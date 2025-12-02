@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Investing 101 - FinanceU</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .lesson-hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 4rem 0;
+            text-align: center;
+        }
+
+        .lesson-icon-large {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+
+        .lesson-meta-info {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 1.5rem;
+            font-size: 0.95rem;
+        }
+
+        .lesson-content-section {
+            padding: 4rem 0;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .lesson-content-section h2 {
+            color: var(--primary-color);
+            font-size: 2rem;
+            margin-top: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .lesson-content-section h3 {
+            color: var(--text-dark);
+            font-size: 1.5rem;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .lesson-content-section p {
+            color: var(--text-light);
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+            font-size: 1.05rem;
+        }
+
+        .lesson-content-section ul,
+        .lesson-content-section ol {
+            color: var(--text-light);
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+            margin-left: 2rem;
+        }
+
+        .lesson-content-section li {
+            margin-bottom: 0.75rem;
+        }
+
+        .highlight-box {
+            background-color: #fef3c7;
+            border-left: 4px solid var(--accent-color);
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 8px;
+        }
+
+        .highlight-box h4 {
+            color: var(--text-dark);
+            margin-bottom: 0.75rem;
+        }
+
+        .highlight-box p {
+            color: var(--text-dark);
+            margin-bottom: 0;
+        }
+
+        .tip-box {
+            background-color: #dbeafe;
+            border-left: 4px solid var(--primary-color);
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 8px;
+        }
+
+        .tip-box h4 {
+            color: var(--primary-color);
+            margin-bottom: 0.75rem;
+        }
+
+        .tip-box p {
+            color: var(--text-dark);
+            margin-bottom: 0;
+        }
+
+        .warning-box {
+            background-color: #fee2e2;
+            border-left: 4px solid #ef4444;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 8px;
+        }
+
+        .warning-box h4 {
+            color: #dc2626;
+            margin-bottom: 0.75rem;
+        }
+
+        .warning-box p {
+            color: var(--text-dark);
+            margin-bottom: 0;
+        }
+
+        .success-box {
+            background-color: #d1fae5;
+            border-left: 4px solid var(--secondary-color);
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 8px;
+        }
+
+        .success-box h4 {
+            color: var(--secondary-color);
+            margin-bottom: 0.75rem;
+        }
+
+        .success-box p {
+            color: var(--text-dark);
+            margin-bottom: 0;
+        }
+
+        .lesson-navigation {
+            display: flex;
+            justify-content: space-between;
+            padding: 2rem 0;
+            margin-top: 3rem;
+            border-top: 2px solid var(--border-color);
+        }
+
+        .nav-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem 2rem;
+            background-color: var(--primary-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .nav-button:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        .nav-button-secondary {
+            background-color: transparent;
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+        }
+
+        .nav-button-secondary:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-wrapper">
+                <div class="logo">Finance<span class="logo-accent">U</span></div>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="lessons.html">Lessons</a></li>
+                    <li><a href="index.html#pricing">Pricing</a></li>
+                    <li><a href="index.html#contact" class="btn-primary">Get Started</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="lesson-hero">
+        <div class="container">
+            <div class="lesson-icon-large">📈</div>
+            <h1>Investing 101</h1>
+            <p>Start building wealth early with smart, simple investing strategies</p>
+            <div class="lesson-meta-info">
+                <span>⏱️ 20 min read</span>
+                <span>📊 Beginner</span>
+                <span>📝 Lesson 5 of 5</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Lesson Content -->
+    <section class="lesson-content-section">
+        <div class="container">
+            <h2>Why Start Investing in College?</h2>
+            <p>
+                "I'm broke. Why would I think about investing?" This is what most students say. But here's the truth: starting to invest even small amounts in college is one of the smartest financial moves you can make.
+            </p>
+            <p>
+                The reason? Time. When you're young, you have the most valuable asset an investor can have: decades for your money to grow through compound interest.
+            </p>
+
+            <div class="highlight-box">
+                <h4>🚀 The Power of Starting Early</h4>
+                <p><strong>Person A:</strong> Invests $200/month from age 22-30 (8 years), then stops. Total invested: $19,200<br>
+                <strong>Person B:</strong> Invests $200/month from age 30-65 (35 years). Total invested: $84,000<br><br>
+                At age 65 (assuming 8% annual return):<br>
+                <strong>Person A has: $564,000</strong><br>
+                Person B has: $475,000<br><br>
+                Person A invested less than 1/4 the amount but ended with MORE money. That's the power of starting early.</p>
+            </div>
+
+            <h2>Investing vs. Saving: What's the Difference?</h2>
+            <p>
+                <strong>Saving</strong> is putting money aside in a safe place (like a savings account) where it earns minimal interest but is protected and accessible.
+            </p>
+            <p>
+                <strong>Investing</strong> is putting money into assets (stocks, bonds, real estate) that have potential to grow significantly over time, but come with risk of losing value in the short term.
+            </p>
+
+            <h3>When to Save vs. When to Invest</h3>
+            <ul>
+                <li><strong>Save if you need the money within 3-5 years:</strong> Emergency fund, textbook money, graduation trip, car down payment</li>
+                <li><strong>Invest if you won't need the money for 5+ years:</strong> Retirement, house down payment in distant future, long-term wealth building</li>
+            </ul>
+
+            <h2>The Golden Rule: Don't Invest Until...</h2>
+            <p>
+                Before putting a single dollar into investments, make sure you have:
+            </p>
+            <ol>
+                <li><strong>A basic budget</strong> - You know where your money goes</li>
+                <li><strong>No high-interest debt</strong> - Credit cards paid off (20% interest kills any investment gains)</li>
+                <li><strong>Emergency fund</strong> - At least $500-1,000 saved</li>
+                <li><strong>Money you won't need soon</strong> - Only invest money you can leave untouched for 5+ years</li>
+            </ol>
+
+            <div class="warning-box">
+                <h4>⚠️ Never Invest Money You Can't Afford to Lose</h4>
+                <p>Investments go up AND down. If you need money for rent next month, it belongs in savings, not investments. Only invest money you can leave alone for years.</p>
+            </div>
+
+            <h2>Understanding Risk and Return</h2>
+            <p>
+                All investments involve a trade-off between risk and potential return:
+            </p>
+
+            <h3>Lower Risk = Lower Returns</h3>
+            <ul>
+                <li><strong>Savings accounts:</strong> 4-5% per year, FDIC insured (no risk)</li>
+                <li><strong>Government bonds:</strong> 4-6% per year, very safe</li>
+                <li><strong>Certificate of Deposit (CD):</strong> 4-5% per year, no risk if held to maturity</li>
+            </ul>
+
+            <h3>Higher Risk = Higher Potential Returns</h3>
+            <ul>
+                <li><strong>Stock market (S&P 500):</strong> ~10% per year average (but varies greatly year to year)</li>
+                <li><strong>Individual stocks:</strong> -100% to +500%+ (very high risk)</li>
+                <li><strong>Cryptocurrency:</strong> Extremely volatile, highest risk</li>
+            </ul>
+
+            <p>
+                The key insight: Higher returns require accepting short-term volatility. The stock market averages 10% per year, but some years it's -20% and others it's +30%. Over decades, it trends upward.
+            </p>
+
+            <h2>Stocks, Bonds, and ETFs Explained</h2>
+
+            <h3>Stocks (Equities)</h3>
+            <p>
+                When you buy stock, you own a tiny piece of a company. If the company does well, your stock value increases. If it struggles, your stock value decreases.
+            </p>
+            <p><strong>Example:</strong> Buy 1 share of Apple stock = You own a microscopic fraction of Apple</p>
+            <ul>
+                <li><strong>Pro:</strong> Highest long-term growth potential</li>
+                <li><strong>Con:</strong> Can be volatile; individual stocks are risky</li>
+            </ul>
+
+            <h3>Bonds</h3>
+            <p>
+                When you buy a bond, you're lending money to a government or company. They pay you interest and return your money at a set date.
+            </p>
+            <ul>
+                <li><strong>Pro:</strong> More stable than stocks, predictable income</li>
+                <li><strong>Con:</strong> Lower returns, sensitive to interest rate changes</li>
+            </ul>
+
+            <h3>ETFs (Exchange-Traded Funds) - BEST FOR BEGINNERS</h3>
+            <p>
+                An ETF is like a basket containing hundreds or thousands of stocks or bonds. When you buy one share of an ETF, you're automatically diversified.
+            </p>
+            <p><strong>Example:</strong> VOO (Vanguard S&P 500 ETF) contains all 500 companies in the S&P 500. One purchase = instant diversification.</p>
+            <ul>
+                <li><strong>Pro:</strong> Instant diversification, low fees, simple</li>
+                <li><strong>Con:</strong> Can't "beat the market" (but most professionals can't either)</li>
+            </ul>
+
+            <div class="tip-box">
+                <h4>💡 Student Investor Strategy</h4>
+                <p>Skip individual stocks. Buy broad market ETFs (like VOO or VTI). This gives you exposure to the entire market's growth without trying to pick winners. Even Warren Buffett recommends this for most investors.</p>
+            </div>
+
+            <h2>Compound Interest: The 8th Wonder of the World</h2>
+            <p>
+                Compound interest means earning returns on your returns. Here's why it's so powerful:
+            </p>
+
+            <h3>Example: Investing $100/month at 8% Annual Return</h3>
+            <ul>
+                <li><strong>After 1 year:</strong> $1,249 ($1,200 invested + $49 growth)</li>
+                <li><strong>After 5 years:</strong> $7,347 ($6,000 invested + $1,347 growth)</li>
+                <li><strong>After 10 years:</strong> $18,294 ($12,000 invested + $6,294 growth)</li>
+                <li><strong>After 20 years:</strong> $58,902 ($24,000 invested + $34,902 growth)</li>
+                <li><strong>After 40 years:</strong> $349,100 ($48,000 invested + $301,100 growth)</li>
+            </ul>
+
+            <p>
+                Notice how growth becomes exponential? Early on, most of your account is money you contributed. Later, most is from compound growth. This is why starting early matters so much.
+            </p>
+
+            <h2>Where to Invest: Account Types</h2>
+
+            <h3>Roth IRA (Best First Investment Account)</h3>
+            <p>
+                A Roth IRA is a retirement account with incredible tax benefits:
+            </p>
+            <ul>
+                <li><strong>Contribution limit:</strong> $7,000/year (2024)</li>
+                <li><strong>Tax treatment:</strong> You pay taxes now, but all future growth and withdrawals are TAX-FREE</li>
+                <li><strong>Flexibility:</strong> Can withdraw contributions (not earnings) anytime without penalty</li>
+                <li><strong>Investment options:</strong> Can buy stocks, bonds, ETFs inside the account</li>
+            </ul>
+
+            <div class="success-box">
+                <h4>✅ Why Roth IRA is Perfect for Students</h4>
+                <p>You're in a low tax bracket now, so paying taxes on contributions costs little. Decades from now, you'll withdraw potentially hundreds of thousands tax-free. It's like paying tax on the acorn instead of the oak tree.</p>
+            </div>
+
+            <h3>Traditional IRA</h3>
+            <ul>
+                <li><strong>Contribution limit:</strong> $7,000/year</li>
+                <li><strong>Tax treatment:</strong> Tax deduction now, pay taxes on withdrawals in retirement</li>
+                <li><strong>Best for:</strong> Higher earners who need current tax deductions (usually not students)</li>
+            </ul>
+
+            <h3>Regular Brokerage Account</h3>
+            <ul>
+                <li><strong>Contribution limit:</strong> Unlimited</li>
+                <li><strong>Tax treatment:</strong> Pay taxes on gains when you sell</li>
+                <li><strong>Flexibility:</strong> Access money anytime without penalties</li>
+                <li><strong>Best for:</strong> Goals that aren't retirement-related, or after maxing retirement accounts</li>
+            </ul>
+
+            <h2>How to Start Investing with $50-$100</h2>
+
+            <h3>Step 1: Choose a Platform</h3>
+            <p>
+                Best investing apps for beginners:
+            </p>
+            <ul>
+                <li><strong>Fidelity</strong> - No account minimums, great research tools, excellent customer service</li>
+                <li><strong>Charles Schwab</strong> - No minimums, fractional shares, robust platform</li>
+                <li><strong>Vanguard</strong> - Lowest-cost ETFs (though less user-friendly for beginners)</li>
+                <li><strong>Robinhood</strong> - Super simple interface, instant deposits (but limited research tools)</li>
+            </ul>
+
+            <h3>Step 2: Open a Roth IRA</h3>
+            <p>
+                Takes 10-15 minutes online. You'll need:
+            </p>
+            <ul>
+                <li>Social Security number</li>
+                <li>ID (driver's license)</li>
+                <li>Bank account info for transfers</li>
+                <li>Employment info (even part-time work counts)</li>
+            </ul>
+
+            <h3>Step 3: Deposit Money</h3>
+            <p>
+                Start with whatever you can afford:
+            </p>
+            <ul>
+                <li>$50 to get started</li>
+                <li>$100/month if you work part-time</li>
+                <li>$25/paycheck if money is tight</li>
+            </ul>
+            <p>Set up automatic transfers so you invest consistently without thinking about it.</p>
+
+            <h3>Step 4: Buy Your First Investment</h3>
+            <p>
+                For beginners, choose ONE of these broad market ETFs:
+            </p>
+            <ul>
+                <li><strong>VOO or SPY</strong> - Tracks S&P 500 (500 largest US companies)</li>
+                <li><strong>VTI</strong> - Total US stock market (nearly every publicly traded US company)</li>
+                <li><strong>VXUS</strong> - Total international stock market (for global exposure)</li>
+            </ul>
+
+            <div class="tip-box">
+                <h4>💡 The Simple Portfolio</h4>
+                <p>80% VTI (US stocks) + 20% VXUS (international stocks). Rebalance once per year. That's it. This simple strategy beats most professional investors long-term.</p>
+            </div>
+
+            <h3>Step 5: Set It and (Mostly) Forget It</h3>
+            <p>
+                The hardest part of investing? Not panicking when the market drops. The best investors:
+            </p>
+            <ul>
+                <li>Keep investing consistently through ups and downs</li>
+                <li>Don't check their accounts daily (check quarterly or annually)</li>
+                <li>Stay invested for decades</li>
+                <li>Don't try to "time the market" by buying low and selling high</li>
+            </ul>
+
+            <h2>Common Investing Mistakes (And How to Avoid Them)</h2>
+
+            <h3>1. Trying to Pick Individual Stocks</h3>
+            <p>
+                90% of professional fund managers can't beat the market long-term. You won't either. Buy index ETFs and skip the stress.
+            </p>
+
+            <h3>2. Panic Selling During Downturns</h3>
+            <p>
+                Market drops 20%? That's when you should keep buying, not sell. Downturns are sales—everything's on discount.
+            </p>
+
+            <h3>3. Following "Hot Tips" on Social Media</h3>
+            <p>
+                If someone on TikTok or Reddit has a "guaranteed" stock pick, it's too late. By the time tips go viral, smart money has already moved on.
+            </p>
+
+            <h3>4. Investing Money You Need Soon</h3>
+            <p>
+                Need money for graduation in 2 years? It belongs in a high-yield savings account, not the stock market. Investments are for long-term goals only.
+            </p>
+
+            <h3>5. Letting Fees Eat Your Returns</h3>
+            <p>
+                A 1% fee might sound small, but over 40 years it can cost you hundreds of thousands. Choose low-cost index funds (expense ratios under 0.10%).
+            </p>
+
+            <div class="warning-box">
+                <h4>⚠️ Avoid These Investment Traps</h4>
+                <p><strong>Cryptocurrency as your first investment:</strong> Way too volatile for beginners<br>
+                <strong>"Meme stocks":</strong> GameStop, AMC, etc. are gambling, not investing<br>
+                <strong>Penny stocks:</strong> High chance of losing everything<br>
+                <strong>Day trading:</strong> 90%+ of day traders lose money</p>
+            </div>
+
+            <h2>Investing as a Student: Realistic Expectations</h2>
+
+            <h3>If You Invest $50/Month Starting at Age 20</h3>
+            <p>Assuming 8% average annual return:</p>
+            <ul>
+                <li><strong>By age 30:</strong> ~$9,000 (invested $6,000)</li>
+                <li><strong>By age 40:</strong> ~$29,000 (invested $12,000)</li>
+                <li><strong>By age 50:</strong> ~$70,000 (invested $18,000)</li>
+                <li><strong>By age 65:</strong> ~$179,000 (invested $27,000)</li>
+            </ul>
+
+            <p>
+                That's turning $27,000 into $179,000 just by starting in college and staying consistent. No fancy strategies, no stock picking, no stress.
+            </p>
+
+            <div class="tip-box">
+                <h4>🎯 Your Action Step</h4>
+                <p>This week, research Roth IRA providers (Fidelity, Schwab, Vanguard). Read reviews, compare interfaces. If you have earned income and a small emergency fund, consider opening a Roth IRA and making your first $50-100 investment in a broad market ETF like VTI.</p>
+            </div>
+
+            <h2>Key Takeaways</h2>
+            <ul>
+                <li>Starting early is more important than investing large amounts</li>
+                <li>Don't invest until you have a budget, no high-interest debt, and an emergency fund</li>
+                <li>ETFs offer instant diversification and are perfect for beginners</li>
+                <li>Roth IRA is ideal for students due to current low tax bracket</li>
+                <li>Simple strategies (like 80% VTI / 20% VXUS) beat complex ones long-term</li>
+                <li>Invest consistently and don't panic during market downturns</li>
+                <li>Time in the market beats timing the market</li>
+                <li>Even $50/month starting now can become six figures by retirement</li>
+            </ul>
+
+            <!-- Navigation -->
+            <div class="lesson-navigation">
+                <a href="saving-strategies.html" class="nav-button nav-button-secondary">← Previous: Saving Strategies</a>
+                <a href="lessons.html" class="nav-button">Back to All Lessons</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>FinanceU</h4>
+                    <p>Making financial literacy accessible for every college student.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Learn</h4>
+                    <ul>
+                        <li><a href="budgeting-basics.html">Budgeting</a></li>
+                        <li><a href="credit-scores.html">Credit Scores</a></li>
+                        <li><a href="investing-101.html">Investing</a></li>
+                        <li><a href="student-loans.html">Student Loans</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 FinanceU. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

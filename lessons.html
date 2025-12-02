@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finance Lessons - FinanceU</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .lessons-hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 4rem 0;
+            text-align: center;
+        }
+
+        .lessons-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            padding: 4rem 0;
+        }
+
+        .lesson-card {
+            background-color: var(--bg-white);
+            border-radius: 12px;
+            box-shadow: var(--shadow-md);
+            overflow: hidden;
+            transition: all 0.3s;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
+        .lesson-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .lesson-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .lesson-number {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            margin-bottom: 0.5rem;
+        }
+
+        .lesson-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .lesson-title {
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .lesson-content {
+            padding: 2rem;
+        }
+
+        .lesson-description {
+            color: var(--text-light);
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+
+        .lesson-topics {
+            list-style: none;
+            margin-bottom: 1.5rem;
+        }
+
+        .lesson-topics li {
+            padding: 0.5rem 0;
+            color: var(--text-dark);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .lesson-topics li:before {
+            content: "✓";
+            color: var(--secondary-color);
+            font-weight: bold;
+        }
+
+        .lesson-meta {
+            display: flex;
+            justify-content: space-between;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border-color);
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+
+        .lesson-duration,
+        .lesson-level {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-wrapper">
+                <div class="logo">Finance<span class="logo-accent">U</span></div>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="lessons.html">Lessons</a></li>
+                    <li><a href="index.html#pricing">Pricing</a></li>
+                    <li><a href="index.html#contact" class="btn-primary">Get Started</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="lessons-hero">
+        <div class="container">
+            <h1>Finance Fundamentals</h1>
+            <p>Master the essential money skills every college student needs to know</p>
+        </div>
+    </section>
+
+    <!-- Lessons Grid -->
+    <section>
+        <div class="container">
+            <div class="lessons-grid">
+                <!-- Lesson 1: Budgeting Basics -->
+                <a href="budgeting-basics.html" class="lesson-card">
+                    <div class="lesson-header">
+                        <div class="lesson-number">Lesson 1</div>
+                        <div class="lesson-icon">💰</div>
+                        <h2 class="lesson-title">Budgeting Basics</h2>
+                    </div>
+                    <div class="lesson-content">
+                        <p class="lesson-description">
+                            Learn how to track your spending, create a realistic budget, and take control of your money. Perfect for students just starting their financial journey.
+                        </p>
+                        <ul class="lesson-topics">
+                            <li>The 50/30/20 budgeting rule</li>
+                            <li>Tracking your expenses</li>
+                            <li>Creating your first budget</li>
+                            <li>Budget-friendly student tips</li>
+                        </ul>
+                        <div class="lesson-meta">
+                            <span class="lesson-duration">⏱️ 15 min read</span>
+                            <span class="lesson-level">📊 Beginner</span>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Lesson 2: Understanding Credit Scores -->
+                <a href="credit-scores.html" class="lesson-card">
+                    <div class="lesson-header">
+                        <div class="lesson-number">Lesson 2</div>
+                        <div class="lesson-icon">📊</div>
+                        <h2 class="lesson-title">Understanding Credit Scores</h2>
+                    </div>
+                    <div class="lesson-content">
+                        <p class="lesson-description">
+                            Demystify credit scores and learn how to build excellent credit from scratch. Understand what affects your score and how to improve it.
+                        </p>
+                        <ul class="lesson-topics">
+                            <li>What is a credit score?</li>
+                            <li>5 factors that affect your score</li>
+                            <li>Building credit as a student</li>
+                            <li>Common credit myths debunked</li>
+                        </ul>
+                        <div class="lesson-meta">
+                            <span class="lesson-duration">⏱️ 12 min read</span>
+                            <span class="lesson-level">📊 Beginner</span>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Lesson 3: Student Loans Explained -->
+                <a href="student-loans.html" class="lesson-card">
+                    <div class="lesson-header">
+                        <div class="lesson-number">Lesson 3</div>
+                        <div class="lesson-icon">🎓</div>
+                        <h2 class="lesson-title">Student Loans Explained</h2>
+                    </div>
+                    <div class="lesson-content">
+                        <p class="lesson-description">
+                            Navigate the complex world of student loans. Learn about different loan types, repayment options, and strategies to minimize debt.
+                        </p>
+                        <ul class="lesson-topics">
+                            <li>Federal vs. private loans</li>
+                            <li>Understanding interest rates</li>
+                            <li>Repayment plan options</li>
+                            <li>Loan forgiveness programs</li>
+                        </ul>
+                        <div class="lesson-meta">
+                            <span class="lesson-duration">⏱️ 18 min read</span>
+                            <span class="lesson-level">📊 Beginner</span>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Lesson 4: Saving Strategies -->
+                <a href="saving-strategies.html" class="lesson-card">
+                    <div class="lesson-header">
+                        <div class="lesson-number">Lesson 4</div>
+                        <div class="lesson-icon">🏦</div>
+                        <h2 class="lesson-title">Saving Strategies</h2>
+                    </div>
+                    <div class="lesson-content">
+                        <p class="lesson-description">
+                            Discover practical ways to build savings even on a tight student budget. Learn about emergency funds, savings accounts, and automation.
+                        </p>
+                        <ul class="lesson-topics">
+                            <li>Building an emergency fund</li>
+                            <li>High-yield savings accounts</li>
+                            <li>Automating your savings</li>
+                            <li>Short-term vs. long-term goals</li>
+                        </ul>
+                        <div class="lesson-meta">
+                            <span class="lesson-duration">⏱️ 14 min read</span>
+                            <span class="lesson-level">📊 Beginner</span>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Lesson 5: Investing 101 -->
+                <a href="investing-101.html" class="lesson-card">
+                    <div class="lesson-header">
+                        <div class="lesson-number">Lesson 5</div>
+                        <div class="lesson-icon">📈</div>
+                        <h2 class="lesson-title">Investing 101</h2>
+                    </div>
+                    <div class="lesson-content">
+                        <p class="lesson-description">
+                            Take your first steps into investing. Understand stocks, bonds, ETFs, and how compound interest can help build long-term wealth.
+                        </p>
+                        <ul class="lesson-topics">
+                            <li>Why start investing early?</li>
+                            <li>Stocks, bonds, and ETFs explained</li>
+                            <li>Understanding risk and return</li>
+                            <li>Getting started with $100 or less</li>
+                        </ul>
+                        <div class="lesson-meta">
+                            <span class="lesson-duration">⏱️ 20 min read</span>
+                            <span class="lesson-level">📊 Beginner</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Ready to Master These Skills?</h2>
+                <p>Get full access to interactive lessons, quizzes, and personalized guidance</p>
+                <a href="index.html#pricing" class="btn-primary btn-large">View Plans</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>FinanceU</h4>
+                    <p>Making financial literacy accessible for every college student.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Learn</h4>
+                    <ul>
+                        <li><a href="budgeting-basics.html">Budgeting</a></li>
+                        <li><a href="credit-scores.html">Credit Scores</a></li>
+                        <li><a href="investing-101.html">Investing</a></li>
+                        <li><a href="student-loans.html">Student Loans</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 FinanceU. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

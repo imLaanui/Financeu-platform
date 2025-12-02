@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - FinanceU</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .dashboard-container {
+            padding: 4rem 0;
+            min-height: 80vh;
+        }
+
+        .dashboard-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 3rem 0;
+            margin-bottom: 3rem;
+        }
+
+        .welcome-section h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .membership-badge {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background-color: var(--accent-color);
+            color: white;
+            border-radius: 20px;
+            font-weight: 600;
+            text-transform: capitalize;
+            margin-top: 1rem;
+        }
+
+        .membership-badge.premium {
+            background-color: #3b82f6;
+        }
+
+        .membership-badge.pro {
+            background: linear-gradient(135deg, #f59e0b 0%, #ef4444 100%);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .stat-card {
+            background-color: var(--bg-white);
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: var(--shadow-md);
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: var(--text-light);
+            font-size: 1rem;
+        }
+
+        .lessons-section {
+            margin-top: 3rem;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .lesson-list {
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .lesson-item {
+            background-color: var(--bg-white);
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: var(--shadow-md);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s;
+        }
+
+        .lesson-item:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .lesson-item.locked {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .lesson-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            flex: 1;
+        }
+
+        .lesson-icon {
+            font-size: 2.5rem;
+        }
+
+        .lesson-details h3 {
+            color: var(--text-dark);
+            margin-bottom: 0.25rem;
+        }
+
+        .lesson-details p {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        .lesson-status {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .status-badge {
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .status-badge.completed {
+            background-color: #d1fae5;
+            color: var(--secondary-color);
+        }
+
+        .status-badge.locked {
+            background-color: #fee2e2;
+            color: #dc2626;
+        }
+
+        .status-badge.available {
+            background-color: #dbeafe;
+            color: var(--primary-color);
+        }
+
+        .btn-lesson {
+            padding: 0.75rem 1.5rem;
+            background-color: var(--primary-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .btn-lesson:hover {
+            background-color: var(--primary-dark);
+        }
+
+        .btn-lesson.disabled {
+            background-color: #d1d5db;
+            cursor: not-allowed;
+            pointer-events: none;
+        }
+
+        .upgrade-banner {
+            background: linear-gradient(135deg, #f59e0b 0%, #ef4444 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 12px;
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .upgrade-banner h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .btn-upgrade {
+            padding: 1rem 2rem;
+            background-color: white;
+            color: #ef4444;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 700;
+            display: inline-block;
+            margin-top: 1rem;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 4rem;
+            color: var(--text-light);
+        }
+
+        .error-message {
+            background-color: #fee2e2;
+            color: #dc2626;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-wrapper">
+                <div class="logo">Finance<span class="logo-accent">U</span></div>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="lessons.html">Lessons</a></li>
+                    <li><a href="dashboard.html">Dashboard</a></li>
+                    <li><a href="#" onclick="logout()" class="btn-primary">Logout</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Dashboard Header -->
+    <section class="dashboard-header">
+        <div class="container">
+            <div class="welcome-section">
+                <h1>Welcome back, <span id="userName">Student</span>!</h1>
+                <p>Continue your journey to financial mastery</p>
+                <div class="membership-badge" id="membershipBadge">Free Member</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Dashboard Content -->
+    <section class="dashboard-container">
+        <div class="container">
+            <!-- Loading State -->
+            <div id="loading" class="loading">
+                <p>Loading your dashboard...</p>
+            </div>
+
+            <!-- Error State -->
+            <div id="error" class="error-message" style="display: none;"></div>
+
+            <!-- Dashboard Content -->
+            <div id="dashboardContent" style="display: none;">
+                <!-- Stats Grid -->
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-number" id="completedLessons">0</div>
+                        <div class="stat-label">Lessons Completed</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="progressPercent">0%</div>
+                        <div class="stat-label">Overall Progress</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="memberDays">0</div>
+                        <div class="stat-label">Days as Member</div>
+                    </div>
+                </div>
+
+                <!-- Upgrade Banner (shown for free users) -->
+                <div id="upgradeBanner" class="upgrade-banner" style="display: none;">
+                    <h3>🚀 Unlock All Lessons with Premium!</h3>
+                    <p>Get access to advanced lessons on saving and investing</p>
+                    <a href="index.html#pricing" class="btn-upgrade">Upgrade Now</a>
+                </div>
+
+                <!-- Lessons Section -->
+                <div class="lessons-section">
+                    <div class="section-header">
+                        <h2>Your Lessons</h2>
+                    </div>
+                    <div class="lesson-list" id="lessonList">
+                        <!-- Lessons will be populated by JavaScript -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>FinanceU</h4>
+                    <p>Making financial literacy accessible for every college student.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Learn</h4>
+                    <ul>
+                        <li><a href="budgeting-basics.html">Budgeting</a></li>
+                        <li><a href="credit-scores.html">Credit Scores</a></li>
+                        <li><a href="investing-101.html">Investing</a></li>
+                        <li><a href="student-loans.html">Student Loans</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Account</h4>
+                    <ul>
+                        <li><a href="dashboard.html">Dashboard</a></li>
+                        <li><a href="#" onclick="logout()">Logout</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 FinanceU. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="config.js"></script>
+    <script>
+        // API_URL is now loaded from config.js
+
+        // Check if user is logged in
+        async function checkAuth() {
+            try {
+                const response = await fetch(`${API_URL}/auth/me`, {
+                    credentials: 'include'
+                });
+
+                if (!response.ok) {
+                    window.location.href = '/login.html';
+                    return null;
+                }
+
+                const data = await response.json();
+                return data.user;
+            } catch (error) {
+                console.error('Auth check failed:', error);
+                window.location.href = '/login.html';
+                return null;
+            }
+        }
+
+        // Load dashboard data
+        async function loadDashboard() {
+            const user = await checkAuth();
+            if (!user) return;
+
+            try {
+                // Update user info
+                document.getElementById('userName').textContent = user.name;
+                const badge = document.getElementById('membershipBadge');
+                badge.textContent = `${user.membershipTier.charAt(0).toUpperCase() + user.membershipTier.slice(1)} Member`;
+                badge.className = `membership-badge ${user.membershipTier}`;
+
+                // Show upgrade banner for free users
+                if (user.membershipTier === 'free') {
+                    document.getElementById('upgradeBanner').style.display = 'block';
+                }
+
+                // Calculate member days
+                const createdDate = new Date(user.createdAt);
+                const today = new Date();
+                const days = Math.floor((today - createdDate) / (1000 * 60 * 60 * 24));
+                document.getElementById('memberDays').textContent = days;
+
+                // Load profile and progress
+                const [profileRes, lessonsRes, progressRes] = await Promise.all([
+                    fetch(`${API_URL}/users/profile`, { credentials: 'include' }),
+                    fetch(`${API_URL}/lessons`, { credentials: 'include' }),
+                    fetch(`${API_URL}/lessons/progress`, { credentials: 'include' })
+                ]);
+
+                const profile = await profileRes.json();
+                const lessonsData = await lessonsRes.json();
+                const progressData = await progressRes.json();
+
+                // Update stats
+                document.getElementById('completedLessons').textContent = profile.stats.completedLessons;
+                const progressPercent = Math.round((profile.stats.completedLessons / profile.stats.totalLessons) * 100);
+                document.getElementById('progressPercent').textContent = `${progressPercent}%`;
+
+                // Create a map of completed lessons
+                const completedMap = {};
+                progressData.progress.forEach(p => {
+                    completedMap[p.lesson_id] = p.completed;
+                });
+
+                // Display lessons
+                const lessonList = document.getElementById('lessonList');
+                lessonList.innerHTML = '';
+
+                lessonsData.lessons.forEach(lesson => {
+                    const isCompleted = completedMap[lesson.id];
+                    const isAccessible = lesson.accessible;
+
+                    const lessonItem = document.createElement('div');
+                    lessonItem.className = `lesson-item ${!isAccessible ? 'locked' : ''}`;
+
+                    lessonItem.innerHTML = `
+                        <div class="lesson-info">
+                            <div class="lesson-icon">${lesson.icon}</div>
+                            <div class="lesson-details">
+                                <h3>${lesson.title}</h3>
+                                <p>${lesson.description}</p>
+                            </div>
+                        </div>
+                        <div class="lesson-status">
+                            ${isCompleted ? '<span class="status-badge completed">✓ Completed</span>' :
+                              !isAccessible ? '<span class="status-badge locked">🔒 Locked</span>' :
+                              '<span class="status-badge available">Start</span>'}
+                            ${isAccessible ?
+                              `<a href="${lesson.url}" class="btn-lesson">${isCompleted ? 'Review' : 'Start Lesson'}</a>` :
+                              `<button class="btn-lesson disabled" onclick="showUpgradeMessage()">Upgrade to Access</button>`}
+                        </div>
+                    `;
+
+                    lessonList.appendChild(lessonItem);
+                });
+
+                // Show dashboard
+                document.getElementById('loading').style.display = 'none';
+                document.getElementById('dashboardContent').style.display = 'block';
+
+            } catch (error) {
+                console.error('Error loading dashboard:', error);
+                document.getElementById('loading').style.display = 'none';
+                document.getElementById('error').textContent = 'Error loading dashboard. Please try again.';
+                document.getElementById('error').style.display = 'block';
+            }
+        }
+
+        // Logout function
+        async function logout() {
+            try {
+                await fetch(`${API_URL}/auth/logout`, {
+                    method: 'POST',
+                    credentials: 'include'
+                });
+                window.location.href = '/index.html';
+            } catch (error) {
+                console.error('Logout error:', error);
+                window.location.href = '/index.html';
+            }
+        }
+
+        // Show upgrade message
+        function showUpgradeMessage() {
+            alert('Upgrade to Premium or Pro to access this lesson!');
+            window.location.href = '/index.html#pricing';
+        }
+
+        // Load dashboard on page load
+        loadDashboard();
+    </script>
+</body>
+</html>
