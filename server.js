@@ -12,11 +12,28 @@ const { authenticateToken, requireTier } = require('./middleware/auth');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+// CORS Configuration - works for both development and production
+const corsOptions = {
+  origin: function (origin, callback) {
+    // Allow requests with no origin (like mobile apps or curl requests)
+    if (!origin) return callback(null, true);
+
+    // In development, allow localhost
+    if (process.env.NODE_ENV !== 'production') {
+      return callback(null, true);
+    }
+
+    // In production, allow requests from the same origin
+    // Render deployments will have the request come from the same domain
+    callback(null, true);
+  },
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+};
+
 // Middleware
-app.use(cors({
-  origin: true,
-  credentials: true
-}));
+app.use(cors(corsOptions));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
@@ -84,12 +101,12 @@ app.post('/api/auth/register', async (req, res) => {
           // Generate token
           const token = generateToken(user);
 
-          // Set cookie
+          // Set cookie - works for both development and production
           res.cookie('token', token, {
             httpOnly: true,
             maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
-            sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
-            secure: process.env.NODE_ENV === 'production'
+            sameSite: 'lax', // 'lax' works for same-domain deployment
+            secure: process.env.NODE_ENV === 'production' // true in production (HTTPS)
           });
 
           res.status(201).json({
@@ -141,12 +158,12 @@ app.post('/api/auth/login', async (req, res) => {
       // Generate token
       const token = generateToken(user);
 
-      // Set cookie
+      // Set cookie - works for both development and production
       res.cookie('token', token, {
         httpOnly: true,
         maxAge: 7 * 24 * 60 * 60 * 1000,
-        sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
-        secure: process.env.NODE_ENV === 'production'
+        sameSite: 'lax', // 'lax' works for same-domain deployment
+        secure: process.env.NODE_ENV === 'production' // true in production (HTTPS)
       });
 
       res.json({
