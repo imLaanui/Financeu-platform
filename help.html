@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Help Center - FinanceU</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .help-hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 80px 20px 60px;
+            text-align: center;
+            color: white;
+        }
+        .help-hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+        .help-hero p {
+            font-size: 20px;
+            opacity: 0.9;
+        }
+        .help-search {
+            max-width: 600px;
+            margin: 40px auto 0;
+        }
+        .help-search input {
+            width: 100%;
+            padding: 16px 24px;
+            border-radius: 50px;
+            border: none;
+            font-size: 16px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .help-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+        .help-categories {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+        .category-card {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .category-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+        .category-icon {
+            font-size: 40px;
+            margin-bottom: 15px;
+        }
+        .category-card h3 {
+            font-size: 22px;
+            margin-bottom: 15px;
+            color: var(--text-primary);
+        }
+        .category-card ul {
+            list-style: none;
+            padding: 0;
+        }
+        .category-card li {
+            padding: 8px 0;
+        }
+        .category-card a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        .category-card a:hover {
+            color: var(--primary);
+        }
+        .faq-section {
+            margin-top: 60px;
+        }
+        .faq-section h2 {
+            font-size: 36px;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+        .faq-item {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .faq-question {
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+        }
+        .faq-answer {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            padding-left: 32px;
+        }
+        .contact-cta {
+            text-align: center;
+            margin-top: 60px;
+            padding: 40px;
+            background: #f7fafc;
+            border-radius: 12px;
+        }
+        .contact-cta h3 {
+            font-size: 28px;
+            margin-bottom: 15px;
+        }
+        .contact-cta p {
+            color: var(--text-secondary);
+            margin-bottom: 25px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-wrapper">
+                <div class="logo"><a href="index.html" style="color: inherit; text-decoration: none;">Finance<span class="logo-accent">U</span></a></div>
+                <ul class="nav-links">
+                    <li><a href="lessons.html">Lessons</a></li>
+                    <li><a href="index.html#features">Features</a></li>
+                    <li><a href="index.html#pricing">Pricing</a></li>
+                    <li id="authButtons">
+                        <a href="login.html" class="btn-primary">Login</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Help Hero -->
+    <section class="help-hero">
+        <h1>How Can We Help You?</h1>
+        <p>Search our help center or browse categories below</p>
+        <div class="help-search">
+            <input type="text" placeholder="Search for help..." id="helpSearch">
+        </div>
+    </section>
+
+    <!-- Help Content -->
+    <div class="help-content">
+        <!-- Categories -->
+        <div class="help-categories">
+            <div class="category-card">
+                <div class="category-icon">🚀</div>
+                <h3>Getting Started</h3>
+                <ul>
+                    <li><a href="#signup">How do I sign up?</a></li>
+                    <li><a href="#first-lesson">Taking your first lesson</a></li>
+                    <li><a href="#navigation">Navigating the platform</a></li>
+                    <li><a href="#profile">Setting up your profile</a></li>
+                </ul>
+            </div>
+
+            <div class="category-card">
+                <div class="category-icon">💳</div>
+                <h3>Billing & Subscriptions</h3>
+                <ul>
+                    <li><a href="#pricing">What are the pricing plans?</a></li>
+                    <li><a href="#upgrade">How to upgrade my account</a></li>
+                    <li><a href="#cancel">Canceling my subscription</a></li>
+                    <li><a href="#refund">Refund policy</a></li>
+                </ul>
+            </div>
+
+            <div class="category-card">
+                <div class="category-icon">📚</div>
+                <h3>Courses & Learning</h3>
+                <ul>
+                    <li><a href="#progress">Tracking your progress</a></li>
+                    <li><a href="#certificates">Earning certificates</a></li>
+                    <li><a href="#quizzes">Completing quizzes</a></li>
+                    <li><a href="#resources">Downloading resources</a></li>
+                </ul>
+            </div>
+
+            <div class="category-card">
+                <div class="category-icon">🔧</div>
+                <h3>Technical Support</h3>
+                <ul>
+                    <li><a href="#login-issues">Login problems</a></li>
+                    <li><a href="#password">Reset your password</a></li>
+                    <li><a href="#browser">Browser compatibility</a></li>
+                    <li><a href="#mobile">Mobile app support</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- FAQs -->
+        <section class="faq-section">
+            <h2>Frequently Asked Questions</h2>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>❓</span>
+                    <span>Is FinanceU really free?</span>
+                </div>
+                <div class="faq-answer">
+                    Yes! Our Starter plan is completely free forever. You get access to 3 core finance courses, a basic budget template, student loan calculator, and community access. No credit card required to sign up.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>❓</span>
+                    <span>Can I cancel my subscription anytime?</span>
+                </div>
+                <div class="faq-answer">
+                    Absolutely. You can cancel your Pro or Premium subscription at any time from your account settings. There are no cancellation fees, and you'll retain access until the end of your billing period.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>❓</span>
+                    <span>Do I need any prior financial knowledge?</span>
+                </div>
+                <div class="faq-answer">
+                    Not at all! FinanceU is designed for complete beginners. Our courses start with the absolute basics and build up gradually. If you can read this, you're qualified to start learning.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>❓</span>
+                    <span>How long does it take to complete a course?</span>
+                </div>
+                <div class="faq-answer">
+                    Most courses take 1-3 hours to complete, but you can go at your own pace. Our lessons are broken into 10-15 minute chunks so you can learn even with a busy schedule. Progress is saved automatically.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>❓</span>
+                    <span>What payment methods do you accept?</span>
+                </div>
+                <div class="faq-answer">
+                    We accept all major credit cards (Visa, Mastercard, American Express, Discover) and PayPal. All payments are processed securely through Stripe.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>❓</span>
+                    <span>Is my personal information secure?</span>
+                </div>
+                <div class="faq-answer">
+                    Yes. We take your privacy seriously and use industry-standard encryption to protect your data. We never sell your information to third parties. Read our <a href="privacy.html" style="color: var(--primary);">Privacy Policy</a> for more details.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>❓</span>
+                    <span>Can I access FinanceU on my phone?</span>
+                </div>
+                <div class="faq-answer">
+                    Yes! Our website is fully mobile-responsive and works great on phones and tablets. We're also working on dedicated mobile apps for iOS and Android, coming soon!
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>❓</span>
+                    <span>Do you offer student discounts?</span>
+                </div>
+                <div class="faq-answer">
+                    Our pricing is already student-friendly! However, if you're facing financial hardship, reach out to us at support@financeu.com. We're committed to making financial education accessible to everyone.
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact CTA -->
+        <div class="contact-cta">
+            <h3>Still Have Questions?</h3>
+            <p>Can't find what you're looking for? Our support team is here to help.</p>
+            <a href="contact.html" class="btn-primary btn-large">Contact Support</a>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>FinanceU</h4>
+                    <p>Making financial literacy accessible for every college student.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Learn</h4>
+                    <ul>
+                        <li><a href="budgeting-basics.html">Budgeting</a></li>
+                        <li><a href="credit-scores.html">Credit Scores</a></li>
+                        <li><a href="investing-101.html">Investing</a></li>
+                        <li><a href="student-loans.html">Student Loans</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="careers.html">Careers</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="help.html">Help Center</a></li>
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                        <li><a href="terms.html">Terms of Service</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 FinanceU. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="config.js"></script>
+    <script>
+        // Check authentication status and update nav
+        async function updateNav() {
+            try {
+                const response = await fetch(`${API_URL}/auth/me`, {
+                    credentials: 'include'
+                });
+
+                const authButtons = document.getElementById('authButtons');
+
+                if (response.ok) {
+                    authButtons.innerHTML = `
+                        <a href="dashboard.html" class="btn-primary">Dashboard</a>
+                    `;
+                } else {
+                    authButtons.innerHTML = `
+                        <a href="login.html" class="btn-primary">Login</a>
+                    `;
+                }
+            } catch (error) {
+                console.log('Not logged in');
+            }
+        }
+
+        updateNav();
+
+        // Search functionality
+        document.getElementById('helpSearch').addEventListener('input', function(e) {
+            const searchTerm = e.target.value.toLowerCase();
+            const faqItems = document.querySelectorAll('.faq-item');
+
+            faqItems.forEach(item => {
+                const text = item.textContent.toLowerCase();
+                if (text.includes(searchTerm)) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
