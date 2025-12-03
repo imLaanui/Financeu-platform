@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson 1: What is Money? - FinanceU</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .lesson-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 60px 20px 40px;
+            color: white;
+        }
+        .lesson-header .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .lesson-number {
+            font-size: 14px;
+            opacity: 0.9;
+            margin-bottom: 10px;
+        }
+        .lesson-header h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+        .lesson-objective {
+            font-size: 20px;
+            opacity: 0.95;
+            font-weight: 500;
+        }
+        .lesson-content {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+        .section {
+            margin-bottom: 50px;
+        }
+        .section h2 {
+            font-size: 32px;
+            color: var(--text-primary);
+            margin-bottom: 20px;
+        }
+        .section h3 {
+            font-size: 24px;
+            color: var(--text-primary);
+            margin: 30px 0 15px;
+        }
+        .section p {
+            font-size: 18px;
+            line-height: 1.8;
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+        }
+        .section ul, .section ol {
+            font-size: 18px;
+            line-height: 1.8;
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+            padding-left: 30px;
+        }
+        .section li {
+            margin-bottom: 10px;
+        }
+        .example-box {
+            background: #f0f9ff;
+            border-left: 4px solid #3b82f6;
+            padding: 25px;
+            border-radius: 8px;
+            margin: 30px 0;
+        }
+        .example-box h4 {
+            color: #1e40af;
+            font-size: 20px;
+            margin-bottom: 12px;
+        }
+        .example-box p {
+            color: #1e3a8a;
+            margin-bottom: 15px;
+        }
+        .analogy-box {
+            background: #fef3c7;
+            border-left: 4px solid #f59e0b;
+            padding: 25px;
+            border-radius: 8px;
+            margin: 30px 0;
+        }
+        .analogy-box h4 {
+            color: #92400e;
+            font-size: 20px;
+            margin-bottom: 12px;
+        }
+        .analogy-box p {
+            color: #78350f;
+            margin-bottom: 15px;
+        }
+        .exercise-box {
+            background: #f0fdf4;
+            border-left: 4px solid #10b981;
+            padding: 25px;
+            border-radius: 8px;
+            margin: 30px 0;
+        }
+        .exercise-box h4 {
+            color: #065f46;
+            font-size: 20px;
+            margin-bottom: 12px;
+        }
+        .exercise-box p {
+            color: #064e3b;
+            margin-bottom: 15px;
+        }
+        .key-takeaway {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            border-radius: 12px;
+            margin: 50px 0;
+        }
+        .key-takeaway h3 {
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+        .key-takeaway ul {
+            list-style: none;
+            padding: 0;
+        }
+        .key-takeaway li {
+            padding: 12px 0;
+            padding-left: 30px;
+            position: relative;
+            font-size: 18px;
+        }
+        .key-takeaway li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+            font-size: 20px;
+        }
+        .lesson-nav {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 60px;
+            padding-top: 40px;
+            border-top: 2px solid #e5e7eb;
+        }
+        .lesson-nav a {
+            padding: 15px 30px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        .btn-back {
+            background: #f3f4f6;
+            color: var(--text-primary);
+        }
+        .btn-back:hover {
+            background: #e5e7eb;
+        }
+        .btn-next {
+            background: var(--primary);
+            color: white;
+        }
+        .btn-next:hover {
+            background: #2563eb;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-wrapper">
+                <div class="logo"><a href="index.html" style="color: inherit; text-decoration: none;">Finance<span class="logo-accent">U</span></a></div>
+                <ul class="nav-links">
+                    <li><a href="how-money-works.html">Learn</a></li>
+                    <li><a href="index.html#features">Features</a></li>
+                    <li><a href="index.html#pricing">Pricing</a></li>
+                    <li id="authButtons">
+                        <a href="login.html" class="btn-primary">Login</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Lesson Header -->
+    <div class="lesson-header">
+        <div class="container">
+            <div class="lesson-number">LESSON 1 • HOW MONEY WORKS</div>
+            <h1>💰 What is Money?</h1>
+            <p class="lesson-objective"><strong>Learning Objective:</strong> Understand what money truly is, why it has value, and how it evolved from physical objects to digital numbers.</p>
+        </div>
+    </div>
+
+    <!-- Lesson Content -->
+    <div class="lesson-content">
+
+        <!-- Introduction -->
+        <div class="section">
+            <h2>The Most Misunderstood Tool</h2>
+            <p>
+                Ask 100 people what money is, and you'll get 100 different answers. Most will say "it's what you use to buy things" or "pieces of paper with numbers on them." But those answers miss the point entirely.
+            </p>
+            <p>
+                <strong>Money isn't just paper, coins, or digits in your bank account. Money is a tool for storing and exchanging value.</strong>
+            </p>
+            <p>
+                Think about it: A $20 bill is literally just paper. It costs about 11 cents to print. So why can you trade it for a burrito, concert ticket, or tank of gas? Because we all agree that piece of paper represents $20 worth of value. That's it. Money only works because we all believe in the same fiction.
+            </p>
+            <p>
+                This might sound weird, but understanding this truth is essential. Once you realize money is just an agreement—a shared belief system—you start to see how it actually works.
+            </p>
+        </div>
+
+        <!-- The Three Jobs of Money -->
+        <div class="section">
+            <h2>Money's Three Jobs</h2>
+            <p>
+                For something to be "money," it needs to do three specific jobs. Any object throughout history that succeeded as money did all three of these:
+            </p>
+
+            <h3>1. Medium of Exchange</h3>
+            <p>
+                Money lets you trade with anyone without needing what they want. Imagine you're a guitar teacher who wants pizza. Without money, you'd need to find a pizza shop owner who wants guitar lessons. Good luck with that.
+            </p>
+            <p>
+                With money? You teach guitar lessons, get paid in cash, then use that cash to buy pizza from anyone. Money breaks the chain of "I'll trade you this for that" and replaces it with a universal trading token everyone accepts.
+            </p>
+
+            <h3>2. Store of Value</h3>
+            <p>
+                Money lets you save your efforts for later. If you earn $500 today, you can spend it next month and it'll still be worth roughly $500. (We'll talk about inflation later, which complicates this.)
+            </p>
+            <p>
+                Compare this to a banana. A banana might be worth $1 today, but in two weeks it's brown mush worth $0. Bad store of value. Money holds its value over time, which means you don't have to spend everything immediately.
+            </p>
+
+            <h3>3. Unit of Account</h3>
+            <p>
+                Money gives us a common way to measure value. Instead of saying "this laptop costs 40 pizzas or 200 coffees or 5 concert tickets," we just say "this laptop costs $800."
+            </p>
+            <p>
+                Money simplifies math. It lets us compare completely different things—rent, groceries, streaming subscriptions—using one universal measuring stick.
+            </p>
+        </div>
+
+        <!-- Real Example -->
+        <div class="example-box">
+            <h4>📖 Real-World Example: How Money Evolved</h4>
+            <p>
+                <strong>Ancient Times:</strong> People used seashells, salt, or cattle as money. These worked okay but had problems. Cows are hard to split into change, and shells can be found on beaches (inflation!).
+            </p>
+            <p>
+                <strong>1500s-1900s:</strong> Gold and silver coins dominated. They were rare, durable, divisible, and people everywhere valued them. The problem? Heavy and easy to steal.
+            </p>
+            <p>
+                <strong>1900s:</strong> Paper money backed by gold (the "gold standard"). Your dollar was basically an IOU for actual gold stored in a vault somewhere.
+            </p>
+            <p>
+                <strong>1971-Today:</strong> "Fiat money"—paper money not backed by anything physical. The U.S. dollar has value only because the government says it does and everyone agrees to use it. And it works!
+            </p>
+            <p>
+                <strong>Today:</strong> Most money is digital. When you Venmo a friend $20, no physical cash moves. A database updates: your account -$20, theirs +$20. Money has become pure information.
+            </p>
+        </div>
+
+        <!-- Analogy -->
+        <div class="analogy-box">
+            <h4>💡 Simple Analogy: Money is Like a Video Game Currency</h4>
+            <p>
+                Imagine playing a video game where you earn coins for completing quests. Those coins only have value inside the game world. You can't eat them, wear them, or build with them. But within that game, everyone agrees coins can buy armor, weapons, and potions.
+            </p>
+            <p>
+                Real money works the same way! U.S. dollars only work because everyone in the U.S. economy agrees they work. Try spending dollars on a remote island with no connection to global trade, and they're just colorful paper.
+            </p>
+            <p>
+                The "game" is the economy, and the "players" are everyone who accepts dollars. As long as everyone keeps playing by the same rules, money keeps working.
+            </p>
+        </div>
+
+        <!-- Why This Matters -->
+        <div class="section">
+            <h2>Why This Matters for You</h2>
+            <p>
+                Understanding that money is just a tool—not something magical or mysterious—changes how you relate to it:
+            </p>
+            <ul>
+                <li><strong>Money is neutral.</strong> It's not good or evil. It's just a tool. Like a hammer, you can use it to build something great or hit yourself in the foot.</li>
+                <li><strong>Money's value comes from agreement.</strong> Bitcoin works because enough people believe in it. The dollar works because the U.S. government and global economy back it. When belief fails, money fails (see: hyperinflation).</li>
+                <li><strong>You don't work for money. You work for what money can buy.</strong> Money is meaningless until you exchange it for something real—food, shelter, experiences, freedom.</li>
+                <li><strong>Different forms of money have different properties.</strong> Cash is instant and private. Credit is borrowed purchasing power. Cryptocurrency is borderless and digital. Understanding the tool helps you choose the right one.</li>
+            </ul>
+        </div>
+
+        <!-- Exercise -->
+        <div class="exercise-box">
+            <h4>✏️ Reflection Exercise: What Does Money Mean to You?</h4>
+            <p>
+                Take 3 minutes to think about (or write down) your answers:
+            </p>
+            <ol>
+                <li><strong>Before this lesson, what did you think money was?</strong> Has your perspective changed?</li>
+                <li><strong>Think of something you bought recently.</strong> What value did you actually exchange money for? (Hint: It's not the physical object—it's what that object does for you.)</li>
+                <li><strong>If money is just an agreement, what would happen if everyone stopped believing in it?</strong> (Wild to think about, right?)</li>
+            </ol>
+        </div>
+
+        <!-- Key Takeaways -->
+        <div class="key-takeaway">
+            <h3>🎯 Key Takeaways</h3>
+            <ul>
+                <li>Money is a tool for storing and exchanging value—not an end in itself</li>
+                <li>Money does three jobs: medium of exchange, store of value, and unit of account</li>
+                <li>Money only works because we all agree it works (it's a shared belief system)</li>
+                <li>Money has evolved from physical objects (shells, gold) to paper to digital information</li>
+                <li>Understanding money as a neutral tool (not something magical) helps you use it wisely</li>
+                <li>You don't work for money—you work for what money can be exchanged for</li>
+            </ul>
+        </div>
+
+        <!-- Navigation -->
+        <div class="lesson-nav">
+            <a href="how-money-works.html" class="btn-back">← Back to Pillar</a>
+            <a href="lesson-money-flows.html" class="btn-next">Next: How Money Flows →</a>
+        </div>
+
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>FinanceU</h4>
+                    <p>Making financial literacy accessible for every college student.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Learn</h4>
+                    <ul>
+                        <li><a href="how-money-works.html">How Money Works</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="careers.html">Careers</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="help.html">Help Center</a></li>
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                        <li><a href="terms.html">Terms of Service</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 FinanceU. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="config.js"></script>
+    <script>
+        // Check authentication status and update nav
+        async function updateNav() {
+            try {
+                const response = await fetch(`${API_URL}/auth/me`, {
+                    credentials: 'include'
+                });
+
+                const authButtons = document.getElementById('authButtons');
+
+                if (response.ok) {
+                    authButtons.innerHTML = `
+                        <a href="dashboard.html" class="btn-primary">Dashboard</a>
+                    `;
+                } else {
+                    authButtons.innerHTML = `
+                        <a href="login.html" class="btn-primary">Login</a>
+                    `;
+                }
+            } catch (error) {
+                console.log('Not logged in');
+            }
+        }
+
+        updateNav();
+    </script>
+</body>
+</html>
