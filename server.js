@@ -231,7 +231,7 @@ app.get('/api/users/profile', authenticateToken, (req, res) => {
         },
         stats: {
           completedLessons: completedCount,
-          totalLessons: 5 // Update this if you add more lessons
+          totalLessons: 0 // No lessons available yet
         }
       });
     });
@@ -287,48 +287,8 @@ app.post('/api/lessons/complete', authenticateToken, (req, res) => {
 
 // Get Available Lessons (with tier restrictions)
 app.get('/api/lessons', authenticateToken, (req, res) => {
-  const lessons = [
-    {
-      id: 'budgeting-basics',
-      title: 'Budgeting Basics',
-      description: 'Learn how to track spending and create a realistic budget',
-      url: '/budgeting-basics.html',
-      requiredTier: 'free',
-      icon: '💰'
-    },
-    {
-      id: 'credit-scores',
-      title: 'Understanding Credit Scores',
-      description: 'Build excellent credit from scratch',
-      url: '/credit-scores.html',
-      requiredTier: 'free',
-      icon: '📊'
-    },
-    {
-      id: 'student-loans',
-      title: 'Student Loans Explained',
-      description: 'Navigate student debt with smart strategies',
-      url: '/student-loans.html',
-      requiredTier: 'free',
-      icon: '🎓'
-    },
-    {
-      id: 'saving-strategies',
-      title: 'Saving Strategies',
-      description: 'Build financial security with practical saving techniques',
-      url: '/saving-strategies.html',
-      requiredTier: 'premium',
-      icon: '🏦'
-    },
-    {
-      id: 'investing-101',
-      title: 'Investing 101',
-      description: 'Start building wealth early with smart investing',
-      url: '/investing-101.html',
-      requiredTier: 'premium',
-      icon: '📈'
-    }
-  ];
+  // No lessons available yet - will be populated as content is created
+  const lessons = [];
 
   const userTier = req.user.membershipTier;
   const tierHierarchy = { 'free': 0, 'premium': 1, 'pro': 2 };
