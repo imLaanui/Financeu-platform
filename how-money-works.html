@@ -24,6 +24,47 @@
             margin: 0 auto 40px;
             line-height: 1.6;
         }
+        .progress-container {
+            max-width: 600px;
+            margin: 40px auto 0;
+            padding: 25px;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 16px;
+            backdrop-filter: blur(10px);
+        }
+        .progress-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+        .progress-text {
+            font-size: 16px;
+            font-weight: 600;
+        }
+        .progress-percentage {
+            font-size: 24px;
+            font-weight: 700;
+        }
+        .progress-bar-bg {
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 10px;
+            height: 20px;
+            overflow: hidden;
+            margin-bottom: 10px;
+        }
+        .progress-bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #10b981 0%, #34d399 100%);
+            border-radius: 10px;
+            transition: width 0.5s ease;
+        }
+        .progress-lessons {
+            font-size: 14px;
+            opacity: 0.9;
+            text-align: center;
+            margin: 0;
+        }
         .pillar-intro {
             max-width: 900px;
             margin: -60px auto 80px;
@@ -176,6 +217,18 @@
     <section class="pillar-hero">
         <h1>How Money Works</h1>
         <p class="subtitle">Master the fundamental concepts that power every financial decision you'll ever make</p>
+
+        <!-- Progress Bar -->
+        <div id="progressContainer" class="progress-container" style="display: none;">
+            <div class="progress-info">
+                <span class="progress-text">Your Progress</span>
+                <span class="progress-percentage" id="progressPercentage">0%</span>
+            </div>
+            <div class="progress-bar-bg">
+                <div class="progress-bar-fill" id="progressBar" style="width: 0%"></div>
+            </div>
+            <p class="progress-lessons" id="progressLessons">0 of 8 lessons completed</p>
+        </div>
     </section>
 
     <!-- Pillar Introduction -->
@@ -375,6 +428,18 @@
 
     <script src="config.js"></script>
     <script>
+        const PILLAR_LESSONS = [
+            'what-is-money',
+            'money-flows',
+            'time-value',
+            'inflation',
+            'money-working',
+            'psychology',
+            'opportunity-cost',
+            'money-foundation'
+        ];
+        const TOTAL_LESSONS = PILLAR_LESSONS.length;
+
         // Check authentication status and update nav
         async function updateNav() {
             try {
@@ -388,6 +453,8 @@
                     authButtons.innerHTML = `
                         <a href="dashboard.html" class="btn-primary">Dashboard</a>
                     `;
+                    // Load user progress
+                    loadProgress();
                 } else {
                     authButtons.innerHTML = `
                         <a href="login.html" class="btn-primary">Login</a>
@@ -395,6 +462,54 @@
                 }
             } catch (error) {
                 console.log('Not logged in');
+            }
+        }
+
+        // Load and display user progress
+        async function loadProgress() {
+            try {
+                const response = await fetch(`${API_URL}/lessons/progress`, {
+                    credentials: 'include'
+                });
+
+                if (response.ok) {
+                    const data = await response.json();
+                    const progress = data.progress || [];
+
+                    // Count completed lessons in this pillar
+                    const completedLessons = progress.filter(p =>
+                        p.completed && PILLAR_LESSONS.includes(p.lesson_id)
+                    ).length;
+
+                    // Calculate percentage
+                    const percentage = Math.round((completedLessons / TOTAL_LESSONS) * 100);
+
+                    // Update UI
+                    updateProgressDisplay(completedLessons, percentage);
+                }
+            } catch (error) {
+                console.error('Error loading progress:', error);
+            }
+        }
+
+        // Update progress display
+        function updateProgressDisplay(completed, percentage) {
+            const container = document.getElementById('progressContainer');
+            const progressBar = document.getElementById('progressBar');
+            const progressPercentage = document.getElementById('progressPercentage');
+            const progressLessons = document.getElementById('progressLessons');
+
+            // Show container
+            container.style.display = 'block';
+
+            // Update values
+            progressBar.style.width = `${percentage}%`;
+            progressPercentage.textContent = `${percentage}%`;
+            progressLessons.textContent = `${completed} of ${TOTAL_LESSONS} lessons completed`;
+
+            // Add celebration if 100%
+            if (percentage === 100) {
+                progressLessons.textContent = `🎉 All ${TOTAL_LESSONS} lessons completed! Great job!`;
             }
         }
 

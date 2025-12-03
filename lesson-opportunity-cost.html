@@ -5,7 +5,57 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lesson 7: Money and Opportunity Cost - FinanceU</title>
     <link rel="stylesheet" href="styles.css">
-    <style>.lesson-header{background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);padding:60px 20px 40px;color:white}.lesson-header .container{max-width:900px;margin:0 auto}.lesson-number{font-size:14px;opacity:.9;margin-bottom:10px}.lesson-header h1{font-size:48px;margin-bottom:20px}.lesson-objective{font-size:20px;opacity:.95;font-weight:500}.lesson-content{max-width:900px;margin:0 auto;padding:60px 20px}.section{margin-bottom:50px}.section h2{font-size:32px;color:var(--text-primary);margin-bottom:20px}.section h3{font-size:24px;color:var(--text-primary);margin:30px 0 15px}.section p{font-size:18px;line-height:1.8;color:var(--text-secondary);margin-bottom:20px}.section ul,.section ol{font-size:18px;line-height:1.8;color:var(--text-secondary);margin-bottom:20px;padding-left:30px}.section li{margin-bottom:10px}.example-box{background:#f0f9ff;border-left:4px solid #3b82f6;padding:25px;border-radius:8px;margin:30px 0}.example-box h4{color:#1e40af;font-size:20px;margin-bottom:12px}.example-box p,.example-box ul{color:#1e3a8a;margin-bottom:15px}.analogy-box{background:#fef3c7;border-left:4px solid #f59e0b;padding:25px;border-radius:8px;margin:30px 0}.analogy-box h4{color:#92400e;font-size:20px;margin-bottom:12px}.analogy-box p{color:#78350f;margin-bottom:15px}.exercise-box{background:#f0fdf4;border-left:4px solid #10b981;padding:25px;border-radius:8px;margin:30px 0}.exercise-box h4{color:#065f46;font-size:20px;margin-bottom:12px}.exercise-box p,.exercise-box ol{color:#064e3b;margin-bottom:15px}.key-takeaway{background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);color:white;padding:40px;border-radius:12px;margin:50px 0}.key-takeaway h3{font-size:28px;margin-bottom:20px}.key-takeaway ul{list-style:none;padding:0}.key-takeaway li{padding:12px 0;padding-left:30px;position:relative;font-size:18px}.key-takeaway li:before{content:"✓";position:absolute;left:0;font-weight:bold;font-size:20px}.lesson-nav{display:flex;justify-content:space-between;margin-top:60px;padding-top:40px;border-top:2px solid #e5e7eb}.lesson-nav a{padding:15px 30px;border-radius:8px;text-decoration:none;font-weight:600;transition:all .3s}.btn-back{background:#f3f4f6;color:var(--text-primary)}.btn-back:hover{background:#e5e7eb}.btn-next{background:var(--primary);color:white}.btn-next:hover{background:#2563eb}</style>
+    <style>.lesson-header{background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);padding:60px 20px 40px;color:white}.lesson-header .container{max-width:900px;margin:0 auto}.lesson-number{font-size:14px;opacity:.9;margin-bottom:10px}.lesson-header h1{font-size:48px;margin-bottom:20px}.lesson-objective{font-size:20px;opacity:.95;font-weight:500}.lesson-content{max-width:900px;margin:0 auto;padding:60px 20px}.section{margin-bottom:50px}.section h2{font-size:32px;color:var(--text-primary);margin-bottom:20px}.section h3{font-size:24px;color:var(--text-primary);margin:30px 0 15px}.section p{font-size:18px;line-height:1.8;color:var(--text-secondary);margin-bottom:20px}.section ul,.section ol{font-size:18px;line-height:1.8;color:var(--text-secondary);margin-bottom:20px;padding-left:30px}.section li{margin-bottom:10px}.example-box{background:#f0f9ff;border-left:4px solid #3b82f6;padding:25px;border-radius:8px;margin:30px 0}.example-box h4{color:#1e40af;font-size:20px;margin-bottom:12px}.example-box p,.example-box ul{color:#1e3a8a;margin-bottom:15px}.analogy-box{background:#fef3c7;border-left:4px solid #f59e0b;padding:25px;border-radius:8px;margin:30px 0}.analogy-box h4{color:#92400e;font-size:20px;margin-bottom:12px}.analogy-box p{color:#78350f;margin-bottom:15px}.exercise-box{background:#f0fdf4;border-left:4px solid #10b981;padding:25px;border-radius:8px;margin:30px 0}.exercise-box h4{color:#065f46;font-size:20px;margin-bottom:12px}.exercise-box p,.exercise-box ol{color:#064e3b;margin-bottom:15px}.key-takeaway{background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);color:white;padding:40px;border-radius:12px;margin:50px 0}.key-takeaway h3{font-size:28px;margin-bottom:20px}.key-takeaway ul{list-style:none;padding:0}.key-takeaway li{padding:12px 0;padding-left:30px;position:relative;font-size:18px}.key-takeaway li:before{content:"✓";position:absolute;left:0;font-weight:bold;font-size:20px}.lesson-nav{display:flex;justify-content:space-between;margin-top:60px;padding-top:40px;border-top:2px solid #e5e7eb}.lesson-nav a{padding:15px 30px;border-radius:8px;text-decoration:none;font-weight:600;transition:all .3s}.btn-back{background:#f3f4f6;color:var(--text-primary)}.btn-back:hover{background:#e5e7eb}.btn-next{background:var(--primary);color:white}.btn-next:hover{background:#2563eb}
+        .complete-section {
+            background: #f0fdf4;
+            border: 2px solid #10b981;
+            border-radius: 12px;
+            padding: 30px;
+            text-align: center;
+            margin: 50px 0;
+        }
+        .complete-section h3 {
+            font-size: 24px;
+            color: #065f46;
+            margin-bottom: 15px;
+        }
+        .complete-section p {
+            color: #064e3b;
+            margin-bottom: 25px;
+        }
+        .btn-complete {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .btn-complete:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4);
+        }
+        .btn-complete:disabled {
+            background: #9ca3af;
+            cursor: not-allowed;
+            transform: none;
+        }
+        .btn-complete.completed {
+            background: #4ade80;
+        }
+        .completion-message {
+            display: none;
+            color: #065f46;
+            font-weight: 600;
+            margin-top: 15px;
+        }
+        .completion-message.show {
+            display: block;
+        }
+    </style>
 </head>
 <body>
     <nav class="navbar"><div class="container"><div class="nav-wrapper"><div class="logo"><a href="index.html" style="color:inherit;text-decoration:none">Finance<span class="logo-accent">U</span></a></div><ul class="nav-links"><li><a href="how-money-works.html">Learn</a></li><li><a href="index.html#features">Features</a></li><li><a href="index.html#pricing">Pricing</a></li><li id="authButtons"><a href="login.html" class="btn-primary">Login</a></li></ul></div></div></nav>
@@ -132,6 +182,14 @@
             </ul>
         </div>
 
+        <!-- Completion Section -->
+        <div class="complete-section">
+            <h3>✨ Complete This Lesson</h3>
+            <p>Mark this lesson as complete to track your progress through the pillar!</p>
+            <button id="completeBtn" class="btn-complete" onclick="completeLesson()">Mark as Complete</button>
+            <p id="completionMessage" class="completion-message">Great job! Lesson completed! 🎉</p>
+        </div>
+
         <div class="lesson-nav">
             <a href="lesson-psychology.html" class="btn-back">← Previous: Psychology of Money</a>
             <a href="lesson-money-foundation.html" class="btn-next">Next: Money Foundation →</a>
@@ -140,6 +198,100 @@
 
     <footer class="footer"><div class="container"><div class="footer-content"><div class="footer-section"><h4>FinanceU</h4><p>Making financial literacy accessible for every college student.</p></div><div class="footer-section"><h4>Learn</h4><ul><li><a href="how-money-works.html">How Money Works</a></li></ul></div><div class="footer-section"><h4>Company</h4><ul><li><a href="about.html">About Us</a></li><li><a href="careers.html">Careers</a></li><li><a href="contact.html">Contact</a></li></ul></div><div class="footer-section"><h4>Support</h4><ul><li><a href="help.html">Help Center</a></li><li><a href="privacy.html">Privacy Policy</a></li><li><a href="terms.html">Terms of Service</a></li></ul></div></div><div class="footer-bottom"><p>&copy; 2024 FinanceU. All rights reserved.</p></div></div></footer>
     <script src="config.js"></script>
-    <script>async function updateNav(){try{const r=await fetch(`${API_URL}/auth/me`,{credentials:'include'});document.getElementById('authButtons').innerHTML=r.ok?`<a href="dashboard.html" class="btn-primary">Dashboard</a>`:`<a href="login.html" class="btn-primary">Login</a>`}catch(e){console.log('Not logged in')}}updateNav();</script>
+    <script>
+        const LESSON_ID = 'opportunity-cost';
+
+        // Check authentication status and update nav
+        async function updateNav() {
+            try {
+                const response = await fetch(`${API_URL}/auth/me`, {
+                    credentials: 'include'
+                });
+
+                const authButtons = document.getElementById('authButtons');
+
+                if (response.ok) {
+                    authButtons.innerHTML = `
+                        <a href="dashboard.html" class="btn-primary">Dashboard</a>
+                    `;
+                    // Check if lesson is already completed
+                    checkLessonCompletion();
+                } else {
+                    authButtons.innerHTML = `
+                        <a href="login.html" class="btn-primary">Login</a>
+                    `;
+                    // Hide completion section if not logged in
+                    document.querySelector('.complete-section').style.display = 'none';
+                }
+            } catch (error) {
+                console.log('Not logged in');
+                document.querySelector('.complete-section').style.display = 'none';
+            }
+        }
+
+        // Check if this lesson is already completed
+        async function checkLessonCompletion() {
+            try {
+                const response = await fetch(`${API_URL}/lessons/progress`, {
+                    credentials: 'include'
+                });
+
+                if (response.ok) {
+                    const data = await response.json();
+                    const thisLesson = data.progress.find(p => p.lesson_id === LESSON_ID);
+
+                    if (thisLesson && thisLesson.completed) {
+                        markAsCompleted();
+                    }
+                }
+            } catch (error) {
+                console.error('Error checking lesson completion:', error);
+            }
+        }
+
+        // Mark lesson as complete
+        async function completeLesson() {
+            const btn = document.getElementById('completeBtn');
+            btn.disabled = true;
+            btn.textContent = 'Saving...';
+
+            try {
+                const response = await fetch(`${API_URL}/lessons/complete`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    credentials: 'include',
+                    body: JSON.stringify({ lessonId: LESSON_ID })
+                });
+
+                if (response.ok) {
+                    markAsCompleted();
+                } else {
+                    btn.disabled = false;
+                    btn.textContent = 'Mark as Complete';
+                    alert('Error completing lesson. Please try again.');
+                }
+            } catch (error) {
+                console.error('Error completing lesson:', error);
+                btn.disabled = false;
+                btn.textContent = 'Mark as Complete';
+                alert('Error completing lesson. Please try again.');
+            }
+        }
+
+        // Update UI to show lesson as completed
+        function markAsCompleted() {
+            const btn = document.getElementById('completeBtn');
+            const message = document.getElementById('completionMessage');
+
+            btn.textContent = '✓ Completed';
+            btn.classList.add('completed');
+            btn.disabled = true;
+            message.classList.add('show');
+        }
+
+        updateNav();
+    </script>
 </body>
 </html>

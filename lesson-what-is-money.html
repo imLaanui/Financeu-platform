@@ -167,6 +167,55 @@
         .btn-next:hover {
             background: #2563eb;
         }
+        .complete-section {
+            background: #f0fdf4;
+            border: 2px solid #10b981;
+            border-radius: 12px;
+            padding: 30px;
+            text-align: center;
+            margin: 50px 0;
+        }
+        .complete-section h3 {
+            font-size: 24px;
+            color: #065f46;
+            margin-bottom: 15px;
+        }
+        .complete-section p {
+            color: #064e3b;
+            margin-bottom: 25px;
+        }
+        .btn-complete {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .btn-complete:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4);
+        }
+        .btn-complete:disabled {
+            background: #9ca3af;
+            cursor: not-allowed;
+            transform: none;
+        }
+        .btn-complete.completed {
+            background: #4ade80;
+        }
+        .completion-message {
+            display: none;
+            color: #065f46;
+            font-weight: 600;
+            margin-top: 15px;
+        }
+        .completion-message.show {
+            display: block;
+        }
     </style>
 </head>
 <body>
@@ -322,6 +371,14 @@
             </ul>
         </div>
 
+        <!-- Completion Section -->
+        <div class="complete-section">
+            <h3>✨ Complete This Lesson</h3>
+            <p>Mark this lesson as complete to track your progress through the pillar!</p>
+            <button id="completeBtn" class="btn-complete" onclick="completeLesson()">Mark as Complete</button>
+            <p id="completionMessage" class="completion-message">Great job! Lesson completed! 🎉</p>
+        </div>
+
         <!-- Navigation -->
         <div class="lesson-nav">
             <a href="how-money-works.html" class="btn-back">← Back to Pillar</a>
@@ -369,6 +426,8 @@
 
     <script src="config.js"></script>
     <script>
+        const LESSON_ID = 'what-is-money';
+
         // Check authentication status and update nav
         async function updateNav() {
             try {
@@ -382,14 +441,81 @@
                     authButtons.innerHTML = `
                         <a href="dashboard.html" class="btn-primary">Dashboard</a>
                     `;
+                    // Check if lesson is already completed
+                    checkLessonCompletion();
                 } else {
                     authButtons.innerHTML = `
                         <a href="login.html" class="btn-primary">Login</a>
                     `;
+                    // Hide completion section if not logged in
+                    document.querySelector('.complete-section').style.display = 'none';
                 }
             } catch (error) {
                 console.log('Not logged in');
+                document.querySelector('.complete-section').style.display = 'none';
             }
+        }
+
+        // Check if this lesson is already completed
+        async function checkLessonCompletion() {
+            try {
+                const response = await fetch(`${API_URL}/lessons/progress`, {
+                    credentials: 'include'
+                });
+
+                if (response.ok) {
+                    const data = await response.json();
+                    const thisLesson = data.progress.find(p => p.lesson_id === LESSON_ID);
+
+                    if (thisLesson && thisLesson.completed) {
+                        markAsCompleted();
+                    }
+                }
+            } catch (error) {
+                console.error('Error checking lesson completion:', error);
+            }
+        }
+
+        // Mark lesson as complete
+        async function completeLesson() {
+            const btn = document.getElementById('completeBtn');
+            btn.disabled = true;
+            btn.textContent = 'Saving...';
+
+            try {
+                const response = await fetch(`${API_URL}/lessons/complete`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    credentials: 'include',
+                    body: JSON.stringify({ lessonId: LESSON_ID })
+                });
+
+                if (response.ok) {
+                    markAsCompleted();
+                } else {
+                    btn.disabled = false;
+                    btn.textContent = 'Mark as Complete';
+                    alert('Error completing lesson. Please try again.');
+                }
+            } catch (error) {
+                console.error('Error completing lesson:', error);
+                btn.disabled = false;
+                btn.textContent = 'Mark as Complete';
+                alert('Error completing lesson. Please try again.');
+            }
+        }
+
+        // Update UI to show lesson as completed
+        function markAsCompleted() {
+            const btn = document.getElementById('completeBtn');
+            const message = document.getElementById('completionMessage');
+
+            btn.textContent = '✓ Completed';
+            btn.classList.add('completed');
+            btn.disabled = true;
+            message.classList.add('show');
         }
 
         updateNav();
