@@ -639,21 +639,29 @@
                 const pillar1Completed = JSON.parse(localStorage.getItem('pillar1_completed') || '[]');
                 const quizCompleted = localStorage.getItem('pillar1_quiz_completed') === 'true';
 
-                // Calculate progress
-                const totalItems = 9; // 8 lessons + 1 quiz
-                const completedCount = pillar1Completed.length;
+                // Calculate progress - Pillar 1 has 8 lessons + 1 final quiz (9 total items)
+                const totalLessons = 8;
+                const completedLessonsCount = pillar1Completed.length;
 
                 // Update completed lessons count
-                document.getElementById('completedLessons').textContent = completedCount;
+                document.getElementById('completedLessons').textContent = completedLessonsCount;
 
-                // Calculate percentage - treat quiz as the 9th item
-                // 8 lessons = 88%, only with quiz passed = 100%
+                // Calculate percentage
+                // Each lesson is worth ~11% (1/9 of total)
+                // Maximum without quiz: 89% (8/9)
+                // Only passing the quiz brings it to 100%
                 let progressPercent;
+
                 if (quizCompleted) {
+                    // Quiz passed - show 100%
                     progressPercent = 100;
                 } else {
-                    progressPercent = Math.round((completedCount / totalItems) * 100);
+                    // Quiz not passed - calculate based on lessons only
+                    // Cap at 89% even if all 8 lessons are done
+                    const totalItems = 9; // 8 lessons + 1 quiz
+                    progressPercent = Math.round((completedLessonsCount / totalItems) * 100);
                 }
+
                 document.getElementById('progressPercent').textContent = `${progressPercent}%`;
 
                 // Update Pillar 1 button text if quiz is completed
