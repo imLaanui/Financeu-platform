@@ -346,8 +346,12 @@
         }
         // Logout function
         async function logout() {
+            // Clear all localStorage including lesson progress
             localStorage.removeItem('authState');
-            localStorage.removeItem('authState');
+            localStorage.removeItem('pillar1_completed');
+            localStorage.removeItem('pillar1_quiz_completed');
+            localStorage.removeItem('pillar1_quiz_score');
+
             try {
                 await fetch(`${API_URL}/auth/logout`, {
                     method: 'POST',

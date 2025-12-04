@@ -422,7 +422,7 @@
                                 </div>
                             </div>
                             <div class="lesson-status">
-                                <a href="pillar1-lessons.html" class="btn-lesson" style="text-decoration: none; display: inline-block;">Start Pillar</a>
+                                <a href="pillar1-lessons.html" class="btn-lesson" id="pillar1Button" style="text-decoration: none; display: inline-block;">Start Pillar</a>
                             </div>
                         </div>
                         <div class="lesson-item locked">
@@ -655,6 +655,11 @@
                 }
                 document.getElementById('progressPercent').textContent = `${progressPercent}%`;
 
+                // Update Pillar 1 button text if quiz is completed
+                if (quizCompleted) {
+                    document.getElementById('pillar1Button').textContent = 'Review Pillar';
+                }
+
                 // Create a map of completed lessons
                 const completedMap = {};
                 progressData.progress.forEach(p => {
@@ -707,7 +712,12 @@
 
         // Logout function
         async function logout() {
+            // Clear all localStorage including lesson progress
             localStorage.removeItem('authState');
+            localStorage.removeItem('pillar1_completed');
+            localStorage.removeItem('pillar1_quiz_completed');
+            localStorage.removeItem('pillar1_quiz_score');
+
             try {
                 await fetch(`${API_URL}/auth/logout`, {
                     method: 'POST',
