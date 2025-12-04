@@ -94,6 +94,57 @@
         .back-link:hover {
             text-decoration: underline;
         }
+        .quiz-card {
+            background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+            border-radius: 12px;
+            padding: 30px;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 12px rgba(251, 191, 36, 0.3);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .quiz-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(251, 191, 36, 0.4);
+        }
+        .quiz-card .lesson-info h3 {
+            color: white;
+            font-size: 26px;
+        }
+        .quiz-card .lesson-info p {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 15px;
+        }
+        .btn-start-quiz {
+            padding: 14px 28px;
+            background: white;
+            color: #f59e0b;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 700;
+            transition: all 0.2s;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .btn-start-quiz:hover {
+            background: #fffbeb;
+            transform: scale(1.05);
+        }
+        .quiz-completed-badge {
+            background: #10b981;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-size: 15px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
     </style>
 </head>
 <body>
@@ -212,6 +263,17 @@
                     <a href="pillar1-lesson8.html" class="btn-start-lesson">Start Lesson</a>
                 </div>
             </div>
+
+            <!-- Final Quiz -->
+            <div class="quiz-card" id="quizCard" style="display: none;">
+                <div class="lesson-info">
+                    <h3>🎓 Final Quiz</h3>
+                    <p>Test your knowledge of all 8 lessons • 16 questions • 80% to pass</p>
+                </div>
+                <div class="lesson-status">
+                    <a href="pillar1-quiz.html" class="btn-start-quiz">Take Quiz</a>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -315,8 +377,29 @@
             });
         }
 
+        // Check if all lessons completed and show quiz
+        function checkQuizAvailability() {
+            const completed = JSON.parse(localStorage.getItem('pillar1_completed') || '[]');
+            const quizCompleted = localStorage.getItem('pillar1_quiz_completed');
+            const quizScore = localStorage.getItem('pillar1_quiz_score');
+            const quizCard = document.getElementById('quizCard');
+
+            if (completed.length === 8) {
+                quizCard.style.display = 'flex';
+
+                if (quizCompleted === 'true') {
+                    const statusDiv = quizCard.querySelector('.lesson-status');
+                    statusDiv.innerHTML = `
+                        <span class="quiz-completed-badge">✓ Passed (${quizScore}%)</span>
+                        <a href="pillar1-quiz.html" class="btn-start-quiz">Retake Quiz</a>
+                    `;
+                }
+            }
+        }
+
         updateNav();
         loadCompletedLessons();
+        checkQuizAvailability();
     </script>
 </body>
 </html>
