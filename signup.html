@@ -261,6 +261,17 @@
                 // Success!
                 showSuccess('Account created successfully! Redirecting...');
 
+                // Clear ALL progress data from previous accounts
+                // This ensures a clean slate for the new user
+                const keysToRemove = [];
+                for (let i = 0; i < localStorage.length; i++) {
+                    const key = localStorage.key(i);
+                    if (key && (key.includes('pillar1_') || key.includes('lesson') || key.includes('quiz'))) {
+                        keysToRemove.push(key);
+                    }
+                }
+                keysToRemove.forEach(key => localStorage.removeItem(key));
+
                 // Store token and userId in localStorage
                 localStorage.setItem('token', data.token);
                 localStorage.setItem('userId', data.user.id);

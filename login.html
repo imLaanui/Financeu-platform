@@ -230,9 +230,25 @@
                 // Success!
                 showSuccess('Login successful! Redirecting...');
 
+                // Check if this is a different user than before
+                const previousUserId = localStorage.getItem('userId');
+                const newUserId = data.user.id;
+
+                // If different user, clear ALL progress data from previous account
+                if (previousUserId && previousUserId !== newUserId) {
+                    const keysToRemove = [];
+                    for (let i = 0; i < localStorage.length; i++) {
+                        const key = localStorage.key(i);
+                        if (key && (key.includes('pillar1_') || key.includes('lesson') || key.includes('quiz'))) {
+                            keysToRemove.push(key);
+                        }
+                    }
+                    keysToRemove.forEach(key => localStorage.removeItem(key));
+                }
+
                 // Store token and userId in localStorage
                 localStorage.setItem('token', data.token);
-                localStorage.setItem('userId', data.user.id);
+                localStorage.setItem('userId', newUserId);
 
                 // Redirect to dashboard
                 setTimeout(() => {
