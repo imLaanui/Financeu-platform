@@ -17,8 +17,7 @@
                     <li><a href="#features">Features</a></li>
                     <li><a href="#pricing">Pricing</a></li>
                     <li><a href="about.html">About</a></li>
-                    <li id="authButtons" style="display: none;">
-                        <a href="login.html" class="btn-primary">Login</a>
+                    <li id="authButtons" style="opacity: 0;">
                     </li>
                 </ul>
             </div>
@@ -266,14 +265,14 @@
                 }
 
                 // Show the button after determining auth state
-                authButtons.style.display = 'list-item';
+                authButtons.style.opacity = '1';
             } catch (error) {
                 console.log('Not logged in');
                 const authButtons = document.getElementById('authButtons');
                 authButtons.innerHTML = `
                     <a href="login.html" class="btn-primary">Login</a>
                 `;
-                authButtons.style.display = 'list-item';
+                authButtons.style.opacity = '1';
             }
         }
 

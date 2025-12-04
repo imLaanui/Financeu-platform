@@ -39,30 +39,8 @@
                 <ul class="nav-links">
                     <li><a href="index.html">Home</a></li>
                     <li><a href="dashboard.html">Dashboard</a></li>
-                    <li id="authButtons" style="display: none;"><a href="login.html" class="btn-primary">Login</a></li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-
-    <div class="lesson-container">
-        <a href="pillar1-lessons.html" class="back-link">← Back to Pillar 1 Lessons</a>
-
-        <div class="lesson-header">
-            <div class="lesson-number">LESSON 7</div>
-            <h1>Tracking Your Money</h1>
-        </div>
-
-        <div class="lesson-section">
-            <h2>Quick Intro</h2>
-            <p>You can't manage what you don't measure. Most people have no idea where their money actually goes each month—it just vanishes. Tracking your money sounds tedious, but it's the single most powerful tool for financial control. Once you see your spending patterns, you gain the power to change them.</p>
-        </div>
-
-        <div class="lesson-section">
-            <h2>Core Concept</h2>
-            <p><strong>Tracking your money means recording what you earn and what you spend so you can see patterns, identify problems, and make informed decisions.</strong></p>
-            <p><strong>Why Tracking Matters:</strong></p>
-            <ul>
+                    <li id="authButtons" style="opacity: 0;">
+                    </li><a href="login.html" class="btn-primary">Login</a></li>
                 <li><strong>Awareness:</strong> Most people are shocked when they actually see where money goes. That $5 daily coffee is $1,825 per year.</li>
                 <li><strong>Control:</strong> You can't change habits you don't notice. Tracking reveals what needs fixing.</li>
                 <li><strong>Progress:</strong> Watching your savings grow or debt shrink is motivating.</li>
@@ -198,14 +176,14 @@
                 } else {
                     authButtons.innerHTML = `<a href="login.html" class="btn-primary">Login</a>`;
                 }
-                authButtons.style.display = 'list-item';
+                authButtons.style.opacity = '1';
             } catch (error) {
                 console.log('Not logged in');
                 const authButtons = document.getElementById('authButtons');
                 authButtons.innerHTML = `
                     <a href="login.html" class="btn-primary">Login</a>
                 `;
-                authButtons.style.display = 'list-item';
+                authButtons.style.opacity = '1';
             }
         }
 
@@ -224,7 +202,7 @@
                 authButtons.innerHTML = `
                     <a href="login.html" class="btn-primary">Login</a>
                 `;
-                authButtons.style.display = 'list-item';
+                authButtons.style.opacity = '1';
                 window.location.href = '/index.html';
             }
         }

@@ -42,30 +42,8 @@
                 <ul class="nav-links">
                     <li><a href="index.html">Home</a></li>
                     <li><a href="dashboard.html">Dashboard</a></li>
-                    <li id="authButtons" style="display: none;"><a href="login.html" class="btn-primary">Login</a></li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-
-    <div class="lesson-container">
-        <a href="pillar1-lessons.html" class="back-link">← Back to Pillar 1 Lessons</a>
-
-        <div class="lesson-header">
-            <div class="lesson-number">LESSON 4</div>
-            <h1>Needs vs. Wants</h1>
-        </div>
-
-        <div class="lesson-section">
-            <h2>Quick Intro</h2>
-            <p>One of the most important financial skills is distinguishing between needs and wants. It sounds simple, but in modern life, the line gets blurry fast. Is a smartphone a need or a want? What about streaming services? Your ability to honestly answer these questions will directly impact your financial success.</p>
-        </div>
-
-        <div class="lesson-section">
-            <h2>Core Concept</h2>
-            <p><strong>Needs are essentials required for survival and basic functioning. Wants are desires that enhance your life but aren't necessary.</strong></p>
-            <p><strong>True Needs:</strong></p>
-            <ul>
+                    <li id="authButtons" style="opacity: 0;">
+                    </li><a href="login.html" class="btn-primary">Login</a></li>
                 <li>Shelter (housing with basic utilities)</li>
                 <li>Food (nutritious meals, not necessarily restaurants)</li>
                 <li>Clothing (adequate, not designer)</li>
@@ -201,14 +179,14 @@
                 } else {
                     authButtons.innerHTML = `<a href="login.html" class="btn-primary">Login</a>`;
                 }
-                authButtons.style.display = 'list-item';
+                authButtons.style.opacity = '1';
             } catch (error) {
                 console.log('Not logged in');
                 const authButtons = document.getElementById('authButtons');
                 authButtons.innerHTML = `
                     <a href="login.html" class="btn-primary">Login</a>
                 `;
-                authButtons.style.display = 'list-item';
+                authButtons.style.opacity = '1';
             }
         }
 
@@ -227,7 +205,7 @@
                 authButtons.innerHTML = `
                     <a href="login.html" class="btn-primary">Login</a>
                 `;
-                authButtons.style.display = 'list-item';
+                authButtons.style.opacity = '1';
                 window.location.href = '/index.html';
             }
         }
