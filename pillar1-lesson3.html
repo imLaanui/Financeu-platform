@@ -6,30 +6,240 @@
     <title>Lesson 3 - The Time Value of Money - FinanceU</title>
     <link rel="stylesheet" href="styles.css">
     <style>
-        .lesson-container { max-width: 800px; margin: 0 auto; padding: 40px 20px; }
-        .lesson-header { text-align: center; margin-bottom: 40px; padding-bottom: 20px; border-bottom: 3px solid var(--primary-color); }
-        .lesson-header h1 { font-size: 36px; color: var(--text-primary); margin-bottom: 10px; }
-        .lesson-header .lesson-number { color: var(--primary-color); font-size: 18px; font-weight: 600; margin-bottom: 5px; }
-        .lesson-section { background: white; padding: 30px; border-radius: 12px; margin-bottom: 25px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); }
-        .lesson-section h2 { color: var(--primary-color); font-size: 24px; margin-bottom: 15px; }
-        .lesson-section p { line-height: 1.8; color: var(--text-secondary); margin-bottom: 15px; }
-        .lesson-section ul { line-height: 1.8; color: var(--text-secondary); margin-left: 20px; margin-bottom: 15px; }
-        .visual-box { background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%); border-left: 4px solid var(--primary-color); padding: 20px; border-radius: 8px; margin: 20px 0; }
-        .visual-box h3 { color: var(--primary-color); margin-bottom: 15px; font-size: 18px; }
-        .timeline { display: flex; justify-content: space-around; align-items: flex-end; margin-top: 20px; gap: 10px; }
-        .timeline-item { text-align: center; flex: 1; }
-        .timeline-box { background: white; padding: 15px; border-radius: 8px; margin-bottom: 10px; }
-        .timeline-box.highlight { background: #10b981; color: white; font-weight: bold; }
-        .action-box { background: #10b98120; border-left: 4px solid #10b981; padding: 20px; border-radius: 8px; }
-        .action-box h3 { color: #10b981; margin-bottom: 10px; }
-        .reflection-box { background: #f59e0b20; border-left: 4px solid #f59e0b; padding: 20px; border-radius: 8px; }
-        .reflection-box h3 { color: #f59e0b; margin-bottom: 10px; }
-        .mistakes-list { background: #fee2e2; padding: 20px; border-radius: 8px; border-left: 4px solid #dc2626; }
-        .mistakes-list h3 { color: #dc2626; margin-bottom: 15px; }
-        .btn-finish { display: block; width: 100%; max-width: 400px; margin: 30px auto; padding: 18px; background: var(--primary-color); color: white; text-align: center; text-decoration: none; border-radius: 8px; font-size: 18px; font-weight: 600; transition: background 0.2s; border: none; cursor: pointer; }
-        .btn-finish:hover { background: #2563eb; }
-        .back-link { display: inline-block; margin-bottom: 20px; color: var(--primary-color); text-decoration: none; font-weight: 600; }
-        .back-link:hover { text-decoration: underline; }
+        .lesson-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        .lesson-header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 30px;
+            background: linear-gradient(135deg, #EFF6FF 0%, #DBEAFE 100%);
+            border-radius: 16px;
+            position: relative;
+            overflow: hidden;
+        }
+        .lesson-header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(59, 130, 246, 0.1) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+        }
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        .lesson-header h1 {
+            font-size: 36px;
+            color: var(--text-primary);
+            margin-bottom: 10px;
+            position: relative;
+            z-index: 1;
+        }
+        .lesson-header .lesson-number {
+            color: var(--primary-color);
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 5px;
+            position: relative;
+            z-index: 1;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        .lesson-section {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            position: relative;
+            border-left: 4px solid transparent;
+            transition: all 0.3s ease;
+        }
+        .lesson-section:hover {
+            border-left-color: var(--primary-color);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        .lesson-section h2 {
+            color: var(--primary-color);
+            font-size: 24px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .lesson-section h2::before {
+            content: '';
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+            background: linear-gradient(135deg, #3B82F6 0%, #8B5CF6 100%);
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 8px rgba(59, 130, 246, 0.3);
+        }
+        .lesson-section p {
+            line-height: 1.8;
+            color: var(--text-secondary);
+            margin-bottom: 15px;
+        }
+        .lesson-section ul {
+            line-height: 1.8;
+            color: var(--text-secondary);
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+        .visual-box {
+            background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+            border-left: 4px solid var(--primary-color);
+            padding: 25px;
+            border-radius: 12px;
+            margin: 20px 0;
+            position: relative;
+            box-shadow: 0 2px 8px rgba(59, 130, 246, 0.1);
+        }
+        .visual-box::before {
+            content: '📊';
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 32px;
+            opacity: 0.3;
+        }
+        .visual-box h3 {
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            font-size: 18px;
+            font-weight: 700;
+        }
+        .timeline {
+            display: flex;
+            justify-content: space-around;
+            align-items: flex-end;
+            margin-top: 20px;
+            gap: 10px;
+        }
+        .timeline-item {
+            text-align: center;
+            flex: 1;
+        }
+        .timeline-box {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+        .timeline-box.highlight {
+            background: #10b981;
+            color: white;
+            font-weight: bold;
+        }
+        .action-box {
+            background: linear-gradient(135deg, #10b98120 0%, #d1fae540 100%);
+            border-left: 4px solid #10b981;
+            padding: 25px;
+            border-radius: 12px;
+            position: relative;
+            box-shadow: 0 2px 8px rgba(16, 185, 129, 0.1);
+        }
+        .action-box::before {
+            content: '🎯';
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 32px;
+            opacity: 0.5;
+        }
+        .action-box h3 {
+            color: #10b981;
+            margin-bottom: 10px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .reflection-box {
+            background: linear-gradient(135deg, #f59e0b20 0%, #fef3c740 100%);
+            border-left: 4px solid #f59e0b;
+            padding: 25px;
+            border-radius: 12px;
+            position: relative;
+            box-shadow: 0 2px 8px rgba(245, 158, 11, 0.1);
+        }
+        .reflection-box::before {
+            content: '💭';
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 32px;
+            opacity: 0.5;
+        }
+        .reflection-box h3 {
+            color: #f59e0b;
+            margin-bottom: 10px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .mistakes-list {
+            background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
+            padding: 25px;
+            border-radius: 12px;
+            border-left: 4px solid #dc2626;
+            position: relative;
+            box-shadow: 0 2px 8px rgba(220, 38, 38, 0.1);
+        }
+        .mistakes-list::before {
+            content: '⚠️';
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 32px;
+            opacity: 0.5;
+        }
+        .mistakes-list h3 {
+            color: #dc2626;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+        .btn-finish {
+            display: block;
+            width: 100%;
+            max-width: 400px;
+            margin: 30px auto;
+            padding: 18px;
+            background: var(--primary-color);
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: 600;
+            transition: background 0.2s;
+            border: none;
+            cursor: pointer;
+        }
+        .btn-finish:hover {
+            background: #2563eb;
+        }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
         .quiz-container {
             background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
             border: 2px solid var(--primary-color);
@@ -157,9 +367,205 @@
             cursor: not-allowed;
             opacity: 0.6;
         }
+        /* Multi-screen styles */
+        .lesson-screen {
+            display: none;
+        }
+        .lesson-screen.active {
+            display: block;
+            animation: fadeIn 0.3s ease-in;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .screen-progress {
+            text-align: center;
+            margin-bottom: 20px;
+            padding: 12px 20px;
+            background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+            border-radius: 8px;
+            font-weight: 600;
+            color: var(--primary-color);
+            font-size: 14px;
+        }
+        .screen-navigation {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 2px solid #e5e7eb;
+        }
+        .btn-nav {
+            padding: 12px 24px;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .btn-nav:hover {
+            background: #2563eb;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+        }
+        .btn-nav:disabled {
+            background: #d1d5db;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        .btn-nav.btn-prev {
+            background: #6b7280;
+        }
+        .btn-nav.btn-prev:hover {
+            background: #4b5563;
+        }
+        .nav-spacer {
+            width: 120px;
+        }
+        /* Checkpoint styles */
+        .checkpoint-container {
+            background: linear-gradient(135deg, #E0F2FE 0%, #BAE6FD 100%);
+            border: 2px solid #7DD3FC;
+            border-radius: 12px;
+            padding: 30px;
+            margin: 20px 0;
+        }
+        .checkpoint-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .checkpoint-header h3 {
+            color: #0284C7;
+            font-size: 24px;
+            margin-bottom: 8px;
+        }
+        .checkpoint-header p {
+            color: var(--text-secondary);
+            font-size: 15px;
+        }
+        .checkpoint-question {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+        .checkpoint-question-text {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 15px;
+        }
+        .checkpoint-option {
+            background: #f9fafb;
+            padding: 15px;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .checkpoint-option:hover {
+            border-color: #0284C7;
+            background: #F0F9FF;
+        }
+        .checkpoint-option.selected {
+            border-color: #0284C7;
+            background: #E0F2FE;
+        }
+        .checkpoint-option.correct {
+            border-color: #10b981;
+            background: #d1fae5;
+            cursor: default;
+        }
+        .checkpoint-option.incorrect {
+            border-color: #dc2626;
+            background: #fee2e2;
+            cursor: default;
+        }
+        .checkpoint-option input[type="radio"] {
+            cursor: pointer;
+        }
+        .checkpoint-feedback {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+            display: none;
+        }
+        .checkpoint-feedback.show {
+            display: block;
+            animation: fadeIn 0.3s ease-in;
+        }
+        .checkpoint-feedback.correct {
+            border-left: 4px solid #10b981;
+        }
+        .checkpoint-feedback.incorrect {
+            border-left: 4px solid #f59e0b;
+        }
+        .checkpoint-feedback-icon {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+        .checkpoint-feedback-title {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        .checkpoint-feedback.correct .checkpoint-feedback-title {
+            color: #10b981;
+        }
+        .checkpoint-feedback.incorrect .checkpoint-feedback-title {
+            color: #f59e0b;
+        }
+        .checkpoint-explanation {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-top: 10px;
+        }
+        .btn-continue {
+            display: none;
+            width: 100%;
+            max-width: 300px;
+            margin: 20px auto;
+            padding: 15px;
+            background: var(--primary-color);
+            color: white;
+            text-align: center;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .btn-continue.show {
+            display: block;
+        }
+        .btn-continue:hover {
+            background: #2563eb;
+        }
+        @media (max-width: 768px) {
+            .timeline {
+                flex-direction: column;
+            }
+        }
     </style>
 </head>
 <body>
+    <!-- Navigation -->
     <nav class="navbar">
         <div class="container">
             <div class="nav-wrapper">
@@ -174,103 +580,245 @@
         </div>
     </nav>
 
+    <!-- Lesson Content -->
     <div class="lesson-container">
         <a href="pillar1-lessons.html" class="back-link">← Back to Pillar 1 Lessons</a>
 
+        <!-- Header -->
         <div class="lesson-header">
             <div class="lesson-number">LESSON 3</div>
             <h1>The Time Value of Money</h1>
         </div>
 
-        <div class="lesson-section">
-            <h2>Quick Intro</h2>
-            <p>Here's a powerful financial truth: a dollar today is worth more than a dollar tomorrow. This isn't about inflation (though that's part of it)—it's about opportunity. Understanding the time value of money will change how you think about saving, spending, and investing. It's the concept that makes compound interest work in your favor and explains why starting early matters so much.</p>
-        </div>
-
-        <div class="lesson-section">
-            <h2>Core Concept</h2>
-            <p><strong>Money available now is worth more than the same amount in the future because it has the potential to grow.</strong></p>
-            <p>Why does time affect money's value?</p>
-            <ul>
-                <li><strong>Growth Potential:</strong> Money you have now can be invested to earn returns, making it worth more later.</li>
-                <li><strong>Inflation:</strong> Prices increase over time, meaning your dollar buys less in the future than it does today.</li>
-                <li><strong>Opportunity Cost:</strong> Having money now gives you options and flexibility you won't have if you wait.</li>
-                <li><strong>Risk:</strong> Money promised in the future isn't guaranteed—something could change before you receive it.</li>
-            </ul>
-            <p>This is why lenders charge interest and why investing early is so powerful. Time is literally money.</p>
-        </div>
-
-        <div class="lesson-section">
-            <h2>Simple Example</h2>
-            <p>Imagine someone offers you a choice:</p>
-            <p><strong>Option A:</strong> Receive $1,000 today<br>
-            <strong>Option B:</strong> Receive $1,000 one year from now</p>
-            <p>Which should you choose? Option A, always!</p>
-            <p>Here's why: If you take $1,000 today and put it in a savings account earning 5% interest, you'll have $1,050 in one year. That's $50 more than waiting. Even if you don't invest it, you have the option to use it for emergencies, opportunities, or needs that might arise this year.</p>
-            <p>Now flip it: Would you lend someone $1,000 today if they promised to pay you back exactly $1,000 in a year? Probably not, because you're losing the opportunity to grow that money. That's why lenders charge interest—they need to be compensated for giving up that growth potential.</p>
-        </div>
-
-        <div class="visual-box">
-            <h3>$100 Saved at Age 20 vs. Age 30</h3>
-            <p style="font-size: 14px; margin-bottom: 15px;">Assuming 7% annual growth until age 65:</p>
-            <div class="timeline">
-                <div class="timeline-item">
-                    <div class="timeline-box highlight">$1,497</div>
-                    <p style="font-size: 13px; color: var(--text-secondary);">Started at 20<br>(45 years growth)</p>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-box">$761</div>
-                    <p style="font-size: 13px; color: var(--text-secondary);">Started at 30<br>(35 years growth)</p>
-                </div>
+        <!-- Screen 1: Quick Intro -->
+        <div class="lesson-screen active" data-screen="1">
+            <div class="screen-progress">Screen 1 of 8</div>
+            <div class="lesson-section">
+                <h2>Quick Intro</h2>
+                <p>Here's a powerful financial truth: a dollar today is worth more than a dollar tomorrow. This isn't about inflation (though that's part of it)—it's about opportunity. Understanding the time value of money will change how you think about saving, spending, and investing. It's the concept that makes compound interest work in your favor and explains why starting early matters so much.</p>
             </div>
-            <p style="margin-top: 20px; text-align: center; font-weight: 600; color: var(--primary-color);">Starting 10 years earlier nearly doubles your money!</p>
+            <div class="screen-navigation">
+                <div class="nav-spacer"></div>
+                <button class="btn-nav" onclick="nextScreen()">Next <span>→</span></button>
+            </div>
         </div>
 
-        <div class="lesson-section">
-            <div class="mistakes-list">
-                <h3>Common Mistakes to Avoid</h3>
-                <ul style="margin-left: 20px;">
-                    <li><strong>Thinking "I'll start saving later":</strong> Every year you wait costs you years of potential growth. Starting with $10/month now beats starting with $100/month in 10 years.</li>
-                    <li><strong>Only thinking about today's value:</strong> That $50 you spend on takeout today could be worth $150 in 20 years if invested. Not every purchase needs this analysis, but it's worth considering for large expenses.</li>
-                    <li><strong>Ignoring inflation:</strong> Money sitting under your mattress loses value every year. You need growth just to stay even.</li>
-                    <li><strong>Not asking for payment terms:</strong> If someone owes you money, getting it sooner rather than later matters. Don't be afraid to ask when you'll be repaid.</li>
+        <!-- Screen 2: Core Concept -->
+        <div class="lesson-screen" data-screen="2">
+            <div class="screen-progress">Screen 2 of 8</div>
+            <div class="lesson-section">
+                <h2>Core Concept</h2>
+                <p><strong>Money available now is worth more than the same amount in the future because it has the potential to grow.</strong></p>
+                <p>Why does time affect money's value?</p>
+                <ul>
+                    <li><strong>Growth Potential:</strong> Money you have now can be invested to earn returns, making it worth more later.</li>
+                    <li><strong>Inflation:</strong> Prices increase over time, meaning your dollar buys less in the future than it does today.</li>
+                    <li><strong>Opportunity Cost:</strong> Having money now gives you options and flexibility you won't have if you wait.</li>
+                    <li><strong>Risk:</strong> Money promised in the future isn't guaranteed—something could change before you receive it.</li>
                 </ul>
+                <p>This is why lenders charge interest and why investing early is so powerful. Time is literally money.</p>
+            </div>
+            <div class="screen-navigation">
+                <button class="btn-nav btn-prev" onclick="previousScreen()"><span>←</span> Previous</button>
+                <button class="btn-nav" onclick="nextScreen()">Next <span>→</span></button>
             </div>
         </div>
 
-        <div class="lesson-section">
-            <div class="action-box">
-                <h3>🎯 Your Micro Action</h3>
-                <p><strong>Calculate your "coffee future":</strong></p>
-                <p>Think of something small you buy regularly (coffee, snacks, subscriptions). Multiply the weekly cost by 52 to get your annual spending. Then multiply by 30 to see what that money could be worth in 30 years if invested at 7% average returns.</p>
-                <p>Example: $5 coffee twice a week = $10/week = $520/year = ~$50,000 in 30 years!</p>
-                <p>This isn't to make you feel guilty—it's to show you the power of time. You get to decide what's worth it.</p>
+        <!-- Screen 3: Checkpoint Question 1 -->
+        <div class="lesson-screen" data-screen="3">
+            <div class="screen-progress">Screen 3 of 8</div>
+            <div class="checkpoint-container">
+                <div class="checkpoint-header">
+                    <h3>Quick Check</h3>
+                    <p>Let's pause and check your understanding. No pressure - you can continue regardless of your answer!</p>
+                </div>
+
+                <div class="checkpoint-question">
+                    <div class="checkpoint-question-text">Why is $100 today worth more than $100 in a year?</div>
+                    <div class="checkpoint-option" onclick="checkCheckpoint1(0)">
+                        <input type="radio" name="checkpoint1" value="0">
+                        <span>A) It's not, they're equal</span>
+                    </div>
+                    <div class="checkpoint-option" onclick="checkCheckpoint1(1)">
+                        <input type="radio" name="checkpoint1" value="1">
+                        <span>B) Because of inflation and opportunity cost</span>
+                    </div>
+                    <div class="checkpoint-option" onclick="checkCheckpoint1(2)">
+                        <input type="radio" name="checkpoint1" value="2">
+                        <span>C) Because paper money degrades</span>
+                    </div>
+                    <div class="checkpoint-option" onclick="checkCheckpoint1(3)">
+                        <input type="radio" name="checkpoint1" value="3">
+                        <span>D) Because of bank fees</span>
+                    </div>
+                </div>
+
+                <div class="checkpoint-feedback" id="checkpoint1-feedback">
+                    <div class="checkpoint-feedback-icon"></div>
+                    <div class="checkpoint-feedback-title"></div>
+                    <div class="checkpoint-explanation"></div>
+                </div>
+
+                <button class="btn-continue" id="checkpoint1-continue" onclick="nextScreen()">Continue <span>→</span></button>
+            </div>
+            <div class="screen-navigation">
+                <button class="btn-nav btn-prev" onclick="previousScreen()"><span>←</span> Previous</button>
+                <div class="nav-spacer"></div>
             </div>
         </div>
 
-        <div class="lesson-section">
-            <div class="reflection-box">
-                <h3>💭 Quick Reflection</h3>
-                <p><strong>Think about this:</strong></p>
-                <p>What opportunities have you missed because you "didn't have money right now"? What could change in your life if you started building wealth today, even with small amounts? The goal isn't to never spend—it's to understand that every financial decision is also a decision about your future.</p>
-                <p style="margin-top: 15px; font-size: 14px; font-style: italic;">Consider this before moving forward.</p>
+        <!-- Screen 4: Simple Example -->
+        <div class="lesson-screen" data-screen="4">
+            <div class="screen-progress">Screen 4 of 8</div>
+            <div class="lesson-section">
+                <h2>Simple Example</h2>
+                <p>Imagine someone offers you a choice:</p>
+                <p><strong>Option A:</strong> Receive $1,000 today<br>
+                <strong>Option B:</strong> Receive $1,000 one year from now</p>
+                <p>Which should you choose? Option A, always!</p>
+                <p>Here's why: If you take $1,000 today and put it in a savings account earning 5% interest, you'll have $1,050 in one year. That's $50 more than waiting. Even if you don't invest it, you have the option to use it for emergencies, opportunities, or needs that might arise this year.</p>
+                <p>Now flip it: Would you lend someone $1,000 today if they promised to pay you back exactly $1,000 in a year? Probably not, because you're losing the opportunity to grow that money. That's why lenders charge interest—they need to be compensated for giving up that growth potential.</p>
+            </div>
+
+            <!-- Mini Visual -->
+            <div class="visual-box">
+                <h3>$100 Saved at Age 20 vs. Age 30</h3>
+                <p style="font-size: 14px; margin-bottom: 15px;">Assuming 7% annual growth until age 65:</p>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-box highlight">$1,497</div>
+                        <p style="font-size: 13px; color: var(--text-secondary);">Started at 20<br>(45 years growth)</p>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-box">$761</div>
+                        <p style="font-size: 13px; color: var(--text-secondary);">Started at 30<br>(35 years growth)</p>
+                    </div>
+                </div>
+                <p style="margin-top: 20px; text-align: center; font-weight: 600; color: var(--primary-color);">Starting 10 years earlier nearly doubles your money!</p>
+            </div>
+            <div class="screen-navigation">
+                <button class="btn-nav btn-prev" onclick="previousScreen()"><span>←</span> Previous</button>
+                <button class="btn-nav" onclick="nextScreen()">Next <span>→</span></button>
             </div>
         </div>
 
-        <!-- Lesson Quiz -->
-        <div class="quiz-container" id="quizContainer">
-            <div class="quiz-header">
-                <h2>Lesson Quiz</h2>
-                <p>Answer these questions to unlock the next lesson. You need 80% (3 out of 4) to pass.</p>
+        <!-- Screen 5: Checkpoint Question 2 -->
+        <div class="lesson-screen" data-screen="5">
+            <div class="screen-progress">Screen 5 of 8</div>
+            <div class="checkpoint-container">
+                <div class="checkpoint-header">
+                    <h3>Quick Check: Apply What You Learned</h3>
+                    <p>Let's see how you can apply this concept to a real-world scenario!</p>
+                </div>
+
+                <div class="checkpoint-question">
+                    <div class="checkpoint-question-text">Sarah invests $100/month starting at 25. Tom invests $200/month starting at 35. Both stop at 65. Who likely has more?</div>
+                    <div class="checkpoint-option" onclick="checkCheckpoint2(0)">
+                        <input type="radio" name="checkpoint2" value="0">
+                        <span>A) Tom (he invested more per month)</span>
+                    </div>
+                    <div class="checkpoint-option" onclick="checkCheckpoint2(1)">
+                        <input type="radio" name="checkpoint2" value="1">
+                        <span>B) Sarah (she started earlier)</span>
+                    </div>
+                    <div class="checkpoint-option" onclick="checkCheckpoint2(2)">
+                        <input type="radio" name="checkpoint2" value="2">
+                        <span>C) They'll have the same</span>
+                    </div>
+                    <div class="checkpoint-option" onclick="checkCheckpoint2(3)">
+                        <input type="radio" name="checkpoint2" value="3">
+                        <span>D) Neither will have much</span>
+                    </div>
+                </div>
+
+                <div class="checkpoint-feedback" id="checkpoint2-feedback">
+                    <div class="checkpoint-feedback-icon"></div>
+                    <div class="checkpoint-feedback-title"></div>
+                    <div class="checkpoint-explanation"></div>
+                </div>
+
+                <button class="btn-continue" id="checkpoint2-continue" onclick="nextScreen()">Continue <span>→</span></button>
             </div>
-            <div id="quizQuestions"></div>
-            <button class="btn-submit-quiz" id="submitQuiz" onclick="submitQuiz()">Submit Quiz</button>
-            <div id="quizResult"></div>
+            <div class="screen-navigation">
+                <button class="btn-nav btn-prev" onclick="previousScreen()"><span>←</span> Previous</button>
+                <div class="nav-spacer"></div>
+            </div>
         </div>
 
-        <button class="btn-finish" id="finishBtn" onclick="finishLesson()" disabled>Finish Lesson</button>
+        <!-- Screen 6: Common Mistakes -->
+        <div class="lesson-screen" data-screen="6">
+            <div class="screen-progress">Screen 6 of 8</div>
+            <div class="lesson-section">
+                <div class="mistakes-list">
+                    <h3>Common Mistakes to Avoid</h3>
+                    <ul style="margin-left: 20px;">
+                        <li><strong>Thinking "I'll start saving later":</strong> Every year you wait costs you years of potential growth. Starting with $10/month now beats starting with $100/month in 10 years.</li>
+                        <li><strong>Only thinking about today's value:</strong> That $50 you spend on takeout today could be worth $150 in 20 years if invested. Not every purchase needs this analysis, but it's worth considering for large expenses.</li>
+                        <li><strong>Ignoring inflation:</strong> Money sitting under your mattress loses value every year. You need growth just to stay even.</li>
+                        <li><strong>Not asking for payment terms:</strong> If someone owes you money, getting it sooner rather than later matters. Don't be afraid to ask when you'll be repaid.</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="screen-navigation">
+                <button class="btn-nav btn-prev" onclick="previousScreen()"><span>←</span> Previous</button>
+                <button class="btn-nav" onclick="nextScreen()">Next <span>→</span></button>
+            </div>
+        </div>
+
+        <!-- Screen 7: Micro Action + Quick Reflection -->
+        <div class="lesson-screen" data-screen="7">
+            <div class="screen-progress">Screen 7 of 8</div>
+            <!-- Micro Action -->
+            <div class="lesson-section">
+                <div class="action-box">
+                    <h3>🎯 Your Micro Action</h3>
+                    <p><strong>Calculate your "coffee future":</strong></p>
+                    <p>Think of something small you buy regularly (coffee, snacks, subscriptions). Multiply the weekly cost by 52 to get your annual spending. Then multiply by 30 to see what that money could be worth in 30 years if invested at 7% average returns.</p>
+                    <p>Example: $5 coffee twice a week = $10/week = $520/year = ~$50,000 in 30 years!</p>
+                    <p>This isn't to make you feel guilty—it's to show you the power of time. You get to decide what's worth it.</p>
+                </div>
+            </div>
+
+            <!-- Quick Reflection -->
+            <div class="lesson-section">
+                <div class="reflection-box">
+                    <h3>💭 Quick Reflection</h3>
+                    <p><strong>Think about this:</strong></p>
+                    <p>What opportunities have you missed because you "didn't have money right now"? What could change in your life if you started building wealth today, even with small amounts? The goal isn't to never spend—it's to understand that every financial decision is also a decision about your future.</p>
+                    <p style="margin-top: 15px; font-size: 14px; font-style: italic;">Consider this before moving forward.</p>
+                </div>
+            </div>
+            <div class="screen-navigation">
+                <button class="btn-nav btn-prev" onclick="previousScreen()"><span>←</span> Previous</button>
+                <button class="btn-nav" onclick="nextScreen()">Next <span>→</span></button>
+            </div>
+        </div>
+
+        <!-- Screen 8: Quiz -->
+        <div class="lesson-screen" data-screen="8">
+            <div class="screen-progress">Screen 8 of 8</div>
+            <!-- Lesson Quiz -->
+            <div class="quiz-container" id="quizContainer">
+                <div class="quiz-header">
+                    <h2>Lesson Quiz</h2>
+                    <p>Answer these questions to unlock the next lesson. You need 80% (3 out of 4) to pass.</p>
+                </div>
+                <div id="quizQuestions"></div>
+                <button class="btn-submit-quiz" id="submitQuiz" onclick="submitQuiz()">Submit Quiz</button>
+                <div id="quizResult"></div>
+            </div>
+
+            <!-- Finish Button -->
+            <button class="btn-finish" id="finishBtn" onclick="finishLesson()" disabled>Finish Lesson</button>
+
+            <div class="screen-navigation">
+                <button class="btn-nav btn-prev" onclick="previousScreen()"><span>←</span> Previous</button>
+                <div class="nav-spacer"></div>
+            </div>
+        </div>
     </div>
 
+    <!-- Footer -->
     <footer class="footer">
         <div class="container">
             <div class="footer-content">
@@ -304,17 +852,54 @@
 
     <script src="config.js"></script>
     <script>
+        // Check authentication status and update nav
         async function updateNav() {
+            const authButtons = document.getElementById('authButtons');
+
+            // Check localStorage for cached auth state and render immediately
+            const cachedAuth = localStorage.getItem('authState');
+            if (cachedAuth) {
+                const authState = JSON.parse(cachedAuth);
+                authButtons.innerHTML = authState.isLoggedIn
+                    ? `<a href="#" onclick="logout(); return false;" class="btn-primary">Logout</a>`
+                    : `<a href="login.html" class="btn-primary">Login</a>`;
+                authButtons.style.opacity = '1';
+            }
+
+            // Then verify with server in background
             try {
                 const response = await fetch(`${API_URL}/auth/me`, { credentials: 'include' });
-                const authButtons = document.getElementById('authButtons');
+
                 if (response.ok) {
-                    authButtons.innerHTML = `<a href="dashboard.html" class="btn-primary">Dashboard</a>`;
+                    localStorage.setItem('authState', JSON.stringify({ isLoggedIn: true }));
+                    authButtons.innerHTML = `<a href="#" onclick="logout(); return false;" class="btn-primary">Logout</a>`;
                 } else {
+                    localStorage.setItem('authState', JSON.stringify({ isLoggedIn: false }));
                     authButtons.innerHTML = `<a href="login.html" class="btn-primary">Login</a>`;
                 }
+                authButtons.style.opacity = '1';
             } catch (error) {
                 console.log('Not logged in');
+                localStorage.setItem('authState', JSON.stringify({ isLoggedIn: false }));
+                authButtons.innerHTML = `<a href="login.html" class="btn-primary">Login</a>`;
+                authButtons.style.opacity = '1';
+            }
+        }
+
+        // Logout function
+        async function logout() {
+            localStorage.removeItem('authState');
+            localStorage.removeItem('token');
+            localStorage.removeItem('userId');
+            try {
+                await fetch(`${API_URL}/auth/logout`, {
+                    method: 'POST',
+                    credentials: 'include'
+                });
+                window.location.href = '/index.html';
+            } catch (error) {
+                console.error('Logout error:', error);
+                window.location.href = '/index.html';
             }
         }
 
@@ -422,6 +1007,7 @@
         let userAnswers = [];
         let quizPassed = false;
 
+        // Initialize quiz
         function initQuiz() {
             const userId = localStorage.getItem('userId');
 
@@ -441,6 +1027,7 @@
                 return;
             }
 
+            // Select random version of each question
             currentQuestions = quizData.map(q => {
                 const randomVersion = q.versions[Math.floor(Math.random() * q.versions.length)];
                 return randomVersion;
@@ -476,6 +1063,7 @@
         function selectAnswer(questionIndex, optionIndex) {
             userAnswers[questionIndex] = optionIndex;
 
+            // Update visual selection
             const questionCard = document.querySelectorAll('.question-card')[questionIndex];
             const options = questionCard.querySelectorAll('.answer-option');
             options.forEach((opt, idx) => {
@@ -488,11 +1076,13 @@
         }
 
         function submitQuiz() {
+            // Check if all questions are answered
             if (userAnswers.includes(null)) {
                 alert('Please answer all questions before submitting.');
                 return;
             }
 
+            // Calculate score
             let correct = 0;
             currentQuestions.forEach((q, index) => {
                 if (userAnswers[index] === q.correct) {
@@ -503,6 +1093,7 @@
             const percentage = Math.round((correct / currentQuestions.length) * 100);
             const passed = percentage >= 80;
 
+            // Show correct/incorrect answers
             document.querySelectorAll('.question-card').forEach((card, qIndex) => {
                 const options = card.querySelectorAll('.answer-option');
                 options.forEach((opt, oIndex) => {
@@ -515,6 +1106,7 @@
                 });
             });
 
+            // Display result
             const resultDiv = document.getElementById('quizResult');
             if (passed) {
                 quizPassed = true;
@@ -546,6 +1138,7 @@
         }
 
         function retryQuiz() {
+            // Re-initialize with new question versions
             currentQuestions = quizData.map(q => {
                 const randomVersion = q.versions[Math.floor(Math.random() * q.versions.length)];
                 return randomVersion;
@@ -568,18 +1161,163 @@
                 return;
             }
 
+            // Get completed lessons from localStorage
             const completed = JSON.parse(localStorage.getItem(`pillar1_completed_${userId}`) || '[]');
 
+            // Add lesson 3 if not already completed
             if (!completed.includes(3)) {
                 completed.push(3);
                 localStorage.setItem(`pillar1_completed_${userId}`, JSON.stringify(completed));
             }
 
+            // Redirect back to lessons page
             window.location.href = 'pillar1-lessons.html';
         }
 
         updateNav();
         initQuiz();
+
+        // Checkpoint functions
+        let checkpoint1Answered = false;
+        let checkpoint2Answered = false;
+
+        function checkCheckpoint1(selectedOption) {
+            if (checkpoint1Answered) return;
+            checkpoint1Answered = true;
+
+            const correctOption = 1; // B) Because of inflation and opportunity cost
+            const isCorrect = selectedOption === correctOption;
+
+            // Get elements
+            const options = document.querySelectorAll('[name="checkpoint1"]').forEach((radio, index) => {
+                const optionDiv = radio.parentElement;
+                optionDiv.style.pointerEvents = 'none';
+
+                if (index === correctOption) {
+                    optionDiv.classList.add('correct');
+                } else if (index === selectedOption && index !== correctOption) {
+                    optionDiv.classList.add('incorrect');
+                }
+
+                if (index === selectedOption) {
+                    radio.checked = true;
+                }
+            });
+
+            // Show feedback
+            const feedback = document.getElementById('checkpoint1-feedback');
+            const feedbackIcon = feedback.querySelector('.checkpoint-feedback-icon');
+            const feedbackTitle = feedback.querySelector('.checkpoint-feedback-title');
+            const feedbackExplanation = feedback.querySelector('.checkpoint-explanation');
+            const continueBtn = document.getElementById('checkpoint1-continue');
+
+            if (isCorrect) {
+                feedback.classList.add('correct');
+                feedbackIcon.textContent = '🎉';
+                feedbackTitle.textContent = 'Correct!';
+                feedbackExplanation.textContent = 'Excellent! $100 today is worth more because of inflation (money loses purchasing power over time) and opportunity cost (you could invest it and earn returns). Having money now gives you options and growth potential that you don\'t have if you wait.';
+            } else {
+                feedback.classList.add('incorrect');
+                feedbackIcon.textContent = '💡';
+                feedbackTitle.textContent = 'Not quite, but that\'s okay!';
+                feedbackExplanation.textContent = 'The correct answer is because of inflation and opportunity cost. Money today can be invested to grow, and inflation means prices increase over time, so the same dollar amount buys less in the future. This is the fundamental principle of the time value of money.';
+            }
+
+            feedback.classList.add('show');
+            continueBtn.classList.add('show');
+        }
+
+        function checkCheckpoint2(selectedOption) {
+            if (checkpoint2Answered) return;
+            checkpoint2Answered = true;
+
+            const correctOption = 1; // B) Sarah (she started earlier)
+            const isCorrect = selectedOption === correctOption;
+
+            // Get elements
+            const options = document.querySelectorAll('[name="checkpoint2"]').forEach((radio, index) => {
+                const optionDiv = radio.parentElement;
+                optionDiv.style.pointerEvents = 'none';
+
+                if (index === correctOption) {
+                    optionDiv.classList.add('correct');
+                } else if (index === selectedOption && index !== correctOption) {
+                    optionDiv.classList.add('incorrect');
+                }
+
+                if (index === selectedOption) {
+                    radio.checked = true;
+                }
+            });
+
+            // Show feedback
+            const feedback = document.getElementById('checkpoint2-feedback');
+            const feedbackIcon = feedback.querySelector('.checkpoint-feedback-icon');
+            const feedbackTitle = feedback.querySelector('.checkpoint-feedback-title');
+            const feedbackExplanation = feedback.querySelector('.checkpoint-explanation');
+            const continueBtn = document.getElementById('checkpoint2-continue');
+
+            if (isCorrect) {
+                feedback.classList.add('correct');
+                feedbackIcon.textContent = '🎉';
+                feedbackTitle.textContent = 'Excellent!';
+                feedbackExplanation.textContent = 'Perfect! Even though Tom invests double per month, Sarah started 10 years earlier. Those extra years of compound growth are incredibly powerful. Sarah\'s money has more time to grow, which often matters more than the monthly amount. This is why starting early is so crucial!';
+            } else {
+                feedback.classList.add('incorrect');
+                feedbackIcon.textContent = '💡';
+                feedbackTitle.textContent = 'Good thinking, but there\'s a better answer!';
+                feedbackExplanation.textContent = 'Sarah will likely have more! Even though Tom invests $200/month versus Sarah\'s $100/month, Sarah started 10 years earlier. Time is the most powerful factor in compound growth. Those extra 10 years give Sarah\'s money significantly more time to grow, often making up for the lower monthly contribution.';
+            }
+
+            feedback.classList.add('show');
+            continueBtn.classList.add('show');
+        }
+
+        // Multi-screen navigation
+        let currentScreen = 1;
+        const totalScreens = 8;
+
+        function showScreen(screenNumber) {
+            // Hide all screens
+            document.querySelectorAll('.lesson-screen').forEach(screen => {
+                screen.classList.remove('active');
+            });
+
+            // Show the requested screen
+            const targetScreen = document.querySelector(`.lesson-screen[data-screen="${screenNumber}"]`);
+            if (targetScreen) {
+                targetScreen.classList.add('active');
+                currentScreen = screenNumber;
+
+                // Smooth scroll to top of lesson container
+                const lessonContainer = document.querySelector('.lesson-container');
+                const headerOffset = 80; // Height of navbar
+                const elementPosition = lessonContainer.getBoundingClientRect().top;
+                const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+                window.scrollTo({
+                    top: offsetPosition,
+                    behavior: 'smooth'
+                });
+            }
+        }
+
+        function nextScreen() {
+            if (currentScreen < totalScreens) {
+                showScreen(currentScreen + 1);
+            }
+        }
+
+        function previousScreen() {
+            if (currentScreen > 1) {
+                showScreen(currentScreen - 1);
+            }
+        }
+
+        // Initialize first screen on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            showScreen(1);
+        });
     </script>
 </body>
 </html>
