@@ -189,76 +189,105 @@
         }
 
         .upgrade-banner {
-            background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
-            border: 2px solid #f59e0b;
-            padding: 1.5rem;
+            background: white;
+            border: 2px solid var(--border-color);
             border-radius: 12px;
             margin-bottom: 2rem;
+            overflow: hidden;
+        }
+
+        .upgrade-header {
+            background: linear-gradient(135deg, #0A1A2F 0%, #1a3a5c 100%);
+            color: white;
+            padding: 1.25rem;
             text-align: center;
         }
 
-        .upgrade-content {
-            max-width: 700px;
-            margin: 0 auto 1rem;
-        }
-
-        .upgrade-banner h3 {
+        .upgrade-header h3 {
             font-size: 1.25rem;
-            margin-bottom: 0.5rem;
-            color: var(--text-dark);
+            margin: 0;
             display: flex;
             align-items: center;
+            justify-content: center;
             gap: 0.5rem;
         }
 
-        .upgrade-banner h3::before {
+        .upgrade-header h3::before {
             content: "🔓";
             font-size: 1.5rem;
         }
 
-        .upgrade-banner p {
-            font-size: 0.9rem;
-            color: var(--text-secondary);
-            margin: 0 0 0.75rem 0;
-            line-height: 1.5;
+        .upgrade-tiers {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0;
         }
 
-        .upgrade-features {
-            display: flex;
-            gap: 1rem;
-            flex-wrap: wrap;
-            margin-top: 0.5rem;
-            justify-content: center;
+        .tier-option {
+            padding: 1.5rem;
+            text-align: center;
+            position: relative;
         }
 
-        .upgrade-feature {
-            display: flex;
-            align-items: center;
-            gap: 0.375rem;
+        .tier-option:first-child {
+            border-right: 1px solid var(--border-color);
+        }
+
+        .tier-badge-banner {
+            display: inline-block;
+            padding: 0.375rem 0.875rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-bottom: 0.75rem;
+        }
+
+        .tier-badge-banner.pro {
+            background: linear-gradient(135deg, #f59e0b 0%, #ef4444 100%);
+            color: white;
+        }
+
+        .tier-badge-banner.premium {
+            background: var(--secondary-color);
+            color: white;
+        }
+
+        .tier-option h4 {
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-dark);
+        }
+
+        .tier-features {
             font-size: 0.8rem;
             color: var(--text-secondary);
-        }
-
-        .upgrade-feature::before {
-            content: "✓";
-            color: #10b981;
-            font-weight: bold;
+            margin-bottom: 0.875rem;
+            line-height: 1.4;
         }
 
         .btn-upgrade {
             padding: 0.625rem 1.25rem;
-            background: linear-gradient(135deg, #f59e0b 0%, #ef4444 100%);
             color: white;
             text-decoration: none;
             border-radius: 8px;
             font-weight: 600;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             display: inline-block;
             transition: transform 0.2s;
         }
 
+        .btn-upgrade.pro {
+            background: linear-gradient(135deg, #f59e0b 0%, #ef4444 100%);
+        }
+
+        .btn-upgrade.premium {
+            background: var(--secondary-color);
+        }
+
         .btn-upgrade:hover {
-            transform: translateY(-1px);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
         }
 
         .loading {
@@ -289,9 +318,13 @@
                 grid-template-columns: 1fr;
             }
 
-            .btn-upgrade {
-                width: 100%;
-                max-width: 300px;
+            .upgrade-tiers {
+                grid-template-columns: 1fr;
+            }
+
+            .tier-option:first-child {
+                border-right: none;
+                border-bottom: 1px solid var(--border-color);
             }
         }
     </style>
@@ -355,17 +388,23 @@
 
                 <!-- Upgrade Banner (shown for free users) -->
                 <div id="upgradeBanner" class="upgrade-banner" style="display: none;">
-                    <div class="upgrade-content">
-                        <h3>Unlock All Lessons with Premium</h3>
-                        <p>Get unlimited access to all 11 pillars of financial mastery</p>
-                        <div class="upgrade-features">
-                            <span class="upgrade-feature">8 Premium Lessons</span>
-                            <span class="upgrade-feature">Expert Content</span>
-                            <span class="upgrade-feature">Progress Tracking</span>
-                            <span class="upgrade-feature">Certificate of Completion</span>
+                    <div class="upgrade-header">
+                        <h3>Unlock Your Full Potential</h3>
+                    </div>
+                    <div class="upgrade-tiers">
+                        <div class="tier-option">
+                            <span class="tier-badge-banner pro">Pro</span>
+                            <h4>Saving & Investing</h4>
+                            <p class="tier-features">Pillars 4-8 • Saving strategies, investment basics, budgeting mastery</p>
+                            <a href="index.html#pricing" class="btn-upgrade pro">Get Pro</a>
+                        </div>
+                        <div class="tier-option">
+                            <span class="tier-badge-banner premium">Premium</span>
+                            <h4>Advanced Finance</h4>
+                            <p class="tier-features">Pillars 9-11 • Insurance, real estate, retirement planning</p>
+                            <a href="index.html#pricing" class="btn-upgrade premium">Get Premium</a>
                         </div>
                     </div>
-                    <a href="index.html#pricing" class="btn-upgrade">Upgrade Now</a>
                 </div>
 
                 <!-- Pillars Section -->
