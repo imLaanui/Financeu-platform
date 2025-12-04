@@ -365,6 +365,71 @@
             cursor: not-allowed;
             opacity: 0.6;
         }
+        /* Multi-screen styles */
+        .lesson-screen {
+            display: none;
+        }
+        .lesson-screen.active {
+            display: block;
+            animation: fadeIn 0.3s ease-in;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .screen-progress {
+            text-align: center;
+            margin-bottom: 20px;
+            padding: 12px 20px;
+            background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+            border-radius: 8px;
+            font-weight: 600;
+            color: var(--primary-color);
+            font-size: 14px;
+        }
+        .screen-navigation {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 2px solid #e5e7eb;
+        }
+        .btn-nav {
+            padding: 12px 24px;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .btn-nav:hover {
+            background: #2563eb;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+        }
+        .btn-nav:disabled {
+            background: #d1d5db;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        .btn-nav.btn-prev {
+            background: #6b7280;
+        }
+        .btn-nav.btn-prev:hover {
+            background: #4b5563;
+        }
+        .nav-spacer {
+            width: 120px;
+        }
     </style>
 </head>
 <body>
@@ -394,94 +459,133 @@
             <h1>What is Money?</h1>
         </div>
 
-        <!-- Quick Intro -->
-        <div class="lesson-section">
-            <h2>Quick Intro</h2>
-            <p>Before you can master your finances, you need to understand what money actually is. It's more than just paper bills and coins—it's a fundamental tool that shapes our daily lives and future opportunities. In this lesson, we'll explore the true nature of money and why understanding it is your first step toward financial confidence.</p>
-        </div>
-
-        <!-- Core Concept -->
-        <div class="lesson-section">
-            <h2>Core Concept</h2>
-            <p><strong>Money is a medium of exchange, a store of value, and a unit of account.</strong></p>
-            <p>Let's break that down:</p>
-            <ul>
-                <li><strong>Medium of Exchange:</strong> Money allows you to trade your work or goods for other things you need without having to barter directly. Instead of trading chickens for shoes, you sell chickens for money, then use that money to buy shoes.</li>
-                <li><strong>Store of Value:</strong> Money holds its worth over time, allowing you to save today and spend tomorrow. You can earn money now and use it months or years later.</li>
-                <li><strong>Unit of Account:</strong> Money provides a common way to measure value. Everything has a price tag, making it easy to compare what things are worth.</li>
-            </ul>
-            <p>Money only works because we all agree it has value. A $20 bill is just paper, but society accepts it as payment because we trust it represents real value.</p>
-        </div>
-
-        <!-- Simple Example -->
-        <div class="lesson-section">
-            <h2>Simple Example</h2>
-            <p>Imagine you're a talented artist who creates beautiful paintings. You want to buy groceries, pay rent, and get a haircut. Without money, you'd have to:</p>
-            <ul>
-                <li>Find a grocery store owner who wants a painting</li>
-                <li>Find a landlord who accepts art as rent payment</li>
-                <li>Find a hairstylist willing to trade a haircut for artwork</li>
-            </ul>
-            <p>This would be incredibly difficult and time-consuming! With money, you simply sell your paintings to anyone who wants them, receive cash, and use that cash to buy whatever you need from whoever is selling it. Money makes the exchange smooth and simple.</p>
-        </div>
-
-        <!-- Mini Visual -->
-        <div class="visual-box">
-            <h3>How Money Flows in Your Life</h3>
-            <div class="money-flow">
-                <div class="flow-item">
-                    <strong>You Work</strong>
-                    <p style="font-size: 14px; margin-top: 8px;">Provide value through labor or skills</p>
-                </div>
-                <div class="flow-arrow">→</div>
-                <div class="flow-item">
-                    <strong>You Earn Money</strong>
-                    <p style="font-size: 14px; margin-top: 8px;">Receive payment for your work</p>
-                </div>
-                <div class="flow-arrow">→</div>
-                <div class="flow-item">
-                    <strong>You Spend Money</strong>
-                    <p style="font-size: 14px; margin-top: 8px;">Exchange it for goods and services</p>
-                </div>
+        <!-- Screen 1: Quick Intro -->
+        <div class="lesson-screen active" data-screen="1">
+            <div class="screen-progress">Screen 1 of 6</div>
+            <div class="lesson-section">
+                <h2>Quick Intro</h2>
+                <p>Before you can master your finances, you need to understand what money actually is. It's more than just paper bills and coins—it's a fundamental tool that shapes our daily lives and future opportunities. In this lesson, we'll explore the true nature of money and why understanding it is your first step toward financial confidence.</p>
             </div>
-            <p style="margin-top: 20px; text-align: center; color: var(--text-secondary); font-size: 14px;">Money is the bridge between what you offer and what you need.</p>
+            <div class="screen-navigation">
+                <div class="nav-spacer"></div>
+                <button class="btn-nav" onclick="nextScreen()">Next <span>→</span></button>
+            </div>
         </div>
 
-        <!-- Common Mistakes -->
-        <div class="lesson-section">
-            <div class="mistakes-list">
-                <h3>Common Mistakes to Avoid</h3>
-                <ul style="margin-left: 20px;">
-                    <li><strong>Thinking money equals happiness:</strong> Money is a tool, not a life goal. It provides security and options, but relationships, health, and purpose create fulfillment.</li>
-                    <li><strong>Believing money is evil:</strong> Money is neutral. It's how you earn it and use it that matters. It can fund education, help others, or build businesses.</li>
-                    <li><strong>Forgetting money's limitations:</strong> Money can't buy time, genuine relationships, or health. Use it wisely for what it can provide.</li>
-                    <li><strong>Treating all money the same:</strong> $100 earned, borrowed, or gifted may feel the same, but each has different implications for your financial health.</li>
+        <!-- Screen 2: Core Concept -->
+        <div class="lesson-screen" data-screen="2">
+            <div class="screen-progress">Screen 2 of 6</div>
+            <div class="lesson-section">
+                <h2>Core Concept</h2>
+                <p><strong>Money is a medium of exchange, a store of value, and a unit of account.</strong></p>
+                <p>Let's break that down:</p>
+                <ul>
+                    <li><strong>Medium of Exchange:</strong> Money allows you to trade your work or goods for other things you need without having to barter directly. Instead of trading chickens for shoes, you sell chickens for money, then use that money to buy shoes.</li>
+                    <li><strong>Store of Value:</strong> Money holds its worth over time, allowing you to save today and spend tomorrow. You can earn money now and use it months or years later.</li>
+                    <li><strong>Unit of Account:</strong> Money provides a common way to measure value. Everything has a price tag, making it easy to compare what things are worth.</li>
                 </ul>
+                <p>Money only works because we all agree it has value. A $20 bill is just paper, but society accepts it as payment because we trust it represents real value.</p>
+            </div>
+            <div class="screen-navigation">
+                <button class="btn-nav btn-prev" onclick="previousScreen()"><span>←</span> Previous</button>
+                <button class="btn-nav" onclick="nextScreen()">Next <span>→</span></button>
             </div>
         </div>
 
-        <!-- Micro Action -->
-        <div class="lesson-section">
-            <div class="action-box">
-                <h3>🎯 Your Micro Action</h3>
-                <p><strong>Take 2 minutes to look at a bill or coin in your wallet or phone payment app.</strong></p>
-                <p>Really observe it. Remember: this is just paper, metal, or digital numbers, but it represents hours of someone's work, the ability to buy food, or the potential to save for a goal. Think about the last time you earned money—what did you trade for it? Your time? Your skills? Your creativity?</p>
-                <p>Understanding this connection helps you value your money more and make better choices with it.</p>
+        <!-- Screen 3: Simple Example -->
+        <div class="lesson-screen" data-screen="3">
+            <div class="screen-progress">Screen 3 of 6</div>
+            <div class="lesson-section">
+                <h2>Simple Example</h2>
+                <p>Imagine you're a talented artist who creates beautiful paintings. You want to buy groceries, pay rent, and get a haircut. Without money, you'd have to:</p>
+                <ul>
+                    <li>Find a grocery store owner who wants a painting</li>
+                    <li>Find a landlord who accepts art as rent payment</li>
+                    <li>Find a hairstylist willing to trade a haircut for artwork</li>
+                </ul>
+                <p>This would be incredibly difficult and time-consuming! With money, you simply sell your paintings to anyone who wants them, receive cash, and use that cash to buy whatever you need from whoever is selling it. Money makes the exchange smooth and simple.</p>
+            </div>
+
+            <!-- Mini Visual -->
+            <div class="visual-box">
+                <h3>How Money Flows in Your Life</h3>
+                <div class="money-flow">
+                    <div class="flow-item">
+                        <strong>You Work</strong>
+                        <p style="font-size: 14px; margin-top: 8px;">Provide value through labor or skills</p>
+                    </div>
+                    <div class="flow-arrow">→</div>
+                    <div class="flow-item">
+                        <strong>You Earn Money</strong>
+                        <p style="font-size: 14px; margin-top: 8px;">Receive payment for your work</p>
+                    </div>
+                    <div class="flow-arrow">→</div>
+                    <div class="flow-item">
+                        <strong>You Spend Money</strong>
+                        <p style="font-size: 14px; margin-top: 8px;">Exchange it for goods and services</p>
+                    </div>
+                </div>
+                <p style="margin-top: 20px; text-align: center; color: var(--text-secondary); font-size: 14px;">Money is the bridge between what you offer and what you need.</p>
+            </div>
+            <div class="screen-navigation">
+                <button class="btn-nav btn-prev" onclick="previousScreen()"><span>←</span> Previous</button>
+                <button class="btn-nav" onclick="nextScreen()">Next <span>→</span></button>
             </div>
         </div>
 
-        <!-- Quick Reflection -->
-        <div class="lesson-section">
-            <div class="reflection-box">
-                <h3>💭 Quick Reflection</h3>
-                <p><strong>Think about this:</strong></p>
-                <p>What does money mean to you personally? Is it security? Freedom? Stress? Opportunity? There's no right answer—your relationship with money is shaped by your experiences, family, and culture. Understanding your feelings about money is the first step to taking control of it.</p>
-                <p style="margin-top: 15px; font-size: 14px; font-style: italic;">Take a moment to consider this before moving forward.</p>
+        <!-- Screen 4: Common Mistakes -->
+        <div class="lesson-screen" data-screen="4">
+            <div class="screen-progress">Screen 4 of 6</div>
+            <div class="lesson-section">
+                <div class="mistakes-list">
+                    <h3>Common Mistakes to Avoid</h3>
+                    <ul style="margin-left: 20px;">
+                        <li><strong>Thinking money equals happiness:</strong> Money is a tool, not a life goal. It provides security and options, but relationships, health, and purpose create fulfillment.</li>
+                        <li><strong>Believing money is evil:</strong> Money is neutral. It's how you earn it and use it that matters. It can fund education, help others, or build businesses.</li>
+                        <li><strong>Forgetting money's limitations:</strong> Money can't buy time, genuine relationships, or health. Use it wisely for what it can provide.</li>
+                        <li><strong>Treating all money the same:</strong> $100 earned, borrowed, or gifted may feel the same, but each has different implications for your financial health.</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="screen-navigation">
+                <button class="btn-nav btn-prev" onclick="previousScreen()"><span>←</span> Previous</button>
+                <button class="btn-nav" onclick="nextScreen()">Next <span>→</span></button>
             </div>
         </div>
 
-        <!-- Lesson Quiz -->
-        <div class="quiz-container" id="quizContainer">
+        <!-- Screen 5: Micro Action + Quick Reflection -->
+        <div class="lesson-screen" data-screen="5">
+            <div class="screen-progress">Screen 5 of 6</div>
+            <!-- Micro Action -->
+            <div class="lesson-section">
+                <div class="action-box">
+                    <h3>🎯 Your Micro Action</h3>
+                    <p><strong>Take 2 minutes to look at a bill or coin in your wallet or phone payment app.</strong></p>
+                    <p>Really observe it. Remember: this is just paper, metal, or digital numbers, but it represents hours of someone's work, the ability to buy food, or the potential to save for a goal. Think about the last time you earned money—what did you trade for it? Your time? Your skills? Your creativity?</p>
+                    <p>Understanding this connection helps you value your money more and make better choices with it.</p>
+                </div>
+            </div>
+
+            <!-- Quick Reflection -->
+            <div class="lesson-section">
+                <div class="reflection-box">
+                    <h3>💭 Quick Reflection</h3>
+                    <p><strong>Think about this:</strong></p>
+                    <p>What does money mean to you personally? Is it security? Freedom? Stress? Opportunity? There's no right answer—your relationship with money is shaped by your experiences, family, and culture. Understanding your feelings about money is the first step to taking control of it.</p>
+                    <p style="margin-top: 15px; font-size: 14px; font-style: italic;">Take a moment to consider this before moving forward.</p>
+                </div>
+            </div>
+            <div class="screen-navigation">
+                <button class="btn-nav btn-prev" onclick="previousScreen()"><span>←</span> Previous</button>
+                <button class="btn-nav" onclick="nextScreen()">Next <span>→</span></button>
+            </div>
+        </div>
+
+        <!-- Screen 6: Quiz -->
+        <div class="lesson-screen" data-screen="6">
+            <div class="screen-progress">Screen 6 of 6</div>
+            <!-- Lesson Quiz -->
+            <div class="quiz-container" id="quizContainer">
             <div class="quiz-header">
                 <h2>Lesson Quiz</h2>
                 <p>Answer these questions to unlock the next lesson. You need 80% (3 out of 4) to pass.</p>
@@ -489,10 +593,16 @@
             <div id="quizQuestions"></div>
             <button class="btn-submit-quiz" id="submitQuiz" onclick="submitQuiz()">Submit Quiz</button>
             <div id="quizResult"></div>
-        </div>
+            </div>
 
-        <!-- Finish Button -->
-        <button class="btn-finish" id="finishBtn" onclick="finishLesson()" disabled>Finish Lesson</button>
+            <!-- Finish Button -->
+            <button class="btn-finish" id="finishBtn" onclick="finishLesson()" disabled>Finish Lesson</button>
+
+            <div class="screen-navigation">
+                <button class="btn-nav btn-prev" onclick="previousScreen()"><span>←</span> Previous</button>
+                <div class="nav-spacer"></div>
+            </div>
+        </div>
     </div>
 
     <!-- Footer -->
@@ -852,6 +962,52 @@
 
         updateNav();
         initQuiz();
+
+        // Multi-screen navigation
+        let currentScreen = 1;
+        const totalScreens = 6;
+
+        function showScreen(screenNumber) {
+            // Hide all screens
+            document.querySelectorAll('.lesson-screen').forEach(screen => {
+                screen.classList.remove('active');
+            });
+
+            // Show the requested screen
+            const targetScreen = document.querySelector(`.lesson-screen[data-screen="${screenNumber}"]`);
+            if (targetScreen) {
+                targetScreen.classList.add('active');
+                currentScreen = screenNumber;
+
+                // Smooth scroll to top of lesson container
+                const lessonContainer = document.querySelector('.lesson-container');
+                const headerOffset = 80; // Height of navbar
+                const elementPosition = lessonContainer.getBoundingClientRect().top;
+                const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+                window.scrollTo({
+                    top: offsetPosition,
+                    behavior: 'smooth'
+                });
+            }
+        }
+
+        function nextScreen() {
+            if (currentScreen < totalScreens) {
+                showScreen(currentScreen + 1);
+            }
+        }
+
+        function previousScreen() {
+            if (currentScreen > 1) {
+                showScreen(currentScreen - 1);
+            }
+        }
+
+        // Initialize first screen on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            showScreen(1);
+        });
     </script>
 </body>
 </html>
