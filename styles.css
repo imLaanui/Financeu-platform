@@ -82,7 +82,7 @@ body {
 /* Buttons */
 .btn-primary {
     background-color: var(--primary-color);
-    color: white;
+    color: white !important;
     padding: 0.75rem 1.5rem;
     border-radius: 8px;
     text-decoration: none;
@@ -91,6 +91,14 @@ body {
     display: inline-block;
     border: none;
     cursor: pointer;
+}
+
+.nav-links .btn-primary {
+    color: white !important;
+}
+
+.nav-links .btn-primary:hover {
+    color: white !important;
 }
 
 .btn-primary:hover {
