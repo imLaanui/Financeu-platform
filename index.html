@@ -17,7 +17,7 @@
                     <li><a href="#features">Features</a></li>
                     <li><a href="#pricing">Pricing</a></li>
                     <li><a href="about.html">About</a></li>
-                    <li id="authButtons">
+                    <li id="authButtons" style="visibility: hidden;">
                         <a href="login.html" class="btn-primary">Login</a>
                     </li>
                 </ul>
@@ -264,8 +264,16 @@
                         <a href="login.html" class="btn-primary">Login</a>
                     `;
                 }
+
+                // Show the button after determining auth state
+                authButtons.style.visibility = 'visible';
             } catch (error) {
                 console.log('Not logged in');
+                const authButtons = document.getElementById('authButtons');
+                authButtons.innerHTML = `
+                    <a href="login.html" class="btn-primary">Login</a>
+                `;
+                authButtons.style.visibility = 'visible';
             }
         }
 
