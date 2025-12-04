@@ -307,7 +307,7 @@
 
                 if (response.ok) {
                     authButtons.innerHTML = `
-                        <a href="dashboard.html" class="btn-primary">Dashboard</a>
+                        <a href="#" onclick="logout(); return false;" class="btn-primary">Logout</a>
                     `;
                 } else {
                     authButtons.innerHTML = `
