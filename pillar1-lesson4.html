@@ -31,6 +31,29 @@
         .btn-finish:hover { background: #2563eb; }
         .back-link { display: inline-block; margin-bottom: 20px; color: var(--primary-color); text-decoration: none; font-weight: 600; }
         .back-link:hover { text-decoration: underline; }
+        .quiz-container { background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%); border: 2px solid var(--primary-color); border-radius: 12px; padding: 30px; margin: 40px 0 30px 0; }
+        .quiz-header { text-align: center; margin-bottom: 25px; }
+        .quiz-header h2 { color: var(--primary-color); font-size: 28px; margin-bottom: 10px; }
+        .quiz-header p { color: var(--text-secondary); font-size: 16px; }
+        .question-card { background: white; padding: 25px; border-radius: 8px; margin-bottom: 20px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); }
+        .question-text { font-size: 18px; font-weight: 600; color: var(--text-primary); margin-bottom: 15px; }
+        .answer-option { background: #f9fafb; padding: 15px; border: 2px solid #e5e7eb; border-radius: 8px; margin-bottom: 10px; cursor: pointer; transition: all 0.2s; }
+        .answer-option:hover { border-color: var(--primary-color); background: #eff6ff; }
+        .answer-option.selected { border-color: var(--primary-color); background: #dbeafe; }
+        .answer-option.correct { border-color: #10b981; background: #d1fae5; }
+        .answer-option.incorrect { border-color: #dc2626; background: #fee2e2; }
+        .btn-submit-quiz { display: block; width: 100%; max-width: 300px; margin: 20px auto; padding: 15px; background: var(--primary-color); color: white; text-align: center; border-radius: 8px; font-size: 16px; font-weight: 600; border: none; cursor: pointer; transition: background 0.2s; }
+        .btn-submit-quiz:hover { background: #2563eb; }
+        .btn-submit-quiz:disabled { background: #9ca3af; cursor: not-allowed; }
+        .quiz-result { background: white; padding: 25px; border-radius: 8px; text-align: center; margin-top: 20px; }
+        .quiz-result.pass { border: 3px solid #10b981; }
+        .quiz-result.fail { border: 3px solid #dc2626; }
+        .result-icon { font-size: 48px; margin-bottom: 15px; }
+        .result-text { font-size: 24px; font-weight: 700; margin-bottom: 10px; }
+        .result-score { font-size: 18px; color: var(--text-secondary); margin-bottom: 20px; }
+        .btn-retry { padding: 12px 24px; background: #f59e0b; color: white; border: none; border-radius: 8px; font-size: 16px; font-weight: 600; cursor: pointer; transition: background 0.2s; }
+        .btn-retry:hover { background: #d97706; }
+        .btn-finish:disabled { background: #9ca3af; cursor: not-allowed; opacity: 0.6; }
         @media (max-width: 768px) { .needs-wants-grid { grid-template-columns: 1fr; } }
     </style>
 </head>
@@ -157,7 +180,18 @@
             </div>
         </div>
 
-        <button class="btn-finish" onclick="finishLesson()">Finish Lesson</button>
+        <!-- Lesson Quiz -->
+        <div class="quiz-container" id="quizContainer">
+            <div class="quiz-header">
+                <h2>Lesson Quiz</h2>
+                <p>Answer these questions to unlock the next lesson. You need 80% (3 out of 4) to pass.</p>
+            </div>
+            <div id="quizQuestions"></div>
+            <button class="btn-submit-quiz" id="submitQuiz" onclick="submitQuiz()">Submit Quiz</button>
+            <div id="quizResult"></div>
+        </div>
+
+        <button class="btn-finish" id="finishBtn" onclick="finishLesson()" disabled>Finish Lesson</button>
     </div>
 
     <footer class="footer">
@@ -207,7 +241,218 @@
             }
         }
 
+        const quizData = [
+            {
+                versions: [
+                    {
+                        question: "What is the main difference between needs and wants?",
+                        options: [
+                            "Needs are expensive, wants are cheap",
+                            "Needs are essentials for survival, wants enhance your life but aren't necessary",
+                            "Needs are boring, wants are fun",
+                            "There is no difference"
+                        ],
+                        correct: 1
+                    },
+                    {
+                        question: "Which statement best describes the difference between needs and wants?",
+                        options: [
+                            "Needs keep you alive, wants make life enjoyable",
+                            "All needs are wants",
+                            "Wants are more important than needs",
+                            "Needs and wants are always the same"
+                        ],
+                        correct: 0
+                    }
+                ]
+            },
+            {
+                versions: [
+                    {
+                        question: "Which of the following is a true need?",
+                        options: [
+                            "Designer clothing",
+                            "Latest smartphone model",
+                            "Nutritious food for meals",
+                            "Premium cable package"
+                        ],
+                        correct: 2
+                    },
+                    {
+                        question: "Which item is most likely a want rather than a need?",
+                        options: [
+                            "Basic shelter",
+                            "Entertainment subscriptions",
+                            "Medical care",
+                            "Work transportation"
+                        ],
+                        correct: 1
+                    }
+                ]
+            },
+            {
+                versions: [
+                    {
+                        question: "In the lesson, Jordan could save how much per year by identifying wants disguised as needs?",
+                        options: [
+                            "$1,200",
+                            "$2,940",
+                            "$5,000",
+                            "$500"
+                        ],
+                        correct: 1
+                    },
+                    {
+                        question: "What did Jordan discover about expenses labeled as 'needs'?",
+                        options: [
+                            "They were all actual needs",
+                            "$245/month were actually wants or upgrades",
+                            "Everything was essential",
+                            "Only $50 was unnecessary"
+                        ],
+                        correct: 1
+                    }
+                ]
+            },
+            {
+                versions: [
+                    {
+                        question: "According to the lesson, when should needs come first?",
+                        options: [
+                            "Never, wants are more important",
+                            "Only on weekends",
+                            "If you're in debt or struggling financially, always",
+                            "Only during emergencies"
+                        ],
+                        correct: 2
+                    },
+                    {
+                        question: "What's the problem with calling everything a 'need'?",
+                        options: [
+                            "It prevents honest assessment of spending",
+                            "It makes you happier",
+                            "It increases your income",
+                            "It has no effect on finances"
+                        ],
+                        correct: 0
+                    }
+                ]
+            }
+        ];
+
+        let currentQuestions = [];
+        let userAnswers = [];
+        let quizPassed = false;
+
+        function initQuiz() {
+            const userId = localStorage.getItem('userId');
+            const quizPassedStatus = localStorage.getItem(`lesson4_quiz_passed_${userId}`);
+            if (quizPassedStatus === 'true') {
+                quizPassed = true;
+                document.getElementById('finishBtn').disabled = false;
+                document.getElementById('quizContainer').style.display = 'none';
+                return;
+            }
+            currentQuestions = quizData.map(q => q.versions[Math.floor(Math.random() * q.versions.length)]);
+            renderQuiz();
+        }
+
+        function renderQuiz() {
+            const questionsContainer = document.getElementById('quizQuestions');
+            questionsContainer.innerHTML = '';
+            userAnswers = new Array(currentQuestions.length).fill(null);
+            currentQuestions.forEach((q, qIndex) => {
+                const questionCard = document.createElement('div');
+                questionCard.className = 'question-card';
+                questionCard.innerHTML = `
+                    <div class="question-text">Question ${qIndex + 1}: ${q.question}</div>
+                    ${q.options.map((option, oIndex) => `
+                        <div class="answer-option" onclick="selectAnswer(${qIndex}, ${oIndex})">
+                            <input type="radio" name="question${qIndex}" value="${oIndex}" style="margin-right: 10px;">
+                            ${option}
+                        </div>
+                    `).join('')}
+                `;
+                questionsContainer.appendChild(questionCard);
+            });
+            document.getElementById('submitQuiz').disabled = false;
+            document.getElementById('quizResult').innerHTML = '';
+        }
+
+        function selectAnswer(questionIndex, optionIndex) {
+            userAnswers[questionIndex] = optionIndex;
+            const questionCard = document.querySelectorAll('.question-card')[questionIndex];
+            const options = questionCard.querySelectorAll('.answer-option');
+            options.forEach((opt, idx) => {
+                opt.classList.remove('selected');
+                if (idx === optionIndex) {
+                    opt.classList.add('selected');
+                    opt.querySelector('input').checked = true;
+                }
+            });
+        }
+
+        function submitQuiz() {
+            if (userAnswers.includes(null)) {
+                alert('Please answer all questions before submitting.');
+                return;
+            }
+            let correct = 0;
+            currentQuestions.forEach((q, index) => {
+                if (userAnswers[index] === q.correct) correct++;
+            });
+            const percentage = Math.round((correct / currentQuestions.length) * 100);
+            const passed = percentage >= 80;
+            document.querySelectorAll('.question-card').forEach((card, qIndex) => {
+                const options = card.querySelectorAll('.answer-option');
+                options.forEach((opt, oIndex) => {
+                    opt.style.pointerEvents = 'none';
+                    if (oIndex === currentQuestions[qIndex].correct) {
+                        opt.classList.add('correct');
+                    } else if (oIndex === userAnswers[qIndex] && oIndex !== currentQuestions[qIndex].correct) {
+                        opt.classList.add('incorrect');
+                    }
+                });
+            });
+            const resultDiv = document.getElementById('quizResult');
+            if (passed) {
+                quizPassed = true;
+                const userId = localStorage.getItem('userId');
+                localStorage.setItem(`lesson4_quiz_passed_${userId}`, 'true');
+                document.getElementById('finishBtn').disabled = false;
+                resultDiv.innerHTML = `
+                    <div class="quiz-result pass">
+                        <div class="result-icon">🎉</div>
+                        <div class="result-text" style="color: #10b981;">Quiz Passed!</div>
+                        <div class="result-score">You scored ${correct} out of ${currentQuestions.length} (${percentage}%)</div>
+                        <p style="color: var(--text-secondary);">Great job! You can now finish the lesson and move to the next one.</p>
+                    </div>
+                `;
+            } else {
+                resultDiv.innerHTML = `
+                    <div class="quiz-result fail">
+                        <div class="result-icon">📚</div>
+                        <div class="result-text" style="color: #dc2626;">Not quite there yet</div>
+                        <div class="result-score">You scored ${correct} out of ${currentQuestions.length} (${percentage}%)</div>
+                        <p style="color: var(--text-secondary); margin-bottom: 15px;">You need 80% to pass. Review the lesson and try again!</p>
+                        <button class="btn-retry" onclick="retryQuiz()">Retry Quiz</button>
+                    </div>
+                `;
+            }
+            document.getElementById('submitQuiz').style.display = 'none';
+        }
+
+        function retryQuiz() {
+            currentQuestions = quizData.map(q => q.versions[Math.floor(Math.random() * q.versions.length)]);
+            renderQuiz();
+            document.getElementById('submitQuiz').style.display = 'block';
+        }
+
         function finishLesson() {
+            if (!quizPassed) {
+                alert('Please complete the quiz first!');
+                return;
+            }
             const completed = JSON.parse(localStorage.getItem(`pillar1_completed_${localStorage.getItem('userId')}`) || '[]');
             if (!completed.includes(4)) {
                 completed.push(4);
@@ -217,6 +462,7 @@
         }
 
         updateNav();
+        initQuiz();
     </script>
 </body>
 </html>

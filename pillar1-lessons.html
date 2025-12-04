@@ -363,22 +363,48 @@
             }
         }
 
-        // Load completed lessons from localStorage
+        // Load completed lessons and handle locking logic
         function loadCompletedLessons() {
             const userId = localStorage.getItem('userId');
             const completed = JSON.parse(localStorage.getItem(`pillar1_completed_${userId}`) || '[]');
 
-            completed.forEach(lessonNum => {
+            // Handle each lesson
+            for (let lessonNum = 1; lessonNum <= 8; lessonNum++) {
                 const lessonCard = document.querySelector(`[data-lesson="${lessonNum}"]`);
-                if (lessonCard) {
-                    lessonCard.classList.add('completed');
-                    const statusDiv = lessonCard.querySelector('.lesson-status');
-                    statusDiv.innerHTML = `
-                        <span class="completed-badge">✓ Completed</span>
-                        <a href="pillar1-lesson${lessonNum}.html" class="btn-start-lesson">Review</a>
-                    `;
+                if (!lessonCard) continue;
+
+                const statusDiv = lessonCard.querySelector('.lesson-status');
+                const previousQuizPassed = lessonNum === 1 || localStorage.getItem(`lesson${lessonNum - 1}_quiz_passed_${userId}`) === 'true';
+
+                if (lessonNum === 1) {
+                    // Lesson 1 is always unlocked
+                    if (completed.includes(1)) {
+                        lessonCard.classList.add('completed');
+                        statusDiv.innerHTML = `
+                            <span class="completed-badge">✓ Completed</span>
+                            <a href="pillar1-lesson1.html" class="btn-start-lesson">Review</a>
+                        `;
+                    }
+                } else {
+                    // Other lessons require previous quiz completion
+                    if (!previousQuizPassed) {
+                        // Lock the lesson
+                        lessonCard.style.opacity = '0.6';
+                        lessonCard.style.pointerEvents = 'none';
+                        statusDiv.innerHTML = `
+                            <span style="color: #9ca3af; font-weight: 600;">🔒 Complete Previous Lesson</span>
+                        `;
+                    } else if (completed.includes(lessonNum)) {
+                        // Lesson completed
+                        lessonCard.classList.add('completed');
+                        statusDiv.innerHTML = `
+                            <span class="completed-badge">✓ Completed</span>
+                            <a href="pillar1-lesson${lessonNum}.html" class="btn-start-lesson">Review</a>
+                        `;
+                    }
+                    // If previous quiz passed but not completed, button already shows "Start Lesson"
                 }
-            });
+            }
         }
 
         // Check if all lessons completed and show quiz
