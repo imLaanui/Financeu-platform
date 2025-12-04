@@ -496,7 +496,7 @@ body {
     padding: 2.5rem;
     position: relative;
     transition: all 0.3s;
-    overflow: hidden;
+    overflow: visible;
 }
 
 .pricing-card::before {
@@ -617,6 +617,7 @@ body {
 .testimonials-section .section-title {
     text-align: center;
     margin-bottom: 3rem;
+    display: block;
 }
 
 .testimonials-grid {
