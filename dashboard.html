@@ -14,24 +14,37 @@
         .dashboard-header {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
-            padding: 3rem 0;
-            margin-bottom: 3rem;
+            padding: 2rem 0;
+            margin-bottom: 2rem;
         }
 
-        .welcome-section h1 {
-            font-size: 2.5rem;
-            margin-bottom: 0.5rem;
+        .welcome-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .welcome-text h1 {
+            font-size: 2rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .welcome-text p {
+            font-size: 1rem;
+            opacity: 0.9;
         }
 
         .membership-badge {
             display: inline-block;
             padding: 0.5rem 1rem;
-            background-color: var(--accent-color);
+            background-color: rgba(255, 255, 255, 0.2);
             color: white;
             border-radius: 20px;
             font-weight: 600;
             text-transform: capitalize;
-            margin-top: 1rem;
+            border: 2px solid rgba(255, 255, 255, 0.3);
         }
 
         .membership-badge.premium {
@@ -176,28 +189,48 @@
         }
 
         .upgrade-banner {
-            background: linear-gradient(135deg, #f59e0b 0%, #ef4444 100%);
-            color: white;
-            padding: 2rem;
+            background: white;
+            border: 2px solid #f59e0b;
+            padding: 1.25rem 1.5rem;
             border-radius: 12px;
-            text-align: center;
-            margin-bottom: 3rem;
+            margin-bottom: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .upgrade-content {
+            flex: 1;
         }
 
         .upgrade-banner h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
+            font-size: 1.125rem;
+            margin-bottom: 0.25rem;
+            color: var(--text-dark);
+        }
+
+        .upgrade-banner p {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            margin: 0;
         }
 
         .btn-upgrade {
-            padding: 1rem 2rem;
-            background-color: white;
-            color: #ef4444;
+            padding: 0.625rem 1.25rem;
+            background: linear-gradient(135deg, #f59e0b 0%, #ef4444 100%);
+            color: white;
             text-decoration: none;
             border-radius: 8px;
-            font-weight: 700;
+            font-weight: 600;
+            font-size: 0.9rem;
             display: inline-block;
-            margin-top: 1rem;
+            transition: transform 0.2s;
+        }
+
+        .btn-upgrade:hover {
+            transform: translateY(-1px);
         }
 
         .loading {
@@ -212,6 +245,27 @@
             padding: 1rem;
             border-radius: 8px;
             margin-bottom: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .welcome-section {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .welcome-text h1 {
+                font-size: 1.75rem;
+            }
+
+            .upgrade-banner {
+                flex-direction: column;
+                align-items: stretch;
+                text-align: center;
+            }
+
+            .btn-upgrade {
+                width: 100%;
+            }
         }
     </style>
 </head>
@@ -234,8 +288,10 @@
     <section class="dashboard-header">
         <div class="container">
             <div class="welcome-section">
-                <h1>Welcome back, <span id="userName">Student</span>!</h1>
-                <p>Continue your journey to financial mastery</p>
+                <div class="welcome-text">
+                    <h1>Welcome back, <span id="userName">Student</span>!</h1>
+                    <p>Continue your journey to financial mastery</p>
+                </div>
                 <div class="membership-badge" id="membershipBadge">Free Member</div>
             </div>
         </div>
@@ -272,8 +328,10 @@
 
                 <!-- Upgrade Banner (shown for free users) -->
                 <div id="upgradeBanner" class="upgrade-banner" style="display: none;">
-                    <h3>Unlock All Lessons with Premium!</h3>
-                    <p>Get access to advanced lessons on saving and investing</p>
+                    <div class="upgrade-content">
+                        <h3>Unlock All Lessons with Premium</h3>
+                        <p>Get access to advanced lessons on saving and investing</p>
+                    </div>
                     <a href="index.html#pricing" class="btn-upgrade">Upgrade Now</a>
                 </div>
 
