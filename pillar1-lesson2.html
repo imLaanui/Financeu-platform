@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson 2 - Understanding Income and Expenses - FinanceU</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .lesson-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        .lesson-header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 3px solid var(--primary-color);
+        }
+        .lesson-header h1 {
+            font-size: 36px;
+            color: var(--text-primary);
+            margin-bottom: 10px;
+        }
+        .lesson-header .lesson-number {
+            color: var(--primary-color);
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        .lesson-section {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .lesson-section h2 {
+            color: var(--primary-color);
+            font-size: 24px;
+            margin-bottom: 15px;
+        }
+        .lesson-section p {
+            line-height: 1.8;
+            color: var(--text-secondary);
+            margin-bottom: 15px;
+        }
+        .lesson-section ul {
+            line-height: 1.8;
+            color: var(--text-secondary);
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+        .visual-box {
+            background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+            border-left: 4px solid var(--primary-color);
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        .visual-box h3 {
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            font-size: 18px;
+        }
+        .income-expense-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 15px;
+        }
+        .income-box {
+            background: #10b98120;
+            padding: 20px;
+            border-radius: 8px;
+            border: 2px solid #10b981;
+        }
+        .expense-box {
+            background: #dc262620;
+            padding: 20px;
+            border-radius: 8px;
+            border: 2px solid #dc2626;
+        }
+        .income-box h4 {
+            color: #10b981;
+            margin-bottom: 10px;
+        }
+        .expense-box h4 {
+            color: #dc2626;
+            margin-bottom: 10px;
+        }
+        .action-box {
+            background: #10b98120;
+            border-left: 4px solid #10b981;
+            padding: 20px;
+            border-radius: 8px;
+        }
+        .action-box h3 {
+            color: #10b981;
+            margin-bottom: 10px;
+        }
+        .reflection-box {
+            background: #f59e0b20;
+            border-left: 4px solid #f59e0b;
+            padding: 20px;
+            border-radius: 8px;
+        }
+        .reflection-box h3 {
+            color: #f59e0b;
+            margin-bottom: 10px;
+        }
+        .mistakes-list {
+            background: #fee2e2;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #dc2626;
+        }
+        .mistakes-list h3 {
+            color: #dc2626;
+            margin-bottom: 15px;
+        }
+        .btn-finish {
+            display: block;
+            width: 100%;
+            max-width: 400px;
+            margin: 30px auto;
+            padding: 18px;
+            background: var(--primary-color);
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: 600;
+            transition: background 0.2s;
+            border: none;
+            cursor: pointer;
+        }
+        .btn-finish:hover {
+            background: #2563eb;
+        }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+        @media (max-width: 768px) {
+            .income-expense-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-wrapper">
+                <div class="logo"><a href="index.html" style="color: inherit; text-decoration: none;">Finance<span class="logo-accent">U</span></a></div>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="dashboard.html">Dashboard</a></li>
+                    <li id="authButtons">
+                        <a href="login.html" class="btn-primary">Login</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Lesson Content -->
+    <div class="lesson-container">
+        <a href="pillar1-lessons.html" class="back-link">← Back to Pillar 1 Lessons</a>
+
+        <!-- Header -->
+        <div class="lesson-header">
+            <div class="lesson-number">LESSON 2</div>
+            <h1>Understanding Income and Expenses</h1>
+        </div>
+
+        <!-- Quick Intro -->
+        <div class="lesson-section">
+            <h2>Quick Intro</h2>
+            <p>Your financial life is made up of two main flows: money coming in (income) and money going out (expenses). Understanding the difference between these two is fundamental to managing your money successfully. Most people focus only on how much they earn, but true financial control comes from understanding both sides of the equation.</p>
+        </div>
+
+        <!-- Core Concept -->
+        <div class="lesson-section">
+            <h2>Core Concept</h2>
+            <p><strong>Income is money you receive, and expenses are money you spend. The difference between them determines your financial health.</strong></p>
+            <p><strong>Income</strong> includes:</p>
+            <ul>
+                <li>Wages or salary from your job</li>
+                <li>Money from side hustles or freelance work</li>
+                <li>Allowance or financial support from family</li>
+                <li>Investment returns or interest</li>
+                <li>Any other money that comes into your possession</li>
+            </ul>
+            <p><strong>Expenses</strong> include:</p>
+            <ul>
+                <li>Housing (rent, mortgage, utilities)</li>
+                <li>Food (groceries, eating out)</li>
+                <li>Transportation (car payment, gas, public transit)</li>
+                <li>Entertainment and subscriptions</li>
+                <li>Clothing, personal care, and miscellaneous purchases</li>
+            </ul>
+            <p>The golden rule: If your income is greater than your expenses, you're building wealth. If your expenses are greater than your income, you're going into debt.</p>
+        </div>
+
+        <!-- Simple Example -->
+        <div class="lesson-section">
+            <h2>Simple Example</h2>
+            <p>Meet Alex, a college student:</p>
+            <p><strong>Alex's Monthly Income:</strong></p>
+            <ul>
+                <li>Part-time job: $800</li>
+                <li>Allowance from parents: $200</li>
+                <li><strong>Total Income: $1,000</strong></li>
+            </ul>
+            <p><strong>Alex's Monthly Expenses:</strong></p>
+            <ul>
+                <li>Rent (shared apartment): $400</li>
+                <li>Food: $250</li>
+                <li>Phone bill: $50</li>
+                <li>Entertainment: $100</li>
+                <li>Gas/transportation: $80</li>
+                <li>Misc. purchases: $70</li>
+                <li><strong>Total Expenses: $950</strong></li>
+            </ul>
+            <p><strong>The Result:</strong> Alex has $50 left over each month ($1,000 - $950 = $50). This is called a surplus, and it's money Alex can save or invest for the future.</p>
+        </div>
+
+        <!-- Mini Visual -->
+        <div class="visual-box">
+            <h3>Income vs. Expenses: Your Financial Balance</h3>
+            <div class="income-expense-grid">
+                <div class="income-box">
+                    <h4>💰 INCOME (Money In)</h4>
+                    <ul style="font-size: 14px; margin-top: 10px;">
+                        <li>Job earnings</li>
+                        <li>Side hustle</li>
+                        <li>Allowance</li>
+                        <li>Gifts</li>
+                        <li>Investment returns</li>
+                    </ul>
+                </div>
+                <div class="expense-box">
+                    <h4>💸 EXPENSES (Money Out)</h4>
+                    <ul style="font-size: 14px; margin-top: 10px;">
+                        <li>Rent/Housing</li>
+                        <li>Food & Groceries</li>
+                        <li>Transportation</li>
+                        <li>Entertainment</li>
+                        <li>Shopping</li>
+                    </ul>
+                </div>
+            </div>
+            <p style="margin-top: 20px; text-align: center; color: var(--text-secondary); font-size: 15px; font-weight: 600;">
+                When Income > Expenses = You build wealth 📈<br>
+                When Expenses > Income = You go into debt 📉
+            </p>
+        </div>
+
+        <!-- Common Mistakes -->
+        <div class="lesson-section">
+            <div class="mistakes-list">
+                <h3>Common Mistakes to Avoid</h3>
+                <ul style="margin-left: 20px;">
+                    <li><strong>Only focusing on income:</strong> Earning more won't help if you spend it all. A person earning $30,000 who saves $5,000 is better off than someone earning $80,000 who saves nothing.</li>
+                    <li><strong>Forgetting irregular expenses:</strong> Car repairs, annual subscriptions, and holiday gifts are expenses too. Budget for them even if they don't happen every month.</li>
+                    <li><strong>Treating gifts as income:</strong> That birthday money is nice, but it's not reliable income you can count on every month.</li>
+                    <li><strong>Ignoring small expenses:</strong> Daily coffee, app purchases, and delivery fees add up fast. $5 a day = $150 a month = $1,825 a year.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Micro Action -->
+        <div class="lesson-section">
+            <div class="action-box">
+                <h3>🎯 Your Micro Action</h3>
+                <p><strong>Write down 3 sources of income you have (or could have) and 5 regular expenses.</strong></p>
+                <p>Don't overthink it—just jot them down quickly on your phone or paper. This simple exercise starts building awareness of your money flow. You don't need exact numbers yet; just identify where money comes from and where it goes.</p>
+                <p>If you don't have income yet, write down potential sources (part-time job, freelancing, etc.) and your current or expected expenses.</p>
+            </div>
+        </div>
+
+        <!-- Quick Reflection -->
+        <div class="lesson-section">
+            <div class="reflection-box">
+                <h3>💭 Quick Reflection</h3>
+                <p><strong>Think about this:</strong></p>
+                <p>Do you currently have more money coming in than going out? If yes, what are you doing with the extra? If no, which expenses could you reduce, or how could you increase your income? There's no judgment here—just honest awareness. Most people have never actually calculated this, and that's okay. The fact that you're thinking about it now puts you ahead.</p>
+                <p style="margin-top: 15px; font-size: 14px; font-style: italic;">Take a moment to reflect before moving on.</p>
+            </div>
+        </div>
+
+        <!-- Finish Button -->
+        <button class="btn-finish" onclick="finishLesson()">Finish Lesson</button>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>FinanceU</h4>
+                    <p>Making financial literacy accessible for everyone.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="careers.html">Careers</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="help.html">Help Center</a></li>
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                        <li><a href="terms.html">Terms of Service</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p style="font-size: 0.85rem; opacity: 0.8; margin-bottom: 10px;">Disclaimer: FinanceU provides educational content only and does not offer financial, legal, or investment advice. Always consult with a qualified professional before making financial decisions.</p>
+                <p>&copy; 2025 FinanceU. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="config.js"></script>
+    <script>
+        async function updateNav() {
+            try {
+                const response = await fetch(`${API_URL}/auth/me`, {
+                    credentials: 'include'
+                });
+
+                const authButtons = document.getElementById('authButtons');
+
+                if (response.ok) {
+                    authButtons.innerHTML = `
+                        <a href="dashboard.html" class="btn-primary">Dashboard</a>
+                    `;
+                } else {
+                    authButtons.innerHTML = `
+                        <a href="login.html" class="btn-primary">Login</a>
+                    `;
+                }
+            } catch (error) {
+                console.log('Not logged in');
+            }
+        }
+
+        function finishLesson() {
+            const completed = JSON.parse(localStorage.getItem('pillar1_completed') || '[]');
+            if (!completed.includes(2)) {
+                completed.push(2);
+                localStorage.setItem('pillar1_completed', JSON.stringify(completed));
+            }
+            window.location.href = 'pillar1-lessons.html';
+        }
+
+        updateNav();
+    </script>
+</body>
+</html>

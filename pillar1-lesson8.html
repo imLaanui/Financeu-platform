@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson 8 - Building Good Money Habits - FinanceU</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .lesson-container { max-width: 800px; margin: 0 auto; padding: 40px 20px; }
+        .lesson-header { text-align: center; margin-bottom: 40px; padding-bottom: 20px; border-bottom: 3px solid var(--primary-color); }
+        .lesson-header h1 { font-size: 36px; color: var(--text-primary); margin-bottom: 10px; }
+        .lesson-header .lesson-number { color: var(--primary-color); font-size: 18px; font-weight: 600; margin-bottom: 5px; }
+        .lesson-section { background: white; padding: 30px; border-radius: 12px; margin-bottom: 25px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); }
+        .lesson-section h2 { color: var(--primary-color); font-size: 24px; margin-bottom: 15px; }
+        .lesson-section p { line-height: 1.8; color: var(--text-secondary); margin-bottom: 15px; }
+        .lesson-section ul { line-height: 1.8; color: var(--text-secondary); margin-left: 20px; margin-bottom: 15px; }
+        .visual-box { background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%); border-left: 4px solid var(--primary-color); padding: 20px; border-radius: 8px; margin: 20px 0; }
+        .visual-box h3 { color: var(--primary-color); margin-bottom: 15px; font-size: 18px; }
+        .habits-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 15px; }
+        .habit-card { background: white; padding: 20px; border-radius: 8px; border-left: 4px solid #10b981; }
+        .action-box { background: #10b98120; border-left: 4px solid #10b981; padding: 20px; border-radius: 8px; }
+        .action-box h3 { color: #10b981; margin-bottom: 10px; }
+        .reflection-box { background: #f59e0b20; border-left: 4px solid #f59e0b; padding: 20px; border-radius: 8px; }
+        .reflection-box h3 { color: #f59e0b; margin-bottom: 10px; }
+        .mistakes-list { background: #fee2e2; padding: 20px; border-radius: 8px; border-left: 4px solid #dc2626; }
+        .mistakes-list h3 { color: #dc2626; margin-bottom: 15px; }
+        .completion-box { background: linear-gradient(135deg, #10b981 0%, #059669 100%); color: white; padding: 30px; border-radius: 12px; text-align: center; margin: 30px 0; }
+        .completion-box h3 { font-size: 28px; margin-bottom: 15px; }
+        .btn-finish { display: block; width: 100%; max-width: 400px; margin: 30px auto; padding: 18px; background: var(--primary-color); color: white; text-align: center; text-decoration: none; border-radius: 8px; font-size: 18px; font-weight: 600; transition: background 0.2s; border: none; cursor: pointer; }
+        .btn-finish:hover { background: #2563eb; }
+        .back-link { display: inline-block; margin-bottom: 20px; color: var(--primary-color); text-decoration: none; font-weight: 600; }
+        .back-link:hover { text-decoration: underline; }
+        @media (max-width: 768px) { .habits-grid { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-wrapper">
+                <div class="logo"><a href="index.html" style="color: inherit; text-decoration: none;">Finance<span class="logo-accent">U</span></a></div>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="dashboard.html">Dashboard</a></li>
+                    <li id="authButtons"><a href="login.html" class="btn-primary">Login</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="lesson-container">
+        <a href="pillar1-lessons.html" class="back-link">← Back to Pillar 1 Lessons</a>
+
+        <div class="lesson-header">
+            <div class="lesson-number">LESSON 8</div>
+            <h1>Building Good Money Habits</h1>
+        </div>
+
+        <div class="lesson-section">
+            <h2>Quick Intro</h2>
+            <p>Financial success isn't about one big decision—it's about hundreds of small choices made consistently over time. Good money habits compound just like interest. The small actions you take today create the financial future you'll live in tomorrow. This final lesson ties everything together and gives you the daily practices that turn knowledge into results.</p>
+        </div>
+
+        <div class="lesson-section">
+            <h2>Core Concept</h2>
+            <p><strong>Money habits are the automatic behaviors and routines that shape your financial life without requiring constant willpower or decision-making.</strong></p>
+            <p><strong>Why Habits Matter More Than Motivation:</strong></p>
+            <ul>
+                <li><strong>Consistency:</strong> Motivation fades, but habits stick. You brush your teeth without thinking—that's the power of habit.</li>
+                <li><strong>Compound Effect:</strong> Small habits repeated daily create massive results over time.</li>
+                <li><strong>Reduced Mental Load:</strong> Automatic good habits free up mental energy for other decisions.</li>
+                <li><strong>Prevention:</strong> Good habits prevent problems before they start (like automatically saving before spending).</li>
+            </ul>
+            <p><strong>Key Money Habits to Build:</strong></p>
+            <ul>
+                <li>Check your account balances regularly (weekly)</li>
+                <li>Pay yourself first (save before spending)</li>
+                <li>Wait 24-48 hours before non-essential purchases</li>
+                <li>Review subscriptions quarterly</li>
+                <li>Track spending consistently</li>
+                <li>Set aside money for goals automatically</li>
+            </ul>
+        </div>
+
+        <div class="lesson-section">
+            <h2>Simple Example</h2>
+            <p>Meet Morgan and Sam, both earning $40,000/year:</p>
+            <p><strong>Morgan's Habits (Poor):</strong></p>
+            <ul>
+                <li>Checks bank balance only when card declines</li>
+                <li>Shops when stressed or bored</li>
+                <li>Pays bills late, incurring fees</li>
+                <li>Plans to save "whatever's left" (there's never anything left)</li>
+                <li><strong>After 5 years:</strong> $3,000 in debt, $0 saved</li>
+            </ul>
+            <p><strong>Sam's Habits (Good):</strong></p>
+            <ul>
+                <li>Checks accounts every Sunday morning with coffee</li>
+                <li>Automatically transfers $200/month to savings on payday</li>
+                <li>Uses the 24-hour rule for purchases over $50</li>
+                <li>Reviews spending monthly and adjusts</li>
+                <li><strong>After 5 years:</strong> $0 debt, $12,000+ saved (with interest)</li>
+            </ul>
+            <p>Same income, completely different outcomes—all because of daily habits.</p>
+        </div>
+
+        <div class="visual-box">
+            <h3>The 4 Fundamental Money Habits</h3>
+            <div class="habits-grid">
+                <div class="habit-card">
+                    <h4 style="color: #10b981; margin-bottom: 10px;">1. Pay Yourself First</h4>
+                    <p style="font-size: 14px;">Automatically move money to savings the day you get paid, before spending on anything else. Even $25/paycheck builds the habit.</p>
+                </div>
+                <div class="habit-card">
+                    <h4 style="color: #10b981; margin-bottom: 10px;">2. The 24-Hour Rule</h4>
+                    <p style="font-size: 14px;">Wait one full day before any unplanned purchase over $50. Most impulse urges fade after 24 hours.</p>
+                </div>
+                <div class="habit-card">
+                    <h4 style="color: #10b981; margin-bottom: 10px;">3. Weekly Money Check-In</h4>
+                    <p style="font-size: 14px;">Set 10 minutes every week (same day, same time) to review accounts, check balances, and note anything unusual.</p>
+                </div>
+                <div class="habit-card">
+                    <h4 style="color: #10b981; margin-bottom: 10px;">4. Monthly Spending Review</h4>
+                    <p style="font-size: 14px;">Once a month, look at where your money went. Identify surprises, cancel unused subscriptions, adjust next month's plan.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="lesson-section">
+            <div class="mistakes-list">
+                <h3>Common Mistakes to Avoid</h3>
+                <ul style="margin-left: 20px;">
+                    <li><strong>Trying to change everything at once:</strong> Start with ONE habit. Master it for a month, then add another.</li>
+                    <li><strong>Relying on willpower:</strong> Willpower runs out. Use automation (automatic transfers, auto-pay) whenever possible.</li>
+                    <li><strong>Beating yourself up over slip-ups:</strong> You'll make mistakes. Just restart the habit the next day. Progress, not perfection.</li>
+                    <li><strong>Not tracking the habit:</strong> Use a calendar, app, or checklist to mark when you complete your habit. Seeing streaks motivates continuation.</li>
+                    <li><strong>Picking habits that don't match your life:</strong> If you're not a morning person, don't make your habit "check finances every morning." Work with your natural rhythms.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="lesson-section">
+            <div class="action-box">
+                <h3>🎯 Your Micro Action</h3>
+                <p><strong>Pick ONE habit from this lesson to start tomorrow.</strong></p>
+                <p>Choose the habit that would make the biggest difference in your life right now:</p>
+                <ul>
+                    <li>Need to save? Start "pay yourself first" with any amount.</li>
+                    <li>Overspending? Implement the 24-hour rule.</li>
+                    <li>Unsure where money goes? Start weekly check-ins.</li>
+                    <li>Want to optimize? Schedule monthly spending reviews.</li>
+                </ul>
+                <p>Set a specific time and day. Put it in your calendar with a reminder. Do it for 30 days—that's when it starts becoming automatic.</p>
+            </div>
+        </div>
+
+        <div class="lesson-section">
+            <div class="reflection-box">
+                <h3>💭 Quick Reflection</h3>
+                <p><strong>Think about this:</strong></p>
+                <p>What would your financial life look like one year from now if you practiced good money habits every day? What about five years? Ten years? The difference between financial struggle and financial freedom usually isn't income—it's habits. You now have the knowledge. The only question is: will you apply it consistently?</p>
+                <p style="margin-top: 15px; font-size: 14px; font-style: italic;">Consider your commitment to building these habits.</p>
+            </div>
+        </div>
+
+        <div class="completion-box">
+            <h3>🎉 Congratulations!</h3>
+            <p style="font-size: 18px; margin-bottom: 20px;">You've completed all 8 lessons of Pillar 1: Financial Literacy Fundamentals!</p>
+            <p style="font-size: 15px; opacity: 0.9;">You've learned the foundation of money management. These concepts are the building blocks for everything else you'll learn about personal finance. Take what you've learned and put it into practice—knowledge without action changes nothing.</p>
+        </div>
+
+        <button class="btn-finish" onclick="finishLesson()">Finish Lesson & Return to Dashboard</button>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>FinanceU</h4>
+                    <p>Making financial literacy accessible for everyone.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="careers.html">Careers</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="help.html">Help Center</a></li>
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                        <li><a href="terms.html">Terms of Service</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p style="font-size: 0.85rem; opacity: 0.8; margin-bottom: 10px;">Disclaimer: FinanceU provides educational content only and does not offer financial, legal, or investment advice. Always consult with a qualified professional before making financial decisions.</p>
+                <p>&copy; 2025 FinanceU. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="config.js"></script>
+    <script>
+        async function updateNav() {
+            try {
+                const response = await fetch(`${API_URL}/auth/me`, { credentials: 'include' });
+                const authButtons = document.getElementById('authButtons');
+                if (response.ok) {
+                    authButtons.innerHTML = `<a href="dashboard.html" class="btn-primary">Dashboard</a>`;
+                } else {
+                    authButtons.innerHTML = `<a href="login.html" class="btn-primary">Login</a>`;
+                }
+            } catch (error) {
+                console.log('Not logged in');
+            }
+        }
+
+        function finishLesson() {
+            const completed = JSON.parse(localStorage.getItem('pillar1_completed') || '[]');
+            if (!completed.includes(8)) {
+                completed.push(8);
+                localStorage.setItem('pillar1_completed', JSON.stringify(completed));
+            }
+            window.location.href = 'pillar1-lessons.html';
+        }
+
+        updateNav();
+    </script>
+</body>
+</html>

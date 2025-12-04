@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson 5 - Setting Financial Goals - FinanceU</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .lesson-container { max-width: 800px; margin: 0 auto; padding: 40px 20px; }
+        .lesson-header { text-align: center; margin-bottom: 40px; padding-bottom: 20px; border-bottom: 3px solid var(--primary-color); }
+        .lesson-header h1 { font-size: 36px; color: var(--text-primary); margin-bottom: 10px; }
+        .lesson-header .lesson-number { color: var(--primary-color); font-size: 18px; font-weight: 600; margin-bottom: 5px; }
+        .lesson-section { background: white; padding: 30px; border-radius: 12px; margin-bottom: 25px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); }
+        .lesson-section h2 { color: var(--primary-color); font-size: 24px; margin-bottom: 15px; }
+        .lesson-section p { line-height: 1.8; color: var(--text-secondary); margin-bottom: 15px; }
+        .lesson-section ul { line-height: 1.8; color: var(--text-secondary); margin-left: 20px; margin-bottom: 15px; }
+        .visual-box { background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%); border-left: 4px solid var(--primary-color); padding: 20px; border-radius: 8px; margin: 20px 0; }
+        .visual-box h3 { color: var(--primary-color); margin-bottom: 15px; font-size: 18px; }
+        .goals-timeline { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin-top: 15px; }
+        .goal-box { background: white; padding: 20px; border-radius: 8px; text-align: center; border: 2px solid #3b82f6; }
+        .goal-box.short { border-color: #10b981; }
+        .goal-box.medium { border-color: #f59e0b; }
+        .goal-box.long { border-color: #8b5cf6; }
+        .action-box { background: #10b98120; border-left: 4px solid #10b981; padding: 20px; border-radius: 8px; }
+        .action-box h3 { color: #10b981; margin-bottom: 10px; }
+        .reflection-box { background: #f59e0b20; border-left: 4px solid #f59e0b; padding: 20px; border-radius: 8px; }
+        .reflection-box h3 { color: #f59e0b; margin-bottom: 10px; }
+        .mistakes-list { background: #fee2e2; padding: 20px; border-radius: 8px; border-left: 4px solid #dc2626; }
+        .mistakes-list h3 { color: #dc2626; margin-bottom: 15px; }
+        .btn-finish { display: block; width: 100%; max-width: 400px; margin: 30px auto; padding: 18px; background: var(--primary-color); color: white; text-align: center; text-decoration: none; border-radius: 8px; font-size: 18px; font-weight: 600; transition: background 0.2s; border: none; cursor: pointer; }
+        .btn-finish:hover { background: #2563eb; }
+        .back-link { display: inline-block; margin-bottom: 20px; color: var(--primary-color); text-decoration: none; font-weight: 600; }
+        .back-link:hover { text-decoration: underline; }
+        @media (max-width: 768px) { .goals-timeline { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-wrapper">
+                <div class="logo"><a href="index.html" style="color: inherit; text-decoration: none;">Finance<span class="logo-accent">U</span></a></div>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="dashboard.html">Dashboard</a></li>
+                    <li id="authButtons"><a href="login.html" class="btn-primary">Login</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="lesson-container">
+        <a href="pillar1-lessons.html" class="back-link">← Back to Pillar 1 Lessons</a>
+
+        <div class="lesson-header">
+            <div class="lesson-number">LESSON 5</div>
+            <h1>Setting Financial Goals</h1>
+        </div>
+
+        <div class="lesson-section">
+            <h2>Quick Intro</h2>
+            <p>Money without a purpose just flows away. Financial goals give your money direction and meaning. Whether you're saving for a car, paying off debt, or building an emergency fund, clear goals transform vague wishes into actionable plans. This lesson will teach you how to set goals that actually stick.</p>
+        </div>
+
+        <div class="lesson-section">
+            <h2>Core Concept</h2>
+            <p><strong>Financial goals are specific, measurable targets that guide your money decisions and give you something concrete to work toward.</strong></p>
+            <p><strong>The SMART Goal Framework:</strong></p>
+            <ul>
+                <li><strong>Specific:</strong> "Save money" is vague. "Save $1,000 for an emergency fund" is specific.</li>
+                <li><strong>Measurable:</strong> You need numbers to track progress. How much? By when?</li>
+                <li><strong>Achievable:</strong> Goals should stretch you but remain realistic given your income.</li>
+                <li><strong>Relevant:</strong> Your goal should matter to YOU, not just look good to others.</li>
+                <li><strong>Time-bound:</strong> Set a deadline. "Someday" never comes.</li>
+            </ul>
+            <p><strong>Three Types of Financial Goals:</strong></p>
+            <ul>
+                <li><strong>Short-term (0-1 year):</strong> Emergency fund, paying off small debt, saving for a purchase</li>
+                <li><strong>Medium-term (1-5 years):</strong> Car down payment, student loan payoff, career training</li>
+                <li><strong>Long-term (5+ years):</strong> House down payment, retirement savings, children's education</li>
+            </ul>
+        </div>
+
+        <div class="lesson-section">
+            <h2>Simple Example</h2>
+            <p><strong>Bad Goal:</strong> "I want to save more money this year."<br>
+            <em>Why it fails:</em> Too vague, no way to track, no deadline</p>
+            
+            <p><strong>Good Goal:</strong> "I will save $500 by December 31st for an emergency fund by setting aside $42 per month."<br>
+            <em>Why it works:</em> Specific amount ($500), measurable (can track monthly), achievable ($42/month is realistic), relevant (emergency fund matters), time-bound (December 31st)</p>
+            
+            <p><strong>How to Break It Down:</strong></p>
+            <ul>
+                <li>Annual goal: $500</li>
+                <li>Monthly target: $42</li>
+                <li>Weekly savings: $10.50</li>
+                <li>Daily equivalent: $1.50</li>
+            </ul>
+            <p>Suddenly "save $500" becomes "skip one coffee drink per day." That's manageable.</p>
+        </div>
+
+        <div class="visual-box">
+            <h3>Types of Financial Goals by Timeline</h3>
+            <div class="goals-timeline">
+                <div class="goal-box short">
+                    <h4 style="color: #10b981; margin-bottom: 10px;">Short-Term</h4>
+                    <p style="font-size: 14px; margin-bottom: 10px;"><strong>0-1 Year</strong></p>
+                    <ul style="font-size: 13px; text-align: left; list-style: none; padding: 0;">
+                        <li>• Emergency fund</li>
+                        <li>• Pay off credit card</li>
+                        <li>• Save for vacation</li>
+                        <li>• Buy used laptop</li>
+                    </ul>
+                </div>
+                <div class="goal-box medium">
+                    <h4 style="color: #f59e0b; margin-bottom: 10px;">Medium-Term</h4>
+                    <p style="font-size: 14px; margin-bottom: 10px;"><strong>1-5 Years</strong></p>
+                    <ul style="font-size: 13px; text-align: left; list-style: none; padding: 0;">
+                        <li>• Car down payment</li>
+                        <li>• Pay off student loans</li>
+                        <li>• Save for wedding</li>
+                        <li>• Career certification</li>
+                    </ul>
+                </div>
+                <div class="goal-box long">
+                    <h4 style="color: #8b5cf6; margin-bottom: 10px;">Long-Term</h4>
+                    <p style="font-size: 14px; margin-bottom: 10px;"><strong>5+ Years</strong></p>
+                    <ul style="font-size: 13px; text-align: left; list-style: none; padding: 0;">
+                        <li>• House down payment</li>
+                        <li>• Retirement savings</li>
+                        <li>• Child's education</li>
+                        <li>• Financial independence</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="lesson-section">
+            <div class="mistakes-list">
+                <h3>Common Mistakes to Avoid</h3>
+                <ul style="margin-left: 20px;">
+                    <li><strong>Setting too many goals at once:</strong> Pick 1-3 priorities. More than that, and you'll spread yourself too thin and accomplish nothing.</li>
+                    <li><strong>Making goals too aggressive:</strong> "Save $10,000 this year" sounds great, but if you only earn $25,000, it's unrealistic and you'll fail.</li>
+                    <li><strong>Only having long-term goals:</strong> You need quick wins too. Mix short-term wins with long-term dreams.</li>
+                    <li><strong>Copying other people's goals:</strong> Your goals should reflect YOUR values and situation, not what Instagram says success looks like.</li>
+                    <li><strong>Not reviewing progress:</strong> Set monthly check-ins. If you're off track, adjust the plan—don't just give up.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="lesson-section">
+            <div class="action-box">
+                <h3>🎯 Your Micro Action</h3>
+                <p><strong>Write down ONE financial goal using the SMART framework:</strong></p>
+                <p>Right now, pick one thing you want to achieve financially. Write it down with:</p>
+                <ul>
+                    <li>The specific amount or outcome</li>
+                    <li>The deadline (date)</li>
+                    <li>How much you need to save per month to get there</li>
+                </ul>
+                <p>Example: "Save $300 for a new phone by June 1st by setting aside $50/month."</p>
+                <p>Put it somewhere you'll see daily—phone wallpaper, bathroom mirror, desk. Visibility creates accountability.</p>
+            </div>
+        </div>
+
+        <div class="lesson-section">
+            <div class="reflection-box">
+                <h3>💭 Quick Reflection</h3>
+                <p><strong>Think about this:</strong></p>
+                <p>What's the one financial achievement that would make you feel most proud or relieved? Not what you "should" want—what would genuinely improve your life or reduce your stress? That's probably where you should start. Goals work best when they're emotionally meaningful, not just logically sound.</p>
+                <p style="margin-top: 15px; font-size: 14px; font-style: italic;">Reflect before moving forward.</p>
+            </div>
+        </div>
+
+        <button class="btn-finish" onclick="finishLesson()">Finish Lesson</button>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>FinanceU</h4>
+                    <p>Making financial literacy accessible for everyone.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="careers.html">Careers</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="help.html">Help Center</a></li>
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                        <li><a href="terms.html">Terms of Service</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p style="font-size: 0.85rem; opacity: 0.8; margin-bottom: 10px;">Disclaimer: FinanceU provides educational content only and does not offer financial, legal, or investment advice. Always consult with a qualified professional before making financial decisions.</p>
+                <p>&copy; 2025 FinanceU. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="config.js"></script>
+    <script>
+        async function updateNav() {
+            try {
+                const response = await fetch(`${API_URL}/auth/me`, { credentials: 'include' });
+                const authButtons = document.getElementById('authButtons');
+                if (response.ok) {
+                    authButtons.innerHTML = `<a href="dashboard.html" class="btn-primary">Dashboard</a>`;
+                } else {
+                    authButtons.innerHTML = `<a href="login.html" class="btn-primary">Login</a>`;
+                }
+            } catch (error) {
+                console.log('Not logged in');
+            }
+        }
+
+        function finishLesson() {
+            const completed = JSON.parse(localStorage.getItem('pillar1_completed') || '[]');
+            if (!completed.includes(5)) {
+                completed.push(5);
+                localStorage.setItem('pillar1_completed', JSON.stringify(completed));
+            }
+            window.location.href = 'pillar1-lessons.html';
+        }
+
+        updateNav();
+    </script>
+</body>
+</html>

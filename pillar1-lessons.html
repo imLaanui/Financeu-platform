@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pillar 1 Lessons - FinanceU</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .pillar-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 60px 20px 40px;
+            text-align: center;
+        }
+        .pillar-header h1 {
+            font-size: 42px;
+            margin-bottom: 15px;
+        }
+        .pillar-header p {
+            font-size: 18px;
+            opacity: 0.9;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        .lessons-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+        .lesson-card {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: transform 0.2s, box-shadow 0.2s;
+            position: relative;
+        }
+        .lesson-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+        .lesson-card.completed {
+            background: #f0fdf4;
+            border: 2px solid #10b981;
+        }
+        .lesson-info h3 {
+            font-size: 22px;
+            margin-bottom: 8px;
+            color: var(--text-primary);
+        }
+        .lesson-info p {
+            color: var(--text-secondary);
+            font-size: 15px;
+            margin: 0;
+        }
+        .lesson-status {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .completed-badge {
+            background: #10b981;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+        .btn-start-lesson {
+            padding: 12px 24px;
+            background: var(--primary-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: background 0.2s;
+            border: none;
+            cursor: pointer;
+        }
+        .btn-start-lesson:hover {
+            background: #2563eb;
+        }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-wrapper">
+                <div class="logo"><a href="index.html" style="color: inherit; text-decoration: none;">Finance<span class="logo-accent">U</span></a></div>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="dashboard.html">Dashboard</a></li>
+                    <li id="authButtons">
+                        <a href="login.html" class="btn-primary">Login</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Pillar Header -->
+    <section class="pillar-header">
+        <h1>Pillar 1: Financial Literacy Fundamentals</h1>
+        <p>Build your foundation with essential money management concepts and skills</p>
+    </section>
+
+    <!-- Lessons List -->
+    <div class="lessons-container">
+        <a href="dashboard.html" class="back-link">← Back to Dashboard</a>
+
+        <div id="lessonsList">
+            <!-- Lesson 1 -->
+            <div class="lesson-card" data-lesson="1">
+                <div class="lesson-info">
+                    <h3>Lesson 1 - What is Money?</h3>
+                    <p>Understand the fundamental concept of money and its role in society</p>
+                </div>
+                <div class="lesson-status">
+                    <a href="pillar1-lesson1.html" class="btn-start-lesson">Start Lesson</a>
+                </div>
+            </div>
+
+            <!-- Lesson 2 -->
+            <div class="lesson-card" data-lesson="2">
+                <div class="lesson-info">
+                    <h3>Lesson 2 - Understanding Income and Expenses</h3>
+                    <p>Learn the difference between money coming in and money going out</p>
+                </div>
+                <div class="lesson-status">
+                    <a href="pillar1-lesson2.html" class="btn-start-lesson">Start Lesson</a>
+                </div>
+            </div>
+
+            <!-- Lesson 3 -->
+            <div class="lesson-card" data-lesson="3">
+                <div class="lesson-info">
+                    <h3>Lesson 3 - The Time Value of Money</h3>
+                    <p>Discover why money today is worth more than money tomorrow</p>
+                </div>
+                <div class="lesson-status">
+                    <a href="pillar1-lesson3.html" class="btn-start-lesson">Start Lesson</a>
+                </div>
+            </div>
+
+            <!-- Lesson 4 -->
+            <div class="lesson-card" data-lesson="4">
+                <div class="lesson-info">
+                    <h3>Lesson 4 - Needs vs. Wants</h3>
+                    <p>Master the crucial skill of distinguishing between necessities and desires</p>
+                </div>
+                <div class="lesson-status">
+                    <a href="pillar1-lesson4.html" class="btn-start-lesson">Start Lesson</a>
+                </div>
+            </div>
+
+            <!-- Lesson 5 -->
+            <div class="lesson-card" data-lesson="5">
+                <div class="lesson-info">
+                    <h3>Lesson 5 - Setting Financial Goals</h3>
+                    <p>Learn how to set and achieve meaningful financial objectives</p>
+                </div>
+                <div class="lesson-status">
+                    <a href="pillar1-lesson5.html" class="btn-start-lesson">Start Lesson</a>
+                </div>
+            </div>
+
+            <!-- Lesson 6 -->
+            <div class="lesson-card" data-lesson="6">
+                <div class="lesson-info">
+                    <h3>Lesson 6 - Introduction to Banking</h3>
+                    <p>Understand how banks work and the services they offer</p>
+                </div>
+                <div class="lesson-status">
+                    <a href="pillar1-lesson6.html" class="btn-start-lesson">Start Lesson</a>
+                </div>
+            </div>
+
+            <!-- Lesson 7 -->
+            <div class="lesson-card" data-lesson="7">
+                <div class="lesson-info">
+                    <h3>Lesson 7 - Tracking Your Money</h3>
+                    <p>Discover simple methods to monitor your financial activities</p>
+                </div>
+                <div class="lesson-status">
+                    <a href="pillar1-lesson7.html" class="btn-start-lesson">Start Lesson</a>
+                </div>
+            </div>
+
+            <!-- Lesson 8 -->
+            <div class="lesson-card" data-lesson="8">
+                <div class="lesson-info">
+                    <h3>Lesson 8 - Building Good Money Habits</h3>
+                    <p>Develop daily practices that lead to long-term financial success</p>
+                </div>
+                <div class="lesson-status">
+                    <a href="pillar1-lesson8.html" class="btn-start-lesson">Start Lesson</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>FinanceU</h4>
+                    <p>Making financial literacy accessible for everyone.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="careers.html">Careers</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="help.html">Help Center</a></li>
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                        <li><a href="terms.html">Terms of Service</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p style="font-size: 0.85rem; opacity: 0.8; margin-bottom: 10px;">Disclaimer: FinanceU provides educational content only and does not offer financial, legal, or investment advice. Always consult with a qualified professional before making financial decisions.</p>
+                <p>&copy; 2025 FinanceU. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="config.js"></script>
+    <script>
+        // Check authentication status and update nav
+        async function updateNav() {
+            try {
+                const response = await fetch(`${API_URL}/auth/me`, {
+                    credentials: 'include'
+                });
+
+                const authButtons = document.getElementById('authButtons');
+
+                if (response.ok) {
+                    authButtons.innerHTML = `
+                        <a href="dashboard.html" class="btn-primary">Dashboard</a>
+                    `;
+                } else {
+                    authButtons.innerHTML = `
+                        <a href="login.html" class="btn-primary">Login</a>
+                    `;
+                }
+            } catch (error) {
+                console.log('Not logged in');
+            }
+        }
+
+        // Load completed lessons from localStorage
+        function loadCompletedLessons() {
+            const completed = JSON.parse(localStorage.getItem('pillar1_completed') || '[]');
+
+            completed.forEach(lessonNum => {
+                const lessonCard = document.querySelector(`[data-lesson="${lessonNum}"]`);
+                if (lessonCard) {
+                    lessonCard.classList.add('completed');
+                    const statusDiv = lessonCard.querySelector('.lesson-status');
+                    statusDiv.innerHTML = `
+                        <span class="completed-badge">✓ Completed</span>
+                        <a href="pillar1-lesson${lessonNum}.html" class="btn-start-lesson">Review</a>
+                    `;
+                }
+            });
+        }
+
+        updateNav();
+        loadCompletedLessons();
+    </script>
+</body>
+</html>

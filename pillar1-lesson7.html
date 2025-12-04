@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson 7 - Tracking Your Money - FinanceU</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .lesson-container { max-width: 800px; margin: 0 auto; padding: 40px 20px; }
+        .lesson-header { text-align: center; margin-bottom: 40px; padding-bottom: 20px; border-bottom: 3px solid var(--primary-color); }
+        .lesson-header h1 { font-size: 36px; color: var(--text-primary); margin-bottom: 10px; }
+        .lesson-header .lesson-number { color: var(--primary-color); font-size: 18px; font-weight: 600; margin-bottom: 5px; }
+        .lesson-section { background: white; padding: 30px; border-radius: 12px; margin-bottom: 25px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); }
+        .lesson-section h2 { color: var(--primary-color); font-size: 24px; margin-bottom: 15px; }
+        .lesson-section p { line-height: 1.8; color: var(--text-secondary); margin-bottom: 15px; }
+        .lesson-section ul { line-height: 1.8; color: var(--text-secondary); margin-left: 20px; margin-bottom: 15px; }
+        .visual-box { background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%); border-left: 4px solid var(--primary-color); padding: 20px; border-radius: 8px; margin: 20px 0; }
+        .visual-box h3 { color: var(--primary-color); margin-bottom: 15px; font-size: 18px; }
+        .tracking-methods { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin-top: 15px; }
+        .method-card { background: white; padding: 20px; border-radius: 8px; text-align: center; border: 2px solid #3b82f6; }
+        .action-box { background: #10b98120; border-left: 4px solid #10b981; padding: 20px; border-radius: 8px; }
+        .action-box h3 { color: #10b981; margin-bottom: 10px; }
+        .reflection-box { background: #f59e0b20; border-left: 4px solid #f59e0b; padding: 20px; border-radius: 8px; }
+        .reflection-box h3 { color: #f59e0b; margin-bottom: 10px; }
+        .mistakes-list { background: #fee2e2; padding: 20px; border-radius: 8px; border-left: 4px solid #dc2626; }
+        .mistakes-list h3 { color: #dc2626; margin-bottom: 15px; }
+        .btn-finish { display: block; width: 100%; max-width: 400px; margin: 30px auto; padding: 18px; background: var(--primary-color); color: white; text-align: center; text-decoration: none; border-radius: 8px; font-size: 18px; font-weight: 600; transition: background 0.2s; border: none; cursor: pointer; }
+        .btn-finish:hover { background: #2563eb; }
+        .back-link { display: inline-block; margin-bottom: 20px; color: var(--primary-color); text-decoration: none; font-weight: 600; }
+        .back-link:hover { text-decoration: underline; }
+        @media (max-width: 768px) { .tracking-methods { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-wrapper">
+                <div class="logo"><a href="index.html" style="color: inherit; text-decoration: none;">Finance<span class="logo-accent">U</span></a></div>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="dashboard.html">Dashboard</a></li>
+                    <li id="authButtons"><a href="login.html" class="btn-primary">Login</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="lesson-container">
+        <a href="pillar1-lessons.html" class="back-link">← Back to Pillar 1 Lessons</a>
+
+        <div class="lesson-header">
+            <div class="lesson-number">LESSON 7</div>
+            <h1>Tracking Your Money</h1>
+        </div>
+
+        <div class="lesson-section">
+            <h2>Quick Intro</h2>
+            <p>You can't manage what you don't measure. Most people have no idea where their money actually goes each month—it just vanishes. Tracking your money sounds tedious, but it's the single most powerful tool for financial control. Once you see your spending patterns, you gain the power to change them.</p>
+        </div>
+
+        <div class="lesson-section">
+            <h2>Core Concept</h2>
+            <p><strong>Tracking your money means recording what you earn and what you spend so you can see patterns, identify problems, and make informed decisions.</strong></p>
+            <p><strong>Why Tracking Matters:</strong></p>
+            <ul>
+                <li><strong>Awareness:</strong> Most people are shocked when they actually see where money goes. That $5 daily coffee is $1,825 per year.</li>
+                <li><strong>Control:</strong> You can't change habits you don't notice. Tracking reveals what needs fixing.</li>
+                <li><strong>Progress:</strong> Watching your savings grow or debt shrink is motivating.</li>
+                <li><strong>Prevention:</strong> Catches problems early (like subscriptions you forgot about or overspending in certain categories).</li>
+            </ul>
+            <p><strong>What to Track:</strong></p>
+            <ul>
+                <li>All income sources</li>
+                <li>Every expense (yes, even the small ones)</li>
+                <li>Account balances</li>
+                <li>Debt payments and remaining balances</li>
+                <li>Savings contributions</li>
+            </ul>
+        </div>
+
+        <div class="lesson-section">
+            <h2>Simple Example</h2>
+            <p>Casey thinks they're careful with money but always runs out before payday. After tracking for one month:</p>
+            <p><strong>Discoveries:</strong></p>
+            <ul>
+                <li>$180 on food delivery (didn't realize it was that much)</li>
+                <li>$45 on subscriptions they forgot about (streaming services, apps)</li>
+                <li>$90 on "small" purchases under $10 (snacks, impulse buys)</li>
+                <li>Total: $315 in spending Casey didn't even remember</li>
+            </ul>
+            <p><strong>The Impact:</strong> By simply becoming aware, Casey canceled unused subscriptions ($45/month saved), reduced delivery to once a week ($120/month saved), and became more mindful of small purchases ($60/month saved). That's $225/month = $2,700/year—without earning a dollar more.</p>
+        </div>
+
+        <div class="visual-box">
+            <h3>Three Methods to Track Your Money</h3>
+            <div class="tracking-methods">
+                <div class="method-card">
+                    <h4 style="color: #10b981; margin-bottom: 10px;">📱 Apps</h4>
+                    <p style="font-size: 13px; line-height: 1.5;"><strong>Pros:</strong> Automatic, categorizes for you, always accessible<br>
+                    <strong>Cons:</strong> Requires linking accounts, learning curve<br>
+                    <strong>Examples:</strong> Mint, YNAB, EveryDollar</p>
+                </div>
+                <div class="method-card">
+                    <h4 style="color: #3b82f6; margin-bottom: 10px;">📊 Spreadsheet</h4>
+                    <p style="font-size: 13px; line-height: 1.5;"><strong>Pros:</strong> Full control, customizable, no fees<br>
+                    <strong>Cons:</strong> Manual entry, time-consuming<br>
+                    <strong>Tools:</strong> Excel, Google Sheets, templates</p>
+                </div>
+                <div class="method-card">
+                    <h4 style="color: #8b5cf6; margin-bottom: 10px;">📓 Pen & Paper</h4>
+                    <p style="font-size: 13px; line-height: 1.5;"><strong>Pros:</strong> Simple, no tech needed, privacy<br>
+                    <strong>Cons:</strong> No automatic calculations, easy to lose<br>
+                    <strong>Method:</strong> Notebook or bullet journal</p>
+                </div>
+            </div>
+            <p style="margin-top: 20px; text-align: center; font-weight: 600; color: var(--primary-color);">The best method is the one you'll actually use consistently.</p>
+        </div>
+
+        <div class="lesson-section">
+            <div class="mistakes-list">
+                <h3>Common Mistakes to Avoid</h3>
+                <ul style="margin-left: 20px;">
+                    <li><strong>Trying to be too detailed:</strong> Don't track every penny down to the cent. Round numbers and broad categories work fine.</li>
+                    <li><strong>Giving up after one mistake:</strong> Forgot to track for a few days? Just start again. Perfect is the enemy of good enough.</li>
+                    <li><strong>Only tracking big expenses:</strong> Small recurring charges add up fast. Track everything for at least one month to see the truth.</li>
+                    <li><strong>Tracking but never reviewing:</strong> Recording data without looking at it is useless. Review weekly or monthly to spot patterns.</li>
+                    <li><strong>Making it too complicated:</strong> Simple systems work better than complex ones. Start basic and add complexity only if needed.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="lesson-section">
+            <div class="action-box">
+                <h3>🎯 Your Micro Action</h3>
+                <p><strong>Track every dollar you spend for the next 3 days.</strong></p>
+                <p>Choose your method (phone notes, notebook, app—anything works). For 3 days, write down EVERY purchase, no matter how small:</p>
+                <ul>
+                    <li>Coffee: $4</li>
+                    <li>Lunch: $12</li>
+                    <li>Parking: $3</li>
+                    <li>Snack: $2</li>
+                </ul>
+                <p>At the end of 3 days, add it up. Most people are surprised by the total. This isn't about judgment—it's about awareness. You can't change what you don't see.</p>
+            </div>
+        </div>
+
+        <div class="lesson-section">
+            <div class="reflection-box">
+                <h3>💭 Quick Reflection</h3>
+                <p><strong>Think about this:</strong></p>
+                <p>If someone asked you right now how much you spent last month, could you answer within $100? If not, you're making financial decisions blind. How comfortable are you with that? Tracking feels like a chore at first, but it's actually freeing—once you know where your money goes, you can decide where it should go instead. That's the difference between reacting to money and controlling it.</p>
+                <p style="margin-top: 15px; font-size: 14px; font-style: italic;">Reflect on your awareness of your spending.</p>
+            </div>
+        </div>
+
+        <button class="btn-finish" onclick="finishLesson()">Finish Lesson</button>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>FinanceU</h4>
+                    <p>Making financial literacy accessible for everyone.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="careers.html">Careers</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="help.html">Help Center</a></li>
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                        <li><a href="terms.html">Terms of Service</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p style="font-size: 0.85rem; opacity: 0.8; margin-bottom: 10px;">Disclaimer: FinanceU provides educational content only and does not offer financial, legal, or investment advice. Always consult with a qualified professional before making financial decisions.</p>
+                <p>&copy; 2025 FinanceU. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="config.js"></script>
+    <script>
+        async function updateNav() {
+            try {
+                const response = await fetch(`${API_URL}/auth/me`, { credentials: 'include' });
+                const authButtons = document.getElementById('authButtons');
+                if (response.ok) {
+                    authButtons.innerHTML = `<a href="dashboard.html" class="btn-primary">Dashboard</a>`;
+                } else {
+                    authButtons.innerHTML = `<a href="login.html" class="btn-primary">Login</a>`;
+                }
+            } catch (error) {
+                console.log('Not logged in');
+            }
+        }
+
+        function finishLesson() {
+            const completed = JSON.parse(localStorage.getItem('pillar1_completed') || '[]');
+            if (!completed.includes(7)) {
+                completed.push(7);
+                localStorage.setItem('pillar1_completed', JSON.stringify(completed));
+            }
+            window.location.href = 'pillar1-lessons.html';
+        }
+
+        updateNav();
+    </script>
+</body>
+</html>
