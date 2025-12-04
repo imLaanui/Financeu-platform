@@ -348,7 +348,7 @@
 
         function finishLesson() {
             // Get completed lessons from localStorage
-            const completed = JSON.parse(localStorage.getItem(`pillar1_completed_${localStorage.getItem('userId')}`)) || '[]');
+            const completed = JSON.parse(localStorage.getItem(`pillar1_completed_${localStorage.getItem('userId')}`) || '[]');
 
             // Add lesson 1 if not already completed
             if (!completed.includes(1)) {

@@ -387,7 +387,7 @@
         }
 
         function finishLesson() {
-            const completed = JSON.parse(localStorage.getItem(`pillar1_completed_${localStorage.getItem('userId')}`)) || '[]');
+            const completed = JSON.parse(localStorage.getItem(`pillar1_completed_${localStorage.getItem('userId')}`) || '[]');
             if (!completed.includes(2)) {
                 completed.push(2);
                 localStorage.setItem(`pillar1_completed_${localStorage.getItem('userId')}`, JSON.stringify(completed));

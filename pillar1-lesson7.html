@@ -205,7 +205,7 @@
         }
 
         function finishLesson() {
-            const completed = JSON.parse(localStorage.getItem(`pillar1_completed_${localStorage.getItem('userId')}`)) || '[]');
+            const completed = JSON.parse(localStorage.getItem(`pillar1_completed_${localStorage.getItem('userId')}`) || '[]');
             if (!completed.includes(7)) {
                 completed.push(7);
                 localStorage.setItem(`pillar1_completed_${localStorage.getItem('userId')}`, JSON.stringify(completed));
