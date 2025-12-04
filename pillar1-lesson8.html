@@ -209,12 +209,27 @@
                 const response = await fetch(`${API_URL}/auth/me`, { credentials: 'include' });
                 const authButtons = document.getElementById('authButtons');
                 if (response.ok) {
-                    authButtons.innerHTML = `<a href="dashboard.html" class="btn-primary">Dashboard</a>`;
+                    authButtons.innerHTML = `<a href="#" onclick="logout(); return false;" class="btn-primary">Logout</a>`;
                 } else {
                     authButtons.innerHTML = `<a href="login.html" class="btn-primary">Login</a>`;
                 }
             } catch (error) {
                 console.log('Not logged in');
+            }
+        }
+
+
+        // Logout function
+        async function logout() {
+            try {
+                await fetch(`${API_URL}/auth/logout`, {
+                    method: 'POST',
+                    credentials: 'include'
+                });
+                window.location.href = '/index.html';
+            } catch (error) {
+                console.error('Logout error:', error);
+                window.location.href = '/index.html';
             }
         }
 

@@ -320,6 +320,21 @@
         }
 
         // Mark lesson as complete and redirect
+
+        // Logout function
+        async function logout() {
+            try {
+                await fetch(`${API_URL}/auth/logout`, {
+                    method: 'POST',
+                    credentials: 'include'
+                });
+                window.location.href = '/index.html';
+            } catch (error) {
+                console.error('Logout error:', error);
+                window.location.href = '/index.html';
+            }
+        }
+
         function finishLesson() {
             // Get completed lessons from localStorage
             const completed = JSON.parse(localStorage.getItem('pillar1_completed') || '[]');

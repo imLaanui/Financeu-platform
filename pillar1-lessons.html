@@ -259,7 +259,7 @@
 
                 if (response.ok) {
                     authButtons.innerHTML = `
-                        <a href="dashboard.html" class="btn-primary">Dashboard</a>
+                        <a href="#" onclick="logout(); return false;" class="btn-primary">Logout</a>
                     `;
                 } else {
                     authButtons.innerHTML = `
@@ -268,6 +268,20 @@
                 }
             } catch (error) {
                 console.log('Not logged in');
+            }
+        }
+
+        // Logout function
+        async function logout() {
+            try {
+                await fetch(`${API_URL}/auth/logout`, {
+                    method: 'POST',
+                    credentials: 'include'
+                });
+                window.location.href = '/index.html';
+            } catch (error) {
+                console.error('Logout error:', error);
+                window.location.href = '/index.html';
             }
         }
 
