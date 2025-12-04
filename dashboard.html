@@ -438,7 +438,7 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2024 FinanceU. All rights reserved.</p>
+                <p>&copy; 2025 FinanceU. All rights reserved.</p>
             </div>
         </div>
     </footer>
@@ -506,7 +506,10 @@
 
                 // Update stats
                 document.getElementById('completedLessons').textContent = profile.stats.completedLessons;
-                const progressPercent = Math.round((profile.stats.completedLessons / profile.stats.totalLessons) * 100);
+                // Since no pillars are available yet, show 0%
+                const progressPercent = profile.stats.totalLessons > 0
+                    ? Math.round((profile.stats.completedLessons / profile.stats.totalLessons) * 100)
+                    : 0;
                 document.getElementById('progressPercent').textContent = `${progressPercent}%`;
 
                 // Create a map of completed lessons
