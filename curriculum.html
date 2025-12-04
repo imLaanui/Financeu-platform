@@ -22,6 +22,48 @@
             max-width: 800px;
             margin: 0 auto;
         }
+        .pillar-info {
+            background: var(--bg-light);
+            padding: 60px 20px;
+            text-align: center;
+        }
+        .pillar-info h2 {
+            font-size: 36px;
+            margin-bottom: 20px;
+            color: var(--text-dark);
+        }
+        .pillar-info p {
+            font-size: 18px;
+            color: var(--text-light);
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+        .pillar-card {
+            position: relative;
+        }
+        .tier-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+        .tier-badge.free {
+            background-color: #10b981;
+            color: white;
+        }
+        .tier-badge.pro {
+            background-color: #f59e0b;
+            color: white;
+        }
+        .tier-badge.premium {
+            background-color: #3b82f6;
+            color: white;
+        }
     </style>
 </head>
 <body>
@@ -46,54 +88,72 @@
     <!-- Curriculum Hero Section -->
     <section class="curriculum-hero">
         <h1>Financial Education Pillars</h1>
-        <p>Master your money with our comprehensive curriculum covering 11 essential pillars of financial literacy</p>
+    </section>
+
+    <!-- What is a Pillar Section -->
+    <section class="pillar-info">
+        <div class="container">
+            <h2>What is a Pillar?</h2>
+            <p>The FinanceU team believes there are 11 essential financial pillars to truly grasp the financial system. Each pillar represents a core area of knowledge that, when mastered, provides a comprehensive understanding of personal finance. Together, these pillars form the foundation of financial literacy and empower you to make informed decisions about your money.</p>
+        </div>
     </section>
 
     <!-- Pillars Section -->
     <section class="features-section">
         <div class="container">
             <div class="features-grid">
-                <div class="feature-card">
+                <div class="feature-card pillar-card">
+                    <span class="tier-badge free">Free</span>
                     <h3>Pillar 1</h3>
                     <p>Foundation of financial literacy and money management fundamentals.</p>
                 </div>
-                <div class="feature-card">
+                <div class="feature-card pillar-card">
+                    <span class="tier-badge free">Free</span>
                     <h3>Pillar 2</h3>
                     <p>Essential skills for building a strong financial future.</p>
                 </div>
-                <div class="feature-card">
+                <div class="feature-card pillar-card">
+                    <span class="tier-badge free">Free</span>
                     <h3>Pillar 3</h3>
                     <p>Understanding credit, debt, and borrowing strategies.</p>
                 </div>
-                <div class="feature-card">
+                <div class="feature-card pillar-card">
+                    <span class="tier-badge pro">Pro</span>
                     <h3>Pillar 4</h3>
                     <p>Smart saving strategies and emergency fund planning.</p>
                 </div>
-                <div class="feature-card">
+                <div class="feature-card pillar-card">
+                    <span class="tier-badge pro">Pro</span>
                     <h3>Pillar 5</h3>
                     <p>Investment principles and wealth building techniques.</p>
                 </div>
-                <div class="feature-card">
+                <div class="feature-card pillar-card">
+                    <span class="tier-badge pro">Pro</span>
                     <h3>Pillar 6</h3>
                     <p>Budgeting mastery and expense management.</p>
                 </div>
-                <div class="feature-card">
+                <div class="feature-card pillar-card">
+                    <span class="tier-badge pro">Pro</span>
                     <h3>Pillar 7</h3>
                     <p>Career development and income optimization.</p>
                 </div>
-                <div class="feature-card">
+                <div class="feature-card pillar-card">
+                    <span class="tier-badge pro">Pro</span>
                     <h3>Pillar 8</h3>
                     <p>Tax fundamentals and financial planning.</p>
                 </div>
-                <div class="feature-card">
+                <div class="feature-card pillar-card">
+                    <span class="tier-badge premium">Premium</span>
                     <h3>Pillar 9</h3>
                     <p>Insurance and risk management essentials.</p>
                 </div>
-                <div class="feature-card">
+                <div class="feature-card pillar-card">
+                    <span class="tier-badge premium">Premium</span>
                     <h3>Pillar 10</h3>
                     <p>Real estate and major purchase planning.</p>
                 </div>
-                <div class="feature-card">
+                <div class="feature-card pillar-card">
+                    <span class="tier-badge premium">Premium</span>
                     <h3>Pillar 11</h3>
                     <p>Retirement planning and long-term financial security.</p>
                 </div>
