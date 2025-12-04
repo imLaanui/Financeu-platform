@@ -41,16 +41,28 @@
         }
         .pillar-card {
             position: relative;
+            padding-top: 60px !important;
+        }
+        .pillar-card-header {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.05) 0%, rgba(139, 92, 246, 0.05) 100%);
+            border-radius: 12px 12px 0 0;
+            border-bottom: 1px solid #e5e7eb;
         }
         .tier-badge {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            padding: 6px 12px;
+            padding: 6px 14px;
             border-radius: 20px;
-            font-size: 12px;
-            font-weight: 600;
+            font-size: 11px;
+            font-weight: 700;
             text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
         .tier-badge.free {
             background-color: #00A676;
@@ -65,14 +77,12 @@
             color: white;
         }
         .availability-badge {
-            position: absolute;
-            top: 15px;
-            left: 15px;
-            padding: 6px 12px;
+            padding: 6px 14px;
             border-radius: 20px;
             font-size: 11px;
-            font-weight: 600;
+            font-weight: 700;
             text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
         .availability-badge.available {
             background-color: #10b981;
@@ -121,68 +131,90 @@
         <div class="container">
             <div class="features-grid">
                 <div class="feature-card pillar-card">
-                    <span class="availability-badge available">Available Now</span>
-                    <span class="tier-badge free">Free</span>
+                    <div class="pillar-card-header">
+                        <span class="availability-badge available">Available Now</span>
+                        <span class="tier-badge free">Free</span>
+                    </div>
                     <h3>Pillar 1</h3>
                     <p>Foundation of financial literacy and money management fundamentals.</p>
                 </div>
                 <div class="feature-card pillar-card">
-                    <span class="availability-badge coming-soon">Coming 2026</span>
-                    <span class="tier-badge free">Free</span>
+                    <div class="pillar-card-header">
+                        <span class="availability-badge coming-soon">Coming 2026</span>
+                        <span class="tier-badge free">Free</span>
+                    </div>
                     <h3>Pillar 2</h3>
                     <p>Essential skills for building a strong financial future.</p>
                 </div>
                 <div class="feature-card pillar-card">
-                    <span class="availability-badge coming-soon">Coming 2026</span>
-                    <span class="tier-badge free">Free</span>
+                    <div class="pillar-card-header">
+                        <span class="availability-badge coming-soon">Coming 2026</span>
+                        <span class="tier-badge free">Free</span>
+                    </div>
                     <h3>Pillar 3</h3>
                     <p>Understanding credit, debt, and borrowing strategies.</p>
                 </div>
                 <div class="feature-card pillar-card">
-                    <span class="availability-badge coming-soon">Coming 2026</span>
-                    <span class="tier-badge pro">Pro</span>
+                    <div class="pillar-card-header">
+                        <span class="availability-badge coming-soon">Coming 2026</span>
+                        <span class="tier-badge pro">Pro</span>
+                    </div>
                     <h3>Pillar 4</h3>
                     <p>Smart saving strategies and emergency fund planning.</p>
                 </div>
                 <div class="feature-card pillar-card">
-                    <span class="availability-badge coming-soon">Coming 2026</span>
-                    <span class="tier-badge pro">Pro</span>
+                    <div class="pillar-card-header">
+                        <span class="availability-badge coming-soon">Coming 2026</span>
+                        <span class="tier-badge pro">Pro</span>
+                    </div>
                     <h3>Pillar 5</h3>
                     <p>Investment principles and wealth building techniques.</p>
                 </div>
                 <div class="feature-card pillar-card">
-                    <span class="availability-badge coming-soon">Coming 2026</span>
-                    <span class="tier-badge pro">Pro</span>
+                    <div class="pillar-card-header">
+                        <span class="availability-badge coming-soon">Coming 2026</span>
+                        <span class="tier-badge pro">Pro</span>
+                    </div>
                     <h3>Pillar 6</h3>
                     <p>Budgeting mastery and expense management.</p>
                 </div>
                 <div class="feature-card pillar-card">
-                    <span class="availability-badge coming-soon">Coming 2026</span>
-                    <span class="tier-badge pro">Pro</span>
+                    <div class="pillar-card-header">
+                        <span class="availability-badge coming-soon">Coming 2026</span>
+                        <span class="tier-badge pro">Pro</span>
+                    </div>
                     <h3>Pillar 7</h3>
                     <p>Career development and income optimization.</p>
                 </div>
                 <div class="feature-card pillar-card">
-                    <span class="availability-badge coming-soon">Coming 2026</span>
-                    <span class="tier-badge pro">Pro</span>
+                    <div class="pillar-card-header">
+                        <span class="availability-badge coming-soon">Coming 2026</span>
+                        <span class="tier-badge pro">Pro</span>
+                    </div>
                     <h3>Pillar 8</h3>
                     <p>Tax fundamentals and financial planning.</p>
                 </div>
                 <div class="feature-card pillar-card">
-                    <span class="availability-badge coming-soon">Coming 2026</span>
-                    <span class="tier-badge premium">Premium</span>
+                    <div class="pillar-card-header">
+                        <span class="availability-badge coming-soon">Coming 2026</span>
+                        <span class="tier-badge premium">Premium</span>
+                    </div>
                     <h3>Pillar 9</h3>
                     <p>Insurance and risk management essentials.</p>
                 </div>
                 <div class="feature-card pillar-card">
-                    <span class="availability-badge coming-soon">Coming 2026</span>
-                    <span class="tier-badge premium">Premium</span>
+                    <div class="pillar-card-header">
+                        <span class="availability-badge coming-soon">Coming 2026</span>
+                        <span class="tier-badge premium">Premium</span>
+                    </div>
                     <h3>Pillar 10</h3>
                     <p>Real estate and major purchase planning.</p>
                 </div>
                 <div class="feature-card pillar-card">
-                    <span class="availability-badge coming-soon">Coming 2026</span>
-                    <span class="tier-badge premium">Premium</span>
+                    <div class="pillar-card-header">
+                        <span class="availability-badge coming-soon">Coming 2026</span>
+                        <span class="tier-badge premium">Premium</span>
+                    </div>
                     <h3>Pillar 11</h3>
                     <p>Retirement planning and long-term financial security.</p>
                 </div>

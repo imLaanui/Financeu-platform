@@ -475,6 +475,7 @@ body {
 
 .pricing-section .section-title {
     text-align: center;
+    display: block;
 }
 
 .pricing-section .section-subtitle {
