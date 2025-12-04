@@ -6,13 +6,14 @@
 }
 
 :root {
-    --primary-color: #2563eb;
-    --primary-dark: #1e40af;
-    --secondary-color: #10b981;
-    --accent-color: #f59e0b;
-    --text-dark: #1f2937;
+    --primary-color: #0A1A2F;
+    --primary-dark: #050f1a;
+    --secondary-color: #00A676;
+    --accent-color: #F5F7FA;
+    --text-dark: #0A1A2F;
     --text-light: #6b7280;
-    --bg-light: #f9fafb;
+    --text-secondary: #4b5563;
+    --bg-light: #F5F7FA;
     --bg-white: #ffffff;
     --border-color: #e5e7eb;
     --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
@@ -57,7 +58,7 @@ body {
 }
 
 .logo-accent {
-    color: var(--accent-color);
+    color: var(--secondary-color);
 }
 
 .nav-links {
@@ -144,7 +145,7 @@ body {
 
 /* Hero Section */
 .hero {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #0A1A2F 0%, #1a3a5c 100%);
     color: white;
     padding: 6rem 0;
     text-align: center;
@@ -163,7 +164,7 @@ body {
 }
 
 .highlight {
-    color: var(--accent-color);
+    color: var(--secondary-color);
 }
 
 .hero-subtitle {
@@ -355,7 +356,7 @@ body {
     top: -15px;
     left: 50%;
     transform: translateX(-50%);
-    background-color: var(--accent-color);
+    background-color: var(--secondary-color);
     color: white;
     padding: 0.5rem 1.5rem;
     border-radius: 20px;
@@ -481,7 +482,7 @@ body {
 /* CTA Section */
 .cta-section {
     padding: 5rem 0;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #0A1A2F 0%, #1a3a5c 100%);
     color: white;
     text-align: center;
 }
