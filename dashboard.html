@@ -515,37 +515,37 @@
                     completedMap[p.lesson_id] = p.completed;
                 });
 
-                // Display lessons
-                const lessonList = document.getElementById('lessonList');
-                lessonList.innerHTML = '';
+                // Display lessons - DISABLED: Using static HTML pillars instead
+                // const lessonList = document.getElementById('lessonList');
+                // lessonList.innerHTML = '';
 
-                lessonsData.lessons.forEach(lesson => {
-                    const isCompleted = completedMap[lesson.id];
-                    const isAccessible = lesson.accessible;
+                // lessonsData.lessons.forEach(lesson => {
+                //     const isCompleted = completedMap[lesson.id];
+                //     const isAccessible = lesson.accessible;
 
-                    const lessonItem = document.createElement('div');
-                    lessonItem.className = `lesson-item ${!isAccessible ? 'locked' : ''}`;
+                //     const lessonItem = document.createElement('div');
+                //     lessonItem.className = `lesson-item ${!isAccessible ? 'locked' : ''}`;
 
-                    lessonItem.innerHTML = `
-                        <div class="lesson-info">
-                            <div class="lesson-icon">${lesson.icon}</div>
-                            <div class="lesson-details">
-                                <h3>${lesson.title}</h3>
-                                <p>${lesson.description}</p>
-                            </div>
-                        </div>
-                        <div class="lesson-status">
-                            ${isCompleted ? '<span class="status-badge completed">Completed</span>' :
-                              !isAccessible ? '<span class="status-badge locked">Locked</span>' :
-                              '<span class="status-badge available">Start</span>'}
-                            ${isAccessible ?
-                              `<a href="${lesson.url}" class="btn-lesson">${isCompleted ? 'Review' : 'Start Lesson'}</a>` :
-                              `<button class="btn-lesson disabled" onclick="showUpgradeMessage()">Upgrade to Access</button>`}
-                        </div>
-                    `;
+                //     lessonItem.innerHTML = `
+                //         <div class="lesson-info">
+                //             <div class="lesson-icon">${lesson.icon}</div>
+                //             <div class="lesson-details">
+                //                 <h3>${lesson.title}</h3>
+                //                 <p>${lesson.description}</p>
+                //             </div>
+                //         </div>
+                //         <div class="lesson-status">
+                //             ${isCompleted ? '<span class="status-badge completed">Completed</span>' :
+                //               !isAccessible ? '<span class="status-badge locked">Locked</span>' :
+                //               '<span class="status-badge available">Start</span>'}
+                //             ${isAccessible ?
+                //               `<a href="${lesson.url}" class="btn-lesson">${isCompleted ? 'Review' : 'Start Lesson'}</a>` :
+                //               `<button class="btn-lesson disabled" onclick="showUpgradeMessage()">Upgrade to Access</button>`}
+                //         </div>
+                //     `;
 
-                    lessonList.appendChild(lessonItem);
-                });
+                //     lessonList.appendChild(lessonItem);
+                // });
 
                 // Show dashboard
                 document.getElementById('loading').style.display = 'none';
