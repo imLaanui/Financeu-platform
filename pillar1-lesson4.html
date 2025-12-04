@@ -170,29 +170,41 @@
 
     <script src="config.js"></script>
     <script>
-        async function updateNav() {
+                async function updateNav() {
+            const authButtons = document.getElementById('authButtons');
+
+            // Check localStorage for cached auth state and render immediately
+            const cachedAuth = localStorage.getItem('authState');
+            if (cachedAuth) {
+                const authState = JSON.parse(cachedAuth);
+                authButtons.innerHTML = authState.isLoggedIn
+                    ? `<a href="#" onclick="logout(); return false;" class="btn-primary">Logout</a>`
+                    : `<a href="login.html" class="btn-primary">Login</a>`;
+                authButtons.style.opacity = '1';
+            }
+
+            // Then verify with server in background
             try {
                 const response = await fetch(`${API_URL}/auth/me`, { credentials: 'include' });
-                const authButtons = document.getElementById('authButtons');
+
                 if (response.ok) {
+                    localStorage.setItem('authState', JSON.stringify({ isLoggedIn: true }));
                     authButtons.innerHTML = `<a href="#" onclick="logout(); return false;" class="btn-primary">Logout</a>`;
                 } else {
+                    localStorage.setItem('authState', JSON.stringify({ isLoggedIn: false }));
                     authButtons.innerHTML = `<a href="login.html" class="btn-primary">Login</a>`;
                 }
                 authButtons.style.opacity = '1';
             } catch (error) {
                 console.log('Not logged in');
-                const authButtons = document.getElementById('authButtons');
-                authButtons.innerHTML = `
-                    <a href="login.html" class="btn-primary">Login</a>
-                `;
+                localStorage.setItem('authState', JSON.stringify({ isLoggedIn: false }));
+                authButtons.innerHTML = `<a href="login.html" class="btn-primary">Login</a>`;
                 authButtons.style.opacity = '1';
             }
         }
-
-
         // Logout function
         async function logout() {
+            localStorage.removeItem('authState');
             try {
                 await fetch(`${API_URL}/auth/logout`, {
                     method: 'POST',

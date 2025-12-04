@@ -565,6 +565,7 @@
 
         // Logout function
         async function logout() {
+            localStorage.removeItem('authState');
             try {
                 await fetch(`${API_URL}/auth/logout`, {
                     method: 'POST',

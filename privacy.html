@@ -194,20 +194,33 @@
 
     <script src="config.js"></script>
     <script>
-        // Check authentication status and update nav
+                // Check authentication status and update nav
         async function updateNav() {
+            const authButtons = document.getElementById('authButtons');
+
+            // Check localStorage for cached auth state and render immediately
+            const cachedAuth = localStorage.getItem('authState');
+            if (cachedAuth) {
+                const authState = JSON.parse(cachedAuth);
+                authButtons.innerHTML = authState.isLoggedIn
+                    ? `<a href="dashboard.html" class="btn-primary">Dashboard</a>`
+                    : `<a href="login.html" class="btn-primary">Login</a>`;
+                authButtons.style.opacity = '1';
+            }
+
+            // Then verify with server in background
             try {
                 const response = await fetch(`${API_URL}/auth/me`, {
                     credentials: 'include'
                 });
 
-                const authButtons = document.getElementById('authButtons');
-
                 if (response.ok) {
+                    localStorage.setItem('authState', JSON.stringify({ isLoggedIn: true }));
                     authButtons.innerHTML = `
                         <a href="dashboard.html" class="btn-primary">Dashboard</a>
                     `;
                 } else {
+                    localStorage.setItem('authState', JSON.stringify({ isLoggedIn: false }));
                     authButtons.innerHTML = `
                         <a href="login.html" class="btn-primary">Login</a>
                     `;
@@ -215,7 +228,7 @@
                 authButtons.style.opacity = '1';
             } catch (error) {
                 console.log('Not logged in');
-                const authButtons = document.getElementById('authButtons');
+                localStorage.setItem('authState', JSON.stringify({ isLoggedIn: false }));
                 authButtons.innerHTML = `
                     <a href="login.html" class="btn-primary">Login</a>
                 `;
