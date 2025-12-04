@@ -38,14 +38,42 @@
             align-items: center;
             transition: transform 0.2s, box-shadow 0.2s;
             position: relative;
+            border-left: 4px solid transparent;
+        }
+        .lesson-card::before {
+            content: attr(data-lesson);
+            position: absolute;
+            left: 25px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #3B82F6 0%, #8B5CF6 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 16px;
+            box-shadow: 0 2px 8px rgba(59, 130, 246, 0.3);
         }
         .lesson-card:hover {
             transform: translateY(-2px);
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            border-left-color: #3B82F6;
         }
         .lesson-card.completed {
-            background: #f0fdf4;
+            background: linear-gradient(135deg, #f0fdf4 0%, #d1fae5 100%);
             border: 2px solid #00A676;
+            border-left: 4px solid #00A676;
+        }
+        .lesson-card.completed::before {
+            background: linear-gradient(135deg, #00A676 0%, #10b981 100%);
+            box-shadow: 0 2px 8px rgba(0, 166, 118, 0.3);
+        }
+        .lesson-info {
+            margin-left: 60px;
         }
         .lesson-info h3 {
             font-size: 22px;
@@ -63,12 +91,20 @@
             gap: 15px;
         }
         .completed-badge {
-            background: #00A676;
+            background: linear-gradient(135deg, #00A676 0%, #10b981 100%);
             color: white;
             padding: 8px 16px;
             border-radius: 20px;
             font-size: 14px;
             font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            box-shadow: 0 2px 8px rgba(0, 166, 118, 0.3);
+        }
+        .completed-badge::before {
+            content: '✓';
+            font-size: 16px;
         }
         .btn-start-lesson {
             padding: 12px 24px;
@@ -105,10 +141,31 @@
             justify-content: space-between;
             align-items: center;
             transition: transform 0.2s, box-shadow 0.2s;
+            position: relative;
+            overflow: hidden;
+        }
+        .quiz-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, transparent 70%);
+            animation: pulse 3s ease-in-out infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.2); opacity: 0.8; }
         }
         .quiz-card:hover {
             transform: translateY(-2px);
             box-shadow: 0 6px 16px rgba(251, 191, 36, 0.4);
+        }
+        .quiz-card .lesson-info {
+            margin-left: 0;
+            position: relative;
+            z-index: 1;
         }
         .quiz-card .lesson-info h3 {
             color: white;

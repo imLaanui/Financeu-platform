@@ -64,22 +64,67 @@
 
         .stat-card {
             background-color: var(--bg-white);
-            padding: 1.25rem;
+            padding: 1.5rem;
             border-radius: 12px;
             box-shadow: var(--shadow-md);
             text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #00A676 0%, #3B82F6 50%, #F59E0B 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .stat-card:hover::before {
+            opacity: 1;
+        }
+
+        .stat-icon {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .stat-icon svg {
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.05));
+            transition: transform 0.3s ease;
+        }
+
+        .stat-card:hover .stat-icon svg {
+            transform: scale(1.1);
         }
 
         .stat-number {
-            font-size: 2rem;
+            font-size: 2.5rem;
             font-weight: 700;
             color: #00A676;
-            margin-bottom: 0.25rem;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, #00A676 0%, #3B82F6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .stat-label {
             color: var(--text-light);
             font-size: 0.875rem;
+            font-weight: 500;
         }
 
         .lessons-section {
@@ -373,14 +418,37 @@
                 <!-- Stats Grid -->
                 <div class="stats-grid">
                     <div class="stat-card">
+                        <div class="stat-icon">
+                            <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="24" cy="24" r="22" fill="#D1FAE5"/>
+                                <path d="M 14 24 L 21 31 L 34 17" stroke="#00A676" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
                         <div class="stat-number" id="completedLessons">0</div>
                         <div class="stat-label">Lessons Completed</div>
                     </div>
                     <div class="stat-card">
+                        <div class="stat-icon">
+                            <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="24" cy="24" r="22" fill="#DBEAFE"/>
+                                <circle cx="24" cy="24" r="18" stroke="#3B82F6" stroke-width="3" fill="none" stroke-dasharray="70 113"/>
+                                <circle cx="24" cy="24" r="12" fill="#3B82F6" opacity="0.2"/>
+                            </svg>
+                        </div>
                         <div class="stat-number" id="progressPercent">0%</div>
                         <div class="stat-label">Overall Progress</div>
                     </div>
                     <div class="stat-card">
+                        <div class="stat-icon">
+                            <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="24" cy="24" r="22" fill="#FEF3C7"/>
+                                <rect x="14" y="10" width="20" height="26" rx="2" stroke="#F59E0B" stroke-width="2.5" fill="none"/>
+                                <line x1="14" y1="16" x2="34" y2="16" stroke="#F59E0B" stroke-width="2.5"/>
+                                <circle cx="19" cy="13" r="1.5" fill="#F59E0B"/>
+                                <circle cx="24" cy="13" r="1.5" fill="#F59E0B"/>
+                                <circle cx="29" cy="13" r="1.5" fill="#F59E0B"/>
+                            </svg>
+                        </div>
                         <div class="stat-number" id="memberDays">0</div>
                         <div class="stat-label">Days as Member</div>
                     </div>
