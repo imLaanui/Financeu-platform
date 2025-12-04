@@ -314,13 +314,17 @@
             adminCredentials = btoa(`admin:${password}`);
 
             try {
+                console.log('🔐 Attempting admin login to:', `${API_URL}/admin/feedback`);
                 const response = await fetch(`${API_URL}/admin/feedback`, {
                     headers: {
                         'Authorization': `Basic ${adminCredentials}`
                     }
                 });
 
+                console.log('📥 Login response status:', response.status);
+
                 if (response.ok) {
+                    console.log('✅ Login successful');
                     // Store in session
                     sessionStorage.setItem('adminAuth', adminCredentials);
                     // Hide login, show dashboard
@@ -329,13 +333,15 @@
                     // Load feedback
                     loadFeedback();
                 } else {
+                    console.error('❌ Login failed with status:', response.status);
                     loginError.textContent = 'Invalid password';
                     loginError.classList.add('show');
                     adminCredentials = null;
                 }
             } catch (error) {
-                console.error('Login error:', error);
-                loginError.textContent = 'Network error. Please try again.';
+                console.error('❌ Login error:', error);
+                console.error('Error details:', error.message);
+                loginError.textContent = `Network error: ${error.message}. Please try again.`;
                 loginError.classList.add('show');
                 adminCredentials = null;
             }

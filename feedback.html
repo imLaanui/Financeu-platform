@@ -276,6 +276,7 @@
             submitBtn.textContent = 'Submitting...';
 
             try {
+                console.log('📤 Submitting feedback to:', `${API_URL}/feedback`);
                 const response = await fetch(`${API_URL}/feedback`, {
                     method: 'POST',
                     headers: {
@@ -284,17 +285,21 @@
                     body: JSON.stringify(formData)
                 });
 
+                console.log('📥 Response status:', response.status);
                 const data = await response.json();
+                console.log('📥 Response data:', data);
 
                 if (response.ok) {
                     showMessage('Thank you! Your feedback has been submitted successfully.', 'success');
                     feedbackForm.reset();
                 } else {
+                    console.error('❌ Feedback failed:', data.error);
                     showMessage(data.error || 'Failed to submit feedback. Please try again.', 'error');
                 }
             } catch (error) {
-                console.error('Feedback submission error:', error);
-                showMessage('Network error. Please check your connection and try again.', 'error');
+                console.error('❌ Feedback submission error:', error);
+                console.error('Error details:', error.message);
+                showMessage(`Network error: ${error.message}. Please check your connection and try again.`, 'error');
             } finally {
                 submitBtn.disabled = false;
                 submitBtn.textContent = 'Submit Feedback';

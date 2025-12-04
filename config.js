@@ -13,3 +13,7 @@ const API_CONFIG = {
 
 // Export for use in all pages
 const API_URL = API_CONFIG.getApiUrl();
+
+// Log for debugging
+console.log('🌐 Environment:', window.location.hostname === 'localhost' ? 'Development' : 'Production');
+console.log('🔗 API URL:', API_URL);
