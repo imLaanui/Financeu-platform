@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connection Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+        .test-result {
+            padding: 20px;
+            margin: 10px 0;
+            border-radius: 8px;
+            font-weight: bold;
+        }
+        .success {
+            background: #d4edda;
+            color: #155724;
+            border: 2px solid #c3e6cb;
+        }
+        .error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 2px solid #f5c6cb;
+        }
+        .info {
+            background: #d1ecf1;
+            color: #0c5460;
+            border: 2px solid #bee5eb;
+        }
+        button {
+            padding: 12px 24px;
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 5px;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h1>🔧 FinanceU Connection Test</h1>
+
+    <div id="urlTest" class="test-result info">
+        <strong>Current URL:</strong> <span id="currentUrl"></span><br>
+        <strong>Protocol:</strong> <span id="protocol"></span><br>
+        <strong>Status:</strong> <span id="urlStatus"></span>
+    </div>
+
+    <div id="apiTest" class="test-result info">
+        <strong>API URL:</strong> <span id="apiUrl"></span><br>
+        <strong>Status:</strong> Waiting for test...
+    </div>
+
+    <button onclick="testFeedbackAPI()">Test Feedback Submission</button>
+    <button onclick="testAdminAPI()">Test Admin Login</button>
+
+    <div id="feedbackResult" style="display: none;" class="test-result"></div>
+    <div id="adminResult" style="display: none;" class="test-result"></div>
+
+    <hr>
+    <h3>Instructions:</h3>
+    <ol>
+        <li>If URL shows <code>file://</code> - you're accessing it wrong! ❌</li>
+        <li>Open: <strong>http://localhost:3000/test-connection.html</strong></li>
+        <li>Click the test buttons above</li>
+        <li>All tests should pass ✅</li>
+    </ol>
+
+    <script src="config.js"></script>
+    <script>
+        // Display current URL info
+        document.getElementById('currentUrl').textContent = window.location.href;
+        document.getElementById('protocol').textContent = window.location.protocol;
+
+        const urlTest = document.getElementById('urlTest');
+        const urlStatus = document.getElementById('urlStatus');
+
+        if (window.location.protocol === 'file:') {
+            urlStatus.textContent = '❌ WRONG! Using file:// protocol';
+            urlTest.className = 'test-result error';
+        } else if (window.location.protocol === 'http:' || window.location.protocol === 'https:') {
+            urlStatus.textContent = '✅ CORRECT! Using HTTP protocol';
+            urlTest.className = 'test-result success';
+        }
+
+        // Display API URL
+        document.getElementById('apiUrl').textContent = API_URL;
+
+        // Test feedback API
+        async function testFeedbackAPI() {
+            const resultDiv = document.getElementById('feedbackResult');
+            resultDiv.style.display = 'block';
+            resultDiv.className = 'test-result info';
+            resultDiv.innerHTML = '⏳ Testing feedback submission...';
+
+            try {
+                const response = await fetch(`${API_URL}/feedback`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        name: 'Test User',
+                        email: 'test@example.com',
+                        feedbackType: 'General Feedback',
+                        message: 'This is a test message from the connection test page'
+                    })
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    resultDiv.className = 'test-result success';
+                    resultDiv.innerHTML = `✅ SUCCESS! Feedback submitted with ID: ${data.feedbackId}`;
+                } else {
+                    resultDiv.className = 'test-result error';
+                    resultDiv.innerHTML = `❌ FAILED! Error: ${data.error}`;
+                }
+            } catch (error) {
+                resultDiv.className = 'test-result error';
+                resultDiv.innerHTML = `❌ FAILED! Network error: ${error.message}<br><br>This usually means:<br>- Server not running<br>- Wrong URL (using file:// instead of http://)`;
+            }
+        }
+
+        // Test admin API
+        async function testAdminAPI() {
+            const resultDiv = document.getElementById('adminResult');
+            resultDiv.style.display = 'block';
+            resultDiv.className = 'test-result info';
+            resultDiv.innerHTML = '⏳ Testing admin authentication...';
+
+            try {
+                const credentials = btoa('admin:financeu2025');
+                const response = await fetch(`${API_URL}/admin/feedback`, {
+                    headers: {
+                        'Authorization': `Basic ${credentials}`
+                    }
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    resultDiv.className = 'test-result success';
+                    resultDiv.innerHTML = `✅ SUCCESS! Retrieved ${data.total} feedback items`;
+                } else {
+                    resultDiv.className = 'test-result error';
+                    resultDiv.innerHTML = `❌ FAILED! Error: ${data.error}`;
+                }
+            } catch (error) {
+                resultDiv.className = 'test-result error';
+                resultDiv.innerHTML = `❌ FAILED! Network error: ${error.message}<br><br>This usually means:<br>- Server not running<br>- Wrong URL (using file:// instead of http://)`;
+            }
+        }
+    </script>
+</body>
+</html>
