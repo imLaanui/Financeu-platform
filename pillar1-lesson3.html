@@ -40,7 +40,7 @@
                 <ul class="nav-links">
                     <li><a href="index.html">Home</a></li>
                     <li><a href="dashboard.html">Dashboard</a></li>
-                    <li id="authButtons"><a href="login.html" class="btn-primary">Login</a></li>
+                    <li id="authButtons" style="opacity: 0;"><a href="login.html" class="btn-primary">Login</a></li>
                 </ul>
             </div>
         </div>
@@ -174,8 +174,14 @@
                 } else {
                     authButtons.innerHTML = `<a href="login.html" class="btn-primary">Login</a>`;
                 }
+                authButtons.style.opacity = '1';
             } catch (error) {
                 console.log('Not logged in');
+                const authButtons = document.getElementById('authButtons');
+                authButtons.innerHTML = `
+                    <a href="login.html" class="btn-primary">Login</a>
+                `;
+                authButtons.style.opacity = '1';
             }
         }
 
@@ -190,6 +196,11 @@
                 window.location.href = '/index.html';
             } catch (error) {
                 console.error('Logout error:', error);
+                const authButtons = document.getElementById('authButtons');
+                authButtons.innerHTML = `
+                    <a href="login.html" class="btn-primary">Login</a>
+                `;
+                authButtons.style.opacity = '1';
                 window.location.href = '/index.html';
             }
         }
