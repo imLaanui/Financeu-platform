@@ -41,7 +41,30 @@
                     <li><a href="index.html">Home</a></li>
                     <li><a href="dashboard.html">Dashboard</a></li>
                     <li id="authButtons" style="opacity: 0;">
-                    </li><a href="login.html" class="btn-primary">Login</a></li>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="lesson-container">
+        <a href="pillar1-lessons.html" class="back-link">← Back to Pillar 1 Lessons</a>
+
+        <div class="lesson-header">
+            <div class="lesson-number">LESSON 3</div>
+            <h1>The Time Value of Money</h1>
+        </div>
+
+        <div class="lesson-section">
+            <h2>Quick Intro</h2>
+            <p>Here's a powerful financial truth: a dollar today is worth more than a dollar tomorrow. This isn't about inflation (though that's part of it)—it's about opportunity. Understanding the time value of money will change how you think about saving, spending, and investing. It's the concept that makes compound interest work in your favor and explains why starting early matters so much.</p>
+        </div>
+
+        <div class="lesson-section">
+            <h2>Core Concept</h2>
+            <p><strong>Money available now is worth more than the same amount in the future because it has the potential to grow.</strong></p>
+            <p>Why does time affect money's value?</p>
+            <ul>
                 <li><strong>Growth Potential:</strong> Money you have now can be invested to earn returns, making it worth more later.</li>
                 <li><strong>Inflation:</strong> Prices increase over time, meaning your dollar buys less in the future than it does today.</li>
                 <li><strong>Opportunity Cost:</strong> Having money now gives you options and flexibility you won't have if you wait.</li>
@@ -144,55 +167,16 @@
     <script src="config.js"></script>
     <script>
         async function updateNav() {
-            const authButtons = document.getElementById('authButtons');
-
-            // Check localStorage for cached auth state and render immediately
-            const cachedAuth = localStorage.getItem('authState');
-            if (cachedAuth) {
-                const authState = JSON.parse(cachedAuth);
-                authButtons.innerHTML = authState.isLoggedIn
-                    ? `<a href="#" onclick="logout(); return false;" class="btn-primary">Logout</a>`
-                    : `<a href="login.html" class="btn-primary">Login</a>`;
-                authButtons.style.opacity = '1';
-            }
-
-            // Then verify with server in background
             try {
                 const response = await fetch(`${API_URL}/auth/me`, { credentials: 'include' });
-
+                const authButtons = document.getElementById('authButtons');
                 if (response.ok) {
-                    localStorage.setItem('authState', JSON.stringify({ isLoggedIn: true }));
-                    authButtons.innerHTML = `<a href="#" onclick="logout(); return false;" class="btn-primary">Logout</a>`;
+                    authButtons.innerHTML = `<a href="dashboard.html" class="btn-primary">Dashboard</a>`;
                 } else {
-                    localStorage.setItem('authState', JSON.stringify({ isLoggedIn: false }));
                     authButtons.innerHTML = `<a href="login.html" class="btn-primary">Login</a>`;
                 }
-                authButtons.style.opacity = '1';
             } catch (error) {
                 console.log('Not logged in');
-                localStorage.setItem('authState', JSON.stringify({ isLoggedIn: false }));
-                authButtons.innerHTML = `<a href="login.html" class="btn-primary">Login</a>`;
-                authButtons.style.opacity = '1';
-            }
-        }
-
-        // Logout function
-        async function logout() {
-            localStorage.removeItem('authState');
-            try {
-                await fetch(`${API_URL}/auth/logout`, {
-                    method: 'POST',
-                    credentials: 'include'
-                });
-                window.location.href = '/index.html';
-            } catch (error) {
-                console.error('Logout error:', error);
-                const authButtons = document.getElementById('authButtons');
-                authButtons.innerHTML = `
-                    <a href="login.html" class="btn-primary">Login</a>
-                `;
-                authButtons.style.opacity = '1';
-                window.location.href = '/index.html';
             }
         }
 

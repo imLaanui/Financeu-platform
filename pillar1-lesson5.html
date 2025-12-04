@@ -43,7 +43,30 @@
                     <li><a href="index.html">Home</a></li>
                     <li><a href="dashboard.html">Dashboard</a></li>
                     <li id="authButtons" style="opacity: 0;">
-                    </li><a href="login.html" class="btn-primary">Login</a></li>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="lesson-container">
+        <a href="pillar1-lessons.html" class="back-link">← Back to Pillar 1 Lessons</a>
+
+        <div class="lesson-header">
+            <div class="lesson-number">LESSON 5</div>
+            <h1>Setting Financial Goals</h1>
+        </div>
+
+        <div class="lesson-section">
+            <h2>Quick Intro</h2>
+            <p>Money without a purpose just flows away. Financial goals give your money direction and meaning. Whether you're saving for a car, paying off debt, or building an emergency fund, clear goals transform vague wishes into actionable plans. This lesson will teach you how to set goals that actually stick.</p>
+        </div>
+
+        <div class="lesson-section">
+            <h2>Core Concept</h2>
+            <p><strong>Financial goals are specific, measurable targets that guide your money decisions and give you something concrete to work toward.</strong></p>
+            <p><strong>The SMART Goal Framework:</strong></p>
+            <ul>
                 <li><strong>Specific:</strong> "Save money" is vague. "Save $1,000 for an emergency fund" is specific.</li>
                 <li><strong>Measurable:</strong> You need numbers to track progress. How much? By when?</li>
                 <li><strong>Achievable:</strong> Goals should stretch you but remain realistic given your income.</li>
@@ -186,54 +209,16 @@
     <script src="config.js"></script>
     <script>
         async function updateNav() {
-            const authButtons = document.getElementById('authButtons');
-
-            // Check localStorage for cached auth state and render immediately
-            const cachedAuth = localStorage.getItem('authState');
-            if (cachedAuth) {
-                const authState = JSON.parse(cachedAuth);
-                authButtons.innerHTML = authState.isLoggedIn
-                    ? `<a href="#" onclick="logout(); return false;" class="btn-primary">Logout</a>`
-                    : `<a href="login.html" class="btn-primary">Login</a>`;
-                authButtons.style.opacity = '1';
-            }
-
-            // Then verify with server in background
             try {
                 const response = await fetch(`${API_URL}/auth/me`, { credentials: 'include' });
-
+                const authButtons = document.getElementById('authButtons');
                 if (response.ok) {
-                    localStorage.setItem('authState', JSON.stringify({ isLoggedIn: true }));
-                    authButtons.innerHTML = `<a href="#" onclick="logout(); return false;" class="btn-primary">Logout</a>`;
+                    authButtons.innerHTML = `<a href="dashboard.html" class="btn-primary">Dashboard</a>`;
                 } else {
-                    localStorage.setItem('authState', JSON.stringify({ isLoggedIn: false }));
                     authButtons.innerHTML = `<a href="login.html" class="btn-primary">Login</a>`;
                 }
-                authButtons.style.opacity = '1';
             } catch (error) {
                 console.log('Not logged in');
-                localStorage.setItem('authState', JSON.stringify({ isLoggedIn: false }));
-                authButtons.innerHTML = `<a href="login.html" class="btn-primary">Login</a>`;
-                authButtons.style.opacity = '1';
-            }
-        }
-
-        // Logout function
-        async function logout() { {
-            try {
-                await fetch(`${API_URL}/auth/logout`, {
-                    method: 'POST',
-                    credentials: 'include'
-                });
-                window.location.href = '/index.html';
-            } catch (error) {
-                console.error('Logout error:', error);
-                const authButtons = document.getElementById('authButtons');
-                authButtons.innerHTML = `
-                    <a href="login.html" class="btn-primary">Login</a>
-                `;
-                authButtons.style.opacity = '1';
-                window.location.href = '/index.html';
             }
         }
 
