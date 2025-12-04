@@ -236,9 +236,10 @@
                 details.textContent = `You answered ${correct} out of ${shuffledQuestions.length} questions correctly.`;
                 retryBtn.style.display = 'none';
 
-                // Save completion
-                localStorage.setItem('pillar1_quiz_completed', 'true');
-                localStorage.setItem('pillar1_quiz_score', percentage);
+                // Save completion with user-specific keys
+                const userId = localStorage.getItem('userId');
+                localStorage.setItem(`pillar1_quiz_completed_${userId}`, 'true');
+                localStorage.setItem(`pillar1_quiz_score_${userId}`, percentage);
             } else {
                 content.className = 'result-content fail';
                 message.textContent = 'Not Quite There Yet';
@@ -281,11 +282,10 @@
         }
 
         async function logout() {
-            // Clear all localStorage including lesson progress
+            // Clear auth data only - keep user-specific progress data
             localStorage.removeItem('authState');
-            localStorage.removeItem('pillar1_completed');
-            localStorage.removeItem('pillar1_quiz_completed');
-            localStorage.removeItem('pillar1_quiz_score');
+            localStorage.removeItem('token');
+            localStorage.removeItem('userId');
 
             try {
                 await fetch(`${API_URL}/auth/logout`, {

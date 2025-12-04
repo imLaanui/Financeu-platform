@@ -230,8 +230,9 @@
                 // Success!
                 showSuccess('Login successful! Redirecting...');
 
-                // Store token in localStorage as backup
+                // Store token and userId in localStorage
                 localStorage.setItem('token', data.token);
+                localStorage.setItem('userId', data.user.id);
 
                 // Redirect to dashboard
                 setTimeout(() => {

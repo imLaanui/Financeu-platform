@@ -636,9 +636,10 @@
                 const progressData = await progressRes.json();
 
                 // ====== PILLAR 1 PROGRESS TRACKING ======
-                // Load progress from localStorage
-                const pillar1Completed = JSON.parse(localStorage.getItem('pillar1_completed') || '[]');
-                const quizCompleted = localStorage.getItem('pillar1_quiz_completed') === 'true';
+                // Use user-specific localStorage keys to keep progress separate per account
+                const userId = user.id;
+                const pillar1Completed = JSON.parse(localStorage.getItem(`pillar1_completed_${userId}`) || '[]');
+                const quizCompleted = localStorage.getItem(`pillar1_quiz_completed_${userId}`) === 'true';
 
                 const totalLessons = 8;
                 const totalItems = 9; // 8 lessons + 1 quiz
@@ -731,11 +732,10 @@
 
         // Logout function
         async function logout() {
-            // Clear all localStorage including lesson progress
+            // Clear auth data only - keep user-specific progress data
             localStorage.removeItem('authState');
-            localStorage.removeItem('pillar1_completed');
-            localStorage.removeItem('pillar1_quiz_completed');
-            localStorage.removeItem('pillar1_quiz_score');
+            localStorage.removeItem('token');
+            localStorage.removeItem('userId');
 
             try {
                 await fetch(`${API_URL}/auth/logout`, {

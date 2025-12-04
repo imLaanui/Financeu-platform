@@ -261,14 +261,9 @@
                 // Success!
                 showSuccess('Account created successfully! Redirecting...');
 
-                // Clear any old progress data from previous accounts
-                localStorage.removeItem('pillar1_completed');
-                localStorage.removeItem('pillar1_quiz_completed');
-                localStorage.removeItem('pillar1_quiz_score');
-                localStorage.removeItem('authState');
-
-                // Store token in localStorage as backup
+                // Store token and userId in localStorage
                 localStorage.setItem('token', data.token);
+                localStorage.setItem('userId', data.user.id);
 
                 // Redirect to dashboard
                 setTimeout(() => {

@@ -332,6 +332,8 @@
         // Logout function
         async function logout() {
             localStorage.removeItem('authState');
+            localStorage.removeItem('token');
+            localStorage.removeItem('userId');
             try {
                 await fetch(`${API_URL}/auth/logout`, {
                     method: 'POST',
@@ -346,12 +348,12 @@
 
         function finishLesson() {
             // Get completed lessons from localStorage
-            const completed = JSON.parse(localStorage.getItem('pillar1_completed') || '[]');
+            const completed = JSON.parse(localStorage.getItem(`pillar1_completed_${localStorage.getItem('userId')}`)) || '[]');
 
             // Add lesson 1 if not already completed
             if (!completed.includes(1)) {
                 completed.push(1);
-                localStorage.setItem('pillar1_completed', JSON.stringify(completed));
+                localStorage.setItem(`pillar1_completed_${localStorage.getItem('userId')}`, JSON.stringify(completed));
             }
 
             // Redirect back to lessons page

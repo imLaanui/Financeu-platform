@@ -223,10 +223,10 @@
         }
 
         function finishLesson() {
-            const completed = JSON.parse(localStorage.getItem('pillar1_completed') || '[]');
+            const completed = JSON.parse(localStorage.getItem(`pillar1_completed_${localStorage.getItem('userId')}`)) || '[]');
             if (!completed.includes(5)) {
                 completed.push(5);
-                localStorage.setItem('pillar1_completed', JSON.stringify(completed));
+                localStorage.setItem(`pillar1_completed_${localStorage.getItem('userId')}`, JSON.stringify(completed));
             }
             window.location.href = 'pillar1-lessons.html';
         }

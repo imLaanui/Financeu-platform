@@ -346,11 +346,10 @@
         }
         // Logout function
         async function logout() {
-            // Clear all localStorage including lesson progress
+            // Clear auth data only - keep user-specific progress data
             localStorage.removeItem('authState');
-            localStorage.removeItem('pillar1_completed');
-            localStorage.removeItem('pillar1_quiz_completed');
-            localStorage.removeItem('pillar1_quiz_score');
+            localStorage.removeItem('token');
+            localStorage.removeItem('userId');
 
             try {
                 await fetch(`${API_URL}/auth/logout`, {
@@ -366,7 +365,8 @@
 
         // Load completed lessons from localStorage
         function loadCompletedLessons() {
-            const completed = JSON.parse(localStorage.getItem('pillar1_completed') || '[]');
+            const userId = localStorage.getItem('userId');
+            const completed = JSON.parse(localStorage.getItem(`pillar1_completed_${userId}`) || '[]');
 
             completed.forEach(lessonNum => {
                 const lessonCard = document.querySelector(`[data-lesson="${lessonNum}"]`);
@@ -383,9 +383,10 @@
 
         // Check if all lessons completed and show quiz
         function checkQuizAvailability() {
-            const completed = JSON.parse(localStorage.getItem('pillar1_completed') || '[]');
-            const quizCompleted = localStorage.getItem('pillar1_quiz_completed');
-            const quizScore = localStorage.getItem('pillar1_quiz_score');
+            const userId = localStorage.getItem('userId');
+            const completed = JSON.parse(localStorage.getItem(`pillar1_completed_${userId}`) || '[]');
+            const quizCompleted = localStorage.getItem(`pillar1_quiz_completed_${userId}`);
+            const quizScore = localStorage.getItem(`pillar1_quiz_score_${userId}`);
             const quizCard = document.getElementById('quizCard');
 
             if (completed.length === 8) {
