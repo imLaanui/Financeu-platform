@@ -159,6 +159,7 @@
             // Then verify with server in background
             try {
                 const response = await fetch(`${API_URL}/auth/me`, { credentials: 'include' });
+
                 if (response.ok) {
                     localStorage.setItem('authState', JSON.stringify({ isLoggedIn: true }));
                     authButtons.innerHTML = `<a href="#" onclick="logout(); return false;" class="btn-primary">Logout</a>`;
