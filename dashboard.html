@@ -635,12 +635,24 @@
                 const lessonsData = await lessonsRes.json();
                 const progressData = await progressRes.json();
 
-                // Update stats
-                document.getElementById('completedLessons').textContent = profile.stats.completedLessons;
-                // Since no pillars are available yet, show 0%
-                const progressPercent = profile.stats.totalLessons > 0
-                    ? Math.round((profile.stats.completedLessons / profile.stats.totalLessons) * 100)
-                    : 0;
+                // Update stats based on localStorage Pillar 1 progress
+                const pillar1Completed = JSON.parse(localStorage.getItem('pillar1_completed') || '[]');
+                const quizCompleted = localStorage.getItem('pillar1_quiz_completed') === 'true';
+
+                // Calculate progress
+                const totalLessons = 8; // Pillar 1 has 8 lessons
+                const completedCount = pillar1Completed.length;
+
+                // Update completed lessons count
+                document.getElementById('completedLessons').textContent = completedCount;
+
+                // Calculate percentage - only 100% when quiz is passed
+                let progressPercent;
+                if (quizCompleted) {
+                    progressPercent = 100;
+                } else {
+                    progressPercent = Math.round((completedCount / totalLessons) * 100);
+                }
                 document.getElementById('progressPercent').textContent = `${progressPercent}%`;
 
                 // Create a map of completed lessons
