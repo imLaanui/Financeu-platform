@@ -1,146 +1,197 @@
-const sqlite3 = require('sqlite3').verbose();
-const path = require('path');
+const { Pool } = require('pg');
 
-// Create/connect to SQLite database
-const dbPath = path.join(__dirname, 'financeu.db');
-const db = new sqlite3.Database(dbPath, (err) => {
-  if (err) {
-    console.error('Error opening database:', err.message);
-  } else {
-    console.log('Connected to SQLite database');
-    initializeDatabase();
-  }
+// Create PostgreSQL connection pool
+const pool = new Pool({
+  connectionString: process.env.DATABASE_URL,
+  ssl: process.env.NODE_ENV === 'production' ? {
+    rejectUnauthorized: false // Required for Render's free PostgreSQL
+  } : false
+});
+
+// Test connection
+pool.on('connect', () => {
+  console.log('Connected to PostgreSQL database');
+});
+
+pool.on('error', (err) => {
+  console.error('Unexpected error on idle client', err);
+  process.exit(-1);
 });
 
 // Initialize database tables
-function initializeDatabase() {
-  db.serialize(() => {
+async function initializeDatabase() {
+  const client = await pool.connect();
+  try {
+    await client.query('BEGIN');
+
     // Users table
-    db.run(`
+    await client.query(`
       CREATE TABLE IF NOT EXISTS users (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        email TEXT UNIQUE NOT NULL,
+        id SERIAL PRIMARY KEY,
+        email VARCHAR(255) UNIQUE NOT NULL,
         password TEXT NOT NULL,
-        name TEXT NOT NULL,
-        membership_tier TEXT DEFAULT 'free' CHECK(membership_tier IN ('free', 'premium', 'pro')),
-        created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-        updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
+        name VARCHAR(255) NOT NULL,
+        membership_tier VARCHAR(20) DEFAULT 'free' CHECK(membership_tier IN ('free', 'premium', 'pro')),
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
       )
-    `, (err) => {
-      if (err) {
-        console.error('Error creating users table:', err.message);
-      } else {
-        console.log('Users table ready');
-      }
-    });
+    `);
+    console.log('Users table ready');
 
     // Lesson progress table
-    db.run(`
+    await client.query(`
       CREATE TABLE IF NOT EXISTS lesson_progress (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        id SERIAL PRIMARY KEY,
         user_id INTEGER NOT NULL,
-        lesson_id TEXT NOT NULL,
-        completed BOOLEAN DEFAULT 0,
-        completed_at DATETIME,
+        lesson_id VARCHAR(255) NOT NULL,
+        completed BOOLEAN DEFAULT false,
+        completed_at TIMESTAMP,
         FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
         UNIQUE(user_id, lesson_id)
       )
-    `, (err) => {
-      if (err) {
-        console.error('Error creating lesson_progress table:', err.message);
-      } else {
-        console.log('Lesson progress table ready');
-      }
-    });
+    `);
+    console.log('Lesson progress table ready');
 
     // Membership subscriptions table (for future payment integration)
-    db.run(`
+    await client.query(`
       CREATE TABLE IF NOT EXISTS subscriptions (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        id SERIAL PRIMARY KEY,
         user_id INTEGER NOT NULL,
-        tier TEXT NOT NULL CHECK(tier IN ('free', 'premium', 'pro')),
-        status TEXT DEFAULT 'active' CHECK(status IN ('active', 'cancelled', 'expired')),
-        start_date DATETIME DEFAULT CURRENT_TIMESTAMP,
-        end_date DATETIME,
+        tier VARCHAR(20) NOT NULL CHECK(tier IN ('free', 'premium', 'pro')),
+        status VARCHAR(20) DEFAULT 'active' CHECK(status IN ('active', 'cancelled', 'expired')),
+        start_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        end_date TIMESTAMP,
         FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
       )
-    `, (err) => {
-      if (err) {
-        console.error('Error creating subscriptions table:', err.message);
-      } else {
-        console.log('Subscriptions table ready');
-      }
-    });
-  });
+    `);
+    console.log('Subscriptions table ready');
+
+    // Feedback table
+    await client.query(`
+      CREATE TABLE IF NOT EXISTS feedback (
+        id SERIAL PRIMARY KEY,
+        name VARCHAR(255),
+        email VARCHAR(255),
+        feedback_type VARCHAR(50) NOT NULL CHECK(feedback_type IN ('Bug Report', 'Feature Request', 'General Feedback', 'Compliment')),
+        message TEXT NOT NULL,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+      )
+    `);
+    console.log('Feedback table ready');
+
+    await client.query('COMMIT');
+  } catch (err) {
+    await client.query('ROLLBACK');
+    console.error('Error initializing database:', err.message);
+    throw err;
+  } finally {
+    client.release();
+  }
 }
 
-// Database helper functions
+// Initialize database on startup
+initializeDatabase().catch(err => {
+  console.error('Failed to initialize database:', err);
+});
+
+// Database helper functions (converted to async/await)
 
 // Get user by email
-function getUserByEmail(email, callback) {
-  db.get('SELECT * FROM users WHERE email = ?', [email], callback);
+async function getUserByEmail(email) {
+  const result = await pool.query('SELECT * FROM users WHERE email = $1', [email]);
+  return result.rows[0] || null;
 }
 
 // Get user by ID
-function getUserById(id, callback) {
-  db.get('SELECT id, email, name, membership_tier, created_at FROM users WHERE id = ?', [id], callback);
+async function getUserById(id) {
+  const result = await pool.query(
+    'SELECT id, email, name, membership_tier, created_at FROM users WHERE id = $1',
+    [id]
+  );
+  return result.rows[0] || null;
 }
 
 // Create new user
-function createUser(email, hashedPassword, name, callback) {
-  db.run(
-    'INSERT INTO users (email, password, name, membership_tier) VALUES (?, ?, ?, ?)',
-    [email, hashedPassword, name, 'free'],
-    callback
+async function createUser(email, hashedPassword, name) {
+  const result = await pool.query(
+    'INSERT INTO users (email, password, name, membership_tier) VALUES ($1, $2, $3, $4) RETURNING id',
+    [email, hashedPassword, name, 'free']
   );
+  return result.rows[0].id;
 }
 
 // Update user membership tier
-function updateUserTier(userId, tier, callback) {
-  db.run(
-    'UPDATE users SET membership_tier = ?, updated_at = CURRENT_TIMESTAMP WHERE id = ?',
-    [tier, userId],
-    callback
+async function updateUserTier(userId, tier) {
+  await pool.query(
+    'UPDATE users SET membership_tier = $1, updated_at = CURRENT_TIMESTAMP WHERE id = $2',
+    [tier, userId]
   );
 }
 
 // Mark lesson as completed
-function markLessonComplete(userId, lessonId, callback) {
-  db.run(
+async function markLessonComplete(userId, lessonId) {
+  await pool.query(
     `INSERT INTO lesson_progress (user_id, lesson_id, completed, completed_at)
-     VALUES (?, ?, 1, CURRENT_TIMESTAMP)
+     VALUES ($1, $2, true, CURRENT_TIMESTAMP)
      ON CONFLICT(user_id, lesson_id)
-     DO UPDATE SET completed = 1, completed_at = CURRENT_TIMESTAMP`,
-    [userId, lessonId],
-    callback
+     DO UPDATE SET completed = true, completed_at = CURRENT_TIMESTAMP`,
+    [userId, lessonId]
   );
 }
 
 // Get user's lesson progress
-function getUserProgress(userId, callback) {
-  db.all(
-    'SELECT lesson_id, completed, completed_at FROM lesson_progress WHERE user_id = ?',
-    [userId],
-    callback
+async function getUserProgress(userId) {
+  const result = await pool.query(
+    'SELECT lesson_id, completed, completed_at FROM lesson_progress WHERE user_id = $1',
+    [userId]
   );
+  return result.rows;
 }
 
 // Get completed lessons count
-function getCompletedLessonsCount(userId, callback) {
-  db.get(
-    'SELECT COUNT(*) as count FROM lesson_progress WHERE user_id = ? AND completed = 1',
-    [userId],
-    callback
+async function getCompletedLessonsCount(userId) {
+  const result = await pool.query(
+    'SELECT COUNT(*) as count FROM lesson_progress WHERE user_id = $1 AND completed = true',
+    [userId]
   );
+  return { count: parseInt(result.rows[0].count) };
+}
+
+// Feedback functions
+
+// Create new feedback
+async function createFeedback(name, email, feedbackType, message) {
+  const result = await pool.query(
+    'INSERT INTO feedback (name, email, feedback_type, message) VALUES ($1, $2, $3, $4) RETURNING id',
+    [name || null, email || null, feedbackType, message]
+  );
+  return result.rows[0].id;
+}
+
+// Get all feedback
+async function getAllFeedback() {
+  const result = await pool.query(
+    'SELECT id, name, email, feedback_type, message, created_at FROM feedback ORDER BY created_at DESC'
+  );
+  return result.rows;
+}
+
+// Get feedback count
+async function getFeedbackCount() {
+  const result = await pool.query('SELECT COUNT(*) as count FROM feedback');
+  return { count: parseInt(result.rows[0].count) };
 }
 
 module.exports = {
-  db,
+  pool,
   getUserByEmail,
   getUserById,
   createUser,
   updateUserTier,
   markLessonComplete,
   getUserProgress,
-  getCompletedLessonsCount
+  getCompletedLessonsCount,
+  createFeedback,
+  getAllFeedback,
+  getFeedbackCount
 };

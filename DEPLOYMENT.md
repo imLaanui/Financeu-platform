@@ -1,6 +1,6 @@
 # Deployment Guide - FinanceU on Render
 
-This guide will walk you through deploying your FinanceU finance learning platform to Render.com.
+This guide will walk you through deploying your FinanceU finance learning platform to Render.com with PostgreSQL.
 
 ## Pre-Deployment Checklist ✅
 
@@ -13,6 +13,61 @@ Your project is now **production-ready** with these updates:
 - ✅ Secure cookies for production (HTTPS)
 - ✅ CORS configured for production domains
 - ✅ `package.json` has proper start script
+- ✅ **Migrated from SQLite to PostgreSQL for persistent storage**
+
+## 🗄️ PostgreSQL Setup (REQUIRED)
+
+**Important:** The app now uses PostgreSQL instead of SQLite for persistent data storage on Render.
+
+### Step 1: Create PostgreSQL Database on Render
+
+1. Go to your [Render Dashboard](https://dashboard.render.com/)
+2. Click **"New +"** and select **"PostgreSQL"**
+3. Configure your database:
+   - **Name**: `financeu-db` (or any name you prefer)
+   - **Database**: `financeu`
+   - **User**: (auto-generated)
+   - **Region**: Choose the **same region** as your web service
+   - **PostgreSQL Version**: 14 or higher
+   - **Plan**: **Free** (or paid for production)
+4. Click **"Create Database"**
+5. Wait for provisioning (1-2 minutes)
+
+### Step 2: Get Database Connection String
+
+After creation, you'll see two connection strings:
+- **Internal Database URL**: Use this for your Render web service (faster, recommended)
+- **External Database URL**: Use this for local development
+
+Copy the **Internal Database URL** - it looks like:
+```
+postgresql://username:password@dpg-xxxxx-a.oregon-postgres.render.com/financeu_xxxx
+```
+
+### Step 3: Add DATABASE_URL to Your Web Service
+
+**Before deploying your web service**, you need to add the database connection:
+
+1. When creating your web service (or in existing service settings)
+2. Go to **"Environment"** tab
+3. Add this environment variable:
+   - **Key**: `DATABASE_URL`
+   - **Value**: Paste the "Internal Database URL" from PostgreSQL
+4. Add other required variables:
+   - `NODE_ENV=production`
+   - `JWT_SECRET=your-secure-random-string` (generate with command below)
+   - `SESSION_EXPIRY=7d`
+
+**Generate a secure JWT_SECRET:**
+```bash
+node -e "console.log(require('crypto').randomBytes(64).toString('hex'))"
+```
+
+5. Click **"Save Changes"**
+
+### Step 4: Database Tables Auto-Creation
+
+The database tables (`users`, `lesson_progress`, `subscriptions`) will be created automatically when your app first connects to PostgreSQL. No manual SQL needed!
 
 ## Deployment Steps
 
@@ -118,9 +173,11 @@ Render's free tier:
 
 ### Database Persistence
 
-Your SQLite database (`financeu.db`) will persist across deployments, but:
-- ⚠️ On free tier, database may be lost if service is deleted
-- 💡 For production, consider upgrading to PostgreSQL (Render offers managed PostgreSQL)
+Your PostgreSQL database provides persistent storage:
+- ✅ Data persists across deployments and restarts
+- ✅ Separate from web service (more reliable)
+- ⚠️ Free tier: 1 GB storage, shared resources
+- 💡 For production, upgrade to a paid PostgreSQL plan for better performance and backups
 
 ### Environment Variables
 
@@ -168,12 +225,13 @@ To use your own domain:
 - Check browser console for CORS errors
 - Ensure credentials are included in fetch requests
 
-### Issue: Database not persisting
+### Issue: Database connection errors
 
-**Solution:** Check file permissions
-- Verify `financeu.db` is in root directory
-- Check Render logs for SQLite errors
-- Consider migrating to PostgreSQL for production
+**Solution:** Verify PostgreSQL connection
+- Check that DATABASE_URL environment variable is set correctly
+- Verify PostgreSQL database is running (check Render dashboard)
+- Look for connection errors in server logs
+- Ensure SSL is enabled (automatic on Render)
 
 ## Monitoring Your App
 
@@ -193,10 +251,14 @@ Render provides:
 
 ### Check Database
 
-To inspect your SQLite database:
+To inspect your PostgreSQL database:
 
-1. Use Render Shell (in dashboard)
-2. Or add an admin endpoint (not recommended for production without auth)
+1. Use the Render dashboard to view database metrics
+2. Connect via psql using the External Database URL:
+   ```bash
+   psql "postgresql://username:password@host:port/database"
+   ```
+3. Or use a PostgreSQL client like pgAdmin or DBeaver
 
 ## Updating Your App
 
@@ -243,10 +305,15 @@ In Render dashboard:
 
 ### Backup Strategy
 
-**SQLite Database:**
-1. Regularly download database from Render
-2. Store backups securely
-3. Consider automated backup solution
+**PostgreSQL Database:**
+1. Render's paid plans include automatic daily backups
+2. Free tier: manually export data periodically using pg_dump
+3. Consider third-party backup services for critical data
+
+```bash
+# Manual backup command (using External Database URL)
+pg_dump "postgresql://username:password@host:port/database" > backup.sql
+```
 
 **Code:**
 - Always in Git/GitHub ✅
@@ -263,14 +330,14 @@ Upgrade from free tier when:
 - You want custom domain
 - Database grows large
 
-### Migration to PostgreSQL
+### Database Scaling
 
-For serious production use:
+For serious production use, consider:
 
-1. Add PostgreSQL database in Render
-2. Update `database.js` to use PostgreSQL
-3. Install `pg` package: `npm install pg`
-4. Migrate data from SQLite to PostgreSQL
+1. Upgrading to a paid PostgreSQL plan for better performance
+2. Setting up automated backups
+3. Enabling connection pooling (already configured)
+4. Monitoring query performance
 
 ## Payment Integration (Future)
 
