@@ -430,6 +430,131 @@
         .nav-spacer {
             width: 120px;
         }
+        /* Checkpoint styles */
+        .checkpoint-container {
+            background: linear-gradient(135deg, #E0F2FE 0%, #BAE6FD 100%);
+            border: 2px solid #7DD3FC;
+            border-radius: 12px;
+            padding: 30px;
+            margin: 20px 0;
+        }
+        .checkpoint-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .checkpoint-header h3 {
+            color: #0284C7;
+            font-size: 24px;
+            margin-bottom: 8px;
+        }
+        .checkpoint-header p {
+            color: var(--text-secondary);
+            font-size: 15px;
+        }
+        .checkpoint-question {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+        .checkpoint-question-text {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 15px;
+        }
+        .checkpoint-option {
+            background: #f9fafb;
+            padding: 15px;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .checkpoint-option:hover {
+            border-color: #0284C7;
+            background: #F0F9FF;
+        }
+        .checkpoint-option.selected {
+            border-color: #0284C7;
+            background: #E0F2FE;
+        }
+        .checkpoint-option.correct {
+            border-color: #10b981;
+            background: #d1fae5;
+            cursor: default;
+        }
+        .checkpoint-option.incorrect {
+            border-color: #dc2626;
+            background: #fee2e2;
+            cursor: default;
+        }
+        .checkpoint-option input[type="radio"] {
+            cursor: pointer;
+        }
+        .checkpoint-feedback {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+            display: none;
+        }
+        .checkpoint-feedback.show {
+            display: block;
+            animation: fadeIn 0.3s ease-in;
+        }
+        .checkpoint-feedback.correct {
+            border-left: 4px solid #10b981;
+        }
+        .checkpoint-feedback.incorrect {
+            border-left: 4px solid #f59e0b;
+        }
+        .checkpoint-feedback-icon {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+        .checkpoint-feedback-title {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        .checkpoint-feedback.correct .checkpoint-feedback-title {
+            color: #10b981;
+        }
+        .checkpoint-feedback.incorrect .checkpoint-feedback-title {
+            color: #f59e0b;
+        }
+        .checkpoint-explanation {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-top: 10px;
+        }
+        .btn-continue {
+            display: none;
+            width: 100%;
+            max-width: 300px;
+            margin: 20px auto;
+            padding: 15px;
+            background: var(--primary-color);
+            color: white;
+            text-align: center;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .btn-continue.show {
+            display: block;
+        }
+        .btn-continue:hover {
+            background: #2563eb;
+        }
     </style>
 </head>
 <body>
@@ -461,7 +586,7 @@
 
         <!-- Screen 1: Quick Intro -->
         <div class="lesson-screen active" data-screen="1">
-            <div class="screen-progress">Screen 1 of 6</div>
+            <div class="screen-progress">Screen 1 of 8</div>
             <div class="lesson-section">
                 <h2>Quick Intro</h2>
                 <p>Before you can master your finances, you need to understand what money actually is. It's more than just paper bills and coins—it's a fundamental tool that shapes our daily lives and future opportunities. In this lesson, we'll explore the true nature of money and why understanding it is your first step toward financial confidence.</p>
@@ -474,7 +599,7 @@
 
         <!-- Screen 2: Core Concept -->
         <div class="lesson-screen" data-screen="2">
-            <div class="screen-progress">Screen 2 of 6</div>
+            <div class="screen-progress">Screen 2 of 8</div>
             <div class="lesson-section">
                 <h2>Core Concept</h2>
                 <p><strong>Money is a medium of exchange, a store of value, and a unit of account.</strong></p>
@@ -492,9 +617,52 @@
             </div>
         </div>
 
-        <!-- Screen 3: Simple Example -->
+        <!-- Screen 3: Checkpoint Question 1 -->
         <div class="lesson-screen" data-screen="3">
-            <div class="screen-progress">Screen 3 of 6</div>
+            <div class="screen-progress">Screen 3 of 8</div>
+            <div class="checkpoint-container">
+                <div class="checkpoint-header">
+                    <h3>Quick Check</h3>
+                    <p>Let's pause and check your understanding. No pressure - you can continue regardless of your answer!</p>
+                </div>
+
+                <div class="checkpoint-question">
+                    <div class="checkpoint-question-text">Which of these is NOT one of the three main functions of money?</div>
+                    <div class="checkpoint-option" onclick="checkCheckpoint1(0)">
+                        <input type="radio" name="checkpoint1" value="0">
+                        <span>A) Medium of exchange</span>
+                    </div>
+                    <div class="checkpoint-option" onclick="checkCheckpoint1(1)">
+                        <input type="radio" name="checkpoint1" value="1">
+                        <span>B) Store of value</span>
+                    </div>
+                    <div class="checkpoint-option" onclick="checkCheckpoint1(2)">
+                        <input type="radio" name="checkpoint1" value="2">
+                        <span>C) Unit of account</span>
+                    </div>
+                    <div class="checkpoint-option" onclick="checkCheckpoint1(3)">
+                        <input type="radio" name="checkpoint1" value="3">
+                        <span>D) Source of happiness</span>
+                    </div>
+                </div>
+
+                <div class="checkpoint-feedback" id="checkpoint1-feedback">
+                    <div class="checkpoint-feedback-icon"></div>
+                    <div class="checkpoint-feedback-title"></div>
+                    <div class="checkpoint-explanation"></div>
+                </div>
+
+                <button class="btn-continue" id="checkpoint1-continue" onclick="nextScreen()">Continue <span>→</span></button>
+            </div>
+            <div class="screen-navigation">
+                <button class="btn-nav btn-prev" onclick="previousScreen()"><span>←</span> Previous</button>
+                <div class="nav-spacer"></div>
+            </div>
+        </div>
+
+        <!-- Screen 4: Simple Example -->
+        <div class="lesson-screen" data-screen="4">
+            <div class="screen-progress">Screen 4 of 8</div>
             <div class="lesson-section">
                 <h2>Simple Example</h2>
                 <p>Imagine you're a talented artist who creates beautiful paintings. You want to buy groceries, pay rent, and get a haircut. Without money, you'd have to:</p>
@@ -533,9 +701,52 @@
             </div>
         </div>
 
-        <!-- Screen 4: Common Mistakes -->
-        <div class="lesson-screen" data-screen="4">
-            <div class="screen-progress">Screen 4 of 6</div>
+        <!-- Screen 5: Checkpoint Question 2 -->
+        <div class="lesson-screen" data-screen="5">
+            <div class="screen-progress">Screen 5 of 8</div>
+            <div class="checkpoint-container">
+                <div class="checkpoint-header">
+                    <h3>Quick Check: Apply What You Learned</h3>
+                    <p>Let's see how you can apply this concept to a real-world scenario!</p>
+                </div>
+
+                <div class="checkpoint-question">
+                    <div class="checkpoint-question-text">Sarah wants to buy a $200 bike. Her friend offers to trade his old laptop for it. Why might Sarah prefer to get paid $200 in cash instead?</div>
+                    <div class="checkpoint-option" onclick="checkCheckpoint2(0)">
+                        <input type="radio" name="checkpoint2" value="0">
+                        <span>A) Cash is easier to carry</span>
+                    </div>
+                    <div class="checkpoint-option" onclick="checkCheckpoint2(1)">
+                        <input type="radio" name="checkpoint2" value="1">
+                        <span>B) She can use cash to buy exactly what she wants at any store</span>
+                    </div>
+                    <div class="checkpoint-option" onclick="checkCheckpoint2(2)">
+                        <input type="radio" name="checkpoint2" value="2">
+                        <span>C) Laptops break easily</span>
+                    </div>
+                    <div class="checkpoint-option" onclick="checkCheckpoint2(3)">
+                        <input type="radio" name="checkpoint2" value="3">
+                        <span>D) Cash looks better</span>
+                    </div>
+                </div>
+
+                <div class="checkpoint-feedback" id="checkpoint2-feedback">
+                    <div class="checkpoint-feedback-icon"></div>
+                    <div class="checkpoint-feedback-title"></div>
+                    <div class="checkpoint-explanation"></div>
+                </div>
+
+                <button class="btn-continue" id="checkpoint2-continue" onclick="nextScreen()">Continue <span>→</span></button>
+            </div>
+            <div class="screen-navigation">
+                <button class="btn-nav btn-prev" onclick="previousScreen()"><span>←</span> Previous</button>
+                <div class="nav-spacer"></div>
+            </div>
+        </div>
+
+        <!-- Screen 6: Common Mistakes -->
+        <div class="lesson-screen" data-screen="6">
+            <div class="screen-progress">Screen 6 of 8</div>
             <div class="lesson-section">
                 <div class="mistakes-list">
                     <h3>Common Mistakes to Avoid</h3>
@@ -553,9 +764,9 @@
             </div>
         </div>
 
-        <!-- Screen 5: Micro Action + Quick Reflection -->
-        <div class="lesson-screen" data-screen="5">
-            <div class="screen-progress">Screen 5 of 6</div>
+        <!-- Screen 7: Micro Action + Quick Reflection -->
+        <div class="lesson-screen" data-screen="7">
+            <div class="screen-progress">Screen 7 of 8</div>
             <!-- Micro Action -->
             <div class="lesson-section">
                 <div class="action-box">
@@ -581,9 +792,9 @@
             </div>
         </div>
 
-        <!-- Screen 6: Quiz -->
-        <div class="lesson-screen" data-screen="6">
-            <div class="screen-progress">Screen 6 of 6</div>
+        <!-- Screen 8: Quiz -->
+        <div class="lesson-screen" data-screen="8">
+            <div class="screen-progress">Screen 8 of 8</div>
             <!-- Lesson Quiz -->
             <div class="quiz-container" id="quizContainer">
             <div class="quiz-header">
@@ -963,9 +1174,105 @@
         updateNav();
         initQuiz();
 
+        // Checkpoint functions
+        let checkpoint1Answered = false;
+        let checkpoint2Answered = false;
+
+        function checkCheckpoint1(selectedOption) {
+            if (checkpoint1Answered) return;
+            checkpoint1Answered = true;
+
+            const correctOption = 3; // D) Source of happiness
+            const isCorrect = selectedOption === correctOption;
+
+            // Get elements
+            const options = document.querySelectorAll('[name="checkpoint1"]').forEach((radio, index) => {
+                const optionDiv = radio.parentElement;
+                optionDiv.style.pointerEvents = 'none';
+
+                if (index === correctOption) {
+                    optionDiv.classList.add('correct');
+                } else if (index === selectedOption && index !== correctOption) {
+                    optionDiv.classList.add('incorrect');
+                }
+
+                if (index === selectedOption) {
+                    radio.checked = true;
+                }
+            });
+
+            // Show feedback
+            const feedback = document.getElementById('checkpoint1-feedback');
+            const feedbackIcon = feedback.querySelector('.checkpoint-feedback-icon');
+            const feedbackTitle = feedback.querySelector('.checkpoint-feedback-title');
+            const feedbackExplanation = feedback.querySelector('.checkpoint-explanation');
+            const continueBtn = document.getElementById('checkpoint1-continue');
+
+            if (isCorrect) {
+                feedback.classList.add('correct');
+                feedbackIcon.textContent = '🎉';
+                feedbackTitle.textContent = 'Correct!';
+                feedbackExplanation.textContent = 'Great job! Money has three functions: medium of exchange, store of value, and unit of account. While money can help provide security and options, happiness comes from many sources beyond money.';
+            } else {
+                feedback.classList.add('incorrect');
+                feedbackIcon.textContent = '💡';
+                feedbackTitle.textContent = 'Not quite, but that\'s okay!';
+                feedbackExplanation.textContent = 'Money has three functions: medium of exchange, store of value, and unit of account. While money can help provide security and options, happiness comes from many sources beyond money. The correct answer is "Source of happiness."';
+            }
+
+            feedback.classList.add('show');
+            continueBtn.classList.add('show');
+        }
+
+        function checkCheckpoint2(selectedOption) {
+            if (checkpoint2Answered) return;
+            checkpoint2Answered = true;
+
+            const correctOption = 1; // B) She can use cash to buy exactly what she wants at any store
+            const isCorrect = selectedOption === correctOption;
+
+            // Get elements
+            const options = document.querySelectorAll('[name="checkpoint2"]').forEach((radio, index) => {
+                const optionDiv = radio.parentElement;
+                optionDiv.style.pointerEvents = 'none';
+
+                if (index === correctOption) {
+                    optionDiv.classList.add('correct');
+                } else if (index === selectedOption && index !== correctOption) {
+                    optionDiv.classList.add('incorrect');
+                }
+
+                if (index === selectedOption) {
+                    radio.checked = true;
+                }
+            });
+
+            // Show feedback
+            const feedback = document.getElementById('checkpoint2-feedback');
+            const feedbackIcon = feedback.querySelector('.checkpoint-feedback-icon');
+            const feedbackTitle = feedback.querySelector('.checkpoint-feedback-title');
+            const feedbackExplanation = feedback.querySelector('.checkpoint-explanation');
+            const continueBtn = document.getElementById('checkpoint2-continue');
+
+            if (isCorrect) {
+                feedback.classList.add('correct');
+                feedbackIcon.textContent = '🎉';
+                feedbackTitle.textContent = 'Excellent!';
+                feedbackExplanation.textContent = 'Perfect! This demonstrates money as a "medium of exchange." Instead of being stuck with items to trade (barter), money lets Sarah exchange her value for any goods or services she wants. She has the flexibility to buy exactly what she needs.';
+            } else {
+                feedback.classList.add('incorrect');
+                feedbackIcon.textContent = '💡';
+                feedbackTitle.textContent = 'Good thinking, but there\'s a better answer!';
+                feedbackExplanation.textContent = 'This demonstrates money as a "medium of exchange." Instead of being stuck with items to trade (barter), money lets Sarah exchange her value for any goods or services she wants. The best answer is that she can use cash to buy exactly what she wants at any store.';
+            }
+
+            feedback.classList.add('show');
+            continueBtn.classList.add('show');
+        }
+
         // Multi-screen navigation
         let currentScreen = 1;
-        const totalScreens = 6;
+        const totalScreens = 8;
 
         function showScreen(screenNumber) {
             // Hide all screens
