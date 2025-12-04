@@ -165,7 +165,7 @@
                 <ul class="nav-links">
                     <li><a href="index.html">Home</a></li>
                     <li><a href="dashboard.html">Dashboard</a></li>
-                    <li id="authButtons" style="visibility: hidden;">
+                    <li id="authButtons" style="display: none;">
                         <a href="login.html" class="btn-primary">Login</a>
                     </li>
                 </ul>
@@ -356,14 +356,14 @@
                 }
 
                 // Show the button after determining auth state
-                authButtons.style.visibility = 'visible';
+                authButtons.style.display = 'list-item';
             } catch (error) {
                 console.log('Not logged in');
                 const authButtons = document.getElementById('authButtons');
                 authButtons.innerHTML = `
                     <a href="login.html" class="btn-primary">Login</a>
                 `;
-                authButtons.style.visibility = 'visible';
+                authButtons.style.display = 'list-item';
             }
         }
 
