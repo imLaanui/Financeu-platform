@@ -189,7 +189,7 @@
         .login-btn {
             width: 100%;
             padding: 14px;
-            background: var(--primary);
+            background: #3b82f6;
             color: white;
             border: none;
             border-radius: 8px;
@@ -237,12 +237,8 @@
             <div id="loginError" class="error-message"></div>
             <form id="loginForm">
                 <div class="form-group">
-                    <label for="username">Username</label>
-                    <input type="text" id="username" name="username" required autocomplete="username">
-                </div>
-                <div class="form-group">
                     <label for="password">Password</label>
-                    <input type="password" id="password" name="password" required autocomplete="current-password">
+                    <input type="password" id="password" name="password" required autocomplete="current-password" placeholder="Enter admin password">
                 </div>
                 <button type="submit" class="login-btn">Login</button>
             </form>
@@ -312,11 +308,10 @@
         loginForm.addEventListener('submit', async (e) => {
             e.preventDefault();
 
-            const username = document.getElementById('username').value;
             const password = document.getElementById('password').value;
 
-            // Store credentials for API calls
-            adminCredentials = btoa(`${username}:${password}`);
+            // Store credentials for API calls (username is always "admin")
+            adminCredentials = btoa(`admin:${password}`);
 
             try {
                 const response = await fetch(`${API_URL}/admin/feedback`, {
@@ -334,7 +329,7 @@
                     // Load feedback
                     loadFeedback();
                 } else {
-                    loginError.textContent = 'Invalid username or password';
+                    loginError.textContent = 'Invalid password';
                     loginError.classList.add('show');
                     adminCredentials = null;
                 }
