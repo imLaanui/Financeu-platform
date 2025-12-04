@@ -631,6 +631,14 @@
         // Initialize quiz
         function initQuiz() {
             const userId = localStorage.getItem('userId');
+
+            // Validate userId exists
+            if (!userId || userId === 'null' || userId === 'undefined') {
+                console.error('No valid userId found');
+                document.getElementById('finishBtn').disabled = true;
+                return;
+            }
+
             const quizPassedStatus = localStorage.getItem(`lesson2_quiz_passed_${userId}`);
 
             if (quizPassedStatus === 'true') {
@@ -761,18 +769,26 @@
         }
 
         function finishLesson() {
+            const userId = localStorage.getItem('userId');
+
+            // Validate userId exists
+            if (!userId || userId === 'null' || userId === 'undefined') {
+                alert('Please log in to save your progress.');
+                return;
+            }
+
             if (!quizPassed) {
                 alert('Please complete the quiz first!');
                 return;
             }
 
             // Get completed lessons from localStorage
-            const completed = JSON.parse(localStorage.getItem(`pillar1_completed_${localStorage.getItem('userId')}`) || '[]');
+            const completed = JSON.parse(localStorage.getItem(`pillar1_completed_${userId}`) || '[]');
 
             // Add lesson 2 if not already completed
             if (!completed.includes(2)) {
                 completed.push(2);
-                localStorage.setItem(`pillar1_completed_${localStorage.getItem('userId')}`, JSON.stringify(completed));
+                localStorage.setItem(`pillar1_completed_${userId}`, JSON.stringify(completed));
             }
 
             // Redirect back to lessons page

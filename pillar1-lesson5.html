@@ -361,6 +361,14 @@
 
         function initQuiz() {
             const userId = localStorage.getItem('userId');
+
+            // Validate userId exists
+            if (!userId || userId === 'null' || userId === 'undefined') {
+                console.error('No valid userId found');
+                document.getElementById('finishBtn').disabled = true;
+                return;
+            }
+
             const quizPassedStatus = localStorage.getItem(`lesson5_quiz_passed_${userId}`);
             if (quizPassedStatus === 'true') {
                 quizPassed = true;
@@ -464,14 +472,22 @@
         }
 
         function finishLesson() {
+            const userId = localStorage.getItem('userId');
+
+            // Validate userId exists
+            if (!userId || userId === 'null' || userId === 'undefined') {
+                alert('Please log in to save your progress.');
+                return;
+            }
+
             if (!quizPassed) {
                 alert('Please complete the quiz first!');
                 return;
             }
-            const completed = JSON.parse(localStorage.getItem(`pillar1_completed_${localStorage.getItem('userId')}`) || '[]');
+            const completed = JSON.parse(localStorage.getItem(`pillar1_completed_${userId}`) || '[]');
             if (!completed.includes(5)) {
                 completed.push(5);
-                localStorage.setItem(`pillar1_completed_${localStorage.getItem('userId')}`, JSON.stringify(completed));
+                localStorage.setItem(`pillar1_completed_${userId}`, JSON.stringify(completed));
             }
             window.location.href = 'pillar1-lessons.html';
         }
