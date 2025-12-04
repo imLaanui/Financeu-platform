@@ -664,9 +664,17 @@
 
                 document.getElementById('progressPercent').textContent = `${progressPercent}%`;
 
-                // Update Pillar 1 button text if quiz is completed
+                // Update Pillar 1 button text based on progress
+                const pillar1Button = document.getElementById('pillar1Button');
                 if (quizCompleted) {
-                    document.getElementById('pillar1Button').textContent = 'Review Pillar';
+                    // All lessons + quiz completed
+                    pillar1Button.textContent = 'Review Pillar';
+                } else if (completedLessonsCount > 0) {
+                    // Some lessons completed but not finished
+                    pillar1Button.textContent = 'Continue Pillar';
+                } else {
+                    // No lessons started yet
+                    pillar1Button.textContent = 'Start Pillar';
                 }
 
                 // Create a map of completed lessons
