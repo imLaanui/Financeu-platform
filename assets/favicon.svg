@@ -1,41 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg width="32" height="32" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
-    <!-- Background circle -->
-    <circle cx="16" cy="16" r="16" fill="#111111"/>
+    <!-- Background circle with gradient -->
+    <defs>
+        <linearGradient id="grad32" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style="stop-color:#2563eb;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#1d4ed8;stop-opacity:1" />
+        </linearGradient>
+    </defs>
 
-    <!-- Letter F (geometric, no serifs) -->
-    <g id="letter-f">
-        <!-- Vertical stem of F -->
-        <rect x="10.4" y="6.719999999999999"
-              width="2.56" height="8.96"
-              fill="white"/>
+    <!-- Circle background -->
+    <circle cx="16" cy="16" r="16" fill="url(#grad32)"/>
 
-        <!-- Top horizontal bar of F -->
-        <rect x="10.4" y="6.719999999999999"
-              width="11.2" height="2.56"
-              fill="white"/>
-
-        <!-- Middle horizontal bar of F (shorter) -->
-        <rect x="10.4" y="9.92"
-              width="7.839999999999999" height="2.56"
-              fill="white"/>
-    </g>
-
-    <!-- Letter U (geometric, no serifs) -->
-    <g id="letter-u">
-        <!-- Left vertical stem of U -->
-        <rect x="10.4" y="16.32"
-              width="2.56" height="8.96"
-              fill="white"/>
-
-        <!-- Right vertical stem of U -->
-        <rect x="19.040000000000003" y="16.32"
-              width="2.56" height="8.96"
-              fill="white"/>
-
-        <!-- Bottom horizontal bar of U -->
-        <rect x="10.4" y="22.720000000000002"
-              width="11.2" height="2.56"
-              fill="white"/>
-    </g>
+    <!-- Dollar sign -->
+    <text x="16" y="22.72"
+          font-family="Arial, sans-serif"
+          font-size="19.2"
+          font-weight="bold"
+          fill="white"
+          text-anchor="middle">$</text>
 </svg>
