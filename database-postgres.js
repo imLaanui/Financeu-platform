@@ -111,6 +111,14 @@ async function getUserById(id) {
   return result.rows[0] || null;
 }
 
+// Get all users (admin only)
+async function getAllUsers() {
+  const result = await pool.query(
+    'SELECT id, email, name, membership_tier, created_at FROM users ORDER BY created_at DESC'
+  );
+  return result.rows;
+}
+
 // Create new user
 async function createUser(email, hashedPassword, name) {
   const result = await pool.query(
@@ -186,6 +194,7 @@ module.exports = {
   pool,
   getUserByEmail,
   getUserById,
+  getAllUsers,
   createUser,
   updateUserTier,
   markLessonComplete,

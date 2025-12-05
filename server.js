@@ -363,6 +363,35 @@ app.get('/api/admin/feedback', async (req, res) => {
   }
 });
 
+// Admin: Get all users (requires admin authentication)
+app.get('/api/admin/users', async (req, res) => {
+  try {
+    // Simple admin authentication check
+    const authHeader = req.headers.authorization;
+
+    if (!authHeader || !authHeader.startsWith('Basic ')) {
+      return res.status(401).json({ error: 'Authentication required' });
+    }
+
+    const credentials = Buffer.from(authHeader.split(' ')[1], 'base64').toString('ascii');
+    const [username, password] = credentials.split(':');
+
+    if (username !== 'admin' || password !== 'financeu2025') {
+      return res.status(401).json({ error: 'Invalid credentials' });
+    }
+
+    const users = await db.getAllUsers();
+
+    res.json({
+      users,
+      total: users.length
+    });
+  } catch (error) {
+    console.error('Get users error:', error);
+    res.status(500).json({ error: 'Error retrieving users' });
+  }
+});
+
 // ==================== STATIC PAGE ROUTES ====================
 
 // Home page

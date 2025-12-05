@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin - Feedback Dashboard</title>
+    <title>Admin - Users Dashboard</title>
     <link rel="stylesheet" href="../styles.css">
     <style>
         body {
@@ -26,7 +26,23 @@
             font-size: 32px;
             margin: 0;
         }
-        .admin-header .logout-btn {
+        .admin-nav {
+            display: flex;
+            gap: 15px;
+        }
+        .admin-nav a {
+            padding: 10px 20px;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 6px;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+        .admin-nav a:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+        .logout-btn {
             padding: 10px 20px;
             background: rgba(255, 255, 255, 0.2);
             color: white;
@@ -36,7 +52,7 @@
             text-decoration: none;
             transition: all 0.2s;
         }
-        .admin-header .logout-btn:hover {
+        .logout-btn:hover {
             background: rgba(255, 255, 255, 0.3);
         }
         .admin-content {
@@ -66,15 +82,15 @@
         .stat-card .stat-value {
             font-size: 36px;
             font-weight: bold;
-            color: var(--primary);
+            color: #3b82f6;
         }
-        .feedback-list {
+        .users-list {
             background: white;
             border-radius: 12px;
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
             overflow: hidden;
         }
-        .feedback-list-header {
+        .users-list-header {
             padding: 20px 25px;
             background: #f8f9fa;
             border-bottom: 1px solid #e5e7eb;
@@ -82,7 +98,7 @@
             justify-content: space-between;
             align-items: center;
         }
-        .feedback-list-header h2 {
+        .users-list-header h2 {
             margin: 0;
             font-size: 24px;
         }
@@ -93,30 +109,26 @@
             font-size: 14px;
             cursor: pointer;
         }
-        .feedback-item {
-            padding: 25px;
-            border-bottom: 1px solid #e5e7eb;
-            transition: background 0.2s;
+        .users-table {
+            width: 100%;
+            border-collapse: collapse;
         }
-        .feedback-item:hover {
+        .users-table th {
+            background: #f8f9fa;
+            padding: 15px 25px;
+            text-align: left;
+            font-weight: 600;
+            color: var(--text-primary);
+            border-bottom: 2px solid #e5e7eb;
+        }
+        .users-table td {
+            padding: 20px 25px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        .users-table tr:hover {
             background: #f8f9fa;
         }
-        .feedback-item:last-child {
-            border-bottom: none;
-        }
-        .feedback-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 15px;
-        }
-        .feedback-meta {
-            display: flex;
-            gap: 15px;
-            align-items: center;
-            flex-wrap: wrap;
-        }
-        .feedback-type {
+        .tier-badge {
             padding: 6px 12px;
             border-radius: 20px;
             font-size: 12px;
@@ -124,38 +136,17 @@
             text-transform: uppercase;
             letter-spacing: 0.5px;
         }
-        .feedback-type.bug {
-            background: #fee2e2;
-            color: #991b1b;
+        .tier-badge.free {
+            background-color: #00A676;
+            color: white;
         }
-        .feedback-type.feature {
-            background: #dbeafe;
-            color: #1e40af;
+        .tier-badge.pro {
+            background-color: #f59e0b;
+            color: white;
         }
-        .feedback-type.general {
-            background: #e5e7eb;
-            color: #374151;
-        }
-        .feedback-type.compliment {
-            background: #d1fae5;
-            color: #065f46;
-        }
-        .feedback-date {
-            color: var(--text-secondary);
-            font-size: 14px;
-        }
-        .feedback-contact {
-            font-size: 14px;
-            color: var(--text-secondary);
-            margin-bottom: 10px;
-        }
-        .feedback-contact strong {
-            color: var(--text-primary);
-        }
-        .feedback-message {
-            color: var(--text-primary);
-            line-height: 1.6;
-            margin-top: 10px;
+        .tier-badge.premium {
+            background-color: #3b82f6;
+            color: white;
         }
         .login-form {
             max-width: 400px;
@@ -218,14 +209,10 @@
             padding: 60px 20px;
             color: var(--text-secondary);
         }
-        .no-feedback {
+        .no-users {
             text-align: center;
             padding: 60px 20px;
             color: var(--text-secondary);
-        }
-        .no-feedback h3 {
-            color: var(--text-primary);
-            margin-bottom: 10px;
         }
     </style>
 </head>
@@ -250,11 +237,11 @@
         <!-- Header -->
         <header class="admin-header">
             <div class="container">
-                <h1>Feedback Dashboard</h1>
+                <h1>Users Dashboard</h1>
                 <div style="display: flex; gap: 15px; align-items: center;">
-                    <nav style="display: flex; gap: 15px;">
-                        <a href="/admin/users.html" style="padding: 10px 20px; background: rgba(255, 255, 255, 0.1); color: white; border: 1px solid rgba(255, 255, 255, 0.3); border-radius: 6px; text-decoration: none; transition: all 0.2s;">Users</a>
-                        <a href="/admin/feedback.html" style="padding: 10px 20px; background: rgba(255, 255, 255, 0.1); color: white; border: 1px solid rgba(255, 255, 255, 0.3); border-radius: 6px; text-decoration: none; transition: all 0.2s;">Feedback</a>
+                    <nav class="admin-nav">
+                        <a href="/admin/users.html">Users</a>
+                        <a href="/admin/feedback.html">Feedback</a>
                     </nav>
                     <button class="logout-btn" onclick="logout()">Logout</button>
                 </div>
@@ -266,37 +253,36 @@
             <!-- Stats -->
             <div class="stats-grid">
                 <div class="stat-card">
-                    <h3>Total Feedback</h3>
-                    <div class="stat-value" id="totalFeedback">0</div>
+                    <h3>Total Users</h3>
+                    <div class="stat-value" id="totalUsers">0</div>
                 </div>
                 <div class="stat-card">
-                    <h3>Bug Reports</h3>
-                    <div class="stat-value" id="bugCount">0</div>
+                    <h3>Free Tier</h3>
+                    <div class="stat-value" id="freeCount">0</div>
                 </div>
                 <div class="stat-card">
-                    <h3>Feature Requests</h3>
-                    <div class="stat-value" id="featureCount">0</div>
+                    <h3>Pro Tier</h3>
+                    <div class="stat-value" id="proCount">0</div>
                 </div>
                 <div class="stat-card">
-                    <h3>Compliments</h3>
-                    <div class="stat-value" id="complimentCount">0</div>
+                    <h3>Premium Tier</h3>
+                    <div class="stat-value" id="premiumCount">0</div>
                 </div>
             </div>
 
-            <!-- Feedback List -->
-            <div class="feedback-list">
-                <div class="feedback-list-header">
-                    <h2>All Feedback</h2>
-                    <select class="filter-dropdown" id="filterType" onchange="filterFeedback()">
-                        <option value="all">All Types</option>
-                        <option value="Bug Report">Bug Reports</option>
-                        <option value="Feature Request">Feature Requests</option>
-                        <option value="General Feedback">General Feedback</option>
-                        <option value="Compliment">Compliments</option>
+            <!-- Users List -->
+            <div class="users-list">
+                <div class="users-list-header">
+                    <h2>All Users</h2>
+                    <select class="filter-dropdown" id="filterTier" onchange="filterUsers()">
+                        <option value="all">All Tiers</option>
+                        <option value="free">Free</option>
+                        <option value="pro">Pro</option>
+                        <option value="premium">Premium</option>
                     </select>
                 </div>
-                <div id="feedbackContainer">
-                    <div class="loading">Loading feedback...</div>
+                <div id="usersContainer">
+                    <div class="loading">Loading users...</div>
                 </div>
             </div>
         </div>
@@ -305,7 +291,7 @@
     <script src="../config.js"></script>
     <script>
         let adminCredentials = null;
-        let allFeedback = [];
+        let allUsers = [];
 
         // Handle login
         const loginForm = document.getElementById('loginForm');
@@ -320,8 +306,8 @@
             adminCredentials = btoa(`admin:${password}`);
 
             try {
-                console.log('🔐 Attempting admin login to:', `${API_URL}/admin/feedback`);
-                const response = await fetch(`${API_URL}/admin/feedback`, {
+                console.log('🔐 Attempting admin login to:', `${API_URL}/admin/users`);
+                const response = await fetch(`${API_URL}/admin/users`, {
                     headers: {
                         'Authorization': `Basic ${adminCredentials}`
                     }
@@ -336,8 +322,8 @@
                     // Hide login, show dashboard
                     document.getElementById('loginContainer').style.display = 'none';
                     document.getElementById('dashboardContainer').style.display = 'block';
-                    // Load feedback
-                    loadFeedback();
+                    // Load users
+                    loadUsers();
                 } else {
                     console.error('❌ Login failed with status:', response.status);
                     loginError.textContent = 'Invalid password';
@@ -358,14 +344,13 @@
             const savedAuth = sessionStorage.getItem('adminAuth');
             if (savedAuth) {
                 adminCredentials = savedAuth;
-                // Verify credentials
                 verifyAndLoadDashboard();
             }
         });
 
         async function verifyAndLoadDashboard() {
             try {
-                const response = await fetch(`${API_URL}/admin/feedback`, {
+                const response = await fetch(`${API_URL}/admin/users`, {
                     headers: {
                         'Authorization': `Basic ${adminCredentials}`
                     }
@@ -374,7 +359,7 @@
                 if (response.ok) {
                     document.getElementById('loginContainer').style.display = 'none';
                     document.getElementById('dashboardContainer').style.display = 'block';
-                    loadFeedback();
+                    loadUsers();
                 } else {
                     sessionStorage.removeItem('adminAuth');
                     adminCredentials = null;
@@ -386,10 +371,10 @@
             }
         }
 
-        // Load feedback from API
-        async function loadFeedback() {
+        // Load users from API
+        async function loadUsers() {
             try {
-                const response = await fetch(`${API_URL}/admin/feedback`, {
+                const response = await fetch(`${API_URL}/admin/users`, {
                     headers: {
                         'Authorization': `Basic ${adminCredentials}`
                     }
@@ -397,17 +382,17 @@
 
                 if (response.ok) {
                     const data = await response.json();
-                    allFeedback = data.feedback;
-                    updateStats(data.feedback);
-                    displayFeedback(data.feedback);
+                    allUsers = data.users;
+                    updateStats(data.users);
+                    displayUsers(data.users);
                 } else {
-                    throw new Error('Failed to load feedback');
+                    throw new Error('Failed to load users');
                 }
             } catch (error) {
-                console.error('Load feedback error:', error);
-                document.getElementById('feedbackContainer').innerHTML = `
-                    <div class="no-feedback">
-                        <h3>Error loading feedback</h3>
+                console.error('Load users error:', error);
+                document.getElementById('usersContainer').innerHTML = `
+                    <div class="no-users">
+                        <h3>Error loading users</h3>
                         <p>Please try refreshing the page</p>
                     </div>
                 `;
@@ -415,67 +400,70 @@
         }
 
         // Update statistics
-        function updateStats(feedback) {
-            document.getElementById('totalFeedback').textContent = feedback.length;
-            document.getElementById('bugCount').textContent = feedback.filter(f => f.feedback_type === 'Bug Report').length;
-            document.getElementById('featureCount').textContent = feedback.filter(f => f.feedback_type === 'Feature Request').length;
-            document.getElementById('complimentCount').textContent = feedback.filter(f => f.feedback_type === 'Compliment').length;
+        function updateStats(users) {
+            document.getElementById('totalUsers').textContent = users.length;
+            document.getElementById('freeCount').textContent = users.filter(u => u.membership_tier === 'free').length;
+            document.getElementById('proCount').textContent = users.filter(u => u.membership_tier === 'pro').length;
+            document.getElementById('premiumCount').textContent = users.filter(u => u.membership_tier === 'premium').length;
         }
 
-        // Display feedback
-        function displayFeedback(feedback) {
-            const container = document.getElementById('feedbackContainer');
+        // Display users
+        function displayUsers(users) {
+            const container = document.getElementById('usersContainer');
 
-            if (feedback.length === 0) {
+            if (users.length === 0) {
                 container.innerHTML = `
-                    <div class="no-feedback">
-                        <h3>No feedback yet</h3>
-                        <p>When users submit feedback, it will appear here</p>
+                    <div class="no-users">
+                        <h3>No users yet</h3>
+                        <p>Registered users will appear here</p>
                     </div>
                 `;
                 return;
             }
 
-            container.innerHTML = feedback.map(item => {
-                const date = new Date(item.created_at).toLocaleString();
-                const typeClass = item.feedback_type.toLowerCase().replace(' ', '-');
-                let typeDisplay = typeClass;
-                if (item.feedback_type === 'Bug Report') typeDisplay = 'bug';
-                else if (item.feedback_type === 'Feature Request') typeDisplay = 'feature';
-                else if (item.feedback_type === 'General Feedback') typeDisplay = 'general';
-                else if (item.feedback_type === 'Compliment') typeDisplay = 'compliment';
-
-                return `
-                    <div class="feedback-item">
-                        <div class="feedback-header">
-                            <div class="feedback-meta">
-                                <span class="feedback-type ${typeDisplay}">${item.feedback_type}</span>
-                                <span class="feedback-date">${date}</span>
-                            </div>
-                        </div>
-                        ${item.name || item.email ? `
-                            <div class="feedback-contact">
-                                ${item.name ? `<strong>Name:</strong> ${item.name}` : ''}
-                                ${item.name && item.email ? ' | ' : ''}
-                                ${item.email ? `<strong>Email:</strong> ${item.email}` : ''}
-                            </div>
-                        ` : ''}
-                        <div class="feedback-message">${escapeHtml(item.message)}</div>
-                    </div>
-                `;
-            }).join('');
+            container.innerHTML = `
+                <table class="users-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Tier</th>
+                            <th>Signup Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${users.map(user => {
+                            const date = new Date(user.created_at).toLocaleDateString('en-US', {
+                                year: 'numeric',
+                                month: 'short',
+                                day: 'numeric'
+                            });
+                            return `
+                                <tr>
+                                    <td>#${user.id}</td>
+                                    <td>${escapeHtml(user.name)}</td>
+                                    <td>${escapeHtml(user.email)}</td>
+                                    <td><span class="tier-badge ${user.membership_tier}">${user.membership_tier.toUpperCase()}</span></td>
+                                    <td>${date}</td>
+                                </tr>
+                            `;
+                        }).join('')}
+                    </tbody>
+                </table>
+            `;
         }
 
-        // Filter feedback
-        function filterFeedback() {
-            const filterValue = document.getElementById('filterType').value;
-            let filtered = allFeedback;
+        // Filter users
+        function filterUsers() {
+            const filterValue = document.getElementById('filterTier').value;
+            let filtered = allUsers;
 
             if (filterValue !== 'all') {
-                filtered = allFeedback.filter(f => f.feedback_type === filterValue);
+                filtered = allUsers.filter(u => u.membership_tier === filterValue);
             }
 
-            displayFeedback(filtered);
+            displayUsers(filtered);
         }
 
         // Logout

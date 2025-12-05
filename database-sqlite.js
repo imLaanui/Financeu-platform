@@ -114,6 +114,16 @@ async function getUserById(id) {
   });
 }
 
+// Get all users (admin only)
+async function getAllUsers() {
+  return new Promise((resolve, reject) => {
+    db.all('SELECT id, email, name, membership_tier, created_at FROM users ORDER BY created_at DESC', [], (err, rows) => {
+      if (err) reject(err);
+      else resolve(rows || []);
+    });
+  });
+}
+
 // Create new user
 async function createUser(email, hashedPassword, name) {
   return new Promise((resolve, reject) => {
@@ -235,6 +245,7 @@ module.exports = {
   db,
   getUserByEmail,
   getUserById,
+  getAllUsers,
   createUser,
   updateUserTier,
   markLessonComplete,
