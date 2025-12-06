@@ -88,7 +88,7 @@
         /* Premium Pillar Cards */
         .pillars-section {
             background: linear-gradient(to bottom, #f9fafb 0%, white 100%);
-            padding: 80px 20px;
+            padding: 60px 20px;
         }
         .pillar-card-premium {
             background: white;
@@ -104,7 +104,7 @@
             flex-direction: column;
         }
         .pillar-card-premium:hover {
-            transform: translateY(-12px);
+            transform: translateY(-8px);
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
         }
         .pillar-card-premium::before {
@@ -113,7 +113,7 @@
             top: 0;
             left: 0;
             right: 0;
-            height: 6px;
+            height: 4px;
             background: linear-gradient(135deg, var(--secondary-color) 0%, #3b82f6 100%);
             transform: scaleX(0);
             transform-origin: left;
@@ -125,28 +125,28 @@
         .pillar-card-header {
             display: flex;
             justify-content: space-between;
-            align-items: flex-start;
-            padding: 24px 24px 16px;
+            align-items: center;
+            padding: 20px 20px 12px;
             border-bottom: 1px solid #f3f4f6;
         }
         .pillar-icon {
-            width: 64px;
-            height: 64px;
+            width: 56px;
+            height: 56px;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 32px;
-            margin-bottom: 16px;
+            font-size: 28px;
             transition: transform 0.3s ease-out;
+            flex-shrink: 0;
         }
         .pillar-card-premium:hover .pillar-icon {
             transform: scale(1.1) rotate(5deg);
         }
         .pillar-badges {
             display: flex;
-            gap: 8px;
+            gap: 6px;
             flex-direction: column;
             align-items: flex-end;
         }
@@ -187,58 +187,58 @@
             color: white;
         }
         .pillar-card-body {
-            padding: 24px;
+            padding: 20px;
             flex: 1;
             display: flex;
             flex-direction: column;
         }
         .pillar-number {
-            font-size: 14px;
+            font-size: 13px;
             color: var(--secondary-color);
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 1px;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
         }
         .pillar-title {
-            font-size: 28px;
+            font-size: 24px;
             font-weight: 700;
             color: var(--text-dark);
-            margin-bottom: 16px;
+            margin-bottom: 12px;
             line-height: 1.2;
         }
         .pillar-description {
-            font-size: 16px;
+            font-size: 15px;
             color: var(--text-secondary);
-            line-height: 1.7;
-            margin-bottom: 24px;
+            line-height: 1.6;
+            margin-bottom: 16px;
         }
         .pillar-meta {
             display: flex;
-            gap: 24px;
-            margin-bottom: 24px;
+            gap: 20px;
+            margin-bottom: 16px;
             flex-wrap: wrap;
         }
         .meta-item {
             display: flex;
             align-items: center;
-            gap: 8px;
-            font-size: 14px;
+            gap: 6px;
+            font-size: 13px;
             color: var(--text-secondary);
         }
         .meta-icon {
-            font-size: 18px;
+            font-size: 16px;
         }
         .pillar-topics {
-            margin-bottom: 24px;
+            margin-bottom: 16px;
         }
         .pillar-topics h4 {
-            font-size: 14px;
+            font-size: 13px;
             font-weight: 700;
             color: var(--text-dark);
             text-transform: uppercase;
             letter-spacing: 0.5px;
-            margin-bottom: 12px;
+            margin-bottom: 10px;
         }
         .topics-list {
             list-style: none;
@@ -246,10 +246,10 @@
             margin: 0;
         }
         .topics-list li {
-            font-size: 14px;
+            font-size: 13px;
             color: var(--text-secondary);
-            padding: 8px 0;
-            padding-left: 24px;
+            padding: 6px 0;
+            padding-left: 20px;
             position: relative;
         }
         .topics-list li::before {
@@ -259,60 +259,18 @@
             color: var(--secondary-color);
             font-weight: 700;
         }
-        .pillar-for {
-            background: #f9fafb;
-            padding: 16px;
-            border-radius: 8px;
-            margin-bottom: 24px;
-        }
-        .pillar-for h4 {
-            font-size: 13px;
-            font-weight: 700;
-            color: var(--text-dark);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-bottom: 8px;
-        }
-        .pillar-for p {
-            font-size: 14px;
-            color: var(--text-secondary);
-            line-height: 1.6;
-            margin: 0;
-        }
-        .pillar-gain {
-            background: linear-gradient(135deg, rgba(0, 166, 118, 0.05) 0%, rgba(59, 130, 246, 0.05) 100%);
-            padding: 16px;
-            border-radius: 8px;
-            margin-bottom: 24px;
-            border: 1px solid rgba(0, 166, 118, 0.2);
-        }
-        .pillar-gain h4 {
-            font-size: 13px;
-            font-weight: 700;
-            color: var(--secondary-color);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-bottom: 8px;
-        }
-        .pillar-gain p {
-            font-size: 14px;
-            color: var(--text-dark);
-            line-height: 1.6;
-            margin: 0;
-            font-weight: 500;
-        }
         .pillar-card-footer {
-            padding: 0 24px 24px;
+            padding: 0 20px 20px;
             margin-top: auto;
         }
         .pillar-cta {
             width: 100%;
-            padding: 14px 24px;
+            padding: 12px 20px;
             background: linear-gradient(135deg, #0A1A2F 0%, #1a3a5c 100%);
             color: white;
             border: none;
             border-radius: 8px;
-            font-size: 16px;
+            font-size: 15px;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease-out;
@@ -335,48 +293,10 @@
         }
         .pillars-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
-            gap: 32px;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 24px;
             max-width: 1400px;
             margin: 0 auto;
-        }
-
-        /* Hover Preview */
-        .lesson-preview {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.4s ease-out, padding 0.4s ease-out;
-            padding: 0 24px;
-        }
-        .pillar-card-premium:hover .lesson-preview {
-            max-height: 200px;
-            padding: 16px 24px;
-        }
-        .lesson-preview h4 {
-            font-size: 13px;
-            font-weight: 700;
-            color: var(--text-dark);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-bottom: 12px;
-        }
-        .preview-lessons {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-        .preview-lessons li {
-            font-size: 13px;
-            color: var(--text-secondary);
-            padding: 6px 0;
-            padding-left: 20px;
-            position: relative;
-        }
-        .preview-lessons li::before {
-            content: '▸';
-            position: absolute;
-            left: 0;
-            color: var(--secondary-color);
         }
 
         @media (max-width: 768px) {
@@ -440,7 +360,7 @@
     <section class="pillar-info">
         <div class="container">
             <h2>What is a Pillar?</h2>
-            <p>Each pillar represents a core area of personal finance. Together, they form the complete system for managing money, building wealth, and achieving financial freedom. No fluff, no theory—just practical knowledge you'll use for the rest of your life.</p>
+            <p>Each pillar represents a core area of personal finance. Together, they form the complete system for managing money, building wealth, and achieving financial freedom. No fluff, no theory.just practical knowledge you'll use for the rest of your life.</p>
         </div>
     </section>
 
@@ -483,27 +403,10 @@
                             </ul>
                         </div>
 
-                        <div class="pillar-for">
-                            <h4>Perfect For</h4>
-                            <p>Students who are tired of feeling confused about money and want to finally understand how the financial system works.</p>
-                        </div>
 
-                        <div class="pillar-gain">
-                            <h4>What You'll Gain</h4>
-                            <p>The confidence to open your first bank account, understand financial conversations, and make informed decisions about where to keep your money.</p>
-                        </div>
-                    </div>
-                    <div class="lesson-preview">
-                        <h4>First Lessons</h4>
-                        <ul class="preview-lessons">
-                            <li>Introduction to Banking</li>
-                            <li>Understanding Interest Rates</li>
-                            <li>Types of Bank Accounts</li>
-                            <li>Building Financial Habits</li>
-                        </ul>
                     </div>
                     <div class="pillar-card-footer">
-                        <a href="pillar1-lessons.html" class="pillar-cta">Start Learning Free →</a>
+                        <a href="#" id="pillar1StartBtn" class="pillar-cta">Start Learning Free →</a>
                     </div>
                 </div>
 
@@ -519,7 +422,7 @@
                     <div class="pillar-card-body">
                         <div class="pillar-number">Pillar 2</div>
                         <h3 class="pillar-title">Financial Goal Setting</h3>
-                        <p class="pillar-description">Stop daydreaming and start achieving. Learn how to set realistic financial goals, create action plans, and actually follow through. Whether it's buying a car, studying abroad, or building an emergency fund—you'll know exactly how to make it happen.</p>
+                        <p class="pillar-description">Stop daydreaming and start achieving. Learn how to set realistic financial goals, create action plans, and actually follow through. Whether it's buying a car, studying abroad, or building an emergency fund.you'll know exactly how to make it happen.</p>
 
                         <div class="pillar-meta">
                             <div class="meta-item">
@@ -542,24 +445,7 @@
                             </ul>
                         </div>
 
-                        <div class="pillar-for">
-                            <h4>Perfect For</h4>
-                            <p>Students who have big dreams but don't know how to turn them into realistic financial plans they can actually achieve.</p>
-                        </div>
 
-                        <div class="pillar-gain">
-                            <h4>What You'll Gain</h4>
-                            <p>A clear roadmap to achieve your financial goals, whether it's saving for a spring break trip or building your first emergency fund.</p>
-                        </div>
-                    </div>
-                    <div class="lesson-preview">
-                        <h4>First Lessons</h4>
-                        <ul class="preview-lessons">
-                            <li>Why Goals Matter</li>
-                            <li>The SMART Goal Framework</li>
-                            <li>Creating Your Financial Roadmap</li>
-                            <li>Staying Motivated</li>
-                        </ul>
                     </div>
                     <div class="pillar-card-footer">
                         <button class="pillar-cta disabled">Coming 2026</button>
@@ -578,7 +464,7 @@
                     <div class="pillar-card-body">
                         <div class="pillar-number">Pillar 3</div>
                         <h3 class="pillar-title">Credit & Debt Mastery</h3>
-                        <p class="pillar-description">Credit cards aren't scary—when you know how to use them. Master credit scores, avoid debt traps, and learn to use credit as a tool, not a burden. Stop making expensive mistakes and start building a strong credit history from day one.</p>
+                        <p class="pillar-description">Credit cards aren't scary.when you know how to use them. Master credit scores, avoid debt traps, and learn to use credit as a tool, not a burden. Stop making expensive mistakes and start building a strong credit history from day one.</p>
 
                         <div class="pillar-meta">
                             <div class="meta-item">
@@ -601,24 +487,7 @@
                             </ul>
                         </div>
 
-                        <div class="pillar-for">
-                            <h4>Perfect For</h4>
-                            <p>Students who are confused about credit cards, worried about debt, or want to build excellent credit from the start.</p>
-                        </div>
 
-                        <div class="pillar-gain">
-                            <h4>What You'll Gain</h4>
-                            <p>The knowledge to build a 750+ credit score, choose the right credit card, and avoid the debt mistakes that haunt most graduates.</p>
-                        </div>
-                    </div>
-                    <div class="lesson-preview">
-                        <h4>First Lessons</h4>
-                        <ul class="preview-lessons">
-                            <li>Credit Score Fundamentals</li>
-                            <li>Your First Credit Card</li>
-                            <li>Understanding APR and Interest</li>
-                            <li>Building Credit Strategically</li>
-                        </ul>
                     </div>
                     <div class="pillar-card-footer">
                         <button class="pillar-cta disabled">Coming 2026</button>
@@ -637,7 +506,7 @@
                     <div class="pillar-card-body">
                         <div class="pillar-number">Pillar 4</div>
                         <h3 class="pillar-title">Smart Saving Strategies</h3>
-                        <p class="pillar-description">Saving isn't about deprivation—it's about freedom. Build an emergency fund that actually protects you, automate your savings so you don't have to think about it, and learn where to keep your money so it grows while you sleep.</p>
+                        <p class="pillar-description">Saving isn't about deprivation.it's about freedom. Build an emergency fund that actually protects you, automate your savings so you don't have to think about it, and learn where to keep your money so it grows while you sleep.</p>
 
                         <div class="pillar-meta">
                             <div class="meta-item">
@@ -660,24 +529,7 @@
                             </ul>
                         </div>
 
-                        <div class="pillar-for">
-                            <h4>Perfect For</h4>
-                            <p>Students who want to stop living paycheck to paycheck and finally build a financial safety net.</p>
-                        </div>
 
-                        <div class="pillar-gain">
-                            <h4>What You'll Gain</h4>
-                            <p>An emergency fund that gives you peace of mind and the systems to save money automatically without feeling broke.</p>
-                        </div>
-                    </div>
-                    <div class="lesson-preview">
-                        <h4>First Lessons</h4>
-                        <ul class="preview-lessons">
-                            <li>Why Emergency Funds Matter</li>
-                            <li>How Much Should You Save?</li>
-                            <li>Finding the Best Savings Account</li>
-                            <li>Automation Strategies</li>
-                        </ul>
                     </div>
                     <div class="pillar-card-footer">
                         <button class="pillar-cta disabled">Coming 2026 • Pro Plan</button>
@@ -719,24 +571,7 @@
                             </ul>
                         </div>
 
-                        <div class="pillar-for">
-                            <h4>Perfect For</h4>
-                            <p>Students who think investing is too complicated or that you need thousands to start, and want to build wealth early.</p>
-                        </div>
 
-                        <div class="pillar-gain">
-                            <h4>What You'll Gain</h4>
-                            <p>The confidence to make your first investment and a strategy to grow your wealth over the next 40+ years.</p>
-                        </div>
-                    </div>
-                    <div class="lesson-preview">
-                        <h4>First Lessons</h4>
-                        <ul class="preview-lessons">
-                            <li>Why Investing Matters</li>
-                            <li>Understanding Risk and Return</li>
-                            <li>Your First $100 Investment</li>
-                            <li>Index Funds Explained</li>
-                        </ul>
                     </div>
                     <div class="pillar-card-footer">
                         <button class="pillar-cta disabled">Coming 2026 • Pro Plan</button>
@@ -778,24 +613,7 @@
                             </ul>
                         </div>
 
-                        <div class="pillar-for">
-                            <h4>Perfect For</h4>
-                            <p>Students whose money disappears every month and who want to finally take control of their spending.</p>
-                        </div>
 
-                        <div class="pillar-gain">
-                            <h4>What You'll Gain</h4>
-                            <p>A personalized budget system that actually works for you, plus the ability to save hundreds every month without sacrifice.</p>
-                        </div>
-                    </div>
-                    <div class="lesson-preview">
-                        <h4>First Lessons</h4>
-                        <ul class="preview-lessons">
-                            <li>Why Most Budgets Fail</li>
-                            <li>Finding Your Budget Style</li>
-                            <li>Tracking Your First Month</li>
-                            <li>Cutting Costs Strategically</li>
-                        </ul>
                     </div>
                     <div class="pillar-card-footer">
                         <button class="pillar-cta disabled">Coming 2026 • Pro Plan</button>
@@ -814,7 +632,7 @@
                     <div class="pillar-card-body">
                         <div class="pillar-number">Pillar 7</div>
                         <h3 class="pillar-title">Career & Income</h3>
-                        <p class="pillar-description">The fastest way to build wealth? Earn more. Learn to negotiate your salary, find high-paying opportunities, build multiple income streams, and maximize your earning potential. Your career is your biggest financial asset—treat it that way.</p>
+                        <p class="pillar-description">The fastest way to build wealth? Earn more. Learn to negotiate your salary, find high-paying opportunities, build multiple income streams, and maximize your earning potential. Your career is your biggest financial asset.treat it that way.</p>
 
                         <div class="pillar-meta">
                             <div class="meta-item">
@@ -837,24 +655,7 @@
                             </ul>
                         </div>
 
-                        <div class="pillar-for">
-                            <h4>Perfect For</h4>
-                            <p>Students entering the job market who want to maximize their earning potential from day one.</p>
-                        </div>
 
-                        <div class="pillar-gain">
-                            <h4>What You'll Gain</h4>
-                            <p>The confidence to negotiate a $5-10K higher starting salary and strategies to build additional income streams.</p>
-                        </div>
-                    </div>
-                    <div class="lesson-preview">
-                        <h4>First Lessons</h4>
-                        <ul class="preview-lessons">
-                            <li>Understanding Your Market Value</li>
-                            <li>Negotiation Fundamentals</li>
-                            <li>Evaluating Job Offers</li>
-                            <li>Your First Side Hustle</li>
-                        </ul>
                     </div>
                     <div class="pillar-card-footer">
                         <button class="pillar-cta disabled">Coming 2026 • Pro Plan</button>
@@ -896,24 +697,7 @@
                             </ul>
                         </div>
 
-                        <div class="pillar-for">
-                            <h4>Perfect For</h4>
-                            <p>Students starting their first job who are confused about withholdings, W-4s, and tax returns.</p>
-                        </div>
 
-                        <div class="pillar-gain">
-                            <h4>What You'll Gain</h4>
-                            <p>The ability to file your taxes confidently and strategies to keep more of your hard-earned money.</p>
-                        </div>
-                    </div>
-                    <div class="lesson-preview">
-                        <h4>First Lessons</h4>
-                        <ul class="preview-lessons">
-                            <li>Tax Basics for Beginners</li>
-                            <li>Understanding Your W-2</li>
-                            <li>Filing Your First Return</li>
-                            <li>Common Tax Mistakes</li>
-                        </ul>
                     </div>
                     <div class="pillar-card-footer">
                         <button class="pillar-cta disabled">Coming 2026 • Pro Plan</button>
@@ -955,24 +739,7 @@
                             </ul>
                         </div>
 
-                        <div class="pillar-for">
-                            <h4>Perfect For</h4>
-                            <p>Students moving off their parents' insurance who need to understand coverage without getting ripped off.</p>
-                        </div>
 
-                        <div class="pillar-gain">
-                            <h4>What You'll Gain</h4>
-                            <p>The knowledge to choose the right insurance coverage and avoid paying for protection you don't need.</p>
-                        </div>
-                    </div>
-                    <div class="lesson-preview">
-                        <h4>First Lessons</h4>
-                        <ul class="preview-lessons">
-                            <li>Insurance 101</li>
-                            <li>Health Insurance Decoded</li>
-                            <li>Protecting Your Stuff</li>
-                            <li>Do You Need Life Insurance?</li>
-                        </ul>
                     </div>
                     <div class="pillar-card-footer">
                         <button class="pillar-cta disabled">Coming 2026 • Premium Plan</button>
@@ -1014,24 +781,7 @@
                             </ul>
                         </div>
 
-                        <div class="pillar-for">
-                            <h4>Perfect For</h4>
-                            <p>Students preparing for major life purchases who want to avoid overpaying or making costly mistakes.</p>
-                        </div>
 
-                        <div class="pillar-gain">
-                            <h4>What You'll Gain</h4>
-                            <p>The knowledge to negotiate better deals and make smart decisions on apartments, cars, and future home purchases.</p>
-                        </div>
-                    </div>
-                    <div class="lesson-preview">
-                        <h4>First Lessons</h4>
-                        <ul class="preview-lessons">
-                            <li>Should You Rent or Buy?</li>
-                            <li>Understanding Your First Lease</li>
-                            <li>Car Buying 101</li>
-                            <li>Avoiding Common Traps</li>
-                        </ul>
                     </div>
                     <div class="pillar-card-footer">
                         <button class="pillar-cta disabled">Coming 2026 • Premium Plan</button>
@@ -1073,24 +823,7 @@
                             </ul>
                         </div>
 
-                        <div class="pillar-for">
-                            <h4>Perfect For</h4>
-                            <p>Students who want to retire wealthy and understand that starting early is the ultimate cheat code.</p>
-                        </div>
 
-                        <div class="pillar-gain">
-                            <h4>What You'll Gain</h4>
-                            <p>A retirement strategy that could make you a millionaire by 65—even if you're starting with nothing today.</p>
-                        </div>
-                    </div>
-                    <div class="lesson-preview">
-                        <h4>First Lessons</h4>
-                        <ul class="preview-lessons">
-                            <li>Why Start Now?</li>
-                            <li>Understanding Your 401(k)</li>
-                            <li>Roth IRA Explained</li>
-                            <li>The Power of Time</li>
-                        </ul>
                     </div>
                     <div class="pillar-card-footer">
                         <button class="pillar-cta disabled">Coming 2026 • Premium Plan</button>
@@ -1191,6 +924,32 @@
         }
 
         updateNav();
+
+        // Handle Pillar 1 Start button - check login status
+        const pillar1Btn = document.getElementById('pillar1StartBtn');
+        if (pillar1Btn) {
+            pillar1Btn.addEventListener('click', async function(e) {
+                e.preventDefault();
+
+                // Check if user is logged in
+                try {
+                    const response = await fetch(`${API_URL}/auth/me`, {
+                        credentials: 'include'
+                    });
+
+                    if (response.ok) {
+                        // User is logged in, redirect to lessons
+                        window.location.href = 'pillar1-lessons.html';
+                    } else {
+                        // User is not logged in, redirect to login
+                        window.location.href = 'login.html';
+                    }
+                } catch (error) {
+                    // Error checking auth, redirect to login
+                    window.location.href = 'login.html';
+                }
+            });
+        }
     </script>
 </body>
 </html>
