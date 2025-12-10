@@ -79,6 +79,19 @@ async function initializeDatabase() {
     `);
     console.log('Feedback table ready');
 
+    // Password reset tokens table
+    await client.query(`
+      CREATE TABLE IF NOT EXISTS password_reset_tokens (
+        id SERIAL PRIMARY KEY,
+        email VARCHAR(255) NOT NULL,
+        token VARCHAR(10) NOT NULL,
+        expires_at TIMESTAMP NOT NULL,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        used BOOLEAN DEFAULT false
+      )
+    `);
+    console.log('Password reset tokens table ready');
+
     await client.query('COMMIT');
   } catch (err) {
     await client.query('ROLLBACK');
@@ -190,6 +203,66 @@ async function getFeedbackCount() {
   return { count: parseInt(result.rows[0].count) };
 }
 
+// Update user password (case-insensitive email lookup)
+async function updateUserPassword(email, hashedPassword) {
+  const result = await pool.query(
+    'UPDATE users SET password = $1, updated_at = CURRENT_TIMESTAMP WHERE LOWER(email) = LOWER($2)',
+    [hashedPassword, email]
+  );
+  if (result.rowCount === 0) {
+    throw new Error('User not found');
+  }
+}
+
+// Password reset token functions
+
+// Create reset token
+async function createResetToken(email, token, expiresAt) {
+  // First, invalidate any existing tokens for this email
+  await pool.query(
+    'UPDATE password_reset_tokens SET used = true WHERE LOWER(email) = LOWER($1) AND used = false',
+    [email]
+  );
+
+  // Then create new token
+  const result = await pool.query(
+    'INSERT INTO password_reset_tokens (email, token, expires_at) VALUES ($1, $2, $3) RETURNING id',
+    [email, token, expiresAt]
+  );
+  return result.rows[0].id;
+}
+
+// Get valid reset token
+async function getResetToken(email, token) {
+  const result = await pool.query(
+    `SELECT * FROM password_reset_tokens
+     WHERE LOWER(email) = LOWER($1)
+     AND token = $2
+     AND used = false
+     AND expires_at > NOW()
+     ORDER BY created_at DESC
+     LIMIT 1`,
+    [email, token]
+  );
+  return result.rows[0] || null;
+}
+
+// Mark token as used
+async function markTokenUsed(id) {
+  await pool.query(
+    'UPDATE password_reset_tokens SET used = true WHERE id = $1',
+    [id]
+  );
+}
+
+// Clean up expired tokens (optional maintenance)
+async function cleanupExpiredTokens() {
+  const result = await pool.query(
+    'DELETE FROM password_reset_tokens WHERE expires_at < NOW() OR used = true'
+  );
+  return result.rowCount;
+}
+
 module.exports = {
   pool,
   getUserByEmail,
@@ -197,10 +270,15 @@ module.exports = {
   getAllUsers,
   createUser,
   updateUserTier,
+  updateUserPassword,
   markLessonComplete,
   getUserProgress,
   getCompletedLessonsCount,
   createFeedback,
   getAllFeedback,
-  getFeedbackCount
+  getFeedbackCount,
+  createResetToken,
+  getResetToken,
+  markTokenUsed,
+  cleanupExpiredTokens
 };

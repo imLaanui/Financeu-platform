@@ -93,9 +93,15 @@
     'use strict';
 
     // Add active class on button click for better feedback
-    const buttons = document.querySelectorAll('.btn-primary, .btn-outline, button');
+    // EXCLUDE nav login button from animations
+    const buttons = document.querySelectorAll('.btn-primary:not(.nav-links .btn-primary), .btn-outline:not(.nav-links .btn-outline), button');
 
     buttons.forEach(button => {
+        // Double-check: skip if button is inside nav-links
+        if (button.closest('.nav-links')) {
+            return;
+        }
+
         button.addEventListener('click', function(e) {
             this.style.transform = 'scale(0.95)';
 
