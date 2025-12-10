@@ -152,6 +152,21 @@ async function updateUserTier(userId, tier) {
   });
 }
 
+// Update user password
+async function updateUserPassword(email, hashedPassword) {
+  return new Promise((resolve, reject) => {
+    db.run(
+      'UPDATE users SET password = ?, updated_at = CURRENT_TIMESTAMP WHERE email = ?',
+      [hashedPassword, email],
+      function(err) {
+        if (err) reject(err);
+        else if (this.changes === 0) reject(new Error('User not found'));
+        else resolve();
+      }
+    );
+  });
+}
+
 // Mark lesson as completed
 async function markLessonComplete(userId, lessonId) {
   return new Promise((resolve, reject) => {
@@ -248,6 +263,7 @@ module.exports = {
   getAllUsers,
   createUser,
   updateUserTier,
+  updateUserPassword,
   markLessonComplete,
   getUserProgress,
   getCompletedLessonsCount,

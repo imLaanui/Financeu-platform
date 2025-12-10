@@ -991,6 +991,11 @@ body {
     width: 100%;
 }
 
+/* Explicitly disable underline for buttons in nav */
+.nav-links .btn-primary::after {
+    display: none !important;
+}
+
 /* Scroll Reveal Animation Classes */
 .scroll-reveal {
     opacity: 0;

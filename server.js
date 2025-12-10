@@ -175,6 +175,93 @@ app.post('/api/auth/logout', (req, res) => {
   res.json({ message: 'Logout successful' });
 });
 
+// Temporary storage for reset codes (in production, use database with expiration)
+const resetCodes = new Map(); // Format: { email: { code, expiry } }
+
+// Forgot Password - Generate Reset Code
+app.post('/api/auth/forgot-password', async (req, res) => {
+  try {
+    const { email } = req.body;
+
+    if (!email) {
+      return res.status(400).json({ error: 'Email is required' });
+    }
+
+    // Check if user exists
+    const user = await db.getUserByEmail(email);
+
+    if (!user) {
+      // For security, don't reveal if email exists
+      return res.status(200).json({
+        message: 'If that email exists, a reset code has been generated',
+        resetCode: '000000' // Fake code for non-existent users
+      });
+    }
+
+    // Generate 6-digit code
+    const resetCode = Math.floor(100000 + Math.random() * 900000).toString();
+
+    // Store code with 15-minute expiry
+    const expiry = Date.now() + 15 * 60 * 1000;
+    resetCodes.set(email, { code: resetCode, expiry });
+
+    // In production, send this via email
+    // For now, return it in the response
+    res.json({
+      message: 'Reset code generated',
+      resetCode // Remove this in production after email is implemented
+    });
+  } catch (error) {
+    console.error('Forgot password error:', error);
+    res.status(500).json({ error: 'Server error' });
+  }
+});
+
+// Reset Password - Verify Code and Update Password
+app.post('/api/auth/reset-password', async (req, res) => {
+  try {
+    const { email, resetCode, newPassword } = req.body;
+
+    if (!email || !resetCode || !newPassword) {
+      return res.status(400).json({ error: 'All fields are required' });
+    }
+
+    if (newPassword.length < 6) {
+      return res.status(400).json({ error: 'Password must be at least 6 characters' });
+    }
+
+    // Check if reset code exists and is valid
+    const storedCode = resetCodes.get(email);
+
+    if (!storedCode) {
+      return res.status(400).json({ error: 'Invalid or expired reset code' });
+    }
+
+    if (storedCode.expiry < Date.now()) {
+      resetCodes.delete(email);
+      return res.status(400).json({ error: 'Reset code has expired' });
+    }
+
+    if (storedCode.code !== resetCode) {
+      return res.status(400).json({ error: 'Invalid reset code' });
+    }
+
+    // Hash new password
+    const hashedPassword = await bcrypt.hash(newPassword, 10);
+
+    // Update password in database
+    await db.updateUserPassword(email, hashedPassword);
+
+    // Delete used reset code
+    resetCodes.delete(email);
+
+    res.json({ message: 'Password reset successful' });
+  } catch (error) {
+    console.error('Reset password error:', error);
+    res.status(500).json({ error: 'Server error' });
+  }
+});
+
 // Get Current User (Check if logged in)
 app.get('/api/auth/me', authenticateToken, async (req, res) => {
   try {
