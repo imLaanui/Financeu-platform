@@ -112,15 +112,24 @@ body {
 
 .nav-links .btn-primary {
     color: white !important;
+    overflow: visible !important;
 }
 
-.nav-links .btn-primary::before {
+.nav-links .btn-primary::before,
+.nav-links .btn-primary::after {
     display: none !important;
+    content: none !important;
 }
 
 .nav-links .btn-primary:hover {
     color: white !important;
     box-shadow: 0 0 20px rgba(10, 26, 47, 0.6), 0 0 40px rgba(10, 26, 47, 0.4);
+}
+
+.nav-links .btn-primary:active::after,
+.nav-links .btn-primary:active::before {
+    display: none !important;
+    content: none !important;
 }
 
 .btn-primary:hover {
@@ -993,11 +1002,6 @@ body {
 
 .nav-links a:not(.btn-primary):hover::after {
     width: 100%;
-}
-
-/* Explicitly disable underline for buttons in nav */
-.nav-links .btn-primary::after {
-    display: none !important;
 }
 
 /* Scroll Reveal Animation Classes */
