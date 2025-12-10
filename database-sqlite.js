@@ -94,10 +94,10 @@ function initializeDatabase() {
 
 // Convert callback-based functions to async/await for consistency with PostgreSQL
 
-// Get user by email
+// Get user by email (case-insensitive)
 async function getUserByEmail(email) {
   return new Promise((resolve, reject) => {
-    db.get('SELECT * FROM users WHERE email = ?', [email], (err, row) => {
+    db.get('SELECT * FROM users WHERE LOWER(email) = LOWER(?)', [email], (err, row) => {
       if (err) reject(err);
       else resolve(row || null);
     });
@@ -152,11 +152,11 @@ async function updateUserTier(userId, tier) {
   });
 }
 
-// Update user password
+// Update user password (case-insensitive email lookup)
 async function updateUserPassword(email, hashedPassword) {
   return new Promise((resolve, reject) => {
     db.run(
-      'UPDATE users SET password = ?, updated_at = CURRENT_TIMESTAMP WHERE email = ?',
+      'UPDATE users SET password = ?, updated_at = CURRENT_TIMESTAMP WHERE LOWER(email) = LOWER(?)',
       [hashedPassword, email],
       function(err) {
         if (err) reject(err);
