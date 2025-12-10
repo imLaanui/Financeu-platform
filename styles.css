@@ -95,7 +95,7 @@ body {
     overflow: hidden;
 }
 
-.btn-primary::before {
+.btn-primary:not(.nav-links .btn-primary)::before {
     content: '';
     position: absolute;
     top: 0;
@@ -106,7 +106,7 @@ body {
     transition: left 0.5s;
 }
 
-.btn-primary:hover::before {
+.btn-primary:not(.nav-links .btn-primary):hover::before {
     left: 100%;
 }
 
@@ -116,6 +116,7 @@ body {
 
 .nav-links .btn-primary:hover {
     color: white !important;
+    box-shadow: 0 0 20px rgba(10, 26, 47, 0.6), 0 0 40px rgba(10, 26, 47, 0.4);
 }
 
 .btn-primary:hover {

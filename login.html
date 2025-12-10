@@ -166,6 +166,7 @@
 
                 <div class="auth-footer">
                     <p>Don't have an account? <a href="/signup.html">Sign up</a></p>
+                    <p style="margin-top: 10px;"><a href="#" id="resetPasswordLink">Forgot your password?</a></p>
                 </div>
             </div>
 
@@ -284,6 +285,12 @@
         }
 
         checkIfLoggedIn();
+
+        // Handle reset password link
+        document.getElementById('resetPasswordLink').addEventListener('click', (e) => {
+            e.preventDefault();
+            showError('Password reset functionality coming soon! For now, please contact support at support@financeu.com or ask an administrator to reset your password using the reset-password-simple.js script.');
+        });
     </script>
 </body>
 </html>
