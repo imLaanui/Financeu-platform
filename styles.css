@@ -114,6 +114,10 @@ body {
     color: white !important;
 }
 
+.nav-links .btn-primary::before {
+    display: none !important;
+}
+
 .nav-links .btn-primary:hover {
     color: white !important;
     box-shadow: 0 0 20px rgba(10, 26, 47, 0.6), 0 0 40px rgba(10, 26, 47, 0.4);
