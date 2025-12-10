@@ -175,9 +175,6 @@ app.post('/api/auth/logout', (req, res) => {
   res.json({ message: 'Logout successful' });
 });
 
-// Temporary storage for reset codes (in production, use database with expiration)
-const resetCodes = new Map(); // Format: { email: { code, expiry } }
-
 // Forgot Password - Generate Reset Code
 app.post('/api/auth/forgot-password', async (req, res) => {
   try {
@@ -195,6 +192,7 @@ app.post('/api/auth/forgot-password', async (req, res) => {
 
     if (!user) {
       // For security, don't reveal if email exists
+      // Still return success but with a fake code
       return res.status(200).json({
         message: 'If that email exists, a reset code has been generated',
         resetCode: '000000' // Fake code for non-existent users
@@ -204,11 +202,13 @@ app.post('/api/auth/forgot-password', async (req, res) => {
     // Generate 6-digit code
     const resetCode = Math.floor(100000 + Math.random() * 900000).toString();
 
-    // Store code with 15-minute expiry
-    const expiry = Date.now() + 15 * 60 * 1000;
-    resetCodes.set(normalizedEmail, { code: resetCode, expiry });
+    // Calculate expiry: 1 hour from now
+    const expiresAt = new Date(Date.now() + 60 * 60 * 1000).toISOString();
 
-    console.log('✓ Reset code generated for:', normalizedEmail, '| Code:', resetCode, '| Expiry:', new Date(expiry));
+    // Store token in database
+    await db.createResetToken(normalizedEmail, resetCode, expiresAt);
+
+    console.log('✓ Reset code generated for:', normalizedEmail, '| Code:', resetCode, '| Expires:', expiresAt);
 
     // In production, send this via email
     // For now, return it in the response
@@ -239,29 +239,39 @@ app.post('/api/auth/reset-password', async (req, res) => {
     const normalizedEmail = email.toLowerCase().trim();
     const trimmedCode = resetCode.trim();
 
-    console.log('Reset password attempt for:', normalizedEmail, '| Code provided:', trimmedCode);
+    console.log('🔐 Reset password attempt for:', normalizedEmail, '| Code:', trimmedCode);
 
-    // Check if reset code exists and is valid
-    const storedCode = resetCodes.get(normalizedEmail);
+    // Get token from database
+    const tokenRecord = await db.getResetToken(normalizedEmail, trimmedCode);
 
-    console.log('Stored code:', storedCode);
-    console.log('All stored codes:', Array.from(resetCodes.entries()));
+    if (!tokenRecord) {
+      console.log('❌ No valid token found for email:', normalizedEmail);
+      // Check if there's any token for this email to give better error
+      const anyToken = await new Promise((resolve, reject) => {
+        db.db.get(
+          'SELECT * FROM password_reset_tokens WHERE LOWER(email) = LOWER(?) AND token = ? ORDER BY created_at DESC LIMIT 1',
+          [normalizedEmail, trimmedCode],
+          (err, row) => {
+            if (err) reject(err);
+            else resolve(row || null);
+          }
+        );
+      });
 
-    if (!storedCode) {
-      console.log('❌ No reset code found for email:', normalizedEmail);
-      return res.status(400).json({ error: 'Invalid or expired reset code' });
+      console.log('Found any token:', anyToken);
+
+      if (anyToken) {
+        if (anyToken.used === 1) {
+          return res.status(400).json({ error: 'This reset code has already been used. Please request a new one.' });
+        } else {
+          return res.status(400).json({ error: 'This reset code has expired. Please request a new one.' });
+        }
+      } else {
+        return res.status(400).json({ error: 'Invalid reset code. Please check the code and try again.' });
+      }
     }
 
-    if (storedCode.expiry < Date.now()) {
-      console.log('❌ Reset code expired');
-      resetCodes.delete(normalizedEmail);
-      return res.status(400).json({ error: 'Reset code has expired' });
-    }
-
-    if (storedCode.code !== trimmedCode) {
-      console.log('❌ Code mismatch. Stored:', storedCode.code, '| Provided:', trimmedCode);
-      return res.status(400).json({ error: 'Invalid reset code' });
-    }
+    console.log('✓ Valid token found:', tokenRecord.id);
 
     // Hash new password
     const hashedPassword = await bcrypt.hash(newPassword, 10);
@@ -269,8 +279,8 @@ app.post('/api/auth/reset-password', async (req, res) => {
     // Update password in database
     await db.updateUserPassword(normalizedEmail, hashedPassword);
 
-    // Delete used reset code
-    resetCodes.delete(normalizedEmail);
+    // Mark token as used
+    await db.markTokenUsed(tokenRecord.id);
 
     console.log('✓ Password reset successful for:', normalizedEmail);
 

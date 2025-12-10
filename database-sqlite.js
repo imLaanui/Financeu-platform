@@ -89,6 +89,24 @@ function initializeDatabase() {
         console.log('Feedback table ready');
       }
     });
+
+    // Password reset tokens table
+    db.run(`
+      CREATE TABLE IF NOT EXISTS password_reset_tokens (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        email TEXT NOT NULL,
+        token TEXT NOT NULL,
+        expires_at DATETIME NOT NULL,
+        created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+        used BOOLEAN DEFAULT 0
+      )
+    `, (err) => {
+      if (err) {
+        console.error('Error creating password_reset_tokens table:', err.message);
+      } else {
+        console.log('Password reset tokens table ready');
+      }
+    });
   });
 }
 
@@ -256,6 +274,83 @@ async function getFeedbackCount() {
   });
 }
 
+// Password reset token functions
+
+// Create reset token
+async function createResetToken(email, token, expiresAt) {
+  return new Promise((resolve, reject) => {
+    // First, invalidate any existing tokens for this email
+    db.run(
+      'UPDATE password_reset_tokens SET used = 1 WHERE LOWER(email) = LOWER(?) AND used = 0',
+      [email],
+      (err) => {
+        if (err) {
+          reject(err);
+          return;
+        }
+
+        // Then create new token
+        db.run(
+          'INSERT INTO password_reset_tokens (email, token, expires_at) VALUES (?, ?, ?)',
+          [email, token, expiresAt],
+          function(err) {
+            if (err) reject(err);
+            else resolve(this.lastID);
+          }
+        );
+      }
+    );
+  });
+}
+
+// Get valid reset token
+async function getResetToken(email, token) {
+  return new Promise((resolve, reject) => {
+    db.get(
+      `SELECT * FROM password_reset_tokens
+       WHERE LOWER(email) = LOWER(?)
+       AND token = ?
+       AND used = 0
+       AND expires_at > datetime('now')
+       ORDER BY created_at DESC
+       LIMIT 1`,
+      [email, token],
+      (err, row) => {
+        if (err) reject(err);
+        else resolve(row || null);
+      }
+    );
+  });
+}
+
+// Mark token as used
+async function markTokenUsed(id) {
+  return new Promise((resolve, reject) => {
+    db.run(
+      'UPDATE password_reset_tokens SET used = 1 WHERE id = ?',
+      [id],
+      (err) => {
+        if (err) reject(err);
+        else resolve();
+      }
+    );
+  });
+}
+
+// Clean up expired tokens (optional maintenance)
+async function cleanupExpiredTokens() {
+  return new Promise((resolve, reject) => {
+    db.run(
+      "DELETE FROM password_reset_tokens WHERE expires_at < datetime('now') OR used = 1",
+      [],
+      function(err) {
+        if (err) reject(err);
+        else resolve(this.changes);
+      }
+    );
+  });
+}
+
 module.exports = {
   db,
   getUserByEmail,
@@ -269,5 +364,9 @@ module.exports = {
   getCompletedLessonsCount,
   createFeedback,
   getAllFeedback,
-  getFeedbackCount
+  getFeedbackCount,
+  createResetToken,
+  getResetToken,
+  markTokenUsed,
+  cleanupExpiredTokens
 };

@@ -113,8 +113,9 @@ body {
 .nav-links .btn-primary {
     color: white !important;
     overflow: visible !important;
-    transition: box-shadow 0.3s ease !important;
+    transition: none !important;
     transform: none !important;
+    animation: none !important;
 }
 
 .nav-links .btn-primary::before,
@@ -123,23 +124,32 @@ body {
     content: none !important;
 }
 
+/* NO hover effects - completely static */
 .nav-links .btn-primary:hover {
     color: white !important;
-    box-shadow: 0 0 20px rgba(10, 26, 47, 0.6), 0 0 40px rgba(10, 26, 47, 0.4) !important;
+    box-shadow: none !important;
     transform: none !important;
     background: linear-gradient(135deg, #0A1A2F 0%, #1a3a5c 100%) !important;
+    transition: none !important;
+    animation: none !important;
 }
 
+/* NO active/focus effects */
 .nav-links .btn-primary:active,
 .nav-links .btn-primary:focus {
     transform: none !important;
-    box-shadow: 0 0 20px rgba(10, 26, 47, 0.6), 0 0 40px rgba(10, 26, 47, 0.4) !important;
+    box-shadow: none !important;
+    transition: none !important;
+    animation: none !important;
+    outline: none !important;
 }
 
 .nav-links .btn-primary:active::after,
 .nav-links .btn-primary:active::before,
 .nav-links .btn-primary:focus::after,
-.nav-links .btn-primary:focus::before {
+.nav-links .btn-primary:focus::before,
+.nav-links .btn-primary:hover::after,
+.nav-links .btn-primary:hover::before {
     display: none !important;
     content: none !important;
 }
