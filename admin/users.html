@@ -687,8 +687,14 @@
 
                         <div class="progress-section">
                             <div class="overall-progress">
-                                <div style="font-size: 24px; font-weight: 600; color: var(--text-dark); margin-bottom: 5px;">${user.progress.overallPercentage}%</div>
-                                <div class="progress-label">${user.progress.completedLessons} of ${user.progress.totalLessons} lessons completed</div>
+                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                                    <span style="font-size: 14px; font-weight: 600; color: var(--text-dark);">Overall Progress</span>
+                                    <span style="font-size: 16px; font-weight: 700; color: var(--text-dark);">${user.progress.overallPercentage}%</span>
+                                </div>
+                                <div style="background: #e5e7eb; border-radius: 10px; height: 20px; overflow: hidden; position: relative;">
+                                    <div style="background: ${user.progress.overallPercentage === 100 ? 'linear-gradient(90deg, #00A676, #10b981)' : user.progress.overallPercentage > 0 ? 'linear-gradient(90deg, #3b82f6, #60a5fa)' : '#d1d5db'}; height: 100%; width: ${user.progress.overallPercentage}%; transition: width 0.3s ease;"></div>
+                                </div>
+                                <div class="progress-label" style="margin-top: 8px;">${user.progress.completedLessons} of ${user.progress.totalLessons} lessons completed</div>
                             </div>
 
                             <button class="toggle-details" onclick="togglePillarDetails(${user.id})">
@@ -703,7 +709,10 @@
                                         return `
                                             <div class="pillar-item ${isCurrent ? 'current' : ''}" title="${pillar.replace('pillar', 'Pillar ')}: ${data.completed}/${data.total} lessons (${data.percentage}%)">
                                                 <div class="pillar-name">${pillar.replace('pillar', 'P')}${isCurrent ? ' ⭐' : ''}</div>
-                                                <div class="pillar-stats">${data.percentage}%</div>
+                                                <div style="background: #e5e7eb; border-radius: 4px; height: 8px; overflow: hidden; margin: 6px 0;">
+                                                    <div style="background: ${data.percentage === 100 ? '#00A676' : data.percentage > 0 ? '#3b82f6' : '#d1d5db'}; height: 100%; width: ${data.percentage}%; transition: width 0.3s ease;"></div>
+                                                </div>
+                                                <div class="pillar-stats" style="font-size: 11px; font-weight: 600;">${data.percentage}%</div>
                                             </div>
                                         `;
                                     }).join('')}
