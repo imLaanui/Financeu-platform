@@ -1,0 +1,220 @@
+import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import "../css/feedback.css";
+
+const API_URL = import.meta.env.VITE_API_URL;
+
+export default function Feedback() {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    feedbackType: "",
+    message: ""
+  });
+
+  const [message, setMessage] = useState<{ text: string; type: "success" | "error" } | null>(null);
+  const [submitting, setSubmitting] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  // Update auth state
+  useEffect(() => {
+    const cachedAuth = localStorage.getItem("authState");
+    if (cachedAuth) {
+      setIsLoggedIn(JSON.parse(cachedAuth).isLoggedIn);
+    }
+
+    async function verifyAuth() {
+      try {
+        const res = await fetch(`${API_URL}/auth/me`, { credentials: "include" });
+        if (res.ok) {
+          localStorage.setItem("authState", JSON.stringify({ isLoggedIn: true }));
+          setIsLoggedIn(true);
+        } else {
+          localStorage.setItem("authState", JSON.stringify({ isLoggedIn: false }));
+          setIsLoggedIn(false);
+        }
+      } catch {
+        localStorage.setItem("authState", JSON.stringify({ isLoggedIn: false }));
+        setIsLoggedIn(false);
+      }
+    }
+
+    verifyAuth();
+  }, []);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setSubmitting(true);
+    setMessage(null);
+
+    try {
+      const response = await fetch(`${API_URL}/feedback`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: formData.name || null,
+          email: formData.email || null,
+          feedbackType: formData.feedbackType,
+          message: formData.message
+        })
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        setMessage({ text: "Thank you! Your feedback has been submitted successfully.", type: "success" });
+        setFormData({ name: "", email: "", feedbackType: "", message: "" });
+      } else {
+        setMessage({ text: data.error || "Failed to submit feedback. Please try again.", type: "error" });
+      }
+    } catch (error: any) {
+      setMessage({ text: `Network error: ${error.message}`, type: "error" });
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
+  return (
+    <>
+      {/* Navbar */}
+      <nav className="navbar">
+        <div className="container">
+          <div className="nav-wrapper">
+            <div className="logo">
+              <Link to="/" style={{ color: "inherit", textDecoration: "none" }}>
+                Finance<span className="logo-accent">U</span>
+              </Link>
+            </div>
+            <ul className="nav-links">
+              <li><Link to="/curriculum">Curriculum</Link></li>
+              <li><a href="/#features">Features</a></li>
+              <li><a href="/#pricing">Pricing</a></li>
+              <li><Link to="/about">About</Link></li>
+              <li>
+                {isLoggedIn ? (
+                  <Link to="/dashboard" className="btn-primary">Dashboard</Link>
+                ) : (
+                  <Link to="/login" className="btn-primary">Login</Link>
+                )}
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+
+      {/* Hero Section */}
+      <section className="feedback-hero">
+        <h1>We Want to Hear From You!</h1>
+        <p>Your feedback helps us improve FinanceU for everyone</p>
+      </section>
+
+      {/* Feedback Form */}
+      <div className="feedback-content">
+        <div className="feedback-form">
+          {message && <div className={`message ${message.type} show`}>{message.text}</div>}
+
+          <form onSubmit={handleSubmit}>
+            <div className="form-group">
+              <label htmlFor="name">Your Name (Optional)</label>
+              <input
+                type="text"
+                id="name"
+                name="name"
+                placeholder="John Doe"
+                value={formData.name}
+                onChange={handleChange}
+              />
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="email">Your Email (Optional)</label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                placeholder="john@example.com"
+                value={formData.email}
+                onChange={handleChange}
+              />
+              <small>We'll only use this if we need to follow up on your feedback</small>
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="feedbackType">Feedback Type *</label>
+              <select
+                id="feedbackType"
+                name="feedbackType"
+                required
+                value={formData.feedbackType}
+                onChange={handleChange}
+              >
+                <option value="">Select feedback type...</option>
+                <option value="Bug Report">Bug Report</option>
+                <option value="Feature Request">Feature Request</option>
+                <option value="General Feedback">General Feedback</option>
+                <option value="Compliment">Compliment</option>
+              </select>
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="message">Your Message *</label>
+              <textarea
+                id="message"
+                name="message"
+                placeholder="Tell us what's on your mind..."
+                required
+                minLength={10}
+                value={formData.message}
+                onChange={handleChange}
+              ></textarea>
+              <small>Minimum 10 characters</small>
+            </div>
+
+            <button type="submit" className="submit-btn" disabled={submitting}>
+              {submitting ? "Submitting..." : "Submit Feedback"}
+            </button>
+          </form>
+        </div>
+      </div>
+
+      {/* Footer */}
+      <footer className="footer">
+        <div className="container">
+          <div className="footer-content">
+            <div className="footer-section">
+              <h4>FinanceU</h4>
+              <p>Making financial literacy accessible for everyone.</p>
+            </div>
+            <div className="footer-section">
+              <h4>Company</h4>
+              <ul>
+                <li><Link to="/about">About Us</Link></li>
+                <li><Link to="/careers">Careers</Link></li>
+                <li><Link to="/contact">Contact</Link></li>
+              </ul>
+            </div>
+            <div className="footer-section">
+              <h4>Support</h4>
+              <ul>
+                <li><Link to="/help">Help Center</Link></li>
+                <li><Link to="/privacy">Privacy Policy</Link></li>
+                <li><Link to="/terms">Terms of Service</Link></li>
+              </ul>
+            </div>
+          </div>
+          <div className="footer-bottom">
+            <p style={{ fontSize: "0.85rem", opacity: 0.8, marginBottom: "10px" }}>
+              Disclaimer: FinanceU provides educational content only and does not offer financial, legal, or investment advice. Always consult with a qualified professional before making financial decisions.
+            </p>
+            <p>&copy; 2025 FinanceU. All rights reserved.</p>
+          </div>
+        </div>
+      </footer>
+    </>
+  );
+}
