@@ -68,7 +68,7 @@ export default function Login() {
             }
         };
         checkIfLoggedIn();
-    }, [navigate]); // include navigate
+    }, [navigate]);
 
     return (
         <section className="auth-container">
