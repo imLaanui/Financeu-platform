@@ -708,49 +708,65 @@
                 const lessonsData = await lessonsRes.json();
                 const progressData = await progressRes.json();
 
-                // ====== PILLAR 1 PROGRESS TRACKING ======
+                // ====== PILLAR 1 & 2 PROGRESS TRACKING ======
                 // Use user-specific localStorage keys to keep progress separate per account
                 const userId = user.id;
                 const pillar1Completed = JSON.parse(localStorage.getItem(`pillar1_completed_${userId}`) || '[]');
-                const quizCompleted = localStorage.getItem(`pillar1_quiz_completed_${userId}`) === 'true';
+                const pillar1QuizCompleted = localStorage.getItem(`pillar1_quiz_completed_${userId}`) === 'true';
+                const pillar2Completed = JSON.parse(localStorage.getItem(`pillar2_completed_${userId}`) || '[]');
+                const pillar2QuizCompleted = localStorage.getItem(`pillar2_quiz_completed_${userId}`) === 'true';
 
-                const totalLessons = 8;
-                const totalItems = 9; // 8 lessons + 1 quiz
-                const completedLessonsCount = pillar1Completed.length;
+                const totalLessonsPerPillar = 8;
+                const totalItemsPerPillar = 9; // 8 lessons + 1 quiz
 
-                // Update "Lessons Completed" stat
-                document.getElementById('completedLessons').textContent = completedLessonsCount;
+                // Total completed lessons across ALL pillars
+                const totalCompletedLessons = pillar1Completed.length + pillar2Completed.length;
 
-                // Calculate "Overall Progress" percentage
-                // RULE: Only show 100% when user passes the final quiz
-                let progressPercent = 0;
+                // Update "Lessons Completed" stat (counts all pillars)
+                document.getElementById('completedLessons').textContent = totalCompletedLessons;
 
-                if (quizCompleted === true) {
-                    // Quiz passed → 100% complete
-                    progressPercent = 100;
-                } else {
-                    // Quiz NOT passed → Maximum 89% (8 lessons out of 9 total items)
-                    // Formula: (completed lessons / 9 total items) × 100
-                    progressPercent = Math.round((completedLessonsCount / totalItems) * 100);
-                }
+                // Calculate "Overall Progress" percentage (based on all available pillars)
+                const totalAvailableLessons = totalLessonsPerPillar * 2; // 2 pillars available
+                const totalAvailableItems = totalItemsPerPillar * 2; // 2 pillars × 9 items each
+                const pillar1QuizBonus = pillar1QuizCompleted ? 1 : 0;
+                const pillar2QuizBonus = pillar2QuizCompleted ? 1 : 0;
+                const totalCompletedItems = totalCompletedLessons + pillar1QuizBonus + pillar2QuizBonus;
 
+                let progressPercent = Math.round((totalCompletedItems / totalAvailableItems) * 100);
                 document.getElementById('progressPercent').textContent = `${progressPercent}%`;
 
                 // Update Pillar 1 button text
                 const pillar1Button = document.getElementById('pillar1Button');
 
-                if (quizCompleted === true) {
+                if (pillar1QuizCompleted === true) {
                     // User finished everything including quiz
                     pillar1Button.textContent = 'Review Pillar';
-                } else if (completedLessonsCount > 0 && completedLessonsCount < totalLessons) {
+                } else if (pillar1Completed.length > 0 && pillar1Completed.length < totalLessonsPerPillar) {
                     // User started but hasn't finished all lessons
                     pillar1Button.textContent = 'Continue Pillar';
-                } else if (completedLessonsCount === totalLessons) {
+                } else if (pillar1Completed.length === totalLessonsPerPillar) {
                     // User finished all 8 lessons but hasn't passed quiz
                     pillar1Button.textContent = 'Continue Pillar';
                 } else {
                     // User hasn't started any lessons yet
                     pillar1Button.textContent = 'Start Pillar';
+                }
+
+                // Update Pillar 2 button text
+                const pillar2Button = document.getElementById('pillar2Button');
+
+                if (pillar2QuizCompleted === true) {
+                    // User finished everything including quiz
+                    pillar2Button.textContent = 'Review Pillar';
+                } else if (pillar2Completed.length > 0 && pillar2Completed.length < totalLessonsPerPillar) {
+                    // User started but hasn't finished all lessons
+                    pillar2Button.textContent = 'Continue Pillar';
+                } else if (pillar2Completed.length === totalLessonsPerPillar) {
+                    // User finished all 8 lessons but hasn't passed quiz
+                    pillar2Button.textContent = 'Continue Pillar';
+                } else {
+                    // User hasn't started any lessons yet
+                    pillar2Button.textContent = 'Start Pillar';
                 }
 
                 // Create a map of completed lessons
