@@ -106,10 +106,6 @@
             gap: 6px;
             box-shadow: 0 2px 8px rgba(0, 166, 118, 0.3);
         }
-        .completed-badge::before {
-            content: '✓';
-            font-size: 16px;
-        }
         .btn-start-lesson {
             padding: 12px 24px;
             background: var(--primary-color);
@@ -459,7 +455,7 @@
                     if (completed.includes(1)) {
                         lessonCard.classList.add('completed');
                         statusDiv.innerHTML = `
-                            <span class="completed-badge">✓ Completed</span>
+                            <span class="completed-badge">Completed</span>
                             <a href="pillar1-lesson1.html" class="btn-start-lesson">Review</a>
                         `;
                     }
@@ -476,7 +472,7 @@
                         // Lesson completed
                         lessonCard.classList.add('completed');
                         statusDiv.innerHTML = `
-                            <span class="completed-badge">✓ Completed</span>
+                            <span class="completed-badge">Completed</span>
                             <a href="pillar1-lesson${lessonNum}.html" class="btn-start-lesson">Review</a>
                         `;
                     }
