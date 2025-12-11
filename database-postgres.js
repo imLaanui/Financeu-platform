@@ -203,6 +203,14 @@ async function getFeedbackCount() {
   return { count: parseInt(result.rows[0].count) };
 }
 
+// Delete feedback
+async function deleteFeedback(id) {
+  const result = await pool.query('DELETE FROM feedback WHERE id = $1', [id]);
+  if (result.rowCount === 0) {
+    throw new Error('Feedback not found');
+  }
+}
+
 // Update user password (case-insensitive email lookup)
 async function updateUserPassword(email, hashedPassword) {
   const result = await pool.query(
@@ -290,6 +298,7 @@ module.exports = {
   createFeedback,
   getAllFeedback,
   getFeedbackCount,
+  deleteFeedback,
   createResetToken,
   getResetToken,
   getAnyResetToken,

@@ -274,6 +274,21 @@ async function getFeedbackCount() {
   });
 }
 
+// Delete feedback
+async function deleteFeedback(id) {
+  return new Promise((resolve, reject) => {
+    db.run(
+      'DELETE FROM feedback WHERE id = ?',
+      [id],
+      function(err) {
+        if (err) reject(err);
+        else if (this.changes === 0) reject(new Error('Feedback not found'));
+        else resolve();
+      }
+    );
+  });
+}
+
 // Password reset token functions
 
 // Create reset token
@@ -383,6 +398,7 @@ module.exports = {
   createFeedback,
   getAllFeedback,
   getFeedbackCount,
+  deleteFeedback,
   createResetToken,
   getResetToken,
   getAnyResetToken,

@@ -470,7 +470,39 @@ app.get('/api/admin/feedback', async (req, res) => {
   }
 });
 
-// Admin: Get all users (requires admin authentication)
+// Admin: Delete feedback (requires admin authentication)
+app.delete('/api/admin/feedback/:id', async (req, res) => {
+  try {
+    // Simple admin authentication check
+    const authHeader = req.headers.authorization;
+
+    if (!authHeader || !authHeader.startsWith('Basic ')) {
+      return res.status(401).json({ error: 'Authentication required' });
+    }
+
+    const credentials = Buffer.from(authHeader.split(' ')[1], 'base64').toString('ascii');
+    const [username, password] = credentials.split(':');
+
+    if (username !== 'admin' || password !== 'financeu2025') {
+      return res.status(401).json({ error: 'Invalid credentials' });
+    }
+
+    const feedbackId = parseInt(req.params.id);
+
+    if (isNaN(feedbackId)) {
+      return res.status(400).json({ error: 'Invalid feedback ID' });
+    }
+
+    await db.deleteFeedback(feedbackId);
+
+    res.json({ message: 'Feedback deleted successfully' });
+  } catch (error) {
+    console.error('Delete feedback error:', error);
+    res.status(500).json({ error: 'Error deleting feedback' });
+  }
+});
+
+// Admin: Get all users with progress data (requires admin authentication)
 app.get('/api/admin/users', async (req, res) => {
   try {
     // Simple admin authentication check
@@ -489,9 +521,66 @@ app.get('/api/admin/users', async (req, res) => {
 
     const users = await db.getAllUsers();
 
+    // Enrich users with progress data
+    const usersWithProgress = await Promise.all(users.map(async (user) => {
+      const progress = await db.getUserProgress(user.id);
+      const completedCount = await db.getCompletedLessonsCount(user.id);
+
+      // Calculate per-pillar progress (assuming 8 lessons per pillar for pillars 1-3, 8 for others)
+      const pillarLessons = {
+        'pillar1': 8, 'pillar2': 8, 'pillar3': 8,
+        'pillar4': 8, 'pillar5': 8, 'pillar6': 8,
+        'pillar7': 8, 'pillar8': 8, 'pillar9': 8,
+        'pillar10': 8, 'pillar11': 8
+      };
+
+      const pillarProgress = {};
+      let currentPillar = null;
+      let currentLesson = null;
+      let lastActivity = null;
+
+      Object.keys(pillarLessons).forEach(pillar => {
+        const pillarLessonsCompleted = progress.filter(p =>
+          p.lesson_id.startsWith(pillar) && p.completed
+        ).length;
+
+        pillarProgress[pillar] = {
+          completed: pillarLessonsCompleted,
+          total: pillarLessons[pillar],
+          percentage: Math.round((pillarLessonsCompleted / pillarLessons[pillar]) * 100)
+        };
+
+        // Find most recent activity
+        progress.forEach(p => {
+          if (p.completed_at && (!lastActivity || new Date(p.completed_at) > new Date(lastActivity))) {
+            lastActivity = p.completed_at;
+            currentLesson = p.lesson_id;
+            currentPillar = p.lesson_id.split('_')[0];
+          }
+        });
+      });
+
+      // Calculate overall progress (88 total lessons)
+      const totalLessons = 88;
+      const overallPercentage = Math.round((completedCount.count / totalLessons) * 100);
+
+      return {
+        ...user,
+        progress: {
+          completedLessons: completedCount.count,
+          totalLessons,
+          overallPercentage,
+          pillarProgress,
+          currentPillar,
+          currentLesson,
+          lastActivity
+        }
+      };
+    }));
+
     res.json({
-      users,
-      total: users.length
+      users: usersWithProgress,
+      total: usersWithProgress.length
     });
   } catch (error) {
     console.error('Get users error:', error);

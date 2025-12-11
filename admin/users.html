@@ -20,7 +20,7 @@
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
         }
         .admin-header .container {
-            max-width: 1400px;
+            max-width: 1600px;
             margin: 0 auto;
             display: flex;
             justify-content: space-between;
@@ -60,7 +60,7 @@
             background: rgba(255, 255, 255, 0.3);
         }
         .admin-content {
-            max-width: 1400px;
+            max-width: 1600px;
             margin: 40px auto;
             padding: 0 20px;
         }
@@ -101,36 +101,65 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
         }
         .users-list-header h2 {
             margin: 0;
             font-size: 24px;
         }
-        .filter-dropdown {
+        .filters {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .filter-dropdown, .sort-dropdown {
             padding: 8px 16px;
             border: 1px solid #ddd;
             border-radius: 6px;
             font-size: 14px;
             cursor: pointer;
+            background: white;
         }
-        .users-table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-        .users-table th {
-            background: #f8f9fa;
-            padding: 15px 25px;
-            text-align: left;
-            font-weight: 600;
-            color: var(--text-primary);
-            border-bottom: 2px solid #e5e7eb;
-        }
-        .users-table td {
-            padding: 20px 25px;
+        .user-card {
+            padding: 25px;
             border-bottom: 1px solid #e5e7eb;
+            transition: background 0.2s;
         }
-        .users-table tr:hover {
+        .user-card:hover {
             background: #f8f9fa;
+        }
+        .user-card:last-child {
+            border-bottom: none;
+        }
+        .user-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        .user-info {
+            flex: 1;
+            min-width: 250px;
+        }
+        .user-name {
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 5px;
+        }
+        .user-email {
+            color: var(--text-secondary);
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+        .user-meta {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            flex-wrap: wrap;
         }
         .tier-badge {
             padding: 6px 12px;
@@ -151,6 +180,108 @@
         .tier-badge.premium {
             background-color: #3b82f6;
             color: white;
+        }
+        .user-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        .stat-item {
+            background: #f8f9fa;
+            padding: 12px 15px;
+            border-radius: 8px;
+        }
+        .stat-label {
+            font-size: 12px;
+            color: var(--text-secondary);
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .stat-value-small {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+        .progress-section {
+            margin-top: 20px;
+        }
+        .progress-section h4 {
+            font-size: 14px;
+            color: var(--text-dark);
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+        .overall-progress {
+            margin-bottom: 20px;
+        }
+        .progress-bar-container {
+            background: #e5e7eb;
+            border-radius: 8px;
+            height: 28px;
+            overflow: hidden;
+            position: relative;
+            margin-bottom: 5px;
+        }
+        .progress-bar {
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 13px;
+            font-weight: 600;
+            color: white;
+            transition: width 0.3s ease;
+        }
+        .progress-bar.green {
+            background: linear-gradient(90deg, #00A676 0%, #00d993 100%);
+        }
+        .progress-bar.yellow {
+            background: linear-gradient(90deg, #f59e0b 0%, #fbbf24 100%);
+        }
+        .progress-bar.gray {
+            background: #9ca3af;
+        }
+        .progress-label {
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+        .pillar-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 10px;
+        }
+        .pillar-item {
+            background: #f8f9fa;
+            padding: 12px;
+            border-radius: 8px;
+            border: 2px solid transparent;
+        }
+        .pillar-item.current {
+            border-color: #3b82f6;
+            background: #eff6ff;
+        }
+        .pillar-name {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 8px;
+        }
+        .pillar-progress {
+            background: #e5e7eb;
+            border-radius: 4px;
+            height: 20px;
+            overflow: hidden;
+            margin-bottom: 5px;
+        }
+        .pillar-progress .progress-bar {
+            height: 100%;
+            font-size: 11px;
+        }
+        .pillar-stats {
+            font-size: 11px;
+            color: var(--text-secondary);
         }
         .login-form {
             max-width: 400px;
@@ -278,12 +409,29 @@
             <div class="users-list">
                 <div class="users-list-header">
                     <h2>All Users</h2>
-                    <select class="filter-dropdown" id="filterTier" onchange="filterUsers()">
-                        <option value="all">All Tiers</option>
-                        <option value="free">Free</option>
-                        <option value="pro">Pro</option>
-                        <option value="premium">Premium</option>
-                    </select>
+                    <div class="filters">
+                        <select class="filter-dropdown" id="filterTier" onchange="applyFilters()">
+                            <option value="all">All Tiers</option>
+                            <option value="free">Free</option>
+                            <option value="pro">Pro</option>
+                            <option value="premium">Premium</option>
+                        </select>
+                        <select class="filter-dropdown" id="filterCompletion" onchange="applyFilters()">
+                            <option value="all">All Completion</option>
+                            <option value="0">0% Complete</option>
+                            <option value="1-25">1-25% Complete</option>
+                            <option value="26-50">26-50% Complete</option>
+                            <option value="51-75">51-75% Complete</option>
+                            <option value="76-99">76-99% Complete</option>
+                            <option value="100">100% Complete</option>
+                        </select>
+                        <select class="sort-dropdown" id="sortBy" onchange="applyFilters()">
+                            <option value="signup">Sort by Signup Date</option>
+                            <option value="activity">Sort by Last Activity</option>
+                            <option value="progress">Sort by Progress</option>
+                            <option value="name">Sort by Name</option>
+                        </select>
+                    </div>
                 </div>
                 <div id="usersContainer">
                     <div class="loading">Loading users...</div>
@@ -388,7 +536,7 @@
                     const data = await response.json();
                     allUsers = data.users;
                     updateStats(data.users);
-                    displayUsers(data.users);
+                    applyFilters();
                 } else {
                     throw new Error('Failed to load users');
                 }
@@ -411,6 +559,60 @@
             document.getElementById('premiumCount').textContent = users.filter(u => u.membership_tier === 'premium').length;
         }
 
+        // Apply filters and sorting
+        function applyFilters() {
+            const tierFilter = document.getElementById('filterTier').value;
+            const completionFilter = document.getElementById('filterCompletion').value;
+            const sortBy = document.getElementById('sortBy').value;
+
+            let filtered = [...allUsers];
+
+            // Filter by tier
+            if (tierFilter !== 'all') {
+                filtered = filtered.filter(u => u.membership_tier === tierFilter);
+            }
+
+            // Filter by completion
+            if (completionFilter !== 'all') {
+                if (completionFilter === '0') {
+                    filtered = filtered.filter(u => u.progress.overallPercentage === 0);
+                } else if (completionFilter === '100') {
+                    filtered = filtered.filter(u => u.progress.overallPercentage === 100);
+                } else {
+                    const [min, max] = completionFilter.split('-').map(Number);
+                    filtered = filtered.filter(u => {
+                        const pct = u.progress.overallPercentage;
+                        return pct >= min && pct <= max;
+                    });
+                }
+            }
+
+            // Sort
+            if (sortBy === 'activity') {
+                filtered.sort((a, b) => {
+                    const dateA = a.progress.lastActivity ? new Date(a.progress.lastActivity) : new Date(0);
+                    const dateB = b.progress.lastActivity ? new Date(b.progress.lastActivity) : new Date(0);
+                    return dateB - dateA;
+                });
+            } else if (sortBy === 'progress') {
+                filtered.sort((a, b) => b.progress.overallPercentage - a.progress.overallPercentage);
+            } else if (sortBy === 'name') {
+                filtered.sort((a, b) => a.name.localeCompare(b.name));
+            } else {
+                // Sort by signup date (default)
+                filtered.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+            }
+
+            displayUsers(filtered);
+        }
+
+        // Get progress bar color
+        function getProgressColor(percentage) {
+            if (percentage === 0) return 'gray';
+            if (percentage === 100) return 'green';
+            return 'yellow';
+        }
+
         // Display users
         function displayUsers(users) {
             const container = document.getElementById('usersContainer');
@@ -418,56 +620,98 @@
             if (users.length === 0) {
                 container.innerHTML = `
                     <div class="no-users">
-                        <h3>No users yet</h3>
-                        <p>Registered users will appear here</p>
+                        <h3>No users found</h3>
+                        <p>Try adjusting your filters</p>
                     </div>
                 `;
                 return;
             }
 
-            container.innerHTML = `
-                <table class="users-table">
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Name</th>
-                            <th>Email</th>
-                            <th>Tier</th>
-                            <th>Signup Date</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        ${users.map(user => {
-                            const date = new Date(user.created_at).toLocaleDateString('en-US', {
-                                year: 'numeric',
-                                month: 'short',
-                                day: 'numeric'
-                            });
-                            return `
-                                <tr>
-                                    <td>#${user.id}</td>
-                                    <td>${escapeHtml(user.name)}</td>
-                                    <td>${escapeHtml(user.email)}</td>
-                                    <td><span class="tier-badge ${user.membership_tier}">${user.membership_tier.toUpperCase()}</span></td>
-                                    <td>${date}</td>
-                                </tr>
-                            `;
-                        }).join('')}
-                    </tbody>
-                </table>
-            `;
-        }
+            container.innerHTML = users.map(user => {
+                const signupDate = new Date(user.created_at).toLocaleDateString('en-US', {
+                    year: 'numeric',
+                    month: 'short',
+                    day: 'numeric'
+                });
 
-        // Filter users
-        function filterUsers() {
-            const filterValue = document.getElementById('filterTier').value;
-            let filtered = allUsers;
+                const lastActivity = user.progress.lastActivity
+                    ? new Date(user.progress.lastActivity).toLocaleString('en-US', {
+                        year: 'numeric',
+                        month: 'short',
+                        day: 'numeric',
+                        hour: '2-digit',
+                        minute: '2-digit'
+                    })
+                    : 'No activity yet';
 
-            if (filterValue !== 'all') {
-                filtered = allUsers.filter(u => u.membership_tier === filterValue);
-            }
+                const overallColor = getProgressColor(user.progress.overallPercentage);
 
-            displayUsers(filtered);
+                return `
+                    <div class="user-card">
+                        <div class="user-header">
+                            <div class="user-info">
+                                <div class="user-name">${escapeHtml(user.name)}</div>
+                                <div class="user-email">${escapeHtml(user.email)}</div>
+                                <div class="user-meta">
+                                    <span class="tier-badge ${user.membership_tier}">${user.membership_tier.toUpperCase()}</span>
+                                    <span style="color: var(--text-secondary); font-size: 13px;">ID: #${user.id}</span>
+                                    <span style="color: var(--text-secondary); font-size: 13px;">Joined: ${signupDate}</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="user-stats">
+                            <div class="stat-item">
+                                <div class="stat-label">Completed Lessons</div>
+                                <div class="stat-value-small">${user.progress.completedLessons} / ${user.progress.totalLessons}</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-label">Current Pillar</div>
+                                <div class="stat-value-small">${user.progress.currentPillar ? user.progress.currentPillar.replace('pillar', 'Pillar ') : 'Not started'}</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-label">Current Lesson</div>
+                                <div class="stat-value-small">${user.progress.currentLesson ? user.progress.currentLesson.split('_')[1] : 'N/A'}</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-label">Last Activity</div>
+                                <div class="stat-value-small">${lastActivity}</div>
+                            </div>
+                        </div>
+
+                        <div class="progress-section">
+                            <div class="overall-progress">
+                                <h4>Overall Progress</h4>
+                                <div class="progress-bar-container">
+                                    <div class="progress-bar ${overallColor}" style="width: ${user.progress.overallPercentage}%">
+                                        ${user.progress.overallPercentage}%
+                                    </div>
+                                </div>
+                                <div class="progress-label">${user.progress.completedLessons} of ${user.progress.totalLessons} lessons completed</div>
+                            </div>
+
+                            <h4>Progress by Pillar</h4>
+                            <div class="pillar-grid">
+                                ${Object.entries(user.progress.pillarProgress).map(([pillar, data]) => {
+                                    const color = getProgressColor(data.percentage);
+                                    const isCurrent = pillar === user.progress.currentPillar;
+                                    return `
+                                        <div class="pillar-item ${isCurrent ? 'current' : ''}">
+                                            <div class="pillar-name">${pillar.replace('pillar', 'Pillar ')} ${isCurrent ? '(Current)' : ''}</div>
+                                            <div class="pillar-progress">
+                                                <div class="progress-bar ${color}" style="width: ${data.percentage}%">
+                                                    ${data.percentage > 20 ? data.percentage + '%' : ''}
+                                                </div>
+                                            </div>
+                                            <div class="pillar-stats">${data.completed}/${data.total} lessons</div>
+                                        </div>
+                                    `;
+                                }).join('')}
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
         }
 
         // Logout
