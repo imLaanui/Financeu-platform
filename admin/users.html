@@ -687,10 +687,7 @@
 
                         <div class="progress-section">
                             <div class="overall-progress">
-                                <div class="progress-bar-container">
-                                    <div class="progress-bar ${overallColor}" style="width: ${user.progress.overallPercentage}%"></div>
-                                    <div class="progress-percentage">${user.progress.overallPercentage}%</div>
-                                </div>
+                                <div style="font-size: 24px; font-weight: 600; color: var(--text-dark); margin-bottom: 5px;">${user.progress.overallPercentage}%</div>
                                 <div class="progress-label">${user.progress.completedLessons} of ${user.progress.totalLessons} lessons completed</div>
                             </div>
 
@@ -706,9 +703,6 @@
                                         return `
                                             <div class="pillar-item ${isCurrent ? 'current' : ''}" title="${pillar.replace('pillar', 'Pillar ')}: ${data.completed}/${data.total} lessons (${data.percentage}%)">
                                                 <div class="pillar-name">${pillar.replace('pillar', 'P')}${isCurrent ? ' ⭐' : ''}</div>
-                                                <div class="pillar-progress">
-                                                    <div class="progress-bar ${color}" style="width: ${data.percentage}%"></div>
-                                                </div>
                                                 <div class="pillar-stats">${data.percentage}%</div>
                                             </div>
                                         `;
