@@ -17,10 +17,10 @@
             <div class="nav-wrapper">
                 <div class="logo">Finance<span class="logo-accent">U</span></div>
                 <ul class="nav-links">
-                    <li><a href="curriculum.html">Curriculum</a></li>
+                    <li><a href="/curriculum">Curriculum</a></li>
                     <li><a href="#features">Features</a></li>
                     <li><a href="#pricing">Pricing</a></li>
-                    <li><a href="about.html">About</a></li>
+                    <li><a href="/about">About</a></li>
                     <li id="authButtons" style="opacity: 0;">
                     </li>
                 </ul>
@@ -40,7 +40,7 @@
                 <h1 class="hero-title">Stop Stressing About Money. <span class="highlight">Start Mastering It.</span></h1>
                 <p class="hero-subtitle">The all-in-one finance platform for anyone starting their financial journey. Whether you're a college student, young professional, or just beginning to learn about money - no confusing jargon, no scattered resources. Just clear, practical money skills you'll actually use.</p>
                 <div class="hero-cta">
-                    <a href="signup.html" class="btn-primary btn-large">Start Learning Free</a>
+                    <a href="/signup" class="btn-primary btn-large">Start Learning Free</a>
                     <a href="#features" class="btn-primary btn-large">See How It Works</a>
                 </div>
             </div>
@@ -221,7 +221,7 @@
                         <li class="feature-excluded">Full Lesson Library</li>
                         <li class="feature-excluded">Premium Support</li>
                     </ul>
-                    <a href="signup.html" class="btn-outline btn-full">Start Free</a>
+                    <a href="/signup" class="btn-outline btn-full">Start Free</a>
                 </div>
 
                 <!-- Pro Tier -->
@@ -243,7 +243,7 @@
                         <li class="feature-excluded">All 11 Financial Pillars</li>
                         <li class="feature-excluded">Complete Lesson Library (88 lessons)</li>
                     </ul>
-                    <a href="signup.html" class="btn-primary btn-full">Start 7-Day Free Trial</a>
+                    <a href="/signup" class="btn-primary btn-full">Start 7-Day Free Trial</a>
                 </div>
 
                 <!-- Premium Tier -->
@@ -263,7 +263,7 @@
                         <li class="feature-included">Advanced Progress Tracking</li>
                         <li class="feature-included">Complete Access to Everything</li>
                     </ul>
-                    <a href="signup.html" class="btn-outline btn-full">Start 7-Day Free Trial</a>
+                    <a href="/signup" class="btn-outline btn-full">Start 7-Day Free Trial</a>
                 </div>
             </div>
 
@@ -279,7 +279,7 @@
             <h2 class="section-title">Want to give Feedback?</h2>
             <p class="section-subtitle" style="text-align: center; margin-bottom: 30px;">We'd love to hear from you! Share your thoughts, report bugs, or request features.</p>
             <div style="text-align: center;">
-                <a href="feedback.html" class="btn-primary btn-large">Share Your Feedback</a>
+                <a href="/feedback" class="btn-primary btn-large">Share Your Feedback</a>
             </div>
         </div>
     </section>
@@ -290,7 +290,7 @@
             <div class="cta-content">
                 <h2>Ready to Stop Stressing and Start Building Wealth?</h2>
                 <p>Take the first step toward financial confidence and security</p>
-                <a href="signup.html" class="btn-primary btn-large">Get Started Free Today</a>
+                <a href="/signup" class="btn-primary btn-large">Get Started Free Today</a>
                 <p class="cta-subtext">No credit card required • Start learning in under 2 minutes</p>
             </div>
         </div>
@@ -307,18 +307,18 @@
                 <div class="footer-section">
                     <h4>Company</h4>
                     <ul>
-                        <li><a href="about.html">About Us</a></li>
-                        <li><a href="careers.html">Careers</a></li>
-                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="/about">About Us</a></li>
+                        <li><a href="/careers">Careers</a></li>
+                        <li><a href="/contact">Contact</a></li>
                     </ul>
                 </div>
                 <div class="footer-section">
                     <h4>Support</h4>
                     <ul>
-                        <li><a href="help.html">Help Center</a></li>
-                        <li><a href="feedback.html">Give Feedback</a></li>
-                        <li><a href="privacy.html">Privacy Policy</a></li>
-                        <li><a href="terms.html">Terms of Service</a></li>
+                        <li><a href="/help">Help Center</a></li>
+                        <li><a href="/feedback">Give Feedback</a></li>
+                        <li><a href="/privacy">Privacy Policy</a></li>
+                        <li><a href="/terms">Terms of Service</a></li>
                     </ul>
                 </div>
             </div>
@@ -341,8 +341,8 @@
             if (cachedAuth) {
                 const authState = JSON.parse(cachedAuth);
                 authButtons.innerHTML = authState.isLoggedIn
-                    ? `<a href="dashboard.html" class="btn-primary">Dashboard</a>`
-                    : `<a href="login.html" class="btn-primary">Login</a>`;
+                    ? `<a href="/dashboard" class="btn-primary">Dashboard</a>`
+                    : `<a href="/login" class="btn-primary">Login</a>`;
                 authButtons.style.opacity = '1';
             }
 
@@ -357,13 +357,13 @@
                     const data = await response.json();
                     localStorage.setItem('authState', JSON.stringify({ isLoggedIn: true }));
                     authButtons.innerHTML = `
-                        <a href="dashboard.html" class="btn-primary">Dashboard</a>
+                        <a href="/dashboard" class="btn-primary">Dashboard</a>
                     `;
                 } else {
                     // User is not logged in
                     localStorage.setItem('authState', JSON.stringify({ isLoggedIn: false }));
                     authButtons.innerHTML = `
-                        <a href="login.html" class="btn-primary">Login</a>
+                        <a href="/login" class="btn-primary">Login</a>
                     `;
                 }
 
@@ -373,7 +373,7 @@
                 console.log('Not logged in');
                 localStorage.setItem('authState', JSON.stringify({ isLoggedIn: false }));
                 authButtons.innerHTML = `
-                    <a href="login.html" class="btn-primary">Login</a>
+                    <a href="/login" class="btn-primary">Login</a>
                 `;
                 authButtons.style.opacity = '1';
             }

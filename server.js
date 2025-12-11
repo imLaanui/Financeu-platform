@@ -5,6 +5,7 @@ const jwt = require('jsonwebtoken');
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
 const path = require('path');
+const fs = require('fs');
 
 const db = require('./database');
 const { authenticateToken, requireTier } = require('./middleware/auth');
@@ -40,6 +41,23 @@ app.use(cookieParser());
 
 // Serve static files (HTML, CSS, JS)
 app.use(express.static(__dirname));
+
+// Middleware to handle clean URLs without .html extension
+app.use((req, res, next) => {
+  // Skip API routes and files with extensions
+  if (req.path.startsWith('/api/') || path.extname(req.path) !== '') {
+    return next();
+  }
+
+  // Try to serve .html file for clean URLs
+  const htmlPath = path.join(__dirname, req.path + '.html');
+
+  if (fs.existsSync(htmlPath)) {
+    return res.sendFile(htmlPath);
+  }
+
+  next();
+});
 
 // Helper function to generate JWT
 function generateToken(user) {

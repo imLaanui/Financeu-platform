@@ -209,10 +209,10 @@
     <nav class="navbar">
         <div class="container">
             <div class="nav-wrapper">
-                <div class="logo"><a href="index.html" style="color: inherit; text-decoration: none;">Finance<span class="logo-accent">U</span></a></div>
+                <div class="logo"><a href="/" style="color: inherit; text-decoration: none;">Finance<span class="logo-accent">U</span></a></div>
                 <ul class="nav-links">
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="dashboard.html">Dashboard</a></li>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="dashboard">Dashboard</a></li>
                     <li id="authButtons" style="opacity: 0;">
                     </li>
                     </li>
@@ -230,7 +230,7 @@
 
     <!-- Lessons List -->
     <div class="lessons-container">
-        <a href="dashboard.html" class="back-link">← Back to Dashboard</a>
+        <a href="dashboard" class="back-link">← Back to Dashboard</a>
 
         <div id="lessonsList">
             <!-- Lesson 1 -->
@@ -240,7 +240,7 @@
                     <p>Understand the fundamental concept of money and its role in society</p>
                 </div>
                 <div class="lesson-status">
-                    <a href="pillar1-lesson1.html" class="btn-start-lesson">Start Lesson</a>
+                    <a href="/pillar1-lesson1" class="btn-start-lesson">Start Lesson</a>
                 </div>
             </div>
 
@@ -251,7 +251,7 @@
                     <p>Learn the difference between money coming in and money going out</p>
                 </div>
                 <div class="lesson-status">
-                    <a href="pillar1-lesson2.html" class="btn-start-lesson">Start Lesson</a>
+                    <a href="/pillar1-lesson2" class="btn-start-lesson">Start Lesson</a>
                 </div>
             </div>
 
@@ -262,7 +262,7 @@
                     <p>Discover why money today is worth more than money tomorrow</p>
                 </div>
                 <div class="lesson-status">
-                    <a href="pillar1-lesson3.html" class="btn-start-lesson">Start Lesson</a>
+                    <a href="/pillar1-lesson3" class="btn-start-lesson">Start Lesson</a>
                 </div>
             </div>
 
@@ -273,7 +273,7 @@
                     <p>Master the crucial skill of distinguishing between necessities and desires</p>
                 </div>
                 <div class="lesson-status">
-                    <a href="pillar1-lesson4.html" class="btn-start-lesson">Start Lesson</a>
+                    <a href="/pillar1-lesson4" class="btn-start-lesson">Start Lesson</a>
                 </div>
             </div>
 
@@ -284,7 +284,7 @@
                     <p>Learn how to set and achieve meaningful financial objectives</p>
                 </div>
                 <div class="lesson-status">
-                    <a href="pillar1-lesson5.html" class="btn-start-lesson">Start Lesson</a>
+                    <a href="/pillar1-lesson5" class="btn-start-lesson">Start Lesson</a>
                 </div>
             </div>
 
@@ -295,7 +295,7 @@
                     <p>Understand how banks work and the services they offer</p>
                 </div>
                 <div class="lesson-status">
-                    <a href="pillar1-lesson6.html" class="btn-start-lesson">Start Lesson</a>
+                    <a href="/pillar1-lesson6" class="btn-start-lesson">Start Lesson</a>
                 </div>
             </div>
 
@@ -306,7 +306,7 @@
                     <p>Discover simple methods to monitor your financial activities</p>
                 </div>
                 <div class="lesson-status">
-                    <a href="pillar1-lesson7.html" class="btn-start-lesson">Start Lesson</a>
+                    <a href="/pillar1-lesson7" class="btn-start-lesson">Start Lesson</a>
                 </div>
             </div>
 
@@ -317,7 +317,7 @@
                     <p>Develop daily practices that lead to long-term financial success</p>
                 </div>
                 <div class="lesson-status">
-                    <a href="pillar1-lesson8.html" class="btn-start-lesson">Start Lesson</a>
+                    <a href="/pillar1-lesson8" class="btn-start-lesson">Start Lesson</a>
                 </div>
             </div>
 
@@ -328,7 +328,7 @@
                     <p>Test your knowledge of all 8 lessons • 16 questions • 80% to pass</p>
                 </div>
                 <div class="lesson-status">
-                    <a href="pillar1-quiz.html" class="btn-start-quiz">Take Quiz</a>
+                    <a href="/pillar1-quiz" class="btn-start-quiz">Take Quiz</a>
                 </div>
             </div>
         </div>
@@ -345,17 +345,17 @@
                 <div class="footer-section">
                     <h4>Company</h4>
                     <ul>
-                        <li><a href="about.html">About Us</a></li>
-                        <li><a href="careers.html">Careers</a></li>
-                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="/about">About Us</a></li>
+                        <li><a href="/careers">Careers</a></li>
+                        <li><a href="/contact">Contact</a></li>
                     </ul>
                 </div>
                 <div class="footer-section">
                     <h4>Support</h4>
                     <ul>
-                        <li><a href="help.html">Help Center</a></li>
-                        <li><a href="privacy.html">Privacy Policy</a></li>
-                        <li><a href="terms.html">Terms of Service</a></li>
+                        <li><a href="/help">Help Center</a></li>
+                        <li><a href="/privacy">Privacy Policy</a></li>
+                        <li><a href="/terms">Terms of Service</a></li>
                     </ul>
                 </div>
             </div>
@@ -379,7 +379,7 @@
                 const authState = JSON.parse(cachedAuth);
                 authButtons.innerHTML = authState.isLoggedIn
                     ? `<a href="#" onclick="logout(); return false;" class="btn-primary">Logout</a>`
-                    : `<a href="login.html" class="btn-primary">Login</a>`;
+                    : `<a href="login" class="btn-primary">Login</a>`;
                 authButtons.style.opacity = '1';
             }
 
@@ -392,13 +392,13 @@
                     authButtons.innerHTML = `<a href="#" onclick="logout(); return false;" class="btn-primary">Logout</a>`;
                 } else {
                     localStorage.setItem('authState', JSON.stringify({ isLoggedIn: false }));
-                    authButtons.innerHTML = `<a href="login.html" class="btn-primary">Login</a>`;
+                    authButtons.innerHTML = `<a href="login" class="btn-primary">Login</a>`;
                 }
                 authButtons.style.opacity = '1';
             } catch (error) {
                 console.log('Not logged in');
                 localStorage.setItem('authState', JSON.stringify({ isLoggedIn: false }));
-                authButtons.innerHTML = `<a href="login.html" class="btn-primary">Login</a>`;
+                authButtons.innerHTML = `<a href="login" class="btn-primary">Login</a>`;
                 authButtons.style.opacity = '1';
             }
         }
@@ -456,7 +456,7 @@
                         lessonCard.classList.add('completed');
                         statusDiv.innerHTML = `
                             <span class="completed-badge">Completed</span>
-                            <a href="pillar1-lesson1.html" class="btn-start-lesson">Review</a>
+                            <a href="/pillar1-lesson1" class="btn-start-lesson">Review</a>
                         `;
                     }
                 } else {
@@ -473,7 +473,7 @@
                         lessonCard.classList.add('completed');
                         statusDiv.innerHTML = `
                             <span class="completed-badge">Completed</span>
-                            <a href="pillar1-lesson${lessonNum}.html" class="btn-start-lesson">Review</a>
+                            <a href="pillar1-lesson${lessonNum}" class="btn-start-lesson">Review</a>
                         `;
                     }
                     // If previous quiz passed but not completed, button already shows "Start Lesson"
@@ -512,7 +512,7 @@
                     const statusDiv = quizCard.querySelector('.lesson-status');
                     statusDiv.innerHTML = `
                         <span class="quiz-completed-badge">Passed (${quizScore}%)</span>
-                        <a href="pillar1-quiz.html" class="btn-start-quiz">Retake Quiz</a>
+                        <a href="/pillar1-quiz" class="btn-start-quiz">Retake Quiz</a>
                     `;
                 }
             } else {

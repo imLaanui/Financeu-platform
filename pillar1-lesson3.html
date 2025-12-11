@@ -573,10 +573,10 @@
     <nav class="navbar">
         <div class="container">
             <div class="nav-wrapper">
-                <div class="logo"><a href="index.html" style="color: inherit; text-decoration: none;">Finance<span class="logo-accent">U</span></a></div>
+                <div class="logo"><a href="/" style="color: inherit; text-decoration: none;">Finance<span class="logo-accent">U</span></a></div>
                 <ul class="nav-links">
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="dashboard.html">Dashboard</a></li>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="dashboard">Dashboard</a></li>
                     <li id="authButtons" style="opacity: 0;">
                     </li>
                 </ul>
@@ -586,7 +586,7 @@
 
     <!-- Lesson Content -->
     <div class="lesson-container">
-        <a href="pillar1-lessons.html" class="back-link">← Back to Pillar 1 Lessons</a>
+        <a href="/pillar1-lessons" class="back-link">← Back to Pillar 1 Lessons</a>
 
         <!-- Header -->
         <div class="lesson-header">
@@ -860,17 +860,17 @@
                 <div class="footer-section">
                     <h4>Company</h4>
                     <ul>
-                        <li><a href="about.html">About Us</a></li>
-                        <li><a href="careers.html">Careers</a></li>
-                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="/about">About Us</a></li>
+                        <li><a href="/careers">Careers</a></li>
+                        <li><a href="/contact">Contact</a></li>
                     </ul>
                 </div>
                 <div class="footer-section">
                     <h4>Support</h4>
                     <ul>
-                        <li><a href="help.html">Help Center</a></li>
-                        <li><a href="privacy.html">Privacy Policy</a></li>
-                        <li><a href="terms.html">Terms of Service</a></li>
+                        <li><a href="/help">Help Center</a></li>
+                        <li><a href="/privacy">Privacy Policy</a></li>
+                        <li><a href="/terms">Terms of Service</a></li>
                     </ul>
                 </div>
             </div>
@@ -895,7 +895,7 @@
                 const authState = JSON.parse(cachedAuth);
                 authButtons.innerHTML = authState.isLoggedIn
                     ? `<a href="#" onclick="logout(); return false;" class="btn-primary">Logout</a>`
-                    : `<a href="login.html" class="btn-primary">Login</a>`;
+                    : `<a href="login" class="btn-primary">Login</a>`;
                 authButtons.style.opacity = '1';
             }
 
@@ -908,13 +908,13 @@
                     authButtons.innerHTML = `<a href="#" onclick="logout(); return false;" class="btn-primary">Logout</a>`;
                 } else {
                     localStorage.setItem('authState', JSON.stringify({ isLoggedIn: false }));
-                    authButtons.innerHTML = `<a href="login.html" class="btn-primary">Login</a>`;
+                    authButtons.innerHTML = `<a href="login" class="btn-primary">Login</a>`;
                 }
                 authButtons.style.opacity = '1';
             } catch (error) {
                 console.log('Not logged in');
                 localStorage.setItem('authState', JSON.stringify({ isLoggedIn: false }));
-                authButtons.innerHTML = `<a href="login.html" class="btn-primary">Login</a>`;
+                authButtons.innerHTML = `<a href="login" class="btn-primary">Login</a>`;
                 authButtons.style.opacity = '1';
             }
         }
