@@ -524,9 +524,8 @@ app.get('/api/admin/users', async (req, res) => {
     // Enrich users with progress data
     const usersWithProgress = await Promise.all(users.map(async (user) => {
       const progress = await db.getUserProgress(user.id);
-      const completedCount = await db.getCompletedLessonsCount(user.id);
 
-      // Calculate per-pillar progress (assuming 8 lessons per pillar for pillars 1-3, 8 for others)
+      // Calculate per-pillar progress (8 lessons per pillar)
       const pillarLessons = {
         'pillar1': 8, 'pillar2': 8, 'pillar3': 8,
         'pillar4': 8, 'pillar5': 8, 'pillar6': 8,
@@ -539,9 +538,13 @@ app.get('/api/admin/users', async (req, res) => {
       let currentLesson = null;
       let lastActivity = null;
 
+      // Count total completed lessons directly from progress array
+      const completedLessons = progress.filter(p => p.completed === true || p.completed === 1).length;
+
+      // Calculate per-pillar progress
       Object.keys(pillarLessons).forEach(pillar => {
         const pillarLessonsCompleted = progress.filter(p =>
-          p.lesson_id.startsWith(pillar) && p.completed
+          p.lesson_id.startsWith(pillar) && (p.completed === true || p.completed === 1)
         ).length;
 
         pillarProgress[pillar] = {
@@ -549,25 +552,26 @@ app.get('/api/admin/users', async (req, res) => {
           total: pillarLessons[pillar],
           percentage: Math.round((pillarLessonsCompleted / pillarLessons[pillar]) * 100)
         };
+      });
 
-        // Find most recent activity
-        progress.forEach(p => {
-          if (p.completed_at && (!lastActivity || new Date(p.completed_at) > new Date(lastActivity))) {
-            lastActivity = p.completed_at;
-            currentLesson = p.lesson_id;
-            currentPillar = p.lesson_id.split('_')[0];
-          }
-        });
+      // Find most recent activity (outside the pillar loop)
+      progress.forEach(p => {
+        if ((p.completed === true || p.completed === 1) && p.completed_at &&
+            (!lastActivity || new Date(p.completed_at) > new Date(lastActivity))) {
+          lastActivity = p.completed_at;
+          currentLesson = p.lesson_id;
+          currentPillar = p.lesson_id.split('_')[0];
+        }
       });
 
       // Calculate overall progress (88 total lessons)
       const totalLessons = 88;
-      const overallPercentage = Math.round((completedCount.count / totalLessons) * 100);
+      const overallPercentage = Math.round((completedLessons / totalLessons) * 100);
 
       return {
         ...user,
         progress: {
-          completedLessons: completedCount.count,
+          completedLessons,
           totalLessons,
           overallPercentage,
           pillarProgress,
