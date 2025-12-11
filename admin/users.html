@@ -220,19 +220,26 @@
             background: #e5e7eb;
             border-radius: 8px;
             height: 28px;
-            overflow: hidden;
             position: relative;
             margin-bottom: 5px;
+            display: flex;
+            align-items: center;
         }
         .progress-bar {
             height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            border-radius: 8px;
+            transition: width 0.3s ease;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+        .progress-percentage {
+            position: absolute;
+            right: 10px;
             font-size: 13px;
             font-weight: 600;
-            color: white;
-            transition: width 0.3s ease;
+            color: var(--text-dark);
+            z-index: 1;
         }
         .progress-bar.green {
             background: linear-gradient(90deg, #00A676 0%, #00d993 100%);
@@ -705,9 +712,8 @@
                         <div class="progress-section">
                             <div class="overall-progress">
                                 <div class="progress-bar-container">
-                                    <div class="progress-bar ${overallColor}" style="width: ${user.progress.overallPercentage}%">
-                                        ${user.progress.overallPercentage}%
-                                    </div>
+                                    <div class="progress-bar ${overallColor}" style="width: ${user.progress.overallPercentage}%"></div>
+                                    <div class="progress-percentage">${user.progress.overallPercentage}%</div>
                                 </div>
                                 <div class="progress-label">${user.progress.completedLessons} of ${user.progress.totalLessons} lessons completed</div>
                             </div>

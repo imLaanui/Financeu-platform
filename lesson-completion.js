@@ -46,7 +46,6 @@ async function completeLesson(lessonId, pillarNum, lessonNum) {
         }
 
         const data = await response.json();
-        console.log('✅ Lesson completion saved to backend:', data);
 
         // Also save to localStorage as a cache
         const storageKey = `pillar${pillarNum}_completed_${userId}`;
@@ -54,8 +53,9 @@ async function completeLesson(lessonId, pillarNum, lessonNum) {
         if (!completed.includes(lessonNum)) {
             completed.push(lessonNum);
             localStorage.setItem(storageKey, JSON.stringify(completed));
-            console.log(`✅ Also saved to localStorage: ${storageKey}`);
         }
+
+        console.log('✅ Lesson completed successfully! Saved to backend & localStorage.');
 
         // Show success message
         alert('Congratulations! Lesson completed successfully! 🎉');
