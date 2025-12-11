@@ -15,3 +15,7 @@ body {
 .hero-title .highlight {
     color: #2aa178; /* green */
 }
+
+html {
+  scroll-behavior: smooth;
+}

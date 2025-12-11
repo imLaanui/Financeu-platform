@@ -1,37 +1,60 @@
+import { useEffect } from "react";
 import "../css/main.css";
 
 export default function Home() {
-    return (
+  useEffect(() => {
+    const handleSmoothScroll = (e: Event) => {
+      const target = e.currentTarget as HTMLAnchorElement;
+      const href = target.getAttribute("href");
+      if (href && href.startsWith("#")) {
+        e.preventDefault();
+        const section = document.querySelector(href);
+        if (section) {
+          section.scrollIntoView({ behavior: "smooth" });
+        }
+      }
+    };
+
+    const links = document.querySelectorAll('a[href^="#"]');
+    links.forEach(link => link.addEventListener("click", handleSmoothScroll));
+
+    // Cleanup
+    return () => {
+      links.forEach(link => link.removeEventListener("click", handleSmoothScroll));
+    };
+  }, []);
+
+  return (
         <>
-            {/* Navigation */}
-            <nav className="navbar">
-                <div className="container">
-                    <div className="nav-wrapper">
-                        <div className="logo">
-                            Finance<span className="logo-accent">U</span>
-                        </div>
-                        <ul className="nav-links">
-                            <li>
-                                <a href="/curriculum">Curriculum</a>
-                            </li>
-                            <li>
-                                <a href="#features">Features</a>
-                            </li>
-                            <li>
-                                <a href="#pricing">Pricing</a>
-                            </li>
-                            <li>
-                                <a href="/about">About</a>
-                            </li>
-                            <li id="authButtons">
-                                <a href="/login" className="btn-primary">
-                                    Login
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </nav>
+      {/* Navigation */}
+      <nav className="navbar">
+        <div className="container">
+          <div className="nav-wrapper">
+            <div className="logo">
+              Finance<span className="logo-accent">U</span>
+            </div>
+            <ul className="nav-links">
+              <li>
+                <a href="/curriculum">Curriculum</a>
+              </li>
+              <li>
+                <a href="#features">Features</a>
+              </li>
+              <li>
+                <a href="#pricing">Pricing</a>
+              </li>
+              <li>
+                <a href="/about">About</a>
+              </li>
+              <li id="authButtons">
+                <a href="/login" className="btn-primary">
+                  Login
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
 
             {/* Hero Section */}
             <section className="hero">
