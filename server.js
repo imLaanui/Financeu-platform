@@ -381,7 +381,11 @@ app.post('/api/lessons/complete', authenticateToken, async (req, res) => {
       return res.status(400).json({ error: 'Lesson ID is required' });
     }
 
+    console.log(`✅ Marking lesson complete - User: ${req.user.email}, Lesson: ${lessonId}`);
+
     await db.markLessonComplete(req.user.id, lessonId);
+
+    console.log(`✅ Lesson marked complete successfully - User: ${req.user.email}, Lesson: ${lessonId}`);
 
     res.json({ message: 'Lesson marked as complete', lessonId });
   } catch (error) {
@@ -525,6 +529,10 @@ app.get('/api/admin/users', async (req, res) => {
     const usersWithProgress = await Promise.all(users.map(async (user) => {
       const progress = await db.getUserProgress(user.id);
 
+      // Debug logging for progress data
+      console.log(`User ${user.email} - Total progress records:`, progress.length);
+      console.log(`User ${user.email} - Progress data:`, JSON.stringify(progress, null, 2));
+
       // Calculate per-pillar progress (8 lessons per pillar)
       const pillarLessons = {
         'pillar1': 8, 'pillar2': 8, 'pillar3': 8,
@@ -540,6 +548,7 @@ app.get('/api/admin/users', async (req, res) => {
 
       // Count total completed lessons directly from progress array
       const completedLessons = progress.filter(p => p.completed === true || p.completed === 1).length;
+      console.log(`User ${user.email} - Completed lessons count:`, completedLessons);
 
       // Calculate per-pillar progress
       Object.keys(pillarLessons).forEach(pillar => {
@@ -581,6 +590,11 @@ app.get('/api/admin/users', async (req, res) => {
         }
       };
     }));
+
+    // Prevent caching of admin data
+    res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
+    res.setHeader('Pragma', 'no-cache');
+    res.setHeader('Expires', '0');
 
     res.json({
       users: usersWithProgress,
