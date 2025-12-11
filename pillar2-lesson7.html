@@ -1,0 +1,1341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson 7 - Short-term vs. Long-term Savings - FinanceU</title>
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+    <link rel="icon" type="image/svg+xml" sizes="16x16" href="assets/favicon-16x16.svg">
+    <link rel="icon" type="image/svg+xml" sizes="32x32" href="assets/favicon-32x32.svg">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.svg">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .lesson-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        .lesson-header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 30px;
+            background: linear-gradient(135deg, #EFF6FF 0%, #DBEAFE 100%);
+            border-radius: 16px;
+            position: relative;
+            overflow: hidden;
+        }
+        .lesson-header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(59, 130, 246, 0.1) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+        }
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        .lesson-header h1 {
+            font-size: 36px;
+            color: var(--text-primary);
+            margin-bottom: 10px;
+            position: relative;
+            z-index: 1;
+        }
+        .lesson-header .lesson-number {
+            color: var(--primary-color);
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 5px;
+            position: relative;
+            z-index: 1;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        .lesson-section {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            position: relative;
+            border-left: 4px solid transparent;
+            transition: all 0.3s ease;
+        }
+        .lesson-section:hover {
+            border-left-color: var(--primary-color);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        .lesson-section h2 {
+            color: var(--primary-color);
+            font-size: 24px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .lesson-section h2::before {
+            content: '';
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+            background: linear-gradient(135deg, #3B82F6 0%, #8B5CF6 100%);
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 8px rgba(59, 130, 246, 0.3);
+        }
+        .lesson-section p {
+            line-height: 1.8;
+            color: var(--text-secondary);
+            margin-bottom: 15px;
+        }
+        .lesson-section ul {
+            line-height: 1.8;
+            color: var(--text-secondary);
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+        .visual-box {
+            background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+            border-left: 4px solid var(--primary-color);
+            padding: 25px;
+            border-radius: 12px;
+            margin: 20px 0;
+            position: relative;
+            box-shadow: 0 2px 8px rgba(59, 130, 246, 0.1);
+        }
+        .visual-box::before {
+            content: '📊';
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 32px;
+            opacity: 0.3;
+        }
+        .visual-box h3 {
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            font-size: 18px;
+            font-weight: 700;
+        }
+        .money-flow {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 15px;
+        }
+        .flow-item {
+            text-align: center;
+            padding: 15px;
+            background: white;
+            border-radius: 8px;
+            flex: 1;
+            min-width: 120px;
+        }
+        .flow-arrow {
+            font-size: 24px;
+            color: var(--primary-color);
+        }
+        .action-box {
+            background: linear-gradient(135deg, #10b98120 0%, #d1fae540 100%);
+            border-left: 4px solid #10b981;
+            padding: 25px;
+            border-radius: 12px;
+            position: relative;
+            box-shadow: 0 2px 8px rgba(16, 185, 129, 0.1);
+        }
+        .action-box::before {
+            content: '🎯';
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 32px;
+            opacity: 0.5;
+        }
+        .action-box h3 {
+            color: #10b981;
+            margin-bottom: 10px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .reflection-box {
+            background: linear-gradient(135deg, #f59e0b20 0%, #fef3c740 100%);
+            border-left: 4px solid #f59e0b;
+            padding: 25px;
+            border-radius: 12px;
+            position: relative;
+            box-shadow: 0 2px 8px rgba(245, 158, 11, 0.1);
+        }
+        .reflection-box::before {
+            content: '💭';
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 32px;
+            opacity: 0.5;
+        }
+        .reflection-box h3 {
+            color: #f59e0b;
+            margin-bottom: 10px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .mistakes-list {
+            background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
+            padding: 25px;
+            border-radius: 12px;
+            border-left: 4px solid #dc2626;
+            position: relative;
+            box-shadow: 0 2px 8px rgba(220, 38, 38, 0.1);
+        }
+        .mistakes-list::before {
+            content: '⚠️';
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 32px;
+            opacity: 0.5;
+        }
+        .mistakes-list h3 {
+            color: #dc2626;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+        .btn-finish {
+            display: block;
+            width: 100%;
+            max-width: 400px;
+            margin: 30px auto;
+            padding: 18px;
+            background: var(--primary-color);
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: 600;
+            transition: background 0.2s;
+            border: none;
+            cursor: pointer;
+        }
+        .btn-finish:hover {
+            background: #2563eb;
+        }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+        .quiz-container {
+            background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+            border: 2px solid var(--primary-color);
+            border-radius: 12px;
+            padding: 30px;
+            margin: 40px 0 30px 0;
+        }
+        .quiz-header {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+        .quiz-header h2 {
+            color: var(--primary-color);
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+        .quiz-header p {
+            color: var(--text-secondary);
+            font-size: 16px;
+        }
+        .question-card {
+            background: white;
+            padding: 25px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .question-text {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 15px;
+        }
+        .answer-option {
+            background: #f9fafb;
+            padding: 15px;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .answer-option:hover {
+            border-color: var(--primary-color);
+            background: #eff6ff;
+        }
+        .answer-option.selected {
+            border-color: var(--primary-color);
+            background: #dbeafe;
+        }
+        .answer-option.correct {
+            border-color: #10b981;
+            background: #d1fae5;
+        }
+        .answer-option.incorrect {
+            border-color: #dc2626;
+            background: #fee2e2;
+        }
+        .btn-submit-quiz {
+            display: block;
+            width: 100%;
+            max-width: 300px;
+            margin: 20px auto;
+            padding: 15px;
+            background: var(--primary-color);
+            color: white;
+            text-align: center;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .btn-submit-quiz:hover {
+            background: #2563eb;
+        }
+        .btn-submit-quiz:disabled {
+            background: #9ca3af;
+            cursor: not-allowed;
+        }
+        .quiz-result {
+            background: white;
+            padding: 25px;
+            border-radius: 8px;
+            text-align: center;
+            margin-top: 20px;
+        }
+        .quiz-result.pass {
+            border: 3px solid #10b981;
+        }
+        .quiz-result.fail {
+            border: 3px solid #dc2626;
+        }
+        .result-icon {
+            font-size: 48px;
+            margin-bottom: 15px;
+        }
+        .result-text {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        .result-score {
+            font-size: 18px;
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+        }
+        .btn-retry {
+            padding: 12px 24px;
+            background: #f59e0b;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .btn-retry:hover {
+            background: #d97706;
+        }
+        .btn-finish:disabled {
+            background: #9ca3af;
+            cursor: not-allowed;
+            opacity: 0.6;
+        }
+        /* Multi-screen styles */
+        .lesson-screen {
+            display: none;
+        }
+        .lesson-screen.active {
+            display: block;
+            animation: fadeIn 0.3s ease-in;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .screen-progress {
+            text-align: center;
+            margin-bottom: 20px;
+            padding: 12px 20px;
+            background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+            border-radius: 8px;
+            font-weight: 600;
+            color: var(--primary-color);
+            font-size: 14px;
+        }
+        .screen-navigation {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 2px solid #e5e7eb;
+        }
+        .btn-nav {
+            padding: 12px 24px;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .btn-nav:hover {
+            background: #2563eb;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+        }
+        .btn-nav:disabled {
+            background: #d1d5db;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        .btn-nav.btn-prev {
+            background: #6b7280;
+        }
+        .btn-nav.btn-prev:hover {
+            background: #4b5563;
+        }
+        .nav-spacer {
+            width: 120px;
+        }
+        /* Checkpoint styles */
+        .checkpoint-container {
+            background: linear-gradient(135deg, #E0F2FE 0%, #BAE6FD 100%);
+            border: 2px solid #7DD3FC;
+            border-radius: 12px;
+            padding: 30px;
+            margin: 20px 0;
+        }
+        .checkpoint-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .checkpoint-header h3 {
+            color: #0284C7;
+            font-size: 24px;
+            margin-bottom: 8px;
+        }
+        .checkpoint-header p {
+            color: var(--text-secondary);
+            font-size: 15px;
+        }
+        .checkpoint-question {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+        .checkpoint-question-text {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 15px;
+        }
+        .checkpoint-option {
+            background: #f9fafb;
+            padding: 15px;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .checkpoint-option:hover {
+            border-color: #0284C7;
+            background: #F0F9FF;
+        }
+        .checkpoint-option.selected {
+            border-color: #0284C7;
+            background: #E0F2FE;
+        }
+        .checkpoint-option.correct {
+            border-color: #10b981;
+            background: #d1fae5;
+            cursor: default;
+        }
+        .checkpoint-option.incorrect {
+            border-color: #dc2626;
+            background: #fee2e2;
+            cursor: default;
+        }
+        .checkpoint-option input[type="radio"] {
+            cursor: pointer;
+        }
+        .checkpoint-feedback {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+            display: none;
+        }
+        .checkpoint-feedback.show {
+            display: block;
+            animation: fadeIn 0.3s ease-in;
+        }
+        .checkpoint-feedback.correct {
+            border-left: 4px solid #10b981;
+        }
+        .checkpoint-feedback.incorrect {
+            border-left: 4px solid #f59e0b;
+        }
+        .checkpoint-feedback-icon {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+        .checkpoint-feedback-title {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        .checkpoint-feedback.correct .checkpoint-feedback-title {
+            color: #10b981;
+        }
+        .checkpoint-feedback.incorrect .checkpoint-feedback-title {
+            color: #f59e0b;
+        }
+        .checkpoint-explanation {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-top: 10px;
+        }
+        .btn-continue {
+            display: none;
+            width: 100%;
+            max-width: 300px;
+            margin: 20px auto;
+            padding: 15px;
+            background: var(--primary-color);
+            color: white;
+            text-align: center;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .btn-continue.show {
+            display: block;
+        }
+        .btn-continue:hover {
+            background: #2563eb;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-wrapper">
+                <div class="logo"><a href="/" style="color: inherit; text-decoration: none;">Finance<span class="logo-accent">U</span></a></div>
+                <ul class="nav-links">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="dashboard">Dashboard</a></li>
+                    <li id="authButtons" style="opacity: 0;">
+                    </li>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Lesson Content -->
+    <div class="lesson-container">
+        <a href="/pillar2-lessons" class="back-link">← Back to Pillar 2 Lessons</a>
+
+        <!-- Header -->
+        <div class="lesson-header">
+            <div class="lesson-number">LESSON 7</div>
+            <h1>Short-term vs. Long-term Savings</h1>
+        </div>
+
+        <!-- Screen 1: Quick Intro -->
+        <div class="lesson-screen active" data-screen="1">
+            <div class="screen-progress">Screen 1 of 8</div>
+            <div class="lesson-section">
+                <h2>Quick Intro</h2>
+
+                <div class="intro-hook">
+                    <h3>🎯 The Problem</h3>
+                    <p>All savings feel the same.</p>
+                </div>
+
+                <div class="intro-why">
+                    <h3>💡 Why It Matters</h3>
+                    <p>Different goals need different strategies.</p>
+                </div>
+
+                <div class="intro-promise">
+                    <h3>✨ What You'll Learn</h3>
+                    <p>How to organize savings by timeline.</p>
+                </div>
+
+                <div class="intro-transition">
+                    <p><strong>Let's learn how to match your savings strategy to your timeline.</strong></p>
+                </div>
+
+                <div class="intro-topics">
+                    <h4>In this lesson:</h4>
+                    <ul>
+                        <li>How to categorize savings goals by timeline</li>
+                        <li>Different strategies for short, medium, and long-term goals</li>
+                        <li>Where to keep money based on when you need it</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="screen-navigation">
+                <div class="nav-spacer"></div>
+                <button class="btn-nav" onclick="nextScreen()">Next <span>→</span></button>
+            </div>
+        </div>
+
+        <!-- Screen 2: Core Concept -->
+        <div class="lesson-screen" data-screen="2">
+            <div class="screen-progress">Screen 2 of 8</div>
+            <div class="lesson-section">
+                <h2>Core Concept</h2>
+                <p><strong>Not all savings are the same - your strategy should match your timeline.</strong></p>
+                <p>Here's how to organize your savings:</p>
+                <ul>
+                    <li><strong>Short-term (0-2 years):</strong> Goals like vacation, holiday gifts, or car down payment. Keep in a high-yield savings account. You need this money soon, so safety and accessibility matter most. Don't invest it.</li>
+                    <li><strong>Medium-term (2-5 years):</strong> Goals like wedding, home renovation, or car purchase. Mix of savings and conservative investments. You have some time for growth but can't risk major losses.</li>
+                    <li><strong>Long-term (5+ years):</strong> Goals like retirement, house down payment, or children's education. Can invest for growth in stocks, retirement accounts, or index funds. Time allows you to ride out market volatility.</li>
+                </ul>
+                <p><strong>Key principle:</strong> The longer your timeline, the more risk you can take for higher potential returns. Money you need soon should stay safe and liquid.</p>
+            </div>
+            <div class="screen-navigation">
+                <button class="btn-nav btn-prev" onclick="previousScreen()"><span>←</span> Previous</button>
+                <button class="btn-nav" onclick="nextScreen()">Next <span>→</span></button>
+            </div>
+        </div>
+
+        <!-- Screen 3: Checkpoint Question 1 -->
+        <div class="lesson-screen" data-screen="3">
+            <div class="screen-progress">Screen 3 of 8</div>
+            <div class="checkpoint-container">
+                <div class="checkpoint-header">
+                    <h3>Quick Check</h3>
+                    <p>Let's pause and check your understanding. No pressure - you can continue regardless of your answer!</p>
+                </div>
+
+                <div class="checkpoint-question">
+                    <div class="checkpoint-question-text">Where should you keep savings for a vacation in 6 months?</div>
+                    <div class="checkpoint-option" onclick="checkCheckpoint1(0)">
+                        <input type="radio" name="checkpoint1" value="0">
+                        <span>A) Stock market</span>
+                    </div>
+                    <div class="checkpoint-option" onclick="checkCheckpoint1(1)">
+                        <input type="radio" name="checkpoint1" value="1">
+                        <span>B) High-yield savings account</span>
+                    </div>
+                    <div class="checkpoint-option" onclick="checkCheckpoint1(2)">
+                        <input type="radio" name="checkpoint1" value="2">
+                        <span>C) Retirement account</span>
+                    </div>
+                    <div class="checkpoint-option" onclick="checkCheckpoint1(3)">
+                        <input type="radio" name="checkpoint1" value="3">
+                        <span>D) Under your mattress</span>
+                    </div>
+                </div>
+
+                <div class="checkpoint-feedback" id="checkpoint1-feedback">
+                    <div class="checkpoint-feedback-icon"></div>
+                    <div class="checkpoint-feedback-title"></div>
+                    <div class="checkpoint-explanation"></div>
+                </div>
+
+                <button class="btn-continue" id="checkpoint1-continue" onclick="nextScreen()">Continue <span>→</span></button>
+            </div>
+            <div class="screen-navigation">
+                <button class="btn-nav btn-prev" onclick="previousScreen()"><span>←</span> Previous</button>
+                <div class="nav-spacer"></div>
+            </div>
+        </div>
+
+        <!-- Screen 4: Simple Example -->
+        <div class="lesson-screen" data-screen="4">
+            <div class="screen-progress">Screen 4 of 8</div>
+            <div class="lesson-section">
+                <h2>Simple Example</h2>
+                <p>Emma has three different savings goals, each with its own account and strategy:</p>
+                <ul>
+                    <li><strong>Emergency fund ($2,000):</strong> Needs immediate access. Keeps in regular savings account linked to checking. Can access instantly if her car breaks down or she has a medical emergency.</li>
+                    <li><strong>Vacation fund ($5,000):</strong> Planning a trip in 1 year. Keeps in high-yield savings account earning 4% interest. Safe and accessible, earning some return while she waits.</li>
+                    <li><strong>House down payment ($20,000):</strong> Wants to buy in 3 years. Keeps in a mix of high-yield savings (60%) and conservative bond funds (40%). Some growth potential with moderate safety.</li>
+                </ul>
+                <p>By separating her savings by timeline, Emma knows exactly where each dollar belongs and uses the right strategy for each goal.</p>
+            </div>
+
+            <!-- Mini Visual -->
+            <div class="visual-box">
+                <h3>Timeline Determines Strategy</h3>
+                <div class="money-flow">
+                    <div class="flow-item">
+                        <strong>0-2 Years</strong>
+                        <p style="font-size: 14px; margin-top: 8px;">Savings account</p>
+                    </div>
+                    <div class="flow-arrow">→</div>
+                    <div class="flow-item">
+                        <strong>2-5 Years</strong>
+                        <p style="font-size: 14px; margin-top: 8px;">Mix: savings + bonds</p>
+                    </div>
+                    <div class="flow-arrow">→</div>
+                    <div class="flow-item">
+                        <strong>5+ Years</strong>
+                        <p style="font-size: 14px; margin-top: 8px;">Investments for growth</p>
+                    </div>
+                </div>
+                <p style="margin-top: 20px; text-align: center; color: var(--text-secondary); font-size: 14px;">Match strategy to timeline for optimal results.</p>
+            </div>
+            <div class="screen-navigation">
+                <button class="btn-nav btn-prev" onclick="previousScreen()"><span>←</span> Previous</button>
+                <button class="btn-nav" onclick="nextScreen()">Next <span>→</span></button>
+            </div>
+        </div>
+
+        <!-- Screen 5: Checkpoint Question 2 -->
+        <div class="lesson-screen" data-screen="5">
+            <div class="screen-progress">Screen 5 of 8</div>
+            <div class="checkpoint-container">
+                <div class="checkpoint-header">
+                    <h3>Quick Check: Apply What You Learned</h3>
+                    <p>Let's see how you can apply this concept to a real-world scenario!</p>
+                </div>
+
+                <div class="checkpoint-question">
+                    <div class="checkpoint-question-text">What's the main risk of investing money you need in 1 year?</div>
+                    <div class="checkpoint-option" onclick="checkCheckpoint2(0)">
+                        <input type="radio" name="checkpoint2" value="0">
+                        <span>A) You'll earn too much interest</span>
+                    </div>
+                    <div class="checkpoint-option" onclick="checkCheckpoint2(1)">
+                        <input type="radio" name="checkpoint2" value="1">
+                        <span>B) Market volatility could reduce its value</span>
+                    </div>
+                    <div class="checkpoint-option" onclick="checkCheckpoint2(2)">
+                        <input type="radio" name="checkpoint2" value="2">
+                        <span>C) It will be harder to access</span>
+                    </div>
+                    <div class="checkpoint-option" onclick="checkCheckpoint2(3)">
+                        <input type="radio" name="checkpoint2" value="3">
+                        <span>D) Banks will charge fees</span>
+                    </div>
+                </div>
+
+                <div class="checkpoint-feedback" id="checkpoint2-feedback">
+                    <div class="checkpoint-feedback-icon"></div>
+                    <div class="checkpoint-feedback-title"></div>
+                    <div class="checkpoint-explanation"></div>
+                </div>
+
+                <button class="btn-continue" id="checkpoint2-continue" onclick="nextScreen()">Continue <span>→</span></button>
+            </div>
+            <div class="screen-navigation">
+                <button class="btn-nav btn-prev" onclick="previousScreen()"><span>←</span> Previous</button>
+                <div class="nav-spacer"></div>
+            </div>
+        </div>
+
+        <!-- Screen 6: Common Mistakes -->
+        <div class="lesson-screen" data-screen="6">
+            <div class="screen-progress">Screen 6 of 8</div>
+            <div class="lesson-section">
+                <div class="mistakes-list">
+                    <h3>Common Mistakes to Avoid</h3>
+                    <ul style="margin-left: 20px;">
+                        <li><strong>Mixing all savings together:</strong> When everything's in one account, it's hard to know what money is for what purpose. Separate accounts prevent you from accidentally spending your house fund on impulse purchases.</li>
+                        <li><strong>Investing short-term money:</strong> Putting money you need in 6 months into stocks is risky. If the market drops 20% right before you need it, you're stuck selling at a loss or can't afford your goal.</li>
+                        <li><strong>Not having short-term goals:</strong> If you only save for retirement, you'll feel like you're sacrificing today for decades from now. Balance long-term security with near-term rewards.</li>
+                        <li><strong>Raiding long-term savings:</strong> Your retirement or house fund shouldn't be touched for vacations or impulse purchases. Protect your future by keeping long-term savings separate and untouchable.</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="screen-navigation">
+                <button class="btn-nav btn-prev" onclick="previousScreen()"><span>←</span> Previous</button>
+                <button class="btn-nav" onclick="nextScreen()">Next <span>→</span></button>
+            </div>
+        </div>
+
+        <!-- Screen 7: Micro Action + Quick Reflection -->
+        <div class="lesson-screen" data-screen="7">
+            <div class="screen-progress">Screen 7 of 8</div>
+            <!-- Micro Action -->
+            <div class="lesson-section">
+                <div class="action-box">
+                    <h3>🎯 Your Micro Action</h3>
+                    <p><strong>List your savings goals and their timelines.</strong></p>
+                    <p>Take 5 minutes and write down every savings goal you have. Next to each, write when you need the money (6 months, 2 years, 10 years, etc.). Then label each as short-term, medium-term, or long-term.</p>
+                    <p>This simple exercise helps you see which savings need to be accessible and which can be invested for growth. It's the first step to organizing your finances by timeline.</p>
+                </div>
+            </div>
+
+            <!-- Quick Reflection -->
+            <div class="lesson-section">
+                <div class="reflection-box">
+                    <h3>💭 Quick Reflection</h3>
+                    <p><strong>Think about this:</strong></p>
+                    <p>Which goals matter most to you? Not all goals are equally important. Your emergency fund and retirement might be critical, while a vacation is nice but not essential. Rank your goals by importance, and make sure your most important goals are fully funded before focusing on lower-priority ones. This ensures you're building real financial security, not just saving randomly.</p>
+                    <p style="margin-top: 15px; font-size: 14px; font-style: italic;">Take a moment to consider your priorities before moving forward.</p>
+                </div>
+            </div>
+            <div class="screen-navigation">
+                <button class="btn-nav btn-prev" onclick="previousScreen()"><span>←</span> Previous</button>
+                <button class="btn-nav" onclick="nextScreen()">Next <span>→</span></button>
+            </div>
+        </div>
+
+        <!-- Screen 8: Quiz -->
+        <div class="lesson-screen" data-screen="8">
+            <div class="screen-progress">Screen 8 of 8</div>
+            <!-- Lesson Quiz -->
+            <div class="quiz-container" id="quizContainer">
+            <div class="quiz-header">
+                <h2>Lesson Quiz</h2>
+                <p>Answer these questions to unlock the next lesson. You need to answer 3 out of 4 correctly to pass.</p>
+            </div>
+            <div id="quizQuestions"></div>
+            <button class="btn-submit-quiz" id="submitQuiz" onclick="submitQuiz()">Submit Quiz</button>
+            <div id="quizResult"></div>
+            </div>
+
+            <!-- Finish Button -->
+            <button class="btn-finish" id="finishBtn" onclick="finishLesson()" disabled>Finish Lesson</button>
+
+            <div class="screen-navigation">
+                <button class="btn-nav btn-prev" onclick="previousScreen()"><span>←</span> Previous</button>
+                <div class="nav-spacer"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>FinanceU</h4>
+                    <p>Making financial literacy accessible for everyone.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="/about">About Us</a></li>
+                        <li><a href="/careers">Careers</a></li>
+                        <li><a href="/contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="/help">Help Center</a></li>
+                        <li><a href="/privacy">Privacy Policy</a></li>
+                        <li><a href="/terms">Terms of Service</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p style="font-size: 0.85rem; opacity: 0.8; margin-bottom: 10px;">Disclaimer: FinanceU provides educational content only and does not offer financial, legal, or investment advice. Always consult with a qualified professional before making financial decisions.</p>
+                <p>&copy; 2025 FinanceU. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="config.js"></script>
+    <script src="lesson-completion.js"></script>
+    <script src="animations.js"></script>
+    <script>
+        // Check authentication status and update nav
+                async function updateNav() {
+            const authButtons = document.getElementById('authButtons');
+
+            // Check localStorage for cached auth state and render immediately
+            const cachedAuth = localStorage.getItem('authState');
+            if (cachedAuth) {
+                const authState = JSON.parse(cachedAuth);
+                authButtons.innerHTML = authState.isLoggedIn
+                    ? `<a href="#" onclick="logout(); return false;" class="btn-primary">Logout</a>`
+                    : `<a href="login" class="btn-primary">Login</a>`;
+                authButtons.style.opacity = '1';
+            }
+
+            // Then verify with server in background
+            try {
+                const response = await fetch(`${API_URL}/auth/me`, { credentials: 'include' });
+
+                if (response.ok) {
+                    localStorage.setItem('authState', JSON.stringify({ isLoggedIn: true }));
+                    authButtons.innerHTML = `<a href="#" onclick="logout(); return false;" class="btn-primary">Logout</a>`;
+                } else {
+                    localStorage.setItem('authState', JSON.stringify({ isLoggedIn: false }));
+                    authButtons.innerHTML = `<a href="login" class="btn-primary">Login</a>`;
+                }
+                authButtons.style.opacity = '1';
+            } catch (error) {
+                console.log('Not logged in');
+                localStorage.setItem('authState', JSON.stringify({ isLoggedIn: false }));
+                authButtons.innerHTML = `<a href="login" class="btn-primary">Login</a>`;
+                authButtons.style.opacity = '1';
+            }
+        }
+        // Logout function
+        async function logout() {
+            localStorage.removeItem('authState');
+            localStorage.removeItem('token');
+            localStorage.removeItem('userId');
+            try {
+                await fetch(`${API_URL}/auth/logout`, {
+                    method: 'POST',
+                    credentials: 'include'
+                });
+                window.location.href = '/index.html';
+            } catch (error) {
+                console.error('Logout error:', error);
+                window.location.href = '/index.html';
+            }
+        }
+
+        // Quiz data with multiple versions of each question
+        const quizData = [
+            {
+                versions: [
+                    {
+                        question: "What type of account is best for money you need in 6 months?",
+                        options: [
+                            "Stock market investments",
+                            "High-yield savings account",
+                            "401(k) retirement account",
+                            "Real estate"
+                        ],
+                        correct: 1
+                    },
+                    {
+                        question: "Where should short-term savings (under 2 years) be kept?",
+                        options: [
+                            "Invested in stocks",
+                            "In a safe, liquid savings account",
+                            "In cryptocurrency",
+                            "In a retirement account"
+                        ],
+                        correct: 1
+                    }
+                ]
+            },
+            {
+                versions: [
+                    {
+                        question: "Why shouldn't you invest money you need in less than a year?",
+                        options: [
+                            "Investments are too complicated",
+                            "Market volatility could reduce its value when you need it",
+                            "You'll earn too much interest",
+                            "Banks don't allow it"
+                        ],
+                        correct: 1
+                    },
+                    {
+                        question: "What's the main risk of putting short-term savings in the stock market?",
+                        options: [
+                            "The money will grow too fast",
+                            "You might lose value right when you need the money",
+                            "It's too easy to access",
+                            "Stocks don't pay interest"
+                        ],
+                        correct: 1
+                    }
+                ]
+            },
+            {
+                versions: [
+                    {
+                        question: "For a goal 10+ years away (like retirement), you should:",
+                        options: [
+                            "Keep it in a checking account",
+                            "Invest it for growth potential",
+                            "Keep it under your mattress",
+                            "Only use a regular savings account"
+                        ],
+                        correct: 1
+                    },
+                    {
+                        question: "What's the best strategy for long-term goals (5+ years)?",
+                        options: [
+                            "Keep everything in cash",
+                            "Invest for growth since you have time to ride out volatility",
+                            "Only use savings accounts",
+                            "Avoid saving altogether"
+                        ],
+                        correct: 1
+                    }
+                ]
+            },
+            {
+                versions: [
+                    {
+                        question: "What's a common mistake with organizing savings?",
+                        options: [
+                            "Having too many accounts",
+                            "Mixing all savings together without separating by goal",
+                            "Using high-yield savings accounts",
+                            "Setting savings goals"
+                        ],
+                        correct: 1
+                    },
+                    {
+                        question: "Why is it important to separate savings by timeline?",
+                        options: [
+                            "Banks require it",
+                            "Different timelines need different strategies",
+                            "It looks more organized",
+                            "You earn more interest"
+                        ],
+                        correct: 1
+                    }
+                ]
+            }
+        ];
+
+        let currentQuestions = [];
+        let userAnswers = [];
+        let quizPassed = false;
+
+        // Initialize quiz
+        function initQuiz() {
+            const userId = localStorage.getItem('userId');
+
+            // Validate userId exists
+            if (!userId || userId === 'null' || userId === 'undefined') {
+                console.error('No valid userId found');
+                document.getElementById('finishBtn').disabled = true;
+                return;
+            }
+
+            const quizPassedStatus = localStorage.getItem(`lesson15_quiz_passed_${userId}`);
+
+            if (quizPassedStatus === 'true') {
+                quizPassed = true;
+                document.getElementById('finishBtn').disabled = false;
+                document.getElementById('quizContainer').style.display = 'none';
+                return;
+            }
+
+            // Select random version of each question
+            currentQuestions = quizData.map(q => {
+                const randomVersion = q.versions[Math.floor(Math.random() * q.versions.length)];
+                return randomVersion;
+            });
+
+            renderQuiz();
+        }
+
+        function renderQuiz() {
+            const questionsContainer = document.getElementById('quizQuestions');
+            questionsContainer.innerHTML = '';
+            userAnswers = new Array(currentQuestions.length).fill(null);
+
+            currentQuestions.forEach((q, qIndex) => {
+                const questionCard = document.createElement('div');
+                questionCard.className = 'question-card';
+                questionCard.innerHTML = `
+                    <div class="question-text">Question ${qIndex + 1}: ${q.question}</div>
+                    ${q.options.map((option, oIndex) => `
+                        <div class="answer-option" onclick="selectAnswer(${qIndex}, ${oIndex})">
+                            <input type="radio" name="question${qIndex}" value="${oIndex}" style="margin-right: 10px;">
+                            ${option}
+                        </div>
+                    `).join('')}
+                `;
+                questionsContainer.appendChild(questionCard);
+            });
+
+            document.getElementById('submitQuiz').disabled = false;
+            document.getElementById('quizResult').innerHTML = '';
+        }
+
+        function selectAnswer(questionIndex, optionIndex) {
+            userAnswers[questionIndex] = optionIndex;
+
+            // Update visual selection
+            const questionCard = document.querySelectorAll('.question-card')[questionIndex];
+            const options = questionCard.querySelectorAll('.answer-option');
+            options.forEach((opt, idx) => {
+                opt.classList.remove('selected');
+                if (idx === optionIndex) {
+                    opt.classList.add('selected');
+                    opt.querySelector('input').checked = true;
+                }
+            });
+        }
+
+        function submitQuiz() {
+            // Check if all questions are answered
+            if (userAnswers.includes(null)) {
+                alert('Please answer all questions before submitting.');
+                return;
+            }
+
+            // Calculate score
+            let correct = 0;
+            currentQuestions.forEach((q, index) => {
+                if (userAnswers[index] === q.correct) {
+                    correct++;
+                }
+            });
+
+            const percentage = Math.round((correct / currentQuestions.length) * 100);
+            const passed = percentage >= 80;
+
+            // Show correct/incorrect answers
+            document.querySelectorAll('.question-card').forEach((card, qIndex) => {
+                const options = card.querySelectorAll('.answer-option');
+                options.forEach((opt, oIndex) => {
+                    opt.style.pointerEvents = 'none';
+                    if (oIndex === currentQuestions[qIndex].correct) {
+                        opt.classList.add('correct');
+                    } else if (oIndex === userAnswers[qIndex] && oIndex !== currentQuestions[qIndex].correct) {
+                        opt.classList.add('incorrect');
+                    }
+                });
+            });
+
+            // Display result
+            const resultDiv = document.getElementById('quizResult');
+            if (passed) {
+                quizPassed = true;
+                const userId = localStorage.getItem('userId');
+                localStorage.setItem(`lesson15_quiz_passed_${userId}`, 'true');
+                document.getElementById('finishBtn').disabled = false;
+
+                resultDiv.innerHTML = `
+                    <div class="quiz-result pass">
+                        <div class="result-icon">🎉</div>
+                        <div class="result-text" style="color: #10b981;">Quiz Passed!</div>
+                        <div class="result-score">You scored ${correct} out of ${currentQuestions.length} (${percentage}%)</div>
+                        <p style="color: var(--text-secondary);">Great job! You can now finish the lesson and move to the next one.</p>
+                    </div>
+                `;
+            } else {
+                resultDiv.innerHTML = `
+                    <div class="quiz-result fail">
+                        <div class="result-icon">📚</div>
+                        <div class="result-text" style="color: #dc2626;">Not quite there yet</div>
+                        <div class="result-score">You scored ${correct} out of ${currentQuestions.length} (${percentage}%)</div>
+                        <p style="color: var(--text-secondary); margin-bottom: 15px;">You need 80% to pass. Review the lesson and try again!</p>
+                        <button class="btn-retry" onclick="retryQuiz()">Retry Quiz</button>
+                    </div>
+                `;
+            }
+
+            document.getElementById('submitQuiz').style.display = 'none';
+        }
+
+        function retryQuiz() {
+            // Re-initialize with new question versions
+            currentQuestions = quizData.map(q => {
+                const randomVersion = q.versions[Math.floor(Math.random() * q.versions.length)];
+                return randomVersion;
+            });
+            renderQuiz();
+            document.getElementById('submitQuiz').style.display = 'block';
+        }
+
+        async function finishLesson() {
+            if (!quizPassed) {
+                alert('Please complete the quiz first!');
+                return;
+            }
+
+            // Use shared completion function
+            const success = await completeLesson('pillar2_lesson7', 2, 7);
+
+            if (success) {
+                // Redirect back to lessons page
+                window.location.href = 'pillar2-lessons.html';
+            }
+        }
+
+        updateNav();
+        initQuiz();
+
+        // Checkpoint functions
+        let checkpoint1Answered = false;
+        let checkpoint2Answered = false;
+
+        function checkCheckpoint1(selectedOption) {
+            if (checkpoint1Answered) return;
+            checkpoint1Answered = true;
+
+            const correctOption = 1; // B) High-yield savings account
+            const isCorrect = selectedOption === correctOption;
+
+            // Get elements
+            const options = document.querySelectorAll('[name="checkpoint1"]').forEach((radio, index) => {
+                const optionDiv = radio.parentElement;
+                optionDiv.style.pointerEvents = 'none';
+
+                if (index === correctOption) {
+                    optionDiv.classList.add('correct');
+                } else if (index === selectedOption && index !== correctOption) {
+                    optionDiv.classList.add('incorrect');
+                }
+
+                if (index === selectedOption) {
+                    radio.checked = true;
+                }
+            });
+
+            // Show feedback
+            const feedback = document.getElementById('checkpoint1-feedback');
+            const feedbackIcon = feedback.querySelector('.checkpoint-feedback-icon');
+            const feedbackTitle = feedback.querySelector('.checkpoint-feedback-title');
+            const feedbackExplanation = feedback.querySelector('.checkpoint-explanation');
+            const continueBtn = document.getElementById('checkpoint1-continue');
+
+            if (isCorrect) {
+                feedback.classList.add('correct');
+                feedbackIcon.textContent = '🎉';
+                feedbackTitle.textContent = 'Correct!';
+                feedbackExplanation.textContent = 'Great job! A high-yield savings account is perfect for short-term goals. Your money is safe, accessible, and earns some interest while you wait. You wouldn\'t want to invest it because market volatility could reduce its value right when you need it.';
+            } else {
+                feedback.classList.add('incorrect');
+                feedbackIcon.textContent = '💡';
+                feedbackTitle.textContent = 'Not quite, but that\'s okay!';
+                feedbackExplanation.textContent = 'A high-yield savings account is perfect for short-term goals. Your money is safe, accessible, and earns some interest while you wait. You wouldn\'t want to invest it because market volatility could reduce its value right when you need it. The correct answer is "High-yield savings account."';
+            }
+
+            feedback.classList.add('show');
+            continueBtn.classList.add('show');
+        }
+
+        function checkCheckpoint2(selectedOption) {
+            if (checkpoint2Answered) return;
+            checkpoint2Answered = true;
+
+            const correctOption = 1; // B) Market volatility could reduce its value
+            const isCorrect = selectedOption === correctOption;
+
+            // Get elements
+            const options = document.querySelectorAll('[name="checkpoint2"]').forEach((radio, index) => {
+                const optionDiv = radio.parentElement;
+                optionDiv.style.pointerEvents = 'none';
+
+                if (index === correctOption) {
+                    optionDiv.classList.add('correct');
+                } else if (index === selectedOption && index !== correctOption) {
+                    optionDiv.classList.add('incorrect');
+                }
+
+                if (index === selectedOption) {
+                    radio.checked = true;
+                }
+            });
+
+            // Show feedback
+            const feedback = document.getElementById('checkpoint2-feedback');
+            const feedbackIcon = feedback.querySelector('.checkpoint-feedback-icon');
+            const feedbackTitle = feedback.querySelector('.checkpoint-feedback-title');
+            const feedbackExplanation = feedback.querySelector('.checkpoint-explanation');
+            const continueBtn = document.getElementById('checkpoint2-continue');
+
+            if (isCorrect) {
+                feedback.classList.add('correct');
+                feedbackIcon.textContent = '🎉';
+                feedbackTitle.textContent = 'Excellent!';
+                feedbackExplanation.textContent = 'Perfect! When you invest money you need soon, you risk losing value if the market drops. If stocks fall 20% right before your goal date, you either sell at a loss or delay your goal. Short-term money should stay safe in savings accounts.';
+            } else {
+                feedback.classList.add('incorrect');
+                feedbackIcon.textContent = '💡';
+                feedbackTitle.textContent = 'Good thinking, but there\'s a better answer!';
+                feedbackExplanation.textContent = 'When you invest money you need soon, you risk losing value if the market drops. If stocks fall 20% right before your goal date, you either sell at a loss or delay your goal. Short-term money should stay safe in savings accounts. The best answer is "Market volatility could reduce its value."';
+            }
+
+            feedback.classList.add('show');
+            continueBtn.classList.add('show');
+        }
+
+        // Multi-screen navigation
+        let currentScreen = 1;
+        const totalScreens = 8;
+
+        function showScreen(screenNumber) {
+            // Hide all screens
+            document.querySelectorAll('.lesson-screen').forEach(screen => {
+                screen.classList.remove('active');
+            });
+
+            // Show the requested screen
+            const targetScreen = document.querySelector(`.lesson-screen[data-screen="${screenNumber}"]`);
+            if (targetScreen) {
+                targetScreen.classList.add('active');
+                currentScreen = screenNumber;
+
+                // Smooth scroll to top of lesson container
+                const lessonContainer = document.querySelector('.lesson-container');
+                const headerOffset = 80; // Height of navbar
+                const elementPosition = lessonContainer.getBoundingClientRect().top;
+                const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+                window.scrollTo({
+                    top: offsetPosition,
+                    behavior: 'smooth'
+                });
+            }
+        }
+
+        function nextScreen() {
+            if (currentScreen < totalScreens) {
+                showScreen(currentScreen + 1);
+            }
+        }
+
+        function previousScreen() {
+            if (currentScreen > 1) {
+                showScreen(currentScreen - 1);
+            }
+        }
+
+        // Initialize first screen on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            showScreen(1);
+        });
+    </script>
+</body>
+</html>
