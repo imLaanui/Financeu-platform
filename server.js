@@ -246,22 +246,13 @@ app.post('/api/auth/reset-password', async (req, res) => {
 
     if (!tokenRecord) {
       console.log('❌ No valid token found for email:', normalizedEmail);
-      // Check if there's any token for this email to give better error
-      const anyToken = await new Promise((resolve, reject) => {
-        db.db.get(
-          'SELECT * FROM password_reset_tokens WHERE LOWER(email) = LOWER(?) AND token = ? ORDER BY created_at DESC LIMIT 1',
-          [normalizedEmail, trimmedCode],
-          (err, row) => {
-            if (err) reject(err);
-            else resolve(row || null);
-          }
-        );
-      });
+      // Check if there's any token for this email to give better error message
+      const anyToken = await db.getAnyResetToken(normalizedEmail, trimmedCode);
 
       console.log('Found any token:', anyToken);
 
       if (anyToken) {
-        if (anyToken.used === 1) {
+        if (anyToken.used) {
           return res.status(400).json({ error: 'This reset code has already been used. Please request a new one.' });
         } else {
           return res.status(400).json({ error: 'This reset code has expired. Please request a new one.' });

@@ -323,6 +323,24 @@ async function getResetToken(email, token) {
   });
 }
 
+// Get any reset token (including expired/used) for better error messages
+async function getAnyResetToken(email, token) {
+  return new Promise((resolve, reject) => {
+    db.get(
+      `SELECT * FROM password_reset_tokens
+       WHERE LOWER(email) = LOWER(?)
+       AND token = ?
+       ORDER BY created_at DESC
+       LIMIT 1`,
+      [email, token],
+      (err, row) => {
+        if (err) reject(err);
+        else resolve(row || null);
+      }
+    );
+  });
+}
+
 // Mark token as used
 async function markTokenUsed(id) {
   return new Promise((resolve, reject) => {
@@ -367,6 +385,7 @@ module.exports = {
   getFeedbackCount,
   createResetToken,
   getResetToken,
+  getAnyResetToken,
   markTokenUsed,
   cleanupExpiredTokens
 };

@@ -109,9 +109,9 @@ initializeDatabase().catch(err => {
 
 // Database helper functions (converted to async/await)
 
-// Get user by email
+// Get user by email (case-insensitive)
 async function getUserByEmail(email) {
-  const result = await pool.query('SELECT * FROM users WHERE email = $1', [email]);
+  const result = await pool.query('SELECT * FROM users WHERE LOWER(email) = LOWER($1)', [email]);
   return result.rows[0] || null;
 }
 
@@ -247,6 +247,19 @@ async function getResetToken(email, token) {
   return result.rows[0] || null;
 }
 
+// Get any reset token (including expired/used) for better error messages
+async function getAnyResetToken(email, token) {
+  const result = await pool.query(
+    `SELECT * FROM password_reset_tokens
+     WHERE LOWER(email) = LOWER($1)
+     AND token = $2
+     ORDER BY created_at DESC
+     LIMIT 1`,
+    [email, token]
+  );
+  return result.rows[0] || null;
+}
+
 // Mark token as used
 async function markTokenUsed(id) {
   await pool.query(
@@ -279,6 +292,7 @@ module.exports = {
   getFeedbackCount,
   createResetToken,
   getResetToken,
+  getAnyResetToken,
   markTokenUsed,
   cleanupExpiredTokens
 };
