@@ -418,10 +418,6 @@
             <!-- Stats -->
             <div class="stats-grid">
                 <div class="stat-card">
-                    <h3>Total Users</h3>
-                    <div class="stat-value" id="totalUsers">0</div>
-                </div>
-                <div class="stat-card">
                     <h3>Free Tier</h3>
                     <div class="stat-value" id="freeCount">0</div>
                 </div>
@@ -583,7 +579,6 @@
 
         // Update statistics
         function updateStats(users) {
-            document.getElementById('totalUsers').textContent = users.length;
             document.getElementById('freeCount').textContent = users.filter(u => u.membership_tier === 'free').length;
             document.getElementById('proCount').textContent = users.filter(u => u.membership_tier === 'pro').length;
             document.getElementById('premiumCount').textContent = users.filter(u => u.membership_tier === 'premium').length;
