@@ -898,6 +898,7 @@
     </footer>
 
     <script src="config.js"></script>
+    <script src="lesson-completion.js"></script>
     <script src="animations.js"></script>
     <script>
         // Check authentication status and update nav
@@ -1195,31 +1196,15 @@
             document.getElementById('submitQuiz').style.display = 'block';
         }
 
-        function finishLesson() {
-            const userId = localStorage.getItem('userId');
-
-            // Validate userId exists
-            if (!userId || userId === 'null' || userId === 'undefined') {
-                alert('Please log in to save your progress.');
-                return;
-            }
-
+        async function finishLesson() {
             if (!quizPassed) {
                 alert('Please complete the quiz first!');
                 return;
             }
-
-            // Get completed lessons from localStorage
-            const completed = JSON.parse(localStorage.getItem(`pillar1_completed_${userId}`) || '[]');
-
-            // Add lesson 7 if not already completed
-            if (!completed.includes(7)) {
-                completed.push(7);
-                localStorage.setItem(`pillar1_completed_${userId}`, JSON.stringify(completed));
+            const success = await completeLesson('pillar1_lesson7', 1, 7);
+            if (success) {
+                window.location.href = 'pillar1-lessons.html';
             }
-
-            // Redirect back to lessons page
-            window.location.href = 'pillar1-lessons.html';
         }
 
         updateNav();
