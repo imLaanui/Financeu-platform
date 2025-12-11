@@ -1,0 +1,12 @@
+@media (max-width: 768px) {
+    .hero-title { font-size: 2.25rem; }
+    .hero-subtitle { font-size: 1.1rem; }
+    .hero-cta { flex-direction: column; align-items: center; }
+    .section-title { font-size: 2rem; }
+    .nav-links { gap: 1rem; font-size: 0.9rem; }
+    .pricing-card-featured { transform: scale(1); }
+    .pricing-grid { grid-template-columns: 1fr; }
+    .features-grid { grid-template-columns: 1fr; }
+    .problem-grid { grid-template-columns: 1fr; }
+    .testimonials-grid { grid-template-columns: 1fr; }
+}

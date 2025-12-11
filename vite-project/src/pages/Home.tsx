@@ -1,4 +1,4 @@
-import "./Home.css";
+import "../css/main.css";
 
 export default function Home() {
   return (
@@ -7,13 +7,27 @@ export default function Home() {
       <nav className="navbar">
         <div className="container">
           <div className="nav-wrapper">
-            <div className="logo">Finance<span className="logo-accent">U</span></div>
+            <div className="logo">
+              Finance<span className="logo-accent">U</span>
+            </div>
             <ul className="nav-links">
-              <li><a href="/curriculum">Curriculum</a></li>
-              <li><a href="#features">Features</a></li>
-              <li><a href="#pricing">Pricing</a></li>
-              <li><a href="/about">About</a></li>
-              <li id="authButtons" style={{ opacity: 0 }}></li>
+              <li>
+                <a href="/curriculum">Curriculum</a>
+              </li>
+              <li>
+                <a href="#features">Features</a>
+              </li>
+              <li>
+                <a href="#pricing">Pricing</a>
+              </li>
+              <li>
+                <a href="/about">About</a>
+              </li>
+              <li id="authButtons">
+                <a href="/login" className="btn-primary">
+                  Login
+                </a>
+              </li>
             </ul>
           </div>
         </div>
@@ -28,9 +42,9 @@ export default function Home() {
               <div className="shape shape-2"></div>
               <div className="shape shape-3"></div>
             </div>
-            <h1 className="hero-title">
-              Stop Stressing About Money. <span className="highlight">Start Mastering It.</span>
-            </h1>
+<h1 className="hero-title">
+  Stop Stressing About Money. <span className="highlight">Start Mastering It.</span>
+</h1>
             <p className="hero-subtitle">
               The all-in-one finance platform for anyone starting their financial journey. Whether you're a college student, young professional, or just beginning to learn about money - no confusing jargon, no scattered resources. Just clear, practical money skills you'll actually use.
             </p>
