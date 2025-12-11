@@ -11,15 +11,17 @@
       "jsx": true
     }
   },
-  "plugins": ["react", "react-hooks", "@typescript-eslint"],
+  "plugins": ["react", "react-hooks", "@typescript-eslint", "prettier"],
   "extends": [
     "eslint:recommended",
     "plugin:react/recommended",
     "plugin:react-hooks/recommended",
     "plugin:@typescript-eslint/recommended",
-    "prettier"
+    "plugin:prettier/recommended"
   ],
-  "rules": {},
+  "rules": {
+    "prettier/prettier": ["error", { "endOfLine": "auto" }]
+  },
   "settings": {
     "react": {
       "version": "detect"
