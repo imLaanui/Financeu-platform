@@ -11,6 +11,7 @@ import Signup from "./pages/Signup";
 import ResetPassword from "./pages/ResetPassword";
 import Privacy from "./pages/Privacy";
 import ForgotPassword from "./pages/ForgotPassword";
+import Curriculum from "./pages/Curriculum";
 
 const routes = [
   { path: "/", element: <Home /> },
@@ -24,6 +25,7 @@ const routes = [
   { path: "/privacy", element: <Privacy /> },
   { path: "/reset-password", element: <ResetPassword /> },
   { path: "/forgot-password", element: <ForgotPassword /> },
+  { path: "/curriculum", element: <Curriculum /> },
 ];
 
 createRoot(document.getElementById("root")!).render(
