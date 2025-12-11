@@ -223,7 +223,7 @@
             });
 
             const percentage = Math.round((correct / shuffledQuestions.length) * 100);
-            const passed = percentage >= 80;
+            const passed = percentage === 100;
 
             // Show results
             const modal = document.getElementById('resultModal');
@@ -250,7 +250,7 @@
                 message.textContent = 'Not Quite There Yet';
                 score.className = 'result-score fail';
                 score.textContent = `${percentage}%`;
-                details.textContent = `You answered ${correct} out of ${shuffledQuestions.length} questions correctly. You need 80% to pass. Review the lessons and try again!`;
+                details.textContent = `You answered ${correct} out of ${shuffledQuestions.length} questions correctly. You need 100% to pass. Review the lessons and try again!`;
                 retryBtn.style.display = 'inline-block';
             }
 

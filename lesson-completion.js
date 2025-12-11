@@ -57,9 +57,6 @@ async function completeLesson(lessonId, pillarNum, lessonNum) {
 
         console.log('✅ Lesson completed successfully! Saved to backend & localStorage.');
 
-        // Show success message
-        alert('Congratulations! Lesson completed successfully! 🎉');
-
         return true;
 
     } catch (error) {

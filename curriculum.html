@@ -291,6 +291,26 @@
             transform: none;
             box-shadow: none;
         }
+        .pillar-card-premium.completed {
+            background: linear-gradient(135deg, #f0fdf4 0%, #d1fae5 100%);
+            border: 3px solid #00A676;
+        }
+        .pillar-card-premium.completed .pillar-icon {
+            background: linear-gradient(135deg, #00A676 0%, #10b981 100%);
+        }
+        .pillar-card-premium.completed .pillar-cta {
+            background: linear-gradient(135deg, #00A676 0%, #10b981 100%);
+        }
+        .completed-badge {
+            background: linear-gradient(135deg, #00A676 0%, #10b981 100%);
+            color: white;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
         .pillars-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
@@ -924,6 +944,47 @@
         }
 
         updateNav();
+
+        // Check pillar completion and update UI
+        async function checkPillarCompletion() {
+            const userId = localStorage.getItem('userId');
+            if (!userId || userId === 'null' || userId === 'undefined') {
+                return;
+            }
+
+            // Check Pillar 1 completion (8 lessons + quiz)
+            const pillar1Completed = JSON.parse(localStorage.getItem(`pillar1_completed_${userId}`) || '[]');
+            const pillar1QuizCompleted = localStorage.getItem(`pillar1_quiz_completed_${userId}`) === 'true';
+            const pillar1Card = document.querySelector('.pillar-card-premium:nth-child(1)');
+            const pillar1Badge = pillar1Card.querySelector('.availability-badge');
+            const pillar1Button = document.getElementById('pillar1StartBtn');
+
+            if (pillar1Completed.length === 8 && pillar1QuizCompleted) {
+                pillar1Card.classList.add('completed');
+                pillar1Badge.classList.remove('available');
+                pillar1Badge.classList.add('completed-badge');
+                pillar1Badge.textContent = 'Completed';
+                pillar1Button.textContent = 'Review Pillar →';
+            }
+
+            // Check Pillar 2 completion (8 lessons + quiz)
+            const pillar2Completed = JSON.parse(localStorage.getItem(`pillar2_completed_${userId}`) || '[]');
+            const pillar2QuizCompleted = localStorage.getItem(`pillar2_quiz_completed_${userId}`) === 'true';
+            const pillar2Card = document.querySelector('.pillar-card-premium:nth-child(2)');
+            const pillar2Badge = pillar2Card.querySelector('.availability-badge');
+            const pillar2Button = document.getElementById('pillar2StartBtn');
+
+            if (pillar2Completed.length === 8 && pillar2QuizCompleted) {
+                pillar2Card.classList.add('completed');
+                pillar2Badge.classList.remove('available');
+                pillar2Badge.classList.add('completed-badge');
+                pillar2Badge.textContent = 'Completed';
+                pillar2Button.textContent = 'Review Pillar →';
+            }
+        }
+
+        // Run completion check on page load
+        checkPillarCompletion();
 
         // Handle Pillar 1 Start button - check login status
         const pillar1Btn = document.getElementById('pillar1StartBtn');

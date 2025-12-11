@@ -1366,7 +1366,7 @@
             });
 
             const percentage = Math.round((correct / currentQuestions.length) * 100);
-            const passed = percentage >= 80;
+            const passed = percentage === 100;
 
             // Show correct/incorrect answers
             document.querySelectorAll('.question-card').forEach((card, qIndex) => {
@@ -1403,7 +1403,7 @@
                         <div class="result-icon">📚</div>
                         <div class="result-text" style="color: #dc2626;">Not quite there yet</div>
                         <div class="result-score">You scored ${correct} out of ${currentQuestions.length} (${percentage}%)</div>
-                        <p style="color: var(--text-secondary); margin-bottom: 15px;">You need 80% to pass. Review the lesson and try again!</p>
+                        <p style="color: var(--text-secondary); margin-bottom: 15px;">You need 100% to pass. Review the lesson and try again!</p>
                         <button class="btn-retry" onclick="retryQuiz()">Retry Quiz</button>
                     </div>
                 `;
