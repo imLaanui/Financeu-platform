@@ -1,3 +1,10 @@
+// Extend Window interface
+declare global {
+    interface Window {
+        revealNewElements?: () => void;
+    }
+}
+
 // Scroll Reveal Animation
 export function initScrollReveal() {
     const config = { threshold: 0.15, rootMargin: '0px 0px -50px 0px' };
@@ -24,7 +31,7 @@ export function initScrollReveal() {
     }
 
     // Re-observe dynamically added elements
-    (window as any).revealNewElements = observeElements;
+    window.revealNewElements = observeElements;
 }
 
 // Page Transition
