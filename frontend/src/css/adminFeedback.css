@@ -2,44 +2,6 @@ body {
   background: #f5f7fa;
 }
 
-/* Navbar */
-.navbar {
-  background: #0a1a2f;
-  color: white;
-  padding: 15px 20px;
-}
-
-.navbar .container {
-  max-width: 1400px;
-  margin: 0 auto;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.navbar .nav-links {
-  display: flex;
-  gap: 15px;
-  list-style: none;
-}
-
-.navbar .nav-links li a,
-.navbar .nav-links li button {
-  padding: 10px 16px;
-  color: white;
-  border: none;
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 6px;
-  text-decoration: none;
-  cursor: pointer;
-  transition: all 0.2s;
-}
-
-.navbar .nav-links li button:hover,
-.navbar .nav-links li a:hover {
-  background: rgba(255, 255, 255, 0.2);
-}
-
 /* Header */
 .admin-header {
   background: linear-gradient(135deg, #1a3a5c 0%, #0a1a2f 100%);
