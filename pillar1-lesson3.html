@@ -566,6 +566,219 @@
                 flex-direction: column;
             }
         }
+
+        /* SCREEN 1: Animated Icons */
+        .intro-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .intro-card {
+            background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+        .intro-card:hover {
+            transform: translateY(-5px) scale(1.02);
+            border-color: var(--primary-color);
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.2);
+        }
+        .intro-card-icon {
+            font-size: 48px;
+            margin-bottom: 10px;
+            animation: float 3s ease-in-out infinite;
+        }
+        .intro-card:nth-child(2) .intro-card-icon {
+            animation-delay: 1s;
+        }
+        .intro-card:nth-child(3) .intro-card-icon {
+            animation-delay: 2s;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        .intro-card h3 {
+            color: var(--primary-color);
+            font-size: 18px;
+            margin-bottom: 8px;
+            font-weight: 700;
+        }
+        .intro-card p {
+            color: var(--text-secondary);
+            font-size: 14px;
+            line-height: 1.5;
+            margin: 0;
+        }
+
+        /* SCREEN 2: Budget Method Cards */
+        .budget-methods {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        .budget-method-card {
+            background: white;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+            transition: all 0.3s;
+        }
+        .budget-method-card:hover {
+            border-color: var(--primary-color);
+            transform: translateY(-3px);
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.2);
+        }
+        .budget-method-emoji {
+            font-size: 32px;
+            margin-bottom: 8px;
+        }
+        .budget-method-name {
+            font-weight: 700;
+            color: var(--text-primary);
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+        .budget-method-desc {
+            font-size: 12px;
+            color: var(--text-secondary);
+            line-height: 1.4;
+        }
+
+        /* SCREEN 6: Visual Mistakes */
+        .mistakes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        .mistake-card {
+            background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
+            border: 2px solid #dc2626;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            transition: all 0.3s;
+        }
+        .mistake-card:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 8px 20px rgba(220, 38, 38, 0.2);
+        }
+        .mistake-icon {
+            font-size: 40px;
+            margin-bottom: 10px;
+            animation: shake 2s ease-in-out infinite;
+        }
+        .mistake-card:nth-child(2) .mistake-icon {
+            animation-delay: 0.4s;
+        }
+        .mistake-card:nth-child(3) .mistake-icon {
+            animation-delay: 0.8s;
+        }
+        .mistake-card:nth-child(4) .mistake-icon {
+            animation-delay: 1.2s;
+        }
+        @keyframes shake {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(-5deg); }
+            75% { transform: rotate(5deg); }
+        }
+        .mistake-title {
+            font-weight: 700;
+            color: #dc2626;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+        .mistake-desc {
+            font-size: 12px;
+            color: var(--text-secondary);
+            line-height: 1.4;
+        }
+
+        /* SCREEN 7: Interactive Checklist */
+        .action-checklist {
+            background: linear-gradient(135deg, #10b98115 0%, #d1fae530 100%);
+            border: 2px solid #10b981;
+            border-radius: 12px;
+            padding: 25px;
+            margin: 20px 0;
+        }
+        .checklist-title {
+            color: #10b981;
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        .checklist-item {
+            background: white;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        .checklist-item:hover {
+            box-shadow: 0 2px 8px rgba(16, 185, 129, 0.2);
+            transform: translateX(5px);
+        }
+        .checklist-item.checked {
+            background: #d1fae5;
+            opacity: 0.7;
+        }
+        .checklist-checkbox {
+            width: 24px;
+            height: 24px;
+            border: 2px solid #10b981;
+            border-radius: 6px;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            transition: all 0.3s;
+        }
+        .checklist-item.checked .checklist-checkbox {
+            background: #10b981;
+            color: white;
+        }
+        .checklist-text {
+            font-size: 14px;
+            color: var(--text-primary);
+            font-weight: 500;
+        }
+        .reflection-box {
+            background: linear-gradient(135deg, #f59e0b15 0%, #fef3c730 100%);
+            border: 2px solid #f59e0b;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: center;
+        }
+        .reflection-icon {
+            font-size: 40px;
+            margin-bottom: 10px;
+        }
+        .reflection-title {
+            color: #f59e0b;
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        .reflection-text {
+            color: var(--text-secondary);
+            font-size: 14px;
+            line-height: 1.6;
+        }
     </style>
 </head>
 <body>
@@ -598,34 +811,23 @@
         <div class="lesson-screen active" data-screen="1">
             <div class="screen-progress">Screen 1 of 8</div>
             <div class="lesson-section">
-                <h2>Quick Intro</h2>
-
-                <div class="intro-hook">
-                    <h3>🎯 The Problem</h3>
-                    <p>Most people think $100 today equals $100 in a year—it doesn't.</p>
-                </div>
-
-                <div class="intro-why">
-                    <h3>💡 Why It Matters</h3>
-                    <p>Understanding time value is the difference between struggling financially and building real wealth.</p>
-                </div>
-
-                <div class="intro-promise">
-                    <h3>✨ What You'll Learn</h3>
-                    <p>You'll see why starting now—not "someday"—is the most powerful financial decision you can make.</p>
-                </div>
-
-                <div class="intro-transition">
-                    <p><strong>Let's discover why timing is everything in personal finance.</strong></p>
-                </div>
-
-                <div class="intro-topics">
-                    <h4>In this lesson:</h4>
-                    <ul>
-                        <li>Why money today is worth more than money tomorrow</li>
-                        <li>The compound effect of starting early</li>
-                        <li>How opportunity cost affects your wealth</li>
-                    </ul>
+                <h2>The Time Value of Money</h2>
+                <div class="intro-cards">
+                    <div class="intro-card">
+                        <div class="intro-card-icon">⏰</div>
+                        <h3>The Problem</h3>
+                        <p>Most people think $100 today equals $100 in a year—it doesn't</p>
+                    </div>
+                    <div class="intro-card">
+                        <div class="intro-card-icon">💪</div>
+                        <h3>Why It Matters</h3>
+                        <p>Understanding time value is the difference between struggling financially and building real wealth</p>
+                    </div>
+                    <div class="intro-card">
+                        <div class="intro-card-icon">🚀</div>
+                        <h3>Your Goal</h3>
+                        <p>See why starting now—not "someday"—is the most powerful financial decision you can make</p>
+                    </div>
                 </div>
             </div>
             <div class="screen-navigation">
@@ -638,16 +840,35 @@
         <div class="lesson-screen" data-screen="2">
             <div class="screen-progress">Screen 2 of 8</div>
             <div class="lesson-section">
-                <h2>Core Concept</h2>
-                <p><strong>Money available now is worth more than the same amount in the future because it has the potential to grow.</strong></p>
-                <p>Why does time affect money's value?</p>
-                <ul>
-                    <li><strong>Growth Potential:</strong> Money you have now can be invested to earn returns, making it worth more later.</li>
-                    <li><strong>Inflation:</strong> Prices increase over time, meaning your dollar buys less in the future than it does today.</li>
-                    <li><strong>Opportunity Cost:</strong> Having money now gives you options and flexibility you won't have if you wait.</li>
-                    <li><strong>Risk:</strong> Money promised in the future isn't guaranteed—something could change before you receive it.</li>
-                </ul>
-                <p>This is why lenders charge interest and why investing early is so powerful. Time is literally money.</p>
+                <h2>Why Time Affects Money's Value</h2>
+                <p style="text-align: center; font-size: 18px; font-weight: 700; color: var(--primary-color); margin-bottom: 20px;">
+                    Money Now > Money Later
+                </p>
+
+                <div class="budget-methods">
+                    <div class="budget-method-card">
+                        <div class="budget-method-emoji">📈</div>
+                        <div class="budget-method-name">Growth Potential</div>
+                        <div class="budget-method-desc">Invest now, earn returns</div>
+                    </div>
+                    <div class="budget-method-card">
+                        <div class="budget-method-emoji">💹</div>
+                        <div class="budget-method-name">Inflation</div>
+                        <div class="budget-method-desc">Prices increase over time</div>
+                    </div>
+                    <div class="budget-method-card">
+                        <div class="budget-method-emoji">🎯</div>
+                        <div class="budget-method-name">Opportunity Cost</div>
+                        <div class="budget-method-desc">Options and flexibility</div>
+                    </div>
+                    <div class="budget-method-card">
+                        <div class="budget-method-emoji">⚠️</div>
+                        <div class="budget-method-name">Risk</div>
+                        <div class="budget-method-desc">Future isn't guaranteed</div>
+                    </div>
+                </div>
+
+                <p style="margin-top: 20px; text-align: center;"><strong>This is why lenders charge interest and why investing early is so powerful. Time is literally money.</strong></p>
             </div>
             <div class="screen-navigation">
                 <button class="btn-nav btn-prev" onclick="previousScreen()"><span>←</span> Previous</button>
@@ -780,14 +1001,28 @@
         <div class="lesson-screen" data-screen="6">
             <div class="screen-progress">Screen 6 of 8</div>
             <div class="lesson-section">
-                <div class="mistakes-list">
-                    <h3>Common Mistakes to Avoid</h3>
-                    <ul style="margin-left: 20px;">
-                        <li><strong>Thinking "I'll start saving later":</strong> Every year you wait costs you years of potential growth. Starting with $10/month now beats starting with $100/month in 10 years.</li>
-                        <li><strong>Only thinking about today's value:</strong> That $50 you spend on takeout today could be worth $150 in 20 years if invested. Not every purchase needs this analysis, but it's worth considering for large expenses.</li>
-                        <li><strong>Ignoring inflation:</strong> Money sitting under your mattress loses value every year. You need growth just to stay even.</li>
-                        <li><strong>Not asking for payment terms:</strong> If someone owes you money, getting it sooner rather than later matters. Don't be afraid to ask when you'll be repaid.</li>
-                    </ul>
+                <h2>Common Mistakes to Avoid</h2>
+                <div class="mistakes-grid">
+                    <div class="mistake-card">
+                        <div class="mistake-icon">⏳</div>
+                        <div class="mistake-title">"I'll Start Later"</div>
+                        <div class="mistake-desc">Every year you wait costs you years of potential growth</div>
+                    </div>
+                    <div class="mistake-card">
+                        <div class="mistake-icon">💸</div>
+                        <div class="mistake-title">Only Thinking Today</div>
+                        <div class="mistake-desc">$50 today could be $150 in 20 years if invested</div>
+                    </div>
+                    <div class="mistake-card">
+                        <div class="mistake-icon">📉</div>
+                        <div class="mistake-title">Ignoring Inflation</div>
+                        <div class="mistake-desc">Money under mattress loses value every year</div>
+                    </div>
+                    <div class="mistake-card">
+                        <div class="mistake-icon">🤝</div>
+                        <div class="mistake-title">Not Asking for Payment</div>
+                        <div class="mistake-desc">Getting money sooner matters—ask when you'll be repaid</div>
+                    </div>
                 </div>
             </div>
             <div class="screen-navigation">
@@ -799,24 +1034,40 @@
         <!-- Screen 7: Micro Action + Quick Reflection -->
         <div class="lesson-screen" data-screen="7">
             <div class="screen-progress">Screen 7 of 8</div>
-            <!-- Micro Action -->
             <div class="lesson-section">
-                <div class="action-box">
-                    <h3>🎯 Your Micro Action</h3>
-                    <p><strong>Calculate your "coffee future":</strong></p>
-                    <p>Think of something small you buy regularly (coffee, snacks, subscriptions). Multiply the weekly cost by 52 to get your annual spending. Then multiply by 30 to see what that money could be worth in 30 years if invested at 7% average returns.</p>
-                    <p>Example: $5 coffee twice a week = $10/week = $520/year = ~$50,000 in 30 years!</p>
-                    <p>This isn't to make you feel guilty—it's to show you the power of time. You get to decide what's worth it.</p>
+                <div class="action-checklist">
+                    <div class="checklist-title">🎯 Calculate Your "Coffee Future"</div>
+                    <p style="text-align: center; color: var(--text-secondary); margin-bottom: 15px; font-size: 14px;">
+                        Complete this exercise to see the power of time:
+                    </p>
+                    <div class="checklist-item" onclick="toggleChecklistItem(this)">
+                        <div class="checklist-checkbox"></div>
+                        <div class="checklist-text">Pick something you buy regularly (coffee, snacks, subscription)</div>
+                    </div>
+                    <div class="checklist-item" onclick="toggleChecklistItem(this)">
+                        <div class="checklist-checkbox"></div>
+                        <div class="checklist-text">Multiply weekly cost by 52 to get annual spending</div>
+                    </div>
+                    <div class="checklist-item" onclick="toggleChecklistItem(this)">
+                        <div class="checklist-checkbox"></div>
+                        <div class="checklist-text">Multiply annual amount by 30 for future value estimate</div>
+                    </div>
+                    <div class="checklist-item" onclick="toggleChecklistItem(this)">
+                        <div class="checklist-checkbox"></div>
+                        <div class="checklist-text">Compare: is this purchase worth the future cost?</div>
+                    </div>
+                    <div class="checklist-item" onclick="toggleChecklistItem(this)">
+                        <div class="checklist-checkbox"></div>
+                        <div class="checklist-text">Decide: keep it or redirect to savings/investments</div>
+                    </div>
                 </div>
-            </div>
 
-            <!-- Quick Reflection -->
-            <div class="lesson-section">
                 <div class="reflection-box">
-                    <h3>💭 Quick Reflection</h3>
-                    <p><strong>Think about this:</strong></p>
-                    <p>What opportunities have you missed because you "didn't have money right now"? What could change in your life if you started building wealth today, even with small amounts? The goal isn't to never spend—it's to understand that every financial decision is also a decision about your future.</p>
-                    <p style="margin-top: 15px; font-size: 14px; font-style: italic;">Consider this before moving forward.</p>
+                    <div class="reflection-icon">💭</div>
+                    <div class="reflection-title">Quick Reflection</div>
+                    <div class="reflection-text">
+                        What could change in your life if you started building wealth today, even with small amounts? The goal isn't to never spend—it's to understand that every financial decision is also a decision about your future.
+                    </div>
                 </div>
             </div>
             <div class="screen-navigation">
@@ -1188,6 +1439,17 @@
             const success = await completeLesson('pillar1_lesson3', 1, 3);
             if (success) {
                 window.location.href = 'pillar1-lessons.html';
+            }
+        }
+
+        // Interactive Checklist
+        function toggleChecklistItem(item) {
+            item.classList.toggle('checked');
+            const checkbox = item.querySelector('.checklist-checkbox');
+            if (item.classList.contains('checked')) {
+                checkbox.textContent = '✓';
+            } else {
+                checkbox.textContent = '';
             }
         }
 

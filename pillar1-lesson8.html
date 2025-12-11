@@ -19,7 +19,7 @@
             text-align: center;
             margin-bottom: 40px;
             padding: 30px;
-            background: linear-gradient(135deg, #EFF6FF 0%, #DBEAFE 100%);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             border-radius: 16px;
             position: relative;
             overflow: hidden;
@@ -40,13 +40,13 @@
         }
         .lesson-header h1 {
             font-size: 36px;
-            color: var(--text-primary);
+            color: white;
             margin-bottom: 10px;
             position: relative;
             z-index: 1;
         }
         .lesson-header .lesson-number {
-            color: var(--primary-color);
+            color: rgba(255, 255, 255, 0.9);
             font-size: 18px;
             font-weight: 700;
             margin-bottom: 5px;
@@ -569,6 +569,163 @@
                 grid-template-columns: 1fr;
             }
         }
+
+        /* SCREEN 1: Animated Icons */
+        .intro-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .intro-card {
+            background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+        .intro-card:hover {
+            transform: translateY(-5px) scale(1.02);
+            border-color: var(--primary-color);
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.2);
+        }
+        .intro-card-icon {
+            font-size: 48px;
+            margin-bottom: 10px;
+            animation: float 3s ease-in-out infinite;
+        }
+        .intro-card:nth-child(2) .intro-card-icon {
+            animation-delay: 1s;
+        }
+        .intro-card:nth-child(3) .intro-card-icon {
+            animation-delay: 2s;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        .intro-card h3 {
+            color: var(--primary-color);
+            font-size: 18px;
+            margin-bottom: 8px;
+            font-weight: 700;
+        }
+        .intro-card p {
+            color: var(--text-secondary);
+            font-size: 14px;
+            line-height: 1.5;
+            margin: 0;
+        }
+
+        /* SCREEN 6: Visual Mistakes Grid */
+        .mistakes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        .mistake-card {
+            background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
+            border: 2px solid #dc2626;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            transition: all 0.3s;
+        }
+        .mistake-card:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 8px 20px rgba(220, 38, 38, 0.2);
+        }
+        .mistake-icon {
+            font-size: 40px;
+            margin-bottom: 10px;
+            animation: shake 2s ease-in-out infinite;
+        }
+        .mistake-card:nth-child(2) .mistake-icon {
+            animation-delay: 0.4s;
+        }
+        .mistake-card:nth-child(3) .mistake-icon {
+            animation-delay: 0.8s;
+        }
+        .mistake-card:nth-child(4) .mistake-icon {
+            animation-delay: 1.2s;
+        }
+        .mistake-card:nth-child(5) .mistake-icon {
+            animation-delay: 1.6s;
+        }
+        @keyframes shake {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(-5deg); }
+            75% { transform: rotate(5deg); }
+        }
+        .mistake-title {
+            font-weight: 700;
+            color: #dc2626;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+        .mistake-desc {
+            font-size: 12px;
+            color: var(--text-secondary);
+            line-height: 1.4;
+        }
+
+        /* SCREEN 7: Interactive Checklist */
+        .action-checklist {
+            background: linear-gradient(135deg, #10b98115 0%, #d1fae530 100%);
+            border: 2px solid #10b981;
+            border-radius: 12px;
+            padding: 25px;
+            margin: 20px 0;
+        }
+        .checklist-title {
+            color: #10b981;
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        .checklist-item {
+            background: white;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        .checklist-item:hover {
+            box-shadow: 0 2px 8px rgba(16, 185, 129, 0.2);
+            transform: translateX(5px);
+        }
+        .checklist-item.checked {
+            background: #d1fae5;
+            opacity: 0.7;
+        }
+        .checklist-checkbox {
+            width: 24px;
+            height: 24px;
+            border: 2px solid #10b981;
+            border-radius: 6px;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            transition: all 0.3s;
+        }
+        .checklist-item.checked .checklist-checkbox {
+            background: #10b981;
+            color: white;
+        }
+        .checklist-text {
+            font-size: 14px;
+            color: var(--text-primary);
+            font-weight: 500;
+        }
     </style>
 </head>
 <body>
@@ -601,34 +758,23 @@
         <div class="lesson-screen active" data-screen="1">
             <div class="screen-progress">Screen 1 of 8</div>
             <div class="lesson-section">
-                <h2>Quick Intro</h2>
-
-                <div class="intro-hook">
-                    <h3>🎯 The Problem</h3>
-                    <p>Most people rely on motivation to save money—but motivation fades, and habits stick.</p>
-                </div>
-
-                <div class="intro-why">
-                    <h3>💡 Why It Matters</h3>
-                    <p>Your daily habits determine your financial future more than your income or knowledge ever will.</p>
-                </div>
-
-                <div class="intro-promise">
-                    <h3>✨ What You'll Learn</h3>
-                    <p>You'll learn proven systems that make saving automatic and remove the struggle from managing money.</p>
-                </div>
-
-                <div class="intro-transition">
-                    <p><strong>Let's build the habits that create lasting financial success.</strong></p>
-                </div>
-
-                <div class="intro-topics">
-                    <h4>In this lesson:</h4>
-                    <ul>
-                        <li>The "Pay Yourself First" principle</li>
-                        <li>The 24-hour rule for purchases</li>
-                        <li>How to make saving automatic, not optional</li>
-                    </ul>
+                <h2>Building Money Habits</h2>
+                <div class="intro-cards">
+                    <div class="intro-card">
+                        <div class="intro-card-icon">💪</div>
+                        <h3>The Problem</h3>
+                        <p>Motivation fades quickly, but habits stick and compound over time</p>
+                    </div>
+                    <div class="intro-card">
+                        <div class="intro-card-icon">🔄</div>
+                        <h3>The Solution</h3>
+                        <p>Daily habits determine your financial future more than income or knowledge</p>
+                    </div>
+                    <div class="intro-card">
+                        <div class="intro-card-icon">🎯</div>
+                        <h3>Your Goal</h3>
+                        <p>Learn systems that make saving automatic and remove the struggle</p>
+                    </div>
                 </div>
             </div>
             <div class="screen-navigation">
@@ -809,15 +955,33 @@
         <div class="lesson-screen" data-screen="6">
             <div class="screen-progress">Screen 6 of 8</div>
             <div class="lesson-section">
-                <div class="mistakes-list">
-                    <h3>Common Mistakes to Avoid</h3>
-                    <ul style="margin-left: 20px;">
-                        <li><strong>Trying to change everything at once:</strong> Start with ONE habit. Master it for a month, then add another.</li>
-                        <li><strong>Relying on willpower:</strong> Willpower runs out. Use automation (automatic transfers, auto-pay) whenever possible.</li>
-                        <li><strong>Beating yourself up over slip-ups:</strong> You'll make mistakes. Just restart the habit the next day. Progress, not perfection.</li>
-                        <li><strong>Not tracking the habit:</strong> Use a calendar, app, or checklist to mark when you complete your habit. Seeing streaks motivates continuation.</li>
-                        <li><strong>Picking habits that don't match your life:</strong> If you're not a morning person, don't make your habit "check finances every morning." Work with your natural rhythms.</li>
-                    </ul>
+                <h2>Avoid These Mistakes</h2>
+                <div class="mistakes-grid">
+                    <div class="mistake-card">
+                        <div class="mistake-icon">🚀</div>
+                        <div class="mistake-title">Changing Everything</div>
+                        <div class="mistake-desc">Start with ONE habit, master it, then add more</div>
+                    </div>
+                    <div class="mistake-card">
+                        <div class="mistake-icon">⚡</div>
+                        <div class="mistake-title">Relying on Willpower</div>
+                        <div class="mistake-desc">Use automation instead - willpower runs out</div>
+                    </div>
+                    <div class="mistake-card">
+                        <div class="mistake-icon">😔</div>
+                        <div class="mistake-title">Beating Yourself Up</div>
+                        <div class="mistake-desc">Slip-ups happen. Just restart the next day</div>
+                    </div>
+                    <div class="mistake-card">
+                        <div class="mistake-icon">📅</div>
+                        <div class="mistake-title">Not Tracking</div>
+                        <div class="mistake-desc">Use a calendar or app to track your streaks</div>
+                    </div>
+                    <div class="mistake-card">
+                        <div class="mistake-icon">🌙</div>
+                        <div class="mistake-title">Fighting Your Rhythms</div>
+                        <div class="mistake-desc">Pick habits that match your natural schedule</div>
+                    </div>
                 </div>
             </div>
             <div class="screen-navigation">
@@ -831,17 +995,31 @@
             <div class="screen-progress">Screen 7 of 8</div>
             <!-- Micro Action -->
             <div class="lesson-section">
-                <div class="action-box">
-                    <h3>🎯 Your Micro Action</h3>
-                    <p><strong>Pick ONE habit from this lesson to start tomorrow.</strong></p>
-                    <p>Choose the habit that would make the biggest difference in your life right now:</p>
-                    <ul>
-                        <li>Need to save? Start "pay yourself first" with any amount.</li>
-                        <li>Overspending? Implement the 24-hour rule.</li>
-                        <li>Unsure where money goes? Start weekly check-ins.</li>
-                        <li>Want to optimize? Schedule monthly spending reviews.</li>
-                    </ul>
-                    <p>Set a specific time and day. Put it in your calendar with a reminder. Do it for 30 days—that's when it starts becoming automatic.</p>
+                <div class="action-checklist">
+                    <div class="checklist-title">🎯 Your 30-Day Habit Challenge</div>
+                    <p style="text-align: center; color: var(--text-secondary); margin-bottom: 15px; font-size: 14px;">
+                        Pick ONE habit and commit for 30 days:
+                    </p>
+                    <div class="checklist-item" onclick="toggleChecklistItem(this)">
+                        <div class="checklist-checkbox"></div>
+                        <div class="checklist-text">Choose your habit (pay yourself first, 24-hour rule, weekly check-ins, or monthly reviews)</div>
+                    </div>
+                    <div class="checklist-item" onclick="toggleChecklistItem(this)">
+                        <div class="checklist-checkbox"></div>
+                        <div class="checklist-text">Set specific time and day in your calendar</div>
+                    </div>
+                    <div class="checklist-item" onclick="toggleChecklistItem(this)">
+                        <div class="checklist-checkbox"></div>
+                        <div class="checklist-text">Create a reminder or alarm</div>
+                    </div>
+                    <div class="checklist-item" onclick="toggleChecklistItem(this)">
+                        <div class="checklist-checkbox"></div>
+                        <div class="checklist-text">Set up tracking system (calendar, app, or checklist)</div>
+                    </div>
+                    <div class="checklist-item" onclick="toggleChecklistItem(this)">
+                        <div class="checklist-checkbox"></div>
+                        <div class="checklist-text">Start tomorrow - commit to 30 days to make it automatic</div>
+                    </div>
                 </div>
             </div>
 
@@ -1230,6 +1408,17 @@
             const success = await completeLesson('pillar1_lesson8', 1, 8);
             if (success) {
                 window.location.href = 'pillar1-lessons.html';
+            }
+        }
+
+        // Interactive Checklist
+        function toggleChecklistItem(item) {
+            item.classList.toggle('checked');
+            const checkbox = item.querySelector('.checklist-checkbox');
+            if (item.classList.contains('checked')) {
+                checkbox.textContent = '✓';
+            } else {
+                checkbox.textContent = '';
             }
         }
 
