@@ -413,16 +413,16 @@
                 <!-- Pillar 2 -->
                 <div class="pillar-card-premium">
                     <div class="pillar-card-header">
-                        <div class="pillar-icon">🎯</div>
+                        <div class="pillar-icon">💰</div>
                         <div class="pillar-badges">
-                            <span class="availability-badge coming-soon">Coming 2026</span>
+                            <span class="availability-badge available">Available Now</span>
                             <span class="tier-badge free">Free</span>
                         </div>
                     </div>
                     <div class="pillar-card-body">
                         <div class="pillar-number">Pillar 2</div>
-                        <h3 class="pillar-title">Financial Goal Setting</h3>
-                        <p class="pillar-description">Stop daydreaming and start achieving. Learn how to set realistic financial goals, create action plans, and actually follow through. Whether it's buying a car, studying abroad, or building an emergency fund.you'll know exactly how to make it happen.</p>
+                        <h3 class="pillar-title">Budgeting and Saving</h3>
+                        <p class="pillar-description">Master the art of managing your money and building financial security. Learn to create budgets that work, build emergency funds, automate savings, and cut expenses without sacrificing your lifestyle. Take control of your finances today.</p>
 
                         <div class="pillar-meta">
                             <div class="meta-item">
@@ -438,17 +438,17 @@
                         <div class="pillar-topics">
                             <h4>What You'll Learn</h4>
                             <ul class="topics-list">
-                                <li>Setting SMART financial goals</li>
-                                <li>Short-term vs. long-term planning</li>
-                                <li>Creating actionable timelines</li>
-                                <li>Tracking progress effectively</li>
+                                <li>Creating budgets that actually work</li>
+                                <li>The 50/30/20 budgeting rule</li>
+                                <li>Building an emergency fund</li>
+                                <li>Automating your savings</li>
                             </ul>
                         </div>
 
 
                     </div>
                     <div class="pillar-card-footer">
-                        <button class="pillar-cta disabled">Coming 2026</button>
+                        <a href="#" id="pillar2StartBtn" class="pillar-cta">Start Learning Free →</a>
                     </div>
                 </div>
 
@@ -940,6 +940,32 @@
                     if (response.ok) {
                         // User is logged in, redirect to lessons
                         window.location.href = 'pillar1-lessons.html';
+                    } else {
+                        // User is not logged in, redirect to login
+                        window.location.href = 'login.html';
+                    }
+                } catch (error) {
+                    // Error checking auth, redirect to login
+                    window.location.href = 'login.html';
+                }
+            });
+        }
+
+        // Handle Pillar 2 Start button - check login status
+        const pillar2Btn = document.getElementById('pillar2StartBtn');
+        if (pillar2Btn) {
+            pillar2Btn.addEventListener('click', async function(e) {
+                e.preventDefault();
+
+                // Check if user is logged in
+                try {
+                    const response = await fetch(`${API_URL}/auth/me`, {
+                        credentials: 'include'
+                    });
+
+                    if (response.ok) {
+                        // User is logged in, redirect to lessons
+                        window.location.href = 'pillar2-lessons.html';
                     } else {
                         // User is not logged in, redirect to login
                         window.location.href = 'login.html';
