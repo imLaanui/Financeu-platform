@@ -10,20 +10,28 @@ import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import ResetPassword from "./pages/ResetPassword";
 import Privacy from "./pages/Privacy";
+import ForgotPassword from "./pages/ForgotPassword";
+
+const routes = [
+  { path: "/", element: <Home /> },
+  { path: "/about", element: <About /> },
+  { path: "/contact", element: <Contact /> },
+  { path: "/careers", element: <Careers /> },
+  { path: "/help", element: <Help /> },
+  { path: "/terms", element: <Terms /> },
+  { path: "/login", element: <Login /> },
+  { path: "/signup", element: <Signup /> },
+  { path: "/privacy", element: <Privacy /> },
+  { path: "/reset-password", element: <ResetPassword /> },
+  { path: "/forgot-password", element: <ForgotPassword /> },
+];
 
 createRoot(document.getElementById("root")!).render(
   <BrowserRouter>
     <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/about" element={<About />} />
-      <Route path="/contact" element={<Contact />} />
-      <Route path="/careers" element={<Careers />} />
-      <Route path="/help" element={<Help />} />
-      <Route path="/terms" element={<Terms />} />
-      <Route path="/login" element={<Login />} />
-      <Route path="/signup" element={<Signup />} />
-      <Route path="/forgot-password" element={<ResetPassword />} />
-      <Route path="/privacy" element={<Privacy />} />
+      {routes.map((route) => (
+        <Route key={route.path} path={route.path} element={route.element} />
+      ))}
     </Routes>
   </BrowserRouter>
 );
