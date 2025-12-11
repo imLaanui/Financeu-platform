@@ -11,15 +11,15 @@
     <link rel="stylesheet" href="styles.css">
     <style>
         .lesson-container {
-            max-width: 800px;
+            max-width: 900px;
             margin: 0 auto;
-            padding: 40px 20px;
+            padding: 30px 20px;
         }
         .lesson-header {
             text-align: center;
-            margin-bottom: 40px;
-            padding: 30px;
-            background: linear-gradient(135deg, #EFF6FF 0%, #DBEAFE 100%);
+            margin-bottom: 30px;
+            padding: 25px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             border-radius: 16px;
             position: relative;
             overflow: hidden;
@@ -31,7 +31,7 @@
             left: -50%;
             width: 200%;
             height: 200%;
-            background: radial-gradient(circle, rgba(59, 130, 246, 0.1) 0%, transparent 70%);
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
             animation: rotate 20s linear infinite;
         }
         @keyframes rotate {
@@ -39,15 +39,15 @@
             to { transform: rotate(360deg); }
         }
         .lesson-header h1 {
-            font-size: 36px;
-            color: var(--text-primary);
-            margin-bottom: 10px;
+            font-size: 32px;
+            color: white;
+            margin-bottom: 8px;
             position: relative;
             z-index: 1;
         }
         .lesson-header .lesson-number {
-            color: var(--primary-color);
-            font-size: 18px;
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 14px;
             font-weight: 700;
             margin-bottom: 5px;
             position: relative;
@@ -57,17 +57,16 @@
         }
         .lesson-section {
             background: white;
-            padding: 30px;
+            padding: 25px;
             border-radius: 12px;
-            margin-bottom: 25px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
             position: relative;
-            border-left: 4px solid transparent;
             transition: all 0.3s ease;
         }
         .lesson-section:hover {
-            border-left-color: var(--primary-color);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+            transform: translateY(-2px);
         }
         .lesson-section h2 {
             color: var(--primary-color);
@@ -375,21 +374,344 @@
         }
         .lesson-screen.active {
             display: block;
-            animation: fadeIn 0.3s ease-in;
+            animation: fadeIn 0.4s ease-in;
         }
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
+            from { opacity: 0; transform: translateY(15px); }
             to { opacity: 1; transform: translateY(0); }
         }
         .screen-progress {
             text-align: center;
             margin-bottom: 20px;
-            padding: 12px 20px;
+            padding: 10px 20px;
             background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
             border-radius: 8px;
             font-weight: 600;
             color: var(--primary-color);
             font-size: 14px;
+        }
+
+        /* SCREEN 1: Animated Icons */
+        .intro-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .intro-card {
+            background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+        .intro-card:hover {
+            transform: translateY(-5px) scale(1.02);
+            border-color: var(--primary-color);
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.2);
+        }
+        .intro-card-icon {
+            font-size: 48px;
+            margin-bottom: 10px;
+            animation: float 3s ease-in-out infinite;
+        }
+        .intro-card:nth-child(2) .intro-card-icon {
+            animation-delay: 1s;
+        }
+        .intro-card:nth-child(3) .intro-card-icon {
+            animation-delay: 2s;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        .intro-card h3 {
+            color: var(--primary-color);
+            font-size: 18px;
+            margin-bottom: 8px;
+            font-weight: 700;
+        }
+        .intro-card p {
+            color: var(--text-secondary);
+            font-size: 14px;
+            line-height: 1.5;
+            margin: 0;
+        }
+
+        /* SCREEN 2: Interactive Calculator */
+        .calculator-box {
+            background: linear-gradient(135deg, #10b98115 0%, #d1fae530 100%);
+            border: 2px solid #10b981;
+            border-radius: 12px;
+            padding: 25px;
+            margin: 20px 0;
+        }
+        .calculator-title {
+            color: #10b981;
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        .calculator-input-group {
+            margin-bottom: 15px;
+        }
+        .calculator-input-group label {
+            display: block;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 5px;
+            font-size: 14px;
+        }
+        .calculator-input-group input {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: all 0.2s;
+        }
+        .calculator-input-group input:focus {
+            outline: none;
+            border-color: #10b981;
+            box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+        }
+        .calculator-result {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            margin-top: 20px;
+            border: 2px solid #e5e7eb;
+        }
+        .calculator-result-label {
+            font-size: 14px;
+            color: var(--text-secondary);
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .calculator-result-value {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        .calculator-result-value.positive {
+            color: #10b981;
+        }
+        .calculator-result-message {
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+        .rule-breakdown {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        .rule-card {
+            background: white;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+            transition: all 0.3s;
+        }
+        .rule-card:hover {
+            border-color: var(--primary-color);
+            transform: translateY(-3px);
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.2);
+        }
+        .rule-emoji {
+            font-size: 32px;
+            margin-bottom: 8px;
+        }
+        .rule-percentage {
+            font-weight: 700;
+            color: var(--primary-color);
+            font-size: 24px;
+            margin-bottom: 5px;
+        }
+        .rule-label {
+            font-size: 14px;
+            color: var(--text-secondary);
+            line-height: 1.4;
+        }
+
+        /* SCREEN 4: Visual Charts */
+        .budget-breakdown {
+            margin: 20px 0;
+        }
+        .budget-chart {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        .budget-chart-title {
+            text-align: center;
+            color: var(--primary-color);
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+        .budget-item {
+            margin-bottom: 12px;
+        }
+        .budget-item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 5px;
+        }
+        .budget-item-label {
+            font-weight: 600;
+            color: var(--text-primary);
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .budget-item-value {
+            font-weight: 700;
+            color: var(--primary-color);
+            font-size: 14px;
+        }
+        .budget-item-bar {
+            height: 24px;
+            background: #f3f4f6;
+            border-radius: 6px;
+            overflow: hidden;
+            position: relative;
+        }
+        .budget-item-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            border-radius: 6px;
+            transition: width 1s ease-out;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding-right: 8px;
+            color: white;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        .needs-bar {
+            background: linear-gradient(90deg, #3B82F6 0%, #2563eb 100%);
+        }
+        .wants-bar {
+            background: linear-gradient(90deg, #f59e0b 0%, #d97706 100%);
+        }
+        .savings-bar {
+            background: linear-gradient(90deg, #10b981 0%, #059669 100%);
+        }
+
+        /* SCREEN 6: Visual Mistakes */
+        .mistakes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        .mistake-card {
+            background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
+            border: 2px solid #dc2626;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            transition: all 0.3s;
+        }
+        .mistake-card:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 8px 20px rgba(220, 38, 38, 0.2);
+        }
+        .mistake-icon {
+            font-size: 40px;
+            margin-bottom: 10px;
+            animation: shake 2s ease-in-out infinite;
+        }
+        .mistake-card:nth-child(2) .mistake-icon {
+            animation-delay: 0.4s;
+        }
+        .mistake-card:nth-child(3) .mistake-icon {
+            animation-delay: 0.8s;
+        }
+        .mistake-card:nth-child(4) .mistake-icon {
+            animation-delay: 1.2s;
+        }
+        @keyframes shake {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(-5deg); }
+            75% { transform: rotate(5deg); }
+        }
+        .mistake-title {
+            font-weight: 700;
+            color: #dc2626;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+        .mistake-desc {
+            font-size: 12px;
+            color: var(--text-secondary);
+            line-height: 1.4;
+        }
+
+        /* SCREEN 7: Interactive Checklist */
+        .action-checklist {
+            background: linear-gradient(135deg, #10b98115 0%, #d1fae530 100%);
+            border: 2px solid #10b981;
+            border-radius: 12px;
+            padding: 25px;
+            margin: 20px 0;
+        }
+        .checklist-title {
+            color: #10b981;
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        .checklist-item {
+            background: white;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        .checklist-item:hover {
+            box-shadow: 0 2px 8px rgba(16, 185, 129, 0.2);
+            transform: translateX(5px);
+        }
+        .checklist-item.checked {
+            background: #d1fae5;
+            opacity: 0.7;
+        }
+        .checklist-checkbox {
+            width: 24px;
+            height: 24px;
+            border: 2px solid #10b981;
+            border-radius: 6px;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            transition: all 0.3s;
+        }
+        .checklist-item.checked .checklist-checkbox {
+            background: #10b981;
+            color: white;
+        }
+        .checklist-text {
+            font-size: 14px;
+            color: var(--text-primary);
+            font-weight: 500;
         }
         .screen-navigation {
             display: flex;
@@ -588,25 +910,27 @@
             <h1>Lesson 2 - The 50/30/20 Rule</h1>
         </div>
 
-        <!-- Screen 1: Quick Intro -->
+        <!-- Screen 1: Quick Intro with Animated Icons -->
         <div class="lesson-screen active" data-screen="1">
             <div class="screen-progress">Screen 1 of 8</div>
             <div class="lesson-section">
-                <h2>Quick Intro</h2>
-
-                <div class="intro-hook">
-                    <h3>🎯 The Problem</h3>
-                    <p>Complicated budgets feel overwhelming and hard to stick with.</p>
-                </div>
-
-                <div class="intro-why">
-                    <h3>💡 Why It Matters</h3>
-                    <p>Simple rules are easier to follow and more likely to become habits.</p>
-                </div>
-
-                <div class="intro-promise">
-                    <h3>✨ What You'll Learn</h3>
-                    <p>How to split your income into three simple categories that work.</p>
+                <h2>Why the 50/30/20 Rule Works</h2>
+                <div class="intro-cards">
+                    <div class="intro-card">
+                        <div class="intro-card-icon">😰</div>
+                        <h3>The Problem</h3>
+                        <p>Complex budgets feel overwhelming and impossible to stick with</p>
+                    </div>
+                    <div class="intro-card">
+                        <div class="intro-card-icon">💪</div>
+                        <h3>The Solution</h3>
+                        <p>Simple rules become automatic habits</p>
+                    </div>
+                    <div class="intro-card">
+                        <div class="intro-card-icon">🎯</div>
+                        <h3>Your Goal</h3>
+                        <p>Split income into three simple categories</p>
+                    </div>
                 </div>
             </div>
             <div class="screen-navigation">
@@ -615,23 +939,44 @@
             </div>
         </div>
 
-        <!-- Screen 2: Core Concept -->
+        <!-- Screen 2: Interactive Calculator -->
         <div class="lesson-screen" data-screen="2">
             <div class="screen-progress">Screen 2 of 8</div>
             <div class="lesson-section">
-                <h2>Core Concept</h2>
-                <p><strong>The 50/30/20 rule splits your after-tax income into three categories:</strong></p>
-                <ul>
-                    <li><strong>50% Needs:</strong> Rent, food, utilities, insurance, minimum debt payments - things you can't live without</li>
-                    <li><strong>30% Wants:</strong> Dining out, hobbies, entertainment, subscriptions - things that enhance your life</li>
-                    <li><strong>20% Savings & Debt:</strong> Emergency fund, retirement, extra debt payments - your future security</li>
-                </ul>
-                <p><strong>Example:</strong> If you earn $3,000/month after taxes:</p>
-                <ul>
-                    <li>$1,500 for needs</li>
-                    <li>$900 for wants</li>
-                    <li>$600 for savings and debt payoff</li>
-                </ul>
+                <h2>The 50/30/20 Formula</h2>
+                <p style="text-align: center; font-size: 18px; font-weight: 700; color: var(--primary-color); margin-bottom: 20px;">
+                    Split your after-tax income into three simple categories
+                </p>
+
+                <div class="rule-breakdown">
+                    <div class="rule-card">
+                        <div class="rule-emoji">🏠</div>
+                        <div class="rule-percentage">50%</div>
+                        <div class="rule-label">Needs</div>
+                    </div>
+                    <div class="rule-card">
+                        <div class="rule-emoji">🎉</div>
+                        <div class="rule-percentage">30%</div>
+                        <div class="rule-label">Wants</div>
+                    </div>
+                    <div class="rule-card">
+                        <div class="rule-emoji">💰</div>
+                        <div class="rule-percentage">20%</div>
+                        <div class="rule-label">Savings</div>
+                    </div>
+                </div>
+
+                <div class="calculator-box">
+                    <div class="calculator-title">Calculate Your Split</div>
+                    <div class="calculator-input-group">
+                        <label>Your Monthly After-Tax Income ($)</label>
+                        <input type="number" id="calcIncome" placeholder="e.g., 3000" oninput="calculate502030()">
+                    </div>
+                    <div class="calculator-result" id="calcResult" style="display: none;">
+                        <div class="calculator-result-label">Your 50/30/20 Budget</div>
+                        <div id="calcBreakdown" style="margin-top: 15px; text-align: left;"></div>
+                    </div>
+                </div>
             </div>
             <div class="screen-navigation">
                 <button class="btn-nav btn-prev" onclick="previousScreen()"><span>←</span> Previous</button>
@@ -682,19 +1027,59 @@
             </div>
         </div>
 
-        <!-- Screen 4: Simple Example -->
+        <!-- Screen 4: Visual Budget Example -->
         <div class="lesson-screen" data-screen="4">
             <div class="screen-progress">Screen 4 of 8</div>
             <div class="lesson-section">
-                <h2>Simple Example</h2>
-                <p><strong>Meet James, who earns $4,000/month after taxes.</strong></p>
-                <p>He allocates:</p>
-                <ul>
-                    <li><strong>$2,000 for Needs (50%):</strong> Rent, groceries, utilities, car payment, insurance</li>
-                    <li><strong>$1,200 for Wants (30%):</strong> Gym membership, streaming services, dining out, hobbies</li>
-                    <li><strong>$800 for Savings (20%):</strong> Emergency fund, 401k contribution</li>
-                </ul>
-                <p>Simple and balanced. James knows exactly how much he can spend guilt-free on wants while building his future.</p>
+                <h2>James's Budget Breakdown</h2>
+                <p style="text-align: center; margin-bottom: 20px;">See how James manages his $4,000/month income:</p>
+
+                <div class="budget-breakdown">
+                    <div class="budget-chart">
+                        <div class="budget-item">
+                            <div class="budget-item-header">
+                                <div class="budget-item-label">🏠 Needs (50%)</div>
+                                <div class="budget-item-value">$2,000</div>
+                            </div>
+                            <div class="budget-item-bar">
+                                <div class="budget-item-fill needs-bar" style="width: 50%;">50%</div>
+                            </div>
+                            <p style="font-size: 12px; color: var(--text-secondary); margin-top: 5px;">
+                                Rent, groceries, utilities, car payment, insurance
+                            </p>
+                        </div>
+
+                        <div class="budget-item">
+                            <div class="budget-item-header">
+                                <div class="budget-item-label">🎉 Wants (30%)</div>
+                                <div class="budget-item-value">$1,200</div>
+                            </div>
+                            <div class="budget-item-bar">
+                                <div class="budget-item-fill wants-bar" style="width: 30%;">30%</div>
+                            </div>
+                            <p style="font-size: 12px; color: var(--text-secondary); margin-top: 5px;">
+                                Gym, streaming, dining out, hobbies
+                            </p>
+                        </div>
+
+                        <div class="budget-item">
+                            <div class="budget-item-header">
+                                <div class="budget-item-label">💰 Savings (20%)</div>
+                                <div class="budget-item-value">$800</div>
+                            </div>
+                            <div class="budget-item-bar">
+                                <div class="budget-item-fill savings-bar" style="width: 20%;">20%</div>
+                            </div>
+                            <p style="font-size: 12px; color: var(--text-secondary); margin-top: 5px;">
+                                Emergency fund, 401k contribution
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <p style="text-align: center; margin-top: 20px; font-weight: 600; color: var(--primary-color);">
+                    Simple and balanced - James knows exactly what he can spend guilt-free
+                </p>
             </div>
             <div class="screen-navigation">
                 <button class="btn-nav btn-prev" onclick="previousScreen()"><span>←</span> Previous</button>
@@ -745,18 +1130,32 @@
             </div>
         </div>
 
-        <!-- Screen 6: Common Mistakes -->
+        <!-- Screen 6: Visual Common Mistakes -->
         <div class="lesson-screen" data-screen="6">
             <div class="screen-progress">Screen 6 of 8</div>
             <div class="lesson-section">
-                <div class="mistakes-list">
-                    <h3>Common Mistakes to Avoid</h3>
-                    <ul style="margin-left: 20px;">
-                        <li><strong>Miscategorizing wants as needs:</strong> That premium cable package is a want, not a need.</li>
-                        <li><strong>Not adjusting for your situation:</strong> If you live in a high-cost area, your needs might be higher than 50% - that's okay, adjust accordingly.</li>
-                        <li><strong>Ignoring the rule entirely:</strong> Even if you can't hit the exact percentages, the principle of balancing needs, wants, and savings still applies.</li>
-                        <li><strong>Being too rigid:</strong> The 50/30/20 rule is a guideline, not a law. It should guide you, not stress you out.</li>
-                    </ul>
+                <h2>Avoid These Mistakes</h2>
+                <div class="mistakes-grid">
+                    <div class="mistake-card">
+                        <div class="mistake-icon">🎭</div>
+                        <div class="mistake-title">Miscategorizing</div>
+                        <div class="mistake-desc">Premium cable is a want, not a need</div>
+                    </div>
+                    <div class="mistake-card">
+                        <div class="mistake-icon">🏙️</div>
+                        <div class="mistake-title">Not Adjusting</div>
+                        <div class="mistake-desc">High-cost areas need flexibility</div>
+                    </div>
+                    <div class="mistake-card">
+                        <div class="mistake-icon">🚫</div>
+                        <div class="mistake-title">Ignoring It</div>
+                        <div class="mistake-desc">The principle still matters even if not exact</div>
+                    </div>
+                    <div class="mistake-card">
+                        <div class="mistake-icon">⚖️</div>
+                        <div class="mistake-title">Too Rigid</div>
+                        <div class="mistake-desc">It's a guideline, not a law</div>
+                    </div>
                 </div>
             </div>
             <div class="screen-navigation">
@@ -765,24 +1164,43 @@
             </div>
         </div>
 
-        <!-- Screen 7: Micro Action + Quick Reflection -->
+        <!-- Screen 7: Interactive Checklist -->
         <div class="lesson-screen" data-screen="7">
             <div class="screen-progress">Screen 7 of 8</div>
-            <!-- Micro Action -->
             <div class="lesson-section">
-                <div class="action-box">
-                    <h3>🎯 Your Micro Action</h3>
-                    <p><strong>Calculate your own 50/30/20 split based on your monthly income.</strong></p>
-                    <p>Take your after-tax income and multiply by 0.5, 0.3, and 0.2. Write down these three numbers. These are your target amounts for needs, wants, and savings.</p>
+                <div class="action-checklist">
+                    <div class="checklist-title">Your Action Plan</div>
+                    <p style="text-align: center; color: var(--text-secondary); margin-bottom: 15px; font-size: 14px;">
+                        Complete this 5-minute exercise now:
+                    </p>
+                    <div class="checklist-item" onclick="toggleChecklistItem(this)">
+                        <div class="checklist-checkbox"></div>
+                        <div class="checklist-text">Calculate your 50/30/20 split (multiply income by 0.5, 0.3, 0.2)</div>
+                    </div>
+                    <div class="checklist-item" onclick="toggleChecklistItem(this)">
+                        <div class="checklist-checkbox"></div>
+                        <div class="checklist-text">Review last month's expenses</div>
+                    </div>
+                    <div class="checklist-item" onclick="toggleChecklistItem(this)">
+                        <div class="checklist-checkbox"></div>
+                        <div class="checklist-text">Identify which category is out of balance</div>
+                    </div>
+                    <div class="checklist-item" onclick="toggleChecklistItem(this)">
+                        <div class="checklist-checkbox"></div>
+                        <div class="checklist-text">Find one expense to adjust in that category</div>
+                    </div>
+                    <div class="checklist-item" onclick="toggleChecklistItem(this)">
+                        <div class="checklist-checkbox"></div>
+                        <div class="checklist-text">Set up automatic transfers to savings</div>
+                    </div>
                 </div>
-            </div>
 
-            <!-- Quick Reflection -->
-            <div class="lesson-section">
                 <div class="reflection-box">
-                    <h3>💭 Quick Reflection</h3>
-                    <p><strong>Does your current spending match this rule?</strong></p>
-                    <p>Look at your last month's expenses. Are you spending more on wants than you realized? Are you saving at least 20%? If not, what's one category where you could make adjustments?</p>
+                    <div class="reflection-icon">💭</div>
+                    <div class="reflection-title">Quick Reflection</div>
+                    <div class="reflection-text">
+                        Does your current spending match this rule? If not, what's one category where you could make adjustments?
+                    </div>
                 </div>
             </div>
             <div class="screen-navigation">
@@ -1016,7 +1434,7 @@
                 return;
             }
 
-            const quizPassedStatus = localStorage.getItem(`lesson10_quiz_passed_${userId}`);
+            const quizPassedStatus = localStorage.getItem(`lesson11_quiz_passed_${userId}`);
 
             if (quizPassedStatus === 'true') {
                 quizPassed = true;
@@ -1109,7 +1527,7 @@
             if (passed) {
                 quizPassed = true;
                 const userId = localStorage.getItem('userId');
-                localStorage.setItem(`lesson10_quiz_passed_${userId}`, 'true');
+                localStorage.setItem(`lesson11_quiz_passed_${userId}`, 'true');
                 document.getElementById('finishBtn').disabled = false;
 
                 resultDiv.innerHTML = `
@@ -1162,6 +1580,44 @@
 
         updateNav();
         initQuiz();
+
+        // Interactive 50/30/20 Calculator
+        function calculate502030() {
+            const income = parseFloat(document.getElementById('calcIncome').value) || 0;
+
+            if (income > 0) {
+                const needs = income * 0.5;
+                const wants = income * 0.3;
+                const savings = income * 0.2;
+
+                const resultDiv = document.getElementById('calcResult');
+                const breakdownDiv = document.getElementById('calcBreakdown');
+
+                resultDiv.style.display = 'block';
+                breakdownDiv.innerHTML = `
+                    <div style="padding: 10px; border-bottom: 2px solid #e5e7eb;">
+                        <strong style="color: #3B82F6;">🏠 Needs (50%):</strong> $${needs.toFixed(2)}
+                    </div>
+                    <div style="padding: 10px; border-bottom: 2px solid #e5e7eb;">
+                        <strong style="color: #f59e0b;">🎉 Wants (30%):</strong> $${wants.toFixed(2)}
+                    </div>
+                    <div style="padding: 10px;">
+                        <strong style="color: #10b981;">💰 Savings (20%):</strong> $${savings.toFixed(2)}
+                    </div>
+                `;
+            }
+        }
+
+        // Interactive Checklist
+        function toggleChecklistItem(item) {
+            item.classList.toggle('checked');
+            const checkbox = item.querySelector('.checklist-checkbox');
+            if (item.classList.contains('checked')) {
+                checkbox.textContent = '✓';
+            } else {
+                checkbox.textContent = '';
+            }
+        }
 
         // Checkpoint functions
         let checkpoint1Answered = false;

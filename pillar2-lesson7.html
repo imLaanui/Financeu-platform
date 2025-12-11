@@ -17,9 +17,9 @@
         }
         .lesson-header {
             text-align: center;
-            margin-bottom: 40px;
-            padding: 30px;
-            background: linear-gradient(135deg, #EFF6FF 0%, #DBEAFE 100%);
+            margin-bottom: 30px;
+            padding: 25px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             border-radius: 16px;
             position: relative;
             overflow: hidden;
@@ -31,7 +31,7 @@
             left: -50%;
             width: 200%;
             height: 200%;
-            background: radial-gradient(circle, rgba(59, 130, 246, 0.1) 0%, transparent 70%);
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
             animation: rotate 20s linear infinite;
         }
         @keyframes rotate {
@@ -39,15 +39,15 @@
             to { transform: rotate(360deg); }
         }
         .lesson-header h1 {
-            font-size: 36px;
-            color: var(--text-primary);
-            margin-bottom: 10px;
+            font-size: 32px;
+            color: white;
+            margin-bottom: 8px;
             position: relative;
             z-index: 1;
         }
         .lesson-header .lesson-number {
-            color: var(--primary-color);
-            font-size: 18px;
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 14px;
             font-weight: 700;
             margin-bottom: 5px;
             position: relative;
@@ -559,6 +559,205 @@
         .btn-continue:hover {
             background: #2563eb;
         }
+
+        /* SCREEN 1: Animated Icons */
+        .intro-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .intro-card {
+            background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+        .intro-card:hover {
+            transform: translateY(-5px) scale(1.02);
+            border-color: var(--primary-color);
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.2);
+        }
+        .intro-card-icon {
+            font-size: 48px;
+            margin-bottom: 10px;
+            animation: float 3s ease-in-out infinite;
+        }
+        .intro-card:nth-child(2) .intro-card-icon {
+            animation-delay: 1s;
+        }
+        .intro-card:nth-child(3) .intro-card-icon {
+            animation-delay: 2s;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        .intro-card h3 {
+            color: var(--primary-color);
+            font-size: 18px;
+            margin-bottom: 8px;
+            font-weight: 700;
+        }
+        .intro-card p {
+            color: var(--text-secondary);
+            font-size: 14px;
+            line-height: 1.5;
+            margin: 0;
+        }
+
+        /* SCREEN 4: Visual Charts */
+        .timeline-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        .timeline-card {
+            background: white;
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            transition: all 0.3s;
+        }
+        .timeline-card:hover {
+            border-color: var(--primary-color);
+            transform: translateY(-3px);
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.2);
+        }
+        .timeline-emoji {
+            font-size: 40px;
+            margin-bottom: 10px;
+        }
+        .timeline-title {
+            font-weight: 700;
+            color: var(--text-primary);
+            font-size: 16px;
+            margin-bottom: 5px;
+        }
+        .timeline-desc {
+            font-size: 13px;
+            color: var(--text-secondary);
+            line-height: 1.4;
+            margin-bottom: 8px;
+        }
+        .timeline-strategy {
+            font-size: 12px;
+            color: var(--primary-color);
+            font-weight: 600;
+            background: #eff6ff;
+            padding: 8px;
+            border-radius: 6px;
+        }
+
+        /* SCREEN 6: Animated Mistake Cards */
+        .mistakes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        .mistake-card {
+            background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
+            border: 2px solid #dc2626;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            transition: all 0.3s;
+        }
+        .mistake-card:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 8px 20px rgba(220, 38, 38, 0.2);
+        }
+        .mistake-icon {
+            font-size: 40px;
+            margin-bottom: 10px;
+            animation: shake 2s ease-in-out infinite;
+        }
+        .mistake-card:nth-child(2) .mistake-icon {
+            animation-delay: 0.4s;
+        }
+        .mistake-card:nth-child(3) .mistake-icon {
+            animation-delay: 0.8s;
+        }
+        .mistake-card:nth-child(4) .mistake-icon {
+            animation-delay: 1.2s;
+        }
+        @keyframes shake {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(-5deg); }
+            75% { transform: rotate(5deg); }
+        }
+        .mistake-title {
+            font-weight: 700;
+            color: #dc2626;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+        .mistake-desc {
+            font-size: 12px;
+            color: var(--text-secondary);
+            line-height: 1.4;
+        }
+
+        /* SCREEN 7: Interactive Checklist */
+        .action-checklist {
+            background: linear-gradient(135deg, #10b98115 0%, #d1fae530 100%);
+            border: 2px solid #10b981;
+            border-radius: 12px;
+            padding: 25px;
+            margin: 20px 0;
+        }
+        .checklist-title {
+            color: #10b981;
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        .checklist-item {
+            background: white;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        .checklist-item:hover {
+            box-shadow: 0 2px 8px rgba(16, 185, 129, 0.2);
+            transform: translateX(5px);
+        }
+        .checklist-item.checked {
+            background: #d1fae5;
+            opacity: 0.7;
+        }
+        .checklist-checkbox {
+            width: 24px;
+            height: 24px;
+            border: 2px solid #10b981;
+            border-radius: 6px;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            transition: all 0.3s;
+        }
+        .checklist-item.checked .checklist-checkbox {
+            background: #10b981;
+            color: white;
+        }
+        .checklist-text {
+            font-size: 14px;
+            color: var(--text-primary);
+            font-weight: 500;
+        }
     </style>
 </head>
 <body>
@@ -584,42 +783,31 @@
 
         <!-- Header -->
         <div class="lesson-header">
-            <div class="lesson-number">LESSON 7</div>
+            <div class="lesson-number">PILLAR 2: BUDGETING AND SAVING</div>
             <h1>Short-term vs. Long-term Savings</h1>
         </div>
 
-        <!-- Screen 1: Quick Intro -->
+        <!-- Screen 1: Quick Intro with Animated Icons -->
         <div class="lesson-screen active" data-screen="1">
             <div class="screen-progress">Screen 1 of 8</div>
             <div class="lesson-section">
-                <h2>Quick Intro</h2>
-
-                <div class="intro-hook">
-                    <h3>🎯 The Problem</h3>
-                    <p>All savings feel the same.</p>
-                </div>
-
-                <div class="intro-why">
-                    <h3>💡 Why It Matters</h3>
-                    <p>Different goals need different strategies.</p>
-                </div>
-
-                <div class="intro-promise">
-                    <h3>✨ What You'll Learn</h3>
-                    <p>How to organize savings by timeline.</p>
-                </div>
-
-                <div class="intro-transition">
-                    <p><strong>Let's learn how to match your savings strategy to your timeline.</strong></p>
-                </div>
-
-                <div class="intro-topics">
-                    <h4>In this lesson:</h4>
-                    <ul>
-                        <li>How to categorize savings goals by timeline</li>
-                        <li>Different strategies for short, medium, and long-term goals</li>
-                        <li>Where to keep money based on when you need it</li>
-                    </ul>
+                <h2>Why Timelines Matter</h2>
+                <div class="intro-cards">
+                    <div class="intro-card">
+                        <div class="intro-card-icon">🤔</div>
+                        <h3>The Problem</h3>
+                        <p>All savings feel the same - but they shouldn't</p>
+                    </div>
+                    <div class="intro-card">
+                        <div class="intro-card-icon">⏰</div>
+                        <h3>The Solution</h3>
+                        <p>Different goals need different strategies based on timeline</p>
+                    </div>
+                    <div class="intro-card">
+                        <div class="intro-card-icon">🎯</div>
+                        <h3>Your Goal</h3>
+                        <p>Match your savings strategy to when you need the money</p>
+                    </div>
                 </div>
             </div>
             <div class="screen-navigation">
@@ -632,15 +820,33 @@
         <div class="lesson-screen" data-screen="2">
             <div class="screen-progress">Screen 2 of 8</div>
             <div class="lesson-section">
-                <h2>Core Concept</h2>
-                <p><strong>Not all savings are the same - your strategy should match your timeline.</strong></p>
-                <p>Here's how to organize your savings:</p>
-                <ul>
-                    <li><strong>Short-term (0-2 years):</strong> Goals like vacation, holiday gifts, or car down payment. Keep in a high-yield savings account. You need this money soon, so safety and accessibility matter most. Don't invest it.</li>
-                    <li><strong>Medium-term (2-5 years):</strong> Goals like wedding, home renovation, or car purchase. Mix of savings and conservative investments. You have some time for growth but can't risk major losses.</li>
-                    <li><strong>Long-term (5+ years):</strong> Goals like retirement, house down payment, or children's education. Can invest for growth in stocks, retirement accounts, or index funds. Time allows you to ride out market volatility.</li>
-                </ul>
-                <p><strong>Key principle:</strong> The longer your timeline, the more risk you can take for higher potential returns. Money you need soon should stay safe and liquid.</p>
+                <h2>The 3 Savings Timelines</h2>
+                <p style="text-align: center; font-size: 18px; font-weight: 700; color: var(--primary-color); margin-bottom: 20px;">
+                    Your timeline determines your strategy
+                </p>
+
+                <div class="timeline-cards">
+                    <div class="timeline-card">
+                        <div class="timeline-emoji">🏖️</div>
+                        <div class="timeline-title">Short (0-2 years)</div>
+                        <div class="timeline-desc">Vacation, gifts, car down payment</div>
+                        <div class="timeline-strategy">High-yield savings</div>
+                    </div>
+                    <div class="timeline-card">
+                        <div class="timeline-emoji">💍</div>
+                        <div class="timeline-title">Medium (2-5 years)</div>
+                        <div class="timeline-desc">Wedding, home renovation</div>
+                        <div class="timeline-strategy">Savings + bonds</div>
+                    </div>
+                    <div class="timeline-card">
+                        <div class="timeline-emoji">🏡</div>
+                        <div class="timeline-title">Long (5+ years)</div>
+                        <div class="timeline-desc">Retirement, house, education</div>
+                        <div class="timeline-strategy">Invest for growth</div>
+                    </div>
+                </div>
+
+                <p style="margin-top: 20px; text-align: center;"><strong>💡 Key:</strong> Longer timeline = More risk = Higher potential returns</p>
             </div>
             <div class="screen-navigation">
                 <button class="btn-nav btn-prev" onclick="previousScreen()"><span>←</span> Previous</button>
@@ -691,40 +897,38 @@
             </div>
         </div>
 
-        <!-- Screen 4: Simple Example -->
+        <!-- Screen 4: Visual Example -->
         <div class="lesson-screen" data-screen="4">
             <div class="screen-progress">Screen 4 of 8</div>
             <div class="lesson-section">
-                <h2>Simple Example</h2>
-                <p>Emma has three different savings goals, each with its own account and strategy:</p>
-                <ul>
-                    <li><strong>Emergency fund ($2,000):</strong> Needs immediate access. Keeps in regular savings account linked to checking. Can access instantly if her car breaks down or she has a medical emergency.</li>
-                    <li><strong>Vacation fund ($5,000):</strong> Planning a trip in 1 year. Keeps in high-yield savings account earning 4% interest. Safe and accessible, earning some return while she waits.</li>
-                    <li><strong>House down payment ($20,000):</strong> Wants to buy in 3 years. Keeps in a mix of high-yield savings (60%) and conservative bond funds (40%). Some growth potential with moderate safety.</li>
-                </ul>
-                <p>By separating her savings by timeline, Emma knows exactly where each dollar belongs and uses the right strategy for each goal.</p>
-            </div>
+                <h2>Emma's Strategy</h2>
+                <p style="text-align: center; margin-bottom: 20px;">See how Emma organizes her savings by timeline:</p>
 
-            <!-- Mini Visual -->
-            <div class="visual-box">
-                <h3>Timeline Determines Strategy</h3>
-                <div class="money-flow">
-                    <div class="flow-item">
-                        <strong>0-2 Years</strong>
-                        <p style="font-size: 14px; margin-top: 8px;">Savings account</p>
+                <div class="timeline-cards">
+                    <div class="timeline-card">
+                        <div class="timeline-emoji">🚨</div>
+                        <div class="timeline-title">Emergency Fund</div>
+                        <div class="timeline-desc">$2,000 • Immediate access</div>
+                        <div class="timeline-strategy">Regular savings</div>
                     </div>
-                    <div class="flow-arrow">→</div>
-                    <div class="flow-item">
-                        <strong>2-5 Years</strong>
-                        <p style="font-size: 14px; margin-top: 8px;">Mix: savings + bonds</p>
+                    <div class="timeline-card">
+                        <div class="timeline-emoji">✈️</div>
+                        <div class="timeline-title">Vacation Fund</div>
+                        <div class="timeline-desc">$5,000 • 1 year away</div>
+                        <div class="timeline-strategy">High-yield (4%)</div>
                     </div>
-                    <div class="flow-arrow">→</div>
-                    <div class="flow-item">
-                        <strong>5+ Years</strong>
-                        <p style="font-size: 14px; margin-top: 8px;">Investments for growth</p>
+                    <div class="timeline-card">
+                        <div class="timeline-emoji">🏠</div>
+                        <div class="timeline-title">House Down Payment</div>
+                        <div class="timeline-desc">$20,000 • 3 years away</div>
+                        <div class="timeline-strategy">60% savings + 40% bonds</div>
                     </div>
                 </div>
-                <p style="margin-top: 20px; text-align: center; color: var(--text-secondary); font-size: 14px;">Match strategy to timeline for optimal results.</p>
+
+                <div class="visual-box" style="margin-top: 20px;">
+                    <h3>💡 Emma's Smart Move</h3>
+                    <p style="margin: 0;">By separating savings by timeline, she knows exactly where each dollar belongs and uses the right strategy for each goal.</p>
+                </div>
             </div>
             <div class="screen-navigation">
                 <button class="btn-nav btn-prev" onclick="previousScreen()"><span>←</span> Previous</button>
@@ -775,18 +979,32 @@
             </div>
         </div>
 
-        <!-- Screen 6: Common Mistakes -->
+        <!-- Screen 6: Visual Mistakes -->
         <div class="lesson-screen" data-screen="6">
             <div class="screen-progress">Screen 6 of 8</div>
             <div class="lesson-section">
-                <div class="mistakes-list">
-                    <h3>Common Mistakes to Avoid</h3>
-                    <ul style="margin-left: 20px;">
-                        <li><strong>Mixing all savings together:</strong> When everything's in one account, it's hard to know what money is for what purpose. Separate accounts prevent you from accidentally spending your house fund on impulse purchases.</li>
-                        <li><strong>Investing short-term money:</strong> Putting money you need in 6 months into stocks is risky. If the market drops 20% right before you need it, you're stuck selling at a loss or can't afford your goal.</li>
-                        <li><strong>Not having short-term goals:</strong> If you only save for retirement, you'll feel like you're sacrificing today for decades from now. Balance long-term security with near-term rewards.</li>
-                        <li><strong>Raiding long-term savings:</strong> Your retirement or house fund shouldn't be touched for vacations or impulse purchases. Protect your future by keeping long-term savings separate and untouchable.</li>
-                    </ul>
+                <h2>Avoid These Mistakes</h2>
+                <div class="mistakes-grid">
+                    <div class="mistake-card">
+                        <div class="mistake-icon">🔀</div>
+                        <div class="mistake-title">Mixing Everything</div>
+                        <div class="mistake-desc">One account = confusion about what's for what</div>
+                    </div>
+                    <div class="mistake-card">
+                        <div class="mistake-icon">📉</div>
+                        <div class="mistake-title">Investing Short-term $</div>
+                        <div class="mistake-desc">Market drops 20% right when you need it</div>
+                    </div>
+                    <div class="mistake-card">
+                        <div class="mistake-icon">😔</div>
+                        <div class="mistake-title">No Short-term Goals</div>
+                        <div class="mistake-desc">Balance future security with today's rewards</div>
+                    </div>
+                    <div class="mistake-card">
+                        <div class="mistake-icon">🚫</div>
+                        <div class="mistake-title">Raiding Long-term $</div>
+                        <div class="mistake-desc">Retirement fund isn't for vacation splurges</div>
+                    </div>
                 </div>
             </div>
             <div class="screen-navigation">
@@ -795,26 +1013,43 @@
             </div>
         </div>
 
-        <!-- Screen 7: Micro Action + Quick Reflection -->
+        <!-- Screen 7: Interactive Checklist -->
         <div class="lesson-screen" data-screen="7">
             <div class="screen-progress">Screen 7 of 8</div>
-            <!-- Micro Action -->
             <div class="lesson-section">
-                <div class="action-box">
-                    <h3>🎯 Your Micro Action</h3>
-                    <p><strong>List your savings goals and their timelines.</strong></p>
-                    <p>Take 5 minutes and write down every savings goal you have. Next to each, write when you need the money (6 months, 2 years, 10 years, etc.). Then label each as short-term, medium-term, or long-term.</p>
-                    <p>This simple exercise helps you see which savings need to be accessible and which can be invested for growth. It's the first step to organizing your finances by timeline.</p>
+                <div class="action-checklist">
+                    <div class="checklist-title">🎯 Your Action Plan</div>
+                    <p style="text-align: center; color: var(--text-secondary); margin-bottom: 15px; font-size: 14px;">
+                        Complete this 5-minute exercise now:
+                    </p>
+                    <div class="checklist-item" onclick="toggleChecklistItemLesson7(this)">
+                        <div class="checklist-checkbox"></div>
+                        <div class="checklist-text">List all your savings goals</div>
+                    </div>
+                    <div class="checklist-item" onclick="toggleChecklistItemLesson7(this)">
+                        <div class="checklist-checkbox"></div>
+                        <div class="checklist-text">Write when you need each goal's money</div>
+                    </div>
+                    <div class="checklist-item" onclick="toggleChecklistItemLesson7(this)">
+                        <div class="checklist-checkbox"></div>
+                        <div class="checklist-text">Label each as short, medium, or long-term</div>
+                    </div>
+                    <div class="checklist-item" onclick="toggleChecklistItemLesson7(this)">
+                        <div class="checklist-checkbox"></div>
+                        <div class="checklist-text">Rank goals by importance (1-5)</div>
+                    </div>
+                    <div class="checklist-item" onclick="toggleChecklistItemLesson7(this)">
+                        <div class="checklist-checkbox"></div>
+                        <div class="checklist-text">Match each goal to the right account type</div>
+                    </div>
                 </div>
-            </div>
 
-            <!-- Quick Reflection -->
-            <div class="lesson-section">
-                <div class="reflection-box">
-                    <h3>💭 Quick Reflection</h3>
-                    <p><strong>Think about this:</strong></p>
-                    <p>Which goals matter most to you? Not all goals are equally important. Your emergency fund and retirement might be critical, while a vacation is nice but not essential. Rank your goals by importance, and make sure your most important goals are fully funded before focusing on lower-priority ones. This ensures you're building real financial security, not just saving randomly.</p>
-                    <p style="margin-top: 15px; font-size: 14px; font-style: italic;">Take a moment to consider your priorities before moving forward.</p>
+                <div class="reflection-box" style="margin-top: 20px;">
+                    <div class="reflection-icon" style="font-size: 40px; margin-bottom: 10px; text-align: center;">💭</div>
+                    <div class="reflection-title" style="text-align: center; color: #f59e0b; font-size: 18px; font-weight: 700; margin-bottom: 10px;">Quick Reflection</div>
+                    <div class="reflection-text" style="text-align: center; color: var(--text-secondary); font-size: 14px; line-height: 1.6;">
+                        Which goals matter most? Fund critical goals (emergency, retirement) fully before nice-to-haves (vacation). This builds real security.
+                    </div>
                 </div>
             </div>
             <div class="screen-navigation">
@@ -1194,6 +1429,17 @@
 
         updateNav();
         initQuiz();
+
+        // Interactive Checklist
+        function toggleChecklistItemLesson7(item) {
+            item.classList.toggle('checked');
+            const checkbox = item.querySelector('.checklist-checkbox');
+            if (item.classList.contains('checked')) {
+                checkbox.textContent = '✓';
+            } else {
+                checkbox.textContent = '';
+            }
+        }
 
         // Checkpoint functions
         let checkpoint1Answered = false;

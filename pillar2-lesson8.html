@@ -17,9 +17,9 @@
         }
         .lesson-header {
             text-align: center;
-            margin-bottom: 40px;
-            padding: 30px;
-            background: linear-gradient(135deg, #EFF6FF 0%, #DBEAFE 100%);
+            margin-bottom: 30px;
+            padding: 25px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             border-radius: 16px;
             position: relative;
             overflow: hidden;
@@ -31,7 +31,7 @@
             left: -50%;
             width: 200%;
             height: 200%;
-            background: radial-gradient(circle, rgba(59, 130, 246, 0.1) 0%, transparent 70%);
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
             animation: rotate 20s linear infinite;
         }
         @keyframes rotate {
@@ -39,15 +39,15 @@
             to { transform: rotate(360deg); }
         }
         .lesson-header h1 {
-            font-size: 36px;
-            color: var(--text-primary);
-            margin-bottom: 10px;
+            font-size: 32px;
+            color: white;
+            margin-bottom: 8px;
             position: relative;
             z-index: 1;
         }
         .lesson-header .lesson-number {
-            color: var(--primary-color);
-            font-size: 18px;
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 14px;
             font-weight: 700;
             margin-bottom: 5px;
             position: relative;
@@ -559,6 +559,200 @@
         .btn-continue:hover {
             background: #2563eb;
         }
+
+        /* SCREEN 1: Animated Icons */
+        .intro-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .intro-card {
+            background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+        .intro-card:hover {
+            transform: translateY(-5px) scale(1.02);
+            border-color: var(--primary-color);
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.2);
+        }
+        .intro-card-icon {
+            font-size: 48px;
+            margin-bottom: 10px;
+            animation: float 3s ease-in-out infinite;
+        }
+        .intro-card:nth-child(2) .intro-card-icon {
+            animation-delay: 1s;
+        }
+        .intro-card:nth-child(3) .intro-card-icon {
+            animation-delay: 2s;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        .intro-card h3 {
+            color: var(--primary-color);
+            font-size: 18px;
+            margin-bottom: 8px;
+            font-weight: 700;
+        }
+        .intro-card p {
+            color: var(--text-secondary);
+            font-size: 14px;
+            line-height: 1.5;
+            margin: 0;
+        }
+
+        /* SCREEN 4: Visual Example Cards */
+        .example-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        .example-card {
+            background: white;
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 20px;
+            transition: all 0.3s;
+        }
+        .example-card:hover {
+            border-color: var(--primary-color);
+            transform: translateY(-3px);
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.2);
+        }
+        .example-emoji {
+            font-size: 36px;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        .example-title {
+            font-weight: 700;
+            color: var(--text-primary);
+            font-size: 15px;
+            margin-bottom: 8px;
+            text-align: center;
+        }
+        .example-desc {
+            font-size: 13px;
+            color: var(--text-secondary);
+            line-height: 1.4;
+        }
+
+        /* SCREEN 6: Animated Mistake Cards */
+        .mistakes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        .mistake-card {
+            background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
+            border: 2px solid #dc2626;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            transition: all 0.3s;
+        }
+        .mistake-card:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 8px 20px rgba(220, 38, 38, 0.2);
+        }
+        .mistake-icon {
+            font-size: 40px;
+            margin-bottom: 10px;
+            animation: shake 2s ease-in-out infinite;
+        }
+        .mistake-card:nth-child(2) .mistake-icon {
+            animation-delay: 0.4s;
+        }
+        .mistake-card:nth-child(3) .mistake-icon {
+            animation-delay: 0.8s;
+        }
+        .mistake-card:nth-child(4) .mistake-icon {
+            animation-delay: 1.2s;
+        }
+        .mistake-card:nth-child(5) .mistake-icon {
+            animation-delay: 1.6s;
+        }
+        @keyframes shake {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(-5deg); }
+            75% { transform: rotate(5deg); }
+        }
+        .mistake-title {
+            font-weight: 700;
+            color: #dc2626;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+        .mistake-desc {
+            font-size: 12px;
+            color: var(--text-secondary);
+            line-height: 1.4;
+        }
+
+        /* SCREEN 7: Interactive Checklist */
+        .action-checklist {
+            background: linear-gradient(135deg, #10b98115 0%, #d1fae530 100%);
+            border: 2px solid #10b981;
+            border-radius: 12px;
+            padding: 25px;
+            margin: 20px 0;
+        }
+        .checklist-title {
+            color: #10b981;
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        .checklist-item {
+            background: white;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        .checklist-item:hover {
+            box-shadow: 0 2px 8px rgba(16, 185, 129, 0.2);
+            transform: translateX(5px);
+        }
+        .checklist-item.checked {
+            background: #d1fae5;
+            opacity: 0.7;
+        }
+        .checklist-checkbox {
+            width: 24px;
+            height: 24px;
+            border: 2px solid #10b981;
+            border-radius: 6px;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            transition: all 0.3s;
+        }
+        .checklist-item.checked .checklist-checkbox {
+            background: #10b981;
+            color: white;
+        }
+        .checklist-text {
+            font-size: 14px;
+            color: var(--text-primary);
+            font-weight: 500;
+        }
     </style>
 </head>
 <body>
@@ -584,42 +778,31 @@
 
         <!-- Header -->
         <div class="lesson-header">
-            <div class="lesson-number">LESSON 8</div>
+            <div class="lesson-number">PILLAR 2: BUDGETING AND SAVING</div>
             <h1>Avoiding Budget Pitfalls</h1>
         </div>
 
-        <!-- Screen 1: Quick Intro -->
+        <!-- Screen 1: Quick Intro with Animated Icons -->
         <div class="lesson-screen active" data-screen="1">
             <div class="screen-progress">Screen 1 of 8</div>
             <div class="lesson-section">
-                <h2>Quick Intro</h2>
-
-                <div class="intro-hook">
-                    <h3>🎯 The Problem</h3>
-                    <p>Budgets fail frequently.</p>
-                </div>
-
-                <div class="intro-why">
-                    <h3>💡 Why It Matters</h3>
-                    <p>Knowing common pitfalls helps you succeed.</p>
-                </div>
-
-                <div class="intro-promise">
-                    <h3>✨ What You'll Learn</h3>
-                    <p>How to stick to your budget long-term.</p>
-                </div>
-
-                <div class="intro-transition">
-                    <p><strong>Let's identify and avoid the mistakes that derail most budgets.</strong></p>
-                </div>
-
-                <div class="intro-topics">
-                    <h4>In this lesson:</h4>
-                    <ul>
-                        <li>The most common reasons budgets fail</li>
-                        <li>How to recover from budget mistakes</li>
-                        <li>Strategies for sustainable, long-term budgeting</li>
-                    </ul>
+                <h2>Why Budgets Fail</h2>
+                <div class="intro-cards">
+                    <div class="intro-card">
+                        <div class="intro-card-icon">😓</div>
+                        <h3>The Problem</h3>
+                        <p>Most budgets fail - not from math errors but behavioral mistakes</p>
+                    </div>
+                    <div class="intro-card">
+                        <div class="intro-card-icon">🛡️</div>
+                        <h3>The Solution</h3>
+                        <p>Know the pitfalls and build systems to avoid them</p>
+                    </div>
+                    <div class="intro-card">
+                        <div class="intro-card-icon">🎯</div>
+                        <h3>Your Goal</h3>
+                        <p>Create a sustainable budget you'll actually stick to</p>
+                    </div>
                 </div>
             </div>
             <div class="screen-navigation">
@@ -632,17 +815,40 @@
         <div class="lesson-screen" data-screen="2">
             <div class="screen-progress">Screen 2 of 8</div>
             <div class="lesson-section">
-                <h2>Core Concept</h2>
-                <p><strong>Most budgets fail not from math errors, but from common behavioral mistakes.</strong></p>
-                <p>Here are the biggest pitfalls to avoid:</p>
-                <ul>
-                    <li><strong>Being too restrictive:</strong> If your budget has zero fun money, you'll burn out and quit. Build in guilt-free spending for entertainment and hobbies. A sustainable budget includes joy.</li>
-                    <li><strong>Forgetting irregular expenses:</strong> Car insurance every 6 months, holiday gifts, annual subscriptions. Divide these by 12 and budget monthly so they don't blindside you.</li>
-                    <li><strong>Not involving your partner:</strong> If you share finances, both people need to be on board. Hidden spending and different priorities create conflict. Budget together.</li>
-                    <li><strong>Giving up after mistakes:</strong> You overspent on dining by $50? That's not failure - adjust and keep going. One bad day doesn't erase progress. Budgets are flexible, not rigid rules.</li>
-                    <li><strong>Using complicated systems:</strong> If your budget requires an hour of spreadsheet work daily, you'll quit. Keep it simple. Track major categories, not every penny.</li>
-                </ul>
-                <p>Success comes from building a budget that fits your real life, not from perfection.</p>
+                <h2>The 5 Budget Killers</h2>
+                <p style="text-align: center; font-size: 18px; font-weight: 700; color: var(--primary-color); margin-bottom: 20px;">
+                    Avoid these behavioral mistakes
+                </p>
+
+                <div class="example-cards">
+                    <div class="example-card">
+                        <div class="example-emoji">🚫</div>
+                        <div class="example-title">Too Restrictive</div>
+                        <div class="example-desc">Zero fun money = burnout. Include guilt-free spending.</div>
+                    </div>
+                    <div class="example-card">
+                        <div class="example-emoji">📅</div>
+                        <div class="example-title">Irregular Expenses</div>
+                        <div class="example-desc">Divide annual costs by 12. Budget monthly for car insurance, gifts.</div>
+                    </div>
+                    <div class="example-card">
+                        <div class="example-emoji">👥</div>
+                        <div class="example-title">Solo Budgeting</div>
+                        <div class="example-desc">Share finances? Both partners must be on board.</div>
+                    </div>
+                    <div class="example-card">
+                        <div class="example-emoji">😔</div>
+                        <div class="example-title">Giving Up</div>
+                        <div class="example-desc">Overspent by $50? Adjust and keep going. One mistake ≠ failure.</div>
+                    </div>
+                    <div class="example-card">
+                        <div class="example-emoji">📊</div>
+                        <div class="example-title">Too Complex</div>
+                        <div class="example-desc">If it takes an hour daily, you'll quit. Keep it simple.</div>
+                    </div>
+                </div>
+
+                <p style="margin-top: 20px; text-align: center;"><strong>💡 Key:</strong> Build a budget that fits your real life, not perfection</p>
             </div>
             <div class="screen-navigation">
                 <button class="btn-nav btn-prev" onclick="previousScreen()"><span>←</span> Previous</button>
@@ -693,43 +899,41 @@
             </div>
         </div>
 
-        <!-- Screen 4: Simple Example -->
+        <!-- Screen 4: Visual Example -->
         <div class="lesson-screen" data-screen="4">
             <div class="screen-progress">Screen 4 of 8</div>
             <div class="lesson-section">
-                <h2>Simple Example</h2>
-                <p>Chris creates a budget in January with $200 for dining out. By mid-month, he's already spent $250 after a few spontaneous restaurant visits with friends.</p>
-                <p><strong>Old approach (giving up):</strong> "I already blew it. This budget thing doesn't work. I'll just spend however much and try again next year."</p>
-                <p><strong>New approach (adjusting):</strong></p>
-                <ul>
-                    <li>Recognizes he overspent by $50</li>
-                    <li>Reduces entertainment budget by $50 this month to compensate</li>
-                    <li>Continues tracking for the rest of the month</li>
-                    <li>Next month, increases dining budget to $250 since that's more realistic</li>
-                </ul>
-                <p><strong>Result:</strong> Chris stays on track overall, learns his true spending patterns, and adjusts his budget to fit his real life. By February, he's consistent and successful because he adapted instead of quitting.</p>
-            </div>
+                <h2>Chris's Recovery</h2>
+                <p style="text-align: center; margin-bottom: 20px;">How Chris turned a budget mistake into success:</p>
 
-            <!-- Mini Visual -->
-            <div class="visual-box">
-                <h3>Budget Mistakes Are Normal</h3>
-                <div class="money-flow">
-                    <div class="flow-item">
-                        <strong>Overspend</strong>
-                        <p style="font-size: 14px; margin-top: 8px;">It happens to everyone</p>
+                <div class="example-cards">
+                    <div class="example-card">
+                        <div class="example-emoji">😰</div>
+                        <div class="example-title">The Mistake</div>
+                        <div class="example-desc">Budgeted $200 for dining, spent $250 by mid-month</div>
                     </div>
-                    <div class="flow-arrow">→</div>
-                    <div class="flow-item">
-                        <strong>Adjust</strong>
-                        <p style="font-size: 14px; margin-top: 8px;">Modify and continue</p>
+                    <div class="example-card">
+                        <div class="example-emoji">🔄</div>
+                        <div class="example-title">The Adjustment</div>
+                        <div class="example-desc">Reduced entertainment by $50 to compensate, kept tracking</div>
                     </div>
-                    <div class="flow-arrow">→</div>
-                    <div class="flow-item">
-                        <strong>Learn</strong>
-                        <p style="font-size: 14px; margin-top: 8px;">Improve next month</p>
+                    <div class="example-card">
+                        <div class="example-emoji">📈</div>
+                        <div class="example-title">The Learning</div>
+                        <div class="example-desc">Increased dining budget to $250 next month - more realistic</div>
+                    </div>
+                    <div class="example-card">
+                        <div class="example-emoji">✅</div>
+                        <div class="example-title">The Result</div>
+                        <div class="example-desc">Stayed consistent, adapted to real life, succeeded long-term</div>
                     </div>
                 </div>
-                <p style="margin-top: 20px; text-align: center; color: var(--text-secondary); font-size: 14px;">Progress over perfection.</p>
+
+                <div class="visual-box" style="margin-top: 20px;">
+                    <h3>💡 The Pattern</h3>
+                    <p style="margin: 0; text-align: center;"><strong>Overspend → Adjust → Learn → Improve</strong></p>
+                    <p style="margin: 8px 0 0 0; text-align: center; font-size: 14px;">Progress over perfection.</p>
+                </div>
             </div>
             <div class="screen-navigation">
                 <button class="btn-nav btn-prev" onclick="previousScreen()"><span>←</span> Previous</button>
@@ -780,19 +984,37 @@
             </div>
         </div>
 
-        <!-- Screen 6: Common Mistakes -->
+        <!-- Screen 6: Visual Mistakes -->
         <div class="lesson-screen" data-screen="6">
             <div class="screen-progress">Screen 6 of 8</div>
             <div class="lesson-section">
-                <div class="mistakes-list">
-                    <h3>Common Mistakes to Avoid</h3>
-                    <ul style="margin-left: 20px;">
-                        <li><strong>All-or-nothing thinking:</strong> Your budget doesn't have to be perfect. Aiming for 80% success is realistic and sustainable. Perfectionists often quit when they can't maintain 100%.</li>
-                        <li><strong>Not tracking progress:</strong> Check your budget weekly, not just when creating it. Regular check-ins help you catch overspending early and celebrate wins.</li>
-                        <li><strong>Comparing to others:</strong> Your budget is unique to your income, goals, and priorities. Someone else's spending categories or savings rate may not fit your life.</li>
-                        <li><strong>Making budgets too complex:</strong> You don't need to track every coffee purchase. Focus on major categories. Simplicity increases the chance you'll stick with it.</li>
-                        <li><strong>Not celebrating wins:</strong> When you hit a savings goal or stay under budget, acknowledge it! Positive reinforcement makes budgeting feel rewarding, not restrictive.</li>
-                    </ul>
+                <h2>More Mistakes to Avoid</h2>
+                <div class="mistakes-grid">
+                    <div class="mistake-card">
+                        <div class="mistake-icon">💯</div>
+                        <div class="mistake-title">All-or-Nothing</div>
+                        <div class="mistake-desc">80% success is great! Perfect = unsustainable</div>
+                    </div>
+                    <div class="mistake-card">
+                        <div class="mistake-icon">📉</div>
+                        <div class="mistake-title">Not Tracking</div>
+                        <div class="mistake-desc">Check weekly, not just when creating it</div>
+                    </div>
+                    <div class="mistake-card">
+                        <div class="mistake-icon">👀</div>
+                        <div class="mistake-title">Comparing Others</div>
+                        <div class="mistake-desc">Your budget is unique to your life</div>
+                    </div>
+                    <div class="mistake-card">
+                        <div class="mistake-icon">📊</div>
+                        <div class="mistake-title">Too Detailed</div>
+                        <div class="mistake-desc">Don't track every coffee. Major categories only</div>
+                    </div>
+                    <div class="mistake-card">
+                        <div class="mistake-icon">🎉</div>
+                        <div class="mistake-title">No Celebrations</div>
+                        <div class="mistake-desc">Acknowledge wins! Makes budgeting rewarding</div>
+                    </div>
                 </div>
             </div>
             <div class="screen-navigation">
@@ -801,26 +1023,43 @@
             </div>
         </div>
 
-        <!-- Screen 7: Micro Action + Quick Reflection -->
+        <!-- Screen 7: Interactive Checklist -->
         <div class="lesson-screen" data-screen="7">
             <div class="screen-progress">Screen 7 of 8</div>
-            <!-- Micro Action -->
             <div class="lesson-section">
-                <div class="action-box">
-                    <h3>🎯 Your Micro Action</h3>
-                    <p><strong>Review your budget and simplify one complicated part.</strong></p>
-                    <p>Look at your current budget (or the one you're planning). Find one area that feels too detailed or time-consuming. Maybe you're tracking 15 subcategories for food - combine them into just "Groceries" and "Dining Out." Or if you're logging every transaction manually, switch to an app that automates it.</p>
-                    <p>The easier your budget is to maintain, the more likely you'll stick with it long-term.</p>
+                <div class="action-checklist">
+                    <div class="checklist-title">🎯 Your Action Plan</div>
+                    <p style="text-align: center; color: var(--text-secondary); margin-bottom: 15px; font-size: 14px;">
+                        Simplify your budget in 10 minutes:
+                    </p>
+                    <div class="checklist-item" onclick="toggleChecklistItemLesson8(this)">
+                        <div class="checklist-checkbox"></div>
+                        <div class="checklist-text">Review your current budget structure</div>
+                    </div>
+                    <div class="checklist-item" onclick="toggleChecklistItemLesson8(this)">
+                        <div class="checklist-checkbox"></div>
+                        <div class="checklist-text">Find 1 area that's too detailed or time-consuming</div>
+                    </div>
+                    <div class="checklist-item" onclick="toggleChecklistItemLesson8(this)">
+                        <div class="checklist-checkbox"></div>
+                        <div class="checklist-text">Combine subcategories (e.g., 15 food items → 2)</div>
+                    </div>
+                    <div class="checklist-item" onclick="toggleChecklistItemLesson8(this)">
+                        <div class="checklist-checkbox"></div>
+                        <div class="checklist-text">Consider an app to automate tracking</div>
+                    </div>
+                    <div class="checklist-item" onclick="toggleChecklistItemLesson8(this)">
+                        <div class="checklist-checkbox"></div>
+                        <div class="checklist-text">Set weekly check-in reminder (Sundays work well)</div>
+                    </div>
                 </div>
-            </div>
 
-            <!-- Quick Reflection -->
-            <div class="lesson-section">
-                <div class="reflection-box">
-                    <h3>💭 Quick Reflection</h3>
-                    <p><strong>Think about this:</strong></p>
-                    <p>What made your past budgets fail? Be honest with yourself. Was it too restrictive? Too complicated? Did you give up after one mistake? Did you not involve your partner? Understanding why you quit before helps you design a budget that actually works this time. Learn from past failures to create future success.</p>
-                    <p style="margin-top: 15px; font-size: 14px; font-style: italic;">Take a moment to reflect on past budgeting attempts before moving forward.</p>
+                <div class="reflection-box" style="margin-top: 20px;">
+                    <div class="reflection-icon" style="font-size: 40px; margin-bottom: 10px; text-align: center;">💭</div>
+                    <div class="reflection-title" style="text-align: center; color: #f59e0b; font-size: 18px; font-weight: 700; margin-bottom: 10px;">Quick Reflection</div>
+                    <div class="reflection-text" style="text-align: center; color: var(--text-secondary); font-size: 14px; line-height: 1.6;">
+                        Why did past budgets fail? Too restrictive? Too complex? Learn from failures to build a system that actually works.
+                    </div>
                 </div>
             </div>
             <div class="screen-navigation">
@@ -1200,6 +1439,17 @@
 
         updateNav();
         initQuiz();
+
+        // Interactive Checklist
+        function toggleChecklistItemLesson8(item) {
+            item.classList.toggle('checked');
+            const checkbox = item.querySelector('.checklist-checkbox');
+            if (item.classList.contains('checked')) {
+                checkbox.textContent = '✓';
+            } else {
+                checkbox.textContent = '';
+            }
+        }
 
         // Checkpoint functions
         let checkpoint1Answered = false;
