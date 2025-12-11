@@ -1,10 +1,9 @@
-// Quick password reset script
 const bcrypt = require('bcryptjs');
 const sqlite3 = require('sqlite3').verbose();
 const readline = require('readline');
 const path = require('path');
 
-const dbPath = path.join(__dirname, 'financeu.db');
+const dbPath = path.join(__dirname, '../financeu.db'); // adjust path
 const db = new sqlite3.Database(dbPath);
 
 const rl = readline.createInterface({
@@ -30,10 +29,8 @@ async function resetPassword() {
       return;
     }
 
-    // Hash the password
     const hashedPassword = await bcrypt.hash(newPassword, 10);
 
-    // Update in database
     db.run(
       'UPDATE users SET password = ? WHERE email = ?',
       [hashedPassword, email],
