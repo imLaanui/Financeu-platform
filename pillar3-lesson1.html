@@ -456,6 +456,71 @@
             transform: translateX(-8px);
             color: #0A1A2F;
         }
+
+        /* Multi-screen navigation */
+        .lesson-section {
+            display: none;
+        }
+        .lesson-section.active {
+            display: block;
+            animation: fadeIn 0.4s ease-in;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .lesson-navigation {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 30px 0;
+            gap: 20px;
+        }
+        .nav-button {
+            padding: 14px 28px;
+            background: linear-gradient(135deg, #0A1A2F 0%, #00A676 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .nav-button:hover:not(:disabled) {
+            transform: scale(1.05);
+            box-shadow: 0 4px 12px rgba(0, 166, 118, 0.4);
+        }
+        .nav-button:disabled {
+            background: #9CA3AF;
+            cursor: not-allowed;
+            opacity: 0.5;
+        }
+
+        .progress-indicator {
+            flex: 1;
+            text-align: center;
+        }
+        .progress-bar {
+            height: 8px;
+            background: #E5E7EB;
+            border-radius: 4px;
+            overflow: hidden;
+            margin-bottom: 8px;
+        }
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #00A676 0%, #10B981 100%);
+            transition: width 0.4s ease;
+        }
+        .progress-text {
+            font-size: 14px;
+            font-weight: 700;
+            color: #0A1A2F;
+        }
     </style>
 </head>
 <body>
@@ -613,8 +678,20 @@
             </div>
         </div>
 
+        <!-- Lesson Navigation -->
+        <div class="lesson-navigation" id="lessonNav">
+            <button class="nav-button" id="prevBtn" onclick="previousSection()">← Previous</button>
+            <div class="progress-indicator">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+                <div class="progress-text" id="progressText">Section 1 of 6</div>
+            </div>
+            <button class="nav-button" id="nextBtn" onclick="nextSection()">Next →</button>
+        </div>
+
         <!-- Mini Quiz -->
-        <div class="quiz-container" id="quizContainer">
+        <div class="quiz-container" id="quizContainer" style="display: none;">
             <div class="quiz-header">
                 <h2>Test Your Knowledge</h2>
                 <p>Answer all 3 questions correctly to complete the lesson</p>
@@ -860,6 +937,59 @@
                 window.location.href = 'pillar3-lessons.html';
             }
         }
+
+        // Multi-screen navigation
+        let currentSection = 0;
+        const sections = document.querySelectorAll('.lesson-section');
+        const totalSections = sections.length;
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const progressFill = document.getElementById('progressFill');
+        const progressText = document.getElementById('progressText');
+        const lessonNav = document.getElementById('lessonNav');
+        const quizContainer = document.getElementById('quizContainer');
+
+        function showSection(index) {
+            // Hide all sections
+            sections.forEach(section => section.classList.remove('active'));
+
+            // Show current section
+            if (index >= 0 && index < totalSections) {
+                sections[index].classList.add('active');
+                currentSection = index;
+
+                // Update navigation buttons
+                prevBtn.disabled = currentSection === 0;
+
+                // Update progress
+                const progress = ((currentSection + 1) / totalSections) * 100;
+                progressFill.style.width = progress + '%';
+                progressText.textContent = `Section ${currentSection + 1} of ${totalSections}`;
+
+                // Scroll to top
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        }
+
+        function nextSection() {
+            if (currentSection < totalSections - 1) {
+                showSection(currentSection + 1);
+            } else {
+                // Show quiz after all sections completed
+                lessonNav.style.display = 'none';
+                quizContainer.style.display = 'block';
+                window.scrollTo({ top: quizContainer.offsetTop - 100, behavior: 'smooth' });
+            }
+        }
+
+        function previousSection() {
+            if (currentSection > 0) {
+                showSection(currentSection - 1);
+            }
+        }
+
+        // Initialize - show first section
+        showSection(0);
 
         updateNav();
         initQuiz();

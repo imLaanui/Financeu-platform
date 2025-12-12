@@ -554,7 +554,7 @@
         </div>
 
         <!-- Lesson Quiz -->
-        <div class="quiz-container" id="quizContainer">
+        <div class="quiz-container" id="quizContainer" style="display: none;">
             <div class="quiz-header">
                 <h2>Lesson Quiz</h2>
                 <p>Test your knowledge to complete this lesson!</p>
@@ -834,7 +834,49 @@
                 // Redirect back to lessons page
                 window.location.href = 'pillar3-lessons.html';
             }
+        }        // Multi-screen navigation
+        let currentSection = 0;
+        const sections = document.querySelectorAll('.lesson-section');
+        const totalSections = sections.length;
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const progressFill = document.getElementById('progressFill');
+        const progressText = document.getElementById('progressText');
+        const lessonNav = document.getElementById('lessonNav');
+        const quizContainer = document.getElementById('quizContainer');
+
+        function showSection(index) {
+            sections.forEach(section => section.classList.remove('active'));
+            if (index >= 0 && index < totalSections) {
+                sections[index].classList.add('active');
+                currentSection = index;
+                prevBtn.disabled = currentSection === 0;
+                const progress = ((currentSection + 1) / totalSections) * 100;
+                progressFill.style.width = progress + '%';
+                progressText.textContent = `Section ${currentSection + 1} of ${totalSections}`;
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
         }
+
+        function nextSection() {
+            if (currentSection < totalSections - 1) {
+                showSection(currentSection + 1);
+            } else {
+                lessonNav.style.display = 'none';
+                quizContainer.style.display = 'block';
+                window.scrollTo({ top: quizContainer.offsetTop - 100, behavior: 'smooth' });
+            }
+        }
+
+        function previousSection() {
+            if (currentSection > 0) {
+                showSection(currentSection - 1);
+            }
+        }
+
+        showSection(0);
+
+
 
         updateNav();
         initQuiz();

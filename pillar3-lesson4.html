@@ -633,10 +633,22 @@
                 <p>Treat your credit card like a debit card - only spend money you already have. Use it for the convenience, rewards, and credit building, but NEVER as a loan.</p>
                 <p style="margin-top: 15px;">When used correctly, credit cards are the best financial tool for building wealth: cash back rewards, fraud protection, credit score building, and zero cost (when paid in full).</p>
             </div>
+        </div>        <!-- Lesson Navigation -->
+        <div class="lesson-navigation" id="lessonNav">
+            <button class="nav-button" id="prevBtn" onclick="previousSection()">← Previous</button>
+            <div class="progress-indicator">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+                <div class="progress-text" id="progressText">Section 1 of 5</div>
+            </div>
+            <button class="nav-button" id="nextBtn" onclick="nextSection()">Next →</button>
         </div>
 
+
+
         <!-- Mini Quiz -->
-        <div class="quiz-container" id="quizContainer">
+        <div class="quiz-container" id="quizContainer" style="display: none;">
             <div class="quiz-header">
                 <h2>Test Your Knowledge</h2>
                 <p>Answer all 3 questions correctly to complete the lesson</p>
@@ -896,7 +908,49 @@
             if (success) {
                 window.location.href = 'pillar3-lessons.html';
             }
+        }        // Multi-screen navigation
+        let currentSection = 0;
+        const sections = document.querySelectorAll('.lesson-section');
+        const totalSections = sections.length;
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const progressFill = document.getElementById('progressFill');
+        const progressText = document.getElementById('progressText');
+        const lessonNav = document.getElementById('lessonNav');
+        const quizContainer = document.getElementById('quizContainer');
+
+        function showSection(index) {
+            sections.forEach(section => section.classList.remove('active'));
+            if (index >= 0 && index < totalSections) {
+                sections[index].classList.add('active');
+                currentSection = index;
+                prevBtn.disabled = currentSection === 0;
+                const progress = ((currentSection + 1) / totalSections) * 100;
+                progressFill.style.width = progress + '%';
+                progressText.textContent = `Section ${currentSection + 1} of ${totalSections}`;
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
         }
+
+        function nextSection() {
+            if (currentSection < totalSections - 1) {
+                showSection(currentSection + 1);
+            } else {
+                lessonNav.style.display = 'none';
+                quizContainer.style.display = 'block';
+                window.scrollTo({ top: quizContainer.offsetTop - 100, behavior: 'smooth' });
+            }
+        }
+
+        function previousSection() {
+            if (currentSection > 0) {
+                showSection(currentSection - 1);
+            }
+        }
+
+        showSection(0);
+
+
 
         updateNav();
         initQuiz();
