@@ -1,4 +1,5 @@
 import "@css/Curriculum.css";
+import Navbar from "@components/Navbar";
 
 const pillars = [
     {
@@ -43,25 +44,8 @@ const pillars = [
 export default function Curriculum() {
     return (
         <>
-            {/* Navbar at the top */}
-            <nav className="navbar">
-                <div className="container">
-                    <div className="nav-wrapper">
-                        <div className="logo">
-                            <a href="/" style={{ color: "inherit", textDecoration: "none" }}>
-                                Finance<span className="logo-accent">U</span>
-                            </a>
-                        </div>
-                        <ul className="nav-links">
-                            <li><a href="/curriculum">Curriculum</a></li>
-                            <li><a href="/#features">Features</a></li>
-                            <li><a href="/#pricing">Pricing</a></li>
-                            <li><a href="/about">About</a></li>
-                            <li id="authButtons" style={{ opacity: 0 }}></li>
-                        </ul>
-                    </div>
-                </div>
-            </nav>
+            {/* Navigation*/}
+            <Navbar />
 
             {/* Hero Section */}
             <section className="curriculum-hero">

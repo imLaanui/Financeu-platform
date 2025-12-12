@@ -3,32 +3,32 @@ import Navbar from "@components/Navbar";
 import "@css/main.css";
 
 export default function Home() {
-  useEffect(() => {
-    const handleSmoothScroll = (e: Event) => {
-      const target = e.currentTarget as HTMLAnchorElement;
-      const href = target.getAttribute("href");
-      if (href && href.startsWith("#")) {
-        e.preventDefault();
-        const section = document.querySelector(href);
-        if (section) {
-          section.scrollIntoView({ behavior: "smooth" });
-        }
-      }
-    };
+    useEffect(() => {
+        const handleSmoothScroll = (e: Event) => {
+            const target = e.currentTarget as HTMLAnchorElement;
+            const href = target.getAttribute("href");
+            if (href && href.startsWith("#")) {
+                e.preventDefault();
+                const section = document.querySelector(href);
+                if (section) {
+                    section.scrollIntoView({ behavior: "smooth" });
+                }
+            }
+        };
 
-    const links = document.querySelectorAll('a[href^="#"]');
-    links.forEach(link => link.addEventListener("click", handleSmoothScroll));
+        const links = document.querySelectorAll('a[href^="#"]');
+        links.forEach(link => link.addEventListener("click", handleSmoothScroll));
 
-    // Cleanup
-    return () => {
-      links.forEach(link => link.removeEventListener("click", handleSmoothScroll));
-    };
-  }, []);
+        // Cleanup
+        return () => {
+            links.forEach(link => link.removeEventListener("click", handleSmoothScroll));
+        };
+    }, []);
 
-  return (
+    return (
         <>
-      {/* Navigation */}
-        <Navbar />
+            {/* Navigation */}
+            <Navbar />
 
             {/* Hero Section */}
             <section className="hero">
