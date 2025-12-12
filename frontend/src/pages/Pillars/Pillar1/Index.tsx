@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "@css/lessons.css";
-
 import Navbar from "@components/Navbar";
 import Footer from "@components/Footer";
 
@@ -23,19 +22,77 @@ const lessons: Lesson[] = [
     { id: 8, title: "Lesson 8 - Building Good Money Habits", description: "Develop daily practices that lead to long-term financial success", url: "/pillar1/lesson8" },
 ];
 
+// Helper to determine initial quiz state on load
+const getInitialQuizState = (uid: string | null) => {
+    if (!uid || uid === 'null' || uid === 'undefined') {
+        return { showQuiz: false, quizCompleted: false, quizScore: null };
+    }
+
+    const completed = JSON.parse(localStorage.getItem(`pillar1_completed_${uid}`) || '[]');
+
+    let allQuizzesPassed = true;
+    for (let i = 1; i <= 8; i++) {
+        if (localStorage.getItem(`lesson${i}_quiz_passed_${uid}`) !== 'true') {
+            allQuizzesPassed = false;
+            break;
+        }
+    }
+
+    const showQuiz = completed.length === 8 && allQuizzesPassed;
+
+    if (showQuiz) {
+        const quizComp = localStorage.getItem(`pillar1_quiz_completed_${uid}`) === 'true';
+        const score = localStorage.getItem(`pillar1_quiz_score_${uid}`);
+
+        return {
+            showQuiz: true,
+            quizCompleted: quizComp,
+            quizScore: score
+        };
+    }
+
+    return { showQuiz: false, quizCompleted: false, quizScore: null };
+};
+
 export default function Pillar1Lessons() {
     const navigate = useNavigate();
 
-    const [completedLessons] = useState<number[]>(() => {
-        const userId = localStorage.getItem("userId");
-        if (!userId) return [];
-        return JSON.parse(localStorage.getItem(`pillar1_completed_${userId}`) || "[]");
+    // Lazy initialization for userId
+    const [userId] = useState<string | null>(() => {
+        return localStorage.getItem("userId");
     });
+
+    // Lazy initialization for completedLessons
+    const [completedLessons] = useState<number[]>(() => {
+        const uid = localStorage.getItem("userId");
+        if (!uid || uid === 'null' || uid === 'undefined') {
+            return [];
+        }
+        return JSON.parse(localStorage.getItem(`pillar1_completed_${uid}`) || '[]');
+    });
+
+    const [quizStatus] = useState(() => getInitialQuizState(userId));
+
+    const showQuiz = quizStatus.showQuiz;
+    const quizCompleted = quizStatus.quizCompleted;
+    const quizScore = quizStatus.quizScore;
+
+    const isLessonLocked = (lessonId: number): boolean => {
+        if (!userId || userId === 'null' || userId === 'undefined') {
+            return lessonId > 1;
+        }
+
+        if (lessonId === 1) {
+            return false;
+        }
+
+        const previousQuizPassed = localStorage.getItem(`lesson${lessonId - 1}_quiz_passed_${userId}`) === 'true';
+        return !previousQuizPassed;
+    };
 
     return (
         <>
             <Navbar />
-
             <div>
                 <section className="pillar-header">
                     <h1>Pillar 1: Financial Literacy Fundamentals</h1>
@@ -43,37 +100,73 @@ export default function Pillar1Lessons() {
                 </section>
 
                 <div className="lessons-container">
-                    <a onClick={() => navigate("/dashboard")} className="back-link">← Back to Dashboard</a>
+                    <a onClick={() => navigate("/dashboard")} className="back-link" style={{ cursor: 'pointer' }}>
+                        ← Back to Dashboard
+                    </a>
 
-                    {lessons.map((lesson) => {
-                        const isCompleted = completedLessons.includes(lesson.id);
-                        return (
-                            <div
-                                key={lesson.id}
-                                className={`lesson-card ${isCompleted ? "completed" : ""}`}
-                                data-lesson={lesson.id}
-                            >
-                                <div className="lesson-info">
-                                    <h3>{lesson.title}</h3>
-                                    <p>{lesson.description}</p>
+                    <div id="lessonsList">
+                        {lessons.map((lesson) => {
+                            const isCompleted = completedLessons.includes(lesson.id);
+                            const isLocked = isLessonLocked(lesson.id);
+
+                            return (
+                                <div
+                                    key={lesson.id}
+                                    className={`lesson-card ${isCompleted ? "completed" : ""} ${isLocked ? "locked" : ""}`}
+                                    data-lesson={lesson.id}
+                                >
+                                    <div className="lesson-content">
+                                        <div className="lesson-info">
+                                            <h3>{lesson.title}</h3>
+                                            <p>{lesson.description}</p>
+                                        </div>
+                                        <div className="lesson-status">
+                                            {isLocked ? (
+                                                <span className="locked-text">🔒 Complete Previous Lesson</span>
+                                            ) : isCompleted ? (
+                                                <>
+                                                    <span className="completed-badge">✓ Completed</span>
+                                                    <a onClick={() => navigate(lesson.url)} className="btn-start-lesson" style={{ cursor: 'pointer' }}>
+                                                        Review
+                                                    </a>
+                                                </>
+                                            ) : (
+                                                <a onClick={() => navigate(lesson.url)} className="btn-start-lesson" style={{ cursor: 'pointer' }}>
+                                                    Start Lesson
+                                                </a>
+                                            )}
+                                        </div>
+                                    </div>
                                 </div>
+                            );
+                        })}
 
+                        {/* Final Quiz */}
+                        {showQuiz && (
+                            <div className="quiz-card">
+                                <div className="lesson-info">
+                                    <h3>🎓 Final Quiz</h3>
+                                    <p>Test your knowledge of all 8 lessons • 16 questions • 80% to pass</p>
+                                </div>
                                 <div className="lesson-status">
-                                    {isCompleted ? (
+                                    {quizCompleted ? (
                                         <>
-                                            <span className="completed-badge">Completed</span>
-                                            <a onClick={() => navigate(lesson.url)} className="btn-start-lesson">Review</a>
+                                            <span className="quiz-completed-badge">✓ Passed ({quizScore}%)</span>
+                                            <a onClick={() => navigate("/pillar1/quiz")} className="btn-start-quiz" style={{ cursor: 'pointer' }}>
+                                                Retake Quiz
+                                            </a>
                                         </>
                                     ) : (
-                                        <a onClick={() => navigate(lesson.url)} className="btn-start-lesson">Start Lesson</a>
+                                        <a onClick={() => navigate("/pillar1/quiz")} className="btn-start-quiz" style={{ cursor: 'pointer' }}>
+                                            Take Quiz
+                                        </a>
                                     )}
                                 </div>
                             </div>
-                        );
-                    })}
+                        )}
+                    </div>
                 </div>
             </div>
-
             <Footer />
         </>
     );
