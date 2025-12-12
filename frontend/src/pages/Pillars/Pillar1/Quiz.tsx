@@ -1,5 +1,5 @@
 import { useState } from "react";
-import "@css/Pillar1Quiz.css";
+import "@css/quiz.css";
 
 interface Question {
   lesson: number;

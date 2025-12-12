@@ -143,14 +143,14 @@ async function getAllUsers() {
 }
 
 // Create new user
-async function createUser(email, hashedPassword, name) {
+async function createUser({ name, email, password }) {
   return new Promise((resolve, reject) => {
     db.run(
       'INSERT INTO users (email, password, name, membership_tier) VALUES (?, ?, ?, ?)',
-      [email, hashedPassword, name, 'free'],
-      function(err) {
+      [email, password, name, 'free'],
+      function (err) {
         if (err) reject(err);
-        else resolve(this.lastID);
+        else resolve({ id: this.lastID, name, email, membership_tier: 'free' });
       }
     );
   });
