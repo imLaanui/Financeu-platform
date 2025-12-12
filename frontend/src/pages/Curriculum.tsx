@@ -1,4 +1,4 @@
-import "../css/Curriculum.css";
+import "@css/Curriculum.css";
 
 const pillars = [
     {

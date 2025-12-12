@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import "../css/dashboard.css";
-import { API_URL } from "../config/api";
+import { API_URL } from "@config/api";
+import "@css/dashboard.css";
 
 type User = {
   id: number;

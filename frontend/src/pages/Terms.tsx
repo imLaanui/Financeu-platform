@@ -1,4 +1,4 @@
-import "../css/terms.css";
+import "@css/terms.css";
 
 export default function Terms() {
   return (

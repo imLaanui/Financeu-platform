@@ -1,8 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import "../css/feedback.css";
-
-const API_URL = import.meta.env.VITE_API_URL;
+import { API_URL } from "@config/api";
+import "@css/feedback.css";
 
 export default function Feedback() {
   const [formData, setFormData] = useState({

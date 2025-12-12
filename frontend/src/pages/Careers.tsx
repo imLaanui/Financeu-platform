@@ -1,10 +1,9 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import "../css/navbar.css";
-import "../css/buttons.css";
-import "../css/sections.css";
-
-const API_URL = import.meta.env.VITE_API_URL;
+import { API_URL } from "@config/api";
+import "@css/navbar.css";
+import "@css/buttons.css";
+import "@css/sections.css";
 
 export default function Careers() {
   const [isLoggedIn, setIsLoggedIn] = useState<boolean | null>(() => {
