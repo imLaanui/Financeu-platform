@@ -2,6 +2,7 @@ import { useEffect, useState, useCallback } from "react";
 import { API_URL } from "@config/api";
 import { Link } from "react-router-dom";
 import "@css/adminFeedback.css";
+import Footer from "@components/Footer";
 
 interface FeedbackItem {
     id: number;
@@ -280,11 +281,7 @@ export default function AdminFeedback() {
             </div>
 
             {/* Footer */}
-            <footer className="footer">
-                <div className="container">
-                    <p>&copy; 2025 FinanceU. All rights reserved.</p>
-                </div>
-            </footer>
+            <Footer />
         </>
     );
 }

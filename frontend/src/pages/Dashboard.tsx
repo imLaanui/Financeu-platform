@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { API_URL } from "@config/api";
+import Footer from "@components/Footer";
 import "@css/dashboard.css";
 
 type User = {
@@ -206,45 +207,7 @@ export default function Dashboard() {
                 </div>
 
                 {/* Footer */}
-                <footer className="footer">
-                    <div className="footer-content">
-                        <div className="footer-section">
-                            <h4>FinanceU</h4>
-                            <p>Making financial literacy accessible for everyone.</p>
-                        </div>
-
-                        <div className="footer-section">
-                            <h4>Account</h4>
-                            <ul>
-                                <li>
-                                    <a href="/dashboard">Dashboard</a>
-                                </li>
-                                <li>
-                                    <button className="logout-btn" onClick={handleLogout}>
-                                        Logout
-                                    </button>
-                                </li>
-                            </ul>
-                        </div>
-
-                        <div className="footer-section">
-                            <h4>Support</h4>
-                            <ul>
-                                <li><a href="/help">Help Center</a></li>
-                                <li><a href="/privacy">Privacy Policy</a></li>
-                                <li><a href="/terms">Terms of Service</a></li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <div className="footer-bottom">
-                        <p className="disclaimer">
-                            Disclaimer: FinanceU provides educational content only and does not
-                            offer financial or investment advice.
-                        </p>
-                        <p>© 2025 FinanceU</p>
-                    </div>
-                </footer>
+                <Footer />
             </div>
         </section>
     );

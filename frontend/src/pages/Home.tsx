@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import Navbar from "@components/Navbar";
+import Footer from "@components/Footer";
 import "@css/main.css";
 
 export default function Home() {
@@ -327,39 +328,7 @@ export default function Home() {
             </section>
 
             {/* Footer */}
-            <footer className="footer">
-                <div className="container">
-                    <div className="footer-content">
-                        <div className="footer-section">
-                            <h4>FinanceU</h4>
-                            <p>Making financial literacy accessible for everyone.</p>
-                        </div>
-                        <div className="footer-section">
-                            <h4>Company</h4>
-                            <ul>
-                                <li><a href="/about">About Us</a></li>
-                                <li><a href="/careers">Careers</a></li>
-                                <li><a href="/contact">Contact</a></li>
-                            </ul>
-                        </div>
-                        <div className="footer-section">
-                            <h4>Support</h4>
-                            <ul>
-                                <li><a href="/help">Help Center</a></li>
-                                <li><a href="/feedback">Give Feedback</a></li>
-                                <li><a href="/privacy">Privacy Policy</a></li>
-                                <li><a href="/terms">Terms of Service</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div className="footer-bottom">
-                        <p style={{ fontSize: '0.85rem', opacity: 0.8, marginBottom: '10px' }}>
-                            Disclaimer: FinanceU provides educational content only and does not offer financial, legal, or investment advice. Always consult with a qualified professional before making financial decisions.
-                        </p>
-                        <p>&copy; 2025 financeU. All rights reserved.</p>
-                    </div>
-                </div>
-            </footer>
+            <Footer />
         </>
     );
 }
