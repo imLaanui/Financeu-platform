@@ -1,0 +1,901 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson 6 - Student Loans: The Smart Way - FinanceU</title>
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+    <link rel="icon" type="image/svg+xml" sizes="16x16" href="assets/favicon-16x16.svg">
+    <link rel="icon" type="image/svg+xml" sizes="32x32" href="assets/favicon-32x32.svg">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.svg">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .lesson-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        .lesson-header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 50px 30px;
+            background: linear-gradient(135deg, #0A1A2F 0%, #00A676 100%);
+            border-radius: 20px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0, 166, 118, 0.3);
+        }
+        .lesson-header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.15) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+        }
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        .lesson-header h1 {
+            font-size: 56px;
+            font-weight: 900;
+            color: white;
+            margin-bottom: 15px;
+            position: relative;
+            z-index: 1;
+            text-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .lesson-header .lesson-number {
+            color: #00A676;
+            font-size: 20px;
+            font-weight: 800;
+            margin-bottom: 10px;
+            position: relative;
+            z-index: 1;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            background: white;
+            padding: 8px 24px;
+            border-radius: 50px;
+            display: inline-block;
+        }
+        .lesson-section {
+            background: white;
+            padding: 40px;
+            border-radius: 16px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border: 3px solid transparent;
+            transition: all 0.3s ease;
+        }
+        .lesson-section:hover {
+            border-color: #00A676;
+            box-shadow: 0 8px 24px rgba(0, 166, 118, 0.2);
+            transform: translateY(-4px);
+        }
+        .lesson-section h2 {
+            color: #0A1A2F;
+            font-size: 48px;
+            font-weight: 800;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        .section-icon {
+            font-size: 64px;
+            filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
+        }
+        .lesson-section p {
+            line-height: 1.8;
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+            font-size: 18px;
+            font-weight: 500;
+        }
+        .lesson-section strong {
+            color: #0A1A2F;
+            font-weight: 700;
+        }
+
+        /* Color-coded callout boxes */
+        .key-concept-box {
+            background: #EFF6FF;
+            border: 4px solid #3B82F6;
+            border-radius: 16px;
+            padding: 30px;
+            margin: 30px 0;
+            position: relative;
+        }
+        .key-concept-box h3 {
+            color: #1E40AF;
+            font-size: 28px;
+            font-weight: 800;
+            margin-bottom: 15px;
+        }
+        .key-concept-box p {
+            color: #1E3A8A;
+            font-size: 18px;
+            line-height: 1.7;
+        }
+        .key-concept-box ul {
+            color: #1E3A8A;
+            font-size: 18px;
+            line-height: 1.7;
+            margin-top: 15px;
+        }
+
+        .warning-box {
+            background: #FEE2E2;
+            border: 4px solid #DC2626;
+            border-radius: 16px;
+            padding: 30px;
+            margin: 30px 0;
+        }
+        .warning-box h3 {
+            color: #991B1B;
+            font-size: 28px;
+            font-weight: 800;
+            margin-bottom: 15px;
+        }
+        .warning-box p {
+            color: #7F1D1D;
+            font-size: 18px;
+            line-height: 1.7;
+        }
+
+        .action-box {
+            background: #FEF3C7;
+            border: 4px solid #F59E0B;
+            border-radius: 16px;
+            padding: 30px;
+            margin: 30px 0;
+        }
+        .action-box h3 {
+            color: #B45309;
+            font-size: 28px;
+            font-weight: 800;
+            margin-bottom: 15px;
+        }
+        .action-box ul {
+            list-style: none;
+            padding: 0;
+        }
+        .action-box li {
+            color: #78350F;
+            font-size: 18px;
+            font-weight: 600;
+            padding: 12px 0;
+            border-bottom: 2px solid #FCD34D;
+        }
+        .action-box li:last-child {
+            border-bottom: none;
+        }
+        .action-box li::before {
+            content: '✓';
+            color: #F59E0B;
+            font-weight: 900;
+            font-size: 24px;
+            margin-right: 12px;
+        }
+
+        .real-world-box {
+            background: #F3E8FF;
+            border: 4px solid #9333EA;
+            border-radius: 16px;
+            padding: 30px;
+            margin: 30px 0;
+        }
+        .real-world-box h3 {
+            color: #6B21A8;
+            font-size: 28px;
+            font-weight: 800;
+            margin-bottom: 15px;
+        }
+        .real-world-box p {
+            color: #581C87;
+            font-size: 18px;
+            line-height: 1.7;
+            font-weight: 600;
+        }
+
+        /* Comparison table */
+        .comparison-table {
+            width: 100%;
+            margin: 30px 0;
+            border-collapse: separate;
+            border-spacing: 0;
+            overflow: hidden;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        .comparison-table th {
+            background: #0A1A2F;
+            color: white;
+            padding: 20px;
+            text-align: left;
+            font-size: 20px;
+            font-weight: 800;
+        }
+        .comparison-table td {
+            padding: 20px;
+            border-bottom: 2px solid #E5E7EB;
+            font-size: 18px;
+            font-weight: 600;
+        }
+        .comparison-table tr:last-child td {
+            border-bottom: none;
+        }
+        .comparison-table tr:nth-child(even) {
+            background: #F9FAFB;
+        }
+
+        /* Quiz styles */
+        .quiz-container {
+            background: linear-gradient(135deg, #0A1A2F 0%, #00A676 100%);
+            border: 5px solid #00A676;
+            border-radius: 20px;
+            padding: 40px;
+            margin: 40px 0;
+            box-shadow: 0 12px 40px rgba(0, 166, 118, 0.3);
+        }
+        .quiz-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .quiz-header h2 {
+            color: white;
+            font-size: 48px;
+            font-weight: 900;
+            margin-bottom: 15px;
+            text-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .quiz-header p {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 18px;
+            font-weight: 600;
+        }
+        .question-card {
+            background: white;
+            padding: 30px;
+            border-radius: 16px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border: 3px solid transparent;
+        }
+        .question-text {
+            font-size: 22px;
+            font-weight: 700;
+            color: #0A1A2F;
+            margin-bottom: 20px;
+        }
+        .answer-option {
+            background: #F9FAFB;
+            padding: 18px;
+            border: 3px solid #E5E7EB;
+            border-radius: 12px;
+            margin-bottom: 12px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 18px;
+            font-weight: 600;
+        }
+        .answer-option:hover {
+            border-color: #00A676;
+            background: #D1FAE5;
+            transform: translateX(8px);
+        }
+        .answer-option.selected {
+            border-color: #00A676;
+            background: #D1FAE5;
+        }
+        .answer-option.correct {
+            border-color: #10B981;
+            background: #6EE7B7;
+            color: #064E3B;
+        }
+        .answer-option.incorrect {
+            border-color: #DC2626;
+            background: #FCA5A5;
+            color: #7F1D1D;
+        }
+
+        .btn-submit-quiz {
+            display: block;
+            width: 100%;
+            max-width: 400px;
+            margin: 25px auto;
+            padding: 20px;
+            background: white;
+            color: #0A1A2F;
+            text-align: center;
+            border-radius: 12px;
+            font-size: 20px;
+            font-weight: 800;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .btn-submit-quiz:hover {
+            background: #00A676;
+            color: white;
+            transform: scale(1.05);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+        }
+
+        .quiz-result {
+            background: white;
+            padding: 40px;
+            border-radius: 16px;
+            text-align: center;
+            margin-top: 25px;
+            border: 4px solid #E5E7EB;
+        }
+        .quiz-result.pass {
+            border-color: #10B981;
+        }
+        .quiz-result.fail {
+            border-color: #DC2626;
+        }
+        .result-icon {
+            font-size: 80px;
+            margin-bottom: 20px;
+        }
+        .result-text {
+            font-size: 36px;
+            font-weight: 900;
+            margin-bottom: 15px;
+        }
+        .result-score {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 25px;
+        }
+
+        /* Finish button */
+        .btn-finish {
+            display: block;
+            width: 100%;
+            height: 56px;
+            margin: 40px auto;
+            padding: 0 40px;
+            background: linear-gradient(135deg, #0A1A2F 0%, #00A676 100%);
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 12px;
+            font-size: 24px;
+            font-weight: 800;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            line-height: 56px;
+            box-shadow: 0 8px 24px rgba(0, 166, 118, 0.3);
+        }
+        .btn-finish:hover {
+            transform: scale(1.02);
+            box-shadow: 0 12px 32px rgba(0, 166, 118, 0.4);
+        }
+        .btn-finish:disabled {
+            background: #9CA3AF;
+            cursor: not-allowed;
+            opacity: 0.6;
+            transform: none;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: #00A676;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 18px;
+            transition: all 0.2s;
+        }
+        .back-link:hover {
+            transform: translateX(-8px);
+            color: #0A1A2F;
+        }
+
+        @media (max-width: 768px) {
+            .lesson-header h1 {
+                font-size: 36px;
+            }
+            .lesson-section h2 {
+                font-size: 32px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-wrapper">
+                <div class="logo"><a href="/" style="color: inherit; text-decoration: none;">Finance<span class="logo-accent">U</span></a></div>
+                <ul class="nav-links">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="dashboard">Dashboard</a></li>
+                    <li id="authButtons" style="opacity: 0;"></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Lesson Content -->
+    <div class="lesson-container">
+        <a href="/pillar3-lessons" class="back-link">← Back to Pillar 3 Lessons</a>
+
+        <!-- Header -->
+        <div class="lesson-header">
+            <div class="lesson-number">PILLAR 3: LESSON 6</div>
+            <h1>Student Loans: The Smart Way</h1>
+        </div>
+
+        <!-- Student Loan Reality -->
+        <div class="lesson-section">
+            <h2><span class="section-icon">🎓</span>The Student Loan Reality</h2>
+            <p>Student loan debt in America has reached <strong>$1.7 trillion</strong>, affecting over 45 million borrowers. The average college graduate leaves school with <strong>$30,000 in debt</strong>, and many take 20+ years to pay it off.</p>
+            <p>But here's the thing: <strong>student loans aren't always bad debt</strong>. When used wisely, they can be an investment in your future earning potential. The key is borrowing smart, not borrowing blindly.</p>
+
+            <div class="warning-box">
+                <h3>⚠️ The Harsh Truth</h3>
+                <p>Many students borrow $100,000+ for degrees that lead to $40,000/year jobs. That's a recipe for financial disaster. Always calculate: Will this degree earn me enough to comfortably repay these loans?</p>
+            </div>
+        </div>
+
+        <!-- Federal vs Private -->
+        <div class="lesson-section">
+            <h2><span class="section-icon">🏛️</span>Federal vs. Private Student Loans</h2>
+            <p>Not all student loans are created equal. Understanding the difference can save you <strong>tens of thousands of dollars</strong>.</p>
+
+            <table class="comparison-table">
+                <tr>
+                    <th>Feature</th>
+                    <th>Federal Loans</th>
+                    <th>Private Loans</th>
+                </tr>
+                <tr>
+                    <td><strong>Interest Rates</strong></td>
+                    <td>Fixed, set by government (currently 5.5%)</td>
+                    <td>Variable, 3-14% based on credit</td>
+                </tr>
+                <tr>
+                    <td><strong>Credit Check</strong></td>
+                    <td>Not required (for Direct Loans)</td>
+                    <td>Required (or cosigner)</td>
+                </tr>
+                <tr>
+                    <td><strong>Repayment Options</strong></td>
+                    <td>Income-driven, deferment, forbearance</td>
+                    <td>Limited flexibility</td>
+                </tr>
+                <tr>
+                    <td><strong>Loan Forgiveness</strong></td>
+                    <td>Public Service, Teacher, Income-Based</td>
+                    <td>None</td>
+                </tr>
+                <tr>
+                    <td><strong>Death/Disability</strong></td>
+                    <td>Loans discharged</td>
+                    <td>Usually not discharged</td>
+                </tr>
+            </table>
+
+            <div class="key-concept-box">
+                <h3>💡 The Golden Rule</h3>
+                <p><strong>Exhaust ALL federal loan options before considering private loans.</strong></p>
+                <p style="margin-top: 15px;">Federal loans offer protections that private loans never will. Only go private if you've maxed out federal options and absolutely need more money.</p>
+            </div>
+        </div>
+
+        <!-- Types of Federal Loans -->
+        <div class="lesson-section">
+            <h2><span class="section-icon">📚</span>Types of Federal Student Loans</h2>
+
+            <div class="key-concept-box">
+                <h3>1. Direct Subsidized Loans</h3>
+                <p><strong>Who qualifies:</strong> Undergraduate students with financial need</p>
+                <p><strong>Interest:</strong> Government pays interest while you're in school</p>
+                <p><strong>Limit:</strong> $3,500-5,500/year depending on year in school</p>
+                <p style="margin-top: 15px;"><strong>This is the BEST type of student loan.</strong> Accept every dollar offered.</p>
+            </div>
+
+            <div class="key-concept-box">
+                <h3>2. Direct Unsubsidized Loans</h3>
+                <p><strong>Who qualifies:</strong> All undergraduate and graduate students</p>
+                <p><strong>Interest:</strong> You're responsible from day one (but can defer payments)</p>
+                <p><strong>Limit:</strong> $5,500-20,500/year</p>
+                <p style="margin-top: 15px;">Still good loans, but interest accumulates while you're in school.</p>
+            </div>
+
+            <div class="warning-box">
+                <h3>⚠️ Parent PLUS Loans: Use Caution</h3>
+                <p>These are federal loans PARENTS take out. They have higher interest rates (8.05%), fewer repayment options, and put your parents' retirement at risk. Only use as a last resort.</p>
+            </div>
+        </div>
+
+        <!-- How Much to Borrow -->
+        <div class="lesson-section">
+            <h2><span class="section-icon">💰</span>The Smart Borrowing Formula</h2>
+            <p>Here's a simple rule that financial experts agree on:</p>
+
+            <div class="action-box">
+                <h3>📊 The 1x Rule</h3>
+                <ul>
+                    <li>Your total student loan debt should NOT exceed your expected first-year salary</li>
+                    <li>Example: Expect to earn $50,000? Don't borrow more than $50,000 total</li>
+                    <li>This ensures loans are manageable and won't crush your post-grad finances</li>
+                </ul>
+            </div>
+
+            <div class="real-world-box">
+                <h3>📈 Real Examples</h3>
+                <p><strong>Smart Borrowing:</strong> Engineering major expects $70,000 salary. Borrows $40,000 total. Monthly payment: $460 (7% of income) ✓</p>
+                <p style="margin-top: 15px;"><strong>Risky Borrowing:</strong> Art major expects $35,000 salary. Borrows $80,000 total. Monthly payment: $920 (32% of income) ✗</p>
+            </div>
+        </div>
+
+        <!-- Repayment Strategies -->
+        <div class="lesson-section">
+            <h2><span class="section-icon">💳</span>Smart Repayment Strategies</h2>
+
+            <div class="key-concept-box">
+                <h3>Standard Repayment (10 years)</h3>
+                <p>Fixed monthly payment. You'll pay the least interest overall, but highest monthly payment.</p>
+                <p style="margin-top: 10px;"><strong>Best for:</strong> High earners who can afford larger payments</p>
+            </div>
+
+            <div class="key-concept-box">
+                <h3>Income-Driven Repayment Plans</h3>
+                <p>Monthly payment = 10-15% of discretionary income. Remaining balance forgiven after 20-25 years.</p>
+                <p style="margin-top: 10px;"><strong>Best for:</strong> Low earners, public service careers, large debt loads</p>
+                <p style="margin-top: 10px;"><strong>Watch out:</strong> You'll pay more interest over time, and forgiven amount may be taxable</p>
+            </div>
+
+            <div class="action-box">
+                <h3>💡 Pro Tips to Save Thousands</h3>
+                <ul>
+                    <li>Make payments while in school if possible (even $25/month helps)</li>
+                    <li>Pay more than the minimum - target the highest interest rate loans first</li>
+                    <li>Sign up for autopay (saves 0.25% on interest rate)</li>
+                    <li>Make bi-weekly payments instead of monthly (13 payments instead of 12/year)</li>
+                    <li>Put windfalls (tax refunds, bonuses) toward principal</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Forgiveness Programs -->
+        <div class="lesson-section">
+            <h2><span class="section-icon">🎁</span>Loan Forgiveness Programs</h2>
+
+            <div class="key-concept-box">
+                <h3>Public Service Loan Forgiveness (PSLF)</h3>
+                <p><strong>How it works:</strong> Make 120 qualifying payments (10 years) while working for government or non-profit → remaining balance forgiven TAX-FREE</p>
+                <p style="margin-top: 15px;"><strong>Qualifies:</strong> Teachers, nurses, social workers, government employees, non-profit workers</p>
+                <p style="margin-top: 15px;"><strong>Requirements:</strong> Must have Direct Loans and be on income-driven repayment plan</p>
+            </div>
+
+            <div class="key-concept-box">
+                <h3>Teacher Loan Forgiveness</h3>
+                <p>Teach full-time for 5 years at low-income school → up to $17,500 forgiven</p>
+            </div>
+
+            <div class="warning-box">
+                <h3>⚠️ Forgiveness Reality Check</h3>
+                <p>Only about 2% of PSLF applicants get approved due to technicalities. Document everything, recertify employment annually, and verify you're on the right repayment plan. Don't count on forgiveness - plan to repay.</p>
+            </div>
+        </div>
+
+        <!-- Action Plan -->
+        <div class="lesson-section">
+            <h2><span class="section-icon">✅</span>Your Student Loan Action Plan</h2>
+
+            <div class="action-box">
+                <h3>🎯 Before You Borrow</h3>
+                <ul>
+                    <li>Calculate expected salary for your major (use Glassdoor, BLS.gov)</li>
+                    <li>Apply for FAFSA every year (even if you think you won't qualify)</li>
+                    <li>Exhaust scholarships, grants, and work-study first</li>
+                    <li>Only borrow what you truly need (not the maximum offered)</li>
+                    <li>Choose federal loans over private ALWAYS</li>
+                </ul>
+            </div>
+
+            <div class="action-box">
+                <h3>🎯 While in School</h3>
+                <ul>
+                    <li>Track all your loans at StudentAid.gov</li>
+                    <li>Make interest payments if possible</li>
+                    <li>Consider working part-time to reduce borrowing</li>
+                    <li>Research loan forgiveness programs you might qualify for</li>
+                </ul>
+            </div>
+
+            <div class="action-box">
+                <h3>🎯 After Graduation</h3>
+                <ul>
+                    <li>Know your grace period (usually 6 months)</li>
+                    <li>Choose the right repayment plan for your income</li>
+                    <li>Set up autopay to never miss a payment</li>
+                    <li>Pay extra toward principal when possible</li>
+                    <li>Refinance private loans if you have good credit (but NEVER refinance federal loans)</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Mini Quiz -->
+        <div class="quiz-container" id="quizContainer">
+            <div class="quiz-header">
+                <h2>Test Your Knowledge</h2>
+                <p>Answer all 3 questions correctly to complete the lesson</p>
+            </div>
+            <div id="quizQuestions"></div>
+            <button class="btn-submit-quiz" id="submitQuiz" onclick="submitQuiz()">Submit Answers</button>
+            <div id="quizResult"></div>
+        </div>
+
+        <!-- Finish Button -->
+        <button class="btn-finish" id="finishBtn" onclick="finishLesson()" disabled>Complete Lesson</button>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>FinanceU</h4>
+                    <p>Making financial literacy accessible for everyone.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="/about">About Us</a></li>
+                        <li><a href="/careers">Careers</a></li>
+                        <li><a href="/contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="/help">Help Center</a></li>
+                        <li><a href="/privacy">Privacy Policy</a></li>
+                        <li><a href="/terms">Terms of Service</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p style="font-size: 0.85rem; opacity: 0.8; margin-bottom: 10px;">Disclaimer: FinanceU provides educational content only and does not offer financial, legal, or investment advice. Always consult with a qualified professional before making financial decisions.</p>
+                <p>&copy; 2025 FinanceU. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="config.js"></script>
+    <script src="lesson-completion.js"></script>
+    <script src="animations.js"></script>
+    <script>
+        // Check authentication status and update nav
+        async function updateNav() {
+            const authButtons = document.getElementById('authButtons');
+            const cachedAuth = localStorage.getItem('authState');
+            if (cachedAuth) {
+                const authState = JSON.parse(cachedAuth);
+                authButtons.innerHTML = authState.isLoggedIn
+                    ? `<a href="#" onclick="logout(); return false;" class="btn-primary">Logout</a>`
+                    : `<a href="login" class="btn-primary">Login</a>`;
+                authButtons.style.opacity = '1';
+            }
+            try {
+                const response = await fetch(`${API_URL}/auth/me`, { credentials: 'include' });
+                if (response.ok) {
+                    localStorage.setItem('authState', JSON.stringify({ isLoggedIn: true }));
+                    authButtons.innerHTML = `<a href="#" onclick="logout(); return false;" class="btn-primary">Logout</a>`;
+                } else {
+                    localStorage.setItem('authState', JSON.stringify({ isLoggedIn: false }));
+                    authButtons.innerHTML = `<a href="login" class="btn-primary">Login</a>`;
+                }
+                authButtons.style.opacity = '1';
+            } catch (error) {
+                console.log('Not logged in');
+                localStorage.setItem('authState', JSON.stringify({ isLoggedIn: false }));
+                authButtons.innerHTML = `<a href="login" class="btn-primary">Login</a>`;
+                authButtons.style.opacity = '1';
+            }
+        }
+
+        async function logout() {
+            localStorage.removeItem('authState');
+            localStorage.removeItem('token');
+            localStorage.removeItem('userId');
+            try {
+                await fetch(`${API_URL}/auth/logout`, {
+                    method: 'POST',
+                    credentials: 'include'
+                });
+                window.location.href = '/index.html';
+            } catch (error) {
+                console.error('Logout error:', error);
+                window.location.href = '/index.html';
+            }
+        }
+
+        // Quiz data
+        const quizData = [
+            {
+                question: "Why should you exhaust federal loan options before considering private loans?",
+                options: [
+                    "A) Federal loans have lower interest rates",
+                    "B) Federal loans offer income-driven repayment, forgiveness options, and better protections",
+                    "C) Federal loans are easier to get",
+                    "D) Federal loans don't require repayment"
+                ],
+                correct: 1
+            },
+            {
+                question: "What is the '1x Rule' for student loan borrowing?",
+                options: [
+                    "A) Borrow exactly one time during college",
+                    "B) Your total student loan debt should not exceed your expected first-year salary",
+                    "C) Pay back loans within one year of graduation",
+                    "D) Only borrow from one lender"
+                ],
+                correct: 1
+            },
+            {
+                question: "What is the main benefit of Direct Subsidized Loans?",
+                options: [
+                    "A) Lower interest rates than other loans",
+                    "B) You never have to pay them back",
+                    "C) The government pays the interest while you're in school",
+                    "D) You can borrow unlimited amounts"
+                ],
+                correct: 2
+            }
+        ];
+
+        let userAnswers = [];
+        let quizPassed = false;
+
+        function initQuiz() {
+            const userId = localStorage.getItem('userId');
+            if (!userId || userId === 'null' || userId === 'undefined') {
+                console.error('No valid userId found');
+                document.getElementById('finishBtn').disabled = true;
+                return;
+            }
+
+            const quizPassedStatus = localStorage.getItem(`pillar3_lesson6_quiz_passed_${userId}`);
+            if (quizPassedStatus === 'true') {
+                quizPassed = true;
+                document.getElementById('finishBtn').disabled = false;
+                document.getElementById('quizContainer').style.display = 'none';
+                return;
+            }
+
+            renderQuiz();
+        }
+
+        function renderQuiz() {
+            const questionsContainer = document.getElementById('quizQuestions');
+            questionsContainer.innerHTML = '';
+            userAnswers = new Array(quizData.length).fill(null);
+
+            quizData.forEach((q, qIndex) => {
+                const questionCard = document.createElement('div');
+                questionCard.className = 'question-card';
+                questionCard.innerHTML = `
+                    <div class="question-text">Question ${qIndex + 1}: ${q.question}</div>
+                    ${q.options.map((option, oIndex) => `
+                        <div class="answer-option" onclick="selectAnswer(${qIndex}, ${oIndex})">
+                            <input type="radio" name="question${qIndex}" value="${oIndex}" style="margin-right: 10px;">
+                            ${option}
+                        </div>
+                    `).join('')}
+                `;
+                questionsContainer.appendChild(questionCard);
+            });
+
+            document.getElementById('submitQuiz').disabled = false;
+            document.getElementById('quizResult').innerHTML = '';
+        }
+
+        function selectAnswer(questionIndex, optionIndex) {
+            userAnswers[questionIndex] = optionIndex;
+            const questionCard = document.querySelectorAll('.question-card')[questionIndex];
+            const options = questionCard.querySelectorAll('.answer-option');
+            options.forEach((opt, idx) => {
+                opt.classList.remove('selected');
+                if (idx === optionIndex) {
+                    opt.classList.add('selected');
+                    opt.querySelector('input').checked = true;
+                }
+            });
+        }
+
+        function submitQuiz() {
+            if (userAnswers.includes(null)) {
+                alert('Please answer all questions before submitting.');
+                return;
+            }
+
+            let correct = 0;
+            quizData.forEach((q, index) => {
+                if (userAnswers[index] === q.correct) {
+                    correct++;
+                }
+            });
+
+            const percentage = Math.round((correct / quizData.length) * 100);
+            const passed = correct === quizData.length;
+
+            document.querySelectorAll('.question-card').forEach((card, qIndex) => {
+                const options = card.querySelectorAll('.answer-option');
+                options.forEach((opt, oIndex) => {
+                    opt.style.pointerEvents = 'none';
+                    if (oIndex === quizData[qIndex].correct) {
+                        opt.classList.add('correct');
+                    } else if (oIndex === userAnswers[qIndex] && oIndex !== quizData[qIndex].correct) {
+                        opt.classList.add('incorrect');
+                    }
+                });
+            });
+
+            const resultDiv = document.getElementById('quizResult');
+            if (passed) {
+                quizPassed = true;
+                const userId = localStorage.getItem('userId');
+                localStorage.setItem(`pillar3_lesson6_quiz_passed_${userId}`, 'true');
+                document.getElementById('finishBtn').disabled = false;
+
+                resultDiv.innerHTML = `
+                    <div class="quiz-result pass">
+                        <div class="result-icon">🎉</div>
+                        <div class="result-text" style="color: #10b981;">Perfect Score!</div>
+                        <div class="result-score">You got all ${quizData.length} questions correct!</div>
+                        <p style="color: var(--text-secondary); font-size: 18px; font-weight: 600;">Excellent! Click "Complete Lesson" to continue.</p>
+                    </div>
+                `;
+            } else {
+                resultDiv.innerHTML = `
+                    <div class="quiz-result fail">
+                        <div class="result-icon">📚</div>
+                        <div class="result-text" style="color: #dc2626;">Not Quite</div>
+                        <div class="result-score">You scored ${correct} out of ${quizData.length}</div>
+                        <p style="color: var(--text-secondary); margin-bottom: 15px; font-size: 18px; font-weight: 600;">You need all 3 correct. Review the lesson and try again!</p>
+                        <button class="btn-submit-quiz" onclick="retryQuiz()">Retry Quiz</button>
+                    </div>
+                `;
+            }
+
+            document.getElementById('submitQuiz').style.display = 'none';
+        }
+
+        function retryQuiz() {
+            renderQuiz();
+            document.getElementById('submitQuiz').style.display = 'block';
+        }
+
+        async function finishLesson() {
+            if (!quizPassed) {
+                alert('Please complete the quiz first!');
+                return;
+            }
+            const success = await completeLesson('pillar3_lesson6', 3, 6);
+            if (success) {
+                window.location.href = 'pillar3-lessons.html';
+            }
+        }
+
+        updateNav();
+        initQuiz();
+    </script>
+</body>
+</html>

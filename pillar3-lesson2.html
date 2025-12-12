@@ -1,0 +1,884 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson 2 - Building Credit from Scratch - FinanceU</title>
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+    <link rel="icon" type="image/svg+xml" sizes="16x16" href="assets/favicon-16x16.svg">
+    <link rel="icon" type="image/svg+xml" sizes="32x32" href="assets/favicon-32x32.svg">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.svg">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .lesson-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        .lesson-header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 50px 30px;
+            background: linear-gradient(135deg, #0A1A2F 0%, #00A676 100%);
+            border-radius: 20px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0, 166, 118, 0.3);
+        }
+        .lesson-header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.15) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+        }
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        .lesson-header h1 {
+            font-size: 56px;
+            font-weight: 900;
+            color: white;
+            margin-bottom: 15px;
+            position: relative;
+            z-index: 1;
+            text-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .lesson-header .lesson-number {
+            color: #00A676;
+            font-size: 20px;
+            font-weight: 800;
+            margin-bottom: 10px;
+            position: relative;
+            z-index: 1;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            background: white;
+            padding: 8px 24px;
+            border-radius: 50px;
+            display: inline-block;
+        }
+        .lesson-section {
+            background: white;
+            padding: 40px;
+            border-radius: 16px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border: 3px solid transparent;
+            transition: all 0.3s ease;
+        }
+        .lesson-section:hover {
+            border-color: #00A676;
+            box-shadow: 0 8px 24px rgba(0, 166, 118, 0.2);
+            transform: translateY(-4px);
+        }
+        .lesson-section h2 {
+            color: #0A1A2F;
+            font-size: 48px;
+            font-weight: 800;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        .section-icon {
+            font-size: 64px;
+            filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
+        }
+        .lesson-section p {
+            line-height: 1.8;
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+            font-size: 18px;
+            font-weight: 500;
+        }
+        .lesson-section strong {
+            color: #0A1A2F;
+            font-weight: 700;
+        }
+
+        /* Color-coded callout boxes */
+        .key-concept-box {
+            background: #EFF6FF;
+            border: 4px solid #3B82F6;
+            border-radius: 16px;
+            padding: 30px;
+            margin: 30px 0;
+            position: relative;
+        }
+        .key-concept-box h3 {
+            color: #1E40AF;
+            font-size: 28px;
+            font-weight: 800;
+            margin-bottom: 15px;
+        }
+        .key-concept-box p {
+            color: #1E3A8A;
+            font-size: 18px;
+            line-height: 1.7;
+        }
+        .key-concept-box ul {
+            color: #1E3A8A;
+            font-size: 18px;
+            line-height: 1.7;
+            margin-top: 15px;
+        }
+
+        .warning-box {
+            background: #FEE2E2;
+            border: 4px solid #DC2626;
+            border-radius: 16px;
+            padding: 30px;
+            margin: 30px 0;
+        }
+        .warning-box h3 {
+            color: #991B1B;
+            font-size: 28px;
+            font-weight: 800;
+            margin-bottom: 15px;
+        }
+        .warning-box p {
+            color: #7F1D1D;
+            font-size: 18px;
+            line-height: 1.7;
+        }
+
+        .action-box {
+            background: #FEF3C7;
+            border: 4px solid #F59E0B;
+            border-radius: 16px;
+            padding: 30px;
+            margin: 30px 0;
+        }
+        .action-box h3 {
+            color: #B45309;
+            font-size: 28px;
+            font-weight: 800;
+            margin-bottom: 15px;
+        }
+        .action-box ul {
+            list-style: none;
+            padding: 0;
+        }
+        .action-box li {
+            color: #78350F;
+            font-size: 18px;
+            font-weight: 600;
+            padding: 12px 0;
+            border-bottom: 2px solid #FCD34D;
+        }
+        .action-box li:last-child {
+            border-bottom: none;
+        }
+        .action-box li::before {
+            content: '✓';
+            color: #F59E0B;
+            font-weight: 900;
+            font-size: 24px;
+            margin-right: 12px;
+        }
+
+        .real-world-box {
+            background: #F3E8FF;
+            border: 4px solid #9333EA;
+            border-radius: 16px;
+            padding: 30px;
+            margin: 30px 0;
+        }
+        .real-world-box h3 {
+            color: #6B21A8;
+            font-size: 28px;
+            font-weight: 800;
+            margin-bottom: 15px;
+        }
+        .real-world-box p {
+            color: #581C87;
+            font-size: 18px;
+            line-height: 1.7;
+            font-weight: 600;
+        }
+
+        /* Timeline styles */
+        .timeline {
+            margin: 30px 0;
+        }
+        .timeline-item {
+            background: white;
+            border: 3px solid #E5E7EB;
+            border-radius: 16px;
+            padding: 25px;
+            margin-bottom: 20px;
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            transition: all 0.3s;
+        }
+        .timeline-item:hover {
+            border-color: #00A676;
+            box-shadow: 0 8px 24px rgba(0, 166, 118, 0.2);
+            transform: translateX(8px);
+        }
+        .timeline-month {
+            font-size: 48px;
+            font-weight: 900;
+            color: #00A676;
+            min-width: 120px;
+            text-align: center;
+        }
+        .timeline-details h3 {
+            font-size: 24px;
+            font-weight: 800;
+            color: #0A1A2F;
+            margin-bottom: 8px;
+        }
+        .timeline-details p {
+            font-size: 16px;
+            color: var(--text-secondary);
+            margin: 0;
+        }
+
+        /* Quiz styles */
+        .quiz-container {
+            background: linear-gradient(135deg, #0A1A2F 0%, #00A676 100%);
+            border: 5px solid #00A676;
+            border-radius: 20px;
+            padding: 40px;
+            margin: 40px 0;
+            box-shadow: 0 12px 40px rgba(0, 166, 118, 0.3);
+        }
+        .quiz-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .quiz-header h2 {
+            color: white;
+            font-size: 48px;
+            font-weight: 900;
+            margin-bottom: 15px;
+            text-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .quiz-header p {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 18px;
+            font-weight: 600;
+        }
+        .question-card {
+            background: white;
+            padding: 30px;
+            border-radius: 16px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border: 3px solid transparent;
+        }
+        .question-text {
+            font-size: 22px;
+            font-weight: 700;
+            color: #0A1A2F;
+            margin-bottom: 20px;
+        }
+        .answer-option {
+            background: #F9FAFB;
+            padding: 18px;
+            border: 3px solid #E5E7EB;
+            border-radius: 12px;
+            margin-bottom: 12px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 18px;
+            font-weight: 600;
+        }
+        .answer-option:hover {
+            border-color: #00A676;
+            background: #D1FAE5;
+            transform: translateX(8px);
+        }
+        .answer-option.selected {
+            border-color: #00A676;
+            background: #D1FAE5;
+        }
+        .answer-option.correct {
+            border-color: #10B981;
+            background: #6EE7B7;
+            color: #064E3B;
+        }
+        .answer-option.incorrect {
+            border-color: #DC2626;
+            background: #FCA5A5;
+            color: #7F1D1D;
+        }
+
+        .btn-submit-quiz {
+            display: block;
+            width: 100%;
+            max-width: 400px;
+            margin: 25px auto;
+            padding: 20px;
+            background: white;
+            color: #0A1A2F;
+            text-align: center;
+            border-radius: 12px;
+            font-size: 20px;
+            font-weight: 800;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .btn-submit-quiz:hover {
+            background: #00A676;
+            color: white;
+            transform: scale(1.05);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+        }
+
+        .quiz-result {
+            background: white;
+            padding: 40px;
+            border-radius: 16px;
+            text-align: center;
+            margin-top: 25px;
+            border: 4px solid #E5E7EB;
+        }
+        .quiz-result.pass {
+            border-color: #10B981;
+        }
+        .quiz-result.fail {
+            border-color: #DC2626;
+        }
+        .result-icon {
+            font-size: 80px;
+            margin-bottom: 20px;
+        }
+        .result-text {
+            font-size: 36px;
+            font-weight: 900;
+            margin-bottom: 15px;
+        }
+        .result-score {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 25px;
+        }
+
+        /* Finish button */
+        .btn-finish {
+            display: block;
+            width: 100%;
+            height: 56px;
+            margin: 40px auto;
+            padding: 0 40px;
+            background: linear-gradient(135deg, #0A1A2F 0%, #00A676 100%);
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 12px;
+            font-size: 24px;
+            font-weight: 800;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            line-height: 56px;
+            box-shadow: 0 8px 24px rgba(0, 166, 118, 0.3);
+        }
+        .btn-finish:hover {
+            transform: scale(1.02);
+            box-shadow: 0 12px 32px rgba(0, 166, 118, 0.4);
+        }
+        .btn-finish:disabled {
+            background: #9CA3AF;
+            cursor: not-allowed;
+            opacity: 0.6;
+            transform: none;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: #00A676;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 18px;
+            transition: all 0.2s;
+        }
+        .back-link:hover {
+            transform: translateX(-8px);
+            color: #0A1A2F;
+        }
+
+        @media (max-width: 768px) {
+            .lesson-header h1 {
+                font-size: 36px;
+            }
+            .lesson-section h2 {
+                font-size: 32px;
+            }
+            .timeline-item {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-wrapper">
+                <div class="logo"><a href="/" style="color: inherit; text-decoration: none;">Finance<span class="logo-accent">U</span></a></div>
+                <ul class="nav-links">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="dashboard">Dashboard</a></li>
+                    <li id="authButtons" style="opacity: 0;"></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Lesson Content -->
+    <div class="lesson-container">
+        <a href="/pillar3-lessons" class="back-link">← Back to Pillar 3 Lessons</a>
+
+        <!-- Header -->
+        <div class="lesson-header">
+            <div class="lesson-number">PILLAR 3: LESSON 2</div>
+            <h1>Building Credit from Scratch</h1>
+        </div>
+
+        <!-- Starting with No Credit -->
+        <div class="lesson-section">
+            <h2><span class="section-icon">🚀</span>Starting from Zero</h2>
+            <p>No credit history? That's actually more common than you think. About <strong>26 million Americans are "credit invisible"</strong> - they have no credit file at all. The challenge is that you need credit to build credit, which creates a catch-22.</p>
+            <p>But don't worry - there are proven strategies to break into the credit system and start building a strong credit profile from scratch.</p>
+
+            <div class="key-concept-box">
+                <h3>💡 The Credit Building Mindset</h3>
+                <p>Building credit is a marathon, not a sprint. It takes patience and consistency, but with the right approach, you can build a good credit score (680+) in as little as 6 months.</p>
+            </div>
+        </div>
+
+        <!-- Secured Credit Cards -->
+        <div class="lesson-section">
+            <h2><span class="section-icon">💳</span>Method 1: Secured Credit Cards</h2>
+            <p>A <strong>secured credit card</strong> is the easiest way to start building credit. Here's how it works:</p>
+
+            <div class="key-concept-box">
+                <h3>🔒 How Secured Cards Work</h3>
+                <ul style="margin-left: 20px;">
+                    <li><strong>You make a deposit:</strong> Usually $200-500 becomes your credit limit</li>
+                    <li><strong>Use it like a regular card:</strong> Make purchases and pay them off monthly</li>
+                    <li><strong>Build credit history:</strong> On-time payments get reported to credit bureaus</li>
+                    <li><strong>Get your deposit back:</strong> After 6-12 months, often upgraded to unsecured card</li>
+                </ul>
+            </div>
+
+            <p style="margin-top: 25px;"><strong>Best Secured Cards for Beginners:</strong></p>
+            <ul style="font-size: 18px; line-height: 2; color: var(--text-secondary); margin-left: 30px;">
+                <li>Discover it Secured (cashback rewards + no annual fee)</li>
+                <li>Capital One Platinum Secured (as low as $49 deposit)</li>
+                <li>Citi Secured Mastercard (no annual fee)</li>
+            </ul>
+
+            <div class="warning-box">
+                <h3>⚠️ Avoid These Traps</h3>
+                <p>Not all secured cards are equal. Avoid cards with high annual fees ($50+) or cards that don't report to all three credit bureaus. Always check reviews first!</p>
+            </div>
+        </div>
+
+        <!-- Becoming an Authorized User -->
+        <div class="lesson-section">
+            <h2><span class="section-icon">👥</span>Method 2: Authorized User Strategy</h2>
+            <p>One of the <strong>fastest ways to build credit</strong> is to become an authorized user on someone else's credit card - ideally a parent, family member, or trusted friend.</p>
+
+            <div class="key-concept-box">
+                <h3>📈 Why This Works</h3>
+                <p>When you're added as an authorized user, the card's entire payment history gets added to YOUR credit report. If they have a card with perfect payment history for 5 years, you inherit that history.</p>
+                <p style="margin-top: 15px;"><strong>Key requirements:</strong></p>
+                <ul style="margin-left: 20px;">
+                    <li>Choose someone with excellent payment history (never late)</li>
+                    <li>Low credit utilization (under 30%)</li>
+                    <li>Long account history (3+ years is ideal)</li>
+                </ul>
+            </div>
+
+            <div class="warning-box">
+                <h3>⚠️ Critical Warning</h3>
+                <p>If the primary cardholder misses payments or maxes out the card, it will HURT your credit too. Only do this with someone financially responsible.</p>
+            </div>
+        </div>
+
+        <!-- Credit Builder Loans -->
+        <div class="lesson-section">
+            <h2><span class="section-icon">🏦</span>Method 3: Credit Builder Loans</h2>
+            <p>A <strong>credit builder loan</strong> is specifically designed for people with no credit. Unlike a regular loan where you get money upfront, these work backwards:</p>
+
+            <div class="key-concept-box">
+                <h3>🔄 How Credit Builder Loans Work</h3>
+                <p><strong>Step 1:</strong> Bank holds $500-$1,000 in a savings account</p>
+                <p><strong>Step 2:</strong> You make monthly payments for 6-24 months</p>
+                <p><strong>Step 3:</strong> Payments are reported to credit bureaus, building your credit</p>
+                <p><strong>Step 4:</strong> After final payment, you get the money PLUS any interest earned</p>
+            </div>
+
+            <p style="margin-top: 25px;"><strong>Where to get them:</strong></p>
+            <ul style="font-size: 18px; line-height: 2; color: var(--text-secondary); margin-left: 30px;">
+                <li>Local credit unions (best rates, often 6-12% APR)</li>
+                <li>Self Financial (online, reports to all 3 bureaus)</li>
+                <li>MoneyLion (no hard credit check)</li>
+            </ul>
+
+            <div class="action-box">
+                <h3>💰 Pro Tip</h3>
+                <ul>
+                    <li>This is essentially forced savings that builds credit</li>
+                    <li>You'll pay about $50-100 in interest for a $1,000 loan</li>
+                    <li>Worth it for the credit boost and guaranteed savings</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Real World Timeline -->
+        <div class="lesson-section">
+            <h2><span class="section-icon">📅</span>Real Timeline: 0 to 680 in 6 Months</h2>
+            <p>Here's exactly how Maria built her credit from nothing to a 680 score:</p>
+
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-month">Month 1</div>
+                    <div class="timeline-details">
+                        <h3>Starting Point</h3>
+                        <p>Opened Discover it Secured card with $300 deposit. Became authorized user on mom's 8-year-old card with perfect history.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-month">Month 2</div>
+                    <div class="timeline-details">
+                        <h3>First Score Appears</h3>
+                        <p>Credit score: 640. Used secured card for gas only ($40/month), paid in full immediately. Utilization: 13%.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-month">Month 3-4</div>
+                    <div class="timeline-details">
+                        <h3>Building Momentum</h3>
+                        <p>Continued perfect payment history. Score climbed to 655. Set up autopay to never miss a payment.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-month">Month 5</div>
+                    <div class="timeline-details">
+                        <h3>Adding Diversity</h3>
+                        <p>Started a $500 credit builder loan at local credit union. Score: 665. Now has revolving and installment credit.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-month">Month 6</div>
+                    <div class="timeline-details">
+                        <h3>Achievement Unlocked</h3>
+                        <p>Score reached 680! Qualified for unsecured credit card with rewards. Total cost: $35 in interest.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="real-world-box">
+                <h3>💰 The Numbers</h3>
+                <p><strong>Total investment: $335</strong> ($300 secured card deposit + $35 credit builder loan interest)</p>
+                <p style="margin-top: 15px;"><strong>Result: 680 credit score in 6 months</strong> - enough to qualify for apartment rentals, car loans, and premium credit cards</p>
+                <p style="margin-top: 15px;">This score can save you <strong>$50,000+ over a lifetime</strong> in lower interest rates compared to bad credit.</p>
+            </div>
+        </div>
+
+        <!-- Action Plan -->
+        <div class="lesson-section">
+            <h2><span class="section-icon">✅</span>Your Credit Building Action Plan</h2>
+
+            <div class="action-box">
+                <h3>🎯 Take Action This Week</h3>
+                <ul>
+                    <li>Apply for a secured credit card (Discover it Secured recommended)</li>
+                    <li>Ask a trusted family member about becoming an authorized user</li>
+                    <li>Research credit builder loans at local credit unions</li>
+                    <li>Set up payment reminders or autopay to never miss a payment</li>
+                    <li>Sign up for free credit monitoring (Credit Karma or your bank)</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Mini Quiz -->
+        <div class="quiz-container" id="quizContainer">
+            <div class="quiz-header">
+                <h2>Test Your Knowledge</h2>
+                <p>Answer all 3 questions correctly to complete the lesson</p>
+            </div>
+            <div id="quizQuestions"></div>
+            <button class="btn-submit-quiz" id="submitQuiz" onclick="submitQuiz()">Submit Answers</button>
+            <div id="quizResult"></div>
+        </div>
+
+        <!-- Finish Button -->
+        <button class="btn-finish" id="finishBtn" onclick="finishLesson()" disabled>Complete Lesson</button>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>FinanceU</h4>
+                    <p>Making financial literacy accessible for everyone.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="/about">About Us</a></li>
+                        <li><a href="/careers">Careers</a></li>
+                        <li><a href="/contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="/help">Help Center</a></li>
+                        <li><a href="/privacy">Privacy Policy</a></li>
+                        <li><a href="/terms">Terms of Service</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p style="font-size: 0.85rem; opacity: 0.8; margin-bottom: 10px;">Disclaimer: FinanceU provides educational content only and does not offer financial, legal, or investment advice. Always consult with a qualified professional before making financial decisions.</p>
+                <p>&copy; 2025 FinanceU. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="config.js"></script>
+    <script src="lesson-completion.js"></script>
+    <script src="animations.js"></script>
+    <script>
+        // Check authentication status and update nav
+        async function updateNav() {
+            const authButtons = document.getElementById('authButtons');
+            const cachedAuth = localStorage.getItem('authState');
+            if (cachedAuth) {
+                const authState = JSON.parse(cachedAuth);
+                authButtons.innerHTML = authState.isLoggedIn
+                    ? `<a href="#" onclick="logout(); return false;" class="btn-primary">Logout</a>`
+                    : `<a href="login" class="btn-primary">Login</a>`;
+                authButtons.style.opacity = '1';
+            }
+            try {
+                const response = await fetch(`${API_URL}/auth/me`, { credentials: 'include' });
+                if (response.ok) {
+                    localStorage.setItem('authState', JSON.stringify({ isLoggedIn: true }));
+                    authButtons.innerHTML = `<a href="#" onclick="logout(); return false;" class="btn-primary">Logout</a>`;
+                } else {
+                    localStorage.setItem('authState', JSON.stringify({ isLoggedIn: false }));
+                    authButtons.innerHTML = `<a href="login" class="btn-primary">Login</a>`;
+                }
+                authButtons.style.opacity = '1';
+            } catch (error) {
+                console.log('Not logged in');
+                localStorage.setItem('authState', JSON.stringify({ isLoggedIn: false }));
+                authButtons.innerHTML = `<a href="login" class="btn-primary">Login</a>`;
+                authButtons.style.opacity = '1';
+            }
+        }
+
+        async function logout() {
+            localStorage.removeItem('authState');
+            localStorage.removeItem('token');
+            localStorage.removeItem('userId');
+            try {
+                await fetch(`${API_URL}/auth/logout`, {
+                    method: 'POST',
+                    credentials: 'include'
+                });
+                window.location.href = '/index.html';
+            } catch (error) {
+                console.error('Logout error:', error);
+                window.location.href = '/index.html';
+            }
+        }
+
+        // Quiz data
+        const quizData = [
+            {
+                question: "What is the main advantage of a secured credit card?",
+                options: [
+                    "A) It offers the best rewards",
+                    "B) It requires a deposit but is easier to get approved for with no credit",
+                    "C) It has no fees at all",
+                    "D) It automatically upgrades after 1 month"
+                ],
+                correct: 1
+            },
+            {
+                question: "What's the risk of becoming an authorized user on someone else's credit card?",
+                options: [
+                    "A) You have to make all the payments",
+                    "B) It doesn't help your credit at all",
+                    "C) Their bad payment history will hurt your credit too",
+                    "D) You can't remove yourself later"
+                ],
+                correct: 2
+            },
+            {
+                question: "How does a credit builder loan work differently than a regular loan?",
+                options: [
+                    "A) You don't have to make payments",
+                    "B) The bank holds the money while you make payments, then gives it to you at the end",
+                    "C) It doesn't report to credit bureaus",
+                    "D) You can never get the money back"
+                ],
+                correct: 1
+            }
+        ];
+
+        let userAnswers = [];
+        let quizPassed = false;
+
+        function initQuiz() {
+            const userId = localStorage.getItem('userId');
+            if (!userId || userId === 'null' || userId === 'undefined') {
+                console.error('No valid userId found');
+                document.getElementById('finishBtn').disabled = true;
+                return;
+            }
+
+            const quizPassedStatus = localStorage.getItem(`pillar3_lesson2_quiz_passed_${userId}`);
+            if (quizPassedStatus === 'true') {
+                quizPassed = true;
+                document.getElementById('finishBtn').disabled = false;
+                document.getElementById('quizContainer').style.display = 'none';
+                return;
+            }
+
+            renderQuiz();
+        }
+
+        function renderQuiz() {
+            const questionsContainer = document.getElementById('quizQuestions');
+            questionsContainer.innerHTML = '';
+            userAnswers = new Array(quizData.length).fill(null);
+
+            quizData.forEach((q, qIndex) => {
+                const questionCard = document.createElement('div');
+                questionCard.className = 'question-card';
+                questionCard.innerHTML = `
+                    <div class="question-text">Question ${qIndex + 1}: ${q.question}</div>
+                    ${q.options.map((option, oIndex) => `
+                        <div class="answer-option" onclick="selectAnswer(${qIndex}, ${oIndex})">
+                            <input type="radio" name="question${qIndex}" value="${oIndex}" style="margin-right: 10px;">
+                            ${option}
+                        </div>
+                    `).join('')}
+                `;
+                questionsContainer.appendChild(questionCard);
+            });
+
+            document.getElementById('submitQuiz').disabled = false;
+            document.getElementById('quizResult').innerHTML = '';
+        }
+
+        function selectAnswer(questionIndex, optionIndex) {
+            userAnswers[questionIndex] = optionIndex;
+            const questionCard = document.querySelectorAll('.question-card')[questionIndex];
+            const options = questionCard.querySelectorAll('.answer-option');
+            options.forEach((opt, idx) => {
+                opt.classList.remove('selected');
+                if (idx === optionIndex) {
+                    opt.classList.add('selected');
+                    opt.querySelector('input').checked = true;
+                }
+            });
+        }
+
+        function submitQuiz() {
+            if (userAnswers.includes(null)) {
+                alert('Please answer all questions before submitting.');
+                return;
+            }
+
+            let correct = 0;
+            quizData.forEach((q, index) => {
+                if (userAnswers[index] === q.correct) {
+                    correct++;
+                }
+            });
+
+            const percentage = Math.round((correct / quizData.length) * 100);
+            const passed = correct === quizData.length;
+
+            document.querySelectorAll('.question-card').forEach((card, qIndex) => {
+                const options = card.querySelectorAll('.answer-option');
+                options.forEach((opt, oIndex) => {
+                    opt.style.pointerEvents = 'none';
+                    if (oIndex === quizData[qIndex].correct) {
+                        opt.classList.add('correct');
+                    } else if (oIndex === userAnswers[qIndex] && oIndex !== quizData[qIndex].correct) {
+                        opt.classList.add('incorrect');
+                    }
+                });
+            });
+
+            const resultDiv = document.getElementById('quizResult');
+            if (passed) {
+                quizPassed = true;
+                const userId = localStorage.getItem('userId');
+                localStorage.setItem(`pillar3_lesson2_quiz_passed_${userId}`, 'true');
+                document.getElementById('finishBtn').disabled = false;
+
+                resultDiv.innerHTML = `
+                    <div class="quiz-result pass">
+                        <div class="result-icon">🎉</div>
+                        <div class="result-text" style="color: #10b981;">Perfect Score!</div>
+                        <div class="result-score">You got all ${quizData.length} questions correct!</div>
+                        <p style="color: var(--text-secondary); font-size: 18px; font-weight: 600;">Excellent! Click "Complete Lesson" to continue.</p>
+                    </div>
+                `;
+            } else {
+                resultDiv.innerHTML = `
+                    <div class="quiz-result fail">
+                        <div class="result-icon">📚</div>
+                        <div class="result-text" style="color: #dc2626;">Not Quite</div>
+                        <div class="result-score">You scored ${correct} out of ${quizData.length}</div>
+                        <p style="color: var(--text-secondary); margin-bottom: 15px; font-size: 18px; font-weight: 600;">You need all 3 correct. Review the lesson and try again!</p>
+                        <button class="btn-submit-quiz" onclick="retryQuiz()">Retry Quiz</button>
+                    </div>
+                `;
+            }
+
+            document.getElementById('submitQuiz').style.display = 'none';
+        }
+
+        function retryQuiz() {
+            renderQuiz();
+            document.getElementById('submitQuiz').style.display = 'block';
+        }
+
+        async function finishLesson() {
+            if (!quizPassed) {
+                alert('Please complete the quiz first!');
+                return;
+            }
+            const success = await completeLesson('pillar3_lesson2', 3, 2);
+            if (success) {
+                window.location.href = 'pillar3-lessons.html';
+            }
+        }
+
+        updateNav();
+        initQuiz();
+    </script>
+</body>
+</html>

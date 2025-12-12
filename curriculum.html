@@ -477,7 +477,7 @@
                     <div class="pillar-card-header">
                         <div class="pillar-icon">💳</div>
                         <div class="pillar-badges">
-                            <span class="availability-badge coming-soon">Coming 2026</span>
+                            <span class="availability-badge available">Available Now</span>
                             <span class="tier-badge free">Free</span>
                         </div>
                     </div>
@@ -510,7 +510,7 @@
 
                     </div>
                     <div class="pillar-card-footer">
-                        <button class="pillar-cta disabled">Coming 2026</button>
+                        <button class="pillar-cta" id="pillar3StartBtn" onclick="window.location.href='/pillar3-lessons'">Start Learning Free →</button>
                     </div>
                 </div>
 
@@ -980,6 +980,21 @@
                 pillar2Badge.classList.add('completed-badge');
                 pillar2Badge.textContent = 'Completed';
                 pillar2Button.textContent = 'Review Pillar →';
+            }
+
+            // Check Pillar 3 completion (8 lessons + quiz)
+            const pillar3Completed = JSON.parse(localStorage.getItem(`pillar3_completed_${userId}`) || '[]');
+            const pillar3QuizCompleted = localStorage.getItem(`pillar3_quiz_completed_${userId}`) === 'true';
+            const pillar3Card = document.querySelector('.pillar-card-premium:nth-child(3)');
+            const pillar3Badge = pillar3Card.querySelector('.availability-badge');
+            const pillar3Button = document.getElementById('pillar3StartBtn');
+
+            if (pillar3Completed.length === 8 && pillar3QuizCompleted) {
+                pillar3Card.classList.add('completed');
+                pillar3Badge.classList.remove('available');
+                pillar3Badge.classList.add('completed-badge');
+                pillar3Badge.textContent = 'Completed';
+                pillar3Button.textContent = 'Review Pillar →';
             }
         }
 

@@ -1,0 +1,905 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson 4 - Credit Card Best Practices - FinanceU</title>
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+    <link rel="icon" type="image/svg+xml" sizes="16x16" href="assets/favicon-16x16.svg">
+    <link rel="icon" type="image/svg+xml" sizes="32x32" href="assets/favicon-32x32.svg">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.svg">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .lesson-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        .lesson-header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 50px 30px;
+            background: linear-gradient(135deg, #0A1A2F 0%, #00A676 100%);
+            border-radius: 20px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0, 166, 118, 0.3);
+        }
+        .lesson-header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.15) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+        }
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        .lesson-header h1 {
+            font-size: 56px;
+            font-weight: 900;
+            color: white;
+            margin-bottom: 15px;
+            position: relative;
+            z-index: 1;
+            text-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .lesson-header .lesson-number {
+            color: #00A676;
+            font-size: 20px;
+            font-weight: 800;
+            margin-bottom: 10px;
+            position: relative;
+            z-index: 1;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            background: white;
+            padding: 8px 24px;
+            border-radius: 50px;
+            display: inline-block;
+        }
+        .lesson-section {
+            background: white;
+            padding: 40px;
+            border-radius: 16px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border: 3px solid transparent;
+            transition: all 0.3s ease;
+        }
+        .lesson-section:hover {
+            border-color: #00A676;
+            box-shadow: 0 8px 24px rgba(0, 166, 118, 0.2);
+            transform: translateY(-4px);
+        }
+        .lesson-section h2 {
+            color: #0A1A2F;
+            font-size: 48px;
+            font-weight: 800;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        .section-icon {
+            font-size: 64px;
+            filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
+        }
+        .lesson-section p {
+            line-height: 1.8;
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+            font-size: 18px;
+            font-weight: 500;
+        }
+        .lesson-section strong {
+            color: #0A1A2F;
+            font-weight: 700;
+        }
+
+        /* Color-coded callout boxes */
+        .key-concept-box {
+            background: #EFF6FF;
+            border: 4px solid #3B82F6;
+            border-radius: 16px;
+            padding: 30px;
+            margin: 30px 0;
+            position: relative;
+        }
+        .key-concept-box h3 {
+            color: #1E40AF;
+            font-size: 28px;
+            font-weight: 800;
+            margin-bottom: 15px;
+        }
+        .key-concept-box p {
+            color: #1E3A8A;
+            font-size: 18px;
+            line-height: 1.7;
+        }
+
+        .warning-box {
+            background: #FEE2E2;
+            border: 4px solid #DC2626;
+            border-radius: 16px;
+            padding: 30px;
+            margin: 30px 0;
+        }
+        .warning-box h3 {
+            color: #991B1B;
+            font-size: 28px;
+            font-weight: 800;
+            margin-bottom: 15px;
+        }
+        .warning-box p {
+            color: #7F1D1D;
+            font-size: 18px;
+            line-height: 1.7;
+        }
+        .warning-box ul {
+            color: #7F1D1D;
+            font-size: 18px;
+            line-height: 1.7;
+            margin-top: 15px;
+        }
+
+        .action-box {
+            background: #FEF3C7;
+            border: 4px solid #F59E0B;
+            border-radius: 16px;
+            padding: 30px;
+            margin: 30px 0;
+        }
+        .action-box h3 {
+            color: #B45309;
+            font-size: 28px;
+            font-weight: 800;
+            margin-bottom: 15px;
+        }
+        .action-box ul {
+            list-style: none;
+            padding: 0;
+        }
+        .action-box li {
+            color: #78350F;
+            font-size: 18px;
+            font-weight: 600;
+            padding: 12px 0;
+            border-bottom: 2px solid #FCD34D;
+        }
+        .action-box li:last-child {
+            border-bottom: none;
+        }
+        .action-box li::before {
+            content: '✓';
+            color: #F59E0B;
+            font-weight: 900;
+            font-size: 24px;
+            margin-right: 12px;
+        }
+
+        .real-world-box {
+            background: #F3E8FF;
+            border: 4px solid #9333EA;
+            border-radius: 16px;
+            padding: 30px;
+            margin: 30px 0;
+        }
+        .real-world-box h3 {
+            color: #6B21A8;
+            font-size: 28px;
+            font-weight: 800;
+            margin-bottom: 15px;
+        }
+        .real-world-box p {
+            color: #581C87;
+            font-size: 18px;
+            line-height: 1.7;
+            font-weight: 600;
+        }
+
+        /* Golden rule box */
+        .golden-rule-box {
+            background: linear-gradient(135deg, #FCD34D 0%, #F59E0B 100%);
+            border: 5px solid #B45309;
+            border-radius: 20px;
+            padding: 40px;
+            margin: 40px 0;
+            text-align: center;
+            box-shadow: 0 12px 40px rgba(245, 158, 11, 0.3);
+        }
+        .golden-rule-box h3 {
+            color: #78350F;
+            font-size: 48px;
+            font-weight: 900;
+            margin-bottom: 20px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .golden-rule-box p {
+            color: #78350F;
+            font-size: 24px;
+            font-weight: 800;
+            line-height: 1.6;
+        }
+
+        /* Comparison table */
+        .comparison-table {
+            margin: 30px 0;
+            overflow-x: auto;
+        }
+        .comparison-table table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        .comparison-table th {
+            background: linear-gradient(135deg, #0A1A2F 0%, #00A676 100%);
+            color: white;
+            padding: 20px;
+            font-size: 20px;
+            font-weight: 800;
+            text-align: left;
+        }
+        .comparison-table td {
+            padding: 20px;
+            font-size: 18px;
+            border-bottom: 2px solid #E5E7EB;
+            color: var(--text-secondary);
+            font-weight: 600;
+        }
+        .comparison-table tr:last-child td {
+            border-bottom: none;
+        }
+        .comparison-table .good {
+            background: #D1FAE5;
+            color: #064E3B;
+        }
+        .comparison-table .bad {
+            background: #FEE2E2;
+            color: #7F1D1D;
+        }
+
+        /* Quiz styles */
+        .quiz-container {
+            background: linear-gradient(135deg, #0A1A2F 0%, #00A676 100%);
+            border: 5px solid #00A676;
+            border-radius: 20px;
+            padding: 40px;
+            margin: 40px 0;
+            box-shadow: 0 12px 40px rgba(0, 166, 118, 0.3);
+        }
+        .quiz-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .quiz-header h2 {
+            color: white;
+            font-size: 48px;
+            font-weight: 900;
+            margin-bottom: 15px;
+            text-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .quiz-header p {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 18px;
+            font-weight: 600;
+        }
+        .question-card {
+            background: white;
+            padding: 30px;
+            border-radius: 16px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border: 3px solid transparent;
+        }
+        .question-text {
+            font-size: 22px;
+            font-weight: 700;
+            color: #0A1A2F;
+            margin-bottom: 20px;
+        }
+        .answer-option {
+            background: #F9FAFB;
+            padding: 18px;
+            border: 3px solid #E5E7EB;
+            border-radius: 12px;
+            margin-bottom: 12px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 18px;
+            font-weight: 600;
+        }
+        .answer-option:hover {
+            border-color: #00A676;
+            background: #D1FAE5;
+            transform: translateX(8px);
+        }
+        .answer-option.selected {
+            border-color: #00A676;
+            background: #D1FAE5;
+        }
+        .answer-option.correct {
+            border-color: #10B981;
+            background: #6EE7B7;
+            color: #064E3B;
+        }
+        .answer-option.incorrect {
+            border-color: #DC2626;
+            background: #FCA5A5;
+            color: #7F1D1D;
+        }
+
+        .btn-submit-quiz {
+            display: block;
+            width: 100%;
+            max-width: 400px;
+            margin: 25px auto;
+            padding: 20px;
+            background: white;
+            color: #0A1A2F;
+            text-align: center;
+            border-radius: 12px;
+            font-size: 20px;
+            font-weight: 800;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .btn-submit-quiz:hover {
+            background: #00A676;
+            color: white;
+            transform: scale(1.05);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+        }
+
+        .quiz-result {
+            background: white;
+            padding: 40px;
+            border-radius: 16px;
+            text-align: center;
+            margin-top: 25px;
+            border: 4px solid #E5E7EB;
+        }
+        .quiz-result.pass {
+            border-color: #10B981;
+        }
+        .quiz-result.fail {
+            border-color: #DC2626;
+        }
+        .result-icon {
+            font-size: 80px;
+            margin-bottom: 20px;
+        }
+        .result-text {
+            font-size: 36px;
+            font-weight: 900;
+            margin-bottom: 15px;
+        }
+        .result-score {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 25px;
+        }
+
+        /* Finish button */
+        .btn-finish {
+            display: block;
+            width: 100%;
+            height: 56px;
+            margin: 40px auto;
+            padding: 0 40px;
+            background: linear-gradient(135deg, #0A1A2F 0%, #00A676 100%);
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 12px;
+            font-size: 24px;
+            font-weight: 800;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            line-height: 56px;
+            box-shadow: 0 8px 24px rgba(0, 166, 118, 0.3);
+        }
+        .btn-finish:hover {
+            transform: scale(1.02);
+            box-shadow: 0 12px 32px rgba(0, 166, 118, 0.4);
+        }
+        .btn-finish:disabled {
+            background: #9CA3AF;
+            cursor: not-allowed;
+            opacity: 0.6;
+            transform: none;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: #00A676;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 18px;
+            transition: all 0.2s;
+        }
+        .back-link:hover {
+            transform: translateX(-8px);
+            color: #0A1A2F;
+        }
+
+        @media (max-width: 768px) {
+            .lesson-header h1 {
+                font-size: 36px;
+            }
+            .lesson-section h2 {
+                font-size: 32px;
+            }
+            .golden-rule-box h3 {
+                font-size: 32px;
+            }
+            .golden-rule-box p {
+                font-size: 18px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-wrapper">
+                <div class="logo"><a href="/" style="color: inherit; text-decoration: none;">Finance<span class="logo-accent">U</span></a></div>
+                <ul class="nav-links">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="dashboard">Dashboard</a></li>
+                    <li id="authButtons" style="opacity: 0;"></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Lesson Content -->
+    <div class="lesson-container">
+        <a href="/pillar3-lessons" class="back-link">← Back to Pillar 3 Lessons</a>
+
+        <!-- Header -->
+        <div class="lesson-header">
+            <div class="lesson-number">PILLAR 3: LESSON 4</div>
+            <h1>Credit Card Best Practices</h1>
+        </div>
+
+        <!-- Golden Rule -->
+        <div class="lesson-section">
+            <h2><span class="section-icon">👑</span>The Golden Rule</h2>
+
+            <div class="golden-rule-box">
+                <h3>🏆 Rule #1: Pay in Full Every Month</h3>
+                <p>This is the single most important credit card rule. Pay your ENTIRE balance every month, no exceptions.</p>
+            </div>
+
+            <p>If you follow only ONE piece of advice from this lesson, make it this: <strong>Never carry a balance.</strong> Credit card interest rates average 20-25% APR - that's wealth destruction in action.</p>
+
+            <div class="key-concept-box">
+                <h3>💡 Why This Matters</h3>
+                <p><strong>The credit card companies' business model relies on you NOT paying in full.</strong> They make billions from interest charges and late fees. When you pay in full every month, you're using their system FOR FREE while building excellent credit.</p>
+            </div>
+        </div>
+
+        <!-- Utilization Rule -->
+        <div class="lesson-section">
+            <h2><span class="section-icon">📊</span>The 30% Utilization Rule</h2>
+            <p><strong>Credit utilization</strong> is how much of your available credit you're using. This accounts for 30% of your credit score - the second most important factor.</p>
+
+            <div class="key-concept-box">
+                <h3>🎯 The Magic Number: Under 30%</h3>
+                <p>Keep your credit utilization below 30% of your total credit limit. Even better: keep it under 10% for optimal credit scores.</p>
+                <p style="margin-top: 15px;"><strong>Example:</strong></p>
+                <p>If your credit limit is $5,000, never carry more than $1,500 on the card ($5,000 × 30% = $1,500)</p>
+                <p style="margin-top: 10px;">Best practice: Keep it under $500 ($5,000 × 10% = $500)</p>
+            </div>
+
+            <div class="comparison-table">
+                <table>
+                    <tr>
+                        <th>Utilization</th>
+                        <th>Impact on Credit Score</th>
+                    </tr>
+                    <tr class="good">
+                        <td><strong>0-10%</strong></td>
+                        <td>Excellent - Maximum credit score benefit</td>
+                    </tr>
+                    <tr class="good">
+                        <td><strong>10-30%</strong></td>
+                        <td>Good - Positive impact on score</td>
+                    </tr>
+                    <tr class="bad">
+                        <td><strong>30-50%</strong></td>
+                        <td>Warning - Starting to hurt your score</td>
+                    </tr>
+                    <tr class="bad">
+                        <td><strong>50-100%</strong></td>
+                        <td>Danger - Significantly damaging your score</td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="action-box">
+                <h3>🎯 Pro Strategies</h3>
+                <ul>
+                    <li>Pay your balance BEFORE the statement closes (keeps reported utilization low)</li>
+                    <li>Request credit limit increases every 6-12 months (lowers utilization automatically)</li>
+                    <li>Split purchases across multiple cards to keep each under 30%</li>
+                    <li>Set up alerts when you hit 20% utilization on any card</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Autopay Setup -->
+        <div class="lesson-section">
+            <h2><span class="section-icon">⚙️</span>Autopay: Your Safety Net</h2>
+            <p>Even if you're responsible, life gets busy. <strong>One missed payment can drop your credit score 100+ points</strong> and stay on your report for 7 years.</p>
+
+            <div class="warning-box">
+                <h3>⚠️ The Cost of One Late Payment</h3>
+                <ul style="margin-left: 20px;">
+                    <li><strong>Immediate:</strong> $25-40 late fee</li>
+                    <li><strong>Short-term:</strong> APR can jump to 29.99% (penalty rate)</li>
+                    <li><strong>Long-term:</strong> Credit score drops 90-110 points</li>
+                    <li><strong>Forever:</strong> Stays on your credit report for 7 years</li>
+                </ul>
+            </div>
+
+            <div class="key-concept-box">
+                <h3>🛡️ The Autopay Strategy</h3>
+                <p><strong>Set up TWO levels of autopay protection:</strong></p>
+                <p style="margin-top: 15px;"><strong>Level 1 (Primary):</strong> Manually pay full balance 2-3 days before due date</p>
+                <p style="margin-top: 10px;"><strong>Level 2 (Backup):</strong> Autopay set to "full balance" as safety net</p>
+                <p style="margin-top: 15px;">This way, if you forget to pay manually, autopay catches it. You NEVER miss a payment.</p>
+            </div>
+
+            <div class="action-box">
+                <h3>✅ How to Set Up Autopay</h3>
+                <ul>
+                    <li>Log into your credit card account online</li>
+                    <li>Go to "Autopay" or "Automatic Payments" section</li>
+                    <li>Select "Pay Full Balance" (NOT minimum payment)</li>
+                    <li>Choose your bank account for withdrawal</li>
+                    <li>Confirm and save - you're protected!</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Minimum Payment Trap -->
+        <div class="lesson-section">
+            <h2><span class="section-icon">🚨</span>Avoid the Minimum Payment Trap</h2>
+            <p>Credit card companies love to advertise the <strong>"minimum payment" - typically just 2-3% of your balance.</strong> This is a trap designed to keep you in debt forever.</p>
+
+            <div class="real-world-box">
+                <h3>💰 The Real Cost</h3>
+                <p><strong>Scenario: $5,000 credit card balance at 22% APR</strong></p>
+                <p style="margin-top: 15px;"><strong>Paying minimum only ($150/month):</strong></p>
+                <p>• Time to pay off: 17 YEARS</p>
+                <p>• Total interest paid: $6,923</p>
+                <p>• Total amount paid: $11,923</p>
+                <p style="margin-top: 15px;"><strong>Paying $250/month instead:</strong></p>
+                <p>• Time to pay off: 2 years</p>
+                <p>• Total interest paid: $1,126</p>
+                <p>• Total amount paid: $6,126</p>
+                <p style="margin-top: 15px; font-size: 24px;"><strong>Difference: You save $5,797 and 15 years!</strong></p>
+            </div>
+
+            <div class="warning-box">
+                <h3>⚠️ Never Do This</h3>
+                <p><strong>Don't fall for these credit card traps:</strong></p>
+                <ul style="margin-left: 20px;">
+                    <li>"Skip a payment" offers - you still accrue interest</li>
+                    <li>Cash advances - typically 25%+ APR with instant interest</li>
+                    <li>Balance transfer fees without doing the math</li>
+                    <li>Store credit cards with 30% APR just to get 10% off today</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Best Practices Summary -->
+        <div class="lesson-section">
+            <h2><span class="section-icon">📋</span>Credit Card Best Practices Checklist</h2>
+
+            <div class="action-box">
+                <h3>✅ Follow These Rules Religiously</h3>
+                <ul>
+                    <li>Pay your full balance every single month - no exceptions</li>
+                    <li>Keep utilization under 30%, ideally under 10%</li>
+                    <li>Set up autopay for full balance as a safety net</li>
+                    <li>Never pay just the minimum - it's a trap</li>
+                    <li>Pay before statement closes to keep reported utilization low</li>
+                    <li>Check your statements monthly for fraud or errors</li>
+                    <li>Request credit limit increases every 6-12 months</li>
+                    <li>Never use credit cards for cash advances</li>
+                </ul>
+            </div>
+
+            <div class="key-concept-box">
+                <h3>🎓 The Credit Card Mindset</h3>
+                <p>Treat your credit card like a debit card - only spend money you already have. Use it for the convenience, rewards, and credit building, but NEVER as a loan.</p>
+                <p style="margin-top: 15px;">When used correctly, credit cards are the best financial tool for building wealth: cash back rewards, fraud protection, credit score building, and zero cost (when paid in full).</p>
+            </div>
+        </div>
+
+        <!-- Mini Quiz -->
+        <div class="quiz-container" id="quizContainer">
+            <div class="quiz-header">
+                <h2>Test Your Knowledge</h2>
+                <p>Answer all 3 questions correctly to complete the lesson</p>
+            </div>
+            <div id="quizQuestions"></div>
+            <button class="btn-submit-quiz" id="submitQuiz" onclick="submitQuiz()">Submit Answers</button>
+            <div id="quizResult"></div>
+        </div>
+
+        <!-- Finish Button -->
+        <button class="btn-finish" id="finishBtn" onclick="finishLesson()" disabled>Complete Lesson</button>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>FinanceU</h4>
+                    <p>Making financial literacy accessible for everyone.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="/about">About Us</a></li>
+                        <li><a href="/careers">Careers</a></li>
+                        <li><a href="/contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="/help">Help Center</a></li>
+                        <li><a href="/privacy">Privacy Policy</a></li>
+                        <li><a href="/terms">Terms of Service</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p style="font-size: 0.85rem; opacity: 0.8; margin-bottom: 10px;">Disclaimer: FinanceU provides educational content only and does not offer financial, legal, or investment advice. Always consult with a qualified professional before making financial decisions.</p>
+                <p>&copy; 2025 FinanceU. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="config.js"></script>
+    <script src="lesson-completion.js"></script>
+    <script src="animations.js"></script>
+    <script>
+        // Check authentication status and update nav
+        async function updateNav() {
+            const authButtons = document.getElementById('authButtons');
+            const cachedAuth = localStorage.getItem('authState');
+            if (cachedAuth) {
+                const authState = JSON.parse(cachedAuth);
+                authButtons.innerHTML = authState.isLoggedIn
+                    ? `<a href="#" onclick="logout(); return false;" class="btn-primary">Logout</a>`
+                    : `<a href="login" class="btn-primary">Login</a>`;
+                authButtons.style.opacity = '1';
+            }
+            try {
+                const response = await fetch(`${API_URL}/auth/me`, { credentials: 'include' });
+                if (response.ok) {
+                    localStorage.setItem('authState', JSON.stringify({ isLoggedIn: true }));
+                    authButtons.innerHTML = `<a href="#" onclick="logout(); return false;" class="btn-primary">Logout</a>`;
+                } else {
+                    localStorage.setItem('authState', JSON.stringify({ isLoggedIn: false }));
+                    authButtons.innerHTML = `<a href="login" class="btn-primary">Login</a>`;
+                }
+                authButtons.style.opacity = '1';
+            } catch (error) {
+                console.log('Not logged in');
+                localStorage.setItem('authState', JSON.stringify({ isLoggedIn: false }));
+                authButtons.innerHTML = `<a href="login" class="btn-primary">Login</a>`;
+                authButtons.style.opacity = '1';
+            }
+        }
+
+        async function logout() {
+            localStorage.removeItem('authState');
+            localStorage.removeItem('token');
+            localStorage.removeItem('userId');
+            try {
+                await fetch(`${API_URL}/auth/logout`, {
+                    method: 'POST',
+                    credentials: 'include'
+                });
+                window.location.href = '/index.html';
+            } catch (error) {
+                console.error('Logout error:', error);
+                window.location.href = '/index.html';
+            }
+        }
+
+        // Quiz data
+        const quizData = [
+            {
+                question: "What is the #1 golden rule of credit cards?",
+                options: [
+                    "A) Always pay the minimum payment",
+                    "B) Pay your full balance every month",
+                    "C) Use it for everything to get rewards",
+                    "D) Keep a small balance to build credit"
+                ],
+                correct: 1
+            },
+            {
+                question: "What should you keep your credit utilization under for optimal credit scores?",
+                options: [
+                    "A) 50%",
+                    "B) 75%",
+                    "C) 30%",
+                    "D) 90%"
+                ],
+                correct: 2
+            },
+            {
+                question: "If you have a $5,000 balance at 22% APR and only pay the minimum, approximately how long will it take to pay off?",
+                options: [
+                    "A) 2 years",
+                    "B) 5 years",
+                    "C) 10 years",
+                    "D) 17 years"
+                ],
+                correct: 3
+            }
+        ];
+
+        let userAnswers = [];
+        let quizPassed = false;
+
+        function initQuiz() {
+            const userId = localStorage.getItem('userId');
+            if (!userId || userId === 'null' || userId === 'undefined') {
+                console.error('No valid userId found');
+                document.getElementById('finishBtn').disabled = true;
+                return;
+            }
+
+            const quizPassedStatus = localStorage.getItem(`pillar3_lesson4_quiz_passed_${userId}`);
+            if (quizPassedStatus === 'true') {
+                quizPassed = true;
+                document.getElementById('finishBtn').disabled = false;
+                document.getElementById('quizContainer').style.display = 'none';
+                return;
+            }
+
+            renderQuiz();
+        }
+
+        function renderQuiz() {
+            const questionsContainer = document.getElementById('quizQuestions');
+            questionsContainer.innerHTML = '';
+            userAnswers = new Array(quizData.length).fill(null);
+
+            quizData.forEach((q, qIndex) => {
+                const questionCard = document.createElement('div');
+                questionCard.className = 'question-card';
+                questionCard.innerHTML = `
+                    <div class="question-text">Question ${qIndex + 1}: ${q.question}</div>
+                    ${q.options.map((option, oIndex) => `
+                        <div class="answer-option" onclick="selectAnswer(${qIndex}, ${oIndex})">
+                            <input type="radio" name="question${qIndex}" value="${oIndex}" style="margin-right: 10px;">
+                            ${option}
+                        </div>
+                    `).join('')}
+                `;
+                questionsContainer.appendChild(questionCard);
+            });
+
+            document.getElementById('submitQuiz').disabled = false;
+            document.getElementById('quizResult').innerHTML = '';
+        }
+
+        function selectAnswer(questionIndex, optionIndex) {
+            userAnswers[questionIndex] = optionIndex;
+            const questionCard = document.querySelectorAll('.question-card')[questionIndex];
+            const options = questionCard.querySelectorAll('.answer-option');
+            options.forEach((opt, idx) => {
+                opt.classList.remove('selected');
+                if (idx === optionIndex) {
+                    opt.classList.add('selected');
+                    opt.querySelector('input').checked = true;
+                }
+            });
+        }
+
+        function submitQuiz() {
+            if (userAnswers.includes(null)) {
+                alert('Please answer all questions before submitting.');
+                return;
+            }
+
+            let correct = 0;
+            quizData.forEach((q, index) => {
+                if (userAnswers[index] === q.correct) {
+                    correct++;
+                }
+            });
+
+            const percentage = Math.round((correct / quizData.length) * 100);
+            const passed = correct === quizData.length;
+
+            document.querySelectorAll('.question-card').forEach((card, qIndex) => {
+                const options = card.querySelectorAll('.answer-option');
+                options.forEach((opt, oIndex) => {
+                    opt.style.pointerEvents = 'none';
+                    if (oIndex === quizData[qIndex].correct) {
+                        opt.classList.add('correct');
+                    } else if (oIndex === userAnswers[qIndex] && oIndex !== quizData[qIndex].correct) {
+                        opt.classList.add('incorrect');
+                    }
+                });
+            });
+
+            const resultDiv = document.getElementById('quizResult');
+            if (passed) {
+                quizPassed = true;
+                const userId = localStorage.getItem('userId');
+                localStorage.setItem(`pillar3_lesson4_quiz_passed_${userId}`, 'true');
+                document.getElementById('finishBtn').disabled = false;
+
+                resultDiv.innerHTML = `
+                    <div class="quiz-result pass">
+                        <div class="result-icon">🎉</div>
+                        <div class="result-text" style="color: #10b981;">Perfect Score!</div>
+                        <div class="result-score">You got all ${quizData.length} questions correct!</div>
+                        <p style="color: var(--text-secondary); font-size: 18px; font-weight: 600;">Excellent! Click "Complete Lesson" to continue.</p>
+                    </div>
+                `;
+            } else {
+                resultDiv.innerHTML = `
+                    <div class="quiz-result fail">
+                        <div class="result-icon">📚</div>
+                        <div class="result-text" style="color: #dc2626;">Not Quite</div>
+                        <div class="result-score">You scored ${correct} out of ${quizData.length}</div>
+                        <p style="color: var(--text-secondary); margin-bottom: 15px; font-size: 18px; font-weight: 600;">You need all 3 correct. Review the lesson and try again!</p>
+                        <button class="btn-submit-quiz" onclick="retryQuiz()">Retry Quiz</button>
+                    </div>
+                `;
+            }
+
+            document.getElementById('submitQuiz').style.display = 'none';
+        }
+
+        function retryQuiz() {
+            renderQuiz();
+            document.getElementById('submitQuiz').style.display = 'block';
+        }
+
+        async function finishLesson() {
+            if (!quizPassed) {
+                alert('Please complete the quiz first!');
+                return;
+            }
+            const success = await completeLesson('pillar3_lesson4', 3, 4);
+            if (success) {
+                window.location.href = 'pillar3-lessons.html';
+            }
+        }
+
+        updateNav();
+        initQuiz();
+    </script>
+</body>
+</html>

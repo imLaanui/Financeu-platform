@@ -1,0 +1,843 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson 5 - Debt Traps and How to Avoid Them - FinanceU</title>
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+    <link rel="icon" type="image/svg+xml" sizes="16x16" href="assets/favicon-16x16.svg">
+    <link rel="icon" type="image/svg+xml" sizes="32x32" href="assets/favicon-32x32.svg">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.svg">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .lesson-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        .lesson-header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 25px;
+            background: linear-gradient(135deg, #0A1A2F 0%, #1a3a5c 100%);
+            border-radius: 16px;
+            position: relative;
+            overflow: hidden;
+        }
+        .lesson-header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+        }
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        .lesson-header h1 {
+            font-size: 32px;
+            color: white;
+            margin-bottom: 8px;
+            position: relative;
+            z-index: 1;
+        }
+        .lesson-header .lesson-number {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 5px;
+            position: relative;
+            z-index: 1;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        .lesson-section {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            position: relative;
+            border-left: 4px solid transparent;
+            transition: all 0.3s ease;
+        }
+        .lesson-section:hover {
+            border-left-color: var(--primary-color);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        .lesson-section h2 {
+            color: var(--primary-color);
+            font-size: 24px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .lesson-section h2::before {
+            content: '';
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+            background: linear-gradient(135deg, #0A1A2F 0%, #00A676 100%);
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 8px rgba(59, 130, 246, 0.3);
+        }
+        .lesson-section p {
+            line-height: 1.8;
+            color: var(--text-secondary);
+            margin-bottom: 15px;
+        }
+        .lesson-section ul {
+            line-height: 1.8;
+            color: var(--text-secondary);
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+        .visual-box {
+            background: linear-gradient(135deg, #0A1A2F15 0%, #00A67615 100%);
+            border-left: 4px solid var(--primary-color);
+            padding: 25px;
+            border-radius: 12px;
+            margin: 20px 0;
+            position: relative;
+            box-shadow: 0 2px 8px rgba(59, 130, 246, 0.1);
+        }
+        .visual-box h3 {
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            font-size: 18px;
+            font-weight: 700;
+        }
+        .warning-box {
+            background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
+            border-left: 4px solid #dc2626;
+            padding: 25px;
+            border-radius: 12px;
+            position: relative;
+            box-shadow: 0 2px 8px rgba(220, 38, 38, 0.1);
+            margin: 20px 0;
+        }
+        .warning-box::before {
+            content: '⚠️';
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 32px;
+            opacity: 0.5;
+        }
+        .warning-box h3 {
+            color: #dc2626;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+        .action-box {
+            background: linear-gradient(135deg, #10b98120 0%, #d1fae540 100%);
+            border-left: 4px solid #10b981;
+            padding: 25px;
+            border-radius: 12px;
+            position: relative;
+            box-shadow: 0 2px 8px rgba(16, 185, 129, 0.1);
+        }
+        .action-box::before {
+            content: '🎯';
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 32px;
+            opacity: 0.5;
+        }
+        .action-box h3 {
+            color: #10b981;
+            margin-bottom: 10px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .btn-finish {
+            display: block;
+            width: 100%;
+            max-width: 400px;
+            margin: 30px auto;
+            padding: 18px;
+            background: var(--primary-color);
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: 600;
+            transition: background 0.2s;
+            border: none;
+            cursor: pointer;
+        }
+        .btn-finish:hover {
+            background: #2563eb;
+        }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+        .quiz-container {
+            background: linear-gradient(135deg, #0A1A2F15 0%, #00A67615 100%);
+            border: 2px solid var(--primary-color);
+            border-radius: 12px;
+            padding: 30px;
+            margin: 40px 0 30px 0;
+        }
+        .quiz-header {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+        .quiz-header h2 {
+            color: var(--primary-color);
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+        .quiz-header p {
+            color: var(--text-secondary);
+            font-size: 16px;
+        }
+        .question-card {
+            background: white;
+            padding: 25px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .question-text {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 15px;
+        }
+        .answer-option {
+            background: #f9fafb;
+            padding: 15px;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .answer-option:hover {
+            border-color: var(--primary-color);
+            background: #eff6ff;
+        }
+        .answer-option.selected {
+            border-color: var(--primary-color);
+            background: #dbeafe;
+        }
+        .answer-option.correct {
+            border-color: #10b981;
+            background: #d1fae5;
+        }
+        .answer-option.incorrect {
+            border-color: #dc2626;
+            background: #fee2e2;
+        }
+        .btn-submit-quiz {
+            display: block;
+            width: 100%;
+            max-width: 300px;
+            margin: 20px auto;
+            padding: 15px;
+            background: var(--primary-color);
+            color: white;
+            text-align: center;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .btn-submit-quiz:hover {
+            background: #2563eb;
+        }
+        .btn-submit-quiz:disabled {
+            background: #9ca3af;
+            cursor: not-allowed;
+        }
+        .quiz-result {
+            background: white;
+            padding: 25px;
+            border-radius: 8px;
+            text-align: center;
+            margin-top: 20px;
+        }
+        .quiz-result.pass {
+            border: 3px solid #10b981;
+        }
+        .quiz-result.fail {
+            border: 3px solid #dc2626;
+        }
+        .result-icon {
+            font-size: 48px;
+            margin-bottom: 15px;
+        }
+        .result-text {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        .result-score {
+            font-size: 18px;
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+        }
+        .btn-retry {
+            padding: 12px 24px;
+            background: #f59e0b;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .btn-retry:hover {
+            background: #d97706;
+        }
+        .btn-finish:disabled {
+            background: #9ca3af;
+            cursor: not-allowed;
+            opacity: 0.6;
+        }
+        .example-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        .example-card {
+            background: white;
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 20px;
+            transition: all 0.3s;
+        }
+        .example-card:hover {
+            border-color: var(--primary-color);
+            transform: translateY(-3px);
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.2);
+        }
+        .example-emoji {
+            font-size: 36px;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        .example-title {
+            font-weight: 700;
+            color: var(--text-primary);
+            font-size: 15px;
+            margin-bottom: 8px;
+            text-align: center;
+        }
+        .example-desc {
+            font-size: 13px;
+            color: var(--text-secondary);
+            line-height: 1.4;
+        }
+        .debt-comparison {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin: 20px 0;
+        }
+        .debt-card {
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+        }
+        .debt-card.avalanche {
+            background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+            border: 2px solid #3b82f6;
+        }
+        .debt-card.snowball {
+            background: linear-gradient(135deg, #e0e7ff 0%, #c7d2fe 100%);
+            border: 2px solid #6366f1;
+        }
+        .debt-card h4 {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        .debt-card p {
+            font-size: 14px;
+            line-height: 1.5;
+            margin: 0;
+        }
+        @media (max-width: 768px) {
+            .debt-comparison {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-wrapper">
+                <div class="logo"><a href="/" style="color: inherit; text-decoration: none;">Finance<span class="logo-accent">U</span></a></div>
+                <ul class="nav-links">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="dashboard">Dashboard</a></li>
+                    <li id="authButtons" style="opacity: 0;">
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Lesson Content -->
+    <div class="lesson-container">
+        <a href="/pillar3-lessons" class="back-link">← Back to Pillar 3 Lessons</a>
+
+        <!-- Header -->
+        <div class="lesson-header">
+            <div class="lesson-number">PILLAR 3: CREDIT & DEBT MASTERY</div>
+            <h1>Debt Traps and How to Avoid Them</h1>
+        </div>
+
+        <!-- Content Section -->
+        <div class="lesson-section">
+            <h2>High-Interest Debt Cascade</h2>
+            <p>High-interest debt creates a dangerous cycle. When interest rates are extremely high, most of your payment goes to interest instead of reducing the actual debt. This means the debt grows faster than you can pay it off, trapping you in a cycle of payments.</p>
+
+            <div class="visual-box">
+                <h3>How High-Interest Debt Grows</h3>
+                <p style="text-align: center; font-size: 16px; margin: 0;"><strong>Borrow $1,000 at 400% APR</strong></p>
+                <p style="text-align: center; margin: 10px 0 0 0;">After 1 year with minimum payments: <strong style="color: #dc2626;">$5,000+ owed</strong></p>
+            </div>
+        </div>
+
+        <div class="lesson-section">
+            <h2>Payday Loans: The Worst Trap</h2>
+            <p>Payday loans are short-term, high-interest loans designed to trap borrowers in a cycle of debt. They seem convenient but are extremely dangerous.</p>
+
+            <div class="warning-box">
+                <h3>Real Example</h3>
+                <p><strong>Borrow $300, pay back $450 after 2 weeks</strong></p>
+                <p style="margin: 10px 0 0 0;">That's a <strong style="font-size: 20px; color: #dc2626;">391% APR</strong> - typically 300-400%+ APR</p>
+                <p style="margin-top: 10px; font-size: 14px;">For comparison, credit cards are typically 15-25% APR</p>
+            </div>
+
+            <p><strong>Why they're dangerous:</strong></p>
+            <ul>
+                <li>Most borrowers can't pay back on time and roll over the loan</li>
+                <li>Each rollover adds more fees and interest</li>
+                <li>Average payday loan borrower is in debt for 5 months</li>
+                <li>Spends $520 in fees to borrow $375</li>
+            </ul>
+        </div>
+
+        <div class="lesson-section">
+            <h2>Buy Now Pay Later (BNPL) Risks</h2>
+            <p>Services like Afterpay, Klarna, and Affirm split purchases into smaller payments. They seem harmless but carry hidden dangers.</p>
+
+            <div class="visual-box">
+                <h3>Alex's BNPL Trap</h3>
+                <p>Alex used Afterpay for $800 in clothes. 4 payments of $200 seemed manageable.</p>
+                <p style="margin-top: 10px;">Then rent was due. Alex missed a payment.</p>
+                <p style="margin-top: 10px; font-weight: 700; color: #dc2626;">Result: $35 late fee + credit score hit + financial stress</p>
+            </div>
+
+            <div class="example-cards">
+                <div class="example-card">
+                    <div class="example-emoji">💸</div>
+                    <div class="example-title">Multiple Services</div>
+                    <div class="example-desc">Easy to have 5+ BNPL payments due at once, losing track of total obligations</div>
+                </div>
+                <div class="example-card">
+                    <div class="example-emoji">📊</div>
+                    <div class="example-title">Budget Blind Spot</div>
+                    <div class="example-desc">BNPL doesn't feel like debt, leading to overspending without realizing</div>
+                </div>
+                <div class="example-card">
+                    <div class="example-emoji">⚠️</div>
+                    <div class="example-title">Late Fee Spiral</div>
+                    <div class="example-desc">Miss one payment and fees pile up quickly, plus credit damage</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="lesson-section">
+            <h2>Store Credit Cards</h2>
+            <p>Store credit cards often come with deceptive introductory offers but have much higher interest rates than regular credit cards.</p>
+
+            <div class="visual-box">
+                <h3>Interest Rate Comparison</h3>
+                <div style="display: flex; justify-content: space-around; margin-top: 15px; flex-wrap: wrap; gap: 15px;">
+                    <div style="text-align: center;">
+                        <p style="font-size: 32px; font-weight: 700; color: #dc2626; margin: 0;">25-30%</p>
+                        <p style="margin: 5px 0 0 0; font-size: 14px;">Store Credit Cards</p>
+                    </div>
+                    <div style="text-align: center;">
+                        <p style="font-size: 32px; font-weight: 700; color: #0A1A2F; margin: 0;">15-20%</p>
+                        <p style="margin: 5px 0 0 0; font-size: 14px;">Regular Credit Cards</p>
+                    </div>
+                </div>
+            </div>
+
+            <p><strong>Red flags:</strong></p>
+            <ul>
+                <li>"Save 20% today if you open a card!" - The interest will cost more than you save</li>
+                <li>Deferred interest promotions - If not paid in full by deadline, charged ALL interest retroactively</li>
+                <li>Can only use at one store - Less flexibility than regular cards</li>
+            </ul>
+        </div>
+
+        <div class="lesson-section">
+            <h2>Warning Signs of Predatory Lending</h2>
+
+            <div class="warning-box">
+                <h3>Spot These Red Flags</h3>
+                <ul style="margin: 0;">
+                    <li><strong>"Fast cash" advertising</strong> - Preys on desperation</li>
+                    <li><strong>No credit check</strong> - They don't care if you can afford it</li>
+                    <li><strong>APR over 36%</strong> - Legally considered predatory in many states</li>
+                    <li><strong>Pressure tactics</strong> - "Limited time offer" to prevent careful consideration</li>
+                    <li><strong>Unclear terms</strong> - Hiding the true cost in fine print</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="lesson-section">
+            <h2>Debt Payoff Strategies</h2>
+            <p>If you already have debt, these two proven methods can help you get out faster:</p>
+
+            <div class="debt-comparison">
+                <div class="debt-card avalanche">
+                    <h4>Debt Avalanche</h4>
+                    <p><strong>Pay highest interest rate first</strong></p>
+                    <p style="margin-top: 10px;">Saves the most money on interest. Mathematically optimal.</p>
+                    <p style="margin-top: 10px; font-size: 12px; font-style: italic;">Best for: Motivated people who want to minimize total cost</p>
+                </div>
+                <div class="debt-card snowball">
+                    <h4>Debt Snowball</h4>
+                    <p><strong>Pay smallest balance first</strong></p>
+                    <p style="margin-top: 10px;">Quick wins build momentum. Psychologically rewarding.</p>
+                    <p style="margin-top: 10px; font-size: 12px; font-style: italic;">Best for: People who need motivational wins to stay on track</p>
+                </div>
+            </div>
+
+            <p style="text-align: center; font-weight: 700; margin-top: 20px;">Both methods work - choose the one you'll stick with!</p>
+        </div>
+
+        <div class="lesson-section">
+            <div class="action-box">
+                <h3>Action Items</h3>
+                <ul style="margin: 0;">
+                    <li>Identify any high-interest debt you currently have</li>
+                    <li>Calculate the true cost of any BNPL services you're using</li>
+                    <li>If in debt, create a payoff plan using avalanche or snowball method</li>
+                    <li>Set up alerts to track all payment due dates</li>
+                    <li>Avoid payday loans, title loans, and rent-to-own schemes</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Lesson Quiz -->
+        <div class="quiz-container" id="quizContainer">
+            <div class="quiz-header">
+                <h2>Lesson Quiz</h2>
+                <p>Test your knowledge to complete this lesson!</p>
+            </div>
+            <div id="quizQuestions"></div>
+            <button class="btn-submit-quiz" id="submitQuiz" onclick="submitQuiz()">Submit Quiz</button>
+            <div id="quizResult"></div>
+        </div>
+
+        <!-- Finish Button -->
+        <button class="btn-finish" id="finishBtn" onclick="finishLesson()" disabled>Finish Lesson</button>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>FinanceU</h4>
+                    <p>Making financial literacy accessible for everyone.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="/about">About Us</a></li>
+                        <li><a href="/careers">Careers</a></li>
+                        <li><a href="/contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="/help">Help Center</a></li>
+                        <li><a href="/privacy">Privacy Policy</a></li>
+                        <li><a href="/terms">Terms of Service</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p style="font-size: 0.85rem; opacity: 0.8; margin-bottom: 10px;">Disclaimer: FinanceU provides educational content only and does not offer financial, legal, or investment advice. Always consult with a qualified professional before making financial decisions.</p>
+                <p>&copy; 2025 FinanceU. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="config.js"></script>
+    <script src="lesson-completion.js"></script>
+    <script src="animations.js"></script>
+    <script>
+        // Check authentication status and update nav
+        async function updateNav() {
+            const authButtons = document.getElementById('authButtons');
+
+            // Check localStorage for cached auth state and render immediately
+            const cachedAuth = localStorage.getItem('authState');
+            if (cachedAuth) {
+                const authState = JSON.parse(cachedAuth);
+                authButtons.innerHTML = authState.isLoggedIn
+                    ? `<a href="#" onclick="logout(); return false;" class="btn-primary">Logout</a>`
+                    : `<a href="login" class="btn-primary">Login</a>`;
+                authButtons.style.opacity = '1';
+            }
+
+            // Then verify with server in background
+            try {
+                const response = await fetch(`${API_URL}/auth/me`, { credentials: 'include' });
+
+                if (response.ok) {
+                    localStorage.setItem('authState', JSON.stringify({ isLoggedIn: true }));
+                    authButtons.innerHTML = `<a href="#" onclick="logout(); return false;" class="btn-primary">Logout</a>`;
+                } else {
+                    localStorage.setItem('authState', JSON.stringify({ isLoggedIn: false }));
+                    authButtons.innerHTML = `<a href="login" class="btn-primary">Login</a>`;
+                }
+                authButtons.style.opacity = '1';
+            } catch (error) {
+                console.log('Not logged in');
+                localStorage.setItem('authState', JSON.stringify({ isLoggedIn: false }));
+                authButtons.innerHTML = `<a href="login" class="btn-primary">Login</a>`;
+                authButtons.style.opacity = '1';
+            }
+        }
+
+        // Logout function
+        async function logout() {
+            localStorage.removeItem('authState');
+            localStorage.removeItem('token');
+            localStorage.removeItem('userId');
+            try {
+                await fetch(`${API_URL}/auth/logout`, {
+                    method: 'POST',
+                    credentials: 'include'
+                });
+                window.location.href = '/index.html';
+            } catch (error) {
+                console.error('Logout error:', error);
+                window.location.href = '/index.html';
+            }
+        }
+
+        // Quiz data
+        const quizData = [
+            {
+                question: "What's the typical APR for payday loans?",
+                options: [
+                    "10-20%",
+                    "50-100%",
+                    "150-300%",
+                    "300-400%+"
+                ],
+                correct: 3
+            },
+            {
+                question: "What's a major risk of Buy Now Pay Later?",
+                options: [
+                    "Require excellent credit",
+                    "High upfront fees",
+                    "Easy to overextend with multiple payment obligations",
+                    "Illegal in most states"
+                ],
+                correct: 2
+            },
+            {
+                question: "What's the difference between debt avalanche and debt snowball?",
+                options: [
+                    "Avalanche pays highest interest first",
+                    "No difference",
+                    "Snowball pays highest interest first",
+                    "Avalanche is only for student loans"
+                ],
+                correct: 0
+            }
+        ];
+
+        let userAnswers = [];
+        let quizPassed = false;
+
+        // Initialize quiz
+        function initQuiz() {
+            const userId = localStorage.getItem('userId');
+
+            // Validate userId exists
+            if (!userId || userId === 'null' || userId === 'undefined') {
+                console.error('No valid userId found');
+                document.getElementById('finishBtn').disabled = true;
+                return;
+            }
+
+            const quizPassedStatus = localStorage.getItem(`lesson25_quiz_passed_${userId}`);
+
+            if (quizPassedStatus === 'true') {
+                quizPassed = true;
+                document.getElementById('finishBtn').disabled = false;
+                document.getElementById('quizContainer').style.display = 'none';
+                return;
+            }
+
+            renderQuiz();
+        }
+
+        function renderQuiz() {
+            const questionsContainer = document.getElementById('quizQuestions');
+            questionsContainer.innerHTML = '';
+            userAnswers = new Array(quizData.length).fill(null);
+
+            quizData.forEach((q, qIndex) => {
+                const questionCard = document.createElement('div');
+                questionCard.className = 'question-card';
+                questionCard.innerHTML = `
+                    <div class="question-text">Question ${qIndex + 1}: ${q.question}</div>
+                    ${q.options.map((option, oIndex) => `
+                        <div class="answer-option" onclick="selectAnswer(${qIndex}, ${oIndex})">
+                            <input type="radio" name="question${qIndex}" value="${oIndex}" style="margin-right: 10px;">
+                            ${option}
+                        </div>
+                    `).join('')}
+                `;
+                questionsContainer.appendChild(questionCard);
+            });
+
+            document.getElementById('submitQuiz').disabled = false;
+            document.getElementById('quizResult').innerHTML = '';
+        }
+
+        function selectAnswer(questionIndex, optionIndex) {
+            userAnswers[questionIndex] = optionIndex;
+
+            // Update visual selection
+            const questionCard = document.querySelectorAll('.question-card')[questionIndex];
+            const options = questionCard.querySelectorAll('.answer-option');
+            options.forEach((opt, idx) => {
+                opt.classList.remove('selected');
+                if (idx === optionIndex) {
+                    opt.classList.add('selected');
+                    opt.querySelector('input').checked = true;
+                }
+            });
+        }
+
+        function submitQuiz() {
+            // Check if all questions are answered
+            if (userAnswers.includes(null)) {
+                alert('Please answer all questions before submitting.');
+                return;
+            }
+
+            // Calculate score
+            let correct = 0;
+            quizData.forEach((q, index) => {
+                if (userAnswers[index] === q.correct) {
+                    correct++;
+                }
+            });
+
+            const percentage = Math.round((correct / quizData.length) * 100);
+            const passed = percentage === 100;
+
+            // Show correct/incorrect answers
+            document.querySelectorAll('.question-card').forEach((card, qIndex) => {
+                const options = card.querySelectorAll('.answer-option');
+                options.forEach((opt, oIndex) => {
+                    opt.style.pointerEvents = 'none';
+                    if (oIndex === quizData[qIndex].correct) {
+                        opt.classList.add('correct');
+                    } else if (oIndex === userAnswers[qIndex] && oIndex !== quizData[qIndex].correct) {
+                        opt.classList.add('incorrect');
+                    }
+                });
+            });
+
+            // Display result
+            const resultDiv = document.getElementById('quizResult');
+            if (passed) {
+                quizPassed = true;
+                const userId = localStorage.getItem('userId');
+                localStorage.setItem(`lesson25_quiz_passed_${userId}`, 'true');
+                document.getElementById('finishBtn').disabled = false;
+
+                resultDiv.innerHTML = `
+                    <div class="quiz-result pass">
+                        <div class="result-icon">🎉</div>
+                        <div class="result-text" style="color: #10b981;">Quiz Passed!</div>
+                        <div class="result-score">You scored ${correct} out of ${quizData.length} (${percentage}%)</div>
+                        <p style="color: var(--text-secondary);">Great job! You can now finish the lesson and move to the next one.</p>
+                    </div>
+                `;
+            } else {
+                resultDiv.innerHTML = `
+                    <div class="quiz-result fail">
+                        <div class="result-icon">📚</div>
+                        <div class="result-text" style="color: #dc2626;">Not quite there yet</div>
+                        <div class="result-score">You scored ${correct} out of ${quizData.length} (${percentage}%)</div>
+                        <p style="color: var(--text-secondary); margin-bottom: 15px;">You need 100% to pass. Review the lesson and try again!</p>
+                        <button class="btn-retry" onclick="retryQuiz()">Retry Quiz</button>
+                    </div>
+                `;
+            }
+
+            document.getElementById('submitQuiz').style.display = 'none';
+        }
+
+        function retryQuiz() {
+            renderQuiz();
+            document.getElementById('submitQuiz').style.display = 'block';
+        }
+
+        async function finishLesson() {
+            if (!quizPassed) {
+                alert('Please complete the quiz first!');
+                return;
+            }
+
+            // Use shared completion function
+            const success = await completeLesson('pillar3_lesson5', 3, 5);
+
+            if (success) {
+                // Redirect back to lessons page
+                window.location.href = 'pillar3-lessons.html';
+            }
+        }
+
+        updateNav();
+        initQuiz();
+    </script>
+</body>
+</html>
