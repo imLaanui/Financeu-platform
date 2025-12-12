@@ -4,13 +4,14 @@ import "@css/navbar.css";
 
 export default function Navbar() {
   const navigate = useNavigate();
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  // Initialize state from localStorage without causing effect re-render
+  const [isLoggedIn] = useState(() => {
+    const token = localStorage.getItem("token");
+    return !!token;
+  });
 
   useEffect(() => {
-    // Example: check if a token exists in localStorage
-    const token = localStorage.getItem("token");
-    setIsLoggedIn(!!token);
-
     const handleSmoothScroll = (e: Event) => {
       const target = e.currentTarget as HTMLAnchorElement;
       const href = target.getAttribute("href");
