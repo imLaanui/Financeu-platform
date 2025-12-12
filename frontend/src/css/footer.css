@@ -1,28 +1,63 @@
 /* Footer */
 .footer {
+    margin-top: 0 !important; /* Force margin to zero */
+    /* Remove or comment out this line as it forces top padding to zero */
+    /* padding-top: 0 !important; */
     background-color: var(--text-dark);
     color: white;
-    padding: 4rem 0 2rem;
+    /* Changed the top padding value from 0 to 2rem */
+    padding: 2rem 0 2rem 0; /* Adjusted to set top padding to 2rem and keep other values */
 }
 
 .footer-content {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 3rem;
-    margin-bottom: 3rem;
     max-width: 900px;
-    margin-left: auto;
-    margin-right: auto;
+    margin: 0 auto 2rem; /* center and add small bottom margin */
     justify-items: center;
     text-align: center;
 }
 
-.footer-section h4 { margin-bottom: 1rem; font-size: 1.1rem; }
-.footer-section p { color: rgba(255, 255, 255, 0.8); font-size: 0.9rem; line-height: 1.6; }
-.footer-section ul { list-style: none; }
-.footer-section ul li { margin-bottom: 0.5rem; }
-.footer-section a { color: rgba(255, 255, 255, 0.8); text-decoration: none; transition: color 0.3s; }
-.footer-section a:hover { color: white; }
+.footer-section h4 {
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+}
 
-.footer-bottom { text-align: center; padding-top: 2rem; border-top: 1px solid rgba(255, 255, 255, 0.1); }
-.footer-bottom p { color: rgba(255, 255, 255, 0.6); font-size: 0.9rem; }
+.footer-section p {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.9rem;
+    line-height: 1.6;
+}
+
+.footer-section ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-section ul li {
+    margin-bottom: 0.5rem;
+}
+
+.footer-section a {
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.footer-section a:hover {
+    color: white;
+}
+
+.footer-bottom {
+    text-align: center;
+    padding-top: 1rem; /* reduced */
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.footer-bottom p {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.9rem;
+    margin: 0;
+}
