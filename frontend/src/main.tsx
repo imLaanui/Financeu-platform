@@ -16,6 +16,8 @@ import Feedback from "./pages/Feedback";
 import AdminFeedback from "./pages/AdminFeedback";
 import AdminUsers from "./pages/AdminUsers";
 import Dashboard from "./pages/Dashboard";
+
+import Pillar1Index from "./pages/Pillars/Pillar1/Index";
 import Lesson1 from "./pages/Pillars/Pillar1/Lesson1";
 import Lesson2 from "./pages/Pillars/Pillar1/Lesson2";
 import Lesson3 from "./pages/Pillars/Pillar1/Lesson3";
@@ -24,44 +26,40 @@ import Lesson5 from "./pages/Pillars/Pillar1/Lesson5";
 import Lesson6 from "./pages/Pillars/Pillar1/Lesson6";
 import Lesson7 from "./pages/Pillars/Pillar1/Lesson7";
 import Lesson8 from "./pages/Pillars/Pillar1/Lesson8";
-import Pillar1Index from "./pages/Pillars/Pillar1/Index";
 import Pillar1Quiz from "./pages/Pillars/Pillar1/Quiz";
-
-const routes = [
-  { path: "/", element: <Home /> },
-  { path: "/about", element: <About /> },
-  { path: "/contact", element: <Contact /> },
-  { path: "/careers", element: <Careers /> },
-  { path: "/help", element: <Help /> },
-  { path: "/terms", element: <Terms /> },
-  { path: "/login", element: <Login /> },
-  { path: "/signup", element: <Signup /> },
-  { path: "/privacy", element: <Privacy /> },
-  { path: "/reset-password", element: <ResetPassword /> },
-  { path: "/forgot-password", element: <ForgotPassword /> },
-  { path: "/curriculum", element: <Curriculum /> },
-  { path: "/feedback", element: <Feedback /> },
-  { path: "/admin/feedback", element: <AdminFeedback /> },
-  { path: "/admin/users", element: <AdminUsers /> },
-  { path: "/dashboard", element: <Dashboard /> },
-  { path: "/pillar1-lessons", element: <Pillar1Index /> },
-  { path: "/pillar-lesson1", element: <Lesson1 /> },
-  { path: "/pillar-lesson2", element: <Lesson2 /> },
-  { path: "/pillar-lesson3", element: <Lesson3 /> },
-  { path: "/pillar-lesson4", element: <Lesson4 /> },
-  { path: "/pillar-lesson5", element: <Lesson5 /> },
-  { path: "/pillar-lesson6", element: <Lesson6 /> },
-  { path: "/pillar-lesson7", element: <Lesson7 /> },
-  { path: "/pillar-lesson8", element: <Lesson8 /> },
-  { path: "/pillar1-quiz", element: <Pillar1Quiz /> },
-];
 
 createRoot(document.getElementById("root")!).render(
   <BrowserRouter>
     <Routes>
-      {routes.map((route) => (
-        <Route key={route.path} path={route.path} element={route.element} />
-      ))}
+      {/* Top-level routes */}
+      <Route path="/" element={<Home />} />
+      <Route path="/about" element={<About />} />
+      <Route path="/contact" element={<Contact />} />
+      <Route path="/careers" element={<Careers />} />
+      <Route path="/help" element={<Help />} />
+      <Route path="/terms" element={<Terms />} />
+      <Route path="/login" element={<Login />} />
+      <Route path="/signup" element={<Signup />} />
+      <Route path="/privacy" element={<Privacy />} />
+      <Route path="/reset-password" element={<ResetPassword />} />
+      <Route path="/forgot-password" element={<ForgotPassword />} />
+      <Route path="/curriculum" element={<Curriculum />} />
+      <Route path="/feedback" element={<Feedback />} />
+      <Route path="/admin/feedback" element={<AdminFeedback />} />
+      <Route path="/admin/users" element={<AdminUsers />} />
+      <Route path="/dashboard" element={<Dashboard />} />
+
+      {/* Pillar1 routes – flat */}
+      <Route path="/pillar1" element={<Pillar1Index />} />
+      <Route path="/pillar1/lesson1" element={<Lesson1 />} />
+      <Route path="/pillar1/lesson2" element={<Lesson2 />} />
+      <Route path="/pillar1/lesson3" element={<Lesson3 />} />
+      <Route path="/pillar1/lesson4" element={<Lesson4 />} />
+      <Route path="/pillar1/lesson5" element={<Lesson5 />} />
+      <Route path="/pillar1/lesson6" element={<Lesson6 />} />
+      <Route path="/pillar1/lesson7" element={<Lesson7 />} />
+      <Route path="/pillar1/lesson8" element={<Lesson8 />} />
+      <Route path="/pillar1/quiz" element={<Pillar1Quiz />} />
     </Routes>
   </BrowserRouter>
 );

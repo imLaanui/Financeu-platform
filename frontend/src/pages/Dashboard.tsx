@@ -12,20 +12,6 @@ interface User {
     createdAt: string;
 }
 
-interface Lesson {
-    id: string;
-    title: string;
-    description: string;
-    icon: string;
-    url: string;
-    accessible: boolean;
-}
-
-interface LessonProgress {
-    lesson_id: string;
-    completed: boolean;
-}
-
 export default function Dashboard() {
     const [user, setUser] = useState<User | null>(null);
     const [loading, setLoading] = useState(true);
@@ -38,10 +24,6 @@ export default function Dashboard() {
     const [showUpgradeBanner, setShowUpgradeBanner] = useState(false);
     const [pillar1ButtonText, setPillar1ButtonText] = useState('Start Pillar');
     const [pillar2ButtonText, setPillar2ButtonText] = useState('Start Pillar');
-
-    useEffect(() => {
-        loadDashboard();
-    }, []);
 
     const checkAuth = async (): Promise<User | null> => {
         try {
@@ -169,6 +151,11 @@ export default function Dashboard() {
             window.location.href = '/index.html';
         }
     };
+
+    useEffect(() => {
+        loadDashboard();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     if (loading) {
         return (
@@ -387,7 +374,7 @@ export default function Dashboard() {
                                     </div>
                                 </div>
                                 <div className="lesson-status">
-                                    <a href="/pillar1-lessons" className="btn-lesson">
+                                    <a href="/pillar1" className="btn-lesson">
                                         {pillar1ButtonText}
                                     </a>
                                 </div>
@@ -405,7 +392,7 @@ export default function Dashboard() {
                                     </div>
                                 </div>
                                 <div className="lesson-status">
-                                    <a href="/pillar2-lessons" className="btn-lesson">
+                                    <a href="/pillar2" className="btn-lesson">
                                         {pillar2ButtonText}
                                     </a>
                                 </div>
@@ -413,7 +400,7 @@ export default function Dashboard() {
 
                             <div
                                 className="lesson-item"
-                                onClick={() => (window.location.href = '/pillar3-lessons')}
+                                onClick={() => (window.location.href = '/pillar3')}
                                 style={{ cursor: 'pointer' }}
                             >
                                 <div className="lesson-info">
