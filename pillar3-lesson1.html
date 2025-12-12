@@ -11,9 +11,110 @@
     <link rel="stylesheet" href="styles.css">
     <style>
         .lesson-container {
-            max-width: 800px;
+            max-width: 1400px;
             margin: 0 auto;
             padding: 30px 20px;
+            display: flex;
+            gap: 30px;
+            align-items: flex-start;
+        }
+
+        /* Sidebar Navigation */
+        .lesson-sidebar {
+            flex: 0 0 280px;
+            position: sticky;
+            top: 90px;
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+            border: 2px solid #e5e7eb;
+            max-height: calc(100vh - 120px);
+            overflow-y: auto;
+        }
+        .lesson-sidebar h3 {
+            font-size: 18px;
+            font-weight: 800;
+            color: #0A1A2F;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #00A676;
+        }
+        .sidebar-section {
+            padding: 12px 15px;
+            margin-bottom: 8px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 14px;
+            font-weight: 600;
+            color: #6B7280;
+            border-left: 3px solid transparent;
+        }
+        .sidebar-section:hover {
+            background: #F0FDF4;
+            color: #00A676;
+            border-left-color: #00A676;
+            transform: translateX(4px);
+        }
+        .sidebar-section.active {
+            background: linear-gradient(135deg, #F0FDF4 0%, #D1FAE5 100%);
+            color: #00A676;
+            border-left-color: #00A676;
+            font-weight: 700;
+        }
+        .sidebar-section .section-num {
+            display: inline-block;
+            width: 24px;
+            height: 24px;
+            background: #E5E7EB;
+            color: #6B7280;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 24px;
+            font-size: 12px;
+            font-weight: 700;
+            margin-right: 10px;
+        }
+        .sidebar-section.active .section-num {
+            background: #00A676;
+            color: white;
+        }
+        .sidebar-progress {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 2px solid #e5e7eb;
+        }
+        .sidebar-progress-label {
+            font-size: 12px;
+            font-weight: 700;
+            color: #6B7280;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .sidebar-progress-bar {
+            height: 8px;
+            background: #E5E7EB;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        .sidebar-progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #00A676 0%, #10B981 100%);
+            transition: width 0.4s ease;
+        }
+        .sidebar-progress-text {
+            font-size: 13px;
+            font-weight: 700;
+            color: #00A676;
+            margin-top: 8px;
+        }
+
+        /* Main Content Area */
+        .lesson-content {
+            flex: 1;
+            min-width: 0;
         }
         .lesson-header {
             text-align: center;
@@ -658,6 +759,32 @@
             font-weight: 700;
             color: #0A1A2F;
         }
+
+        @media (max-width: 1024px) {
+            .lesson-container {
+                flex-direction: column;
+            }
+            .lesson-sidebar {
+                position: relative;
+                top: 0;
+                flex: 0 0 auto;
+                width: 100%;
+                max-height: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .lesson-header h1 {
+                font-size: 24px;
+            }
+            .lesson-section h2 {
+                font-size: 24px;
+            }
+            .sidebar-section {
+                font-size: 13px;
+                padding: 10px 12px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -677,10 +804,49 @@
 
     <!-- Lesson Content -->
     <div class="lesson-container">
-        <a href="/pillar3-lessons" class="back-link">← Back to Pillar 3 Lessons</a>
+        <!-- Sidebar Navigation -->
+        <aside class="lesson-sidebar">
+            <h3>📚 Lesson Sections</h3>
+            <div class="sidebar-section active" onclick="jumpToSection(0)" data-section="0">
+                <span class="section-num">1</span>
+                What is a Credit Score?
+            </div>
+            <div class="sidebar-section" onclick="jumpToSection(1)" data-section="1">
+                <span class="section-num">2</span>
+                Why It Matters
+            </div>
+            <div class="sidebar-section" onclick="jumpToSection(2)" data-section="2">
+                <span class="section-num">3</span>
+                The 5 Factors
+            </div>
+            <div class="sidebar-section" onclick="jumpToSection(3)" data-section="3">
+                <span class="section-num">4</span>
+                Score Ranges
+            </div>
+            <div class="sidebar-section" onclick="jumpToSection(4)" data-section="4">
+                <span class="section-num">5</span>
+                Real-World Impact
+            </div>
+            <div class="sidebar-section" onclick="jumpToSection(5)" data-section="5">
+                <span class="section-num">6</span>
+                Action Plan
+            </div>
 
-        <!-- Header -->
-        <div class="lesson-header">
+            <div class="sidebar-progress">
+                <div class="sidebar-progress-label">Your Progress</div>
+                <div class="sidebar-progress-bar">
+                    <div class="sidebar-progress-fill" id="sidebarProgressFill" style="width: 16.7%"></div>
+                </div>
+                <div class="sidebar-progress-text" id="sidebarProgressText">Section 1 of 6</div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <div class="lesson-content">
+            <a href="/pillar3-lessons" class="back-link">← Back to Pillar 3 Lessons</a>
+
+            <!-- Header -->
+            <div class="lesson-header">
             <div class="lesson-number">PILLAR 3: LESSON 1</div>
             <h1>Understanding Credit Scores</h1>
         </div>
@@ -864,8 +1030,9 @@
             <div id="quizResult"></div>
         </div>
 
-        <!-- Finish Button -->
-        <button class="btn-finish" id="finishBtn" onclick="finishLesson()" disabled>Complete Lesson</button>
+            <!-- Finish Button -->
+            <button class="btn-finish" id="finishBtn" onclick="finishLesson()" disabled>Complete Lesson</button>
+        </div>
     </div>
 
     <!-- Footer -->
@@ -1184,6 +1351,9 @@
         const progressText = document.getElementById('progressText');
         const lessonNav = document.getElementById('lessonNav');
         const quizContainer = document.getElementById('quizContainer');
+        const sidebarSections = document.querySelectorAll('.sidebar-section');
+        const sidebarProgressFill = document.getElementById('sidebarProgressFill');
+        const sidebarProgressText = document.getElementById('sidebarProgressText');
 
         function showSection(index) {
             // Hide all sections
@@ -1197,14 +1367,29 @@
                 // Update navigation buttons
                 prevBtn.disabled = currentSection === 0;
 
-                // Update progress
+                // Update progress bars
                 const progress = ((currentSection + 1) / totalSections) * 100;
                 progressFill.style.width = progress + '%';
                 progressText.textContent = `Section ${currentSection + 1} of ${totalSections}`;
+                sidebarProgressFill.style.width = progress + '%';
+                sidebarProgressText.textContent = `Section ${currentSection + 1} of ${totalSections}`;
 
-                // Scroll to top
+                // Update sidebar active state
+                sidebarSections.forEach((section, idx) => {
+                    if (idx === currentSection) {
+                        section.classList.add('active');
+                    } else {
+                        section.classList.remove('active');
+                    }
+                });
+
+                // Scroll to top smoothly
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             }
+        }
+
+        function jumpToSection(index) {
+            showSection(index);
         }
 
         function nextSection() {
