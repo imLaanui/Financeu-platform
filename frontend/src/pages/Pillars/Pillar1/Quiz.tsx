@@ -1,5 +1,4 @@
-import { useEffect, useState } from "react";
-import { API_URL } from "@config/api";
+import { useState } from "react";
 import "@css/Pillar1Quiz.css";
 
 interface Question {
@@ -28,17 +27,13 @@ const questions: Question[] = [
   { lesson: 8, question: "What is the '24-hour rule' for purchases?", answers: ["Shop only during business hours", "Wait one day before making unplanned purchases over $50", "Return items within 24 hours", "Pay bills within 24 hours"], correct: 1 },
 ];
 
+// Shuffle questions once outside component to avoid impure function during render
+const shuffledQuestions = [...questions].sort(() => Math.random() - 0.5);
+
 export default function Quiz() {
-  const [shuffledQuestions, setShuffledQuestions] = useState<Question[]>([]);
   const [answers, setAnswers] = useState<number[]>(Array(16).fill(-1));
   const [showResult, setShowResult] = useState(false);
   const [score, setScore] = useState(0);
-
-  useEffect(() => {
-    // Shuffle questions once
-    const shuffled = [...questions].sort(() => Math.random() - 0.5);
-    setShuffledQuestions(shuffled);
-  }, []);
 
   const handleSelect = (qIndex: number, answerIndex: number) => {
     const updated = [...answers];

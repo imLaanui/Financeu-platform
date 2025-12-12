@@ -79,14 +79,6 @@ const quizData: { versions: QuizQuestion[] }[] = [
   },
 ];
 
-interface CheckpointFeedback {
-  show: boolean;
-  correct: boolean;
-  title: string;
-  explanation: string;
-  icon: string;
-}
-
 export default function Lesson2() {
   const navigate = useNavigate();
   const totalScreens = 8;
@@ -97,11 +89,6 @@ export default function Lesson2() {
   const [userAnswers, setUserAnswers] = useState<(number | null)[]>([]);
   const [quizPassed, setQuizPassed] = useState(false);
   const [quizResult, setQuizResult] = useState<React.ReactNode>(null);
-
-  const [checkpointFeedback, setCheckpointFeedback] = useState<Record<number, CheckpointFeedback>>({
-    1: { show: false, correct: false, title: "", explanation: "", icon: "" },
-    2: { show: false, correct: false, title: "", explanation: "", icon: "" },
-  });
 
   // Authentication check
   useEffect(() => {
@@ -141,30 +128,6 @@ export default function Lesson2() {
   };
   const nextScreen = () => showScreen(currentScreen + 1);
   const previousScreen = () => showScreen(currentScreen - 1);
-
-  // Checkpoint handlers
-  const checkCheckpoint = (number: 1 | 2, selectedOption: number) => {
-    if (checkpointFeedback[number].show) return;
-
-    const correctOption = number === 1 ? 1 : 1;
-    const isCorrect = selectedOption === correctOption;
-
-    const feedback: CheckpointFeedback = {
-      show: true,
-      correct: isCorrect,
-      title: isCorrect ? (number === 1 ? "Correct!" : "Excellent!") : "Incorrect",
-      explanation:
-        number === 1
-          ? isCorrect
-            ? "Excellent! The golden rule is that income should be greater than expenses. This is how you build wealth over time."
-            : "Income should be greater than expenses. Spending less than you earn allows you to save or invest."
-          : isCorrect
-          ? "Perfect! You should reduce expenses or increase income."
-          : "When expenses exceed income, you're going into debt. Reduce expenses or increase income.",
-      icon: isCorrect ? "🎉" : "💡",
-    };
-    setCheckpointFeedback((prev) => ({ ...prev, [number]: feedback }));
-  };
 
   // Quiz
   useEffect(() => {
@@ -336,9 +299,6 @@ export default function Lesson2() {
           </div>
         </div>
       )}
-
-      {/* Remaining screens (2-8) follow same pattern as Lesson1.tsx, replacing HTML with JSX and using currentScreen state */}
-      {/* For brevity, I can expand all screens fully with checkpoint and quiz JSX next if you want */}
 
       {/* Quiz & Finish Button */}
       {currentScreen === 8 && (

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import "@css/lessons.css";
 
 interface Lesson {
@@ -20,15 +20,11 @@ const lessons: Lesson[] = [
 ];
 
 export default function Pillar1Lessons() {
-    const [completedLessons, setCompletedLessons] = useState<number[]>([]);
-
-    useEffect(() => {
+    const [completedLessons] = useState<number[]>(() => {
         const userId = localStorage.getItem("userId");
-        if (!userId) return;
-
-        const completed = JSON.parse(localStorage.getItem(`pillar1_completed_${userId}`) || "[]");
-        setCompletedLessons(completed);
-    }, []);
+        if (!userId) return [];
+        return JSON.parse(localStorage.getItem(`pillar1_completed_${userId}`) || "[]");
+    });
 
     return (
         <div>
