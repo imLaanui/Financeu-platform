@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { API_URL } from "@config/api";
-import "@css/lesson.css";
 import { completeLesson } from "@utils/lessonCompletion";
+import "@css/lesson.css";
 
 interface QuizQuestion {
   question: string;
