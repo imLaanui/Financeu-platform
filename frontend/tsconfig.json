@@ -10,7 +10,8 @@
       "@config/*": ["config/*"],
       "@utils/*": ["utils/*"],
       "@css/*": ["css/*"],
-      "@pages/*": ["pages/*"]
+      "@pages/*": ["pages/*"],
+      "@components/*": ["components/*"]
     },
     "strict": true,
     "esModuleInterop": true,

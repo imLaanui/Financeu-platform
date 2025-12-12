@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import Navbar from "@components/Navbar";
 import "@css/main.css";
 
 export default function Home() {
@@ -27,34 +28,7 @@ export default function Home() {
   return (
         <>
       {/* Navigation */}
-      <nav className="navbar">
-        <div className="container">
-          <div className="nav-wrapper">
-            <div className="logo">
-              Finance<span className="logo-accent">U</span>
-            </div>
-            <ul className="nav-links">
-              <li>
-                <a href="/curriculum">Curriculum</a>
-              </li>
-              <li>
-                <a href="#features">Features</a>
-              </li>
-              <li>
-                <a href="#pricing">Pricing</a>
-              </li>
-              <li>
-                <a href="/about">About</a>
-              </li>
-              <li id="authButtons">
-                <a href="/login" className="btn-primary">
-                  Login
-                </a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </nav>
+        <Navbar />
 
             {/* Hero Section */}
             <section className="hero">
