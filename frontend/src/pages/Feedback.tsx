@@ -9,7 +9,7 @@ export default function Feedback() {
     name: "",
     email: "",
     feedbackType: "",
-    message: ""
+    message: "",
   });
 
   const [message, setMessage] = useState<{ text: string; type: "success" | "error" } | null>(null);
@@ -19,9 +19,7 @@ export default function Feedback() {
   // Update auth state
   useEffect(() => {
     const cachedAuth = localStorage.getItem("authState");
-    if (cachedAuth) {
-      setIsLoggedIn(JSON.parse(cachedAuth).isLoggedIn);
-    }
+    if (cachedAuth) setIsLoggedIn(JSON.parse(cachedAuth).isLoggedIn);
 
     async function verifyAuth() {
       try {
@@ -60,8 +58,8 @@ export default function Feedback() {
           name: formData.name || null,
           email: formData.email || null,
           feedbackType: formData.feedbackType,
-          message: formData.message
-        })
+          message: formData.message,
+        }),
       });
 
       const data = await response.json();
@@ -72,8 +70,12 @@ export default function Feedback() {
       } else {
         setMessage({ text: data.error || "Failed to submit feedback. Please try again.", type: "error" });
       }
-    } catch (error: any) {
-      setMessage({ text: `Network error: ${error.message}`, type: "error" });
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        setMessage({ text: `Network error: ${error.message}`, type: "error" });
+      } else {
+        setMessage({ text: "An unknown error occurred.", type: "error" });
+      }
     } finally {
       setSubmitting(false);
     }

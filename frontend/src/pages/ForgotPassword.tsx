@@ -35,9 +35,13 @@ export default function ForgotPassword() {
 
       // Show reset code
       setResetCode(data.resetCode);
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error("Forgot password error:", error);
-      setErrorMsg(error.message || "Failed to generate reset code. Please try again.");
+      if (error instanceof Error) {
+        setErrorMsg(error.message);
+      } else {
+        setErrorMsg("Failed to generate reset code. Please try again.");
+      }
     } finally {
       setLoading(false);
     }
@@ -52,18 +56,10 @@ export default function ForgotPassword() {
             <p>Enter your email to get a password reset code (displayed on screen)</p>
           </div>
 
-          {errorMsg && (
-            <div className="error-message" style={{ display: "block" }}>
-              {errorMsg}
-            </div>
-          )}
-          {successMsg && (
-            <div className="success-message" style={{ display: "block" }}>
-              {successMsg}
-            </div>
-          )}
+          {errorMsg && <div className="error-message">{errorMsg}</div>}
+          {successMsg && <div className="success-message">{successMsg}</div>}
           {resetCode && (
-            <div className="reset-code-display" style={{ display: "block" }}>
+            <div className="reset-code-display">
               <p>
                 <strong>📧 Email not yet configured - Your reset code is shown below:</strong>
               </p>

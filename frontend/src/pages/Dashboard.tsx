@@ -89,7 +89,7 @@ export default function Dashboard() {
 
         setLoading(false);
       } catch (err) {
-        setErrorMsg("Failed to load dashboard.");
+        setErrorMsg(`Failed to load dashboard. ${err}`);
         setLoading(false);
       }
     };

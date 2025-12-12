@@ -40,11 +40,18 @@ export default function TestConnection() {
       } else {
         setFeedbackResult({ status: "error", message: `❌ FAILED! Error: ${data.error}` });
       }
-    } catch (error: any) {
-      setFeedbackResult({
-        status: "error",
-        message: `❌ FAILED! Network error: ${error.message}\nThis usually means:\n- Server not running\n- Wrong URL (using file:// instead of http://)`,
-      });
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        setFeedbackResult({
+          status: "error",
+          message: `❌ FAILED! Network error: ${error.message}\nThis usually means:\n- Server not running\n- Wrong URL (using file:// instead of http://)`,
+        });
+      } else {
+        setFeedbackResult({
+          status: "error",
+          message: "❌ FAILED! Unknown network error occurred",
+        });
+      }
     }
   };
 
@@ -64,11 +71,18 @@ export default function TestConnection() {
       } else {
         setAdminResult({ status: "error", message: `❌ FAILED! Error: ${data.error}` });
       }
-    } catch (error: any) {
-      setAdminResult({
-        status: "error",
-        message: `❌ FAILED! Network error: ${error.message}\nThis usually means:\n- Server not running\n- Wrong URL (using file:// instead of http://)`,
-      });
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        setAdminResult({
+          status: "error",
+          message: `❌ FAILED! Network error: ${error.message}\nThis usually means:\n- Server not running\n- Wrong URL (using file:// instead of http://)`,
+        });
+      } else {
+        setAdminResult({
+          status: "error",
+          message: "❌ FAILED! Unknown network error occurred",
+        });
+      }
     }
   };
 

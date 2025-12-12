@@ -1,8 +1,7 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import "../css/adminFeedback.css";
 import { Link } from "react-router-dom";
-
-const API_URL = import.meta.env.VITE_API_URL;
+import { API_URL } from "../config/api";
 
 interface FeedbackItem {
   id: number;
@@ -22,17 +21,8 @@ export default function AdminFeedback() {
   const [loading, setLoading] = useState(false);
   const [adminAuth, setAdminAuth] = useState<string | null>(null);
 
-  // Check session storage for auth
-  useEffect(() => {
-    const savedAuth = sessionStorage.getItem("adminAuth");
-    if (savedAuth) {
-      setAdminAuth(savedAuth);
-      verifyLogin(savedAuth);
-    }
-  }, []);
-
   // Verify admin credentials
-  const verifyLogin = async (auth: string) => {
+  const verifyLogin = useCallback(async (auth: string) => {
     try {
       const res = await fetch(`${API_URL}/admin/feedback`, {
         headers: { Authorization: `Basic ${auth}` },
@@ -46,7 +36,16 @@ export default function AdminFeedback() {
     } catch {
       sessionStorage.removeItem("adminAuth");
     }
-  };
+  }, []);
+
+  // Check session storage for auth
+  useEffect(() => {
+    const savedAuth = sessionStorage.getItem("adminAuth");
+    if (savedAuth) {
+      setAdminAuth(savedAuth);
+      verifyLogin(savedAuth);
+    }
+  }, [verifyLogin]);
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -63,8 +62,12 @@ export default function AdminFeedback() {
       } else {
         setLoginError("Invalid password");
       }
-    } catch (err: any) {
-      setLoginError(`Network error: ${err.message}`);
+    } catch (err) {
+      if (err instanceof Error) {
+        setLoginError(`Network error: ${err.message}`);
+      } else {
+        setLoginError("Unknown network error");
+      }
     }
   };
 
@@ -77,8 +80,7 @@ export default function AdminFeedback() {
       if (!res.ok) throw new Error("Failed to load feedback");
       const data = await res.json();
       setAllFeedback(data.feedback);
-    } catch (err) {
-      console.error(err);
+    } catch {
       setAllFeedback([]);
     } finally {
       setLoading(false);
@@ -103,11 +105,11 @@ export default function AdminFeedback() {
         headers: { Authorization: `Basic ${adminAuth}` },
       });
       if (res.ok) {
-        setAllFeedback(allFeedback.filter((f) => f.id !== id));
+        setAllFeedback((prev) => prev.filter((f) => f.id !== id));
       } else {
         alert("Failed to delete feedback");
       }
-    } catch (err) {
+    } catch {
       alert("Error deleting feedback");
     }
   };
@@ -120,8 +122,10 @@ export default function AdminFeedback() {
   const stats = {
     total: allFeedback.length,
     bug: allFeedback.filter((f) => f.feedback_type === "Bug Report").length,
-    feature: allFeedback.filter((f) => f.feedback_type === "Feature Request").length,
-    compliment: allFeedback.filter((f) => f.feedback_type === "Compliment").length,
+    feature:
+      allFeedback.filter((f) => f.feedback_type === "Feature Request").length,
+    compliment:
+      allFeedback.filter((f) => f.feedback_type === "Compliment").length,
   };
 
   const escapeHtml = (text: string) => {
@@ -236,7 +240,9 @@ export default function AdminFeedback() {
             {!loading &&
               filteredFeedback.map((item) => {
                 const date = new Date(item.created_at).toLocaleString();
-                const typeClass = item.feedback_type.toLowerCase().replace(" ", "-");
+                const typeClass = item.feedback_type
+                  .toLowerCase()
+                  .replace(" ", "-");
 
                 return (
                   <div className="feedback-item" key={item.id}>
@@ -263,7 +269,9 @@ export default function AdminFeedback() {
                         {item.email && escapeHtml(item.email)}
                       </div>
                     )}
-                    <div className="feedback-message">{escapeHtml(item.message)}</div>
+                    <div className="feedback-message">
+                      {escapeHtml(item.message)}
+                    </div>
                   </div>
                 );
               })}
