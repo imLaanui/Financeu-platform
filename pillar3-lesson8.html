@@ -1,0 +1,904 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson 8 - Credit Monitoring and Protection - FinanceU</title>
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+    <link rel="icon" type="image/svg+xml" sizes="16x16" href="assets/favicon-16x16.svg">
+    <link rel="icon" type="image/svg+xml" sizes="32x32" href="assets/favicon-32x32.svg">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.svg">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .lesson-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        .lesson-header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 50px 30px;
+            background: linear-gradient(135deg, #0A1A2F 0%, #00A676 100%);
+            border-radius: 20px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0, 166, 118, 0.3);
+        }
+        .lesson-header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.15) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+        }
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        .lesson-header h1 {
+            font-size: 56px;
+            font-weight: 900;
+            color: white;
+            margin-bottom: 15px;
+            position: relative;
+            z-index: 1;
+            text-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .lesson-header .lesson-number {
+            color: #00A676;
+            font-size: 20px;
+            font-weight: 800;
+            margin-bottom: 10px;
+            position: relative;
+            z-index: 1;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            background: white;
+            padding: 8px 24px;
+            border-radius: 50px;
+            display: inline-block;
+        }
+        .lesson-section {
+            background: white;
+            padding: 40px;
+            border-radius: 16px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border: 3px solid transparent;
+            transition: all 0.3s ease;
+        }
+        .lesson-section:hover {
+            border-color: #00A676;
+            box-shadow: 0 8px 24px rgba(0, 166, 118, 0.2);
+            transform: translateY(-4px);
+        }
+        .lesson-section h2 {
+            color: #0A1A2F;
+            font-size: 48px;
+            font-weight: 800;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        .section-icon {
+            font-size: 64px;
+            filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
+        }
+        .lesson-section p {
+            line-height: 1.8;
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+            font-size: 18px;
+            font-weight: 500;
+        }
+        .lesson-section strong {
+            color: #0A1A2F;
+            font-weight: 700;
+        }
+
+        /* Color-coded callout boxes */
+        .key-concept-box {
+            background: #EFF6FF;
+            border: 4px solid #3B82F6;
+            border-radius: 16px;
+            padding: 30px;
+            margin: 30px 0;
+            position: relative;
+        }
+        .key-concept-box h3 {
+            color: #1E40AF;
+            font-size: 28px;
+            font-weight: 800;
+            margin-bottom: 15px;
+        }
+        .key-concept-box p {
+            color: #1E3A8A;
+            font-size: 18px;
+            line-height: 1.7;
+        }
+        .key-concept-box ul {
+            color: #1E3A8A;
+            font-size: 18px;
+            line-height: 1.7;
+            margin-top: 15px;
+        }
+
+        .warning-box {
+            background: #FEE2E2;
+            border: 4px solid #DC2626;
+            border-radius: 16px;
+            padding: 30px;
+            margin: 30px 0;
+        }
+        .warning-box h3 {
+            color: #991B1B;
+            font-size: 28px;
+            font-weight: 800;
+            margin-bottom: 15px;
+        }
+        .warning-box p {
+            color: #7F1D1D;
+            font-size: 18px;
+            line-height: 1.7;
+        }
+
+        .action-box {
+            background: #FEF3C7;
+            border: 4px solid #F59E0B;
+            border-radius: 16px;
+            padding: 30px;
+            margin: 30px 0;
+        }
+        .action-box h3 {
+            color: #B45309;
+            font-size: 28px;
+            font-weight: 800;
+            margin-bottom: 15px;
+        }
+        .action-box ul {
+            list-style: none;
+            padding: 0;
+        }
+        .action-box li {
+            color: #78350F;
+            font-size: 18px;
+            font-weight: 600;
+            padding: 12px 0;
+            border-bottom: 2px solid #FCD34D;
+        }
+        .action-box li:last-child {
+            border-bottom: none;
+        }
+        .action-box li::before {
+            content: '✓';
+            color: #F59E0B;
+            font-weight: 900;
+            font-size: 24px;
+            margin-right: 12px;
+        }
+
+        .real-world-box {
+            background: #F3E8FF;
+            border: 4px solid #9333EA;
+            border-radius: 16px;
+            padding: 30px;
+            margin: 30px 0;
+        }
+        .real-world-box h3 {
+            color: #6B21A8;
+            font-size: 28px;
+            font-weight: 800;
+            margin-bottom: 15px;
+        }
+        .real-world-box p {
+            color: #581C87;
+            font-size: 18px;
+            line-height: 1.7;
+            font-weight: 600;
+        }
+
+        /* Quiz styles */
+        .quiz-container {
+            background: linear-gradient(135deg, #0A1A2F 0%, #00A676 100%);
+            border: 5px solid #00A676;
+            border-radius: 20px;
+            padding: 40px;
+            margin: 40px 0;
+            box-shadow: 0 12px 40px rgba(0, 166, 118, 0.3);
+        }
+        .quiz-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .quiz-header h2 {
+            color: white;
+            font-size: 48px;
+            font-weight: 900;
+            margin-bottom: 15px;
+            text-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .quiz-header p {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 18px;
+            font-weight: 600;
+        }
+        .question-card {
+            background: white;
+            padding: 30px;
+            border-radius: 16px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border: 3px solid transparent;
+        }
+        .question-text {
+            font-size: 22px;
+            font-weight: 700;
+            color: #0A1A2F;
+            margin-bottom: 20px;
+        }
+        .answer-option {
+            background: #F9FAFB;
+            padding: 18px;
+            border: 3px solid #E5E7EB;
+            border-radius: 12px;
+            margin-bottom: 12px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 18px;
+            font-weight: 600;
+        }
+        .answer-option:hover {
+            border-color: #00A676;
+            background: #D1FAE5;
+            transform: translateX(8px);
+        }
+        .answer-option.selected {
+            border-color: #00A676;
+            background: #D1FAE5;
+        }
+        .answer-option.correct {
+            border-color: #10B981;
+            background: #6EE7B7;
+            color: #064E3B;
+        }
+        .answer-option.incorrect {
+            border-color: #DC2626;
+            background: #FCA5A5;
+            color: #7F1D1D;
+        }
+
+        .btn-submit-quiz {
+            display: block;
+            width: 100%;
+            max-width: 400px;
+            margin: 25px auto;
+            padding: 20px;
+            background: white;
+            color: #0A1A2F;
+            text-align: center;
+            border-radius: 12px;
+            font-size: 20px;
+            font-weight: 800;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .btn-submit-quiz:hover {
+            background: #00A676;
+            color: white;
+            transform: scale(1.05);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+        }
+
+        .quiz-result {
+            background: white;
+            padding: 40px;
+            border-radius: 16px;
+            text-align: center;
+            margin-top: 25px;
+            border: 4px solid #E5E7EB;
+        }
+        .quiz-result.pass {
+            border-color: #10B981;
+        }
+        .quiz-result.fail {
+            border-color: #DC2626;
+        }
+        .result-icon {
+            font-size: 80px;
+            margin-bottom: 20px;
+        }
+        .result-text {
+            font-size: 36px;
+            font-weight: 900;
+            margin-bottom: 15px;
+        }
+        .result-score {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 25px;
+        }
+
+        /* Finish button */
+        .btn-finish {
+            display: block;
+            width: 100%;
+            height: 56px;
+            margin: 40px auto;
+            padding: 0 40px;
+            background: linear-gradient(135deg, #0A1A2F 0%, #00A676 100%);
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 12px;
+            font-size: 24px;
+            font-weight: 800;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            line-height: 56px;
+            box-shadow: 0 8px 24px rgba(0, 166, 118, 0.3);
+        }
+        .btn-finish:hover {
+            transform: scale(1.02);
+            box-shadow: 0 12px 32px rgba(0, 166, 118, 0.4);
+        }
+        .btn-finish:disabled {
+            background: #9CA3AF;
+            cursor: not-allowed;
+            opacity: 0.6;
+            transform: none;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: #00A676;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 18px;
+            transition: all 0.2s;
+        }
+        .back-link:hover {
+            transform: translateX(-8px);
+            color: #0A1A2F;
+        }
+
+        @media (max-width: 768px) {
+            .lesson-header h1 {
+                font-size: 36px;
+            }
+            .lesson-section h2 {
+                font-size: 32px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-wrapper">
+                <div class="logo"><a href="/" style="color: inherit; text-decoration: none;">Finance<span class="logo-accent">U</span></a></div>
+                <ul class="nav-links">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="dashboard">Dashboard</a></li>
+                    <li id="authButtons" style="opacity: 0;"></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Lesson Content -->
+    <div class="lesson-container">
+        <a href="/pillar3-lessons" class="back-link">← Back to Pillar 3 Lessons</a>
+
+        <!-- Header -->
+        <div class="lesson-header">
+            <div class="lesson-number">PILLAR 3: LESSON 8</div>
+            <h1>Credit Monitoring & Protection</h1>
+        </div>
+
+        <!-- Why Monitoring Matters -->
+        <div class="lesson-section">
+            <h2><span class="section-icon">🛡️</span>Why Credit Monitoring Matters</h2>
+            <p>Your credit report is like your financial fingerprint. It follows you everywhere: <strong>apartment applications, job interviews, loan approvals, insurance rates, and more</strong>. A single error or fraudulent account can cost you thousands in higher interest rates or even prevent you from getting approved.</p>
+            <p>The scary reality? <strong>1 in 5 Americans has an error on their credit report</strong>, and most don't know it. Identity theft affects 15 million people per year. Without monitoring, you could be a victim and not even know it until damage is done.</p>
+
+            <div class="warning-box">
+                <h3>⚠️ Real Cost of Not Monitoring</h3>
+                <p>Sarah didn't check her credit for 2 years. When she applied for a car loan, she discovered a fraudulent credit card with $8,000 in debt opened in her name 18 months ago. Her credit score dropped from 720 to 580. It took 6 months and hundreds of hours to fix. Don't be Sarah.</p>
+            </div>
+        </div>
+
+        <!-- Your Free Credit Reports -->
+        <div class="lesson-section">
+            <h2><span class="section-icon">📊</span>Your Free Credit Reports</h2>
+            <p>By law, you're entitled to <strong>one free credit report per year</strong> from each of the three major credit bureaus: Equifax, Experian, and TransUnion.</p>
+
+            <div class="key-concept-box">
+                <h3>🆓 How to Get Your Free Reports</h3>
+                <p><strong>Official Site:</strong> AnnualCreditReport.com (the ONLY authorized free site)</p>
+                <p style="margin-top: 15px;"><strong>Pro Strategy:</strong> Request one report every 4 months from a different bureau to monitor your credit 3 times per year for free.</p>
+                <ul style="margin-left: 20px;">
+                    <li><strong>January:</strong> Pull Equifax</li>
+                    <li><strong>May:</strong> Pull Experian</li>
+                    <li><strong>September:</strong> Pull TransUnion</li>
+                </ul>
+                <p style="margin-top: 15px;">This gives you year-round monitoring without paying for a service.</p>
+            </div>
+
+            <div class="warning-box">
+                <h3>⚠️ Watch Out for Imposters</h3>
+                <p>Sites like FreeCreditReport.com and FreeCreditScore.com are NOT the official free report site. They're paid services disguised as free. Always use AnnualCreditReport.com</p>
+            </div>
+        </div>
+
+        <!-- Free Monitoring Tools -->
+        <div class="lesson-section">
+            <h2><span class="section-icon">📱</span>Best Free Credit Monitoring Tools</h2>
+
+            <div class="key-concept-box">
+                <h3>1. Credit Karma</h3>
+                <p><strong>Cost:</strong> 100% Free</p>
+                <p><strong>What you get:</strong> Weekly credit score updates, credit monitoring, alerts for new accounts</p>
+                <p><strong>Covers:</strong> TransUnion & Equifax (not Experian)</p>
+                <p style="margin-top: 15px;"><strong>Best for:</strong> Quick, weekly credit checks and basic monitoring</p>
+            </div>
+
+            <div class="key-concept-box">
+                <h3>2. Your Bank or Credit Card</h3>
+                <p>Many banks (Chase, Capital One, Discover, Citi) offer free FICO scores and monitoring to customers.</p>
+                <p style="margin-top: 15px;"><strong>Check your bank app</strong> - you might already have free monitoring and didn't even know it.</p>
+            </div>
+
+            <div class="key-concept-box">
+                <h3>3. Experian (Free Account)</h3>
+                <p><strong>Cost:</strong> Free (with upsell attempts)</p>
+                <p><strong>What you get:</strong> Experian credit score, monthly reports, dark web monitoring</p>
+                <p style="margin-top: 15px;"><strong>Tip:</strong> Decline the paid upgrade offers. The free version is plenty for most people.</p>
+            </div>
+
+            <div class="action-box">
+                <h3>💡 Your Free Monitoring Stack</h3>
+                <ul>
+                    <li>Sign up for Credit Karma (TransUnion + Equifax)</li>
+                    <li>Create free Experian account (Experian)</li>
+                    <li>Set calendar reminders to pull AnnualCreditReport every 4 months</li>
+                    <li>Check your bank app for free FICO scores</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- What to Look For -->
+        <div class="lesson-section">
+            <h2><span class="section-icon">🔍</span>What to Look For When Monitoring</h2>
+
+            <div class="warning-box">
+                <h3>🚨 Red Flags That Require Immediate Action</h3>
+                <ul style="margin-left: 20px; color: #7F1D1D;">
+                    <li><strong>Accounts you didn't open:</strong> Sign of identity theft</li>
+                    <li><strong>Hard inquiries you don't recognize:</strong> Someone tried to open credit in your name</li>
+                    <li><strong>Wrong addresses:</strong> Could indicate fraud</li>
+                    <li><strong>Late payments you know you made on time:</strong> Bank error or reporting issue</li>
+                    <li><strong>Incorrect balances or credit limits:</strong> Reporting errors that hurt your utilization ratio</li>
+                    <li><strong>Accounts listed as open that you closed:</strong> Creditor hasn't updated properly</li>
+                </ul>
+            </div>
+
+            <div class="action-box">
+                <h3>✅ Monthly Credit Check Checklist</h3>
+                <ul>
+                    <li>Verify all accounts are yours</li>
+                    <li>Check balances match your records</li>
+                    <li>Look for hard inquiries</li>
+                    <li>Verify payment history is accurate</li>
+                    <li>Check personal information (name, address, employment)</li>
+                    <li>Look for sudden score drops (investigate why)</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Disputing Errors -->
+        <div class="lesson-section">
+            <h2><span class="section-icon">📝</span>How to Dispute Credit Report Errors</h2>
+            <p>Found an error? Don't panic. Federal law requires credit bureaus to investigate and correct errors within <strong>30 days</strong>. Here's how to fix it:</p>
+
+            <div class="key-concept-box">
+                <h3>📋 Step-by-Step Dispute Process</h3>
+                <p><strong>Step 1:</strong> Document the error with evidence (bank statements, receipts, letters)</p>
+                <p><strong>Step 2:</strong> File dispute online or by mail with the credit bureau reporting the error</p>
+                <p><strong>Step 3:</strong> Also dispute directly with the creditor who reported the error</p>
+                <p><strong>Step 4:</strong> Bureau must investigate within 30 days</p>
+                <p><strong>Step 5:</strong> If error confirmed, it must be corrected or removed</p>
+                <p><strong>Step 6:</strong> Request updated credit report to confirm correction</p>
+            </div>
+
+            <p style="margin-top: 25px;"><strong>Where to file disputes:</strong></p>
+            <ul style="font-size: 18px; line-height: 2; color: var(--text-secondary); margin-left: 30px;">
+                <li>Equifax: Equifax.com/personal/credit-report-services</li>
+                <li>Experian: Experian.com/disputes</li>
+                <li>TransUnion: TransUnion.com/credit-disputes</li>
+            </ul>
+
+            <div class="action-box">
+                <h3>💡 Dispute Tips</h3>
+                <ul>
+                    <li>Keep copies of EVERYTHING you send</li>
+                    <li>Send disputes by certified mail with return receipt (proof they received it)</li>
+                    <li>Be specific about the error and why it's wrong</li>
+                    <li>Include supporting documents (copies, not originals)</li>
+                    <li>Follow up if you don't hear back in 30 days</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Identity Theft Protection -->
+        <div class="lesson-section">
+            <h2><span class="section-icon">🔒</span>Protecting Yourself from Identity Theft</h2>
+
+            <div class="key-concept-box">
+                <h3>🧊 Credit Freeze: Your Best Defense</h3>
+                <p>A credit freeze prevents anyone (including you) from opening new credit accounts. It's <strong>free</strong>, lasts until you unfreeze, and is the strongest protection against identity theft.</p>
+                <p style="margin-top: 15px;"><strong>How it works:</strong></p>
+                <ul style="margin-left: 20px;">
+                    <li>Contact all three credit bureaus to freeze your credit</li>
+                    <li>You get a PIN to unfreeze temporarily when you need to apply for credit</li>
+                    <li>No one can open accounts in your name while frozen</li>
+                    <li>Your existing accounts still work normally</li>
+                </ul>
+            </div>
+
+            <div class="action-box">
+                <h3>🛡️ Complete Identity Protection Strategy</h3>
+                <ul>
+                    <li>Freeze your credit at all three bureaus (Equifax, Experian, TransUnion)</li>
+                    <li>Use unique, strong passwords for financial accounts</li>
+                    <li>Enable two-factor authentication everywhere possible</li>
+                    <li>Never share SSN unless absolutely necessary</li>
+                    <li>Shred documents with personal information</li>
+                    <li>Use secure internet connections (avoid public WiFi for banking)</li>
+                    <li>Monitor bank statements weekly for unauthorized charges</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- If You're a Victim -->
+        <div class="lesson-section">
+            <h2><span class="section-icon">🚨</span>If You're a Victim of Identity Theft</h2>
+
+            <div class="warning-box">
+                <h3>⚠️ Act Fast - Every Hour Counts</h3>
+                <p>The sooner you act, the easier it is to fix. Most victims who catch it in the first 24 hours avoid serious damage.</p>
+            </div>
+
+            <div class="action-box">
+                <h3>🚨 Emergency Action Plan</h3>
+                <ul>
+                    <li><strong>Step 1:</strong> Place fraud alert at one credit bureau (they notify the other two)</li>
+                    <li><strong>Step 2:</strong> Close fraudulent accounts immediately</li>
+                    <li><strong>Step 3:</strong> File report at IdentityTheft.gov (FTC's official recovery site)</li>
+                    <li><strong>Step 4:</strong> File police report and get report number</li>
+                    <li><strong>Step 5:</strong> Freeze your credit at all three bureaus</li>
+                    <li><strong>Step 6:</strong> Dispute fraudulent items on credit reports</li>
+                    <li><strong>Step 7:</strong> Monitor closely for next 2 years</li>
+                </ul>
+            </div>
+
+            <div class="key-concept-box">
+                <h3>📞 Important Contacts</h3>
+                <p><strong>FTC Identity Theft Hotline:</strong> 1-877-ID-THEFT (1-877-438-4338)</p>
+                <p><strong>Identity Theft Recovery:</strong> IdentityTheft.gov</p>
+                <p style="margin-top: 15px;">These resources are free and walk you through the entire recovery process step-by-step.</p>
+            </div>
+        </div>
+
+        <!-- Final Action Plan -->
+        <div class="lesson-section">
+            <h2><span class="section-icon">✅</span>Your Credit Protection Checklist</h2>
+
+            <div class="action-box">
+                <h3>🎯 Do This Week</h3>
+                <ul>
+                    <li>Sign up for Credit Karma and Experian free accounts</li>
+                    <li>Request your free credit report from AnnualCreditReport.com</li>
+                    <li>Set 4-month calendar reminders to rotate credit bureau checks</li>
+                    <li>Review current report for errors and dispute if needed</li>
+                    <li>Consider freezing your credit at all three bureaus</li>
+                </ul>
+            </div>
+
+            <div class="action-box">
+                <h3>🎯 Do Every Month</h3>
+                <ul>
+                    <li>Check Credit Karma and Experian for updates</li>
+                    <li>Review bank statements for unauthorized charges</li>
+                    <li>Verify no new hard inquiries or accounts</li>
+                </ul>
+            </div>
+
+            <div class="real-world-box">
+                <h3>🎉 Congratulations!</h3>
+                <p>You've completed all 8 lessons in Pillar 3: Credit & Debt Mastery!</p>
+                <p style="margin-top: 15px;">You now know more about credit than 90% of adults. You understand how to build credit, manage debt, choose credit cards wisely, avoid traps, and protect your financial identity.</p>
+                <p style="margin-top: 15px;"><strong>Next step:</strong> Take the final quiz to prove you've mastered everything!</p>
+            </div>
+        </div>
+
+        <!-- Mini Quiz -->
+        <div class="quiz-container" id="quizContainer">
+            <div class="quiz-header">
+                <h2>Test Your Knowledge</h2>
+                <p>Answer all 3 questions correctly to complete the lesson</p>
+            </div>
+            <div id="quizQuestions"></div>
+            <button class="btn-submit-quiz" id="submitQuiz" onclick="submitQuiz()">Submit Answers</button>
+            <div id="quizResult"></div>
+        </div>
+
+        <!-- Finish Button -->
+        <button class="btn-finish" id="finishBtn" onclick="finishLesson()" disabled>Complete Lesson</button>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>FinanceU</h4>
+                    <p>Making financial literacy accessible for everyone.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="/about">About Us</a></li>
+                        <li><a href="/careers">Careers</a></li>
+                        <li><a href="/contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="/help">Help Center</a></li>
+                        <li><a href="/privacy">Privacy Policy</a></li>
+                        <li><a href="/terms">Terms of Service</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p style="font-size: 0.85rem; opacity: 0.8; margin-bottom: 10px;">Disclaimer: FinanceU provides educational content only and does not offer financial, legal, or investment advice. Always consult with a qualified professional before making financial decisions.</p>
+                <p>&copy; 2025 FinanceU. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="config.js"></script>
+    <script src="lesson-completion.js"></script>
+    <script src="animations.js"></script>
+    <script>
+        // Check authentication status and update nav
+        async function updateNav() {
+            const authButtons = document.getElementById('authButtons');
+            const cachedAuth = localStorage.getItem('authState');
+            if (cachedAuth) {
+                const authState = JSON.parse(cachedAuth);
+                authButtons.innerHTML = authState.isLoggedIn
+                    ? `<a href="#" onclick="logout(); return false;" class="btn-primary">Logout</a>`
+                    : `<a href="login" class="btn-primary">Login</a>`;
+                authButtons.style.opacity = '1';
+            }
+            try {
+                const response = await fetch(`${API_URL}/auth/me`, { credentials: 'include' });
+                if (response.ok) {
+                    localStorage.setItem('authState', JSON.stringify({ isLoggedIn: true }));
+                    authButtons.innerHTML = `<a href="#" onclick="logout(); return false;" class="btn-primary">Logout</a>`;
+                } else {
+                    localStorage.setItem('authState', JSON.stringify({ isLoggedIn: false }));
+                    authButtons.innerHTML = `<a href="login" class="btn-primary">Login</a>`;
+                }
+                authButtons.style.opacity = '1';
+            } catch (error) {
+                console.log('Not logged in');
+                localStorage.setItem('authState', JSON.stringify({ isLoggedIn: false }));
+                authButtons.innerHTML = `<a href="login" class="btn-primary">Login</a>`;
+                authButtons.style.opacity = '1';
+            }
+        }
+
+        async function logout() {
+            localStorage.removeItem('authState');
+            localStorage.removeItem('token');
+            localStorage.removeItem('userId');
+            try {
+                await fetch(`${API_URL}/auth/logout`, {
+                    method: 'POST',
+                    credentials: 'include'
+                });
+                window.location.href = '/index.html';
+            } catch (error) {
+                console.error('Logout error:', error);
+                window.location.href = '/index.html';
+            }
+        }
+
+        // Quiz data
+        const quizData = [
+            {
+                question: "What is the best free official source for getting your credit reports?",
+                options: [
+                    "A) FreeCreditReport.com",
+                    "B) AnnualCreditReport.com",
+                    "C) FreeCreditScore.com",
+                    "D) Any credit bureau website"
+                ],
+                correct: 1
+            },
+            {
+                question: "What is a credit freeze and why is it effective?",
+                options: [
+                    "A) It stops you from using your credit cards",
+                    "B) It prevents anyone from opening new accounts in your name",
+                    "C) It automatically pays off your debts",
+                    "D) It removes errors from your credit report"
+                ],
+                correct: 1
+            },
+            {
+                question: "If you find an error on your credit report, how long does the credit bureau have to investigate?",
+                options: [
+                    "A) 7 days",
+                    "B) 15 days",
+                    "C) 30 days",
+                    "D) 90 days"
+                ],
+                correct: 2
+            }
+        ];
+
+        let userAnswers = [];
+        let quizPassed = false;
+
+        function initQuiz() {
+            const userId = localStorage.getItem('userId');
+            if (!userId || userId === 'null' || userId === 'undefined') {
+                console.error('No valid userId found');
+                document.getElementById('finishBtn').disabled = true;
+                return;
+            }
+
+            const quizPassedStatus = localStorage.getItem(`pillar3_lesson8_quiz_passed_${userId}`);
+            if (quizPassedStatus === 'true') {
+                quizPassed = true;
+                document.getElementById('finishBtn').disabled = false;
+                document.getElementById('quizContainer').style.display = 'none';
+                return;
+            }
+
+            renderQuiz();
+        }
+
+        function renderQuiz() {
+            const questionsContainer = document.getElementById('quizQuestions');
+            questionsContainer.innerHTML = '';
+            userAnswers = new Array(quizData.length).fill(null);
+
+            quizData.forEach((q, qIndex) => {
+                const questionCard = document.createElement('div');
+                questionCard.className = 'question-card';
+                questionCard.innerHTML = `
+                    <div class="question-text">Question ${qIndex + 1}: ${q.question}</div>
+                    ${q.options.map((option, oIndex) => `
+                        <div class="answer-option" onclick="selectAnswer(${qIndex}, ${oIndex})">
+                            <input type="radio" name="question${qIndex}" value="${oIndex}" style="margin-right: 10px;">
+                            ${option}
+                        </div>
+                    `).join('')}
+                `;
+                questionsContainer.appendChild(questionCard);
+            });
+
+            document.getElementById('submitQuiz').disabled = false;
+            document.getElementById('quizResult').innerHTML = '';
+        }
+
+        function selectAnswer(questionIndex, optionIndex) {
+            userAnswers[questionIndex] = optionIndex;
+            const questionCard = document.querySelectorAll('.question-card')[questionIndex];
+            const options = questionCard.querySelectorAll('.answer-option');
+            options.forEach((opt, idx) => {
+                opt.classList.remove('selected');
+                if (idx === optionIndex) {
+                    opt.classList.add('selected');
+                    opt.querySelector('input').checked = true;
+                }
+            });
+        }
+
+        function submitQuiz() {
+            if (userAnswers.includes(null)) {
+                alert('Please answer all questions before submitting.');
+                return;
+            }
+
+            let correct = 0;
+            quizData.forEach((q, index) => {
+                if (userAnswers[index] === q.correct) {
+                    correct++;
+                }
+            });
+
+            const percentage = Math.round((correct / quizData.length) * 100);
+            const passed = correct === quizData.length;
+
+            document.querySelectorAll('.question-card').forEach((card, qIndex) => {
+                const options = card.querySelectorAll('.answer-option');
+                options.forEach((opt, oIndex) => {
+                    opt.style.pointerEvents = 'none';
+                    if (oIndex === quizData[qIndex].correct) {
+                        opt.classList.add('correct');
+                    } else if (oIndex === userAnswers[qIndex] && oIndex !== quizData[qIndex].correct) {
+                        opt.classList.add('incorrect');
+                    }
+                });
+            });
+
+            const resultDiv = document.getElementById('quizResult');
+            if (passed) {
+                quizPassed = true;
+                const userId = localStorage.getItem('userId');
+                localStorage.setItem(`pillar3_lesson8_quiz_passed_${userId}`, 'true');
+                document.getElementById('finishBtn').disabled = false;
+
+                resultDiv.innerHTML = `
+                    <div class="quiz-result pass">
+                        <div class="result-icon">🎉</div>
+                        <div class="result-text" style="color: #10b981;">Perfect Score!</div>
+                        <div class="result-score">You got all ${quizData.length} questions correct!</div>
+                        <p style="color: var(--text-secondary); font-size: 18px; font-weight: 600;">Excellent! Click "Complete Lesson" to continue to the final quiz.</p>
+                    </div>
+                `;
+            } else {
+                resultDiv.innerHTML = `
+                    <div class="quiz-result fail">
+                        <div class="result-icon">📚</div>
+                        <div class="result-text" style="color: #dc2626;">Not Quite</div>
+                        <div class="result-score">You scored ${correct} out of ${quizData.length}</div>
+                        <p style="color: var(--text-secondary); margin-bottom: 15px; font-size: 18px; font-weight: 600;">You need all 3 correct. Review the lesson and try again!</p>
+                        <button class="btn-submit-quiz" onclick="retryQuiz()">Retry Quiz</button>
+                    </div>
+                `;
+            }
+
+            document.getElementById('submitQuiz').style.display = 'none';
+        }
+
+        function retryQuiz() {
+            renderQuiz();
+            document.getElementById('submitQuiz').style.display = 'block';
+        }
+
+        async function finishLesson() {
+            if (!quizPassed) {
+                alert('Please complete the quiz first!');
+                return;
+            }
+            const success = await completeLesson('pillar3_lesson8', 3, 8);
+            if (success) {
+                window.location.href = 'pillar3-lessons.html';
+            }
+        }
+
+        updateNav();
+        initQuiz();
+    </script>
+</body>
+</html>
