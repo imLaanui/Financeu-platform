@@ -2,6 +2,9 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "@css/lessons.css";
 
+import Navbar from "@components/Navbar";
+import Footer from "@components/Footer";
+
 interface Lesson {
     id: number;
     title: string;
@@ -30,41 +33,48 @@ export default function Pillar1Lessons() {
     });
 
     return (
-        <div>
-            <section className="pillar-header">
-                <h1>Pillar 1: Financial Literacy Fundamentals</h1>
-                <p>Build your foundation with essential money management concepts and skills</p>
-            </section>
+        <>
+            <Navbar />
 
-            <div className="lessons-container">
-                <a onClick={() => navigate("/dashboard")} className="back-link">← Back to Dashboard</a>
+            <div>
+                <section className="pillar-header">
+                    <h1>Pillar 1: Financial Literacy Fundamentals</h1>
+                    <p>Build your foundation with essential money management concepts and skills</p>
+                </section>
 
-                {lessons.map((lesson) => {
-                    const isCompleted = completedLessons.includes(lesson.id);
-                    return (
-                        <div
-                            key={lesson.id}
-                            className={`lesson-card ${isCompleted ? "completed" : ""}`}
-                            data-lesson={lesson.id}
-                        >
-                            <div className="lesson-info">
-                                <h3>{lesson.title}</h3>
-                                <p>{lesson.description}</p>
+                <div className="lessons-container">
+                    <a onClick={() => navigate("/dashboard")} className="back-link">← Back to Dashboard</a>
+
+                    {lessons.map((lesson) => {
+                        const isCompleted = completedLessons.includes(lesson.id);
+                        return (
+                            <div
+                                key={lesson.id}
+                                className={`lesson-card ${isCompleted ? "completed" : ""}`}
+                                data-lesson={lesson.id}
+                            >
+                                <div className="lesson-info">
+                                    <h3>{lesson.title}</h3>
+                                    <p>{lesson.description}</p>
+                                </div>
+
+                                <div className="lesson-status">
+                                    {isCompleted ? (
+                                        <>
+                                            <span className="completed-badge">Completed</span>
+                                            <a onClick={() => navigate(lesson.url)} className="btn-start-lesson">Review</a>
+                                        </>
+                                    ) : (
+                                        <a onClick={() => navigate(lesson.url)} className="btn-start-lesson">Start Lesson</a>
+                                    )}
+                                </div>
                             </div>
-                            <div className="lesson-status">
-                                {isCompleted ? (
-                                    <>
-                                        <span className="completed-badge">Completed</span>
-                                        <a onClick={() => navigate(lesson.url)} className="btn-start-lesson">Review</a>
-                                    </>
-                                ) : (
-                                    <a onClick={() => navigate(lesson.url)} className="btn-start-lesson">Start Lesson</a>
-                                )}
-                            </div>
-                        </div>
-                    );
-                })}
+                        );
+                    })}
+                </div>
             </div>
-        </div>
+
+            <Footer />
+        </>
     );
 }
