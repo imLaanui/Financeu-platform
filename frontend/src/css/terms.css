@@ -1,20 +1,12 @@
-/* terms.css */
-
-/* This targets the content *inside* the auth-card wrapper */
 .legal-content {
-    /* If max-width is needed, it should probably be handled by the auth-card wrapper,
-       but keeping it here ensures the content spacing is correct */
     max-width: 900px;
-    /* margin: 0 auto; - Remove this if using the auth-card centering */
-    padding: 0; /* Remove top/bottom padding since auth-card handles it */
+    padding: 0;
 }
 
-/* Ensure headings and text are styled consistently */
 .legal-content h1 {
     font-size: 42px;
     margin-bottom: 20px;
     color: var(--text-primary);
-    /* H1 is moved to auth-header in the TSX, but defining it here covers the content area too */
 }
 .last-updated {
     color: var(--text-secondary);
@@ -48,8 +40,7 @@
     margin-bottom: 10px;
 }
 
-/* Style for the link in the contact section */
 .legal-content a {
-    color: var(--color-primary, #2563EB); /* Use a primary color variable */
+    color: var(--color-primary, #2563EB);
     text-decoration: underline;
 }
