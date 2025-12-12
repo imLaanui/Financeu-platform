@@ -15,6 +15,7 @@ import Curriculum from "./pages/Curriculum";
 import Feedback from "./pages/Feedback";
 import AdminFeedback from "./pages/AdminFeedback";
 import AdminUsers from "./pages/AdminUsers";
+import Dashboard from "./pages/Dashboard";
 
 const routes = [
   { path: "/", element: <Home /> },
@@ -32,6 +33,7 @@ const routes = [
   { path: "/feedback", element: <Feedback /> },
   { path: "/admin/feedback", element: <AdminFeedback /> },
   { path: "/admin/users", element: <AdminUsers /> },
+  { path: "/dashboard", element: <Dashboard /> },
 ];
 
 createRoot(document.getElementById("root")!).render(

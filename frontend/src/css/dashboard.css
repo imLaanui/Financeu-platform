@@ -1,0 +1,152 @@
+/* Dashboard Layout */
+.dashboard {
+  padding: 60px 0;
+}
+
+.dashboard-container {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.dashboard-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.dashboard-header h1 {
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+}
+
+.membership-badge {
+  display: inline-block;
+  padding: 6px 12px;
+  border-radius: 30px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-top: 10px;
+}
+
+.membership-badge.free {
+  background: #10b98120;
+  color: #10b981;
+}
+
+.membership-badge.pro {
+  background: #f59e0b20;
+  color: #f59e0b;
+}
+
+.membership-badge.premium {
+  background: #3b82f620;
+  color: #3b82f6;
+}
+
+/* Upgrade Banner */
+.upgrade-banner {
+  display: none;
+  background: #10b981;
+  color: white;
+  padding: 14px;
+  border-radius: 10px;
+  text-align: center;
+  margin-bottom: 30px;
+  font-size: 1.1rem;
+}
+
+/* Stats */
+.stats-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 40px;
+}
+
+.stat-box {
+  flex: 1;
+  background: var(--bg-white);
+  padding: 25px;
+  border-radius: 15px;
+  text-align: center;
+  box-shadow: var(--shadow-light);
+}
+
+.stat-box h3 {
+  margin-bottom: 10px;
+  font-size: 1rem;
+  opacity: 0.8;
+}
+
+.stat-box p {
+  font-size: 1.8rem;
+  font-weight: 700;
+}
+
+/* Lessons Section */
+.lessons-section {
+  margin-top: 30px;
+}
+
+.section-header h2 {
+  margin-bottom: 15px;
+}
+
+.lesson-list {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.lesson-item {
+  display: flex;
+  justify-content: space-between;
+  background: var(--bg-white);
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: var(--shadow-light);
+}
+
+.lesson-item.locked {
+  opacity: 0.55;
+}
+
+.lesson-details h3 {
+  margin-bottom: 8px;
+}
+
+.lesson-status {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.status-badge {
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.status-badge.locked {
+  background: #e5e7eb;
+  color: #6b7280;
+}
+
+.btn-lesson {
+  padding: 8px 14px;
+  background: #3b82f6;
+  color: white;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  text-decoration: none;
+}
+
+.btn-lesson.disabled {
+  background: #9ca3af;
+  cursor: not-allowed;
+}
+
+/* Footer Override */
+.footer {
+  margin-top: 50px;
+}
