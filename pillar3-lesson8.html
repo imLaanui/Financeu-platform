@@ -11,19 +11,19 @@
     <link rel="stylesheet" href="styles.css">
     <style>
         .lesson-container {
-            max-width: 900px;
+            max-width: 800px;
             margin: 0 auto;
-            padding: 40px 20px;
+            padding: 30px 20px;
         }
         .lesson-header {
             text-align: center;
-            margin-bottom: 40px;
-            padding: 50px 30px;
+            margin-bottom: 25px;
+            padding: 30px 20px;
             background: linear-gradient(135deg, #0A1A2F 0%, #00A676 100%);
-            border-radius: 20px;
+            border-radius: 12px;
             position: relative;
             overflow: hidden;
-            box-shadow: 0 10px 40px rgba(0, 166, 118, 0.3);
+            box-shadow: 0 4px 16px rgba(0, 166, 118, 0.3);
         }
         .lesson-header::before {
             content: '';
@@ -40,35 +40,35 @@
             to { transform: rotate(360deg); }
         }
         .lesson-header h1 {
-            font-size: 56px;
+            font-size: 32px;
             font-weight: 900;
             color: white;
-            margin-bottom: 15px;
-            position: relative;
-            z-index: 1;
-            text-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        }
-        .lesson-header .lesson-number {
-            color: #00A676;
-            font-size: 20px;
-            font-weight: 800;
             margin-bottom: 10px;
             position: relative;
             z-index: 1;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        .lesson-header .lesson-number {
+            color: #00A676;
+            font-size: 14px;
+            font-weight: 800;
+            margin-bottom: 8px;
+            position: relative;
+            z-index: 1;
             text-transform: uppercase;
-            letter-spacing: 3px;
+            letter-spacing: 2px;
             background: white;
-            padding: 8px 24px;
-            border-radius: 50px;
+            padding: 6px 16px;
+            border-radius: 20px;
             display: inline-block;
         }
         .lesson-section {
             background: white;
-            padding: 40px;
-            border-radius: 16px;
-            margin-bottom: 30px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            border: 3px solid transparent;
+            padding: 25px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            border: 2px solid #e5e7eb;
             transition: all 0.3s ease;
         }
         .lesson-section:hover {
@@ -78,22 +78,22 @@
         }
         .lesson-section h2 {
             color: #0A1A2F;
-            font-size: 48px;
+            font-size: 28px;
             font-weight: 800;
-            margin-bottom: 25px;
+            margin-bottom: 18px;
             display: flex;
             align-items: center;
-            gap: 20px;
+            gap: 12px;
         }
         .section-icon {
-            font-size: 64px;
+            font-size: 36px;
             filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
         }
         .lesson-section p {
-            line-height: 1.8;
+            line-height: 1.6;
             color: var(--text-secondary);
-            margin-bottom: 20px;
-            font-size: 18px;
+            margin-bottom: 15px;
+            font-size: 16px;
             font-weight: 500;
         }
         .lesson-section strong {
@@ -104,61 +104,61 @@
         /* Color-coded callout boxes */
         .key-concept-box {
             background: #EFF6FF;
-            border: 4px solid #3B82F6;
-            border-radius: 16px;
-            padding: 30px;
+            border: 3px solid #3B82F6;
+            border-radius: 12px;
+            padding: 20px;
             margin: 30px 0;
             position: relative;
         }
         .key-concept-box h3 {
             color: #1E40AF;
-            font-size: 28px;
+            font-size: 20px;
             font-weight: 800;
-            margin-bottom: 15px;
+            margin-bottom: 12px;
         }
         .key-concept-box p {
             color: #1E3A8A;
-            font-size: 18px;
-            line-height: 1.7;
+            font-size: 15px;
+            line-height: 1.6;
         }
         .key-concept-box ul {
             color: #1E3A8A;
-            font-size: 18px;
-            line-height: 1.7;
+            font-size: 15px;
+            line-height: 1.6;
             margin-top: 15px;
         }
 
         .warning-box {
             background: #FEE2E2;
-            border: 4px solid #DC2626;
-            border-radius: 16px;
-            padding: 30px;
+            border: 3px solid #DC2626;
+            border-radius: 12px;
+            padding: 20px;
             margin: 30px 0;
         }
         .warning-box h3 {
             color: #991B1B;
-            font-size: 28px;
+            font-size: 20px;
             font-weight: 800;
-            margin-bottom: 15px;
+            margin-bottom: 12px;
         }
         .warning-box p {
             color: #7F1D1D;
-            font-size: 18px;
-            line-height: 1.7;
+            font-size: 15px;
+            line-height: 1.6;
         }
 
         .action-box {
             background: #FEF3C7;
-            border: 4px solid #F59E0B;
-            border-radius: 16px;
-            padding: 30px;
+            border: 3px solid #F59E0B;
+            border-radius: 12px;
+            padding: 20px;
             margin: 30px 0;
         }
         .action-box h3 {
             color: #B45309;
-            font-size: 28px;
+            font-size: 20px;
             font-weight: 800;
-            margin-bottom: 15px;
+            margin-bottom: 12px;
         }
         .action-box ul {
             list-style: none;
@@ -184,21 +184,21 @@
 
         .real-world-box {
             background: #F3E8FF;
-            border: 4px solid #9333EA;
-            border-radius: 16px;
-            padding: 30px;
+            border: 3px solid #9333EA;
+            border-radius: 12px;
+            padding: 20px;
             margin: 30px 0;
         }
         .real-world-box h3 {
             color: #6B21A8;
-            font-size: 28px;
+            font-size: 20px;
             font-weight: 800;
-            margin-bottom: 15px;
+            margin-bottom: 12px;
         }
         .real-world-box p {
             color: #581C87;
-            font-size: 18px;
-            line-height: 1.7;
+            font-size: 15px;
+            line-height: 1.6;
             font-weight: 600;
         }
 
@@ -233,7 +233,7 @@
             border-radius: 16px;
             margin-bottom: 25px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            border: 3px solid transparent;
+            border: 2px solid #e5e7eb;
         }
         .question-text {
             font-size: 22px;
@@ -372,6 +372,132 @@
             transform: translateX(-8px);
             color: #0A1A2F;
         }
+        /* Interactive elements */
+        .interactive-box {
+            background: linear-gradient(135deg, #F0FDF4 0%, #D1FAE5 100%);
+            border: 3px solid #00A676;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .interactive-box:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 166, 118, 0.3);
+        }
+        .interactive-box h3 {
+            color: #065F46;
+            font-size: 18px;
+            font-weight: 800;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .click-reveal {
+            cursor: pointer;
+            user-select: none;
+        }
+        .reveal-content {
+            display: none;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 2px solid #00A676;
+            animation: slideDown 0.3s ease;
+        }
+        .reveal-content.show {
+            display: block;
+        }
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Calculator styles */
+        .calculator {
+            background: #FFFBEB;
+            border: 3px solid #F59E0B;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        .calculator h3 {
+            color: #B45309;
+            font-size: 18px;
+            font-weight: 800;
+            margin-bottom: 15px;
+        }
+        .calc-input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #FCD34D;
+            border-radius: 8px;
+            font-size: 16px;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+        .calc-input:focus {
+            outline: none;
+            border-color: #F59E0B;
+        }
+        .calc-result {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 15px;
+            font-weight: 700;
+            font-size: 18px;
+            color: #B45309;
+            text-align: center;
+        }
+
+        /* Mini quiz within section */
+        .mini-check {
+            background: #FEF3C7;
+            border: 3px solid #F59E0B;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        .mini-check h4 {
+            color: #B45309;
+            font-size: 16px;
+            font-weight: 800;
+            margin-bottom: 12px;
+        }
+        .mini-option {
+            background: white;
+            padding: 12px;
+            border: 2px solid #FCD34D;
+            border-radius: 8px;
+            margin-bottom: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 14px;
+            font-weight: 600;
+        }
+        .mini-option:hover {
+            border-color: #F59E0B;
+            transform: translateX(4px);
+        }
+        .mini-option.correct {
+            border-color: #10B981;
+            background: #D1FAE5;
+            color: #065F46;
+        }
+        .mini-option.incorrect {
+            border-color: #DC2626;
+            background: #FEE2E2;
+            color: #7F1D1D;
+        }
+
 
         @media (max-width: 768px) {
             .lesson-header h1 {
@@ -907,7 +1033,77 @@
             if (success) {
                 window.location.href = 'pillar3-lessons.html';
             }
-        }        // Multi-screen navigation
+        }        // Interactive element functions
+        function toggleReveal(element) {
+            const content = element.querySelector('.reveal-content');
+            const heading = element.querySelector('h3');
+            if (content.classList.contains('show')) {
+                content.classList.remove('show');
+                heading.innerHTML = heading.innerHTML.replace('▲', '▼');
+            } else {
+                content.classList.add('show');
+                heading.innerHTML = heading.innerHTML.replace('▼', '▲');
+            }
+        }
+
+        function checkMini(element, isCorrect) {
+            const parent = element.parentElement;
+            const options = parent.querySelectorAll('.mini-option');
+            options.forEach(opt => {
+                opt.classList.remove('correct', 'incorrect');
+                opt.style.pointerEvents = 'none';
+            });
+
+            if (isCorrect) {
+                element.classList.add('correct');
+                element.innerHTML += ' ✓ Correct!';
+            } else {
+                element.classList.add('incorrect');
+                element.innerHTML += ' ✗';
+                options.forEach(opt => {
+                    if (opt.onclick && opt.onclick.toString().includes('true')) {
+                        opt.classList.add('correct');
+                        opt.innerHTML += ' ← Correct Answer';
+                    }
+                });
+            }
+        }
+
+        function calculateUtilization() {
+            const balance = parseFloat(document.getElementById('balance').value) || 0;
+            const limit = parseFloat(document.getElementById('limit').value) || 0;
+            const resultDiv = document.getElementById('utilResult');
+
+            if (limit === 0) {
+                resultDiv.textContent = 'Enter your credit limit';
+                resultDiv.style.background = 'white';
+                return;
+            }
+
+            const utilization = ((balance / limit) * 100).toFixed(1);
+            let message = `Your utilization: ${utilization}%`;
+            let feedback = '';
+            let color = '';
+
+            if (utilization <= 10) {
+                feedback = '🌟 Excellent! This helps your score.';
+                color = '#D1FAE5';
+            } else if (utilization <= 30) {
+                feedback = '✅ Good! You\'re in the sweet spot.';
+                color = '#FEF3C7';
+            } else if (utilization <= 50) {
+                feedback = '⚠️ Fair - Try to pay down to under 30%.';
+                color = '#FED7AA';
+            } else {
+                feedback = '🚨 High! This is hurting your score. Pay down ASAP.';
+                color = '#FEE2E2';
+            }
+
+            resultDiv.innerHTML = `<strong>${message}</strong><br><span style="font-size: 15px;">${feedback}</span>`;
+            resultDiv.style.background = color;
+        }
+
+        // Multi-screen navigation
         let currentSection = 0;
         const sections = document.querySelectorAll('.lesson-section');
         const totalSections = sections.length;
