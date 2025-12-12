@@ -7,6 +7,7 @@
     "moduleResolution": "Node",
     "baseUrl": "src",
     "paths": {
+      "@assets/*": ["assets/*"],
       "@config/*": ["config/*"],
       "@utils/*": ["utils/*"],
       "@css/*": ["css/*"],
