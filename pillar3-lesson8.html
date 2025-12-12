@@ -95,6 +95,8 @@
             margin-bottom: 15px;
             font-size: 16px;
             font-weight: 500;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
         }
         .lesson-section strong {
             color: #0A1A2F;
@@ -125,6 +127,8 @@
             color: #1E3A8A;
             font-size: 15px;
             line-height: 1.6;
+            margin-left: 20px;
+            margin-top: 10px;
             margin-top: 15px;
         }
 
@@ -556,9 +560,9 @@
                 <p><strong>Official Site:</strong> AnnualCreditReport.com (the ONLY authorized free site)</p>
                 <p style="margin-top: 15px;"><strong>Pro Strategy:</strong> Request one report every 4 months from a different bureau to monitor your credit 3 times per year for free.</p>
                 <ul style="margin-left: 20px;">
-                    <li><strong>January:</strong> Pull Equifax</li>
-                    <li><strong>May:</strong> Pull Experian</li>
-                    <li><strong>September:</strong> Pull TransUnion</li>
+                    <li style="margin-bottom: 10px;"><strong>January:</strong> Pull Equifax</li>
+                    <li style="margin-bottom: 10px;"><strong>May:</strong> Pull Experian</li>
+                    <li style="margin-bottom: 10px;"><strong>September:</strong> Pull TransUnion</li>
                 </ul>
                 <p style="margin-top: 15px;">This gives you year-round monitoring without paying for a service.</p>
             </div>
@@ -612,12 +616,12 @@
             <div class="warning-box">
                 <h3>🚨 Red Flags That Require Immediate Action</h3>
                 <ul style="margin-left: 20px; color: #7F1D1D;">
-                    <li><strong>Accounts you didn't open:</strong> Sign of identity theft</li>
-                    <li><strong>Hard inquiries you don't recognize:</strong> Someone tried to open credit in your name</li>
-                    <li><strong>Wrong addresses:</strong> Could indicate fraud</li>
-                    <li><strong>Late payments you know you made on time:</strong> Bank error or reporting issue</li>
-                    <li><strong>Incorrect balances or credit limits:</strong> Reporting errors that hurt your utilization ratio</li>
-                    <li><strong>Accounts listed as open that you closed:</strong> Creditor hasn't updated properly</li>
+                    <li style="margin-bottom: 10px;"><strong>Accounts you didn't open:</strong> Sign of identity theft</li>
+                    <li style="margin-bottom: 10px;"><strong>Hard inquiries you don't recognize:</strong> Someone tried to open credit in your name</li>
+                    <li style="margin-bottom: 10px;"><strong>Wrong addresses:</strong> Could indicate fraud</li>
+                    <li style="margin-bottom: 10px;"><strong>Late payments you know you made on time:</strong> Bank error or reporting issue</li>
+                    <li style="margin-bottom: 10px;"><strong>Incorrect balances or credit limits:</strong> Reporting errors that hurt your utilization ratio</li>
+                    <li style="margin-bottom: 10px;"><strong>Accounts listed as open that you closed:</strong> Creditor hasn't updated properly</li>
                 </ul>
             </div>
 
@@ -665,7 +669,14 @@
                     <li>Include supporting documents (copies, not originals)</li>
                     <li>Follow up if you don't hear back in 30 days</li>
                 </ul>
+            
+            <div class="interactive-box click-reveal" onclick="toggleReveal(this)">
+                <h3>🛡️ Click to Reveal: Credit Freeze vs Fraud Alert ▼</h3>
+                <div class="reveal-content">
+                    <p style="font-size: 15px; color: #065F46; line-height: 1.6;"><strong>Credit Freeze:</strong> Blocks ALL access to your credit report. Best protection, but you must unfreeze to apply for credit.<br><br><strong>Fraud Alert:</strong> Just warns lenders to verify your identity. Less secure but more convenient. Lasts 1 year (free) or 7 years (if you're a victim).</p>
+                </div>
             </div>
+        </div>
         </div>
 
         <!-- Identity Theft Protection -->
@@ -710,13 +721,13 @@
             <div class="action-box">
                 <h3>🚨 Emergency Action Plan</h3>
                 <ul>
-                    <li><strong>Step 1:</strong> Place fraud alert at one credit bureau (they notify the other two)</li>
-                    <li><strong>Step 2:</strong> Close fraudulent accounts immediately</li>
-                    <li><strong>Step 3:</strong> File report at IdentityTheft.gov (FTC's official recovery site)</li>
-                    <li><strong>Step 4:</strong> File police report and get report number</li>
-                    <li><strong>Step 5:</strong> Freeze your credit at all three bureaus</li>
-                    <li><strong>Step 6:</strong> Dispute fraudulent items on credit reports</li>
-                    <li><strong>Step 7:</strong> Monitor closely for next 2 years</li>
+                    <li style="margin-bottom: 10px;"><strong>Step 1:</strong> Place fraud alert at one credit bureau (they notify the other two)</li>
+                    <li style="margin-bottom: 10px;"><strong>Step 2:</strong> Close fraudulent accounts immediately</li>
+                    <li style="margin-bottom: 10px;"><strong>Step 3:</strong> File report at IdentityTheft.gov (FTC's official recovery site)</li>
+                    <li style="margin-bottom: 10px;"><strong>Step 4:</strong> File police report and get report number</li>
+                    <li style="margin-bottom: 10px;"><strong>Step 5:</strong> Freeze your credit at all three bureaus</li>
+                    <li style="margin-bottom: 10px;"><strong>Step 6:</strong> Dispute fraudulent items on credit reports</li>
+                    <li style="margin-bottom: 10px;"><strong>Step 7:</strong> Monitor closely for next 2 years</li>
                 </ul>
             </div>
 

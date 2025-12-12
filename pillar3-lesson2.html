@@ -95,6 +95,8 @@
             margin-bottom: 15px;
             font-size: 16px;
             font-weight: 500;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
         }
         .lesson-section strong {
             color: #0A1A2F;
@@ -125,6 +127,8 @@
             color: #1E3A8A;
             font-size: 15px;
             line-height: 1.6;
+            margin-left: 20px;
+            margin-top: 10px;
             margin-top: 15px;
         }
 
@@ -652,6 +656,15 @@
                 <h3>💡 The Credit Building Mindset</h3>
                 <p>Building credit is a marathon, not a sprint. It takes patience and consistency, but with the right approach, you can build a good credit score (680+) in as little as 6 months.</p>
             </div>
+
+            <div class="mini-check">
+                <h4>✅ Quick Check: Ready to Build Credit?</h4>
+                <p style="font-size: 14px; margin-bottom: 12px; color: #78350F;">How long does it typically take to build a good credit score from scratch?</p>
+                <div class="mini-option" onclick="checkMini(this, false)">A) 1-2 months</div>
+                <div class="mini-option" onclick="checkMini(this, true)">B) 6 months</div>
+                <div class="mini-option" onclick="checkMini(this, false)">C) 5 years</div>
+                <div class="mini-option" onclick="checkMini(this, false)">D) 10 years</div>
+            </div>
         </div>
 
         <!-- Secured Credit Cards -->
@@ -662,10 +675,10 @@
             <div class="key-concept-box">
                 <h3>🔒 How Secured Cards Work</h3>
                 <ul style="margin-left: 20px;">
-                    <li><strong>You make a deposit:</strong> Usually $200-500 becomes your credit limit</li>
-                    <li><strong>Use it like a regular card:</strong> Make purchases and pay them off monthly</li>
-                    <li><strong>Build credit history:</strong> On-time payments get reported to credit bureaus</li>
-                    <li><strong>Get your deposit back:</strong> After 6-12 months, often upgraded to unsecured card</li>
+                    <li style="margin-bottom: 10px;"><strong>You make a deposit:</strong> Usually $200-500 becomes your credit limit</li>
+                    <li style="margin-bottom: 10px;"><strong>Use it like a regular card:</strong> Make purchases and pay them off monthly</li>
+                    <li style="margin-bottom: 10px;"><strong>Build credit history:</strong> On-time payments get reported to credit bureaus</li>
+                    <li style="margin-bottom: 10px;"><strong>Get your deposit back:</strong> After 6-12 months, often upgraded to unsecured card</li>
                 </ul>
             </div>
 
@@ -679,6 +692,20 @@
             <div class="warning-box">
                 <h3>⚠️ Avoid These Traps</h3>
                 <p>Not all secured cards are equal. Avoid cards with high annual fees ($50+) or cards that don't report to all three credit bureaus. Always check reviews first!</p>
+            </div>
+
+            <div class="interactive-box click-reveal" onclick="toggleReveal(this)">
+                <h3>💡 Click to Reveal: How to Choose the Best Secured Card ▼</h3>
+                <div class="reveal-content">
+                    <p style="font-size: 15px; color: #065F46; line-height: 1.6;"><strong>Checklist for choosing:</strong></p>
+                    <ul style="font-size: 15px; color: #065F46; margin-left: 20px; margin-top: 10px;">
+                        <li>✓ Reports to all 3 credit bureaus (Experian, Equifax, TransUnion)</li>
+                        <li>✓ No or low annual fee (under $25)</li>
+                        <li>✓ Low minimum deposit ($200 or less preferred)</li>
+                        <li>✓ Path to upgrade to unsecured card</li>
+                        <li>✓ Cashback or rewards (nice bonus!)</li>
+                    </ul>
+                </div>
             </div>
         </div>
 
@@ -732,6 +759,18 @@
                     <li>Worth it for the credit boost and guaranteed savings</li>
                 </ul>
             </div>
+
+            <div class="calculator">
+                <h3>🧮 Credit Builder Loan Calculator</h3>
+                <p style="font-size: 14px; margin-bottom: 15px; color: #78350F;">See what a credit builder loan will cost you:</p>
+                <label style="font-size: 14px; font-weight: 700; color: #B45309; display: block; margin-bottom: 5px;">Loan Amount ($):</label>
+                <input type="number" id="loanAmount" class="calc-input" placeholder="e.g., 1000" value="1000" oninput="calculateLoan()">
+                <label style="font-size: 14px; font-weight: 700; color: #B45309; display: block; margin-bottom: 5px;">Interest Rate (%):</label>
+                <input type="number" id="interestRate" class="calc-input" placeholder="e.g., 10" value="10" step="0.1" oninput="calculateLoan()">
+                <label style="font-size: 14px; font-weight: 700; color: #B45309; display: block; margin-bottom: 5px;">Loan Term (months):</label>
+                <input type="number" id="loanTerm" class="calc-input" placeholder="e.g., 12" value="12" oninput="calculateLoan()">
+                <div class="calc-result" id="loanResult">Calculating...</div>
+            </div>
         </div>
 
         <!-- Real World Timeline -->
@@ -744,35 +783,35 @@
                     <div class="timeline-month">Month 1</div>
                     <div class="timeline-details">
                         <h3>Starting Point</h3>
-                        <p>Opened Discover it Secured card with $300 deposit. Became authorized user on mom's 8-year-old card with perfect history.</p>
-                    </div>
+                        <p style="margin-bottom: 10px;">Opened Discover it Secured card with $300 deposit. Became authorized user on mom's 8-year-old card with perfect history.</p>
                 </div>
+            </div>
 
-                <div class="timeline-item">
+            <div class="timeline-item">
                     <div class="timeline-month">Month 2</div>
                     <div class="timeline-details">
                         <h3>First Score Appears</h3>
-                        <p>Credit score: 640. Used secured card for gas only ($40/month), paid in full immediately. Utilization: 13%.</p>
-                    </div>
+                        <p style="margin-bottom: 10px;">Credit score: 640. Used secured card for gas only ($40/month), paid in full immediately. Utilization: 13%.</p>
                 </div>
+            </div>
 
-                <div class="timeline-item">
+            <div class="timeline-item">
                     <div class="timeline-month">Month 3-4</div>
                     <div class="timeline-details">
                         <h3>Building Momentum</h3>
-                        <p>Continued perfect payment history. Score climbed to 655. Set up autopay to never miss a payment.</p>
-                    </div>
+                        <p style="margin-bottom: 10px;">Continued perfect payment history. Score climbed to 655. Set up autopay to never miss a payment.</p>
                 </div>
+            </div>
 
-                <div class="timeline-item">
+            <div class="timeline-item">
                     <div class="timeline-month">Month 5</div>
                     <div class="timeline-details">
                         <h3>Adding Diversity</h3>
-                        <p>Started a $500 credit builder loan at local credit union. Score: 665. Now has revolving and installment credit.</p>
-                    </div>
+                        <p style="margin-bottom: 10px;">Started a $500 credit builder loan at local credit union. Score: 665. Now has revolving and installment credit.</p>
                 </div>
+            </div>
 
-                <div class="timeline-item">
+            <div class="timeline-item">
                     <div class="timeline-month">Month 6</div>
                     <div class="timeline-details">
                         <h3>Achievement Unlocked</h3>
@@ -1079,6 +1118,41 @@
                 window.location.href = 'pillar3-lessons.html';
             }
         }        // Interactive element functions
+        function calculateLoan() {
+            const amount = parseFloat(document.getElementById('loanAmount').value) || 0;
+            const rate = parseFloat(document.getElementById('interestRate').value) || 0;
+            const months = parseInt(document.getElementById('loanTerm').value) || 0;
+            const resultDiv = document.getElementById('loanResult');
+
+            if (amount === 0 || months === 0) {
+                resultDiv.textContent = 'Enter loan details';
+                resultDiv.style.background = 'white';
+                return;
+            }
+
+            const monthlyRate = (rate / 100) / 12;
+            const monthlyPayment = (amount * monthlyRate * Math.pow(1 + monthlyRate, months)) / (Math.pow(1 + monthlyRate, months) - 1);
+            const totalPaid = monthlyPayment * months;
+            const interestPaid = totalPaid - amount;
+
+            resultDiv.innerHTML = `
+                <strong>Monthly Payment: $${monthlyPayment.toFixed(2)}</strong><br>
+                <span style="font-size: 15px;">
+                    Total Interest: $${interestPaid.toFixed(2)}<br>
+                    You get back: $${amount.toFixed(2)} after ${months} months!<br>
+                    💡 Credit boost + forced savings for only $${interestPaid.toFixed(2)}
+                </span>
+            `;
+            resultDiv.style.background = '#D1FAE5';
+        }
+
+        // Initialize calculator on page load
+        setTimeout(() => {
+            if (document.getElementById('loanAmount')) {
+                calculateLoan();
+            }
+        }, 100);
+
         function toggleReveal(element) {
             const content = element.querySelector('.reveal-content');
             const heading = element.querySelector('h3');

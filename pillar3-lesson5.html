@@ -635,11 +635,11 @@
             <div class="warning-box">
                 <h3>Spot These Red Flags</h3>
                 <ul style="margin: 0;">
-                    <li><strong>"Fast cash" advertising</strong> - Preys on desperation</li>
-                    <li><strong>No credit check</strong> - They don't care if you can afford it</li>
-                    <li><strong>APR over 36%</strong> - Legally considered predatory in many states</li>
-                    <li><strong>Pressure tactics</strong> - "Limited time offer" to prevent careful consideration</li>
-                    <li><strong>Unclear terms</strong> - Hiding the true cost in fine print</li>
+                    <li style="margin-bottom: 10px;"><strong>"Fast cash" advertising</strong> - Preys on desperation</li>
+                    <li style="margin-bottom: 10px;"><strong>No credit check</strong> - They don't care if you can afford it</li>
+                    <li style="margin-bottom: 10px;"><strong>APR over 36%</strong> - Legally considered predatory in many states</li>
+                    <li style="margin-bottom: 10px;"><strong>Pressure tactics</strong> - "Limited time offer" to prevent careful consideration</li>
+                    <li style="margin-bottom: 10px;"><strong>Unclear terms</strong> - Hiding the true cost in fine print</li>
                 </ul>
             </div>
         </div>
@@ -961,6 +961,48 @@
                 window.location.href = 'pillar3-lessons.html';
             }
         }        // Interactive element functions
+
+        function calculateDebtPayoff() {
+            const debt = parseFloat(document.getElementById('debtAmount')?.value) || 0;
+            const payment = parseFloat(document.getElementById('monthlyPay')?.value) || 0;
+            const rate = parseFloat(document.getElementById('debtRate')?.value) || 0;
+            const resultDiv = document.getElementById('debtResult');
+
+            if (!resultDiv || debt === 0 || payment === 0) return;
+
+            const monthlyRate = (rate / 100) / 12;
+            if (payment <= (debt * monthlyRate)) {
+                resultDiv.innerHTML = '<strong style="color: #DC2626;">⚠️ Payment too low!</strong><br><span style="font-size: 15px;">Your payment barely covers interest. You\'ll never pay this off! Increase payment.</span>';
+                resultDiv.style.background = '#FEE2E2';
+                return;
+            }
+
+            const months = Math.log(payment / (payment - debt * monthlyRate)) / Math.log(1 + monthlyRate);
+            const totalPaid = payment * months;
+            const totalInterest = totalPaid - debt;
+            const years = Math.floor(months / 12);
+            const remainingMonths = Math.round(months % 12);
+
+            let timeString = '';
+            if (years > 0) timeString += `${years} year${years > 1 ? 's' : ''}`;
+            if (remainingMonths > 0) timeString += ` ${remainingMonths} month${remainingMonths > 1 ? 's' : ''}`;
+
+            resultDiv.innerHTML = `
+                <strong>Debt-Free In: ${timeString}</strong><br>
+                <span style="font-size: 15px;">
+                    Total Interest: $${totalInterest.toFixed(2)}<br>
+                    Total Paid: $${totalPaid.toFixed(2)}<br>
+                    💡 ${payment >= debt * 0.05 ? 'Great payment amount!' : 'Consider paying more to save on interest'}
+                </span>
+            `;
+            resultDiv.style.background = months <= 24 ? '#D1FAE5' : months <= 48 ? '#FEF3C7' : '#FED7AA';
+        }
+
+        setTimeout(() => {
+            if (document.getElementById('debtAmount')) {
+                calculateDebtPayoff();
+            }
+        }, 100);
         function toggleReveal(element) {
             const content = element.querySelector('.reveal-content');
             const heading = element.querySelector('h3');
