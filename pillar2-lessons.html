@@ -11,124 +11,282 @@
     <link rel="stylesheet" href="styles.css">
     <style>
         .pillar-header {
-            background: linear-gradient(135deg, #0A1A2F 0%, #1a3a5c 100%);
+            background: linear-gradient(135deg, #0A1A2F 0%, #00A676 100%);
             color: white;
-            padding: 60px 20px 40px;
+            padding: 80px 20px 60px;
             text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .pillar-header::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            background: url('data:image/svg+xml,<svg width="60" height="60" xmlns="http://www.w3.org/2000/svg"><rect width="2" height="2" fill="rgba(255,255,255,0.1)"/></svg>');
+            opacity: 0.3;
         }
         .pillar-header h1 {
-            font-size: 42px;
+            font-size: 48px;
             margin-bottom: 15px;
+            font-weight: 900;
+            position: relative;
+            z-index: 1;
         }
         .pillar-header p {
-            font-size: 18px;
-            opacity: 0.9;
+            font-size: 20px;
+            opacity: 0.95;
             max-width: 700px;
-            margin: 0 auto;
+            margin: 0 auto 30px;
+            position: relative;
+            z-index: 1;
         }
+
+        /* Progress Overview */
+        .progress-overview {
+            max-width: 500px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            padding: 20px;
+            position: relative;
+            z-index: 1;
+        }
+        .progress-label {
+            font-size: 14px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+            opacity: 0.9;
+        }
+        .progress-bar-container {
+            background: rgba(255, 255, 255, 0.2);
+            height: 12px;
+            border-radius: 6px;
+            overflow: hidden;
+            margin-bottom: 10px;
+        }
+        .progress-bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #10B981 0%, #34D399 100%);
+            border-radius: 6px;
+            transition: width 0.5s ease;
+            box-shadow: 0 0 10px rgba(16, 185, 129, 0.5);
+        }
+        .progress-stats {
+            display: flex;
+            justify-content: space-between;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
         .lessons-container {
-            max-width: 900px;
+            max-width: 1200px;
             margin: 0 auto;
             padding: 60px 20px;
         }
+
+        /* Grid Layout for Lessons */
+        .lessons-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
+            gap: 24px;
+            margin-bottom: 40px;
+        }
+
         .lesson-card {
             background: white;
-            border-radius: 12px;
-            padding: 25px;
-            margin-bottom: 20px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            transition: transform 0.2s, box-shadow 0.2s;
+            border-radius: 16px;
+            padding: 28px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
-            border-left: 4px solid transparent;
+            border: 2px solid #e5e7eb;
+            overflow: hidden;
         }
+
         .lesson-card::before {
-            content: attr(data-lesson);
+            content: '';
             position: absolute;
-            left: 25px;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 40px;
-            height: 40px;
-            background: linear-gradient(135deg, #0A1A2F 0%, #1a3a5c 100%);
+            top: 0;
+            left: 0;
+            width: 6px;
+            height: 100%;
+            background: linear-gradient(180deg, #00A676 0%, #10B981 100%);
+            transform: scaleY(0);
+            transform-origin: top;
+            transition: transform 0.3s ease;
+        }
+
+        .lesson-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px rgba(0, 166, 118, 0.15);
+            border-color: #00A676;
+        }
+
+        .lesson-card:hover::before {
+            transform: scaleY(1);
+        }
+
+        .lesson-card.completed {
+            background: linear-gradient(135deg, #F0FDF4 0%, #D1FAE5 100%);
+            border-color: #00A676;
+        }
+
+        .lesson-header-row {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            margin-bottom: 16px;
+        }
+
+        .lesson-icon {
+            font-size: 48px;
+            line-height: 1;
+            flex-shrink: 0;
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+        }
+
+        .lesson-number-badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 36px;
+            height: 36px;
+            background: linear-gradient(135deg, #0A1A2F 0%, #00A676 100%);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
-            font-weight: 700;
+            font-weight: 800;
             font-size: 16px;
-            box-shadow: 0 2px 8px rgba(10, 26, 47, 0.3);
-        }
-        .lesson-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-            border-left-color: #0A1A2F;
-        }
-        .lesson-card.completed {
-            background: linear-gradient(135deg, #f0fdf4 0%, #d1fae5 100%);
-            border: 2px solid #00A676;
-            border-left: 4px solid #00A676;
-        }
-        .lesson-card.completed::before {
-            background: linear-gradient(135deg, #00A676 0%, #10b981 100%);
             box-shadow: 0 2px 8px rgba(0, 166, 118, 0.3);
         }
-        .lesson-info {
-            margin-left: 60px;
+
+        .lesson-card.completed .lesson-number-badge {
+            background: linear-gradient(135deg, #10B981 0%, #34D399 100%);
         }
-        .lesson-info h3 {
+
+        .lesson-content {
+            flex: 1;
+        }
+
+        .lesson-content h3 {
             font-size: 22px;
+            font-weight: 800;
             margin-bottom: 8px;
-            color: var(--text-primary);
+            color: #0A1A2F;
         }
-        .lesson-info p {
-            color: var(--text-secondary);
+
+        .lesson-content p {
+            color: #6B7280;
             font-size: 15px;
-            margin: 0;
+            margin-bottom: 16px;
+            line-height: 1.5;
         }
-        .lesson-status {
+
+        .lesson-meta {
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 16px;
+            margin-bottom: 16px;
         }
-        .completed-badge {
-            background: linear-gradient(135deg, #00A676 0%, #10b981 100%);
-            color: white;
-            padding: 8px 16px;
-            border-radius: 20px;
+
+        .lesson-duration {
+            display: flex;
+            align-items: center;
+            gap: 6px;
             font-size: 14px;
             font-weight: 600;
+            color: #6B7280;
+            background: #F3F4F6;
+            padding: 6px 12px;
+            border-radius: 8px;
+        }
+
+        .lesson-topics {
+            font-size: 13px;
+            color: #9CA3AF;
+            font-weight: 500;
+        }
+
+        .lesson-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .completed-badge {
+            background: linear-gradient(135deg, #10B981 0%, #34D399 100%);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: 700;
             display: inline-flex;
             align-items: center;
             gap: 6px;
-            box-shadow: 0 2px 8px rgba(0, 166, 118, 0.3);
+            box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3);
         }
+
         .btn-start-lesson {
             padding: 12px 24px;
-            background: var(--primary-color);
+            background: linear-gradient(135deg, #0A1A2F 0%, #00A676 100%);
             color: white;
             text-decoration: none;
-            border-radius: 8px;
-            font-weight: 600;
-            transition: background 0.2s;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 15px;
+            transition: all 0.3s;
             border: none;
             cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0, 166, 118, 0.2);
         }
+
         .btn-start-lesson:hover {
-            background: #2563eb;
+            transform: scale(1.05);
+            box-shadow: 0 6px 16px rgba(0, 166, 118, 0.3);
         }
+
         .back-link {
-            display: inline-block;
-            margin-bottom: 20px;
-            color: var(--primary-color);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 30px;
+            color: #00A676;
             text-decoration: none;
-            font-weight: 600;
+            font-weight: 700;
+            font-size: 16px;
+            transition: all 0.2s;
         }
+
         .back-link:hover {
-            text-decoration: underline;
+            transform: translateX(-4px);
+            color: #0A1A2F;
+        }
+
+        @media (max-width: 1100px) {
+            .lessons-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .pillar-header h1 {
+                font-size: 36px;
+            }
+            .lesson-header-row {
+                flex-direction: column;
+            }
+            .lesson-icon {
+                font-size: 36px;
+            }
         }
         .quiz-card {
             background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
@@ -224,102 +382,178 @@
 
     <!-- Pillar Header -->
     <section class="pillar-header">
-        <h1>Pillar 2: Budgeting and Saving</h1>
+        <h1>💰 Pillar 2: Budgeting & Saving</h1>
         <p>Master the art of managing your money and building financial security</p>
+
+        <div class="progress-overview">
+            <div class="progress-label">Your Progress</div>
+            <div class="progress-bar-container">
+                <div class="progress-bar-fill" id="overallProgress" style="width: 0%"></div>
+            </div>
+            <div class="progress-stats">
+                <span id="progressText">0 of 8 lessons completed</span>
+                <span id="progressPercent">0%</span>
+            </div>
+        </div>
     </section>
 
     <!-- Lessons List -->
     <div class="lessons-container">
         <a href="dashboard" class="back-link">← Back to Dashboard</a>
 
-        <div id="lessonsList">
+        <div class="lessons-grid" id="lessonsList">
             <!-- Lesson 1 -->
             <div class="lesson-card" data-lesson="1">
-                <div class="lesson-info">
-                    <h3>Lesson 1 - Creating Your First Budget</h3>
-                    <p>Learn the fundamentals of building a budget that works for you</p>
+                <div class="lesson-number-badge">1</div>
+                <div class="lesson-header-row">
+                    <div class="lesson-icon">📝</div>
+                    <div class="lesson-content">
+                        <h3>Creating Your First Budget</h3>
+                        <p>Learn the fundamentals of building a budget that works for you</p>
+                        <div class="lesson-meta">
+                            <span class="lesson-duration">⏱️ 15 min</span>
+                            <span class="lesson-topics">Income tracking • Expenses • Planning</span>
+                        </div>
+                    </div>
                 </div>
-                <div class="lesson-status">
+                <div class="lesson-footer">
                     <a href="/pillar2-lesson1" class="btn-start-lesson">Start Lesson</a>
                 </div>
             </div>
 
             <!-- Lesson 2 -->
             <div class="lesson-card" data-lesson="2">
-                <div class="lesson-info">
-                    <h3>Lesson 2 - The 50/30/20 Rule</h3>
-                    <p>Discover a simple framework for dividing your income</p>
+                <div class="lesson-number-badge">2</div>
+                <div class="lesson-header-row">
+                    <div class="lesson-icon">📊</div>
+                    <div class="lesson-content">
+                        <h3>The 50/30/20 Rule</h3>
+                        <p>Discover a simple framework for dividing your income</p>
+                        <div class="lesson-meta">
+                            <span class="lesson-duration">⏱️ 12 min</span>
+                            <span class="lesson-topics">Budget rules • Income allocation</span>
+                        </div>
+                    </div>
                 </div>
-                <div class="lesson-status">
+                <div class="lesson-footer">
                     <a href="/pillar2-lesson2" class="btn-start-lesson">Start Lesson</a>
                 </div>
             </div>
 
             <!-- Lesson 3 -->
             <div class="lesson-card" data-lesson="3">
-                <div class="lesson-info">
-                    <h3>Lesson 3 - Building an Emergency Fund</h3>
-                    <p>Create a financial safety net for unexpected expenses</p>
+                <div class="lesson-number-badge">3</div>
+                <div class="lesson-header-row">
+                    <div class="lesson-icon">🛡️</div>
+                    <div class="lesson-content">
+                        <h3>Building an Emergency Fund</h3>
+                        <p>Create a financial safety net for unexpected expenses</p>
+                        <div class="lesson-meta">
+                            <span class="lesson-duration">⏱️ 14 min</span>
+                            <span class="lesson-topics">Emergency savings • Financial security</span>
+                        </div>
+                    </div>
                 </div>
-                <div class="lesson-status">
+                <div class="lesson-footer">
                     <a href="/pillar2-lesson3" class="btn-start-lesson">Start Lesson</a>
                 </div>
             </div>
 
             <!-- Lesson 4 -->
             <div class="lesson-card" data-lesson="4">
-                <div class="lesson-info">
-                    <h3>Lesson 4 - Saving Strategies That Work</h3>
-                    <p>Explore proven methods to grow your savings consistently</p>
+                <div class="lesson-number-badge">4</div>
+                <div class="lesson-header-row">
+                    <div class="lesson-icon">💡</div>
+                    <div class="lesson-content">
+                        <h3>Saving Strategies That Work</h3>
+                        <p>Explore proven methods to grow your savings consistently</p>
+                        <div class="lesson-meta">
+                            <span class="lesson-duration">⏱️ 13 min</span>
+                            <span class="lesson-topics">Savings tactics • Growth strategies</span>
+                        </div>
+                    </div>
                 </div>
-                <div class="lesson-status">
+                <div class="lesson-footer">
                     <a href="/pillar2-lesson4" class="btn-start-lesson">Start Lesson</a>
                 </div>
             </div>
 
             <!-- Lesson 5 -->
             <div class="lesson-card" data-lesson="5">
-                <div class="lesson-info">
-                    <h3>Lesson 5 - Cutting Expenses Without Sacrifice</h3>
-                    <p>Reduce spending while maintaining your quality of life</p>
+                <div class="lesson-number-badge">5</div>
+                <div class="lesson-header-row">
+                    <div class="lesson-icon">✂️</div>
+                    <div class="lesson-content">
+                        <h3>Cutting Expenses Without Sacrifice</h3>
+                        <p>Reduce spending while maintaining your quality of life</p>
+                        <div class="lesson-meta">
+                            <span class="lesson-duration">⏱️ 14 min</span>
+                            <span class="lesson-topics">Expense reduction • Smart spending</span>
+                        </div>
+                    </div>
                 </div>
-                <div class="lesson-status">
+                <div class="lesson-footer">
                     <a href="/pillar2-lesson5" class="btn-start-lesson">Start Lesson</a>
                 </div>
             </div>
 
             <!-- Lesson 6 -->
             <div class="lesson-card" data-lesson="6">
-                <div class="lesson-info">
-                    <h3>Lesson 6 - Automating Your Savings</h3>
-                    <p>Set up systems that save money without thinking about it</p>
+                <div class="lesson-number-badge">6</div>
+                <div class="lesson-header-row">
+                    <div class="lesson-icon">🤖</div>
+                    <div class="lesson-content">
+                        <h3>Automating Your Savings</h3>
+                        <p>Set up systems that save money without thinking about it</p>
+                        <div class="lesson-meta">
+                            <span class="lesson-duration">⏱️ 11 min</span>
+                            <span class="lesson-topics">Automation • Financial systems</span>
+                        </div>
+                    </div>
                 </div>
-                <div class="lesson-status">
+                <div class="lesson-footer">
                     <a href="/pillar2-lesson6" class="btn-start-lesson">Start Lesson</a>
                 </div>
             </div>
 
             <!-- Lesson 7 -->
             <div class="lesson-card" data-lesson="7">
-                <div class="lesson-info">
-                    <h3>Lesson 7 - Short-term vs. Long-term Savings</h3>
-                    <p>Understand how to save for different time horizons</p>
+                <div class="lesson-number-badge">7</div>
+                <div class="lesson-header-row">
+                    <div class="lesson-icon">🎯</div>
+                    <div class="lesson-content">
+                        <h3>Short-term vs. Long-term Savings</h3>
+                        <p>Understand how to save for different time horizons</p>
+                        <div class="lesson-meta">
+                            <span class="lesson-duration">⏱️ 13 min</span>
+                            <span class="lesson-topics">Goal setting • Time horizons</span>
+                        </div>
+                    </div>
                 </div>
-                <div class="lesson-status">
+                <div class="lesson-footer">
                     <a href="/pillar2-lesson7" class="btn-start-lesson">Start Lesson</a>
                 </div>
             </div>
 
             <!-- Lesson 8 -->
             <div class="lesson-card" data-lesson="8">
-                <div class="lesson-info">
-                    <h3>Lesson 8 - Avoiding Budget Pitfalls</h3>
-                    <p>Learn common budgeting mistakes and how to prevent them</p>
+                <div class="lesson-number-badge">8</div>
+                <div class="lesson-header-row">
+                    <div class="lesson-icon">⚠️</div>
+                    <div class="lesson-content">
+                        <h3>Avoiding Budget Pitfalls</h3>
+                        <p>Learn common budgeting mistakes and how to prevent them</p>
+                        <div class="lesson-meta">
+                            <span class="lesson-duration">⏱️ 12 min</span>
+                            <span class="lesson-topics">Common mistakes • Prevention tips</span>
+                        </div>
+                    </div>
                 </div>
-                <div class="lesson-status">
+                <div class="lesson-footer">
                     <a href="/pillar2-lesson8" class="btn-start-lesson">Start Lesson</a>
                 </div>
             </div>
+        </div>
 
             <!-- Final Quiz -->
             <div class="quiz-card" id="quizCard" style="display: none;">
@@ -433,8 +667,8 @@
                     if (lessonCard) {
                         lessonCard.style.opacity = '0.6';
                         lessonCard.style.pointerEvents = 'none';
-                        const statusDiv = lessonCard.querySelector('.lesson-status');
-                        statusDiv.innerHTML = `<span style="color: #9ca3af; font-weight: 600;">🔒 Complete Previous Lesson</span>`;
+                        const footerDiv = lessonCard.querySelector('.lesson-footer');
+                        footerDiv.innerHTML = `<span style="color: #9ca3af; font-weight: 600;">🔒 Complete Previous Lesson</span>`;
                     }
                 }
                 return;
@@ -442,20 +676,27 @@
 
             const completed = JSON.parse(localStorage.getItem(`pillar2_completed_${userId}`) || '[]');
 
+            // Update overall progress bar
+            const completedCount = completed.length;
+            const progressPercent = Math.round((completedCount / 8) * 100);
+            document.getElementById('overallProgress').style.width = progressPercent + '%';
+            document.getElementById('progressText').textContent = `${completedCount} of 8 lessons completed`;
+            document.getElementById('progressPercent').textContent = progressPercent + '%';
+
             // Handle each lesson
             for (let lessonNum = 1; lessonNum <= 8; lessonNum++) {
                 const lessonCard = document.querySelector(`[data-lesson="${lessonNum}"]`);
                 if (!lessonCard) continue;
 
-                const statusDiv = lessonCard.querySelector('.lesson-status');
+                const footerDiv = lessonCard.querySelector('.lesson-footer');
                 const previousQuizPassed = lessonNum === 1 || localStorage.getItem(`lesson${lessonNum - 1 + 8}_quiz_passed_${userId}`) === 'true';
 
                 if (lessonNum === 1) {
                     // Lesson 1 is always unlocked
                     if (completed.includes(1)) {
                         lessonCard.classList.add('completed');
-                        statusDiv.innerHTML = `
-                            <span class="completed-badge">Completed</span>
+                        footerDiv.innerHTML = `
+                            <span class="completed-badge">✓ Completed</span>
                             <a href="/pillar2-lesson1" class="btn-start-lesson">Review</a>
                         `;
                     }
@@ -465,14 +706,14 @@
                         // Lock the lesson
                         lessonCard.style.opacity = '0.6';
                         lessonCard.style.pointerEvents = 'none';
-                        statusDiv.innerHTML = `
+                        footerDiv.innerHTML = `
                             <span style="color: #9ca3af; font-weight: 600;">🔒 Complete Previous Lesson</span>
                         `;
                     } else if (completed.includes(lessonNum)) {
                         // Lesson completed
                         lessonCard.classList.add('completed');
-                        statusDiv.innerHTML = `
-                            <span class="completed-badge">Completed</span>
+                        footerDiv.innerHTML = `
+                            <span class="completed-badge">✓ Completed</span>
                             <a href="pillar2-lesson${lessonNum}" class="btn-start-lesson">Review</a>
                         `;
                     }
