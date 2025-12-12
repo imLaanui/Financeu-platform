@@ -8,7 +8,7 @@ import "@css/buttons.css";
 import "@css/sections.css";
 
 export default function Contact() {
-    const [isLoggedIn, setIsLoggedIn] = useState<boolean | null>(() => {
+    const [, setIsLoggedIn] = useState<boolean | null>(() => {
         const cached = localStorage.getItem("authState");
         return cached ? JSON.parse(cached).isLoggedIn : null;
     });

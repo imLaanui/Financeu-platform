@@ -9,7 +9,7 @@ import "@css/sections.css";
 import "@css/help.css";
 
 export default function Help() {
-    const [isLoggedIn, setIsLoggedIn] = useState<boolean | null>(() => {
+    const [, setIsLoggedIn] = useState<boolean | null>(() => {
         const cached = localStorage.getItem("authState");
         return cached ? JSON.parse(cached).isLoggedIn : null;
     });

@@ -14,7 +14,7 @@ export default function Feedback() {
 
     const [message, setMessage] = useState<{ text: string; type: "success" | "error" } | null>(null);
     const [submitting, setSubmitting] = useState(false);
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [, setIsLoggedIn] = useState(false);
 
     // Update auth state
     useEffect(() => {

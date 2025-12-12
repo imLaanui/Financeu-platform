@@ -30,24 +30,6 @@ export default function Dashboard() {
         }
     };
 
-    // ---- Logout ----
-    const handleLogout = async () => {
-        localStorage.removeItem("authState");
-        localStorage.removeItem("token");
-        localStorage.removeItem("userId");
-
-        try {
-            await fetch(`${API_URL}/auth/logout`, {
-                method: "POST",
-                credentials: "include",
-            });
-        } catch {
-            /* ignore */
-        }
-
-        window.location.href = "/";
-    };
-
     // ---- Load dashboard ----
     useEffect(() => {
         const load = async () => {
