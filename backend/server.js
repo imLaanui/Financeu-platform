@@ -5,7 +5,7 @@ const cookieParser = require('cookie-parser');
 const path = require('path');
 const fs = require('fs');
 
-const authRoutes = require('./routes/auth');
+const { router: authRoutes } = require('./routes/auth');
 const userRoutes = require('./routes/users');
 const lessonRoutes = require('./routes/lessons');
 const feedbackRoutes = require('./routes/feedback');
