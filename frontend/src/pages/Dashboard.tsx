@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { API_URL } from '@config/api';
 import Navbar from '@components/Navbar';
 import Footer from '@components/Footer';
@@ -13,6 +14,7 @@ interface User {
 }
 
 export default function Dashboard() {
+    const navigate = useNavigate();
     const [user, setUser] = useState<User | null>(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
@@ -32,7 +34,7 @@ export default function Dashboard() {
             });
 
             if (!response.ok) {
-                window.location.href = '/login.html';
+                navigate('/login'); // Use React Router navigate
                 return null;
             }
 
@@ -40,7 +42,7 @@ export default function Dashboard() {
             return data.user;
         } catch (error) {
             console.error('Auth check failed:', error);
-            window.location.href = '/login.html';
+            navigate('/login'); // Use React Router navigate
             return null;
         }
     };
@@ -145,10 +147,10 @@ export default function Dashboard() {
                 method: 'POST',
                 credentials: 'include',
             });
-            window.location.href = '/index.html';
+            navigate('/'); // Use React Router navigate
         } catch (error) {
             console.error('Logout error:', error);
-            window.location.href = '/index.html';
+            navigate('/'); // Use React Router navigate
         }
     };
 
@@ -205,7 +207,6 @@ export default function Dashboard() {
             </div>
         );
     }
-
     return (
         <div className="dashboard-page">
             {/* Navigation */}

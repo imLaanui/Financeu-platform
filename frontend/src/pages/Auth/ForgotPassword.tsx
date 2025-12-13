@@ -7,12 +7,10 @@ export default function ForgotPassword() {
     const [loading, setLoading] = useState(false);
     const [errorMsg, setErrorMsg] = useState<string | null>(null);
     const [successMsg, setSuccessMsg] = useState<string | null>(null);
-    const [resetCode, setResetCode] = useState<string | null>(null);
 
     const hideMessages = () => {
         setErrorMsg(null);
         setSuccessMsg(null);
-        setResetCode(null);
     };
 
     const handleSubmit = async (e: React.FormEvent) => {
@@ -24,23 +22,27 @@ export default function ForgotPassword() {
             const response = await fetch(`${API_URL}/auth/forgot-password`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
+                credentials: "include",
                 body: JSON.stringify({ email }),
             });
 
             const data = await response.json();
 
             if (!response.ok) {
-                throw new Error(data.error || "Failed to generate reset code");
+                throw new Error(data.error || "Failed to send reset email");
             }
 
-            // Show reset code
-            setResetCode(data.resetCode);
+            // Success - show message that email was sent
+            setSuccessMsg(
+                "Password reset instructions have been sent to your email. " +
+                "Check your browser console for the reset link (email not yet configured)."
+            );
         } catch (error: unknown) {
             console.error("Forgot password error:", error);
             if (error instanceof Error) {
                 setErrorMsg(error.message);
             } else {
-                setErrorMsg("Failed to generate reset code. Please try again.");
+                setErrorMsg("Failed to send reset email. Please try again.");
             }
         } finally {
             setLoading(false);
@@ -53,52 +55,44 @@ export default function ForgotPassword() {
                 <div className="auth-card">
                     <div className="auth-header">
                         <h1>Reset Password</h1>
-                        <p>Enter your email to get a password reset code (displayed on screen)</p>
+                        <p>Enter your email to receive password reset instructions</p>
                     </div>
 
                     {errorMsg && <div className="error-message">{errorMsg}</div>}
-                    {successMsg && <div className="success-message">{successMsg}</div>}
-                    {resetCode && (
-                        <div className="reset-code-display">
-                            <p>
-                                <strong>📧 Email not yet configured - Your reset code is shown below:</strong>
-                            </p>
-                            <div className="code">{resetCode}</div>
+                    {successMsg && (
+                        <div className="success-message">
+                            <p>{successMsg}</p>
                             <p style={{ fontSize: "0.9rem", marginTop: "1rem" }}>
-                                Copy this code and use it on the{" "}
-                                <a href="/reset-password" style={{ color: "var(--primary-color)", textDecoration: "underline" }}>
-                                    reset password page
-                                </a>
+                                <strong>Note:</strong> Email service is not configured yet.
+                                Check your browser console for the reset link, or contact support.
                             </p>
                         </div>
                     )}
 
-                    {!resetCode && (
-                        <form onSubmit={handleSubmit}>
-                            <div className="form-group">
-                                <label htmlFor="email">Email Address</label>
-                                <input
-                                    type="email"
-                                    id="email"
-                                    name="email"
-                                    required
-                                    placeholder="you@example.com"
-                                    value={email}
-                                    onChange={(e) => setEmail(e.target.value)}
-                                />
-                            </div>
-                            <button type="submit" className="btn-submit" disabled={loading}>
-                                {loading ? "Generating code..." : "Get Reset Code"}
-                            </button>
-                        </form>
-                    )}
+                    <form onSubmit={handleSubmit}>
+                        <div className="form-group">
+                            <label htmlFor="email">Email Address</label>
+                            <input
+                                type="email"
+                                id="email"
+                                name="email"
+                                required
+                                placeholder="you@example.com"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                            />
+                        </div>
+                        <button type="submit" className="btn-submit" disabled={loading}>
+                            {loading ? "Sending..." : "Send Reset Instructions"}
+                        </button>
+                    </form>
 
                     <div className="auth-footer">
                         <p>
                             Remember your password? <a href="/login">Log in</a>
                         </p>
                         <p style={{ marginTop: "10px" }}>
-                            Already have a code? <a href="/reset-password">Reset password</a>
+                            Already have a reset link? <a href="/reset-password">Reset password</a>
                         </p>
                     </div>
                 </div>

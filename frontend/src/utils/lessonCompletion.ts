@@ -1,4 +1,4 @@
-import { API_URL } from '../config/api';
+import { API_URL } from '@config/api';
 
 export async function completeLesson(
     lessonId: string,
@@ -6,7 +6,6 @@ export async function completeLesson(
     lessonNum: number
 ): Promise<boolean> {
     const userId = localStorage.getItem('userId');
-
     if (!userId || userId === 'null' || userId === 'undefined') {
         console.error('❌ No userId found');
         alert('Please log in to save your progress.');
@@ -31,6 +30,7 @@ export async function completeLesson(
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${token}`,
             },
+            credentials: 'include', // Important: include cookies
             body: JSON.stringify({ lessonId }),
         });
 
@@ -52,7 +52,6 @@ export async function completeLesson(
 
         console.log('✅ Lesson completed successfully! Saved to backend & localStorage.');
         alert('Congratulations! Lesson completed successfully! 🎉');
-
         return true;
     } catch (error: unknown) {
         if (error instanceof Error) {
