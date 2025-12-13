@@ -364,8 +364,24 @@ export default function Dashboard() {
                                     <div className="lesson-details">
                                         <h3>
                                             Pillar 1{' '}
-                                            <span className="badge-free">FREE</span>
-                                            <span className="badge-available">• Available Now</span>
+                                            <span style={{
+                                                color: '#10b981',
+                                                fontSize: '12px',
+                                                fontWeight: 600,
+                                                textTransform: 'uppercase',
+                                                marginLeft: '10px'
+                                            }}>
+                                                FREE
+                                            </span>{' '}
+                                            <span style={{
+                                                color: '#10b981',
+                                                fontSize: '12px',
+                                                fontWeight: 600,
+                                                textTransform: 'uppercase',
+                                                marginLeft: '5px'
+                                            }}>
+                                                • Available Now
+                                            </span>
                                         </h3>
                                         <p>
                                             Foundation of financial literacy and money management
@@ -374,7 +390,11 @@ export default function Dashboard() {
                                     </div>
                                 </div>
                                 <div className="lesson-status">
-                                    <a href="/pillar1" className="btn-lesson">
+                                    <a
+                                        href="/pillar1-lessons"
+                                        className="btn-lesson"
+                                        style={{ textDecoration: 'none', display: 'inline-block' }}
+                                    >
                                         {pillar1ButtonText}
                                     </a>
                                 </div>
@@ -385,14 +405,34 @@ export default function Dashboard() {
                                     <div className="lesson-details">
                                         <h3>
                                             Pillar 2{' '}
-                                            <span className="badge-free">FREE</span>
-                                            <span className="badge-available">• Available Now</span>
+                                            <span style={{
+                                                color: '#10b981',
+                                                fontSize: '12px',
+                                                fontWeight: 600,
+                                                textTransform: 'uppercase',
+                                                marginLeft: '10px'
+                                            }}>
+                                                FREE
+                                            </span>{' '}
+                                            <span style={{
+                                                color: '#10b981',
+                                                fontSize: '12px',
+                                                fontWeight: 600,
+                                                textTransform: 'uppercase',
+                                                marginLeft: '5px'
+                                            }}>
+                                                • Available Now
+                                            </span>
                                         </h3>
                                         <p>Master budgeting and saving to build your financial security.</p>
                                     </div>
                                 </div>
                                 <div className="lesson-status">
-                                    <a href="/pillar2" className="btn-lesson">
+                                    <a
+                                        href="/pillar2-lessons"
+                                        className="btn-lesson"
+                                        style={{ textDecoration: 'none', display: 'inline-block' }}
+                                    >
                                         {pillar2ButtonText}
                                     </a>
                                 </div>
@@ -400,14 +440,22 @@ export default function Dashboard() {
 
                             <div
                                 className="lesson-item"
-                                onClick={() => (window.location.href = '/pillar3')}
+                                onClick={() => (window.location.href = '/pillar3-lessons')}
                                 style={{ cursor: 'pointer' }}
                             >
                                 <div className="lesson-info">
                                     <div className="lesson-details">
                                         <h3>
                                             Pillar 3: Credit & Debt Mastery{' '}
-                                            <span className="badge-free">FREE</span>
+                                            <span style={{
+                                                color: '#10b981',
+                                                fontSize: '12px',
+                                                fontWeight: 600,
+                                                textTransform: 'uppercase',
+                                                marginLeft: '10px'
+                                            }}>
+                                                FREE
+                                            </span>
                                         </h3>
                                         <p>Master credit scores, credit cards, and debt management.</p>
                                     </div>
@@ -433,7 +481,13 @@ export default function Dashboard() {
                                         <div className="lesson-details">
                                             <h3>
                                                 Pillar {pillar.num}{' '}
-                                                <span className={`badge-tier ${pillar.tier.toLowerCase()}`}>
+                                                <span style={{
+                                                    color: pillar.tier === 'PRO' ? '#f59e0b' : '#3b82f6',
+                                                    fontSize: '12px',
+                                                    fontWeight: 600,
+                                                    textTransform: 'uppercase',
+                                                    marginLeft: '10px'
+                                                }}>
                                                     {pillar.tier}
                                                 </span>
                                             </h3>
