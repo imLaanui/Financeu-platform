@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 import Navbar from '@components/Navbar';
 import Footer from '@components/Footer';
 
@@ -26,7 +26,7 @@ export default function Lesson1() {
 
     const totalScreens = 8;
 
-    const quizData: QuizData[] = [
+    const quizData: QuizData[] = useMemo(() => [
         {
             versions: [
                 {
@@ -123,7 +123,7 @@ export default function Lesson1() {
                 }
             ]
         }
-    ];
+    ], []);
 
     const initQuiz = () => {
         const selected = quizData.map(q => {
@@ -140,9 +140,14 @@ export default function Lesson1() {
             setQuizPassed(true);
             setQuizSubmitted(true);
         } else {
-            initQuiz();
+            const selected = quizData.map(q => {
+                const randomVersion = q.versions[Math.floor(Math.random() * q.versions.length)];
+                return randomVersion;
+            });
+            setCurrentQuestions(selected);
+            setUserAnswers(new Array(selected.length).fill(null));
         }
-    }, []);
+    }, [quizData]);
 
     const showScreen = (screenNumber: number) => {
         setCurrentScreen(screenNumber);
@@ -423,16 +428,16 @@ export default function Lesson1() {
                                                 ? idx === 3
                                                     ? '#d1fae5'
                                                     : checkpoint1Answer === idx
-                                                    ? '#fee2e2'
-                                                    : '#f9fafb'
+                                                        ? '#fee2e2'
+                                                        : '#f9fafb'
                                                 : '#f9fafb',
                                             padding: '15px',
                                             border: checkpoint1Answered
                                                 ? idx === 3
                                                     ? '2px solid #10b981'
                                                     : checkpoint1Answer === idx
-                                                    ? '2px solid #dc2626'
-                                                    : '2px solid #e5e7eb'
+                                                        ? '2px solid #dc2626'
+                                                        : '2px solid #e5e7eb'
                                                 : '2px solid #e5e7eb',
                                             borderRadius: '8px',
                                             marginBottom: '10px',
@@ -606,16 +611,16 @@ export default function Lesson1() {
                                                 ? idx === 1
                                                     ? '#d1fae5'
                                                     : checkpoint2Answer === idx
-                                                    ? '#fee2e2'
-                                                    : '#f9fafb'
+                                                        ? '#fee2e2'
+                                                        : '#f9fafb'
                                                 : '#f9fafb',
                                             padding: '15px',
                                             border: checkpoint2Answered
                                                 ? idx === 1
                                                     ? '2px solid #10b981'
                                                     : checkpoint2Answer === idx
-                                                    ? '2px solid #dc2626'
-                                                    : '2px solid #e5e7eb'
+                                                        ? '2px solid #dc2626'
+                                                        : '2px solid #e5e7eb'
                                                 : '2px solid #e5e7eb',
                                             borderRadius: '8px',
                                             marginBottom: '10px',
@@ -771,17 +776,15 @@ export default function Lesson1() {
                                             {q.options.map((option, oIndex) => (
                                                 <div
                                                     key={oIndex}
-                                                    className={`answer-option ${
-                                                        userAnswers[qIndex] === oIndex ? 'selected' : ''
-                                                    } ${
-                                                        quizSubmitted
+                                                    className={`answer-option ${userAnswers[qIndex] === oIndex ? 'selected' : ''
+                                                        } ${quizSubmitted
                                                             ? oIndex === q.correct
                                                                 ? 'correct'
                                                                 : userAnswers[qIndex] === oIndex
                                                                     ? 'incorrect'
                                                                     : ''
                                                             : ''
-                                                    }`}
+                                                        }`}
                                                     onClick={() => !quizSubmitted && selectAnswer(qIndex, oIndex)}
                                                     style={{ pointerEvents: quizSubmitted ? 'none' : 'auto' }}
                                                 >
