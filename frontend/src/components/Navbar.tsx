@@ -1,6 +1,6 @@
 import { useEffect, useState, useCallback } from "react";
 import { useNavigate, Link, useLocation } from "react-router-dom";
-import "@css/navbar.css";
+import "@css/components/navbar.css";
 
 export default function Navbar() {
   const navigate = useNavigate();

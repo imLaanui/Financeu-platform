@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { API_URL } from "@config/api";
-import "@css/lesson.css";
+import "@css/utilities/lesson.css";
 
 interface QuizQuestion {
   question: string;
@@ -107,7 +107,7 @@ export default function Lesson4() {
   useEffect(() => {
     updateNav();
     initQuiz();
-     
+
   }, []);
 
   const showScreen = (num: number) => {

@@ -1,7 +1,7 @@
-import "@css/curriculum.css";
 import Navbar from "@components/Navbar";
 import Footer from "@components/Footer";
 import { useNavigate } from "react-router-dom";
+import "@css/pages/curriculum.css";
 
 const pillars = [
     {

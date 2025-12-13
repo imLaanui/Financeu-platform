@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "@css/lesson.css";
 import { completeLesson } from "@utils/lessonCompletion";
+import "@css/utilities/lesson.css";
 
 interface QuizQuestion {
     question: string;

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { API_URL } from "@config/api";
-import "@css/Login.css";
+import "@css/auth/login.css";
 
 export default function ResetPassword() {
     const navigate = useNavigate();

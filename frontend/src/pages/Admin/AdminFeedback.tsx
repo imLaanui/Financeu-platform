@@ -1,8 +1,8 @@
 import { useEffect, useState, useCallback } from "react";
 import { API_URL } from "@config/api";
 import { Link } from "react-router-dom";
-import "@css/adminFeedback.css";
 import Footer from "@components/Footer";
+import "@css/admin/adminFeedback.css";
 
 interface FeedbackItem {
     id: number;

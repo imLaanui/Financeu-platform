@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { API_URL } from '@config/api';
 import Navbar from '@components/Navbar';
 import Footer from '@components/Footer';
-import '@css/dashboard.css';
+import '@css/pages/dashboard.css';
 
 interface User {
     id: string;

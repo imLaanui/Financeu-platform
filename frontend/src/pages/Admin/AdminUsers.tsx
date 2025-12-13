@@ -1,6 +1,6 @@
 import { useEffect, useState, useCallback } from "react";
 import { API_URL } from "@config/api";
-import "@css/adminUsers.css";
+import "@css/admin/adminUsers.css";
 
 interface PillarProgress {
     completed: number;

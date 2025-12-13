@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { API_URL } from "@config/api";
 import Navbar from "@components/Navbar";
 import Footer from "@components/Footer";
-import "@css/feedback.css";
+import "@css/pages/feedback.css";
 
 export default function Feedback() {
     const [formData, setFormData] = useState({

@@ -3,10 +3,10 @@ import { Link } from "react-router-dom";
 import { API_URL } from "@config/api";
 import Navbar from "@components/Navbar";
 import Footer from "@components/Footer";
-import "@css/navbar.css";
-import "@css/buttons.css";
-import "@css/sections.css";
-import "@css/help.css";
+import "@css/components/navbar.css";
+import "@css/layouts/buttons.css";
+import "@css/layouts/sections.css";
+import "@css/pages/help.css";
 
 export default function Help() {
     const [, setIsLoggedIn] = useState<boolean | null>(() => {

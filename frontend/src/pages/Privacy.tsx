@@ -1,6 +1,6 @@
-import "@css/main.css";
 import Navbar from "@components/Navbar";
 import Footer from "@components/Footer";
+import "@css/global/main.css";
 
 export default function Privacy() {
     return (

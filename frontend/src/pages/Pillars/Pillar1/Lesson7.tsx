@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { API_URL } from "@config/api";
-import "@css/lesson.css";
+import "@css/utilities/lesson.css";
 
 interface QuizQuestion {
   question: string;

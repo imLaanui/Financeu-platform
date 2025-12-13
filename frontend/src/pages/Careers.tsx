@@ -3,9 +3,9 @@ import { Link } from "react-router-dom";
 import { API_URL } from "@config/api";
 import Navbar from "@components/Navbar";
 import Footer from "@components/Footer";
-import "@css/navbar.css";
-import "@css/buttons.css";
-import "@css/sections.css";
+import "@css/components/navbar.css";
+import "@css/layouts/buttons.css";
+import "@css/layouts/sections.css";
 
 export default function Careers() {
     const [, setIsLoggedIn] = useState<boolean | null>(() => {

@@ -1,7 +1,7 @@
-import "@css/main.css"; // Assuming auth-container, container, and auth-card are defined here
 import Navbar from "@components/Navbar";
 import Footer from "@components/Footer";
-import "@css/terms.css"; // Styles for legal-content, h1, h2, p, ul, etc.
+import "@css/global/main.css";
+import "@css/pages/terms.css";
 
 export default function Terms() {
     return (

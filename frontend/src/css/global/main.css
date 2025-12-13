@@ -1,0 +1,12 @@
+@import './variables.css';
+@import './base.css';
+@import './reset.css';
+@import '../utilities/animations.css';
+@import '../layouts/sections.css';
+@import '../layouts/buttons.css';
+@import '../components/navbar.css';
+@import '../components/footer.css';
+@import '../pages/hero.css';
+@import '../pages/pricing.css';
+@import '../utilities/intro.css';
+@import './responsive.css';

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { API_URL } from "@config/api";
-import "@css/login.css";
+import "@css/auth/login.css";
 
 interface TestResult {
     status: "info" | "success" | "error";
