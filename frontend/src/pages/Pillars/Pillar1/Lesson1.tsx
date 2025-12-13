@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import Navbar from '@components/Navbar';
 import Footer from '@components/Footer';
-import '@css/utilities/lesson.css';
 
 interface QuizQuestion {
     question: string;
@@ -15,7 +14,9 @@ interface QuizData {
 
 export default function Lesson1() {
     const [currentScreen, setCurrentScreen] = useState(1);
+    const [checkpoint1Answer, setCheckpoint1Answer] = useState<number | null>(null);
     const [checkpoint1Answered, setCheckpoint1Answered] = useState(false);
+    const [checkpoint2Answer, setCheckpoint2Answer] = useState<number | null>(null);
     const [checkpoint2Answered, setCheckpoint2Answered] = useState(false);
     const [currentQuestions, setCurrentQuestions] = useState<QuizQuestion[]>([]);
     const [userAnswers, setUserAnswers] = useState<(number | null)[]>([]);
@@ -134,20 +135,13 @@ export default function Lesson1() {
     };
 
     useEffect(() => {
-        const userId = localStorage.getItem('userId');
-        if (!userId || userId === 'null' || userId === 'undefined') {
-            console.error('No valid userId found');
-            return;
-        }
-
-        const quizPassedStatus = localStorage.getItem(`lesson1_quiz_passed_${userId}`);
+        const quizPassedStatus = localStorage.getItem('lesson1_quiz_passed');
         if (quizPassedStatus === 'true') {
             setQuizPassed(true);
             setQuizSubmitted(true);
         } else {
             initQuiz();
         }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     const showScreen = (screenNumber: number) => {
@@ -167,15 +161,15 @@ export default function Lesson1() {
         }
     };
 
-    // FIX: Removed unused parameter
-    const checkCheckpoint1 = () => {
+    const checkCheckpoint1 = (selectedIndex: number) => {
         if (checkpoint1Answered) return;
+        setCheckpoint1Answer(selectedIndex);
         setCheckpoint1Answered(true);
     };
 
-    // FIX: Removed unused parameter
-    const checkCheckpoint2 = () => {
+    const checkCheckpoint2 = (selectedIndex: number) => {
         if (checkpoint2Answered) return;
+        setCheckpoint2Answer(selectedIndex);
         setCheckpoint2Answered(true);
     };
 
@@ -206,8 +200,7 @@ export default function Lesson1() {
 
         if (passed) {
             setQuizPassed(true);
-            const userId = localStorage.getItem('userId');
-            localStorage.setItem(`lesson1_quiz_passed_${userId}`, 'true');
+            localStorage.setItem('lesson1_quiz_passed', 'true');
         }
     };
 
@@ -217,198 +210,388 @@ export default function Lesson1() {
         initQuiz();
     };
 
-    const finishLesson = async () => {
+    const finishLesson = () => {
         if (!quizPassed) {
             alert('Please complete the quiz first!');
             return;
         }
-
-        // Mark lesson as completed
-        const userId = localStorage.getItem('userId');
-        const completedLessons = JSON.parse(localStorage.getItem(`pillar1_completed_${userId}`) || '[]');
-
-        if (!completedLessons.includes(1)) {
-            completedLessons.push(1);
-            localStorage.setItem(`pillar1_completed_${userId}`, JSON.stringify(completedLessons));
-        }
-
-        window.location.href = '/pillar1';
+        alert('Lesson completed! Redirecting to dashboard...');
     };
 
     const toggleChecklistItem = (index: number) => {
-        const items = document.querySelectorAll('.checklist-item');
-        items[index]?.classList.toggle('checked');
-        const checkbox = items[index]?.querySelector('.checklist-checkbox');
-        if (checkbox) {
-            checkbox.textContent = items[index]?.classList.contains('checked') ? '✓' : '';
-        }
+        const checkbox = document.querySelector(`#checklist-${index}`);
+        checkbox?.parentElement?.classList.toggle('checked');
     };
 
     return (
-        <div className="lesson-page">
+        <div style={{
+            fontFamily: 'system-ui, -apple-system, sans-serif',
+            backgroundColor: '#f8fafc',
+            minHeight: '100vh',
+            padding: '20px'
+        }}>
             <Navbar />
-
-            <div className="lesson-container">
-                <a href="/pillar1" className="back-link">← Back to Pillar 1 Lessons</a>
+            <div style={{ maxWidth: '800px', margin: '0 auto', padding: '40px 20px' }}>
+                <a href="#" style={{
+                    display: 'inline-block',
+                    marginBottom: '20px',
+                    color: '#3b82f6',
+                    textDecoration: 'none',
+                    fontWeight: '600'
+                }}>← Back to Pillar 1 Lessons</a>
 
                 {/* Header */}
-                <div className="lesson-header">
-                    <div className="lesson-number">LESSON 1</div>
-                    <h1>What is Money?</h1>
+                <div style={{
+                    textAlign: 'center',
+                    marginBottom: '40px',
+                    padding: '30px',
+                    background: 'linear-gradient(135deg, #0A1A2F 0%, #1a3a5c 100%)',
+                    borderRadius: '16px',
+                    color: 'white'
+                }}>
+                    <div style={{
+                        fontSize: '18px',
+                        fontWeight: '700',
+                        marginBottom: '5px',
+                        textTransform: 'uppercase',
+                        letterSpacing: '2px'
+                    }}>LESSON 1</div>
+                    <h1 style={{ fontSize: '36px', margin: '0' }}>What is Money?</h1>
                 </div>
 
                 {/* Screen 1: Quick Intro */}
                 {currentScreen === 1 && (
-                    <div className="lesson-screen active">
-                        <div className="screen-progress">Screen 1 of 8</div>
-                        <div className="lesson-section">
-                            <h2>What is Money?</h2>
-                            <div className="intro-cards">
-                                <div className="intro-card">
-                                    <div className="intro-card-icon">🎯</div>
-                                    <h3>The Problem</h3>
-                                    <p>Most people think money is just paper and coins</p>
-                                </div>
-                                <div className="intro-card">
-                                    <div className="intro-card-icon">💡</div>
-                                    <h3>Why It Matters</h3>
-                                    <p>Understanding money helps you make smarter financial decisions</p>
-                                </div>
-                                <div className="intro-card">
-                                    <div className="intro-card-icon">✨</div>
-                                    <h3>What You'll Learn</h3>
-                                    <p>Why money has value and how it works in your life</p>
-                                </div>
+                    <div>
+                        <div style={{
+                            textAlign: 'center',
+                            marginBottom: '20px',
+                            padding: '12px 20px',
+                            background: 'linear-gradient(135deg, #0A1A2F15 0%, #00A67615 100%)',
+                            borderRadius: '8px',
+                            fontWeight: '600',
+                            color: '#3b82f6'
+                        }}>Screen 1 of 8</div>
+
+                        <div style={{
+                            background: 'white',
+                            padding: '30px',
+                            borderRadius: '12px',
+                            marginBottom: '25px',
+                            boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)'
+                        }}>
+                            <h2 style={{ color: '#3b82f6', fontSize: '24px', marginBottom: '15px' }}>What is Money?</h2>
+                            <div style={{
+                                display: 'grid',
+                                gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
+                                gap: '20px',
+                                marginTop: '20px'
+                            }}>
+                                {[
+                                    { icon: '🎯', title: 'The Problem', desc: 'Most people think money is just paper and coins' },
+                                    { icon: '💡', title: 'Why It Matters', desc: 'Understanding money helps you make smarter financial decisions' },
+                                    { icon: '✨', title: "What You'll Learn", desc: 'Why money has value and how it works in your life' }
+                                ].map((card, i) => (
+                                    <div key={i} style={{
+                                        background: 'linear-gradient(135deg, #0A1A2F15 0%, #00A67615 100%)',
+                                        borderRadius: '12px',
+                                        padding: '20px',
+                                        textAlign: 'center'
+                                    }}>
+                                        <div style={{ fontSize: '48px', marginBottom: '10px' }}>{card.icon}</div>
+                                        <h3 style={{ color: '#3b82f6', fontSize: '18px', marginBottom: '8px' }}>{card.title}</h3>
+                                        <p style={{ color: '#64748b', fontSize: '14px', margin: '0' }}>{card.desc}</p>
+                                    </div>
+                                ))}
                             </div>
                         </div>
-                        <div className="screen-navigation">
-                            <div className="nav-spacer"></div>
-                            <button className="btn-nav" onClick={nextScreen}>Next <span>→</span></button>
+
+                        <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+                            <button onClick={nextScreen} style={{
+                                padding: '12px 24px',
+                                background: '#3b82f6',
+                                color: 'white',
+                                border: 'none',
+                                borderRadius: '8px',
+                                fontSize: '16px',
+                                fontWeight: '600',
+                                cursor: 'pointer'
+                            }}>Next →</button>
                         </div>
                     </div>
                 )}
 
                 {/* Screen 2: Core Concept */}
                 {currentScreen === 2 && (
-                    <div className="lesson-screen active">
-                        <div className="screen-progress">Screen 2 of 8</div>
-                        <div className="lesson-section">
-                            <h2>Core Concept</h2>
-                            <p><strong>Money is a medium of exchange, a store of value, and a unit of account.</strong></p>
-                            <p>Let's break that down:</p>
-                            <ul>
-                                <li><strong>Medium of Exchange:</strong> Money allows you to trade your work or goods for other things you need without having to barter directly. Instead of trading chickens for shoes, you sell chickens for money, then use that money to buy shoes.</li>
-                                <li><strong>Store of Value:</strong> Money holds its worth over time, allowing you to save today and spend tomorrow. You can earn money now and use it months or years later.</li>
-                                <li><strong>Unit of Account:</strong> Money provides a common way to measure value. Everything has a price tag, making it easy to compare what things are worth.</li>
+                    <div>
+                        <div style={{
+                            textAlign: 'center',
+                            marginBottom: '20px',
+                            padding: '12px 20px',
+                            background: 'linear-gradient(135deg, #0A1A2F15 0%, #00A67615 100%)',
+                            borderRadius: '8px',
+                            fontWeight: '600',
+                            color: '#3b82f6'
+                        }}>Screen 2 of 8</div>
+
+                        <div style={{
+                            background: 'white',
+                            padding: '30px',
+                            borderRadius: '12px',
+                            marginBottom: '25px',
+                            boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)'
+                        }}>
+                            <h2 style={{ color: '#3b82f6', fontSize: '24px', marginBottom: '15px' }}>Core Concept</h2>
+                            <p style={{ lineHeight: '1.8', color: '#64748b' }}>
+                                <strong>Money is a medium of exchange, a store of value, and a unit of account.</strong>
+                            </p>
+                            <p style={{ lineHeight: '1.8', color: '#64748b' }}>Let's break that down:</p>
+                            <ul style={{ lineHeight: '1.8', color: '#64748b' }}>
+                                <li><strong>Medium of Exchange:</strong> Money allows you to trade your work or goods for other things you need without having to barter directly.</li>
+                                <li><strong>Store of Value:</strong> Money holds its worth over time, allowing you to save today and spend tomorrow.</li>
+                                <li><strong>Unit of Account:</strong> Money provides a common way to measure value.</li>
                             </ul>
-                            <p>Money only works because we all agree it has value. A $20 bill is just paper, but society accepts it as payment because we trust it represents real value.</p>
                         </div>
-                        <div className="screen-navigation">
-                            <button className="btn-nav btn-prev" onClick={previousScreen}><span>←</span> Previous</button>
-                            <button className="btn-nav" onClick={nextScreen}>Next <span>→</span></button>
+
+                        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                            <button onClick={previousScreen} style={{
+                                padding: '12px 24px',
+                                background: '#6b7280',
+                                color: 'white',
+                                border: 'none',
+                                borderRadius: '8px',
+                                fontSize: '16px',
+                                fontWeight: '600',
+                                cursor: 'pointer'
+                            }}>← Previous</button>
+                            <button onClick={nextScreen} style={{
+                                padding: '12px 24px',
+                                background: '#3b82f6',
+                                color: 'white',
+                                border: 'none',
+                                borderRadius: '8px',
+                                fontSize: '16px',
+                                fontWeight: '600',
+                                cursor: 'pointer'
+                            }}>Next →</button>
                         </div>
                     </div>
                 )}
 
-                {/* Screen 3: Checkpoint Question 1 */}
+                {/* Screen 3: Checkpoint 1 */}
                 {currentScreen === 3 && (
-                    <div className="lesson-screen active">
-                        <div className="screen-progress">Screen 3 of 8</div>
-                        <div className="checkpoint-container">
-                            <div className="checkpoint-header">
-                                <h3>Quick Check</h3>
-                                <p>Let's pause and check your understanding. No pressure - you can continue regardless of your answer!</p>
+                    <div>
+                        <div style={{
+                            textAlign: 'center',
+                            marginBottom: '20px',
+                            padding: '12px 20px',
+                            background: 'linear-gradient(135deg, #0A1A2F15 0%, #00A67615 100%)',
+                            borderRadius: '8px',
+                            fontWeight: '600',
+                            color: '#3b82f6'
+                        }}>Screen 3 of 8</div>
+
+                        <div style={{
+                            background: 'linear-gradient(135deg, #E0F2FE 0%, #BAE6FD 100%)',
+                            border: '2px solid #7DD3FC',
+                            borderRadius: '12px',
+                            padding: '30px'
+                        }}>
+                            <div style={{ textAlign: 'center', marginBottom: '20px' }}>
+                                <h3 style={{ color: '#0284C7', fontSize: '24px', marginBottom: '8px' }}>Quick Check</h3>
+                                <p style={{ color: '#64748b' }}>Let's pause and check your understanding.</p>
                             </div>
-                            <div className="checkpoint-question">
-                                <div className="checkpoint-question-text">Which of these is NOT one of the three main functions of money?</div>
+
+                            <div style={{
+                                background: 'white',
+                                padding: '20px',
+                                borderRadius: '8px',
+                                marginBottom: '15px'
+                            }}>
+                                <div style={{
+                                    fontSize: '18px',
+                                    fontWeight: '600',
+                                    color: '#1e293b',
+                                    marginBottom: '15px'
+                                }}>Which of these is NOT one of the three main functions of money?</div>
+
                                 {['Medium of exchange', 'Store of value', 'Unit of account', 'Source of happiness'].map((option, idx) => (
                                     <div
                                         key={idx}
-                                        className={`checkpoint-option ${checkpoint1Answered ? (idx === 3 ? 'correct' : '') : ''}`}
-                                        onClick={checkCheckpoint1}
-                                        style={{ pointerEvents: checkpoint1Answered ? 'none' : 'auto' }}
+                                        onClick={() => checkCheckpoint1(idx)}
+                                        style={{
+                                            background: checkpoint1Answered
+                                                ? idx === 3
+                                                    ? '#d1fae5'
+                                                    : checkpoint1Answer === idx
+                                                    ? '#fee2e2'
+                                                    : '#f9fafb'
+                                                : '#f9fafb',
+                                            padding: '15px',
+                                            border: checkpoint1Answered
+                                                ? idx === 3
+                                                    ? '2px solid #10b981'
+                                                    : checkpoint1Answer === idx
+                                                    ? '2px solid #dc2626'
+                                                    : '2px solid #e5e7eb'
+                                                : '2px solid #e5e7eb',
+                                            borderRadius: '8px',
+                                            marginBottom: '10px',
+                                            cursor: checkpoint1Answered ? 'default' : 'pointer',
+                                            transition: 'all 0.2s'
+                                        }}
                                     >
-                                        <input type="radio" name="checkpoint1" value={idx} />
-                                        <span>{String.fromCharCode(65 + idx)}) {option}</span>
+                                        {String.fromCharCode(65 + idx)}) {option}
                                     </div>
                                 ))}
                             </div>
+
                             {checkpoint1Answered && (
-                                <div className="checkpoint-feedback show correct">
-                                    <div className="checkpoint-feedback-icon">🎉</div>
-                                    <div className="checkpoint-feedback-title">Great job!</div>
-                                    <div className="checkpoint-explanation">
-                                        Money has three functions: medium of exchange, store of value, and unit of account. While money can help provide security and options, happiness comes from many sources beyond money.
+                                <div style={{
+                                    background: 'white',
+                                    padding: '20px',
+                                    borderRadius: '8px',
+                                    borderLeft: checkpoint1Answer === 3 ? '4px solid #10b981' : '4px solid #f59e0b'
+                                }}>
+                                    <div style={{ fontSize: '32px', marginBottom: '10px' }}>
+                                        {checkpoint1Answer === 3 ? '🎉' : '💭'}
+                                    </div>
+                                    <div style={{
+                                        fontSize: '20px',
+                                        fontWeight: '700',
+                                        marginBottom: '10px',
+                                        color: checkpoint1Answer === 3 ? '#10b981' : '#f59e0b'
+                                    }}>
+                                        {checkpoint1Answer === 3 ? 'Great job!' : 'Not quite!'}
+                                    </div>
+                                    <div style={{ color: '#64748b', lineHeight: '1.6' }}>
+                                        {checkpoint1Answer === 3
+                                            ? 'Money has three functions: medium of exchange, store of value, and unit of account. While money can help provide security and options, happiness comes from many sources beyond money.'
+                                            : 'The correct answer is "Source of happiness". Money has three functions: medium of exchange, store of value, and unit of account. While money can help provide security and options, happiness comes from many sources beyond money.'}
                                     </div>
                                 </div>
                             )}
+
                             {checkpoint1Answered && (
-                                <button className="btn-continue show" onClick={nextScreen}>Continue <span>→</span></button>
+                                <button onClick={nextScreen} style={{
+                                    display: 'block',
+                                    width: '100%',
+                                    maxWidth: '300px',
+                                    margin: '20px auto 0',
+                                    padding: '15px',
+                                    background: '#3b82f6',
+                                    color: 'white',
+                                    border: 'none',
+                                    borderRadius: '8px',
+                                    fontSize: '16px',
+                                    fontWeight: '600',
+                                    cursor: 'pointer'
+                                }}>Continue →</button>
                             )}
                         </div>
-                        <div className="screen-navigation">
-                            <button className="btn-nav btn-prev" onClick={previousScreen}><span>←</span> Previous</button>
-                            <div className="nav-spacer"></div>
+
+                        <div style={{ display: 'flex', justifyContent: 'flex-start', marginTop: '20px' }}>
+                            <button onClick={previousScreen} style={{
+                                padding: '12px 24px',
+                                background: '#6b7280',
+                                color: 'white',
+                                border: 'none',
+                                borderRadius: '8px',
+                                fontSize: '16px',
+                                fontWeight: '600',
+                                cursor: 'pointer'
+                            }}>← Previous</button>
                         </div>
                     </div>
                 )}
 
                 {/* Screen 4: Simple Example */}
                 {currentScreen === 4 && (
-                    <div className="lesson-screen active">
-                        <div className="screen-progress">Screen 4 of 8</div>
-                        <div className="lesson-section">
-                            <h2>Simple Example</h2>
-                            <p>Imagine you're a talented artist who creates beautiful paintings. You want to buy groceries, pay rent, and get a haircut. Without money, you'd have to:</p>
-                            <ul>
-                                <li>Find a grocery store owner who wants a painting</li>
-                                <li>Find a landlord who accepts art as rent payment</li>
-                                <li>Find a hairstylist willing to trade a haircut for artwork</li>
-                            </ul>
-                            <p>This would be incredibly difficult and time-consuming! With money, you simply sell your paintings to anyone who wants them, receive cash, and use that cash to buy whatever you need from whoever is selling it. Money makes the exchange smooth and simple.</p>
-                        </div>
-                        <div className="visual-box">
-                            <h3>How Money Flows in Your Life</h3>
-                            <div className="money-flow">
-                                <div className="flow-item">
-                                    <strong>You Work</strong>
-                                    <p style={{ fontSize: '14px', marginTop: '8px' }}>Provide value through labor or skills</p>
-                                </div>
-                                <div className="flow-arrow">→</div>
-                                <div className="flow-item">
-                                    <strong>You Earn Money</strong>
-                                    <p style={{ fontSize: '14px', marginTop: '8px' }}>Receive payment for your work</p>
-                                </div>
-                                <div className="flow-arrow">→</div>
-                                <div className="flow-item">
-                                    <strong>You Spend Money</strong>
-                                    <p style={{ fontSize: '14px', marginTop: '8px' }}>Exchange it for goods and services</p>
-                                </div>
-                            </div>
-                            <p style={{ marginTop: '20px', textAlign: 'center', color: 'var(--text-secondary)', fontSize: '14px' }}>
-                                Money is the bridge between what you offer and what you need.
+                    <div>
+                        <div style={{
+                            textAlign: 'center',
+                            marginBottom: '20px',
+                            padding: '12px 20px',
+                            background: 'linear-gradient(135deg, #0A1A2F15 0%, #00A67615 100%)',
+                            borderRadius: '8px',
+                            fontWeight: '600',
+                            color: '#3b82f6'
+                        }}>Screen 4 of 8</div>
+
+                        <div style={{
+                            background: 'white',
+                            padding: '30px',
+                            borderRadius: '12px',
+                            marginBottom: '25px',
+                            boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)'
+                        }}>
+                            <h2 style={{ color: '#3b82f6', fontSize: '24px', marginBottom: '15px' }}>Simple Example</h2>
+                            <p style={{ lineHeight: '1.8', color: '#64748b' }}>
+                                Imagine you're a talented artist who creates beautiful paintings. Without money, you'd have to find specific people who want your art AND have what you need. With money, you simply sell your paintings and use that cash to buy whatever you need from whoever is selling it.
                             </p>
                         </div>
-                        <div className="screen-navigation">
-                            <button className="btn-nav btn-prev" onClick={previousScreen}><span>←</span> Previous</button>
-                            <button className="btn-nav" onClick={nextScreen}>Next <span>→</span></button>
+
+                        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                            <button onClick={previousScreen} style={{
+                                padding: '12px 24px',
+                                background: '#6b7280',
+                                color: 'white',
+                                border: 'none',
+                                borderRadius: '8px',
+                                fontSize: '16px',
+                                fontWeight: '600',
+                                cursor: 'pointer'
+                            }}>← Previous</button>
+                            <button onClick={nextScreen} style={{
+                                padding: '12px 24px',
+                                background: '#3b82f6',
+                                color: 'white',
+                                border: 'none',
+                                borderRadius: '8px',
+                                fontSize: '16px',
+                                fontWeight: '600',
+                                cursor: 'pointer'
+                            }}>Next →</button>
                         </div>
                     </div>
                 )}
 
-                {/* Screen 5: Checkpoint Question 2 */}
+                {/* Screen 5: Checkpoint 2 */}
                 {currentScreen === 5 && (
-                    <div className="lesson-screen active">
-                        <div className="screen-progress">Screen 5 of 8</div>
-                        <div className="checkpoint-container">
-                            <div className="checkpoint-header">
-                                <h3>Quick Check: Apply What You Learned</h3>
-                                <p>Let's see how you can apply this concept to a real-world scenario!</p>
+                    <div>
+                        <div style={{
+                            textAlign: 'center',
+                            marginBottom: '20px',
+                            padding: '12px 20px',
+                            background: 'linear-gradient(135deg, #0A1A2F15 0%, #00A67615 100%)',
+                            borderRadius: '8px',
+                            fontWeight: '600',
+                            color: '#3b82f6'
+                        }}>Screen 5 of 8</div>
+
+                        <div style={{
+                            background: 'linear-gradient(135deg, #E0F2FE 0%, #BAE6FD 100%)',
+                            border: '2px solid #7DD3FC',
+                            borderRadius: '12px',
+                            padding: '30px'
+                        }}>
+                            <div style={{ textAlign: 'center', marginBottom: '20px' }}>
+                                <h3 style={{ color: '#0284C7', fontSize: '24px', marginBottom: '8px' }}>Quick Check: Apply What You Learned</h3>
+                                <p style={{ color: '#64748b' }}>Let's see how you can apply this concept!</p>
                             </div>
-                            <div className="checkpoint-question">
-                                <div className="checkpoint-question-text">
-                                    Sarah wants to buy a $200 bike. Her friend offers to trade his old laptop for it. Why might Sarah prefer to get paid $200 in cash instead?
-                                </div>
+
+                            <div style={{
+                                background: 'white',
+                                padding: '20px',
+                                borderRadius: '8px',
+                                marginBottom: '15px'
+                            }}>
+                                <div style={{
+                                    fontSize: '18px',
+                                    fontWeight: '600',
+                                    color: '#1e293b',
+                                    marginBottom: '15px'
+                                }}>Sarah wants to buy a $200 bike. Her friend offers to trade his old laptop for it. Why might Sarah prefer to get paid $200 in cash instead?</div>
+
                                 {[
                                     'Cash is easier to carry',
                                     'She can use cash to buy exactly what she wants at any store',
@@ -417,31 +600,89 @@ export default function Lesson1() {
                                 ].map((option, idx) => (
                                     <div
                                         key={idx}
-                                        className={`checkpoint-option ${checkpoint2Answered ? (idx === 1 ? 'correct' : '') : ''}`}
-                                        onClick={checkCheckpoint2}
-                                        style={{ pointerEvents: checkpoint2Answered ? 'none' : 'auto' }}
+                                        onClick={() => checkCheckpoint2(idx)}
+                                        style={{
+                                            background: checkpoint2Answered
+                                                ? idx === 1
+                                                    ? '#d1fae5'
+                                                    : checkpoint2Answer === idx
+                                                    ? '#fee2e2'
+                                                    : '#f9fafb'
+                                                : '#f9fafb',
+                                            padding: '15px',
+                                            border: checkpoint2Answered
+                                                ? idx === 1
+                                                    ? '2px solid #10b981'
+                                                    : checkpoint2Answer === idx
+                                                    ? '2px solid #dc2626'
+                                                    : '2px solid #e5e7eb'
+                                                : '2px solid #e5e7eb',
+                                            borderRadius: '8px',
+                                            marginBottom: '10px',
+                                            cursor: checkpoint2Answered ? 'default' : 'pointer',
+                                            transition: 'all 0.2s'
+                                        }}
                                     >
-                                        <input type="radio" name="checkpoint2" value={idx} />
-                                        <span>{String.fromCharCode(65 + idx)}) {option}</span>
+                                        {String.fromCharCode(65 + idx)}) {option}
                                     </div>
                                 ))}
                             </div>
+
                             {checkpoint2Answered && (
-                                <div className="checkpoint-feedback show correct">
-                                    <div className="checkpoint-feedback-icon">🎉</div>
-                                    <div className="checkpoint-feedback-title">Excellent!</div>
-                                    <div className="checkpoint-explanation">
-                                        Perfect! This demonstrates money as a "medium of exchange." Instead of being stuck with items to trade (barter), money lets Sarah exchange her value for any goods or services she wants. She has the flexibility to buy exactly what she needs.
+                                <div style={{
+                                    background: 'white',
+                                    padding: '20px',
+                                    borderRadius: '8px',
+                                    borderLeft: checkpoint2Answer === 1 ? '4px solid #10b981' : '4px solid #f59e0b'
+                                }}>
+                                    <div style={{ fontSize: '32px', marginBottom: '10px' }}>
+                                        {checkpoint2Answer === 1 ? '🎉' : '💭'}
+                                    </div>
+                                    <div style={{
+                                        fontSize: '20px',
+                                        fontWeight: '700',
+                                        marginBottom: '10px',
+                                        color: checkpoint2Answer === 1 ? '#10b981' : '#f59e0b'
+                                    }}>
+                                        {checkpoint2Answer === 1 ? 'Excellent!' : 'Not quite!'}
+                                    </div>
+                                    <div style={{ color: '#64748b', lineHeight: '1.6' }}>
+                                        {checkpoint2Answer === 1
+                                            ? 'Perfect! This demonstrates money as a "medium of exchange." Instead of being stuck with items to trade, money lets Sarah exchange her value for any goods or services she wants.'
+                                            : 'The correct answer is "She can use cash to buy exactly what she wants at any store". This demonstrates money as a "medium of exchange" - it gives Sarah flexibility to buy exactly what she needs instead of being stuck with a specific item through barter.'}
                                     </div>
                                 </div>
                             )}
+
                             {checkpoint2Answered && (
-                                <button className="btn-continue show" onClick={nextScreen}>Continue <span>→</span></button>
+                                <button onClick={nextScreen} style={{
+                                    display: 'block',
+                                    width: '100%',
+                                    maxWidth: '300px',
+                                    margin: '20px auto 0',
+                                    padding: '15px',
+                                    background: '#3b82f6',
+                                    color: 'white',
+                                    border: 'none',
+                                    borderRadius: '8px',
+                                    fontSize: '16px',
+                                    fontWeight: '600',
+                                    cursor: 'pointer'
+                                }}>Continue →</button>
                             )}
                         </div>
-                        <div className="screen-navigation">
-                            <button className="btn-nav btn-prev" onClick={previousScreen}><span>←</span> Previous</button>
-                            <div className="nav-spacer"></div>
+
+                        <div style={{ display: 'flex', justifyContent: 'flex-start', marginTop: '20px' }}>
+                            <button onClick={previousScreen} style={{
+                                padding: '12px 24px',
+                                background: '#6b7280',
+                                color: 'white',
+                                border: 'none',
+                                borderRadius: '8px',
+                                fontSize: '16px',
+                                fontWeight: '600',
+                                cursor: 'pointer'
+                            }}>← Previous</button>
                         </div>
                     </div>
                 )}
