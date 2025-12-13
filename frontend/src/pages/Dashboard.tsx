@@ -391,7 +391,7 @@ export default function Dashboard() {
                                 </div>
                                 <div className="lesson-status">
                                     <a
-                                        href="/pillar1-lessons"
+                                        href="/pillar1"
                                         className="btn-lesson"
                                         style={{ textDecoration: 'none', display: 'inline-block' }}
                                     >
@@ -429,7 +429,7 @@ export default function Dashboard() {
                                 </div>
                                 <div className="lesson-status">
                                     <a
-                                        href="/pillar2-lessons"
+                                        href="/pillar2"
                                         className="btn-lesson"
                                         style={{ textDecoration: 'none', display: 'inline-block' }}
                                     >
@@ -440,7 +440,7 @@ export default function Dashboard() {
 
                             <div
                                 className="lesson-item"
-                                onClick={() => (window.location.href = '/pillar3-lessons')}
+                                onClick={() => (window.location.href = '/pillar3')}
                                 style={{ cursor: 'pointer' }}
                             >
                                 <div className="lesson-info">
