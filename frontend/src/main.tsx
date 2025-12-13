@@ -6,27 +6,27 @@ import Contact from "./pages/Contact";
 import Careers from "./pages/Careers";
 import Help from "./pages/Help";
 import Terms from "./pages/Terms";
-import Login from "./pages/Auth/Login";
-import Signup from "./pages/Auth/Signup";
-import ResetPassword from "./pages/Auth/ResetPassword";
+import Login from "./pages/auth/Login";
+import Signup from "./pages/auth/Signup";
+import ResetPassword from "./pages/auth/ResetPassword";
 import Privacy from "./pages/Privacy";
-import ForgotPassword from "./pages/Auth/ForgotPassword";
+import ForgotPassword from "./pages/auth/ForgotPassword";
 import Curriculum from "./pages/Curriculum";
 import Feedback from "./pages/Feedback";
-import AdminFeedback from "./pages/Admin/AdminFeedback";
-import AdminUsers from "./pages/Admin/AdminUsers";
+import AdminFeedback from "./pages/admin/AdminFeedback";
+import AdminUsers from "./pages/admin/AdminUsers";
 import Dashboard from "./pages/Dashboard";
 
-import Pillar1Index from "./pages/Pillars/Pillar1/Index";
-import Lesson1 from "./pages/Pillars/Pillar1/Lesson1";
-import Lesson2 from "./pages/Pillars/Pillar1/Lesson2";
-import Lesson3 from "./pages/Pillars/Pillar1/Lesson3";
-import Lesson4 from "./pages/Pillars/Pillar1/Lesson4";
-import Lesson5 from "./pages/Pillars/Pillar1/Lesson5";
-import Lesson6 from "./pages/Pillars/Pillar1/Lesson6";
-import Lesson7 from "./pages/Pillars/Pillar1/Lesson7";
-import Lesson8 from "./pages/Pillars/Pillar1/Lesson8";
-import Pillar1Quiz from "./pages/Pillars/Pillar1/Quiz";
+import Pillar1Index from "./pages/pillars/pillar1/Index";
+import Lesson1 from "./pages/pillars/pillar1/Lesson1";
+import Lesson2 from "./pages/pillars/pillar1/Lesson2";
+import Lesson3 from "./pages/pillars/pillar1/Lesson3";
+import Lesson4 from "./pages/pillars/pillar1/Lesson4";
+import Lesson5 from "./pages/pillars/pillar1/Lesson5";
+import Lesson6 from "./pages/pillars/pillar1/Lesson6";
+import Lesson7 from "./pages/pillars/pillar1/Lesson7";
+import Lesson8 from "./pages/pillars/pillar1/Lesson8";
+import Pillar1Quiz from "./pages/pillars/pillar1/Quiz";
 
 createRoot(document.getElementById("root")!).render(
   <BrowserRouter>
