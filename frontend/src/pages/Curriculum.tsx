@@ -168,6 +168,7 @@ export default function Curriculum() {
                 </div>
             </section>
 
+            {/* Footer */}
             <Footer />
         </>
     );
