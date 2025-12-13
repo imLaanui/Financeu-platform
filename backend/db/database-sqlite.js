@@ -15,6 +15,23 @@ const db = new sqlite3.Database(dbPath, (err) => {
 // Initialize database tables
 function initializeDatabase() {
   db.serialize(() => {
+    // Check if feedback table exists and drop it if it has wrong schema
+    db.get("SELECT sql FROM sqlite_master WHERE type='table' AND name='feedback'", [], (err, row) => {
+      if (row && row.sql && row.sql.includes('feedback_type')) {
+        console.log('⚠️  Detected old feedback table schema, dropping and recreating...');
+        db.run('DROP TABLE IF EXISTS feedback', (dropErr) => {
+          if (dropErr) {
+            console.error('Error dropping old feedback table:', dropErr);
+          } else {
+            console.log('✓ Old feedback table dropped');
+            createFeedbackTable();
+          }
+        });
+      } else {
+        createFeedbackTable();
+      }
+    });
+
     // Users table
     db.run(`
       CREATE TABLE IF NOT EXISTS users (
@@ -72,24 +89,6 @@ function initializeDatabase() {
       }
     });
 
-    // Feedback table
-    db.run(`
-      CREATE TABLE IF NOT EXISTS feedback (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        name TEXT,
-        email TEXT,
-        feedback_type TEXT NOT NULL CHECK(feedback_type IN ('Bug Report', 'Feature Request', 'General Feedback', 'Compliment')),
-        message TEXT NOT NULL,
-        created_at DATETIME DEFAULT CURRENT_TIMESTAMP
-      )
-    `, (err) => {
-      if (err) {
-        console.error('Error creating feedback table:', err.message);
-      } else {
-        console.log('Feedback table ready');
-      }
-    });
-
     // Password reset tokens table
     db.run(`
       CREATE TABLE IF NOT EXISTS password_reset_tokens (
@@ -107,6 +106,26 @@ function initializeDatabase() {
         console.log('Password reset tokens table ready');
       }
     });
+  });
+}
+
+// Separate function to create feedback table with correct schema
+function createFeedbackTable() {
+  db.run(`
+    CREATE TABLE IF NOT EXISTS feedback (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      name TEXT,
+      email TEXT,
+      type TEXT NOT NULL,
+      message TEXT NOT NULL,
+      created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+    )
+  `, (err) => {
+    if (err) {
+      console.error('Error creating feedback table:', err.message);
+    } else {
+      console.log('Feedback table ready');
+    }
   });
 }
 
@@ -230,13 +249,13 @@ async function getCompletedLessonsCount(userId) {
   });
 }
 
-// Feedback functions
+// Feedback functions - FIXED: Changed feedback_type to type
 
 // Create new feedback
 async function createFeedback(name, email, feedbackType, message) {
   return new Promise((resolve, reject) => {
     db.run(
-      'INSERT INTO feedback (name, email, feedback_type, message) VALUES (?, ?, ?, ?)',
+      'INSERT INTO feedback (name, email, type, message) VALUES (?, ?, ?, ?)',
       [name || null, email || null, feedbackType, message],
       function(err) {
         if (err) reject(err);
@@ -250,7 +269,7 @@ async function createFeedback(name, email, feedbackType, message) {
 async function getAllFeedback() {
   return new Promise((resolve, reject) => {
     db.all(
-      'SELECT id, name, email, feedback_type, message, created_at FROM feedback ORDER BY created_at DESC',
+      'SELECT id, name, email, type, message, created_at FROM feedback ORDER BY created_at DESC',
       [],
       (err, rows) => {
         if (err) reject(err);
