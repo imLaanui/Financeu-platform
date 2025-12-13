@@ -232,7 +232,7 @@ export default function Lesson1() {
             localStorage.setItem(`pillar1_completed_${userId}`, JSON.stringify(completedLessons));
         }
 
-        window.location.href = '/pillar1-lessons';
+        window.location.href = '/pillar1';
     };
 
     const toggleChecklistItem = (index: number) => {
@@ -249,7 +249,7 @@ export default function Lesson1() {
             <Navbar />
 
             <div className="lesson-container">
-                <a href="/pillar1-lessons" className="back-link">← Back to Pillar 1 Lessons</a>
+                <a href="/pillar1" className="back-link">← Back to Pillar 1 Lessons</a>
 
                 {/* Header */}
                 <div className="lesson-header">
