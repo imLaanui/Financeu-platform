@@ -1,4 +1,7 @@
-.PHONY: run build migrate test clean
+.PHONY: run build migrate-up migrate-down migrate-status test clean
+
+include .env
+export
 
 run:
 	go run cmd/server/main.go
@@ -6,8 +9,14 @@ run:
 build:
 	go build -o bin/server cmd/server/main.go
 
-migrate:
-	psql -h $(DB_HOST) -U $(DB_USER) -d $(DB_NAME) -f migrations/001_init_schema.sql
+migrate-up:
+	goose -dir migrations postgres "$(DATABASE_URL)" up
+
+migrate-down:
+	goose -dir migrations postgres "$(DATABASE_URL)" down
+
+migrate-status:
+	goose -dir migrations postgres "$(DATABASE_URL)" status
 
 test:
 	go test -v ./...
