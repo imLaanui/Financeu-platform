@@ -30,7 +30,14 @@ export default function Login() {
                 body: JSON.stringify({ email, password }),
             });
 
-            const data: { user: { id: string }; token: string; error?: string } = await response.json();
+            const data: {
+                user: {
+                    id: string;
+                    role: string;
+                };
+                token: string;
+                error?: string;
+            } = await response.json();
 
             if (!response.ok) throw new Error(data.error || "Login failed");
 
@@ -46,6 +53,7 @@ export default function Login() {
 
             localStorage.setItem("token", data.token);
             localStorage.setItem("userId", newUserId);
+            localStorage.setItem("userRole", data.user.role);
 
             setSuccessMessage("Login successful! Redirecting...");
             setTimeout(() => navigate("/dashboard"), 1000);

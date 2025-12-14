@@ -42,8 +42,14 @@ export default function Signup() {
                 body: JSON.stringify({ name, email, password }),
             });
 
-            const data: { user: { id: string }; token: string; error?: string } =
-                await response.json();
+            const data: {
+                user: {
+                    id: string;
+                    role: string;
+                };
+                token: string;
+                error?: string;
+            } = await response.json();
 
             if (!response.ok) throw new Error(data.error || "Registration failed");
 
@@ -56,6 +62,7 @@ export default function Signup() {
 
             localStorage.setItem("token", data.token);
             localStorage.setItem("userId", data.user.id);
+            localStorage.setItem("userRole", data.user.role);
 
             setSuccessMessage("Account created successfully! Redirecting...");
             setTimeout(() => navigate("/dashboard"), 1500);
