@@ -1,3 +1,4 @@
+// Package handlers provides the HTTP handlers for managing user accounts, profiles, and administrative actions.
 package handlers
 
 import (
@@ -8,11 +9,15 @@ import (
 	"github.com/imLaanui/Financeu-platform/backend/internal/repository"
 )
 
+// UserHandler holds dependencies for user-related HTTP handlers,
+// specifically the repositories needed to access user and lesson data.
 type UserHandler struct {
 	userRepo   *repository.UserRepository
 	lessonRepo *repository.LessonRepository
 }
 
+// NewUserHandler creates and returns a new UserHandler instance,
+// initializing it with the required UserRepository and LessonRepository.
 func NewUserHandler(userRepo *repository.UserRepository, lessonRepo *repository.LessonRepository) *UserHandler {
 	return &UserHandler{
 		userRepo:   userRepo,
@@ -20,6 +25,7 @@ func NewUserHandler(userRepo *repository.UserRepository, lessonRepo *repository.
 	}
 }
 
+// UpdateMembershipRequest defines the structure for a request to update a user's membership tier.
 type UpdateMembershipRequest struct {
 	Tier string `json:"tier" binding:"required,oneof=free premium pro"`
 }

@@ -1,3 +1,4 @@
+// Package handlers provides the HTTP handlers for the application, including submission and administration of feedback.
 package handlers
 
 import (
@@ -9,16 +10,20 @@ import (
 	"github.com/imLaanui/Financeu-platform/backend/internal/repository"
 )
 
+// FeedbackHandler holds the dependency for interacting with the feedback data store.
 type FeedbackHandler struct {
 	feedbackRepo *repository.FeedbackRepository
 }
 
+// NewFeedbackHandler creates and returns a new FeedbackHandler instance,
+// initializing it with the required FeedbackRepository.
 func NewFeedbackHandler(feedbackRepo *repository.FeedbackRepository) *FeedbackHandler {
 	return &FeedbackHandler{
 		feedbackRepo: feedbackRepo,
 	}
 }
 
+// SubmitFeedbackRequest defines the structure for a user's request to submit feedback.
 type SubmitFeedbackRequest struct {
 	Name         *string `json:"name"`
 	Email        *string `json:"email"`
@@ -78,7 +83,7 @@ func (h *FeedbackHandler) AdminGetFeedback(c *gin.Context) {
 	})
 }
 
-// AdminDeleteFeedback deletes a feedback entry (admin only)
+// AdminDeleteFeedback deletes a feedback entry specified by ID (admin only)
 func (h *FeedbackHandler) AdminDeleteFeedback(c *gin.Context) {
 	idStr := c.Param("id")
 	if idStr == "" {

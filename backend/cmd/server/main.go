@@ -40,7 +40,11 @@ func main() {
 
 	// Connect to the database
 	db := database.Connect()
-	defer db.Close()
+	defer func() {
+		if err := db.Close(); err != nil {
+			log.Printf("Error closing database: %v", err)
+		}
+	}()
 
 	// Initialize repositories
 	userRepo := repository.NewUserRepository(db)

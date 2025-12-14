@@ -1,3 +1,4 @@
+// Package repository provides data access methods for interacting with the database, abstracting the SQL logic from the business handlers.
 package repository
 
 import (
@@ -7,10 +8,12 @@ import (
 	"github.com/imLaanui/Financeu-platform/backend/internal/models"
 )
 
+// LessonRepository provides methods for managing user lesson progress data in the database.
 type LessonRepository struct {
 	db *sql.DB
 }
 
+// NewLessonRepository creates and returns a new LessonRepository instance.
 func NewLessonRepository(db *sql.DB) *LessonRepository {
 	return &LessonRepository{db: db}
 }
@@ -27,7 +30,11 @@ func (r *LessonRepository) GetUserProgress(userID int) ([]*models.LessonProgress
 	if err != nil {
 		return nil, fmt.Errorf("error getting user progress: %w", err)
 	}
-	defer rows.Close()
+	defer func() {
+		if err := rows.Close(); err != nil {
+			fmt.Printf("error closing rows: %v\n", err)
+		}
+	}()
 
 	var progress []*models.LessonProgress
 	for rows.Next() {
@@ -37,6 +44,11 @@ func (r *LessonRepository) GetUserProgress(userID int) ([]*models.LessonProgress
 			return nil, fmt.Errorf("error scanning progress: %w", err)
 		}
 		progress = append(progress, p)
+	}
+
+	// FIX: Check for any error that occurred during the iteration
+	if err := rows.Err(); err != nil {
+		return nil, fmt.Errorf("error during lesson progress iteration: %w", err)
 	}
 
 	return progress, nil

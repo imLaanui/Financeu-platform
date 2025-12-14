@@ -1,4 +1,5 @@
-package utils
+// Package jwtauth provides general-purpose utility functions, specifically including JWT token generation and validation.
+package jwtauth
 
 import (
 	"fmt"

@@ -1,3 +1,4 @@
+// Package handlers provides the HTTP handlers for the application's authentication and user-related routes.
 package handlers
 
 import (
@@ -12,9 +13,11 @@ import (
 	"golang.org/x/crypto/bcrypt"
 
 	"github.com/imLaanui/Financeu-platform/backend/internal/repository"
-	"github.com/imLaanui/Financeu-platform/backend/internal/utils"
+	"github.com/imLaanui/Financeu-platform/backend/internal/jwtauth"
 )
 
+// AuthHandler holds dependencies for authentication-related HTTP handlers,
+// including repositories and configuration settings (JWT secret, session expiry).
 type AuthHandler struct {
 	userRepo       *repository.UserRepository
 	resetTokenRepo *repository.ResetTokenRepository
@@ -22,6 +25,8 @@ type AuthHandler struct {
 	sessionExpiry  time.Duration
 }
 
+// NewAuthHandler creates and returns a new AuthHandler instance, initializing it
+// with the necessary repositories and loading JWT configuration from environment variables.
 func NewAuthHandler(userRepo *repository.UserRepository, resetTokenRepo *repository.ResetTokenRepository) *AuthHandler {
 	// Get JWT settings from environment
 	jwtSecret := os.Getenv("JWT_SECRET")
@@ -46,22 +51,27 @@ func NewAuthHandler(userRepo *repository.UserRepository, resetTokenRepo *reposit
 	}
 }
 
-// Request/Response structs
+// RegisterRequest defines the structure for a new user registration request.
 type RegisterRequest struct {
 	Name     string `json:"name" binding:"required"`
 	Email    string `json:"email" binding:"required,email"`
 	Password string `json:"password" binding:"required,min=6"`
 }
 
+// LoginRequest defines the structure for a user login request.
 type LoginRequest struct {
 	Email    string `json:"email" binding:"required,email"`
 	Password string `json:"password" binding:"required"`
 }
 
+// ForgotPasswordRequest defines the structure for a forgot password request,
+// requiring only the user's email.
 type ForgotPasswordRequest struct {
 	Email string `json:"email" binding:"required,email"`
 }
 
+// ResetPasswordRequest defines the structure for a password reset request,
+// requiring email, token, and a new password.
 type ResetPasswordRequest struct {
 	Email       string `json:"email" binding:"required,email"`
 	Token       string `json:"token" binding:"required"`
@@ -105,7 +115,7 @@ func (h *AuthHandler) Register(c *gin.Context) {
 	}
 
 	// Generate JWT token
-	token, err := utils.GenerateToken(user, h.jwtSecret, h.sessionExpiry)
+	token, err := jwtauth.GenerateToken(user, h.jwtSecret, h.sessionExpiry)
 	if err != nil {
 		log.Printf("Error generating token: %v", err)
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to generate token"})
@@ -148,7 +158,7 @@ func (h *AuthHandler) Login(c *gin.Context) {
 	}
 
 	// Generate JWT token
-	token, err := utils.GenerateToken(user, h.jwtSecret, h.sessionExpiry)
+	token, err := jwtauth.GenerateToken(user, h.jwtSecret, h.sessionExpiry)
 	if err != nil {
 		log.Printf("Error generating token: %v", err)
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to generate token"})

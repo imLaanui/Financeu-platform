@@ -1,3 +1,4 @@
+// Package middleware provides Gin middleware functions for authentication, authorization, and other request processing tasks.
 package middleware
 
 import (
@@ -5,7 +6,7 @@ import (
 	"strings"
 
 	"github.com/gin-gonic/gin"
-	"github.com/imLaanui/Financeu-platform/backend/internal/utils"
+	"github.com/imLaanui/Financeu-platform/backend/internal/jwtauth"
 )
 
 // AuthMiddleware validates JWT tokens and adds user info to the context
@@ -34,7 +35,7 @@ func AuthMiddleware(jwtSecret string) gin.HandlerFunc {
 		}
 
 		// Verify token
-		claims, err := utils.VerifyToken(token, jwtSecret)
+		claims, err := jwtauth.VerifyToken(token, jwtSecret)
 		if err != nil {
 			c.JSON(http.StatusUnauthorized, gin.H{"error": "Invalid or expired token"})
 			c.Abort()

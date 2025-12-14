@@ -1,3 +1,4 @@
+// Package repository provides data access methods for interacting with the database, abstracting the SQL logic from the business handlers.
 package repository
 
 import (
@@ -8,10 +9,12 @@ import (
 	"github.com/imLaanui/Financeu-platform/backend/internal/models"
 )
 
+// ResetTokenRepository provides methods for managing password reset tokens in the database.
 type ResetTokenRepository struct {
 	db *sql.DB
 }
 
+// NewResetTokenRepository creates and returns a new ResetTokenRepository instance.
 func NewResetTokenRepository(db *sql.DB) *ResetTokenRepository {
 	return &ResetTokenRepository{db: db}
 }

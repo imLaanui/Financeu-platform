@@ -1,3 +1,4 @@
+// Package handlers provides the HTTP handlers for managing user-specific lesson progress and fetching lesson metadata.
 package handlers
 
 import (
@@ -8,16 +9,20 @@ import (
 	"github.com/imLaanui/Financeu-platform/backend/internal/repository"
 )
 
+// LessonHandler holds the dependency for interacting with the lesson data repository.
 type LessonHandler struct {
 	lessonRepo *repository.LessonRepository
 }
 
+// NewLessonHandler creates and returns a new LessonHandler instance,
+// initializing it with the required LessonRepository.
 func NewLessonHandler(lessonRepo *repository.LessonRepository) *LessonHandler {
 	return &LessonHandler{
 		lessonRepo: lessonRepo,
 	}
 }
 
+// CompleteLessonRequest defines the structure for a request to mark a specific lesson as completed.
 type CompleteLessonRequest struct {
 	LessonID string `json:"lessonId" binding:"required"`
 }

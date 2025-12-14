@@ -1,3 +1,4 @@
+// Package database provides functionality for connecting to and interacting with the application's PostgreSQL database.
 package database
 
 import (
@@ -6,9 +7,14 @@ import (
 	"log"
 	"os"
 
+	// This is a blank import, used specifically to register the PostgreSQL driver
+	// with the database/sql package.
 	_ "github.com/lib/pq"
 )
 
+// Connect establishes a connection to the PostgreSQL database using environment variables
+// for configuration and returns the *sql.DB object. It logs and exits the application
+// if the connection or a ping attempt fails.
 func Connect() *sql.DB {
 	dsn := fmt.Sprintf(
 		"host=%s port=%s user=%s password=%s dbname=%s sslmode=%s",

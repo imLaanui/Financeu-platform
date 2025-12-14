@@ -1,3 +1,4 @@
+// Package repository provides data access methods for interacting with the database, abstracting the SQL logic from the business handlers.
 package repository
 
 import (
@@ -8,10 +9,12 @@ import (
 	"github.com/imLaanui/Financeu-platform/backend/internal/models"
 )
 
+// UserRepository provides methods for managing user account data in the database.
 type UserRepository struct {
 	db *sql.DB
 }
 
+// NewUserRepository creates and returns a new UserRepository instance.
 func NewUserRepository(db *sql.DB) *UserRepository {
 	return &UserRepository{db: db}
 }

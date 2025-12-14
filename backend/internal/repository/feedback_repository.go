@@ -1,3 +1,4 @@
+// Package repository provides data access methods for interacting with the database, abstracting the SQL logic from the business handlers.
 package repository
 
 import (
@@ -7,10 +8,12 @@ import (
 	"github.com/imLaanui/Financeu-platform/backend/internal/models"
 )
 
+// FeedbackRepository provides methods for managing feedback data in the database.
 type FeedbackRepository struct {
 	db *sql.DB
 }
 
+// NewFeedbackRepository creates and returns a new FeedbackRepository instance.
 func NewFeedbackRepository(db *sql.DB) *FeedbackRepository {
 	return &FeedbackRepository{db: db}
 }
@@ -44,7 +47,11 @@ func (r *FeedbackRepository) GetAll() ([]*models.Feedback, error) {
 	if err != nil {
 		return nil, fmt.Errorf("error getting feedback: %w", err)
 	}
-	defer rows.Close()
+	defer func() {
+		if err := rows.Close(); err != nil {
+			fmt.Printf("error closing rows: %v\n", err)
+		}
+	}()
 
 	var feedbacks []*models.Feedback
 	for rows.Next() {
@@ -54,6 +61,11 @@ func (r *FeedbackRepository) GetAll() ([]*models.Feedback, error) {
 			return nil, fmt.Errorf("error scanning feedback: %w", err)
 		}
 		feedbacks = append(feedbacks, f)
+	}
+
+	// FIX: Check for any error that occurred during the iteration
+	if err := rows.Err(); err != nil {
+		return nil, fmt.Errorf("error during feedback iteration: %w", err)
 	}
 
 	return feedbacks, nil
