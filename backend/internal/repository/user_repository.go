@@ -22,22 +22,21 @@ func NewUserRepository(db *sql.DB) *UserRepository {
 // GetByEmail finds a user by email (case-insensitive)
 func (r *UserRepository) GetByEmail(email string) (*models.User, error) {
 	query := `
-		SELECT id, email, password, name, membership_tier, created_at, updated_at
+		SELECT id, email, password, name, role, membership_tier, created_at, updated_at
 		FROM users
 		WHERE LOWER(email) = LOWER($1)
 	`
-
 	user := &models.User{}
 	err := r.db.QueryRow(query, email).Scan(
 		&user.ID,
 		&user.Email,
 		&user.Password,
 		&user.Name,
+		&user.Role,
 		&user.MembershipTier,
 		&user.CreatedAt,
 		&user.UpdatedAt,
 	)
-
 	if err == sql.ErrNoRows {
 		return nil, nil // User not found, return nil without error
 	}
@@ -51,22 +50,21 @@ func (r *UserRepository) GetByEmail(email string) (*models.User, error) {
 // GetByID finds a user by ID
 func (r *UserRepository) GetByID(id int) (*models.User, error) {
 	query := `
-		SELECT id, email, password, name, membership_tier, created_at, updated_at
+		SELECT id, email, password, name, role, membership_tier, created_at, updated_at
 		FROM users
 		WHERE id = $1
 	`
-
 	user := &models.User{}
 	err := r.db.QueryRow(query, id).Scan(
 		&user.ID,
 		&user.Email,
 		&user.Password,
 		&user.Name,
+		&user.Role,
 		&user.MembershipTier,
 		&user.CreatedAt,
 		&user.UpdatedAt,
 	)
-
 	if err == sql.ErrNoRows {
 		return nil, nil
 	}
@@ -77,24 +75,23 @@ func (r *UserRepository) GetByID(id int) (*models.User, error) {
 	return user, nil
 }
 
-// Create creates a new user
+// Create creates a new user with default role of 'user'
 func (r *UserRepository) Create(name, email, hashedPassword string) (*models.User, error) {
 	query := `
-		INSERT INTO users (name, email, password, membership_tier)
-		VALUES ($1, $2, $3, 'free')
-		RETURNING id, email, name, membership_tier, created_at, updated_at
+		INSERT INTO users (name, email, password, role, membership_tier)
+		VALUES ($1, $2, $3, 'user', 'free')
+		RETURNING id, email, name, role, membership_tier, created_at, updated_at
 	`
-
 	user := &models.User{}
 	err := r.db.QueryRow(query, name, email, hashedPassword).Scan(
 		&user.ID,
 		&user.Email,
 		&user.Name,
+		&user.Role,
 		&user.MembershipTier,
 		&user.CreatedAt,
 		&user.UpdatedAt,
 	)
-
 	if err != nil {
 		if strings.Contains(err.Error(), "duplicate key") {
 			return nil, fmt.Errorf("user with this email already exists")
@@ -112,7 +109,6 @@ func (r *UserRepository) UpdatePassword(email, hashedPassword string) error {
 		SET password = $1, updated_at = CURRENT_TIMESTAMP
 		WHERE LOWER(email) = LOWER($2)
 	`
-
 	result, err := r.db.Exec(query, hashedPassword, email)
 	if err != nil {
 		return fmt.Errorf("error updating password: %w", err)
@@ -122,7 +118,6 @@ func (r *UserRepository) UpdatePassword(email, hashedPassword string) error {
 	if err != nil {
 		return fmt.Errorf("error checking rows affected: %w", err)
 	}
-
 	if rowsAffected == 0 {
 		return fmt.Errorf("user not found")
 	}
@@ -137,10 +132,24 @@ func (r *UserRepository) UpdateTier(userID int, tier string) error {
 		SET membership_tier = $1, updated_at = CURRENT_TIMESTAMP
 		WHERE id = $2
 	`
-
 	_, err := r.db.Exec(query, tier, userID)
 	if err != nil {
 		return fmt.Errorf("error updating user tier: %w", err)
+	}
+
+	return nil
+}
+
+// UpdateRole updates a user's role (admin use only)
+func (r *UserRepository) UpdateRole(userID int, role string) error {
+	query := `
+		UPDATE users
+		SET role = $1, updated_at = CURRENT_TIMESTAMP
+		WHERE id = $2
+	`
+	_, err := r.db.Exec(query, role, userID)
+	if err != nil {
+		return fmt.Errorf("error updating user role: %w", err)
 	}
 
 	return nil

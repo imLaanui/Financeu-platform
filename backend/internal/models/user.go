@@ -9,6 +9,7 @@ type User struct {
 	Email          string    `json:"email"`
 	Password       string    `json:"-"`
 	Name           string    `json:"name"`
+	Role           string    `json:"role"`
 	MembershipTier string    `json:"membershipTier"`
 	CreatedAt      time.Time `json:"createdAt"`
 	UpdatedAt      time.Time `json:"updatedAt"`
@@ -18,7 +19,8 @@ type User struct {
 type UserResponse struct {
 	ID             int       `json:"id"`
 	Email          string    `json:"email"`
-	Name           string    `json:"name"` // Removed the colon (:) here
+	Name           string    `json:"name"`
+	Role           string    `json:"role"`
 	MembershipTier string    `json:"membershipTier"`
 	CreatedAt      time.Time `json:"createdAt"`
 }
@@ -29,7 +31,13 @@ func (u *User) ToResponse() *UserResponse {
 		ID:             u.ID,
 		Email:          u.Email,
 		Name:           u.Name,
+		Role:           u.Role,
 		MembershipTier: u.MembershipTier,
 		CreatedAt:      u.CreatedAt,
 	}
+}
+
+// IsAdmin returns true if the user has an admin role
+func (u *User) IsAdmin() bool {
+	return u.Role == "admin"
 }

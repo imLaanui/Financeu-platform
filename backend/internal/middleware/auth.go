@@ -46,7 +46,28 @@ func AuthMiddleware(jwtSecret string) gin.HandlerFunc {
 		c.Set("userID", claims.UserID)
 		c.Set("email", claims.Email)
 		c.Set("name", claims.Name)
+		c.Set("role", claims.Role)
 		c.Set("membershipTier", claims.MembershipTier)
+
+		c.Next()
+	}
+}
+
+// RequireAdmin middleware checks if user has admin role
+func RequireAdmin() gin.HandlerFunc {
+	return func(c *gin.Context) {
+		role, exists := c.Get("role")
+		if !exists {
+			c.JSON(http.StatusForbidden, gin.H{"error": "Role not found"})
+			c.Abort()
+			return
+		}
+
+		if role != "admin" {
+			c.JSON(http.StatusForbidden, gin.H{"error": "Admin access required"})
+			c.Abort()
+			return
+		}
 
 		c.Next()
 	}
@@ -61,6 +82,13 @@ func RequireTier(requiredTier string) gin.HandlerFunc {
 	}
 
 	return func(c *gin.Context) {
+		// Admins bypass tier requirements
+		role, roleExists := c.Get("role")
+		if roleExists && role == "admin" {
+			c.Next()
+			return
+		}
+
 		userTier, exists := c.Get("membershipTier")
 		if !exists {
 			c.JSON(http.StatusForbidden, gin.H{"error": "Membership tier not found"})

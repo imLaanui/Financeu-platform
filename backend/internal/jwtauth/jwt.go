@@ -14,6 +14,7 @@ type Claims struct {
 	UserID         int    `json:"id"`
 	Email          string `json:"email"`
 	Name           string `json:"name"`
+	Role           string `json:"role"`
 	MembershipTier string `json:"membershipTier"`
 	jwt.RegisteredClaims
 }
@@ -24,6 +25,7 @@ func GenerateToken(user *models.User, secret string, expiry time.Duration) (stri
 		UserID:         user.ID,
 		Email:          user.Email,
 		Name:           user.Name,
+		Role:           user.Role,
 		MembershipTier: user.MembershipTier,
 		RegisteredClaims: jwt.RegisteredClaims{
 			ExpiresAt: jwt.NewNumericDate(time.Now().Add(expiry)),
