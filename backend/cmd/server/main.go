@@ -86,11 +86,6 @@ func main() {
 		AllowCredentials: true,
 	}))
 
-	// Health check endpoint
-	r.GET("/health", func(c *gin.Context) {
-		c.JSON(200, gin.H{"status": "ok"})
-	})
-
 	// API routes
 	api := r.Group("/api")
 	{
@@ -137,9 +132,7 @@ func main() {
 		port = "3000"
 	}
 
-	log.Printf("🚀 Server starting on port %s", port)
-	log.Printf("📡 API available at http://localhost:%s/api", port)
-	log.Printf("🏥 Health check at http://localhost:%s/health", port)
+	log.Printf("Server starting on port %s", port)
 
 	if err := r.Run(":" + port); err != nil {
 		log.Fatal("Failed to start server:", err)
