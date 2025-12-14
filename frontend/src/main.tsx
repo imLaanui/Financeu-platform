@@ -8,6 +8,7 @@ import Help from "./pages/Help";
 import Terms from "./pages/Terms";
 import Login from "./pages/auth/Login";
 import Signup from "./pages/auth/Signup";
+import Signout from "./pages/auth/Signout";
 import ResetPassword from "./pages/auth/ResetPassword";
 import Privacy from "./pages/Privacy";
 import ForgotPassword from "./pages/auth/ForgotPassword";
@@ -48,6 +49,7 @@ createRoot(document.getElementById("root")!).render(
       <Route path="/admin/feedback" element={<AdminFeedback />} />
       <Route path="/admin/users" element={<AdminUsers />} />
       <Route path="/dashboard" element={<Dashboard />} />
+      <Route path="/signout" element={<Signout />} />
 
       {/* Pillar1 routes – flat */}
       <Route path="/pillar1" element={<Pillar1Index />} />
