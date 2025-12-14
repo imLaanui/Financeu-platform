@@ -1,4 +1,4 @@
-.PHONY: run build migrate-up migrate-down migrate-status test clean
+.PHONY: run build migrate-up migrate-down migrate-status test vet lint check clean
 
 include .env
 export
@@ -21,5 +21,13 @@ migrate-status:
 test:
 	go test -v ./...
 
+vet:
+	go vet ./...
+
+lint:
+	golangci-lint run
+
+check: vet lint test
+
 clean:
-	rm -rf bin/
+	rm -rf bin

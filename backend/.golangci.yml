@@ -1,0 +1,30 @@
+version: 2
+
+run:
+  timeout: 3m
+  tests: true
+
+linters:
+  enable:
+    - govet
+    - errcheck
+    - staticcheck
+    - unused
+    - ineffassign
+    - revive
+    - bodyclose
+    - rowserrcheck
+    - sqlclosecheck
+
+linters-settings:
+  revive:
+    rules:
+      - name: var-naming
+      - name: indent-error-flow
+      - name: early-return
+      - name: line-length-limit
+        arguments: [120]
+
+issues:
+  max-issues-per-linter: 0
+  max-same-issues: 0
