@@ -1,357 +1,497 @@
 import { useEffect, useState, useCallback } from "react";
+import { useNavigate } from "react-router-dom";
 import { API_URL } from "@config/api";
+import { isAdmin } from "@utils/auth";
 import "@css/admin/adminUsers.css";
-
-interface PillarProgress {
-    completed: number;
-    total: number;
-    percentage: number;
-}
-
-interface UserProgress {
-    overallPercentage: number;
-    completedLessons: number;
-    totalLessons: number;
-    lastActivity: string | null;
-    currentPillar: string;
-    pillarProgress: Record<string, PillarProgress>;
-}
 
 interface User {
     id: number;
     name: string;
     email: string;
-    membership_tier: "free" | "pro" | "premium";
-    created_at: string;
-    progress: UserProgress;
+    role: "user" | "admin";
+    membershipTier: "free" | "pro" | "premium";
+    createdAt: string;
 }
 
 export default function AdminUsers() {
-    const [adminAuth, setAdminAuth] = useState<string | null>(null);
-    const [allUsers, setAllUsers] = useState<User[]>([]);
+    const navigate = useNavigate();
+    const [users, setUsers] = useState<User[]>([]);
     const [filteredUsers, setFilteredUsers] = useState<User[]>([]);
-    const [loginPassword, setLoginPassword] = useState("");
-    const [loginError, setLoginError] = useState("");
+    const [loading, setLoading] = useState(true);
+    const [searchQuery, setSearchQuery] = useState("");
     const [filterTier, setFilterTier] = useState("all");
-    const [filterCompletion, setFilterCompletion] = useState("all");
-    const [sortBy, setSortBy] = useState("signup");
+    const [filterRole, setFilterRole] = useState("all");
+    const [sortBy, setSortBy] = useState("newest");
+    const [selectedUsers, setSelectedUsers] = useState<Set<number>>(new Set());
+    const [showDeleteModal, setShowDeleteModal] = useState(false);
+    const [userToDelete, setUserToDelete] = useState<number | null>(null);
+    const [showBulkActions, setShowBulkActions] = useState(false);
 
-    const verifyAndLoadDashboard = useCallback(async (auth: string) => {
+    // Check admin auth
+    useEffect(() => {
+        if (!isAdmin()) {
+            navigate("/dashboard");
+        }
+    }, [navigate]);
+
+    // Fetch users
+    const fetchUsers = useCallback(async () => {
         try {
-            const res = await fetch(`${API_URL}/admin/users`, {
-                headers: { Authorization: `Basic ${auth}` },
+            const response = await fetch(`${API_URL}/admin/users`, {
+                credentials: "include",
             });
-            if (res.ok) {
-                const data = await res.json();
-                // Wrap setState in setTimeout to satisfy linter
-                setTimeout(() => {
-                    setAllUsers(data.users);
-                    setFilteredUsers(data.users);
-                }, 0);
-            } else {
-                sessionStorage.removeItem("adminAuth");
-                setTimeout(() => setAdminAuth(null), 0);
+
+            if (!response.ok) {
+                throw new Error("Failed to fetch users");
             }
-        } catch (err) {
-            console.error("Verification error:", err);
-            sessionStorage.removeItem("adminAuth");
-            setTimeout(() => setAdminAuth(null), 0);
+
+            const data = await response.json();
+            setUsers(data.users || []);
+            setFilteredUsers(data.users || []);
+            setLoading(false);
+        } catch (error) {
+            console.error("Error fetching users:", error);
+            setLoading(false);
         }
     }, []);
 
     useEffect(() => {
-        const savedAuth = sessionStorage.getItem("adminAuth");
-        if (savedAuth) {
-            // Wrap setState to avoid synchronous setState in effect
-            setTimeout(() => {
-                setAdminAuth(savedAuth);
-                verifyAndLoadDashboard(savedAuth);
-            }, 0);
+        fetchUsers();
+    }, [fetchUsers]);
+
+    // Filter and sort users
+    useEffect(() => {
+        let filtered = [...users];
+
+        // Search filter
+        if (searchQuery) {
+            const query = searchQuery.toLowerCase();
+            filtered = filtered.filter(
+                (user) =>
+                    user.name.toLowerCase().includes(query) ||
+                    user.email.toLowerCase().includes(query) ||
+                    user.id.toString().includes(query)
+            );
         }
-    }, [verifyAndLoadDashboard]);
 
-    const handleLogin = async (e: React.FormEvent) => {
-        e.preventDefault();
-        const auth = btoa(`admin:${loginPassword}`);
+        // Tier filter
+        if (filterTier !== "all") {
+            filtered = filtered.filter((user) => user.membershipTier === filterTier);
+        }
 
+        // Role filter
+        if (filterRole !== "all") {
+            filtered = filtered.filter((user) => user.role === filterRole);
+        }
+
+        // Sort
+        filtered.sort((a, b) => {
+            switch (sortBy) {
+                case "newest":
+                    return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
+                case "oldest":
+                    return new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime();
+                case "name":
+                    return a.name.localeCompare(b.name);
+                case "email":
+                    return a.email.localeCompare(b.email);
+                default:
+                    return 0;
+            }
+        });
+
+        setFilteredUsers(filtered);
+    }, [users, searchQuery, filterTier, filterRole, sortBy]);
+
+    // Select/deselect user
+    const toggleUserSelection = (userId: number) => {
+        const newSelected = new Set(selectedUsers);
+        if (newSelected.has(userId)) {
+            newSelected.delete(userId);
+        } else {
+            newSelected.add(userId);
+        }
+        setSelectedUsers(newSelected);
+    };
+
+    // Select all visible users
+    const selectAll = () => {
+        if (selectedUsers.size === filteredUsers.length) {
+            setSelectedUsers(new Set());
+        } else {
+            setSelectedUsers(new Set(filteredUsers.map((u) => u.id)));
+        }
+    };
+
+    // Update user role
+    const updateUserRole = async (userId: number, newRole: "user" | "admin") => {
         try {
-            const res = await fetch(`${API_URL}/admin/users`, {
-                headers: { Authorization: `Basic ${auth}` },
+            const response = await fetch(`${API_URL}/admin/users/${userId}/role`, {
+                method: "PUT",
+                credentials: "include",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ role: newRole }),
             });
 
-            if (res.ok) {
-                sessionStorage.setItem("adminAuth", auth);
-                setAdminAuth(auth);
-                const data = await res.json();
-                setAllUsers(data.users);
-                setFilteredUsers(data.users);
+            if (response.ok) {
+                fetchUsers();
             } else {
-                setLoginError("Invalid password");
+                alert("Failed to update user role");
             }
-        } catch (err) {
-            if (err instanceof Error) {
-                setLoginError(`Network error: ${err.message}`);
-            } else {
-                setLoginError("Unknown network error");
-            }
+        } catch (error) {
+            console.error("Error updating role:", error);
+            alert("Error updating user role");
         }
     };
 
-    const logout = () => {
-        sessionStorage.removeItem("adminAuth");
-        setAdminAuth(null);
-        setLoginPassword("");
-        setLoginError("");
-    };
+    // Update user tier
+    const updateUserTier = async (userId: number, newTier: "free" | "pro" | "premium") => {
+        try {
+            const response = await fetch(`${API_URL}/admin/users/${userId}/tier`, {
+                method: "PUT",
+                credentials: "include",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ tier: newTier }),
+            });
 
-    useEffect(() => {
-        const filtered = (() => {
-            let temp = [...allUsers];
-
-            if (filterTier !== "all") {
-                temp = temp.filter((u) => u.membership_tier === filterTier);
-            }
-
-            if (filterCompletion !== "all") {
-                if (filterCompletion === "0") {
-                    temp = temp.filter((u) => u.progress.overallPercentage === 0);
-                } else if (filterCompletion === "100") {
-                    temp = temp.filter((u) => u.progress.overallPercentage === 100);
-                } else {
-                    const [min, max] = filterCompletion.split("-").map(Number);
-                    temp = temp.filter((u) => {
-                        const pct = u.progress.overallPercentage;
-                        return pct >= min && pct <= max;
-                    });
-                }
-            }
-
-            if (sortBy === "activity") {
-                temp.sort((a, b) => {
-                    const dateA = a.progress.lastActivity ? new Date(a.progress.lastActivity) : new Date(0);
-                    const dateB = b.progress.lastActivity ? new Date(b.progress.lastActivity) : new Date(0);
-                    return dateB.getTime() - dateA.getTime();
-                });
-            } else if (sortBy === "progress") {
-                temp.sort((a, b) => b.progress.overallPercentage - a.progress.overallPercentage);
-            } else if (sortBy === "name") {
-                temp.sort((a, b) => a.name.localeCompare(b.name));
+            if (response.ok) {
+                fetchUsers();
             } else {
-                temp.sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
+                alert("Failed to update membership tier");
             }
-
-            return temp;
-        })();
-
-        // Wrap setState in setTimeout
-        setTimeout(() => setFilteredUsers(filtered), 0);
-    }, [allUsers, filterTier, filterCompletion, sortBy]);
-
-    const togglePillarDetails = (userId: number) => {
-        const div = document.getElementById(`pillar-details-${userId}`);
-        const text = document.getElementById(`toggle-text-${userId}`);
-        if (!div || !text) return;
-
-        div.classList.toggle("expanded");
-        text.textContent = div.classList.contains("expanded") ? "Hide pillar details" : "Show pillar details";
+        } catch (error) {
+            console.error("Error updating tier:", error);
+            alert("Error updating membership tier");
+        }
     };
 
-    const escapeHtml = (text: string) => {
-        const div = document.createElement("div");
-        div.textContent = text;
-        return div.innerHTML;
+    // Delete user
+    const deleteUser = async (userId: number) => {
+        try {
+            const response = await fetch(`${API_URL}/admin/users/${userId}`, {
+                method: "DELETE",
+                credentials: "include",
+            });
+
+            if (response.ok) {
+                fetchUsers();
+                setShowDeleteModal(false);
+                setUserToDelete(null);
+            } else {
+                alert("Failed to delete user");
+            }
+        } catch (error) {
+            console.error("Error deleting user:", error);
+            alert("Error deleting user");
+        }
     };
 
-    if (!adminAuth) {
+    // Bulk delete users
+    const bulkDeleteUsers = async () => {
+        if (selectedUsers.size === 0) return;
+        if (!confirm(`Are you sure you want to delete ${selectedUsers.size} user(s)?`)) return;
+
+        try {
+            const deletePromises = Array.from(selectedUsers).map((userId) =>
+                fetch(`${API_URL}/admin/users/${userId}`, {
+                    method: "DELETE",
+                    credentials: "include",
+                })
+            );
+
+            await Promise.all(deletePromises);
+            fetchUsers();
+            setSelectedUsers(new Set());
+            setShowBulkActions(false);
+        } catch (error) {
+            console.error("Error bulk deleting:", error);
+            alert("Error deleting users");
+        }
+    };
+
+    // Bulk update tier
+    const bulkUpdateTier = async (tier: "free" | "pro" | "premium") => {
+        if (selectedUsers.size === 0) return;
+
+        try {
+            const updatePromises = Array.from(selectedUsers).map((userId) =>
+                fetch(`${API_URL}/admin/users/${userId}/tier`, {
+                    method: "PUT",
+                    credentials: "include",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ tier }),
+                })
+            );
+
+            await Promise.all(updatePromises);
+            fetchUsers();
+            setSelectedUsers(new Set());
+            setShowBulkActions(false);
+        } catch (error) {
+            console.error("Error bulk updating:", error);
+            alert("Error updating users");
+        }
+    };
+
+    if (loading) {
         return (
-            <div className="login-form">
-                <h2>Admin Login</h2>
-                {loginError && <div className="error-message show">{loginError}</div>}
-                <form onSubmit={handleLogin}>
-                    <div className="form-group">
-                        <label>Password</label>
-                        <input
-                            type="password"
-                            value={loginPassword}
-                            onChange={(e) => setLoginPassword(e.target.value)}
-                            required
-                            placeholder="Enter admin password"
-                            autoComplete="current-password"
-                        />
-                    </div>
-                    <button type="submit" className="login-btn">
-                        Login
-                    </button>
-                </form>
+            <div className="admin-loading">
+                <div className="spinner"></div>
+                <p>Loading users...</p>
             </div>
         );
     }
 
-    // Admin Dashboard
     return (
-        <div>
+        <div className="admin-page">
+            {/* Header */}
             <header className="admin-header">
-                <div className="container">
-                    <h1>Users Dashboard</h1>
-                    <div style={{ display: "flex", gap: "15px", alignItems: "center" }}>
-                        <nav className="admin-nav">
-                            <a href="/admin/users">Users</a>
-                            <a href="/admin/feedback">Feedback</a>
-                        </nav>
-                        <button className="logout-btn" onClick={logout}>
+                <div className="admin-header-content">
+                    <h1>⚡ User Management</h1>
+                    <div className="admin-header-actions">
+                        <button className="btn-secondary" onClick={() => navigate("/dashboard")}>
+                            ← Back to Dashboard
+                        </button>
+                        <button className="btn-danger" onClick={() => navigate("/signout")}>
                             Logout
                         </button>
                     </div>
                 </div>
             </header>
 
-            <div className="admin-content">
+            <div className="admin-container">
+                {/* Stats */}
                 <div className="stats-grid">
                     <div className="stat-card">
-                        <h3>Free Tier</h3>
-                        <div className="stat-value">{allUsers.filter((u) => u.membership_tier === "free").length}</div>
+                        <div className="stat-icon">👥</div>
+                        <div className="stat-info">
+                            <div className="stat-label">Total Users</div>
+                            <div className="stat-value">{users.length}</div>
+                        </div>
                     </div>
                     <div className="stat-card">
-                        <h3>Pro Tier</h3>
-                        <div className="stat-value">{allUsers.filter((u) => u.membership_tier === "pro").length}</div>
+                        <div className="stat-icon">🆓</div>
+                        <div className="stat-info">
+                            <div className="stat-label">Free Tier</div>
+                            <div className="stat-value">{users.filter((u) => u.membershipTier === "free").length}</div>
+                        </div>
                     </div>
                     <div className="stat-card">
-                        <h3>Premium Tier</h3>
-                        <div className="stat-value">{allUsers.filter((u) => u.membership_tier === "premium").length}</div>
+                        <div className="stat-icon">⭐</div>
+                        <div className="stat-info">
+                            <div className="stat-label">Pro Tier</div>
+                            <div className="stat-value">{users.filter((u) => u.membershipTier === "pro").length}</div>
+                        </div>
+                    </div>
+                    <div className="stat-card">
+                        <div className="stat-icon">💎</div>
+                        <div className="stat-info">
+                            <div className="stat-label">Premium Tier</div>
+                            <div className="stat-value">{users.filter((u) => u.membershipTier === "premium").length}</div>
+                        </div>
+                    </div>
+                    <div className="stat-card">
+                        <div className="stat-icon">⚡</div>
+                        <div className="stat-info">
+                            <div className="stat-label">Admins</div>
+                            <div className="stat-value">{users.filter((u) => u.role === "admin").length}</div>
+                        </div>
                     </div>
                 </div>
 
-                <div className="users-list">
-                    <div className="users-list-header">
-                        <h2>All Users</h2>
-                        <div className="filters">
-                            <select value={filterTier} onChange={(e) => setFilterTier(e.target.value)} className="filter-dropdown">
-                                <option value="all">All Tiers</option>
-                                <option value="free">Free</option>
-                                <option value="pro">Pro</option>
-                                <option value="premium">Premium</option>
-                            </select>
+                {/* Controls */}
+                <div className="controls-section">
+                    <div className="search-bar">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <circle cx="11" cy="11" r="8" strokeWidth="2" />
+                            <path d="m21 21-4.35-4.35" strokeWidth="2" strokeLinecap="round" />
+                        </svg>
+                        <input
+                            type="text"
+                            placeholder="Search by name, email, or ID..."
+                            value={searchQuery}
+                            onChange={(e) => setSearchQuery(e.target.value)}
+                        />
+                        {searchQuery && (
+                            <button className="clear-search" onClick={() => setSearchQuery("")}>
+                                ✕
+                            </button>
+                        )}
+                    </div>
 
-                            <select value={filterCompletion} onChange={(e) => setFilterCompletion(e.target.value)} className="filter-dropdown">
-                                <option value="all">All Completion</option>
-                                <option value="0">0% Complete</option>
-                                <option value="1-25">1-25% Complete</option>
-                                <option value="26-50">26-50% Complete</option>
-                                <option value="51-75">51-75% Complete</option>
-                                <option value="76-99">76-99% Complete</option>
-                                <option value="100">100% Complete</option>
-                            </select>
+                    <div className="filters">
+                        <select value={filterTier} onChange={(e) => setFilterTier(e.target.value)} className="filter-select">
+                            <option value="all">All Tiers</option>
+                            <option value="free">Free</option>
+                            <option value="pro">Pro</option>
+                            <option value="premium">Premium</option>
+                        </select>
 
-                            <select value={sortBy} onChange={(e) => setSortBy(e.target.value)} className="sort-dropdown">
-                                <option value="signup">Sort by Signup Date</option>
-                                <option value="activity">Sort by Last Activity</option>
-                                <option value="progress">Sort by Progress</option>
-                                <option value="name">Sort by Name</option>
-                            </select>
+                        <select value={filterRole} onChange={(e) => setFilterRole(e.target.value)} className="filter-select">
+                            <option value="all">All Roles</option>
+                            <option value="user">Users</option>
+                            <option value="admin">Admins</option>
+                        </select>
+
+                        <select value={sortBy} onChange={(e) => setSortBy(e.target.value)} className="filter-select">
+                            <option value="newest">Newest First</option>
+                            <option value="oldest">Oldest First</option>
+                            <option value="name">Name (A-Z)</option>
+                            <option value="email">Email (A-Z)</option>
+                        </select>
+                    </div>
+                </div>
+
+                {/* Bulk Actions */}
+                {selectedUsers.size > 0 && (
+                    <div className="bulk-actions-bar">
+                        <div className="bulk-info">
+                            <span>{selectedUsers.size} user(s) selected</span>
+                            <button className="btn-text" onClick={() => setSelectedUsers(new Set())}>
+                                Clear selection
+                            </button>
+                        </div>
+                        <div className="bulk-buttons">
+                            <button className="btn-bulk" onClick={() => setShowBulkActions(!showBulkActions)}>
+                                Bulk Actions ▼
+                            </button>
+                            {showBulkActions && (
+                                <div className="bulk-dropdown">
+                                    <button onClick={() => bulkUpdateTier("free")}>Set to Free</button>
+                                    <button onClick={() => bulkUpdateTier("pro")}>Set to Pro</button>
+                                    <button onClick={() => bulkUpdateTier("premium")}>Set to Premium</button>
+                                    <div className="dropdown-divider"></div>
+                                    <button className="danger" onClick={bulkDeleteUsers}>
+                                        Delete Selected
+                                    </button>
+                                </div>
+                            )}
+                        </div>
+                    </div>
+                )}
+
+                {/* Users Table */}
+                <div className="users-table-container">
+                    <div className="users-table-header">
+                        <div className="table-title">
+                            <h2>Users ({filteredUsers.length})</h2>
+                        </div>
+                        <div className="table-actions">
+                            <button className="btn-select-all" onClick={selectAll}>
+                                {selectedUsers.size === filteredUsers.length ? "Deselect All" : "Select All"}
+                            </button>
                         </div>
                     </div>
 
-                    <div id="usersContainer">
-                        {filteredUsers.length === 0 ? (
-                            <div className="no-users">
-                                <h3>No users found</h3>
-                                <p>Try adjusting your filters</p>
-                            </div>
-                        ) : (
-                            filteredUsers.map((user) => {
-                                const signupDate = new Date(user.created_at).toLocaleDateString("en-US", {
-                                    year: "numeric",
-                                    month: "short",
-                                    day: "numeric",
-                                });
+                    {filteredUsers.length === 0 ? (
+                        <div className="no-results">
+                            <div className="no-results-icon">🔍</div>
+                            <h3>No users found</h3>
+                            <p>Try adjusting your search or filters</p>
+                        </div>
+                    ) : (
+                        <div className="users-table">
+                            {filteredUsers.map((user) => (
+                                <div key={user.id} className={`user-row ${selectedUsers.has(user.id) ? "selected" : ""}`}>
+                                    <div className="user-checkbox">
+                                        <input
+                                            type="checkbox"
+                                            checked={selectedUsers.has(user.id)}
+                                            onChange={() => toggleUserSelection(user.id)}
+                                        />
+                                    </div>
 
-                                return (
-                                    <div className="user-card" key={user.id}>
-                                        <div className="user-header">
-                                            <div className="user-info">
-                                                <div className="user-name">{escapeHtml(user.name)}</div>
-                                                <div className="user-email">{escapeHtml(user.email)}</div>
-                                                <div className="user-meta">
-                                                    <span className={`tier-badge ${user.membership_tier}`}>{user.membership_tier.toUpperCase()}</span>
-                                                    <span style={{ color: "var(--text-secondary)", fontSize: "13px" }}>ID: #{user.id}</span>
-                                                    <span style={{ color: "var(--text-secondary)", fontSize: "13px" }}>Joined: {signupDate}</span>
-                                                </div>
+                                    <div className="user-main-info">
+                                        <div className="user-avatar">{user.name.charAt(0).toUpperCase()}</div>
+                                        <div className="user-details">
+                                            <div className="user-name-row">
+                                                <span className="user-name">{user.name}</span>
+                                                {user.role === "admin" && <span className="admin-badge">⚡ Admin</span>}
                                             </div>
-                                        </div>
-
-                                        <div className="progress-section">
-                                            <div className="overall-progress">
-                                                <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "8px" }}>
-                                                    <span style={{ fontSize: "14px", fontWeight: 600, color: "var(--text-dark)" }}>Overall Progress</span>
-                                                    <span style={{ fontSize: "16px", fontWeight: 700, color: "var(--text-dark)" }}>
-                                                        {user.progress.overallPercentage}%
-                                                    </span>
-                                                </div>
-
-                                                <div style={{ background: "#e5e7eb", borderRadius: "10px", height: "20px", overflow: "hidden", position: "relative" }}>
-                                                    <div
-                                                        style={{
-                                                            background:
-                                                                user.progress.overallPercentage === 100
-                                                                    ? "linear-gradient(90deg, #00A676, #10b981)"
-                                                                    : user.progress.overallPercentage > 0
-                                                                        ? "linear-gradient(90deg, #3b82f6, #60a5fa)"
-                                                                        : "#d1d5db",
-                                                            height: "100%",
-                                                            width: `${user.progress.overallPercentage}%`,
-                                                            transition: "width 0.3s ease",
-                                                        }}
-                                                    />
-                                                </div>
-                                                <div className="progress-label" style={{ marginTop: "8px" }}>
-                                                    {user.progress.completedLessons} of {user.progress.totalLessons} lessons completed
-                                                </div>
-                                            </div>
-
-                                            <button className="toggle-details" onClick={() => togglePillarDetails(user.id)}>
-                                                <span id={`toggle-text-${user.id}`}>Show pillar details</span>
-                                            </button>
-
-                                            <div className="progress-details" id={`pillar-details-${user.id}`}>
-                                                <div className="pillar-grid">
-                                                    {Object.entries(user.progress.pillarProgress).map(([pillar, data]) => {
-                                                        const isCurrent = pillar === user.progress.currentPillar;
-                                                        return (
-                                                            <div
-                                                                className={`pillar-item ${isCurrent ? "current" : ""}`}
-                                                                title={`${pillar.replace("pillar", "Pillar ")}: ${data.completed}/${data.total} lessons (${data.percentage}%)`}
-                                                                key={pillar}
-                                                            >
-                                                                <div className="pillar-name">
-                                                                    {pillar.replace("pillar", "P")}
-                                                                    {isCurrent ? " ⭐" : ""}
-                                                                </div>
-                                                                <div style={{ background: "#e5e7eb", borderRadius: "4px", height: "8px", overflow: "hidden", margin: "6px 0" }}>
-                                                                    <div
-                                                                        style={{
-                                                                            background: data.percentage === 100 ? "#00A676" : data.percentage > 0 ? "#3b82f6" : "#d1d5db",
-                                                                            height: "100%",
-                                                                            width: `${data.percentage}%`,
-                                                                            transition: "width 0.3s ease",
-                                                                        }}
-                                                                    />
-                                                                </div>
-                                                                <div className="pillar-stats" style={{ fontSize: "11px", fontWeight: 600 }}>
-                                                                    {data.percentage}%
-                                                                </div>
-                                                            </div>
-                                                        );
-                                                    })}
-                                                </div>
+                                            <div className="user-email">{user.email}</div>
+                                            <div className="user-meta-info">
+                                                <span>ID: #{user.id}</span>
+                                                <span>•</span>
+                                                <span>Joined {new Date(user.createdAt).toLocaleDateString()}</span>
                                             </div>
                                         </div>
                                     </div>
-                                );
-                            })
-                        )}
-                    </div>
+
+                                    <div className="user-tier-control">
+                                        <label>Membership</label>
+                                        <select
+                                            value={user.membershipTier}
+                                            onChange={(e) => updateUserTier(user.id, e.target.value as any)}
+                                            className={`tier-select ${user.membershipTier}`}
+                                        >
+                                            <option value="free">Free</option>
+                                            <option value="pro">Pro</option>
+                                            <option value="premium">Premium</option>
+                                        </select>
+                                    </div>
+
+                                    <div className="user-role-control">
+                                        <label>Role</label>
+                                        <select
+                                            value={user.role}
+                                            onChange={(e) => updateUserRole(user.id, e.target.value as any)}
+                                            className={`role-select ${user.role}`}
+                                        >
+                                            <option value="user">User</option>
+                                            <option value="admin">Admin</option>
+                                        </select>
+                                    </div>
+
+                                    <div className="user-actions">
+                                        <button
+                                            className="btn-icon danger"
+                                            onClick={() => {
+                                                setUserToDelete(user.id);
+                                                setShowDeleteModal(true);
+                                            }}
+                                            title="Delete user"
+                                        >
+                                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                                <path d="M3 6h18M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    )}
                 </div>
             </div>
+
+            {/* Delete Confirmation Modal */}
+            {showDeleteModal && userToDelete && (
+                <div className="modal-overlay" onClick={() => setShowDeleteModal(false)}>
+                    <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+                        <div className="modal-header">
+                            <h3>Delete User</h3>
+                            <button className="modal-close" onClick={() => setShowDeleteModal(false)}>
+                                ✕
+                            </button>
+                        </div>
+                        <div className="modal-body">
+                            <p>Are you sure you want to delete this user? This action cannot be undone.</p>
+                            <div className="user-to-delete">
+                                {users.find((u) => u.id === userToDelete)?.name}
+                                <br />
+                                <small>{users.find((u) => u.id === userToDelete)?.email}</small>
+                            </div>
+                        </div>
+                        <div className="modal-footer">
+                            <button className="btn-secondary" onClick={() => setShowDeleteModal(false)}>
+                                Cancel
+                            </button>
+                            <button className="btn-danger" onClick={() => deleteUser(userToDelete)}>
+                                Delete User
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>
     );
 }
