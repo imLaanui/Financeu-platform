@@ -154,3 +154,64 @@ func (r *UserRepository) UpdateRole(userID int, role string) error {
 
 	return nil
 }
+
+// GetAll retrieves all users (admin only)
+func (r *UserRepository) GetAll() ([]*models.User, error) {
+	query := `
+		SELECT id, email, password, name, role, membership_tier, created_at, updated_at
+		FROM users
+		ORDER BY created_at DESC
+	`
+
+	rows, err := r.db.Query(query)
+	if err != nil {
+		return nil, fmt.Errorf("error getting all users: %w", err)
+	}
+	defer rows.Close()
+
+	var users []*models.User
+	for rows.Next() {
+		user := &models.User{}
+		err := rows.Scan(
+			&user.ID,
+			&user.Email,
+			&user.Password,
+			&user.Name,
+			&user.Role,
+			&user.MembershipTier,
+			&user.CreatedAt,
+			&user.UpdatedAt,
+		)
+		if err != nil {
+			return nil, fmt.Errorf("error scanning user: %w", err)
+		}
+		users = append(users, user)
+	}
+
+	if err = rows.Err(); err != nil {
+		return nil, fmt.Errorf("error iterating users: %w", err)
+	}
+
+	return users, nil
+}
+
+// Delete removes a user from the database (admin only)
+func (r *UserRepository) Delete(userID int) error {
+	query := `DELETE FROM users WHERE id = $1`
+
+	result, err := r.db.Exec(query, userID)
+	if err != nil {
+		return fmt.Errorf("error deleting user: %w", err)
+	}
+
+	rowsAffected, err := result.RowsAffected()
+	if err != nil {
+		return fmt.Errorf("error checking rows affected: %w", err)
+	}
+
+	if rowsAffected == 0 {
+		return fmt.Errorf("user not found")
+	}
+
+	return nil
+}

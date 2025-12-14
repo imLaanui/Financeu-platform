@@ -1,17 +1,16 @@
 import { useEffect, useState, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
-import { API_URL } from "@config/api";
 import { isAdmin } from "@utils/auth";
+import {
+    User,
+    fetchUsers as apiFetchUsers,
+    updateUserRole as apiUpdateUserRole,
+    updateUserTier as apiUpdateUserTier,
+    deleteUser as apiDeleteUser,
+    bulkDeleteUsers as apiBulkDeleteUsers,
+    bulkUpdateTier as apiBulkUpdateTier,
+} from "@utils/api";
 import "@css/admin/adminUsers.css";
-
-interface User {
-    id: number;
-    name: string;
-    email: string;
-    role: "user" | "admin";
-    membershipTier: "free" | "pro" | "premium";
-    createdAt: string;
-}
 
 export default function AdminUsers() {
     const navigate = useNavigate();
@@ -37,20 +36,13 @@ export default function AdminUsers() {
     // Fetch users
     const fetchUsers = useCallback(async () => {
         try {
-            const response = await fetch(`${API_URL}/admin/users`, {
-                credentials: "include",
-            });
-
-            if (!response.ok) {
-                throw new Error("Failed to fetch users");
-            }
-
-            const data = await response.json();
-            setUsers(data.users || []);
-            setFilteredUsers(data.users || []);
-            setLoading(false);
+            const data = await apiFetchUsers();
+            setUsers(data);
+            setFilteredUsers(data);
         } catch (error) {
             console.error("Error fetching users:", error);
+            alert("Failed to load users");
+        } finally {
             setLoading(false);
         }
     }, []);
@@ -126,63 +118,35 @@ export default function AdminUsers() {
     // Update user role
     const updateUserRole = async (userId: number, newRole: "user" | "admin") => {
         try {
-            const response = await fetch(`${API_URL}/admin/users/${userId}/role`, {
-                method: "PUT",
-                credentials: "include",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ role: newRole }),
-            });
-
-            if (response.ok) {
-                fetchUsers();
-            } else {
-                alert("Failed to update user role");
-            }
+            await apiUpdateUserRole(userId, newRole);
+            fetchUsers();
         } catch (error) {
             console.error("Error updating role:", error);
-            alert("Error updating user role");
+            alert("Failed to update user role");
         }
     };
 
     // Update user tier
     const updateUserTier = async (userId: number, newTier: "free" | "pro" | "premium") => {
         try {
-            const response = await fetch(`${API_URL}/admin/users/${userId}/tier`, {
-                method: "PUT",
-                credentials: "include",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ tier: newTier }),
-            });
-
-            if (response.ok) {
-                fetchUsers();
-            } else {
-                alert("Failed to update membership tier");
-            }
+            await apiUpdateUserTier(userId, newTier);
+            fetchUsers();
         } catch (error) {
             console.error("Error updating tier:", error);
-            alert("Error updating membership tier");
+            alert("Failed to update membership tier");
         }
     };
 
     // Delete user
     const deleteUser = async (userId: number) => {
         try {
-            const response = await fetch(`${API_URL}/admin/users/${userId}`, {
-                method: "DELETE",
-                credentials: "include",
-            });
-
-            if (response.ok) {
-                fetchUsers();
-                setShowDeleteModal(false);
-                setUserToDelete(null);
-            } else {
-                alert("Failed to delete user");
-            }
+            await apiDeleteUser(userId);
+            fetchUsers();
+            setShowDeleteModal(false);
+            setUserToDelete(null);
         } catch (error) {
             console.error("Error deleting user:", error);
-            alert("Error deleting user");
+            alert("Failed to delete user");
         }
     };
 
@@ -192,20 +156,13 @@ export default function AdminUsers() {
         if (!confirm(`Are you sure you want to delete ${selectedUsers.size} user(s)?`)) return;
 
         try {
-            const deletePromises = Array.from(selectedUsers).map((userId) =>
-                fetch(`${API_URL}/admin/users/${userId}`, {
-                    method: "DELETE",
-                    credentials: "include",
-                })
-            );
-
-            await Promise.all(deletePromises);
+            await apiBulkDeleteUsers(Array.from(selectedUsers));
             fetchUsers();
             setSelectedUsers(new Set());
             setShowBulkActions(false);
         } catch (error) {
             console.error("Error bulk deleting:", error);
-            alert("Error deleting users");
+            alert("Failed to delete users");
         }
     };
 
@@ -214,22 +171,13 @@ export default function AdminUsers() {
         if (selectedUsers.size === 0) return;
 
         try {
-            const updatePromises = Array.from(selectedUsers).map((userId) =>
-                fetch(`${API_URL}/admin/users/${userId}/tier`, {
-                    method: "PUT",
-                    credentials: "include",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ tier }),
-                })
-            );
-
-            await Promise.all(updatePromises);
+            await apiBulkUpdateTier(Array.from(selectedUsers), tier);
             fetchUsers();
             setSelectedUsers(new Set());
             setShowBulkActions(false);
         } catch (error) {
             console.error("Error bulk updating:", error);
-            alert("Error updating users");
+            alert("Failed to update users");
         }
     };
 

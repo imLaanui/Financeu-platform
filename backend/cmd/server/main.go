@@ -108,6 +108,18 @@ func main() {
 			users.PUT("/membership", userHandler.UpdateMembership)
 		}
 
+		// Admin routes (protected - admin only)
+		admin := api.Group("/admin")
+		admin.Use(middleware.AuthMiddleware(jwtSecret))
+		admin.Use(middleware.RequireAdmin())
+		{
+			// User management
+			admin.GET("/users", userHandler.GetAllUsers)
+			admin.PUT("/users/:id/role", userHandler.AdminUpdateUserRole)
+			admin.PUT("/users/:id/tier", userHandler.AdminUpdateUserTier)
+			admin.DELETE("/users/:id", userHandler.AdminDeleteUser)
+		}
+
 		// Lesson routes (protected)
 		lessons := api.Group("/lessons")
 		lessons.Use(middleware.AuthMiddleware(jwtSecret))
