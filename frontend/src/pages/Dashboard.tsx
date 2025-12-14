@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { API_URL } from '@config/api';
+import { isAdmin } from '@utils/auth';
 import Navbar from '@components/Navbar';
 import Footer from '@components/Footer';
 import '@css/pages/dashboard.css';
@@ -9,6 +10,7 @@ interface User {
     id: string;
     name: string;
     email: string;
+    role: string;
     membershipTier: 'free' | 'pro' | 'premium';
     createdAt: string;
 }
@@ -34,7 +36,7 @@ export default function Dashboard() {
             });
 
             if (!response.ok) {
-                navigate('/login'); // Use React Router navigate
+                navigate('/login');
                 return null;
             }
 
@@ -42,7 +44,7 @@ export default function Dashboard() {
             return data.user;
         } catch (error) {
             console.error('Auth check failed:', error);
-            navigate('/login'); // Use React Router navigate
+            navigate('/login');
             return null;
         }
     };
@@ -54,8 +56,8 @@ export default function Dashboard() {
         setUser(authenticatedUser);
 
         try {
-            // Show upgrade banner for free users
-            if (authenticatedUser.membershipTier === 'free') {
+            // Show upgrade banner for free users (but not admins)
+            if (authenticatedUser.membershipTier === 'free' && authenticatedUser.role !== 'admin') {
                 setShowUpgradeBanner(true);
             }
 
@@ -141,16 +143,17 @@ export default function Dashboard() {
         localStorage.removeItem('authState');
         localStorage.removeItem('token');
         localStorage.removeItem('userId');
+        localStorage.removeItem('userRole');
 
         try {
             await fetch(`${API_URL}/auth/logout`, {
                 method: 'POST',
                 credentials: 'include',
             });
-            navigate('/'); // Use React Router navigate
+            navigate('/');
         } catch (error) {
             console.error('Logout error:', error);
-            navigate('/'); // Use React Router navigate
+            navigate('/');
         }
     };
 
@@ -207,9 +210,9 @@ export default function Dashboard() {
             </div>
         );
     }
+
     return (
         <div className="dashboard-page">
-            {/* Navigation */}
             <Navbar />
 
             {/* Dashboard Header */}
@@ -223,9 +226,18 @@ export default function Dashboard() {
                             <p>Continue your journey to financial mastery</p>
                         </div>
                         <div className={`membership-badge ${user?.membershipTier}`}>
-                            {user?.membershipTier
-                                ? `${user.membershipTier.charAt(0).toUpperCase() + user.membershipTier.slice(1)} Member`
-                                : 'Free Member'}
+                            {user?.role === 'admin' ? (
+                                <>
+                                    <span style={{ marginRight: '8px' }}>⚡</span>
+                                    Admin
+                                </>
+                            ) : (
+                                <>
+                                    {user?.membershipTier
+                                        ? `${user.membershipTier.charAt(0).toUpperCase() + user.membershipTier.slice(1)} Member`
+                                        : 'Free Member'}
+                                </>
+                            )}
                         </div>
                     </div>
                 </div>
@@ -234,6 +246,70 @@ export default function Dashboard() {
             {/* Dashboard Content */}
             <section className="dashboard-container">
                 <div className="container">
+                    {/* Admin Panel - Only visible to admins */}
+                    {isAdmin() && (
+                        <div className="admin-panel">
+                            <div className="admin-header">
+                                <h2>
+                                    <span className="admin-icon">⚡</span>
+                                    Admin Control Panel
+                                </h2>
+                                <p>Manage platform users, content, and feedback</p>
+                            </div>
+                            <div className="admin-actions">
+                                <button
+                                    className="admin-card"
+                                    onClick={() => navigate('/admin/users')}
+                                >
+                                    <div className="admin-card-icon">
+                                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                                            <circle cx="9" cy="7" r="4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                                            <path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                                        </svg>
+                                    </div>
+                                    <div className="admin-card-content">
+                                        <h3>User Management</h3>
+                                        <p>View and manage all platform users</p>
+                                    </div>
+                                    <div className="admin-card-arrow">→</div>
+                                </button>
+
+                                <button
+                                    className="admin-card"
+                                    onClick={() => navigate('/admin/feedback')}
+                                >
+                                    <div className="admin-card-icon">
+                                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                                        </svg>
+                                    </div>
+                                    <div className="admin-card-content">
+                                        <h3>Feedback & Support</h3>
+                                        <p>Review user feedback and support tickets</p>
+                                    </div>
+                                    <div className="admin-card-arrow">→</div>
+                                </button>
+
+                                <button
+                                    className="admin-card"
+                                    onClick={() => navigate('/admin/analytics')}
+                                >
+                                    <div className="admin-card-icon">
+                                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M18 20V10M12 20V4M6 20v-6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                                        </svg>
+                                    </div>
+                                    <div className="admin-card-content">
+                                        <h3>Analytics</h3>
+                                        <p>View platform statistics and insights</p>
+                                    </div>
+                                    <div className="admin-card-arrow">→</div>
+                                </button>
+                            </div>
+                        </div>
+                    )}
+
                     {/* Stats Grid */}
                     <div className="stats-grid">
                         <div className="stat-card">
@@ -321,7 +397,7 @@ export default function Dashboard() {
                         </div>
                     </div>
 
-                    {/* Upgrade Banner (shown for free users) */}
+                    {/* Upgrade Banner (shown for free users, hidden for admins) */}
                     {showUpgradeBanner && (
                         <div className="upgrade-banner">
                             <div className="upgrade-header">
@@ -505,7 +581,6 @@ export default function Dashboard() {
                 </div>
             </section>
 
-            {/* Footer */}
             <Footer />
         </div>
     );
