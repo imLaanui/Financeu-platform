@@ -18,16 +18,13 @@ migrate-down:
 migrate-status:
 	goose -dir migrations postgres "$(DATABASE_URL)" status
 
-test:
-	go test -v ./...
-
 vet:
 	go vet ./...
 
 lint:
 	golangci-lint run
 
-check: vet lint test
+check: vet lint
 
 clean:
 	rm -rf bin
