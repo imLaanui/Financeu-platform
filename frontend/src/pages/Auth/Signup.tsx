@@ -42,30 +42,26 @@ export default function Signup() {
                 body: JSON.stringify({ name, email, password }),
             });
 
-            const data: {
-                user: {
-                    id: string;
-                    role: string;
-                };
-                token: string;
-                error?: string;
-            } = await response.json();
+            const data = await response.json();
 
-            if (!response.ok) throw new Error(data.error || "Registration failed");
+            if (!response.ok) {
+                throw new Error(data.error || "Registration failed");
+            }
 
-            // Clear previous progress data
-            Object.keys(localStorage).forEach((key) => {
-                if (key.includes("pillar1_") || key.includes("lesson") || key.includes("quiz")) {
-                    localStorage.removeItem(key);
-                }
-            });
+            // Show success message - user needs to verify email
+            setSuccessMessage(
+                "Account created! Please check your email to verify your account before logging in."
+            );
 
-            localStorage.setItem("token", data.token);
-            localStorage.setItem("userId", data.user.id);
-            localStorage.setItem("userRole", data.user.role);
-
-            setSuccessMessage("Account created successfully! Redirecting...");
-            setTimeout(() => navigate("/dashboard"), 1500);
+            // Redirect to login after 3 seconds
+            setTimeout(() => {
+                navigate("/login", {
+                    state: {
+                        message: "Please check your email to verify your account before logging in.",
+                        email: email
+                    }
+                });
+            }, 3000);
         } catch (error) {
             const err = error instanceof Error ? error : new Error("Registration failed");
             console.error("Signup error:", err);
@@ -123,7 +119,7 @@ export default function Signup() {
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
                             />
-                            <div className="form-hint">Use your .edu email for student benefits</div>
+                            <div className="form-hint">We'll send a verification link to this email</div>
                         </div>
 
                         <div className="form-group">

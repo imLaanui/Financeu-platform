@@ -11,6 +11,7 @@ import (
 	"github.com/joho/godotenv"
 
 	"github.com/imLaanui/Financeu-platform/backend/internal/database"
+	"github.com/imLaanui/Financeu-platform/backend/internal/email"
 	"github.com/imLaanui/Financeu-platform/backend/internal/handlers"
 	"github.com/imLaanui/Financeu-platform/backend/internal/middleware"
 	"github.com/imLaanui/Financeu-platform/backend/internal/repository"
@@ -46,14 +47,17 @@ func main() {
 		}
 	}()
 
+	// Initialize email service
+	emailService := email.NewService()
+
 	// Initialize repositories
 	userRepo := repository.NewUserRepository(db)
 	lessonRepo := repository.NewLessonRepository(db)
 	feedbackRepo := repository.NewFeedbackRepository(db)
 	resetTokenRepo := repository.NewResetTokenRepository(db)
 
-	// Initialize handlers
-	authHandler := handlers.NewAuthHandler(userRepo, resetTokenRepo)
+	// Initialize handlers (pass email service to auth handler)
+	authHandler := handlers.NewAuthHandler(userRepo, resetTokenRepo, emailService)
 	userHandler := handlers.NewUserHandler(userRepo, lessonRepo)
 	lessonHandler := handlers.NewLessonHandler(lessonRepo)
 	feedbackHandler := handlers.NewFeedbackHandler(feedbackRepo)
@@ -100,6 +104,8 @@ func main() {
 			auth.POST("/register", authHandler.Register)
 			auth.POST("/login", authHandler.Login)
 			auth.POST("/logout", authHandler.Logout)
+			auth.POST("/verify-email", authHandler.VerifyEmail)
+			auth.POST("/resend-verification", authHandler.ResendVerification)
 			auth.POST("/forgot-password", authHandler.ForgotPassword)
 			auth.POST("/reset-password", authHandler.ResetPassword)
 			auth.GET("/me", middleware.AuthMiddleware(jwtSecret), authHandler.GetCurrentUser)
@@ -129,7 +135,7 @@ func main() {
 		lessons := api.Group("/lessons")
 		lessons.Use(middleware.AuthMiddleware(jwtSecret))
 		{
-			lessons.GET("", lessonHandler.GetLessons)          // Changed from "/" to ""
+			lessons.GET("", lessonHandler.GetLessons)
 			lessons.GET("/progress", lessonHandler.GetProgress)
 			lessons.POST("/complete", lessonHandler.CompleteLesson)
 		}
@@ -137,7 +143,6 @@ func main() {
 		// Feedback routes (public submit, protected admin)
 		feedback := api.Group("/feedback")
 		{
-			// CRITICAL: No trailing slash on POST route
 			feedback.POST("", feedbackHandler.SubmitFeedback)
 
 			// Admin routes for feedback
@@ -159,6 +164,7 @@ func main() {
 
 	log.Printf("🚀 Server starting on port %s", port)
 	log.Printf("📡 CORS enabled for: %s", corsOrigin)
+	log.Printf("📧 Email service configured")
 
 	if err := r.Run(":" + port); err != nil {
 		log.Fatal("Failed to start server:", err)

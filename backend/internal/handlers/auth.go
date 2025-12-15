@@ -12,8 +12,9 @@ import (
 	"github.com/gin-gonic/gin"
 	"golang.org/x/crypto/bcrypt"
 
-	"github.com/imLaanui/Financeu-platform/backend/internal/repository"
+	"github.com/imLaanui/Financeu-platform/backend/internal/email"
 	"github.com/imLaanui/Financeu-platform/backend/internal/jwtauth"
+	"github.com/imLaanui/Financeu-platform/backend/internal/repository"
 )
 
 // AuthHandler holds dependencies for authentication-related HTTP handlers,
@@ -21,13 +22,14 @@ import (
 type AuthHandler struct {
 	userRepo       *repository.UserRepository
 	resetTokenRepo *repository.ResetTokenRepository
+	emailService   *email.Service
 	jwtSecret      string
 	sessionExpiry  time.Duration
 }
 
 // NewAuthHandler creates and returns a new AuthHandler instance, initializing it
 // with the necessary repositories and loading JWT configuration from environment variables.
-func NewAuthHandler(userRepo *repository.UserRepository, resetTokenRepo *repository.ResetTokenRepository) *AuthHandler {
+func NewAuthHandler(userRepo *repository.UserRepository, resetTokenRepo *repository.ResetTokenRepository, emailService *email.Service) *AuthHandler {
 	// Get JWT settings from environment
 	jwtSecret := os.Getenv("JWT_SECRET")
 	if jwtSecret == "" {
@@ -46,6 +48,7 @@ func NewAuthHandler(userRepo *repository.UserRepository, resetTokenRepo *reposit
 	return &AuthHandler{
 		userRepo:       userRepo,
 		resetTokenRepo: resetTokenRepo,
+		emailService:   emailService,
 		jwtSecret:      jwtSecret,
 		sessionExpiry:  expiry,
 	}
@@ -78,7 +81,13 @@ type ResetPasswordRequest struct {
 	NewPassword string `json:"newPassword" binding:"required,min=6"`
 }
 
-// Register creates a new user account
+// VerifyEmailRequest defines the structure for email verification
+type VerifyEmailRequest struct {
+	Email string `json:"email" binding:"required,email"`
+	Token string `json:"token" binding:"required"`
+}
+
+// Register creates a new user account and sends verification email
 func (h *AuthHandler) Register(c *gin.Context) {
 	var req RegisterRequest
 	if err := c.ShouldBindJSON(&req); err != nil {
@@ -114,21 +123,145 @@ func (h *AuthHandler) Register(c *gin.Context) {
 		return
 	}
 
-	// Generate JWT token
+	// Generate verification token
+	tokenBytes := make([]byte, 32)
+	if _, err := rand.Read(tokenBytes); err != nil {
+		log.Printf("Error generating verification token: %v", err)
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to generate verification token"})
+		return
+	}
+	verificationToken := hex.EncodeToString(tokenBytes)
+
+	// Set token expiration to 24 hours from now
+	expiresAt := time.Now().Add(24 * time.Hour)
+
+	// Save verification token to database
+	if err := h.userRepo.SetVerificationToken(user.ID, verificationToken, expiresAt); err != nil {
+		log.Printf("Error setting verification token: %v", err)
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to set verification token"})
+		return
+	}
+
+	// Send verification email
+	if err := h.emailService.SendVerificationEmail(user.Email, user.Name, verificationToken); err != nil {
+		log.Printf("Error sending verification email: %v", err)
+		// Don't fail the registration if email fails, just log it
+		log.Printf("User %s registered but verification email failed to send", user.Email)
+	}
+
+	c.JSON(http.StatusCreated, gin.H{
+		"message": "Registration successful! Please check your email to verify your account.",
+		"user":    user.ToResponse(),
+	})
+}
+
+// VerifyEmail verifies a user's email address
+func (h *AuthHandler) VerifyEmail(c *gin.Context) {
+	var req VerifyEmailRequest
+	if err := c.ShouldBindJSON(&req); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+
+	// Get user by verification token
+	user, err := h.userRepo.GetByVerificationToken(req.Token)
+	if err != nil {
+		log.Printf("Error getting user by token: %v", err)
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Server error"})
+		return
+	}
+	if user == nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid or expired verification token"})
+		return
+	}
+
+	// Verify that the email matches
+	if user.Email != req.Email {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Email does not match verification token"})
+		return
+	}
+
+	// Mark email as verified
+	if err := h.userRepo.VerifyEmail(user.ID); err != nil {
+		log.Printf("Error verifying email: %v", err)
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to verify email"})
+		return
+	}
+
+	// Generate JWT token for auto-login after verification
 	token, err := jwtauth.GenerateToken(user, h.jwtSecret, h.sessionExpiry)
 	if err != nil {
 		log.Printf("Error generating token: %v", err)
-		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to generate token"})
+		// Don't fail verification if token generation fails
+		c.JSON(http.StatusOK, gin.H{"message": "Email verified successfully! Please login."})
 		return
 	}
 
 	// Set cookie
 	c.SetCookie("token", token, int(h.sessionExpiry.Seconds()), "/", "", false, true)
 
-	c.JSON(http.StatusCreated, gin.H{
-		"user":  user.ToResponse(),
-		"token": token,
+	c.JSON(http.StatusOK, gin.H{
+		"message": "Email verified successfully!",
+		"user":    user.ToResponse(),
+		"token":   token,
 	})
+}
+
+// ResendVerification resends the verification email
+func (h *AuthHandler) ResendVerification(c *gin.Context) {
+	var req struct {
+		Email string `json:"email" binding:"required,email"`
+	}
+	if err := c.ShouldBindJSON(&req); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+
+	// Get user by email
+	user, err := h.userRepo.GetByEmail(req.Email)
+	if err != nil {
+		log.Printf("Error getting user: %v", err)
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Server error"})
+		return
+	}
+	if user == nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "No account found with that email"})
+		return
+	}
+
+	// Check if already verified
+	if user.EmailVerified {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Email already verified"})
+		return
+	}
+
+	// Generate new verification token
+	tokenBytes := make([]byte, 32)
+	if _, err := rand.Read(tokenBytes); err != nil {
+		log.Printf("Error generating verification token: %v", err)
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to generate verification token"})
+		return
+	}
+	verificationToken := hex.EncodeToString(tokenBytes)
+
+	// Set token expiration to 24 hours from now
+	expiresAt := time.Now().Add(24 * time.Hour)
+
+	// Save verification token to database
+	if err := h.userRepo.SetVerificationToken(user.ID, verificationToken, expiresAt); err != nil {
+		log.Printf("Error setting verification token: %v", err)
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to set verification token"})
+		return
+	}
+
+	// Send verification email
+	if err := h.emailService.SendVerificationEmail(user.Email, user.Name, verificationToken); err != nil {
+		log.Printf("Error sending verification email: %v", err)
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to send verification email"})
+		return
+	}
+
+	c.JSON(http.StatusOK, gin.H{"message": "Verification email sent! Please check your inbox."})
 }
 
 // Login authenticates a user
@@ -154,6 +287,15 @@ func (h *AuthHandler) Login(c *gin.Context) {
 	// Verify password
 	if err := bcrypt.CompareHashAndPassword([]byte(user.Password), []byte(req.Password)); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid email or password"})
+		return
+	}
+
+	// Check if email is verified (optional - comment out if you want to allow unverified logins)
+	if !user.EmailVerified {
+		c.JSON(http.StatusForbidden, gin.H{
+			"error": "Please verify your email before logging in",
+			"emailVerified": false,
+		})
 		return
 	}
 
@@ -196,7 +338,8 @@ func (h *AuthHandler) ForgotPassword(c *gin.Context) {
 		return
 	}
 	if user == nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "No account found with that email"})
+		// For security, return success even if user doesn't exist
+		c.JSON(http.StatusOK, gin.H{"message": "If an account exists with that email, a password reset link has been sent"})
 		return
 	}
 
@@ -219,15 +362,15 @@ func (h *AuthHandler) ForgotPassword(c *gin.Context) {
 		return
 	}
 
-	// TODO: Send email with reset link
-	// For now, just log it (in production, integrate with email service)
-	frontendURL := os.Getenv("FRONTEND_URL")
-	if frontendURL == "" {
-		frontendURL = "http://localhost:5173"
+	// Send password reset email
+	if err := h.emailService.SendPasswordResetEmail(user.Email, user.Name, token); err != nil {
+		log.Printf("Error sending password reset email: %v", err)
+		// Don't expose email sending errors to users
+		c.JSON(http.StatusOK, gin.H{"message": "If an account exists with that email, a password reset link has been sent"})
+		return
 	}
-	log.Printf("Reset link for %s: %s/reset-password?token=%s&email=%s", req.Email, frontendURL, token, req.Email)
 
-	c.JSON(http.StatusOK, gin.H{"message": "Password reset email sent"})
+	c.JSON(http.StatusOK, gin.H{"message": "If an account exists with that email, a password reset link has been sent"})
 }
 
 // ResetPassword completes the password reset process
@@ -270,7 +413,7 @@ func (h *AuthHandler) ResetPassword(c *gin.Context) {
 		log.Printf("Warning: Failed to mark token as used: %v", err)
 	}
 
-	c.JSON(http.StatusOK, gin.H{"message": "Password has been reset"})
+	c.JSON(http.StatusOK, gin.H{"message": "Password has been reset successfully"})
 }
 
 // GetCurrentUser returns the currently authenticated user

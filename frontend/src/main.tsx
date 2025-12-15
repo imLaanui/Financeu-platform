@@ -10,6 +10,7 @@ import Login from "./pages/auth/Login";
 import Signup from "./pages/auth/Signup";
 import Signout from "./pages/auth/Signout";
 import ResetPassword from "./pages/auth/ResetPassword";
+import VerifyEmail from "./pages/auth/VerifyEmail";
 import Privacy from "./pages/Privacy";
 import ForgotPassword from "./pages/auth/ForgotPassword";
 import Curriculum from "./pages/Curriculum";
@@ -50,6 +51,7 @@ createRoot(document.getElementById("root")!).render(
       <Route path="/admin/users" element={<AdminUsers />} />
       <Route path="/dashboard" element={<Dashboard />} />
       <Route path="/signout" element={<Signout />} />
+      <Route path="/verify-email" element={<VerifyEmail />} />
 
       {/* Pillar1 routes – flat */}
       <Route path="/pillar1" element={<Pillar1Index />} />

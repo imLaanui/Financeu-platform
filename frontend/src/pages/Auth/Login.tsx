@@ -1,20 +1,66 @@
 import { useState, useEffect } from "react";
 import { API_URL } from "@config/api";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import "@css/auth/login.css";
 
 export default function Login() {
     const navigate = useNavigate();
+    const location = useLocation();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [errorMessage, setErrorMessage] = useState("");
     const [successMessage, setSuccessMessage] = useState("");
     const [loading, setLoading] = useState(false);
+    const [showResendVerification, setShowResendVerification] = useState(false);
+
+    // Show message from signup/verification redirect
+    useEffect(() => {
+        if (location.state?.message) {
+            setSuccessMessage(location.state.message);
+            if (location.state?.email) {
+                setEmail(location.state.email);
+            }
+        }
+    }, [location]);
 
     // Hide messages
     const hideMessages = () => {
         setErrorMessage("");
         setSuccessMessage("");
+        setShowResendVerification(false);
+    };
+
+    const handleResendVerification = async () => {
+        if (!email) {
+            setErrorMessage("Please enter your email address");
+            return;
+        }
+
+        setLoading(true);
+        hideMessages();
+
+        try {
+            const response = await fetch(`${API_URL}/auth/resend-verification`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                credentials: "include",
+                body: JSON.stringify({ email }),
+            });
+
+            const data = await response.json();
+
+            if (!response.ok) {
+                throw new Error(data.error || "Failed to resend verification email");
+            }
+
+            setSuccessMessage("Verification email sent! Please check your inbox.");
+            setShowResendVerification(false);
+        } catch (error) {
+            const err = error instanceof Error ? error : new Error("Failed to resend email");
+            setErrorMessage(err.message);
+        } finally {
+            setLoading(false);
+        }
     };
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -30,16 +76,18 @@ export default function Login() {
                 body: JSON.stringify({ email, password }),
             });
 
-            const data: {
-                user: {
-                    id: string;
-                    role: string;
-                };
-                token: string;
-                error?: string;
-            } = await response.json();
+            const data = await response.json();
 
-            if (!response.ok) throw new Error(data.error || "Login failed");
+            if (!response.ok) {
+                // Check if email is not verified
+                if (data.emailVerified === false) {
+                    setErrorMessage(data.error || "Please verify your email before logging in");
+                    setShowResendVerification(true);
+                    setLoading(false);
+                    return;
+                }
+                throw new Error(data.error || "Login failed");
+            }
 
             const previousUserId = localStorage.getItem("userId");
             const newUserId = data.user.id;
@@ -89,6 +137,20 @@ export default function Login() {
 
                     {errorMessage && <div className="error-message">{errorMessage}</div>}
                     {successMessage && <div className="success-message">{successMessage}</div>}
+
+                    {showResendVerification && (
+                        <div className="info-message">
+                            <p>Didn't receive the email?</p>
+                            <button
+                                type="button"
+                                className="btn-link"
+                                onClick={handleResendVerification}
+                                disabled={loading}
+                            >
+                                {loading ? "Sending..." : "Resend verification email"}
+                            </button>
+                        </div>
+                    )}
 
                     <form onSubmit={handleSubmit}>
                         <div className="form-group">

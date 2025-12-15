@@ -5,6 +5,7 @@ import (
 	"database/sql"
 	"fmt"
 	"strings"
+	"time"
 
 	"github.com/imLaanui/Financeu-platform/backend/internal/models"
 )
@@ -22,7 +23,9 @@ func NewUserRepository(db *sql.DB) *UserRepository {
 // GetByEmail finds a user by email (case-insensitive)
 func (r *UserRepository) GetByEmail(email string) (*models.User, error) {
 	query := `
-		SELECT id, email, password, name, role, membership_tier, created_at, updated_at
+		SELECT id, email, password, name, role, membership_tier,
+		       email_verified, verification_token, verification_token_expires_at,
+		       created_at, updated_at
 		FROM users
 		WHERE LOWER(email) = LOWER($1)
 	`
@@ -34,6 +37,9 @@ func (r *UserRepository) GetByEmail(email string) (*models.User, error) {
 		&user.Name,
 		&user.Role,
 		&user.MembershipTier,
+		&user.EmailVerified,
+		&user.VerificationToken,
+		&user.VerificationTokenExpiresAt,
 		&user.CreatedAt,
 		&user.UpdatedAt,
 	)
@@ -50,7 +56,9 @@ func (r *UserRepository) GetByEmail(email string) (*models.User, error) {
 // GetByID finds a user by ID
 func (r *UserRepository) GetByID(id int) (*models.User, error) {
 	query := `
-		SELECT id, email, password, name, role, membership_tier, created_at, updated_at
+		SELECT id, email, password, name, role, membership_tier,
+		       email_verified, verification_token, verification_token_expires_at,
+		       created_at, updated_at
 		FROM users
 		WHERE id = $1
 	`
@@ -62,6 +70,9 @@ func (r *UserRepository) GetByID(id int) (*models.User, error) {
 		&user.Name,
 		&user.Role,
 		&user.MembershipTier,
+		&user.EmailVerified,
+		&user.VerificationToken,
+		&user.VerificationTokenExpiresAt,
 		&user.CreatedAt,
 		&user.UpdatedAt,
 	)
@@ -75,12 +86,47 @@ func (r *UserRepository) GetByID(id int) (*models.User, error) {
 	return user, nil
 }
 
-// Create creates a new user with default role of 'user'
+// GetByVerificationToken finds a user by their verification token
+func (r *UserRepository) GetByVerificationToken(token string) (*models.User, error) {
+	query := `
+		SELECT id, email, password, name, role, membership_tier,
+		       email_verified, verification_token, verification_token_expires_at,
+		       created_at, updated_at
+		FROM users
+		WHERE verification_token = $1
+		AND verification_token_expires_at > CURRENT_TIMESTAMP
+		AND email_verified = false
+	`
+	user := &models.User{}
+	err := r.db.QueryRow(query, token).Scan(
+		&user.ID,
+		&user.Email,
+		&user.Password,
+		&user.Name,
+		&user.Role,
+		&user.MembershipTier,
+		&user.EmailVerified,
+		&user.VerificationToken,
+		&user.VerificationTokenExpiresAt,
+		&user.CreatedAt,
+		&user.UpdatedAt,
+	)
+	if err == sql.ErrNoRows {
+		return nil, nil
+	}
+	if err != nil {
+		return nil, fmt.Errorf("error getting user by verification token: %w", err)
+	}
+
+	return user, nil
+}
+
+// Create creates a new user with default role of 'user' and unverified email
 func (r *UserRepository) Create(name, email, hashedPassword string) (*models.User, error) {
 	query := `
-		INSERT INTO users (name, email, password, role, membership_tier)
-		VALUES ($1, $2, $3, 'user', 'free')
-		RETURNING id, email, name, role, membership_tier, created_at, updated_at
+		INSERT INTO users (name, email, password, role, membership_tier, email_verified)
+		VALUES ($1, $2, $3, 'user', 'free', false)
+		RETURNING id, email, name, role, membership_tier, email_verified, created_at, updated_at
 	`
 	user := &models.User{}
 	err := r.db.QueryRow(query, name, email, hashedPassword).Scan(
@@ -89,6 +135,7 @@ func (r *UserRepository) Create(name, email, hashedPassword string) (*models.Use
 		&user.Name,
 		&user.Role,
 		&user.MembershipTier,
+		&user.EmailVerified,
 		&user.CreatedAt,
 		&user.UpdatedAt,
 	)
@@ -100,6 +147,49 @@ func (r *UserRepository) Create(name, email, hashedPassword string) (*models.Use
 	}
 
 	return user, nil
+}
+
+// SetVerificationToken sets the verification token and expiration for a user
+func (r *UserRepository) SetVerificationToken(userID int, token string, expiresAt time.Time) error {
+	query := `
+		UPDATE users
+		SET verification_token = $1,
+		    verification_token_expires_at = $2,
+		    updated_at = CURRENT_TIMESTAMP
+		WHERE id = $3
+	`
+	_, err := r.db.Exec(query, token, expiresAt, userID)
+	if err != nil {
+		return fmt.Errorf("error setting verification token: %w", err)
+	}
+
+	return nil
+}
+
+// VerifyEmail marks a user's email as verified and clears the verification token
+func (r *UserRepository) VerifyEmail(userID int) error {
+	query := `
+		UPDATE users
+		SET email_verified = true,
+		    verification_token = NULL,
+		    verification_token_expires_at = NULL,
+		    updated_at = CURRENT_TIMESTAMP
+		WHERE id = $1
+	`
+	result, err := r.db.Exec(query, userID)
+	if err != nil {
+		return fmt.Errorf("error verifying email: %w", err)
+	}
+
+	rowsAffected, err := result.RowsAffected()
+	if err != nil {
+		return fmt.Errorf("error checking rows affected: %w", err)
+	}
+	if rowsAffected == 0 {
+		return fmt.Errorf("user not found")
+	}
+
+	return nil
 }
 
 // UpdatePassword updates a user's password
@@ -158,7 +248,9 @@ func (r *UserRepository) UpdateRole(userID int, role string) error {
 // GetAll retrieves all users (admin only)
 func (r *UserRepository) GetAll() ([]*models.User, error) {
 	query := `
-		SELECT id, email, password, name, role, membership_tier, created_at, updated_at
+		SELECT id, email, password, name, role, membership_tier,
+		       email_verified, verification_token, verification_token_expires_at,
+		       created_at, updated_at
 		FROM users
 		ORDER BY created_at DESC
 	`
@@ -179,6 +271,9 @@ func (r *UserRepository) GetAll() ([]*models.User, error) {
 			&user.Name,
 			&user.Role,
 			&user.MembershipTier,
+			&user.EmailVerified,
+			&user.VerificationToken,
+			&user.VerificationTokenExpiresAt,
 			&user.CreatedAt,
 			&user.UpdatedAt,
 		)
