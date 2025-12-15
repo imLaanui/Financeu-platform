@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lesson 5 - Debt Traps and How to Avoid Them - FinanceU</title>
+    <title>Lesson 5 - Credit Utilization Mastery - FinanceU</title>
     <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
     <link rel="icon" type="image/svg+xml" sizes="16x16" href="assets/favicon-16x16.svg">
     <link rel="icon" type="image/svg+xml" sizes="32x32" href="assets/favicon-32x32.svg">
@@ -57,109 +57,36 @@
         }
         .lesson-section {
             background: white;
-            padding: 30px;
+            padding: 25px;
             border-radius: 12px;
-            margin-bottom: 25px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
             position: relative;
-            border-left: 4px solid transparent;
             transition: all 0.3s ease;
         }
         .lesson-section:hover {
-            border-left-color: var(--primary-color);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+            transform: translateY(-2px);
         }
         .lesson-section h2 {
             color: var(--primary-color);
             font-size: 24px;
             margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-        .lesson-section h2::before {
-            content: '';
-            width: 36px;
-            height: 36px;
-            border-radius: 8px;
-            background: linear-gradient(135deg, #0A1A2F 0%, #00A676 100%);
-            flex-shrink: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 2px 8px rgba(59, 130, 246, 0.3);
         }
         .lesson-section p {
-            line-height: 1.8;
+            line-height: 1.6;
             color: var(--text-secondary);
-            margin-bottom: 15px;
+            margin-bottom: 12px;
+            font-size: 16px;
         }
         .lesson-section ul {
-            line-height: 1.8;
+            line-height: 1.6;
             color: var(--text-secondary);
             margin-left: 20px;
-            margin-bottom: 15px;
+            margin-bottom: 12px;
         }
-        .visual-box {
-            background: linear-gradient(135deg, #0A1A2F15 0%, #00A67615 100%);
-            border-left: 4px solid var(--primary-color);
-            padding: 25px;
-            border-radius: 12px;
-            margin: 20px 0;
-            position: relative;
-            box-shadow: 0 2px 8px rgba(59, 130, 246, 0.1);
-        }
-        .visual-box h3 {
-            color: var(--primary-color);
-            margin-bottom: 15px;
-            font-size: 18px;
-            font-weight: 700;
-        }
-        .warning-box {
-            background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
-            border-left: 4px solid #dc2626;
-            padding: 25px;
-            border-radius: 12px;
-            position: relative;
-            box-shadow: 0 2px 8px rgba(220, 38, 38, 0.1);
-            margin: 20px 0;
-        }
-        .warning-box::before {
-            content: '⚠️';
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            font-size: 32px;
-            opacity: 0.5;
-        }
-        .warning-box h3 {
-            color: #dc2626;
-            margin-bottom: 15px;
-            font-weight: 700;
-        }
-        .action-box {
-            background: linear-gradient(135deg, #10b98120 0%, #d1fae540 100%);
-            border-left: 4px solid #10b981;
-            padding: 25px;
-            border-radius: 12px;
-            position: relative;
-            box-shadow: 0 2px 8px rgba(16, 185, 129, 0.1);
-        }
-        .action-box::before {
-            content: '🎯';
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            font-size: 32px;
-            opacity: 0.5;
-        }
-        .action-box h3 {
-            color: #10b981;
-            margin-bottom: 10px;
-            font-weight: 700;
-            display: flex;
-            align-items: center;
-            gap: 8px;
+        .lesson-section ul li {
+            margin-bottom: 8px;
         }
         .btn-finish {
             display: block;
@@ -174,12 +101,13 @@
             border-radius: 8px;
             font-size: 18px;
             font-weight: 600;
-            transition: background 0.2s;
+            transition: all 0.3s;
             border: none;
             cursor: pointer;
         }
         .btn-finish:hover {
             background: #2563eb;
+            transform: scale(1.02);
         }
         .back-link {
             display: inline-block;
@@ -187,16 +115,17 @@
             color: var(--primary-color);
             text-decoration: none;
             font-weight: 600;
+            transition: all 0.2s;
         }
         .back-link:hover {
-            text-decoration: underline;
+            transform: translateX(-5px);
         }
         .quiz-container {
             background: linear-gradient(135deg, #0A1A2F15 0%, #00A67615 100%);
             border: 2px solid var(--primary-color);
             border-radius: 12px;
             padding: 30px;
-            margin: 40px 0 30px 0;
+            margin: 30px 0;
         }
         .quiz-header {
             text-align: center;
@@ -204,29 +133,29 @@
         }
         .quiz-header h2 {
             color: var(--primary-color);
-            font-size: 28px;
+            font-size: 26px;
             margin-bottom: 10px;
         }
         .quiz-header p {
             color: var(--text-secondary);
-            font-size: 16px;
+            font-size: 15px;
         }
         .question-card {
             background: white;
-            padding: 25px;
+            padding: 20px;
             border-radius: 8px;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
         .question-text {
-            font-size: 18px;
+            font-size: 17px;
             font-weight: 600;
             color: var(--text-primary);
             margin-bottom: 15px;
         }
         .answer-option {
             background: #f9fafb;
-            padding: 15px;
+            padding: 12px;
             border: 2px solid #e5e7eb;
             border-radius: 8px;
             margin-bottom: 10px;
@@ -236,6 +165,7 @@
         .answer-option:hover {
             border-color: var(--primary-color);
             background: #eff6ff;
+            transform: translateX(5px);
         }
         .answer-option.selected {
             border-color: var(--primary-color);
@@ -263,14 +193,16 @@
             font-weight: 600;
             border: none;
             cursor: pointer;
-            transition: background 0.2s;
+            transition: all 0.3s;
         }
         .btn-submit-quiz:hover {
             background: #2563eb;
+            transform: scale(1.05);
         }
         .btn-submit-quiz:disabled {
             background: #9ca3af;
             cursor: not-allowed;
+            transform: scale(1);
         }
         .quiz-result {
             background: white;
@@ -288,6 +220,11 @@
         .result-icon {
             font-size: 48px;
             margin-bottom: 15px;
+            animation: bounce 0.6s ease;
+        }
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
         }
         .result-text {
             font-size: 24px;
@@ -308,215 +245,387 @@
             font-size: 16px;
             font-weight: 600;
             cursor: pointer;
-            transition: background 0.2s;
+            transition: all 0.3s;
         }
         .btn-retry:hover {
             background: #d97706;
+            transform: scale(1.05);
         }
         .btn-finish:disabled {
             background: #9ca3af;
             cursor: not-allowed;
             opacity: 0.6;
         }
-        .example-cards {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 15px;
-            margin: 20px 0;
+
+        .lesson-screen {
+            display: none;
         }
-        .example-card {
-            background: white;
-            border: 2px solid #e5e7eb;
-            border-radius: 12px;
-            padding: 20px;
-            transition: all 0.3s;
+        .lesson-screen.active {
+            display: block;
+            animation: fadeIn 0.4s ease-in;
         }
-        .example-card:hover {
-            border-color: var(--primary-color);
-            transform: translateY(-3px);
-            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.2);
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
         }
-        .example-emoji {
-            font-size: 36px;
-            margin-bottom: 10px;
+        .screen-progress {
             text-align: center;
-        }
-        .example-title {
-            font-weight: 700;
-            color: var(--text-primary);
-            font-size: 15px;
-            margin-bottom: 8px;
-            text-align: center;
-        }
-        .example-desc {
-            font-size: 13px;
-            color: var(--text-secondary);
-            line-height: 1.4;
-        }
-        .debt-comparison {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-            margin: 20px 0;
-        }
-        .debt-card {
-            padding: 20px;
-            border-radius: 12px;
-            text-align: center;
-        }
-        .debt-card.avalanche {
-            background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
-            border: 2px solid #3b82f6;
-        }
-        .debt-card.snowball {
-            background: linear-gradient(135deg, #e0e7ff 0%, #c7d2fe 100%);
-            border: 2px solid #6366f1;
-        }
-        .debt-card h4 {
-            font-size: 18px;
-            font-weight: 700;
-            margin-bottom: 10px;
-        }
-        .debt-card p {
+            margin-bottom: 20px;
+            padding: 10px 20px;
+            background: linear-gradient(135deg, #0A1A2F15 0%, #00A67615 100%);
+            border-radius: 8px;
+            font-weight: 600;
+            color: var(--primary-color);
             font-size: 14px;
-            line-height: 1.5;
-            margin: 0;
         }
-        /* Interactive elements */
-        .interactive-box {
-            background: linear-gradient(135deg, #F0FDF4 0%, #D1FAE5 100%);
-            border: 3px solid #00A676;
-            border-radius: 12px;
-            padding: 20px;
-            margin: 20px 0;
+        .screen-navigation {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+            margin-top: 25px;
+            padding-top: 20px;
+            border-top: 2px solid #e5e7eb;
+        }
+        .btn-nav {
+            padding: 12px 24px;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
             cursor: pointer;
             transition: all 0.3s;
-        }
-        .interactive-box:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0, 166, 118, 0.3);
-        }
-        .interactive-box h3 {
-            color: #065F46;
-            font-size: 18px;
-            font-weight: 800;
-            margin-bottom: 12px;
             display: flex;
             align-items: center;
             gap: 8px;
         }
-        .click-reveal {
-            cursor: pointer;
-            user-select: none;
+        .btn-nav:hover {
+            background: #2563eb;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
         }
-        .reveal-content {
-            display: none;
-            margin-top: 15px;
-            padding-top: 15px;
-            border-top: 2px solid #00A676;
-            animation: slideDown 0.3s ease;
+        .btn-nav:disabled {
+            background: #d1d5db;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
         }
-        .reveal-content.show {
-            display: block;
+        .btn-nav.btn-prev {
+            background: #6b7280;
         }
-        @keyframes slideDown {
-            from {
-                opacity: 0;
-                transform: translateY(-10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        .btn-nav.btn-prev:hover {
+            background: #4b5563;
+        }
+        .nav-spacer {
+            width: 120px;
         }
 
-        /* Calculator styles */
-        .calculator {
-            background: #FFFBEB;
-            border: 3px solid #F59E0B;
+        .checkpoint-container {
+            background: linear-gradient(135deg, #E0F2FE 0%, #BAE6FD 100%);
+            border: 2px solid #7DD3FC;
             border-radius: 12px;
-            padding: 20px;
+            padding: 25px;
             margin: 20px 0;
         }
-        .calculator h3 {
-            color: #B45309;
+        .checkpoint-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .checkpoint-header h3 {
+            color: #0284C7;
+            font-size: 24px;
+            margin-bottom: 8px;
+        }
+        .checkpoint-header p {
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+        .checkpoint-question {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+        .checkpoint-question-text {
+            font-size: 17px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 15px;
+        }
+        .checkpoint-option {
+            background: #f9fafb;
+            padding: 12px;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .checkpoint-option:hover {
+            border-color: #0284C7;
+            background: #F0F9FF;
+            transform: translateX(5px);
+        }
+        .checkpoint-option.selected {
+            border-color: #0284C7;
+            background: #E0F2FE;
+        }
+        .checkpoint-option.correct {
+            border-color: #10b981;
+            background: #d1fae5;
+            cursor: default;
+        }
+        .checkpoint-option.incorrect {
+            border-color: #dc2626;
+            background: #fee2e2;
+            cursor: default;
+        }
+        .checkpoint-option input[type="radio"] {
+            cursor: pointer;
+        }
+        .checkpoint-feedback {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+            display: none;
+        }
+        .checkpoint-feedback.show {
+            display: block;
+            animation: fadeIn 0.3s ease-in;
+        }
+        .checkpoint-feedback.correct {
+            border-left: 4px solid #10b981;
+        }
+        .checkpoint-feedback.incorrect {
+            border-left: 4px solid #f59e0b;
+        }
+        .checkpoint-feedback-icon {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+        .checkpoint-feedback-title {
             font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        .checkpoint-feedback.correct .checkpoint-feedback-title {
+            color: #10b981;
+        }
+        .checkpoint-feedback.incorrect .checkpoint-feedback-title {
+            color: #f59e0b;
+        }
+        .checkpoint-explanation {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-top: 10px;
+            font-size: 14px;
+        }
+        .btn-continue {
+            display: none;
+            width: 100%;
+            max-width: 300px;
+            margin: 20px auto;
+            padding: 15px;
+            background: var(--primary-color);
+            color: white;
+            text-align: center;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .btn-continue.show {
+            display: block;
+        }
+        .btn-continue:hover {
+            background: #2563eb;
+            transform: scale(1.05);
+        }
+
+        .intro-cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .intro-card {
+            background: linear-gradient(135deg, #0A1A2F15 0%, #00A67615 100%);
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+        .intro-card:hover {
+            transform: translateY(-5px) scale(1.02);
+            border-color: var(--primary-color);
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.2);
+        }
+        .intro-card-icon {
+            font-size: 48px;
+            margin-bottom: 10px;
+            animation: float 3s ease-in-out infinite;
+        }
+        .intro-card:nth-child(2) .intro-card-icon {
+            animation-delay: 1s;
+        }
+        .intro-card:nth-child(3) .intro-card-icon {
+            animation-delay: 2s;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        .intro-card h3 {
+            color: var(--primary-color);
+            font-size: 18px;
+            margin-bottom: 8px;
+            font-weight: 700;
+        }
+        .intro-card p {
+            color: var(--text-secondary);
+            font-size: 14px;
+            line-height: 1.5;
+            margin: 0;
+        }
+
+        .score-ranges {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        .score-card {
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            transition: all 0.3s;
+            border: 3px solid;
+        }
+        .score-card:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        }
+        .score-card.excellent {
+            border-color: #10b981;
+            background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
+        }
+        .score-card.good {
+            border-color: #3b82f6;
+            background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+        }
+        .score-card.fair {
+            border-color: #f59e0b;
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+        }
+        .score-card.poor {
+            border-color: #dc2626;
+            background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
+        }
+        .score-range {
+            font-size: 28px;
+            font-weight: 900;
+            margin-bottom: 8px;
+        }
+        .score-label {
+            font-size: 16px;
+            font-weight: 800;
+            text-transform: uppercase;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, #F3E8FF 0%, #E9D5FF 100%);
+            border: 3px solid #9333EA;
+            border-radius: 12px;
+            padding: 25px;
+            margin: 20px 0;
+            text-align: center;
+        }
+        .highlight-box h3 {
+            color: #6B21A8;
+            font-size: 22px;
             font-weight: 800;
             margin-bottom: 15px;
         }
-        .calc-input {
-            width: 100%;
-            padding: 12px;
-            border: 2px solid #FCD34D;
-            border-radius: 8px;
+        .highlight-box p {
+            color: #581C87;
             font-size: 16px;
-            margin-bottom: 12px;
+            line-height: 1.6;
             font-weight: 600;
-        }
-        .calc-input:focus {
-            outline: none;
-            border-color: #F59E0B;
-        }
-        .calc-result {
-            background: white;
-            padding: 15px;
-            border-radius: 8px;
-            margin-top: 15px;
-            font-weight: 700;
-            font-size: 18px;
-            color: #B45309;
-            text-align: center;
+            margin: 0;
         }
 
-        /* Mini quiz within section */
-        .mini-check {
-            background: #FEF3C7;
-            border: 3px solid #F59E0B;
+        .action-checklist {
+            background: linear-gradient(135deg, #10b98115 0%, #d1fae530 100%);
+            border: 2px solid #10b981;
             border-radius: 12px;
-            padding: 20px;
+            padding: 25px;
             margin: 20px 0;
         }
-        .mini-check h4 {
-            color: #B45309;
-            font-size: 16px;
-            font-weight: 800;
-            margin-bottom: 12px;
+        .checklist-title {
+            color: #10b981;
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            text-align: center;
         }
-        .mini-option {
+        .checklist-item {
             background: white;
-            padding: 12px;
-            border: 2px solid #FCD34D;
             border-radius: 8px;
-            margin-bottom: 8px;
+            padding: 15px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: all 0.3s;
             cursor: pointer;
-            transition: all 0.2s;
+        }
+        .checklist-item:hover {
+            box-shadow: 0 2px 8px rgba(16, 185, 129, 0.2);
+            transform: translateX(5px);
+        }
+        .checklist-item.checked {
+            background: #d1fae5;
+            opacity: 0.7;
+        }
+        .checklist-checkbox {
+            width: 24px;
+            height: 24px;
+            border: 2px solid #10b981;
+            border-radius: 6px;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            transition: all 0.3s;
+        }
+        .checklist-item.checked .checklist-checkbox {
+            background: #10b981;
+            color: white;
+        }
+        .checklist-text {
             font-size: 14px;
-            font-weight: 600;
-        }
-        .mini-option:hover {
-            border-color: #F59E0B;
-            transform: translateX(4px);
-        }
-        .mini-option.correct {
-            border-color: #10B981;
-            background: #D1FAE5;
-            color: #065F46;
-        }
-        .mini-option.incorrect {
-            border-color: #DC2626;
-            background: #FEE2E2;
-            color: #7F1D1D;
+            color: var(--text-primary);
+            font-weight: 500;
         }
 
         @media (max-width: 768px) {
-            .debt-comparison {
+            .intro-cards {
                 grid-template-columns: 1fr;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Navigation -->
     <nav class="navbar">
         <div class="container">
             <div class="nav-wrapper">
@@ -524,177 +633,275 @@
                 <ul class="nav-links">
                     <li><a href="/">Home</a></li>
                     <li><a href="dashboard">Dashboard</a></li>
-                    <li id="authButtons" style="opacity: 0;">
-                    </li>
+                    <li id="authButtons" style="opacity: 0;"></li>
                 </ul>
             </div>
         </div>
     </nav>
 
-    <!-- Lesson Content -->
     <div class="lesson-container">
         <a href="/pillar3-lessons" class="back-link">← Back to Pillar 3 Lessons</a>
 
-        <!-- Header -->
         <div class="lesson-header">
-            <div class="lesson-number">PILLAR 3: CREDIT & DEBT MASTERY</div>
-            <h1>Debt Traps and How to Avoid Them</h1>
+            <div class="lesson-number">PILLAR 3: LESSON 5</div>
+            <h1>Credit Utilization Mastery</h1>
         </div>
 
-        <!-- Content Section -->
-        <div class="lesson-section">
-            <h2>High-Interest Debt Cascade</h2>
-            <p>High-interest debt creates a dangerous cycle. When interest rates are extremely high, most of your payment goes to interest instead of reducing the actual debt. This means the debt grows faster than you can pay it off, trapping you in a cycle of payments.</p>
-
-            <div class="visual-box">
-                <h3>How High-Interest Debt Grows</h3>
-                <p style="text-align: center; font-size: 16px; margin: 0;"><strong>Borrow $1,000 at 400% APR</strong></p>
-                <p style="text-align: center; margin: 10px 0 0 0;">After 1 year with minimum payments: <strong style="color: #dc2626;">$5,000+ owed</strong></p>
-            </div>
-        </div>
-
-        <div class="lesson-section">
-            <h2>Payday Loans: The Worst Trap</h2>
-            <p>Payday loans are short-term, high-interest loans designed to trap borrowers in a cycle of debt. They seem convenient but are extremely dangerous.</p>
-
-            <div class="warning-box">
-                <h3>Real Example</h3>
-                <p><strong>Borrow $300, pay back $450 after 2 weeks</strong></p>
-                <p style="margin: 10px 0 0 0;">That's a <strong style="font-size: 20px; color: #dc2626;">391% APR</strong> - typically 300-400%+ APR</p>
-                <p style="margin-top: 10px; font-size: 14px;">For comparison, credit cards are typically 15-25% APR</p>
-            </div>
-
-            <p><strong>Why they're dangerous:</strong></p>
-            <ul>
-                <li>Most borrowers can't pay back on time and roll over the loan</li>
-                <li>Each rollover adds more fees and interest</li>
-                <li>Average payday loan borrower is in debt for 5 months</li>
-                <li>Spends $520 in fees to borrow $375</li>
-            </ul>
-        </div>
-
-        <div class="lesson-section">
-            <h2>Buy Now Pay Later (BNPL) Risks</h2>
-            <p>Services like Afterpay, Klarna, and Affirm split purchases into smaller payments. They seem harmless but carry hidden dangers.</p>
-
-            <div class="visual-box">
-                <h3>Alex's BNPL Trap</h3>
-                <p>Alex used Afterpay for $800 in clothes. 4 payments of $200 seemed manageable.</p>
-                <p style="margin-top: 10px;">Then rent was due. Alex missed a payment.</p>
-                <p style="margin-top: 10px; font-weight: 700; color: #dc2626;">Result: $35 late fee + credit score hit + financial stress</p>
-            </div>
-
-            <div class="example-cards">
-                <div class="example-card">
-                    <div class="example-emoji">💸</div>
-                    <div class="example-title">Multiple Services</div>
-                    <div class="example-desc">Easy to have 5+ BNPL payments due at once, losing track of total obligations</div>
-                </div>
-                <div class="example-card">
-                    <div class="example-emoji">📊</div>
-                    <div class="example-title">Budget Blind Spot</div>
-                    <div class="example-desc">BNPL doesn't feel like debt, leading to overspending without realizing</div>
-                </div>
-                <div class="example-card">
-                    <div class="example-emoji">⚠️</div>
-                    <div class="example-title">Late Fee Spiral</div>
-                    <div class="example-desc">Miss one payment and fees pile up quickly, plus credit damage</div>
-                </div>
-            </div>
-        </div>
-
-        <div class="lesson-section">
-            <h2>Store Credit Cards</h2>
-            <p>Store credit cards often come with deceptive introductory offers but have much higher interest rates than regular credit cards.</p>
-
-            <div class="visual-box">
-                <h3>Interest Rate Comparison</h3>
-                <div style="display: flex; justify-content: space-around; margin-top: 15px; flex-wrap: wrap; gap: 15px;">
-                    <div style="text-align: center;">
-                        <p style="font-size: 32px; font-weight: 700; color: #dc2626; margin: 0;">25-30%</p>
-                        <p style="margin: 5px 0 0 0; font-size: 14px;">Store Credit Cards</p>
+        <div class="lesson-screen active" data-screen="1">
+            <div class="screen-progress">Screen 1 of 8</div>
+            <div class="lesson-section">
+                <h2>The 30% Rule That Boosts Your Score</h2>
+                <div class="intro-cards">
+                    <div class="intro-card">
+                        <div class="intro-card-icon">📊</div>
+                        <h3>The Problem</h3>
+                        <p>Credit utilization is 30% of your score but most people don't understand it</p>
                     </div>
-                    <div style="text-align: center;">
-                        <p style="font-size: 32px; font-weight: 700; color: #0A1A2F; margin: 0;">15-20%</p>
-                        <p style="margin: 5px 0 0 0; font-size: 14px;">Regular Credit Cards</p>
+                    <div class="intro-card">
+                        <div class="intro-card-icon">🎯</div>
+                        <h3>The Solution</h3>
+                        <p>Keep your utilization below 30%, ideally under 10% for best results</p>
+                    </div>
+                    <div class="intro-card">
+                        <div class="intro-card-icon">⚡</div>
+                        <h3>Your Goal</h3>
+                        <p>Master utilization to unlock quick credit score improvements</p>
                     </div>
                 </div>
             </div>
-
-            <p><strong>Red flags:</strong></p>
-            <ul>
-                <li>"Save 20% today if you open a card!" - The interest will cost more than you save</li>
-                <li>Deferred interest promotions - If not paid in full by deadline, charged ALL interest retroactively</li>
-                <li>Can only use at one store - Less flexibility than regular cards</li>
-            </ul>
-        </div>
-
-        <div class="lesson-section">
-            <h2>Warning Signs of Predatory Lending</h2>
-
-            <div class="warning-box">
-                <h3>Spot These Red Flags</h3>
-                <ul style="margin: 0;">
-                    <li style="margin-bottom: 10px;"><strong>"Fast cash" advertising</strong> - Preys on desperation</li>
-                    <li style="margin-bottom: 10px;"><strong>No credit check</strong> - They don't care if you can afford it</li>
-                    <li style="margin-bottom: 10px;"><strong>APR over 36%</strong> - Legally considered predatory in many states</li>
-                    <li style="margin-bottom: 10px;"><strong>Pressure tactics</strong> - "Limited time offer" to prevent careful consideration</li>
-                    <li style="margin-bottom: 10px;"><strong>Unclear terms</strong> - Hiding the true cost in fine print</li>
-                </ul>
+            <div class="screen-navigation">
+                <div class="nav-spacer"></div>
+                <button class="btn-nav" onclick="nextScreen()">Next <span>→</span></button>
             </div>
         </div>
 
-        <div class="lesson-section">
-            <h2>Debt Payoff Strategies</h2>
-            <p>If you already have debt, these two proven methods can help you get out faster:</p>
+        <div class="lesson-screen" data-screen="2">
+            <div class="screen-progress">Screen 2 of 8</div>
+            <div class="lesson-section">
+                <h2>What Is Credit Utilization?</h2>
+                <p><strong>Credit utilization</strong> is the percentage of your available credit that you're currently using. It's calculated by dividing your total credit card balances by your total credit limits.</p>
 
-            <div class="debt-comparison">
-                <div class="debt-card avalanche">
-                    <h4>Debt Avalanche</h4>
-                    <p><strong>Pay highest interest rate first</strong></p>
-                    <p style="margin-top: 10px;">Saves the most money on interest. Mathematically optimal.</p>
-                    <p style="margin-top: 10px; font-size: 12px; font-style: italic;">Best for: Motivated people who want to minimize total cost</p>
-                </div>
-                <div class="debt-card snowball">
-                    <h4>Debt Snowball</h4>
-                    <p><strong>Pay smallest balance first</strong></p>
-                    <p style="margin-top: 10px;">Quick wins build momentum. Psychologically rewarding.</p>
-                    <p style="margin-top: 10px; font-size: 12px; font-style: italic;">Best for: People who need motivational wins to stay on track</p>
+                <p style="margin-top: 15px;"><strong>Example:</strong> If you have a credit card with a $1,000 limit and you owe $300, your utilization is 30%.</p>
+
+                <p style="margin-top: 15px;"><strong>Why it matters:</strong> This single factor accounts for <strong>30% of your credit score</strong>. High utilization signals that you might be overextended financially, even if you pay on time.</p>
+
+                <div class="score-ranges">
+                    <div class="score-card excellent">
+                        <div class="score-range">1-10%</div>
+                        <div class="score-label">Excellent</div>
+                    </div>
+                    <div class="score-card good">
+                        <div class="score-range">10-30%</div>
+                        <div class="score-label">Good</div>
+                    </div>
+                    <div class="score-card fair">
+                        <div class="score-range">30-50%</div>
+                        <div class="score-label">Fair</div>
+                    </div>
+                    <div class="score-card poor">
+                        <div class="score-range">50%+</div>
+                        <div class="score-label">Poor</div>
+                    </div>
                 </div>
             </div>
-
-            <p style="text-align: center; font-weight: 700; margin-top: 20px;">Both methods work - choose the one you'll stick with!</p>
+            <div class="screen-navigation">
+                <button class="btn-nav btn-prev" onclick="previousScreen()"><span>←</span> Previous</button>
+                <button class="btn-nav" onclick="nextScreen()">Next <span>→</span></button>
+            </div>
         </div>
 
-        <div class="lesson-section">
-            <div class="action-box">
-                <h3>Action Items</h3>
-                <ul style="margin: 0;">
-                    <li>Identify any high-interest debt you currently have</li>
-                    <li>Calculate the true cost of any BNPL services you're using</li>
-                    <li>If in debt, create a payoff plan using avalanche or snowball method</li>
-                    <li>Set up alerts to track all payment due dates</li>
-                    <li>Avoid payday loans, title loans, and rent-to-own schemes</li>
+        <div class="lesson-screen" data-screen="3">
+            <div class="screen-progress">Screen 3 of 8</div>
+            <div class="checkpoint-container">
+                <div class="checkpoint-header">
+                    <h3>✓ Quick Check</h3>
+                    <p>Test your understanding</p>
+                </div>
+
+                <div class="checkpoint-question">
+                    <div class="checkpoint-question-text">What percentage of your credit score is based on credit utilization?</div>
+                    <div class="checkpoint-option" onclick="checkCheckpoint1(0)">
+                        <input type="radio" name="checkpoint1" value="0">
+                        <span>A) 10%</span>
+                    </div>
+                    <div class="checkpoint-option" onclick="checkCheckpoint1(1)">
+                        <input type="radio" name="checkpoint1" value="1">
+                        <span>B) 20%</span>
+                    </div>
+                    <div class="checkpoint-option" onclick="checkCheckpoint1(2)">
+                        <input type="radio" name="checkpoint1" value="2">
+                        <span>C) 30%</span>
+                    </div>
+                    <div class="checkpoint-option" onclick="checkCheckpoint1(3)">
+                        <input type="radio" name="checkpoint1" value="3">
+                        <span>D) 40%</span>
+                    </div>
+                </div>
+
+                <div class="checkpoint-feedback" id="checkpoint1-feedback">
+                    <div class="checkpoint-feedback-icon"></div>
+                    <div class="checkpoint-feedback-title"></div>
+                    <div class="checkpoint-explanation"></div>
+                </div>
+
+                <button class="btn-continue" id="checkpoint1-continue" onclick="nextScreen()">Continue <span>→</span></button>
+            </div>
+            <div class="screen-navigation">
+                <button class="btn-nav btn-prev" onclick="previousScreen()"><span>←</span> Previous</button>
+                <div class="nav-spacer"></div>
+            </div>
+        </div>
+
+        <div class="lesson-screen" data-screen="4">
+            <div class="screen-progress">Screen 4 of 8</div>
+            <div class="lesson-section">
+                <h2>Real Impact on Your Score</h2>
+
+                <div class="highlight-box">
+                    <h3>💡 Jake's 60-Point Jump</h3>
+                    <p><strong>Before:</strong> Jake had $2,400 balance on a $3,000 limit card (80% utilization). His score was 620.</p>
+                    <p style="margin-top: 15px;"><strong>After:</strong> He paid it down to $300 (10% utilization). His score jumped to 680 in just ONE MONTH.</p>
+                    <p style="margin-top: 15px;"><strong>Cost:</strong> $0. He just moved money from savings to pay down the balance.</p>
+                </div>
+
+                <p style="margin-top: 20px;"><strong>Why this works:</strong> Utilization has no memory. Unlike payment history, which stays on your report for years, utilization is recalculated every month. Lower it today, see results next month.</p>
+
+                <ul style="font-size: 16px; line-height: 1.8; margin-top: 15px;">
+                    <li><strong>Per-card utilization matters:</strong> Keep EACH card under 30%, not just overall</li>
+                    <li><strong>Timing matters:</strong> Balance is reported on your statement date, not due date</li>
+                    <li><strong>$0 is not best:</strong> Using 1-10% shows you actively use credit responsibly</li>
                 </ul>
             </div>
-        </div>
-
-        <!-- Lesson Quiz -->
-        <div class="quiz-container" id="quizContainer" style="display: none;">
-            <div class="quiz-header">
-                <h2>Lesson Quiz</h2>
-                <p>Test your knowledge to complete this lesson!</p>
+            <div class="screen-navigation">
+                <button class="btn-nav btn-prev" onclick="previousScreen()"><span>←</span> Previous</button>
+                <button class="btn-nav" onclick="nextScreen()">Next <span>→</span></button>
             </div>
-            <div id="quizQuestions"></div>
-            <button class="btn-submit-quiz" id="submitQuiz" onclick="submitQuiz()">Submit Quiz</button>
-            <div id="quizResult"></div>
         </div>
 
-        <!-- Finish Button -->
-        <button class="btn-finish" id="finishBtn" onclick="finishLesson()" disabled>Finish Lesson</button>
+        <div class="lesson-screen" data-screen="5">
+            <div class="screen-progress">Screen 5 of 8</div>
+            <div class="checkpoint-container">
+                <div class="checkpoint-header">
+                    <h3>✓ Apply Your Knowledge</h3>
+                    <p>What would you do in this situation?</p>
+                </div>
+
+                <div class="checkpoint-question">
+                    <div class="checkpoint-question-text">You have a $5,000 credit limit. What's the maximum balance you should carry to stay under 30% utilization?</div>
+                    <div class="checkpoint-option" onclick="checkCheckpoint2(0)">
+                        <input type="radio" name="checkpoint2" value="0">
+                        <span>A) $1,000</span>
+                    </div>
+                    <div class="checkpoint-option" onclick="checkCheckpoint2(1)">
+                        <input type="radio" name="checkpoint2" value="1">
+                        <span>B) $1,500</span>
+                    </div>
+                    <div class="checkpoint-option" onclick="checkCheckpoint2(2)">
+                        <input type="radio" name="checkpoint2" value="2">
+                        <span>C) $2,000</span>
+                    </div>
+                    <div class="checkpoint-option" onclick="checkCheckpoint2(3)">
+                        <input type="radio" name="checkpoint2" value="3">
+                        <span>D) $2,500</span>
+                    </div>
+                </div>
+
+                <div class="checkpoint-feedback" id="checkpoint2-feedback">
+                    <div class="checkpoint-feedback-icon"></div>
+                    <div class="checkpoint-feedback-title"></div>
+                    <div class="checkpoint-explanation"></div>
+                </div>
+
+                <button class="btn-continue" id="checkpoint2-continue" onclick="nextScreen()">Continue <span>→</span></button>
+            </div>
+            <div class="screen-navigation">
+                <button class="btn-nav btn-prev" onclick="previousScreen()"><span>←</span> Previous</button>
+                <div class="nav-spacer"></div>
+            </div>
+        </div>
+
+        <div class="lesson-screen" data-screen="6">
+            <div class="screen-progress">Screen 6 of 8</div>
+            <div class="lesson-section">
+                <h2>Advanced Strategies</h2>
+                
+                <p><strong>Strategy 1: Multiple Payment Dates</strong></p>
+                <p>Pay your credit card balance multiple times per month, especially right before your statement closing date. This keeps your reported balance low even if you use the card heavily.</p>
+
+                <p style="margin-top: 20px;"><strong>Strategy 2: Request Credit Limit Increases</strong></p>
+                <p>If you have good payment history, request a credit limit increase. Higher limits = lower utilization percentage without changing your spending.</p>
+
+                <p style="margin-top: 20px;"><strong>Strategy 3: Strategic Card Usage</strong></p>
+                <p>If you have multiple cards, spread spending across them to keep each card's utilization low rather than maxing out one card.</p>
+
+                <div class="highlight-box" style="margin-top: 25px;">
+                    <h3>⚠️ Warning</h3>
+                    <p>These strategies only work if you're paying in full. Never carry high balances just to "use" credit - the interest will cost you far more than any credit score benefit.</p>
+                </div>
+            </div>
+            <div class="screen-navigation">
+                <button class="btn-nav btn-prev" onclick="previousScreen()"><span>←</span> Previous</button>
+                <button class="btn-nav" onclick="nextScreen()">Next <span>→</span></button>
+            </div>
+        </div>
+
+        <div class="lesson-screen" data-screen="7">
+            <div class="screen-progress">Screen 7 of 8</div>
+            <div class="lesson-section">
+                <div class="action-checklist">
+                    <div class="checklist-title">🎯 Your Utilization Action Plan</div>
+                    <p style="text-align: center; color: var(--text-secondary); margin-bottom: 15px; font-size: 14px;">
+                        Take these steps to optimize your credit utilization:
+                    </p>
+                    <div class="checklist-item" onclick="toggleChecklistItem(this)">
+                        <div class="checklist-checkbox"></div>
+                        <div class="checklist-text">Calculate your current utilization for each card and overall</div>
+                    </div>
+                    <div class="checklist-item" onclick="toggleChecklistItem(this)">
+                        <div class="checklist-checkbox"></div>
+                        <div class="checklist-text">Set calendar reminder for your statement closing dates</div>
+                    </div>
+                    <div class="checklist-item" onclick="toggleChecklistItem(this)">
+                        <div class="checklist-checkbox"></div>
+                        <div class="checklist-text">Pay down any cards over 30% utilization before statement closes</div>
+                    </div>
+                    <div class="checklist-item" onclick="toggleChecklistItem(this)">
+                        <div class="checklist-checkbox"></div>
+                        <div class="checklist-text">Request credit limit increases on cards with good payment history</div>
+                    </div>
+                    <div class="checklist-item" onclick="toggleChecklistItem(this)">
+                        <div class="checklist-checkbox"></div>
+                        <div class="checklist-text">Aim for 10% or less utilization on all cards for maximum score impact</div>
+                    </div>
+                </div>
+            </div>
+            <div class="screen-navigation">
+                <button class="btn-nav btn-prev" onclick="previousScreen()"><span>←</span> Previous</button>
+                <button class="btn-nav" onclick="nextScreen()">Next <span>→</span></button>
+            </div>
+        </div>
+
+        <div class="lesson-screen" data-screen="8">
+            <div class="screen-progress">Screen 8 of 8</div>
+            <div class="quiz-container" id="quizContainer">
+                <div class="quiz-header">
+                    <h2>Final Quiz</h2>
+                    <p>Answer all 3 questions correctly to complete the lesson</p>
+                </div>
+                <div id="quizQuestions"></div>
+                <button class="btn-submit-quiz" id="submitQuiz" onclick="submitQuiz()">Submit Quiz</button>
+                <div id="quizResult"></div>
+            </div>
+
+            <button class="btn-finish" id="finishBtn" onclick="finishLesson()" disabled>Finish Lesson</button>
+
+            <div class="screen-navigation">
+                <button class="btn-nav btn-prev" onclick="previousScreen()"><span>←</span> Previous</button>
+                <div class="nav-spacer"></div>
+            </div>
+        </div>
     </div>
 
-    <!-- Footer -->
     <footer class="footer">
         <div class="container">
             <div class="footer-content">
@@ -730,50 +937,40 @@
     <script src="lesson-completion.js"></script>
     <script src="animations.js"></script>
     <script>
-        // Check authentication status and update nav
         async function updateNav() {
             const authButtons = document.getElementById('authButtons');
-
-            // Check localStorage for cached auth state and render immediately
             const cachedAuth = localStorage.getItem('authState');
             if (cachedAuth) {
                 const authState = JSON.parse(cachedAuth);
                 authButtons.innerHTML = authState.isLoggedIn
-                    ? `<a href="#" onclick="logout(); return false;" class="btn-primary">Logout</a>`
-                    : `<a href="login" class="btn-primary">Login</a>`;
+                    ? \`<a href="#" onclick="logout(); return false;" class="btn-primary">Logout</a>\`
+                    : \`<a href="login" class="btn-primary">Login</a>\`;
                 authButtons.style.opacity = '1';
             }
-
-            // Then verify with server in background
             try {
-                const response = await fetch(`${API_URL}/auth/me`, { credentials: 'include' });
-
+                const response = await fetch(\`\${API_URL}/auth/me\`, { credentials: 'include' });
                 if (response.ok) {
                     localStorage.setItem('authState', JSON.stringify({ isLoggedIn: true }));
-                    authButtons.innerHTML = `<a href="#" onclick="logout(); return false;" class="btn-primary">Logout</a>`;
+                    authButtons.innerHTML = \`<a href="#" onclick="logout(); return false;" class="btn-primary">Logout</a>\`;
                 } else {
                     localStorage.setItem('authState', JSON.stringify({ isLoggedIn: false }));
-                    authButtons.innerHTML = `<a href="login" class="btn-primary">Login</a>`;
+                    authButtons.innerHTML = \`<a href="login" class="btn-primary">Login</a>\`;
                 }
                 authButtons.style.opacity = '1';
             } catch (error) {
                 console.log('Not logged in');
                 localStorage.setItem('authState', JSON.stringify({ isLoggedIn: false }));
-                authButtons.innerHTML = `<a href="login" class="btn-primary">Login</a>`;
+                authButtons.innerHTML = \`<a href="login" class="btn-primary">Login</a>\`;
                 authButtons.style.opacity = '1';
             }
         }
 
-        // Logout function
         async function logout() {
             localStorage.removeItem('authState');
             localStorage.removeItem('token');
             localStorage.removeItem('userId');
             try {
-                await fetch(`${API_URL}/auth/logout`, {
-                    method: 'POST',
-                    credentials: 'include'
-                });
+                await fetch(\`\${API_URL}/auth/logout\`, { method: 'POST', credentials: 'include' });
                 window.location.href = '/index.html';
             } catch (error) {
                 console.error('Logout error:', error);
@@ -781,56 +978,46 @@
             }
         }
 
-        // Quiz data
+        function toggleChecklistItem(item) {
+            item.classList.toggle('checked');
+            const checkbox = item.querySelector('.checklist-checkbox');
+            if (item.classList.contains('checked')) {
+                checkbox.textContent = '✓';
+            } else {
+                checkbox.textContent = '';
+            }
+        }
+
         const quizData = [
             {
-                question: "What's the typical APR for payday loans?",
-                options: [
-                    "10-20%",
-                    "50-100%",
-                    "150-300%",
-                    "300-400%+"
-                ],
-                correct: 3
-            },
-            {
-                question: "What's a major risk of Buy Now Pay Later?",
-                options: [
-                    "Require excellent credit",
-                    "High upfront fees",
-                    "Easy to overextend with multiple payment obligations",
-                    "Illegal in most states"
-                ],
+                question: "What percentage of your credit score is based on credit utilization?",
+                options: ["A) 10%", "B) 20%", "C) 30%", "D) 40%"],
                 correct: 2
             },
             {
-                question: "What's the difference between debt avalanche and debt snowball?",
-                options: [
-                    "Avalanche pays highest interest first",
-                    "No difference",
-                    "Snowball pays highest interest first",
-                    "Avalanche is only for student loans"
-                ],
-                correct: 0
+                question: "What's the maximum utilization percentage recommended to keep?",
+                options: ["A) 10%", "B) 30%", "C) 50%", "D) 70%"],
+                correct: 1
+            },
+            {
+                question: "With a $5,000 credit limit, what's the maximum balance for 30% utilization?",
+                options: ["A) $1,000", "B) $1,500", "C) $2,000", "D) $2,500"],
+                correct: 1
             }
         ];
 
         let userAnswers = [];
         let quizPassed = false;
 
-        // Initialize quiz
         function initQuiz() {
             const userId = localStorage.getItem('userId');
-
-            // Validate userId exists
             if (!userId || userId === 'null' || userId === 'undefined') {
                 console.error('No valid userId found');
                 document.getElementById('finishBtn').disabled = true;
                 return;
             }
 
-            const quizPassedStatus = localStorage.getItem(`lesson25_quiz_passed_${userId}`);
-
+            const quizPassedStatus = localStorage.getItem(\`pillar3_lesson5_quiz_passed_\${userId}\`);
             if (quizPassedStatus === 'true') {
                 quizPassed = true;
                 document.getElementById('finishBtn').disabled = false;
@@ -849,15 +1036,15 @@
             quizData.forEach((q, qIndex) => {
                 const questionCard = document.createElement('div');
                 questionCard.className = 'question-card';
-                questionCard.innerHTML = `
-                    <div class="question-text">Question ${qIndex + 1}: ${q.question}</div>
-                    ${q.options.map((option, oIndex) => `
-                        <div class="answer-option" onclick="selectAnswer(${qIndex}, ${oIndex})">
-                            <input type="radio" name="question${qIndex}" value="${oIndex}" style="margin-right: 10px;">
-                            ${option}
+                questionCard.innerHTML = \`
+                    <div class="question-text">Question \${qIndex + 1}: \${q.question}</div>
+                    \${q.options.map((option, oIndex) => \`
+                        <div class="answer-option" onclick="selectAnswer(\${qIndex}, \${oIndex})">
+                            <input type="radio" name="question\${qIndex}" value="\${oIndex}" style="margin-right: 10px;">
+                            \${option}
                         </div>
-                    `).join('')}
-                `;
+                    \`).join('')}
+                \`;
                 questionsContainer.appendChild(questionCard);
             });
 
@@ -867,8 +1054,6 @@
 
         function selectAnswer(questionIndex, optionIndex) {
             userAnswers[questionIndex] = optionIndex;
-
-            // Update visual selection
             const questionCard = document.querySelectorAll('.question-card')[questionIndex];
             const options = questionCard.querySelectorAll('.answer-option');
             options.forEach((opt, idx) => {
@@ -881,13 +1066,11 @@
         }
 
         function submitQuiz() {
-            // Check if all questions are answered
             if (userAnswers.includes(null)) {
                 alert('Please answer all questions before submitting.');
                 return;
             }
 
-            // Calculate score
             let correct = 0;
             quizData.forEach((q, index) => {
                 if (userAnswers[index] === q.correct) {
@@ -896,9 +1079,8 @@
             });
 
             const percentage = Math.round((correct / quizData.length) * 100);
-            const passed = percentage === 100;
+            const passed = correct === quizData.length;
 
-            // Show correct/incorrect answers
             document.querySelectorAll('.question-card').forEach((card, qIndex) => {
                 const options = card.querySelectorAll('.answer-option');
                 options.forEach((opt, oIndex) => {
@@ -911,32 +1093,31 @@
                 });
             });
 
-            // Display result
             const resultDiv = document.getElementById('quizResult');
             if (passed) {
                 quizPassed = true;
                 const userId = localStorage.getItem('userId');
-                localStorage.setItem(`lesson25_quiz_passed_${userId}`, 'true');
+                localStorage.setItem(\`pillar3_lesson5_quiz_passed_\${userId}\`, 'true');
                 document.getElementById('finishBtn').disabled = false;
 
-                resultDiv.innerHTML = `
+                resultDiv.innerHTML = \`
                     <div class="quiz-result pass">
                         <div class="result-icon">🎉</div>
-                        <div class="result-text" style="color: #10b981;">Quiz Passed!</div>
-                        <div class="result-score">You scored ${correct} out of ${quizData.length} (${percentage}%)</div>
-                        <p style="color: var(--text-secondary);">Great job! You can now finish the lesson and move to the next one.</p>
+                        <div class="result-text" style="color: #10b981;">Perfect Score!</div>
+                        <div class="result-score">You got all \${quizData.length} questions correct!</div>
+                        <p style="color: var(--text-secondary); font-size: 16px; font-weight: 600;">Excellent! Click "Finish Lesson" to continue.</p>
                     </div>
-                `;
+                \`;
             } else {
-                resultDiv.innerHTML = `
+                resultDiv.innerHTML = \`
                     <div class="quiz-result fail">
                         <div class="result-icon">📚</div>
-                        <div class="result-text" style="color: #dc2626;">Not quite there yet</div>
-                        <div class="result-score">You scored ${correct} out of ${quizData.length} (${percentage}%)</div>
-                        <p style="color: var(--text-secondary); margin-bottom: 15px;">You need 100% to pass. Review the lesson and try again!</p>
+                        <div class="result-text" style="color: #dc2626;">Not Quite</div>
+                        <div class="result-score">You scored \${correct} out of \${quizData.length}</div>
+                        <p style="color: var(--text-secondary); margin-bottom: 15px; font-size: 16px; font-weight: 600;">You need all 3 correct. Review the lesson and try again!</p>
                         <button class="btn-retry" onclick="retryQuiz()">Retry Quiz</button>
                     </div>
-                `;
+                \`;
             }
 
             document.getElementById('submitQuiz').style.display = 'none';
@@ -952,172 +1133,146 @@
                 alert('Please complete the quiz first!');
                 return;
             }
-
-            // Use shared completion function
             const success = await completeLesson('pillar3_lesson5', 3, 5);
-
             if (success) {
-                // Redirect back to lessons page
                 window.location.href = 'pillar3-lessons.html';
             }
-        }        // Interactive element functions
-
-        function calculateDebtPayoff() {
-            const debt = parseFloat(document.getElementById('debtAmount')?.value) || 0;
-            const payment = parseFloat(document.getElementById('monthlyPay')?.value) || 0;
-            const rate = parseFloat(document.getElementById('debtRate')?.value) || 0;
-            const resultDiv = document.getElementById('debtResult');
-
-            if (!resultDiv || debt === 0 || payment === 0) return;
-
-            const monthlyRate = (rate / 100) / 12;
-            if (payment <= (debt * monthlyRate)) {
-                resultDiv.innerHTML = '<strong style="color: #DC2626;">⚠️ Payment too low!</strong><br><span style="font-size: 15px;">Your payment barely covers interest. You\'ll never pay this off! Increase payment.</span>';
-                resultDiv.style.background = '#FEE2E2';
-                return;
-            }
-
-            const months = Math.log(payment / (payment - debt * monthlyRate)) / Math.log(1 + monthlyRate);
-            const totalPaid = payment * months;
-            const totalInterest = totalPaid - debt;
-            const years = Math.floor(months / 12);
-            const remainingMonths = Math.round(months % 12);
-
-            let timeString = '';
-            if (years > 0) timeString += `${years} year${years > 1 ? 's' : ''}`;
-            if (remainingMonths > 0) timeString += ` ${remainingMonths} month${remainingMonths > 1 ? 's' : ''}`;
-
-            resultDiv.innerHTML = `
-                <strong>Debt-Free In: ${timeString}</strong><br>
-                <span style="font-size: 15px;">
-                    Total Interest: $${totalInterest.toFixed(2)}<br>
-                    Total Paid: $${totalPaid.toFixed(2)}<br>
-                    💡 ${payment >= debt * 0.05 ? 'Great payment amount!' : 'Consider paying more to save on interest'}
-                </span>
-            `;
-            resultDiv.style.background = months <= 24 ? '#D1FAE5' : months <= 48 ? '#FEF3C7' : '#FED7AA';
         }
 
-        setTimeout(() => {
-            if (document.getElementById('debtAmount')) {
-                calculateDebtPayoff();
-            }
-        }, 100);
-        function toggleReveal(element) {
-            const content = element.querySelector('.reveal-content');
-            const heading = element.querySelector('h3');
-            if (content.classList.contains('show')) {
-                content.classList.remove('show');
-                heading.innerHTML = heading.innerHTML.replace('▲', '▼');
-            } else {
-                content.classList.add('show');
-                heading.innerHTML = heading.innerHTML.replace('▼', '▲');
-            }
-        }
+        updateNav();
+        initQuiz();
 
-        function checkMini(element, isCorrect) {
-            const parent = element.parentElement;
-            const options = parent.querySelectorAll('.mini-option');
-            options.forEach(opt => {
-                opt.classList.remove('correct', 'incorrect');
-                opt.style.pointerEvents = 'none';
+        let checkpoint1Answered = false;
+        let checkpoint2Answered = false;
+
+        function checkCheckpoint1(selectedOption) {
+            if (checkpoint1Answered) return;
+            checkpoint1Answered = true;
+
+            const correctOption = 2;
+            const isCorrect = selectedOption === correctOption;
+
+            document.querySelectorAll('[name="checkpoint1"]').forEach((radio, index) => {
+                const optionDiv = radio.parentElement;
+                optionDiv.style.pointerEvents = 'none';
+
+                if (index === correctOption) {
+                    optionDiv.classList.add('correct');
+                } else if (index === selectedOption && index !== correctOption) {
+                    optionDiv.classList.add('incorrect');
+                }
+
+                if (index === selectedOption) {
+                    radio.checked = true;
+                }
             });
 
+            const feedback = document.getElementById('checkpoint1-feedback');
+            const feedbackIcon = feedback.querySelector('.checkpoint-feedback-icon');
+            const feedbackTitle = feedback.querySelector('.checkpoint-feedback-title');
+            const feedbackExplanation = feedback.querySelector('.checkpoint-explanation');
+            const continueBtn = document.getElementById('checkpoint1-continue');
+
             if (isCorrect) {
-                element.classList.add('correct');
-                element.innerHTML += ' ✓ Correct!';
+                feedback.classList.add('correct');
+                feedbackIcon.textContent = '🎉';
+                feedbackTitle.textContent = 'Correct!';
+                feedbackExplanation.textContent = 'Credit utilization accounts for 30% of your credit score, making it the second most important factor after payment history.';
             } else {
-                element.classList.add('incorrect');
-                element.innerHTML += ' ✗';
-                options.forEach(opt => {
-                    if (opt.onclick && opt.onclick.toString().includes('true')) {
-                        opt.classList.add('correct');
-                        opt.innerHTML += ' ← Correct Answer';
-                    }
+                feedback.classList.add('incorrect');
+                feedbackIcon.textContent = '💡';
+                feedbackTitle.textContent = 'Not quite!';
+                feedbackExplanation.textContent = 'The correct answer is 30%. This makes utilization one of the most impactful factors you can control.';
+            }
+
+            feedback.classList.add('show');
+            continueBtn.classList.add('show');
+        }
+
+        function checkCheckpoint2(selectedOption) {
+            if (checkpoint2Answered) return;
+            checkpoint2Answered = true;
+
+            const correctOption = 1;
+            const isCorrect = selectedOption === correctOption;
+
+            document.querySelectorAll('[name="checkpoint2"]').forEach((radio, index) => {
+                const optionDiv = radio.parentElement;
+                optionDiv.style.pointerEvents = 'none';
+
+                if (index === correctOption) {
+                    optionDiv.classList.add('correct');
+                } else if (index === selectedOption && index !== correctOption) {
+                    optionDiv.classList.add('incorrect');
+                }
+
+                if (index === selectedOption) {
+                    radio.checked = true;
+                }
+            });
+
+            const feedback = document.getElementById('checkpoint2-feedback');
+            const feedbackIcon = feedback.querySelector('.checkpoint-feedback-icon');
+            const feedbackTitle = feedback.querySelector('.checkpoint-feedback-title');
+            const feedbackExplanation = feedback.querySelector('.checkpoint-explanation');
+            const continueBtn = document.getElementById('checkpoint2-continue');
+
+            if (isCorrect) {
+                feedback.classList.add('correct');
+                feedbackIcon.textContent = '🎉';
+                feedbackTitle.textContent = 'Excellent!';
+                feedbackExplanation.textContent = '30% of $5,000 is $1,500. Keep your balance at or below this amount to maintain good utilization.';
+            } else {
+                feedback.classList.add('incorrect');
+                feedbackIcon.textContent = '💡';
+                feedbackTitle.textContent = 'Good thinking, but...';
+                feedbackExplanation.textContent = 'The correct answer is $1,500. Calculate by multiplying $5,000 × 0.30 = $1,500.';
+            }
+
+            feedback.classList.add('show');
+            continueBtn.classList.add('show');
+        }
+
+        let currentScreen = 1;
+        const totalScreens = 8;
+
+        function showScreen(screenNumber) {
+            document.querySelectorAll('.lesson-screen').forEach(screen => {
+                screen.classList.remove('active');
+            });
+
+            const targetScreen = document.querySelector(\`.lesson-screen[data-screen="\${screenNumber}"]\`);
+            if (targetScreen) {
+                targetScreen.classList.add('active');
+                currentScreen = screenNumber;
+
+                const lessonContainer = document.querySelector('.lesson-container');
+                const headerOffset = 80;
+                const elementPosition = lessonContainer.getBoundingClientRect().top;
+                const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+                window.scrollTo({
+                    top: offsetPosition,
+                    behavior: 'smooth'
                 });
             }
         }
 
-        function calculateUtilization() {
-            const balance = parseFloat(document.getElementById('balance').value) || 0;
-            const limit = parseFloat(document.getElementById('limit').value) || 0;
-            const resultDiv = document.getElementById('utilResult');
-
-            if (limit === 0) {
-                resultDiv.textContent = 'Enter your credit limit';
-                resultDiv.style.background = 'white';
-                return;
-            }
-
-            const utilization = ((balance / limit) * 100).toFixed(1);
-            let message = `Your utilization: ${utilization}%`;
-            let feedback = '';
-            let color = '';
-
-            if (utilization <= 10) {
-                feedback = '🌟 Excellent! This helps your score.';
-                color = '#D1FAE5';
-            } else if (utilization <= 30) {
-                feedback = '✅ Good! You\'re in the sweet spot.';
-                color = '#FEF3C7';
-            } else if (utilization <= 50) {
-                feedback = '⚠️ Fair - Try to pay down to under 30%.';
-                color = '#FED7AA';
-            } else {
-                feedback = '🚨 High! This is hurting your score. Pay down ASAP.';
-                color = '#FEE2E2';
-            }
-
-            resultDiv.innerHTML = `<strong>${message}</strong><br><span style="font-size: 15px;">${feedback}</span>`;
-            resultDiv.style.background = color;
-        }
-
-        // Multi-screen navigation
-        let currentSection = 0;
-        const sections = document.querySelectorAll('.lesson-section');
-        const totalSections = sections.length;
-        const prevBtn = document.getElementById('prevBtn');
-        const nextBtn = document.getElementById('nextBtn');
-        const progressFill = document.getElementById('progressFill');
-        const progressText = document.getElementById('progressText');
-        const lessonNav = document.getElementById('lessonNav');
-        const quizContainer = document.getElementById('quizContainer');
-
-        function showSection(index) {
-            sections.forEach(section => section.classList.remove('active'));
-            if (index >= 0 && index < totalSections) {
-                sections[index].classList.add('active');
-                currentSection = index;
-                prevBtn.disabled = currentSection === 0;
-                const progress = ((currentSection + 1) / totalSections) * 100;
-                progressFill.style.width = progress + '%';
-                progressText.textContent = `Section ${currentSection + 1} of ${totalSections}`;
-                window.scrollTo({ top: 0, behavior: 'smooth' });
+        function nextScreen() {
+            if (currentScreen < totalScreens) {
+                showScreen(currentScreen + 1);
             }
         }
 
-        function nextSection() {
-            if (currentSection < totalSections - 1) {
-                showSection(currentSection + 1);
-            } else {
-                lessonNav.style.display = 'none';
-                quizContainer.style.display = 'block';
-                window.scrollTo({ top: quizContainer.offsetTop - 100, behavior: 'smooth' });
+        function previousScreen() {
+            if (currentScreen > 1) {
+                showScreen(currentScreen - 1);
             }
         }
 
-        function previousSection() {
-            if (currentSection > 0) {
-                showSection(currentSection - 1);
-            }
-        }
-
-        showSection(0);
-
-
-
-        updateNav();
-        initQuiz();
+        document.addEventListener('DOMContentLoaded', function() {
+            showScreen(1);
+        });
     </script>
 </body>
 </html>

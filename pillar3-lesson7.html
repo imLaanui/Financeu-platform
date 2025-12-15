@@ -1172,7 +1172,7 @@
                 return;
             }
 
-            const quizPassedStatus = localStorage.getItem(`lesson24_quiz_passed_${userId}`);
+            const quizPassedStatus = localStorage.getItem(`pillar3_lesson7_quiz_passed_${userId}`);
 
             if (quizPassedStatus === 'true') {
                 quizPassed = true;
@@ -1259,7 +1259,7 @@
             if (passed) {
                 quizPassed = true;
                 const userId = localStorage.getItem('userId');
-                localStorage.setItem(`lesson24_quiz_passed_${userId}`, 'true');
+                localStorage.setItem(`pillar3_lesson7_quiz_passed_${userId}`, 'true');
                 document.getElementById('finishBtn').disabled = false;
 
                 resultDiv.innerHTML = `
