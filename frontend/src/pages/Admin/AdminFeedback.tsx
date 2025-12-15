@@ -1,6 +1,6 @@
 import { useEffect, useState, useCallback } from "react";
 import { API_URL } from "@config/api";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Footer from "@components/Footer";
 import "@css/admin/adminFeedback.css";
 
@@ -8,125 +8,149 @@ interface FeedbackItem {
     id: number;
     name?: string;
     email?: string;
-    feedback_type: string;
+    type: string; // Changed from feedback_type to match backend
     message: string;
     created_at: string;
 }
 
+type SortField = "date" | "type" | "name";
+type SortOrder = "asc" | "desc";
+
 export default function AdminFeedback() {
-    const [loggedIn, setLoggedIn] = useState(false);
-    const [password, setPassword] = useState("");
-    const [loginError, setLoginError] = useState("");
+    const navigate = useNavigate();
+    const [isAdmin, setIsAdmin] = useState<boolean | null>(null);
     const [allFeedback, setAllFeedback] = useState<FeedbackItem[]>([]);
     const [filterType, setFilterType] = useState("all");
-    const [loading, setLoading] = useState(false);
-    const [adminAuth, setAdminAuth] = useState<string | null>(null);
+    const [sortField, setSortField] = useState<SortField>("date");
+    const [sortOrder, setSortOrder] = useState<SortOrder>("desc");
+    const [searchTerm, setSearchTerm] = useState("");
+    const [loading, setLoading] = useState(true);
 
-    // Verify admin credentials
-    const verifyLogin = useCallback(async (auth: string) => {
+    // Verify admin authentication
+    const verifyAdmin = useCallback(async () => {
         try {
-            const res = await fetch(`${API_URL}/admin/feedback`, {
-                headers: { Authorization: `Basic ${auth}` },
+            const res = await fetch(`${API_URL}/auth/me`, {
+                credentials: "include",
             });
-            if (res.ok) {
-                setLoggedIn(true);
-                loadFeedback(auth);
-            } else {
-                sessionStorage.removeItem("adminAuth");
-            }
-        } catch {
-            sessionStorage.removeItem("adminAuth");
-        }
-    }, []);
 
-    // Check session storage for auth
+            if (res.ok) {
+                const data = await res.json();
+                if (data.user?.role === "admin") {
+                    setIsAdmin(true);
+                    loadFeedback();
+                } else {
+                    setIsAdmin(false);
+                    navigate("/");
+                }
+            } else {
+                setIsAdmin(false);
+                navigate("/auth/login");
+            }
+        } catch (error) {
+            console.error("Auth verification error:", error);
+            setIsAdmin(false);
+            navigate("/auth/login");
+        }
+    }, [navigate]);
+
     useEffect(() => {
-        const savedAuth = sessionStorage.getItem("adminAuth");
-        if (savedAuth) {
-            setAdminAuth(savedAuth);
-            verifyLogin(savedAuth);
-        }
-    }, [verifyLogin]);
+        verifyAdmin();
+    }, [verifyAdmin]);
 
-    const handleLogin = async (e: React.FormEvent) => {
-        e.preventDefault();
-        const auth = btoa(`admin:${password}`);
-        try {
-            const res = await fetch(`${API_URL}/admin/feedback`, {
-                headers: { Authorization: `Basic ${auth}` },
-            });
-            if (res.ok) {
-                setAdminAuth(auth);
-                sessionStorage.setItem("adminAuth", auth);
-                setLoggedIn(true);
-                loadFeedback(auth);
-            } else {
-                setLoginError("Invalid password");
-            }
-        } catch (err) {
-            if (err instanceof Error) {
-                setLoginError(`Network error: ${err.message}`);
-            } else {
-                setLoginError("Unknown network error");
-            }
-        }
-    };
-
-    const loadFeedback = async (auth: string) => {
+    const loadFeedback = async () => {
         setLoading(true);
         try {
-            const res = await fetch(`${API_URL}/admin/feedback`, {
-                headers: { Authorization: `Basic ${auth}` },
+            const res = await fetch(`${API_URL}/feedback/admin`, {
+                credentials: "include",
             });
-            if (!res.ok) throw new Error("Failed to load feedback");
+
+            if (!res.ok) {
+                throw new Error("Failed to load feedback");
+            }
+
             const data = await res.json();
-            setAllFeedback(data.feedback);
-        } catch {
+            setAllFeedback(data.feedback || []);
+        } catch (error) {
+            console.error("Error loading feedback:", error);
             setAllFeedback([]);
         } finally {
             setLoading(false);
         }
     };
 
-    const handleLogout = () => {
-        sessionStorage.removeItem("adminAuth");
-        setLoggedIn(false);
-        setPassword("");
-        setAdminAuth(null);
-        setAllFeedback([]);
-    };
-
     const deleteFeedback = async (id: number) => {
-        if (!adminAuth) return;
         if (!confirm("Are you sure you want to delete this feedback?")) return;
 
         try {
-            const res = await fetch(`${API_URL}/admin/feedback/${id}`, {
+            const res = await fetch(`${API_URL}/feedback/admin/${id}`, {
                 method: "DELETE",
-                headers: { Authorization: `Basic ${adminAuth}` },
+                credentials: "include",
             });
+
             if (res.ok) {
                 setAllFeedback((prev) => prev.filter((f) => f.id !== id));
             } else {
                 alert("Failed to delete feedback");
             }
-        } catch {
+        } catch (error) {
+            console.error("Error deleting feedback:", error);
             alert("Error deleting feedback");
         }
     };
 
-    const filteredFeedback =
-        filterType === "all"
-            ? allFeedback
-            : allFeedback.filter((f) => f.feedback_type === filterType);
+    const handleSort = (field: SortField) => {
+        if (sortField === field) {
+            setSortOrder(sortOrder === "asc" ? "desc" : "asc");
+        } else {
+            setSortField(field);
+            setSortOrder("desc");
+        }
+    };
 
+    // Filter feedback by type
+    const filteredByType = filterType === "all"
+        ? allFeedback
+        : allFeedback.filter((f) => f.type === filterType);
+
+    // Filter by search term
+    const filteredBySearch = filteredByType.filter((f) => {
+        const searchLower = searchTerm.toLowerCase();
+        return (
+            f.message.toLowerCase().includes(searchLower) ||
+            f.name?.toLowerCase().includes(searchLower) ||
+            f.email?.toLowerCase().includes(searchLower) ||
+            f.type.toLowerCase().includes(searchLower)
+        );
+    });
+
+    // Sort feedback
+    const sortedFeedback = [...filteredBySearch].sort((a, b) => {
+        let comparison = 0;
+
+        switch (sortField) {
+            case "date":
+                comparison = new Date(a.created_at).getTime() - new Date(b.created_at).getTime();
+                break;
+            case "type":
+                comparison = a.type.localeCompare(b.type);
+                break;
+            case "name":
+                const nameA = a.name || "Zzz";
+                const nameB = b.name || "Zzz";
+                comparison = nameA.localeCompare(nameB);
+                break;
+        }
+
+        return sortOrder === "asc" ? comparison : -comparison;
+    });
+
+    // Calculate stats
     const stats = {
         total: allFeedback.length,
-        bug: allFeedback.filter((f) => f.feedback_type === "Bug Report").length,
-        feature:
-            allFeedback.filter((f) => f.feedback_type === "Feature Request").length,
-        compliment:
-            allFeedback.filter((f) => f.feedback_type === "Compliment").length,
+        bug: allFeedback.filter((f) => f.type === "Bug Report").length,
+        feature: allFeedback.filter((f) => f.type === "Feature Request").length,
+        general: allFeedback.filter((f) => f.type === "General Feedback").length,
+        compliment: allFeedback.filter((f) => f.type === "Compliment").length,
     };
 
     const escapeHtml = (text: string) => {
@@ -135,26 +159,18 @@ export default function AdminFeedback() {
         return div.innerHTML;
     };
 
-    if (!loggedIn) {
+    // Show loading state while checking auth
+    if (isAdmin === null) {
         return (
-            <div className="login-form">
-                <h2>Admin Login</h2>
-                {loginError && <div className="error-message show">{loginError}</div>}
-                <form onSubmit={handleLogin}>
-                    <div className="form-group">
-                        <label>Password</label>
-                        <input
-                            type="password"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                            placeholder="Enter admin password"
-                            required
-                        />
-                    </div>
-                    <button className="login-btn">Login</button>
-                </form>
+            <div className="loading-container">
+                <div className="loading">Verifying authentication...</div>
             </div>
         );
+    }
+
+    // If not admin, don't render anything (will redirect)
+    if (!isAdmin) {
+        return null;
     }
 
     return (
@@ -176,9 +192,9 @@ export default function AdminFeedback() {
                                 <Link to="/admin/feedback">Feedback</Link>
                             </li>
                             <li>
-                                <button onClick={handleLogout} className="btn-primary">
+                                <Link to="/auth/signout" className="btn-primary">
                                     Logout
-                                </button>
+                                </Link>
                             </li>
                         </ul>
                     </div>
@@ -189,6 +205,7 @@ export default function AdminFeedback() {
             <header className="admin-header">
                 <div className="container">
                     <h1>Feedback Dashboard</h1>
+                    <p>Manage and review user feedback</p>
                 </div>
             </header>
 
@@ -213,10 +230,19 @@ export default function AdminFeedback() {
                     </div>
                 </div>
 
-                {/* Feedback List */}
-                <div className="feedback-list">
-                    <div className="feedback-list-header">
-                        <h2>All Feedback</h2>
+                {/* Controls */}
+                <div className="feedback-controls">
+                    <div className="search-box">
+                        <input
+                            type="text"
+                            placeholder="Search feedback..."
+                            value={searchTerm}
+                            onChange={(e) => setSearchTerm(e.target.value)}
+                            className="search-input"
+                        />
+                    </div>
+
+                    <div className="control-group">
                         <select
                             className="filter-dropdown"
                             value={filterType}
@@ -228,50 +254,106 @@ export default function AdminFeedback() {
                             <option value="General Feedback">General Feedback</option>
                             <option value="Compliment">Compliments</option>
                         </select>
-                    </div>
 
+                        <select
+                            className="sort-dropdown"
+                            value={`${sortField}-${sortOrder}`}
+                            onChange={(e) => {
+                                const [field, order] = e.target.value.split("-") as [SortField, SortOrder];
+                                setSortField(field);
+                                setSortOrder(order);
+                            }}
+                        >
+                            <option value="date-desc">Newest First</option>
+                            <option value="date-asc">Oldest First</option>
+                            <option value="type-asc">Type (A-Z)</option>
+                            <option value="type-desc">Type (Z-A)</option>
+                            <option value="name-asc">Name (A-Z)</option>
+                            <option value="name-desc">Name (Z-A)</option>
+                        </select>
+                    </div>
+                </div>
+
+                {/* Results count */}
+                {searchTerm && (
+                    <div className="results-info">
+                        Showing {sortedFeedback.length} of {allFeedback.length} feedback items
+                    </div>
+                )}
+
+                {/* Feedback List */}
+                <div className="feedback-list">
                     <div id="feedbackContainer">
                         {loading && <div className="loading">Loading feedback...</div>}
-                        {!loading && filteredFeedback.length === 0 && (
+
+                        {!loading && sortedFeedback.length === 0 && !searchTerm && (
                             <div className="no-feedback">
                                 <h3>No feedback yet</h3>
                                 <p>When users submit feedback, it will appear here</p>
                             </div>
                         )}
+
+                        {!loading && sortedFeedback.length === 0 && searchTerm && (
+                            <div className="no-feedback">
+                                <h3>No results found</h3>
+                                <p>Try adjusting your search or filters</p>
+                            </div>
+                        )}
+
                         {!loading &&
-                            filteredFeedback.map((item) => {
-                                const date = new Date(item.created_at).toLocaleString();
-                                const typeClass = item.feedback_type
-                                    .toLowerCase()
-                                    .replace(" ", "-");
+                            sortedFeedback.map((item) => {
+                                const date = new Date(item.created_at).toLocaleString("en-US", {
+                                    year: "numeric",
+                                    month: "short",
+                                    day: "numeric",
+                                    hour: "2-digit",
+                                    minute: "2-digit",
+                                });
+                                const typeClass = item.type.toLowerCase().replace(/\s+/g, "-");
 
                                 return (
                                     <div className="feedback-item" key={item.id}>
                                         <div className="feedback-header">
                                             <div className="feedback-meta">
                                                 <span className={`feedback-type ${typeClass}`}>
-                                                    {item.feedback_type}
+                                                    {item.type}
                                                 </span>
-                                                <span className="feedback-date">{date}</span>
+                                                <span className="feedback-date">
+                                                    📅 {date}
+                                                </span>
                                             </div>
                                             <button
                                                 className="delete-btn"
                                                 onClick={() => deleteFeedback(item.id)}
+                                                title="Delete this feedback"
                                             >
-                                                Delete
+                                                🗑️ Delete
                                             </button>
                                         </div>
-                                        {(item.name || item.email) && (
-                                            <div className="feedback-contact">
-                                                {item.name && <strong>Name:</strong>}{" "}
-                                                {item.name && escapeHtml(item.name)}
-                                                {item.name && item.email ? " | " : ""}
-                                                {item.email && <strong>Email:</strong>}{" "}
-                                                {item.email && escapeHtml(item.email)}
+
+                                        <div className="feedback-body">
+                                            {(item.name || item.email) && (
+                                                <div className="feedback-contact">
+                                                    {item.name && (
+                                                        <span className="contact-item">
+                                                            <strong>👤 Name:</strong> {escapeHtml(item.name)}
+                                                        </span>
+                                                    )}
+                                                    {item.email && (
+                                                        <span className="contact-item">
+                                                            <strong>✉️ Email:</strong>{" "}
+                                                            <a href={`mailto:${item.email}`}>
+                                                                {escapeHtml(item.email)}
+                                                            </a>
+                                                        </span>
+                                                    )}
+                                                </div>
+                                            )}
+
+                                            <div className="feedback-message">
+                                                <strong>Message:</strong>
+                                                <p>{escapeHtml(item.message)}</p>
                                             </div>
-                                        )}
-                                        <div className="feedback-message">
-                                            {escapeHtml(item.message)}
                                         </div>
                                     </div>
                                 );

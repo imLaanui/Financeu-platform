@@ -73,6 +73,9 @@ func main() {
 	// Initialize router
 	r := gin.Default()
 
+	// CRITICAL FIX: Disable automatic redirect for trailing slashes
+	r.RedirectTrailingSlash = false
+
 	// CORS middleware
 	corsOrigin := os.Getenv("CORS_ORIGIN")
 	if corsOrigin == "" {
@@ -83,7 +86,9 @@ func main() {
 		AllowOrigins:     []string{corsOrigin},
 		AllowMethods:     []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},
 		AllowHeaders:     []string{"Origin", "Content-Type", "Authorization", "Cookie"},
+		ExposeHeaders:    []string{"Content-Length"},
 		AllowCredentials: true,
+		MaxAge:           12 * 3600, // 12 hours
 	}))
 
 	// API routes
@@ -124,7 +129,7 @@ func main() {
 		lessons := api.Group("/lessons")
 		lessons.Use(middleware.AuthMiddleware(jwtSecret))
 		{
-			lessons.GET("/", lessonHandler.GetLessons)
+			lessons.GET("", lessonHandler.GetLessons)          // Changed from "/" to ""
 			lessons.GET("/progress", lessonHandler.GetProgress)
 			lessons.POST("/complete", lessonHandler.CompleteLesson)
 		}
@@ -132,9 +137,17 @@ func main() {
 		// Feedback routes (public submit, protected admin)
 		feedback := api.Group("/feedback")
 		{
-			feedback.POST("/", feedbackHandler.SubmitFeedback)
-			feedback.GET("/admin", feedbackHandler.AdminGetFeedback)
-			feedback.DELETE("/admin/:id", feedbackHandler.AdminDeleteFeedback)
+			// CRITICAL: No trailing slash on POST route
+			feedback.POST("", feedbackHandler.SubmitFeedback)
+
+			// Admin routes for feedback
+			feedbackAdmin := feedback.Group("/admin")
+			feedbackAdmin.Use(middleware.AuthMiddleware(jwtSecret))
+			feedbackAdmin.Use(middleware.RequireAdmin())
+			{
+				feedbackAdmin.GET("", feedbackHandler.AdminGetFeedback)
+				feedbackAdmin.DELETE("/:id", feedbackHandler.AdminDeleteFeedback)
+			}
 		}
 	}
 
@@ -144,7 +157,8 @@ func main() {
 		port = "3000"
 	}
 
-	log.Printf("Server starting on port %s", port)
+	log.Printf("🚀 Server starting on port %s", port)
+	log.Printf("📡 CORS enabled for: %s", corsOrigin)
 
 	if err := r.Run(":" + port); err != nil {
 		log.Fatal("Failed to start server:", err)

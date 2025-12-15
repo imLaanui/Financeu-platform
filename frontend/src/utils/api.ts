@@ -14,11 +14,9 @@ export const fetchUsers = async (): Promise<User[]> => {
     const response = await fetch(`${API_URL}/admin/users`, {
         credentials: "include",
     });
-
     if (!response.ok) {
         throw new Error("Failed to fetch users");
     }
-
     const data = await response.json();
     return data.users || [];
 };
@@ -34,7 +32,6 @@ export const updateUserRole = async (
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ role: newRole }),
     });
-
     if (!response.ok) {
         throw new Error("Failed to update user role");
     }
@@ -51,7 +48,6 @@ export const updateUserTier = async (
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ tier: newTier }),
     });
-
     if (!response.ok) {
         throw new Error("Failed to update membership tier");
     }
@@ -63,7 +59,6 @@ export const deleteUser = async (userId: number): Promise<void> => {
         method: "DELETE",
         credentials: "include",
     });
-
     if (!response.ok) {
         throw new Error("Failed to delete user");
     }
@@ -77,10 +72,8 @@ export const bulkDeleteUsers = async (userIds: number[]): Promise<void> => {
             credentials: "include",
         })
     );
-
     const responses = await Promise.all(deletePromises);
     const failed = responses.filter((r) => !r.ok);
-
     if (failed.length > 0) {
         throw new Error(`Failed to delete ${failed.length} user(s)`);
     }
@@ -99,10 +92,8 @@ export const bulkUpdateTier = async (
             body: JSON.stringify({ tier }),
         })
     );
-
     const responses = await Promise.all(updatePromises);
     const failed = responses.filter((r) => !r.ok);
-
     if (failed.length > 0) {
         throw new Error(`Failed to update ${failed.length} user(s)`);
     }

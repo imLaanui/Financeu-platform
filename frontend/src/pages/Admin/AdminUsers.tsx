@@ -1,30 +1,32 @@
 import { useEffect, useState, useCallback } from "react";
-import { useNavigate } from "react-router-dom";
+import { API_URL } from "@config/api";
+import { Link, useNavigate } from "react-router-dom";
 import { isAdmin } from "@utils/auth";
-import {
-    User,
-    fetchUsers as apiFetchUsers,
-    updateUserRole as apiUpdateUserRole,
-    updateUserTier as apiUpdateUserTier,
-    deleteUser as apiDeleteUser,
-    bulkDeleteUsers as apiBulkDeleteUsers,
-    bulkUpdateTier as apiBulkUpdateTier,
-} from "@utils/api";
-import "@css/admin/adminUsers.css";
+import Footer from "@components/Footer";
+import "@css/admin/adminFeedback.css";
 
-export default function AdminUsers() {
+interface FeedbackItem {
+    id: number;
+    name?: string;
+    email?: string;
+    type: string;
+    message: string;
+    created_at: string;
+}
+
+type SortField = "date" | "type" | "name";
+type SortOrder = "asc" | "desc";
+
+export default function AdminFeedback() {
     const navigate = useNavigate();
-    const [users, setUsers] = useState<User[]>([]);
-    const [filteredUsers, setFilteredUsers] = useState<User[]>([]);
+    const [allFeedback, setAllFeedback] = useState<FeedbackItem[]>([]);
+    const [filterType, setFilterType] = useState("all");
+    const [sortField, setSortField] = useState<SortField>("date");
+    const [sortOrder, setSortOrder] = useState<SortOrder>("desc");
+    const [searchTerm, setSearchTerm] = useState("");
     const [loading, setLoading] = useState(true);
-    const [searchQuery, setSearchQuery] = useState("");
-    const [filterTier, setFilterTier] = useState("all");
-    const [filterRole, setFilterRole] = useState("all");
-    const [sortBy, setSortBy] = useState("newest");
-    const [selectedUsers, setSelectedUsers] = useState<Set<number>>(new Set());
     const [showDeleteModal, setShowDeleteModal] = useState(false);
-    const [userToDelete, setUserToDelete] = useState<number | null>(null);
-    const [showBulkActions, setShowBulkActions] = useState(false);
+    const [feedbackToDelete, setFeedbackToDelete] = useState<number | null>(null);
 
     // Check admin auth
     useEffect(() => {
@@ -33,159 +35,118 @@ export default function AdminUsers() {
         }
     }, [navigate]);
 
-    // Fetch users
-    const fetchUsers = useCallback(async () => {
+    const loadFeedback = useCallback(async () => {
+        setLoading(true);
         try {
-            const data = await apiFetchUsers();
-            setUsers(data);
-            setFilteredUsers(data);
+            const res = await fetch(`${API_URL}/feedback/admin`, {
+                credentials: "include",
+            });
+
+            if (!res.ok) {
+                throw new Error("Failed to load feedback");
+            }
+
+            const data = await res.json();
+            setAllFeedback(data.feedback || []);
         } catch (error) {
-            console.error("Error fetching users:", error);
-            alert("Failed to load users");
+            console.error("Error loading feedback:", error);
+            setAllFeedback([]);
+            alert("Failed to load feedback");
         } finally {
             setLoading(false);
         }
     }, []);
 
     useEffect(() => {
-        fetchUsers();
-    }, [fetchUsers]);
+        loadFeedback();
+    }, [loadFeedback]);
 
-    // Filter and sort users
-    useEffect(() => {
-        let filtered = [...users];
+    const deleteFeedback = async (id: number) => {
+        try {
+            const res = await fetch(`${API_URL}/feedback/admin/${id}`, {
+                method: "DELETE",
+                credentials: "include",
+            });
 
-        // Search filter
-        if (searchQuery) {
-            const query = searchQuery.toLowerCase();
-            filtered = filtered.filter(
-                (user) =>
-                    user.name.toLowerCase().includes(query) ||
-                    user.email.toLowerCase().includes(query) ||
-                    user.id.toString().includes(query)
-            );
-        }
-
-        // Tier filter
-        if (filterTier !== "all") {
-            filtered = filtered.filter((user) => user.membershipTier === filterTier);
-        }
-
-        // Role filter
-        if (filterRole !== "all") {
-            filtered = filtered.filter((user) => user.role === filterRole);
-        }
-
-        // Sort
-        filtered.sort((a, b) => {
-            switch (sortBy) {
-                case "newest":
-                    return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
-                case "oldest":
-                    return new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime();
-                case "name":
-                    return a.name.localeCompare(b.name);
-                case "email":
-                    return a.email.localeCompare(b.email);
-                default:
-                    return 0;
+            if (res.ok) {
+                setAllFeedback((prev) => prev.filter((f) => f.id !== id));
+                setShowDeleteModal(false);
+                setFeedbackToDelete(null);
+            } else {
+                alert("Failed to delete feedback");
             }
-        });
+        } catch (error) {
+            console.error("Error deleting feedback:", error);
+            alert("Error deleting feedback");
+        }
+    };
 
-        setFilteredUsers(filtered);
-    }, [users, searchQuery, filterTier, filterRole, sortBy]);
-
-    // Select/deselect user
-    const toggleUserSelection = (userId: number) => {
-        const newSelected = new Set(selectedUsers);
-        if (newSelected.has(userId)) {
-            newSelected.delete(userId);
+    const handleSort = (field: SortField) => {
+        if (sortField === field) {
+            setSortOrder(sortOrder === "asc" ? "desc" : "asc");
         } else {
-            newSelected.add(userId);
-        }
-        setSelectedUsers(newSelected);
-    };
-
-    // Select all visible users
-    const selectAll = () => {
-        if (selectedUsers.size === filteredUsers.length) {
-            setSelectedUsers(new Set());
-        } else {
-            setSelectedUsers(new Set(filteredUsers.map((u) => u.id)));
+            setSortField(field);
+            setSortOrder("desc");
         }
     };
 
-    // Update user role
-    const updateUserRole = async (userId: number, newRole: "user" | "admin") => {
-        try {
-            await apiUpdateUserRole(userId, newRole);
-            fetchUsers();
-        } catch (error) {
-            console.error("Error updating role:", error);
-            alert("Failed to update user role");
+    // Filter feedback by type
+    const filteredByType = filterType === "all"
+        ? allFeedback
+        : allFeedback.filter((f) => f.type === filterType);
+
+    // Filter by search term
+    const filteredBySearch = filteredByType.filter((f) => {
+        const searchLower = searchTerm.toLowerCase();
+        return (
+            f.message.toLowerCase().includes(searchLower) ||
+            f.name?.toLowerCase().includes(searchLower) ||
+            f.email?.toLowerCase().includes(searchLower) ||
+            f.type.toLowerCase().includes(searchLower)
+        );
+    });
+
+    // Sort feedback
+    const sortedFeedback = [...filteredBySearch].sort((a, b) => {
+        let comparison = 0;
+
+        switch (sortField) {
+            case "date":
+                comparison = new Date(a.created_at).getTime() - new Date(b.created_at).getTime();
+                break;
+            case "type":
+                comparison = a.type.localeCompare(b.type);
+                break;
+            case "name":
+                const nameA = a.name || "Zzz";
+                const nameB = b.name || "Zzz";
+                comparison = nameA.localeCompare(nameB);
+                break;
         }
+
+        return sortOrder === "asc" ? comparison : -comparison;
+    });
+
+    // Calculate stats
+    const stats = {
+        total: allFeedback.length,
+        bug: allFeedback.filter((f) => f.type === "Bug Report").length,
+        feature: allFeedback.filter((f) => f.type === "Feature Request").length,
+        general: allFeedback.filter((f) => f.type === "General Feedback").length,
+        compliment: allFeedback.filter((f) => f.type === "Compliment").length,
     };
 
-    // Update user tier
-    const updateUserTier = async (userId: number, newTier: "free" | "pro" | "premium") => {
-        try {
-            await apiUpdateUserTier(userId, newTier);
-            fetchUsers();
-        } catch (error) {
-            console.error("Error updating tier:", error);
-            alert("Failed to update membership tier");
-        }
-    };
-
-    // Delete user
-    const deleteUser = async (userId: number) => {
-        try {
-            await apiDeleteUser(userId);
-            fetchUsers();
-            setShowDeleteModal(false);
-            setUserToDelete(null);
-        } catch (error) {
-            console.error("Error deleting user:", error);
-            alert("Failed to delete user");
-        }
-    };
-
-    // Bulk delete users
-    const bulkDeleteUsers = async () => {
-        if (selectedUsers.size === 0) return;
-        if (!confirm(`Are you sure you want to delete ${selectedUsers.size} user(s)?`)) return;
-
-        try {
-            await apiBulkDeleteUsers(Array.from(selectedUsers));
-            fetchUsers();
-            setSelectedUsers(new Set());
-            setShowBulkActions(false);
-        } catch (error) {
-            console.error("Error bulk deleting:", error);
-            alert("Failed to delete users");
-        }
-    };
-
-    // Bulk update tier
-    const bulkUpdateTier = async (tier: "free" | "pro" | "premium") => {
-        if (selectedUsers.size === 0) return;
-
-        try {
-            await apiBulkUpdateTier(Array.from(selectedUsers), tier);
-            fetchUsers();
-            setSelectedUsers(new Set());
-            setShowBulkActions(false);
-        } catch (error) {
-            console.error("Error bulk updating:", error);
-            alert("Failed to update users");
-        }
+    const escapeHtml = (text: string) => {
+        const div = document.createElement("div");
+        div.textContent = text;
+        return div.innerHTML;
     };
 
     if (loading) {
         return (
             <div className="admin-loading">
                 <div className="spinner"></div>
-                <p>Loading users...</p>
+                <p>Loading feedback...</p>
             </div>
         );
     }
@@ -195,12 +156,15 @@ export default function AdminUsers() {
             {/* Header */}
             <header className="admin-header">
                 <div className="admin-header-content">
-                    <h1>⚡ User Management</h1>
+                    <h1>💬 Feedback Management</h1>
                     <div className="admin-header-actions">
+                        <button className="btn-secondary" onClick={() => navigate("/admin/users")}>
+                            Users →
+                        </button>
                         <button className="btn-secondary" onClick={() => navigate("/dashboard")}>
                             ← Back to Dashboard
                         </button>
-                        <button className="btn-danger" onClick={() => navigate("/signout")}>
+                        <button className="btn-danger" onClick={() => navigate("/auth/signout")}>
                             Logout
                         </button>
                     </div>
@@ -211,38 +175,38 @@ export default function AdminUsers() {
                 {/* Stats */}
                 <div className="stats-grid">
                     <div className="stat-card">
-                        <div className="stat-icon">👥</div>
+                        <div className="stat-icon">📊</div>
                         <div className="stat-info">
-                            <div className="stat-label">Total Users</div>
-                            <div className="stat-value">{users.length}</div>
+                            <div className="stat-label">Total Feedback</div>
+                            <div className="stat-value">{stats.total}</div>
                         </div>
                     </div>
                     <div className="stat-card">
-                        <div className="stat-icon">🆓</div>
+                        <div className="stat-icon">🐛</div>
                         <div className="stat-info">
-                            <div className="stat-label">Free Tier</div>
-                            <div className="stat-value">{users.filter((u) => u.membershipTier === "free").length}</div>
+                            <div className="stat-label">Bug Reports</div>
+                            <div className="stat-value">{stats.bug}</div>
                         </div>
                     </div>
                     <div className="stat-card">
-                        <div className="stat-icon">⭐</div>
+                        <div className="stat-icon">✨</div>
                         <div className="stat-info">
-                            <div className="stat-label">Pro Tier</div>
-                            <div className="stat-value">{users.filter((u) => u.membershipTier === "pro").length}</div>
+                            <div className="stat-label">Feature Requests</div>
+                            <div className="stat-value">{stats.feature}</div>
                         </div>
                     </div>
                     <div className="stat-card">
-                        <div className="stat-icon">💎</div>
+                        <div className="stat-icon">💬</div>
                         <div className="stat-info">
-                            <div className="stat-label">Premium Tier</div>
-                            <div className="stat-value">{users.filter((u) => u.membershipTier === "premium").length}</div>
+                            <div className="stat-label">General</div>
+                            <div className="stat-value">{stats.general}</div>
                         </div>
                     </div>
                     <div className="stat-card">
-                        <div className="stat-icon">⚡</div>
+                        <div className="stat-icon">❤️</div>
                         <div className="stat-info">
-                            <div className="stat-label">Admins</div>
-                            <div className="stat-value">{users.filter((u) => u.role === "admin").length}</div>
+                            <div className="stat-label">Compliments</div>
+                            <div className="stat-value">{stats.compliment}</div>
                         </div>
                     </div>
                 </div>
@@ -256,190 +220,179 @@ export default function AdminUsers() {
                         </svg>
                         <input
                             type="text"
-                            placeholder="Search by name, email, or ID..."
-                            value={searchQuery}
-                            onChange={(e) => setSearchQuery(e.target.value)}
+                            placeholder="Search feedback..."
+                            value={searchTerm}
+                            onChange={(e) => setSearchTerm(e.target.value)}
                         />
-                        {searchQuery && (
-                            <button className="clear-search" onClick={() => setSearchQuery("")}>
+                        {searchTerm && (
+                            <button className="clear-search" onClick={() => setSearchTerm("")}>
                                 ✕
                             </button>
                         )}
                     </div>
 
                     <div className="filters">
-                        <select value={filterTier} onChange={(e) => setFilterTier(e.target.value)} className="filter-select">
-                            <option value="all">All Tiers</option>
-                            <option value="free">Free</option>
-                            <option value="pro">Pro</option>
-                            <option value="premium">Premium</option>
+                        <select
+                            className="filter-select"
+                            value={filterType}
+                            onChange={(e) => setFilterType(e.target.value)}
+                        >
+                            <option value="all">All Types</option>
+                            <option value="Bug Report">Bug Reports</option>
+                            <option value="Feature Request">Feature Requests</option>
+                            <option value="General Feedback">General Feedback</option>
+                            <option value="Compliment">Compliments</option>
                         </select>
 
-                        <select value={filterRole} onChange={(e) => setFilterRole(e.target.value)} className="filter-select">
-                            <option value="all">All Roles</option>
-                            <option value="user">Users</option>
-                            <option value="admin">Admins</option>
-                        </select>
-
-                        <select value={sortBy} onChange={(e) => setSortBy(e.target.value)} className="filter-select">
-                            <option value="newest">Newest First</option>
-                            <option value="oldest">Oldest First</option>
-                            <option value="name">Name (A-Z)</option>
-                            <option value="email">Email (A-Z)</option>
+                        <select
+                            className="filter-select"
+                            value={`${sortField}-${sortOrder}`}
+                            onChange={(e) => {
+                                const [field, order] = e.target.value.split("-") as [SortField, SortOrder];
+                                setSortField(field);
+                                setSortOrder(order);
+                            }}
+                        >
+                            <option value="date-desc">Newest First</option>
+                            <option value="date-asc">Oldest First</option>
+                            <option value="type-asc">Type (A-Z)</option>
+                            <option value="type-desc">Type (Z-A)</option>
+                            <option value="name-asc">Name (A-Z)</option>
+                            <option value="name-desc">Name (Z-A)</option>
                         </select>
                     </div>
                 </div>
 
-                {/* Bulk Actions */}
-                {selectedUsers.size > 0 && (
-                    <div className="bulk-actions-bar">
-                        <div className="bulk-info">
-                            <span>{selectedUsers.size} user(s) selected</span>
-                            <button className="btn-text" onClick={() => setSelectedUsers(new Set())}>
-                                Clear selection
-                            </button>
-                        </div>
-                        <div className="bulk-buttons">
-                            <button className="btn-bulk" onClick={() => setShowBulkActions(!showBulkActions)}>
-                                Bulk Actions ▼
-                            </button>
-                            {showBulkActions && (
-                                <div className="bulk-dropdown">
-                                    <button onClick={() => bulkUpdateTier("free")}>Set to Free</button>
-                                    <button onClick={() => bulkUpdateTier("pro")}>Set to Pro</button>
-                                    <button onClick={() => bulkUpdateTier("premium")}>Set to Premium</button>
-                                    <div className="dropdown-divider"></div>
-                                    <button className="danger" onClick={bulkDeleteUsers}>
-                                        Delete Selected
-                                    </button>
-                                </div>
-                            )}
-                        </div>
+                {/* Results count */}
+                {searchTerm && (
+                    <div className="results-info">
+                        Showing {sortedFeedback.length} of {allFeedback.length} feedback items
                     </div>
                 )}
 
-                {/* Users Table */}
-                <div className="users-table-container">
-                    <div className="users-table-header">
-                        <div className="table-title">
-                            <h2>Users ({filteredUsers.length})</h2>
-                        </div>
-                        <div className="table-actions">
-                            <button className="btn-select-all" onClick={selectAll}>
-                                {selectedUsers.size === filteredUsers.length ? "Deselect All" : "Select All"}
-                            </button>
-                        </div>
+                {/* Feedback List */}
+                <div className="feedback-table-container">
+                    <div className="feedback-table-header">
+                        <h2>Feedback ({sortedFeedback.length})</h2>
                     </div>
 
-                    {filteredUsers.length === 0 ? (
+                    {sortedFeedback.length === 0 && !searchTerm && (
+                        <div className="no-results">
+                            <div className="no-results-icon">💬</div>
+                            <h3>No feedback yet</h3>
+                            <p>When users submit feedback, it will appear here</p>
+                        </div>
+                    )}
+
+                    {sortedFeedback.length === 0 && searchTerm && (
                         <div className="no-results">
                             <div className="no-results-icon">🔍</div>
-                            <h3>No users found</h3>
+                            <h3>No results found</h3>
                             <p>Try adjusting your search or filters</p>
                         </div>
-                    ) : (
-                        <div className="users-table">
-                            {filteredUsers.map((user) => (
-                                <div key={user.id} className={`user-row ${selectedUsers.has(user.id) ? "selected" : ""}`}>
-                                    <div className="user-checkbox">
-                                        <input
-                                            type="checkbox"
-                                            checked={selectedUsers.has(user.id)}
-                                            onChange={() => toggleUserSelection(user.id)}
-                                        />
-                                    </div>
+                    )}
 
-                                    <div className="user-main-info">
-                                        <div className="user-avatar">{user.name.charAt(0).toUpperCase()}</div>
-                                        <div className="user-details">
-                                            <div className="user-name-row">
-                                                <span className="user-name">{user.name}</span>
-                                                {user.role === "admin" && <span className="admin-badge">⚡ Admin</span>}
+                    {sortedFeedback.length > 0 && (
+                        <div className="feedback-table">
+                            {sortedFeedback.map((item) => {
+                                const date = new Date(item.created_at).toLocaleDateString("en-US", {
+                                    year: "numeric",
+                                    month: "short",
+                                    day: "numeric",
+                                    hour: "2-digit",
+                                    minute: "2-digit",
+                                });
+                                const typeClass = item.type.toLowerCase().replace(/\s+/g, "-");
+
+                                return (
+                                    <div className="feedback-row" key={item.id}>
+                                        <div className="feedback-header-row">
+                                            <div className="feedback-meta">
+                                                <span className={`feedback-type-badge ${typeClass}`}>
+                                                    {item.type}
+                                                </span>
+                                                <span className="feedback-date">
+                                                    📅 {date}
+                                                </span>
                                             </div>
-                                            <div className="user-email">{user.email}</div>
-                                            <div className="user-meta-info">
-                                                <span>ID: #{user.id}</span>
-                                                <span>•</span>
-                                                <span>Joined {new Date(user.createdAt).toLocaleDateString()}</span>
+                                            <button
+                                                className="btn-icon danger"
+                                                onClick={() => {
+                                                    setFeedbackToDelete(item.id);
+                                                    setShowDeleteModal(true);
+                                                }}
+                                                title="Delete this feedback"
+                                            >
+                                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                                    <path d="M3 6h18M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                                                </svg>
+                                            </button>
+                                        </div>
+
+                                        <div className="feedback-body">
+                                            {(item.name || item.email) && (
+                                                <div className="feedback-contact">
+                                                    {item.name && (
+                                                        <span className="contact-item">
+                                                            <strong>👤 Name:</strong> {escapeHtml(item.name)}
+                                                        </span>
+                                                    )}
+                                                    {item.email && (
+                                                        <span className="contact-item">
+                                                            <strong>✉️ Email:</strong>{" "}
+                                                            <a href={`mailto:${item.email}`}>
+                                                                {escapeHtml(item.email)}
+                                                            </a>
+                                                        </span>
+                                                    )}
+                                                </div>
+                                            )}
+
+                                            <div className="feedback-message">
+                                                <strong>Message:</strong>
+                                                <p>{escapeHtml(item.message)}</p>
                                             </div>
                                         </div>
                                     </div>
-
-                                    <div className="user-tier-control">
-                                        <label>Membership</label>
-                                        <select
-                                            value={user.membershipTier}
-                                            onChange={(e) => updateUserTier(user.id, e.target.value as any)}
-                                            className={`tier-select ${user.membershipTier}`}
-                                        >
-                                            <option value="free">Free</option>
-                                            <option value="pro">Pro</option>
-                                            <option value="premium">Premium</option>
-                                        </select>
-                                    </div>
-
-                                    <div className="user-role-control">
-                                        <label>Role</label>
-                                        <select
-                                            value={user.role}
-                                            onChange={(e) => updateUserRole(user.id, e.target.value as any)}
-                                            className={`role-select ${user.role}`}
-                                        >
-                                            <option value="user">User</option>
-                                            <option value="admin">Admin</option>
-                                        </select>
-                                    </div>
-
-                                    <div className="user-actions">
-                                        <button
-                                            className="btn-icon danger"
-                                            onClick={() => {
-                                                setUserToDelete(user.id);
-                                                setShowDeleteModal(true);
-                                            }}
-                                            title="Delete user"
-                                        >
-                                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                                                <path d="M3 6h18M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                                            </svg>
-                                        </button>
-                                    </div>
-                                </div>
-                            ))}
+                                );
+                            })}
                         </div>
                     )}
                 </div>
             </div>
 
             {/* Delete Confirmation Modal */}
-            {showDeleteModal && userToDelete && (
+            {showDeleteModal && feedbackToDelete && (
                 <div className="modal-overlay" onClick={() => setShowDeleteModal(false)}>
                     <div className="modal-content" onClick={(e) => e.stopPropagation()}>
                         <div className="modal-header">
-                            <h3>Delete User</h3>
+                            <h3>Delete Feedback</h3>
                             <button className="modal-close" onClick={() => setShowDeleteModal(false)}>
                                 ✕
                             </button>
                         </div>
                         <div className="modal-body">
-                            <p>Are you sure you want to delete this user? This action cannot be undone.</p>
-                            <div className="user-to-delete">
-                                {users.find((u) => u.id === userToDelete)?.name}
+                            <p>Are you sure you want to delete this feedback? This action cannot be undone.</p>
+                            <div className="feedback-to-delete">
+                                <strong>Type:</strong> {allFeedback.find((f) => f.id === feedbackToDelete)?.type}
                                 <br />
-                                <small>{users.find((u) => u.id === userToDelete)?.email}</small>
+                                <strong>Message:</strong> {allFeedback.find((f) => f.id === feedbackToDelete)?.message.substring(0, 100)}...
                             </div>
                         </div>
                         <div className="modal-footer">
                             <button className="btn-secondary" onClick={() => setShowDeleteModal(false)}>
                                 Cancel
                             </button>
-                            <button className="btn-danger" onClick={() => deleteUser(userToDelete)}>
-                                Delete User
+                            <button className="btn-danger" onClick={() => deleteFeedback(feedbackToDelete)}>
+                                Delete Feedback
                             </button>
                         </div>
                     </div>
                 </div>
             )}
+
+            {/* Footer */}
+            <Footer />
         </div>
     );
 }

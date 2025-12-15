@@ -62,20 +62,16 @@ export default function Feedback() {
                 }),
             });
 
-            const data = await response.json();
-
             if (response.ok) {
                 setMessage({ text: "Thank you! Your feedback has been submitted successfully.", type: "success" });
                 setFormData({ name: "", email: "", feedbackType: "", message: "" });
             } else {
+                const data = await response.json();
                 setMessage({ text: data.error || "Failed to submit feedback. Please try again.", type: "error" });
             }
         } catch (error: unknown) {
-            if (error instanceof Error) {
-                setMessage({ text: `Network error: ${error.message}`, type: "error" });
-            } else {
-                setMessage({ text: "An unknown error occurred.", type: "error" });
-            }
+            console.error("Feedback submission error:", error);
+            setMessage({ text: "Network error. Please check your connection and try again.", type: "error" });
         } finally {
             setSubmitting(false);
         }
