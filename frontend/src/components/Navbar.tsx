@@ -5,8 +5,12 @@ import "@css/components/navbar.css";
 export default function Navbar() {
   const navigate = useNavigate();
   const location = useLocation();
-
   const [isLoggedIn] = useState(() => !!localStorage.getItem("token"));
+
+  // Scroll to top whenever location changes
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location.pathname]);
 
   const handleScroll = useCallback(
     (id: string) => {
@@ -15,7 +19,7 @@ export default function Navbar() {
         setTimeout(() => {
           const section = document.querySelector(id);
           if (section) section.scrollIntoView({ behavior: "smooth" });
-        }, 50);
+        }, 100);
       } else {
         const section = document.querySelector(id);
         if (section) section.scrollIntoView({ behavior: "smooth" });
@@ -23,6 +27,29 @@ export default function Navbar() {
     },
     [location.pathname, navigate]
   );
+
+  // Handle logo click - scroll to top if on homepage, otherwise navigate
+  const handleLogoClick = () => {
+    if (location.pathname === "/") {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    } else {
+      navigate("/");
+    }
+  };
+
+  // Handle page navigation with instant scroll to top
+  const handlePageNavigation = (e: React.MouseEvent, path: string) => {
+    e.preventDefault();
+
+    // If we're already on the page, just scroll to top
+    if (location.pathname === path) {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      return;
+    }
+
+    // Navigate to the page
+    navigate(path);
+  };
 
   useEffect(() => {
     const handleSmoothScroll = (e: Event) => {
@@ -51,14 +78,18 @@ export default function Navbar() {
           <div
             className="logo"
             style={{ cursor: "pointer" }}
-            onClick={() => navigate("/")}
+            onClick={handleLogoClick}
           >
             Finance<span className="logo-accent">U</span>
           </div>
-
           <ul className="nav-links">
             <li>
-              <Link to="/curriculum">Curriculum</Link>
+              <Link
+                to="/curriculum"
+                onClick={(e) => handlePageNavigation(e, "/curriculum")}
+              >
+                Curriculum
+              </Link>
             </li>
             <li>
               <a href="#features">Features</a>
@@ -67,11 +98,20 @@ export default function Navbar() {
               <a href="#pricing">Pricing</a>
             </li>
             <li>
-              <Link to="/about">About</Link>
+              <Link
+                to="/about"
+                onClick={(e) => handlePageNavigation(e, "/about")}
+              >
+                About
+              </Link>
             </li>
             <li id="authButtons">
               {isLoggedIn ? (
-                <Link to="/dashboard" className="btn-primary">
+                <Link
+                  to="/dashboard"
+                  className="btn-primary"
+                  onClick={(e) => handlePageNavigation(e, "/dashboard")}
+                >
                   Dashboard
                 </Link>
               ) : (
