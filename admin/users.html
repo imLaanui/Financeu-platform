@@ -181,6 +181,37 @@
             background-color: #3b82f6;
             color: white;
         }
+        .tier-selector {
+            padding: 8px 12px;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            text-transform: uppercase;
+            cursor: pointer;
+            background: white;
+            transition: all 0.2s;
+        }
+        .tier-selector:hover {
+            border-color: #3b82f6;
+        }
+        .tier-selector:focus {
+            outline: none;
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+        .tier-selector.free {
+            color: #00A676;
+            border-color: #00A676;
+        }
+        .tier-selector.pro {
+            color: #f59e0b;
+            border-color: #f59e0b;
+        }
+        .tier-selector.premium {
+            color: #3b82f6;
+            border-color: #3b82f6;
+        }
         .user-stats {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -678,7 +709,11 @@
                                 <div class="user-name">${escapeHtml(user.name)}</div>
                                 <div class="user-email">${escapeHtml(user.email)}</div>
                                 <div class="user-meta">
-                                    <span class="tier-badge ${user.membership_tier}">${user.membership_tier.toUpperCase()}</span>
+                                    <select class="tier-selector ${user.membership_tier}" onchange="changeTier(${user.id}, this.value)" data-user-id="${user.id}">
+                                        <option value="free" ${user.membership_tier === 'free' ? 'selected' : ''}>Free</option>
+                                        <option value="pro" ${user.membership_tier === 'pro' ? 'selected' : ''}>Pro</option>
+                                        <option value="premium" ${user.membership_tier === 'premium' ? 'selected' : ''}>Premium</option>
+                                    </select>
                                     <span style="color: var(--text-secondary); font-size: 13px;">ID: #${user.id}</span>
                                     <span style="color: var(--text-secondary); font-size: 13px;">Joined: ${signupDate}</span>
                                 </div>
@@ -752,6 +787,55 @@
             const div = document.createElement('div');
             div.textContent = text;
             return div.innerHTML;
+        }
+
+        // Change user subscription tier
+        async function changeTier(userId, newTier) {
+            const select = document.querySelector(`select[data-user-id="${userId}"]`);
+            const originalTier = allUsers.find(u => u.id === userId)?.membership_tier;
+
+            try {
+                console.log(`Updating user ${userId} tier to ${newTier}`);
+
+                const response = await fetch(`${API_URL}/admin/users/${userId}/tier`, {
+                    method: 'PUT',
+                    headers: {
+                        'Authorization': `Basic ${adminCredentials}`,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ tier: newTier })
+                });
+
+                if (response.ok) {
+                    console.log('✅ Tier updated successfully');
+
+                    // Update the local data
+                    const userIndex = allUsers.findIndex(u => u.id === userId);
+                    if (userIndex !== -1) {
+                        allUsers[userIndex].membership_tier = newTier;
+                    }
+
+                    // Update the select element styling
+                    select.className = `tier-selector ${newTier}`;
+
+                    // Update stats
+                    updateStats(allUsers);
+
+                    // Show success message
+                    alert(`Subscription tier updated to ${newTier.toUpperCase()} successfully!`);
+                } else {
+                    throw new Error('Failed to update tier');
+                }
+            } catch (error) {
+                console.error('Error updating tier:', error);
+                alert('Error updating subscription tier. Please try again.');
+
+                // Revert the select to original value
+                if (originalTier) {
+                    select.value = originalTier;
+                    select.className = `tier-selector ${originalTier}`;
+                }
+            }
         }
     </script>
 </body>

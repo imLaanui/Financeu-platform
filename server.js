@@ -525,6 +525,40 @@ app.delete('/api/admin/feedback/:id', async (req, res) => {
 });
 
 // Admin: Get all users with progress data (requires admin authentication)
+// Admin: Update user subscription tier
+app.put('/api/admin/users/:userId/tier', async (req, res) => {
+  try {
+    // Simple admin authentication check
+    const authHeader = req.headers.authorization;
+
+    if (!authHeader || !authHeader.startsWith('Basic ')) {
+      return res.status(401).json({ error: 'Authentication required' });
+    }
+
+    const credentials = Buffer.from(authHeader.split(' ')[1], 'base64').toString('ascii');
+    const [username, password] = credentials.split(':');
+
+    if (username !== 'admin' || password !== 'financeu2025') {
+      return res.status(401).json({ error: 'Invalid credentials' });
+    }
+
+    const { userId } = req.params;
+    const { tier } = req.body;
+
+    // Validate tier
+    if (!['free', 'pro', 'premium'].includes(tier)) {
+      return res.status(400).json({ error: 'Invalid tier. Must be free, pro, or premium' });
+    }
+
+    await db.updateUserTier(userId, tier);
+
+    res.json({ success: true, message: 'User tier updated successfully' });
+  } catch (error) {
+    console.error('Update tier error:', error);
+    res.status(500).json({ error: 'Error updating user tier' });
+  }
+});
+
 app.get('/api/admin/users', async (req, res) => {
   try {
     // Simple admin authentication check
