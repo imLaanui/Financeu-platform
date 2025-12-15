@@ -10,348 +10,197 @@
     <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.svg">
     <link rel="stylesheet" href="styles.css">
     <style>
-        body {
-            background: #f9fafb;
-        }
-
-        /* Bold Hero Section */
-        .hero-section {
-            background: linear-gradient(135deg, #0A1A2F 0%, #00A676 100%);
-            padding: 40px 20px;
+        .pillar-header {
+            background: linear-gradient(135deg, #0A1A2F 0%, #1a3a5c 100%);
+            color: white;
+            padding: 60px 20px 40px;
             text-align: center;
-            position: relative;
-            overflow: hidden;
         }
-        .hero-section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: radial-gradient(circle at 20% 50%, rgba(0, 166, 118, 0.3) 0%, transparent 50%),
-                        radial-gradient(circle at 80% 50%, rgba(10, 26, 47, 0.3) 0%, transparent 50%);
-            animation: pulse 8s ease-in-out infinite;
-        }
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.7; }
-        }
-        .hero-content {
-            position: relative;
-            z-index: 1;
-        }
-        .hero-icon {
-            font-size: 48px;
+        .pillar-header h1 {
+            font-size: 42px;
             margin-bottom: 15px;
-            animation: float 3s ease-in-out infinite;
         }
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
-        .hero-content h1 {
-            font-size: 36px;
-            font-weight: 900;
-            color: white;
-            margin: 0 0 10px 0;
-            letter-spacing: -1px;
-            text-transform: uppercase;
-        }
-        .hero-content p {
-            font-size: 16px;
-            color: rgba(255, 255, 255, 0.95);
-            max-width: 600px;
-            margin: 0 auto 15px auto;
-            line-height: 1.5;
-        }
-        .hero-stats {
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            margin-top: 20px;
-            flex-wrap: wrap;
-        }
-        .stat-item {
-            color: white;
-        }
-        .stat-number {
-            font-size: 24px;
-            font-weight: 800;
-            display: block;
-        }
-        .stat-label {
-            font-size: 12px;
+        .pillar-header p {
+            font-size: 18px;
             opacity: 0.9;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        /* Horizontal Tab Navigation */
-        .tab-navigation {
-            background: white;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-            position: sticky;
-            top: 70px;
-            z-index: 100;
-            border-bottom: 4px solid #0A1A2F;
-        }
-        .tab-container {
-            max-width: 1200px;
+            max-width: 700px;
             margin: 0 auto;
-            display: flex;
-            overflow-x: auto;
-            scrollbar-width: thin;
-            scrollbar-color: #00A676 #f3f4f6;
         }
-        .tab-container::-webkit-scrollbar {
-            height: 4px;
-        }
-        .tab-container::-webkit-scrollbar-track {
-            background: #f3f4f6;
-        }
-        .tab-container::-webkit-scrollbar-thumb {
-            background: #00A676;
-            border-radius: 2px;
-        }
-        .tab-item {
-            flex: 1;
-            min-width: 120px;
-            padding: 20px 15px;
-            text-align: center;
-            cursor: pointer;
-            border-bottom: 4px solid transparent;
-            transition: all 0.3s;
-            position: relative;
-            background: white;
-        }
-        .tab-item:hover {
-            background: #f9fafb;
-        }
-        .tab-item.active {
-            background: #f0fdf4;
-            border-bottom-color: #00A676;
-        }
-        .tab-icon {
-            font-size: 28px;
-            margin-bottom: 5px;
-        }
-        .tab-label {
-            font-size: 12px;
-            font-weight: 700;
-            color: #0A1A2F;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-        .tab-item.completed .tab-icon::after {
-            content: '✓';
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            background: #00A676;
-            color: white;
-            border-radius: 50%;
-            width: 20px;
-            height: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 12px;
-            font-weight: 700;
-        }
-
-        /* Lessons Container */
         .lessons-container {
-            max-width: 1200px;
+            max-width: 900px;
             margin: 0 auto;
-            padding: 40px 20px;
-        }
-        .section-title {
-            font-size: 24px;
-            font-weight: 800;
-            color: #0A1A2F;
-            margin-bottom: 30px;
-            text-align: center;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        /* Bold Lesson Cards */
-        .lesson-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
+            padding: 60px 20px;
         }
         .lesson-card {
             background: white;
             border-radius: 12px;
             padding: 25px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-            border: 3px solid #e5e7eb;
-            transition: all 0.3s;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: transform 0.2s, box-shadow 0.2s;
             position: relative;
-            overflow: hidden;
+            border-left: 4px solid transparent;
         }
         .lesson-card::before {
-            content: '';
+            content: attr(data-lesson);
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 6px;
-            background: linear-gradient(90deg, #0A1A2F 0%, #00A676 100%);
+            left: 25px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #0A1A2F 0%, #1a3a5c 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 16px;
+            box-shadow: 0 2px 8px rgba(10, 26, 47, 0.3);
         }
         .lesson-card:hover {
-            transform: translateY(-5px) scale(1.02);
-            box-shadow: 0 8px 24px rgba(0, 166, 118, 0.2);
-            border-color: #00A676;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            border-left-color: #0A1A2F;
         }
         .lesson-card.completed {
             background: linear-gradient(135deg, #f0fdf4 0%, #d1fae5 100%);
-            border-color: #00A676;
+            border: 2px solid #00A676;
+            border-left: 4px solid #00A676;
         }
         .lesson-card.completed::before {
-            background: #00A676;
-        }
-        .lesson-card.locked {
-            opacity: 0.6;
-            cursor: not-allowed;
-        }
-        .lesson-card.locked:hover {
-            transform: none;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-            border-color: #e5e7eb;
-        }
-        .lesson-icon {
-            font-size: 48px;
-            margin-bottom: 15px;
-            display: block;
-        }
-        .lesson-number {
-            font-size: 12px;
-            font-weight: 800;
-            color: #00A676;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            margin-bottom: 8px;
-        }
-        .lesson-title {
-            font-size: 18px;
-            font-weight: 800;
-            color: #0A1A2F;
-            margin-bottom: 10px;
-            line-height: 1.3;
-        }
-        .lesson-description {
-            color: #6b7280;
-            font-size: 14px;
-            line-height: 1.5;
-            margin-bottom: 20px;
-        }
-        .lesson-button {
-            display: inline-block;
-            padding: 12px 24px;
-            background: linear-gradient(135deg, #0A1A2F 0%, #00A676 100%);
-            color: white;
-            text-decoration: none;
-            border-radius: 8px;
-            font-weight: 700;
-            font-size: 14px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            transition: all 0.3s;
-            border: none;
-            cursor: pointer;
+            background: linear-gradient(135deg, #00A676 0%, #10b981 100%);
             box-shadow: 0 2px 8px rgba(0, 166, 118, 0.3);
         }
-        .lesson-button:hover {
-            transform: scale(1.05);
-            box-shadow: 0 6px 20px rgba(0, 166, 118, 0.4);
+        .lesson-info {
+            margin-left: 60px;
         }
-        .lesson-button.completed {
+        .lesson-info h3 {
+            font-size: 22px;
+            margin-bottom: 8px;
+            color: var(--text-primary);
+        }
+        .lesson-info p {
+            color: var(--text-secondary);
+            font-size: 15px;
+            margin: 0;
+        }
+        .lesson-status {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .completed-badge {
             background: linear-gradient(135deg, #00A676 0%, #10b981 100%);
-        }
-        .lesson-button.locked {
-            background: #d1d5db;
-            cursor: not-allowed;
-            box-shadow: none;
-        }
-        .lesson-button.locked:hover {
-            transform: none;
-        }
-        .completion-badge {
-            background: #00A676;
             color: white;
             padding: 8px 16px;
             border-radius: 20px;
-            font-size: 12px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            display: inline-block;
-            margin-bottom: 15px;
+            font-size: 14px;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            box-shadow: 0 2px 8px rgba(0, 166, 118, 0.3);
         }
-        .lock-icon {
-            font-size: 32px;
-            color: #9ca3af;
-            margin-bottom: 10px;
-            display: block;
-        }
-
-        /* Quiz Card */
-        .quiz-card {
-            background: linear-gradient(135deg, #EF4444 0%, #DC2626 100%);
+        .btn-start-lesson {
+            padding: 12px 24px;
+            background: var(--primary-color);
             color: white;
-            border: 5px solid #DC2626;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: background 0.2s;
+            border: none;
+            cursor: pointer;
+        }
+        .btn-start-lesson:hover {
+            background: #2563eb;
+        }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+        .quiz-card {
+            background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+            border-radius: 12px;
+            padding: 30px;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 12px rgba(251, 191, 36, 0.3);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: transform 0.2s, box-shadow 0.2s;
+            position: relative;
+            overflow: hidden;
         }
         .quiz-card::before {
-            background: #B91C1C;
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, transparent 70%);
+            animation: pulse 3s ease-in-out infinite;
         }
-        .quiz-card .lesson-number {
-            color: #FEE2E2;
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.2); opacity: 0.8; }
         }
-        .quiz-card .lesson-title,
-        .quiz-card .lesson-description {
+        .quiz-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(251, 191, 36, 0.4);
+        }
+        .quiz-card .lesson-info {
+            margin-left: 0;
+            position: relative;
+            z-index: 1;
+        }
+        .quiz-card .lesson-info h3 {
             color: white;
+            font-size: 26px;
         }
-        .quiz-card .lesson-button {
+        .quiz-card .lesson-info p {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 15px;
+        }
+        .btn-start-quiz {
+            padding: 14px 28px;
             background: white;
-            color: #EF4444;
+            color: #f59e0b;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 700;
+            transition: all 0.2s;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
         }
-        .quiz-card .lesson-button:hover {
-            background: #FEE2E2;
+        .btn-start-quiz:hover {
+            background: #fffbeb;
+            transform: scale(1.05);
         }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .hero-content h1 {
-                font-size: 36px;
-            }
-            .hero-content p {
-                font-size: 18px;
-            }
-            .hero-stats {
-                gap: 20px;
-            }
-            .stat-number {
-                font-size: 28px;
-            }
-            .tab-item {
-                min-width: 100px;
-                padding: 15px 10px;
-            }
-            .tab-icon {
-                font-size: 24px;
-            }
-            .tab-label {
-                font-size: 10px;
-            }
-            .lesson-grid {
-                grid-template-columns: 1fr;
-            }
-            .section-title {
-                font-size: 24px;
-            }
+        .quiz-completed-badge {
+            background: #00A676;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-size: 15px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
     </style>
 </head>
@@ -369,155 +218,114 @@
         </div>
     </nav>
 
-    <!-- Bold Hero Section -->
-    <div class="hero-section">
-        <div class="hero-content">
-            <div class="hero-icon">💳</div>
-            <h1>Credit & Debt Mastery</h1>
-            <p>Master credit scores, credit cards, and debt management. Learn to build credit from scratch and avoid financial traps.</p>
-            <div class="hero-stats">
-                <div class="stat-item">
-                    <span class="stat-number">8</span>
-                    <span class="stat-label">Lessons</span>
-                </div>
-                <div class="stat-item">
-                    <span class="stat-number">2</span>
-                    <span class="stat-label">Hours</span>
-                </div>
-                <div class="stat-item">
-                    <span class="stat-number">Free</span>
-                    <span class="stat-label">Forever</span>
-                </div>
-            </div>
-        </div>
-    </div>
+    <!-- Pillar Header -->
+    <section class="pillar-header">
+        <h1>Pillar 3: Credit & Debt Mastery</h1>
+        <p>Master credit scores, credit cards, and debt management strategies</p>
+    </section>
 
-    <!-- Horizontal Tab Navigation -->
-    <div class="tab-navigation">
-        <div class="tab-container">
-            <div class="tab-item active" data-tab="1">
-                <div class="tab-icon">📊</div>
-                <div class="tab-label">Lesson 1</div>
-            </div>
-            <div class="tab-item" data-tab="2">
-                <div class="tab-icon">🌱</div>
-                <div class="tab-label">Lesson 2</div>
-            </div>
-            <div class="tab-item" data-tab="3">
-                <div class="tab-icon">💳</div>
-                <div class="tab-label">Lesson 3</div>
-            </div>
-            <div class="tab-item" data-tab="4">
-                <div class="tab-icon">⭐</div>
-                <div class="tab-label">Lesson 4</div>
-            </div>
-            <div class="tab-item" data-tab="5">
-                <div class="tab-icon">⚠️</div>
-                <div class="tab-label">Lesson 5</div>
-            </div>
-            <div class="tab-item" data-tab="6">
-                <div class="tab-icon">🎓</div>
-                <div class="tab-label">Lesson 6</div>
-            </div>
-            <div class="tab-item" data-tab="7">
-                <div class="tab-icon">⚖️</div>
-                <div class="tab-label">Lesson 7</div>
-            </div>
-            <div class="tab-item" data-tab="8">
-                <div class="tab-icon">🛡️</div>
-                <div class="tab-label">Lesson 8</div>
-            </div>
-            <div class="tab-item" data-tab="quiz">
-                <div class="tab-icon">🏆</div>
-                <div class="tab-label">Final Quiz</div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Lessons Container -->
+    <!-- Lessons List -->
     <div class="lessons-container">
-        <h2 class="section-title">Start Your Journey</h2>
+        <a href="dashboard" class="back-link">← Back to Dashboard</a>
 
-        <div class="lesson-grid">
+        <div id="lessonsList">
             <!-- Lesson 1 -->
-            <div class="lesson-card" id="lesson1">
-                <div class="lesson-icon">📊</div>
-                <div class="lesson-number">Lesson 1</div>
-                <h3 class="lesson-title">Understanding Credit Scores</h3>
-                <p class="lesson-description">Master the fundamentals of credit scores and why they matter for your financial future.</p>
-                <a href="/pillar3-lesson1" class="lesson-button">Start Lesson →</a>
+            <div class="lesson-card" data-lesson="1">
+                <div class="lesson-info">
+                    <h3>Lesson 1 - Understanding Credit Scores</h3>
+                    <p>Master the fundamentals of credit scores and why they matter for your financial future</p>
+                </div>
+                <div class="lesson-status">
+                    <a href="/pillar3-lesson1" class="btn-start-lesson">Start Lesson</a>
+                </div>
             </div>
 
             <!-- Lesson 2 -->
-            <div class="lesson-card locked" id="lesson2">
-                <div class="lesson-icon">🌱</div>
-                <div class="lesson-number">Lesson 2</div>
-                <h3 class="lesson-title">Building Credit from Scratch</h3>
-                <p class="lesson-description">Learn how to start building your credit history even with no prior experience.</p>
-                <button class="lesson-button locked" disabled><span class="lock-icon">🔒</span> Locked</button>
+            <div class="lesson-card" data-lesson="2">
+                <div class="lesson-info">
+                    <h3>Lesson 2 - Building Credit from Scratch</h3>
+                    <p>Learn how to start building your credit history even with no prior experience</p>
+                </div>
+                <div class="lesson-status">
+                    <a href="/pillar3-lesson2" class="btn-start-lesson">Start Lesson</a>
+                </div>
             </div>
 
             <!-- Lesson 3 -->
-            <div class="lesson-card locked" id="lesson3">
-                <div class="lesson-icon">💳</div>
-                <div class="lesson-number">Lesson 3</div>
-                <h3 class="lesson-title">Choosing Your First Credit Card</h3>
-                <p class="lesson-description">Navigate the world of credit cards and find the perfect match for your needs.</p>
-                <button class="lesson-button locked" disabled><span class="lock-icon">🔒</span> Locked</button>
+            <div class="lesson-card" data-lesson="3">
+                <div class="lesson-info">
+                    <h3>Lesson 3 - Choosing Your First Credit Card</h3>
+                    <p>Navigate the world of credit cards and find the perfect match for your needs</p>
+                </div>
+                <div class="lesson-status">
+                    <a href="/pillar3-lesson3" class="btn-start-lesson">Start Lesson</a>
+                </div>
             </div>
 
             <!-- Lesson 4 -->
-            <div class="lesson-card locked" id="lesson4">
-                <div class="lesson-icon">⭐</div>
-                <div class="lesson-number">Lesson 4</div>
-                <h3 class="lesson-title">Credit Card Best Practices</h3>
-                <p class="lesson-description">Develop smart habits to use credit cards responsibly and build excellent credit.</p>
-                <button class="lesson-button locked" disabled><span class="lock-icon">🔒</span> Locked</button>
+            <div class="lesson-card" data-lesson="4">
+                <div class="lesson-info">
+                    <h3>Lesson 4 - Credit Card Best Practices</h3>
+                    <p>Develop smart habits to use credit cards responsibly and build excellent credit</p>
+                </div>
+                <div class="lesson-status">
+                    <a href="/pillar3-lesson4" class="btn-start-lesson">Start Lesson</a>
+                </div>
             </div>
 
             <!-- Lesson 5 -->
-            <div class="lesson-card locked" id="lesson5">
-                <div class="lesson-icon">⚠️</div>
-                <div class="lesson-number">Lesson 5</div>
-                <h3 class="lesson-title">Debt Traps and How to Avoid Them</h3>
-                <p class="lesson-description">Recognize and avoid common debt traps that can derail your financial progress.</p>
-                <button class="lesson-button locked" disabled><span class="lock-icon">🔒</span> Locked</button>
+            <div class="lesson-card" data-lesson="5">
+                <div class="lesson-info">
+                    <h3>Lesson 5 - Debt Traps and How to Avoid Them</h3>
+                    <p>Recognize and avoid common debt traps that can derail your financial progress</p>
+                </div>
+                <div class="lesson-status">
+                    <a href="/pillar3-lesson5" class="btn-start-lesson">Start Lesson</a>
+                </div>
             </div>
 
             <!-- Lesson 6 -->
-            <div class="lesson-card locked" id="lesson6">
-                <div class="lesson-icon">🎓</div>
-                <div class="lesson-number">Lesson 6</div>
-                <h3 class="lesson-title">Student Loans: The Smart Way</h3>
-                <p class="lesson-description">Navigate student loans wisely and minimize your debt burden after graduation.</p>
-                <button class="lesson-button locked" disabled><span class="lock-icon">🔒</span> Locked</button>
+            <div class="lesson-card" data-lesson="6">
+                <div class="lesson-info">
+                    <h3>Lesson 6 - Student Loans: The Smart Way</h3>
+                    <p>Navigate student loans wisely and minimize your debt burden after graduation</p>
+                </div>
+                <div class="lesson-status">
+                    <a href="/pillar3-lesson6" class="btn-start-lesson">Start Lesson</a>
+                </div>
             </div>
 
             <!-- Lesson 7 -->
-            <div class="lesson-card locked" id="lesson7">
-                <div class="lesson-icon">⚖️</div>
-                <div class="lesson-number">Lesson 7</div>
-                <h3 class="lesson-title">Good Debt vs Bad Debt</h3>
-                <p class="lesson-description">Learn to distinguish between debt that builds wealth and debt that destroys it.</p>
-                <button class="lesson-button locked" disabled><span class="lock-icon">🔒</span> Locked</button>
+            <div class="lesson-card" data-lesson="7">
+                <div class="lesson-info">
+                    <h3>Lesson 7 - Good Debt vs Bad Debt</h3>
+                    <p>Learn to distinguish between debt that builds wealth and debt that destroys it</p>
+                </div>
+                <div class="lesson-status">
+                    <a href="/pillar3-lesson7" class="btn-start-lesson">Start Lesson</a>
+                </div>
             </div>
 
             <!-- Lesson 8 -->
-            <div class="lesson-card locked" id="lesson8">
-                <div class="lesson-icon">🛡️</div>
-                <div class="lesson-number">Lesson 8</div>
-                <h3 class="lesson-title">Credit Monitoring and Protection</h3>
-                <p class="lesson-description">Protect your credit and catch errors before they damage your financial health.</p>
-                <button class="lesson-button locked" disabled><span class="lock-icon">🔒</span> Locked</button>
+            <div class="lesson-card" data-lesson="8">
+                <div class="lesson-info">
+                    <h3>Lesson 8 - Credit Monitoring and Protection</h3>
+                    <p>Protect your credit and catch errors before they damage your financial health</p>
+                </div>
+                <div class="lesson-status">
+                    <a href="/pillar3-lesson8" class="btn-start-lesson">Start Lesson</a>
+                </div>
             </div>
+        </div>
 
-            <!-- Final Quiz -->
-            <div class="lesson-card quiz-card locked" id="quiz">
-                <div class="lesson-icon">🏆</div>
-                <div class="lesson-number">Final Quiz</div>
-                <h3 class="lesson-title">Credit & Debt Mastery Challenge</h3>
-                <p class="lesson-description">Test your knowledge and prove you've mastered credit and debt management!</p>
-                <button class="lesson-button locked" disabled><span class="lock-icon">🔒</span> Locked</button>
+        <!-- Final Quiz -->
+        <div class="quiz-card" id="quizCard" style="display: none;">
+            <div class="lesson-info">
+                <h3>🎓 Final Quiz</h3>
+                <p>Test your knowledge of all 8 lessons • 16 questions • 80% to pass</p>
+            </div>
+            <div class="lesson-status">
+                <a href="/pillar3-quiz" class="btn-start-quiz">Take Quiz</a>
             </div>
         </div>
     </div>
@@ -556,107 +364,11 @@
     <script src="config.js"></script>
     <script src="animations.js"></script>
     <script>
-        // Check completion status and update UI
-        async function updateLessonsUI() {
-            const userId = localStorage.getItem('userId');
-            if (!userId || userId === 'null' || userId === 'undefined') {
-                return;
-            }
-
-            const completed = JSON.parse(localStorage.getItem(`pillar3_completed_${userId}`) || '[]');
-            const quizCompleted = localStorage.getItem(`pillar3_quiz_completed_${userId}`) === 'true';
-
-            // Update lessons
-            for (let i = 1; i <= 8; i++) {
-                const card = document.getElementById(`lesson${i}`);
-                const button = card.querySelector('.lesson-button');
-                const tab = document.querySelector(`.tab-item[data-tab="${i}"]`);
-
-                if (completed.includes(i)) {
-                    // Mark as completed
-                    card.classList.add('completed');
-                    card.classList.remove('locked');
-                    button.textContent = 'Review Lesson →';
-                    button.classList.add('completed');
-                    button.classList.remove('locked');
-                    button.disabled = false;
-
-                    // Add completion badge
-                    if (!card.querySelector('.completion-badge')) {
-                        const badge = document.createElement('div');
-                        badge.className = 'completion-badge';
-                        badge.textContent = '✓ Completed';
-                        card.insertBefore(badge, card.querySelector('.lesson-number'));
-                    }
-
-                    // Mark tab as completed
-                    tab.classList.add('completed');
-
-                    // Unlock next lesson
-                    if (i < 8) {
-                        const nextCard = document.getElementById(`lesson${i + 1}`);
-                        const nextButton = nextCard.querySelector('.lesson-button');
-                        nextCard.classList.remove('locked');
-                        nextButton.textContent = 'Start Lesson →';
-                        nextButton.classList.remove('locked');
-                        nextButton.disabled = false;
-                        nextButton.onclick = () => window.location.href = `/pillar3-lesson${i + 1}`;
-                    } else {
-                        // Unlock quiz after lesson 8
-                        const quizCard = document.getElementById('quiz');
-                        const quizButton = quizCard.querySelector('.lesson-button');
-                        quizCard.classList.remove('locked');
-                        quizButton.textContent = 'Take Final Quiz →';
-                        quizButton.classList.remove('locked');
-                        quizButton.disabled = false;
-                        quizButton.onclick = () => window.location.href = '/pillar3-quiz';
-                    }
-                }
-            }
-
-            // Update quiz status
-            if (quizCompleted) {
-                const quizCard = document.getElementById('quiz');
-                const quizButton = quizCard.querySelector('.lesson-button');
-                const quizTab = document.querySelector('.tab-item[data-tab="quiz"]');
-
-                quizCard.classList.add('completed');
-                quizCard.classList.remove('locked');
-                quizButton.textContent = 'Review Quiz →';
-                quizButton.classList.add('completed');
-                quizButton.classList.remove('locked');
-                quizButton.disabled = false;
-
-                // Add completion badge
-                if (!quizCard.querySelector('.completion-badge')) {
-                    const badge = document.createElement('div');
-                    badge.className = 'completion-badge';
-                    badge.textContent = '✓ Completed';
-                    quizCard.insertBefore(badge, quizCard.querySelector('.lesson-number'));
-                }
-
-                quizTab.classList.add('completed');
-            }
-        }
-
-        // Tab click handlers
-        document.querySelectorAll('.tab-item').forEach(tab => {
-            tab.addEventListener('click', () => {
-                document.querySelectorAll('.tab-item').forEach(t => t.classList.remove('active'));
-                tab.classList.add('active');
-
-                const tabId = tab.getAttribute('data-tab');
-                if (tabId === 'quiz') {
-                    document.getElementById('quiz').scrollIntoView({ behavior: 'smooth', block: 'center' });
-                } else {
-                    document.getElementById(`lesson${tabId}`).scrollIntoView({ behavior: 'smooth', block: 'center' });
-                }
-            });
-        });
-
-        // Auth nav function
+        // Check authentication status and update nav
         async function updateNav() {
             const authButtons = document.getElementById('authButtons');
+
+            // Check localStorage for cached auth state and render immediately
             const cachedAuth = localStorage.getItem('authState');
             if (cachedAuth) {
                 const authState = JSON.parse(cachedAuth);
@@ -665,8 +377,11 @@
                     : `<a href="login" class="btn-primary">Login</a>`;
                 authButtons.style.opacity = '1';
             }
+
+            // Then verify with server in background
             try {
                 const response = await fetch(`${API_URL}/auth/me`, { credentials: 'include' });
+
                 if (response.ok) {
                     localStorage.setItem('authState', JSON.stringify({ isLoggedIn: true }));
                     authButtons.innerHTML = `<a href="#" onclick="logout(); return false;" class="btn-primary">Logout</a>`;
@@ -682,11 +397,13 @@
                 authButtons.style.opacity = '1';
             }
         }
-
+        // Logout function
         async function logout() {
+            // Clear auth data only - keep user-specific progress data
             localStorage.removeItem('authState');
             localStorage.removeItem('token');
             localStorage.removeItem('userId');
+
             try {
                 await fetch(`${API_URL}/auth/logout`, {
                     method: 'POST',
@@ -699,9 +416,109 @@
             }
         }
 
-        // Initialize
-        updateLessonsUI();
+        // Load completed lessons and handle locking logic
+        function loadCompletedLessons() {
+            const userId = localStorage.getItem('userId');
+
+            // If no userId, don't load any progress (user not logged in)
+            if (!userId || userId === 'null' || userId === 'undefined') {
+                // Lock all lessons except lesson 1
+                for (let lessonNum = 2; lessonNum <= 8; lessonNum++) {
+                    const lessonCard = document.querySelector(`[data-lesson="${lessonNum}"]`);
+                    if (lessonCard) {
+                        lessonCard.style.opacity = '0.6';
+                        lessonCard.style.pointerEvents = 'none';
+                        const statusDiv = lessonCard.querySelector('.lesson-status');
+                        statusDiv.innerHTML = `<span style="color: #9ca3af; font-weight: 600;">🔒 Complete Previous Lesson</span>`;
+                    }
+                }
+                return;
+            }
+
+            const completed = JSON.parse(localStorage.getItem(`pillar3_completed_${userId}`) || '[]');
+
+            // Handle each lesson
+            for (let lessonNum = 1; lessonNum <= 8; lessonNum++) {
+                const lessonCard = document.querySelector(`[data-lesson="${lessonNum}"]`);
+                if (!lessonCard) continue;
+
+                const statusDiv = lessonCard.querySelector('.lesson-status');
+                const previousQuizPassed = lessonNum === 1 || localStorage.getItem(`lesson${lessonNum - 1 + 16}_quiz_passed_${userId}`) === 'true';
+
+                if (lessonNum === 1) {
+                    // Lesson 1 is always unlocked
+                    if (completed.includes(1)) {
+                        lessonCard.classList.add('completed');
+                        statusDiv.innerHTML = `
+                            <span class="completed-badge">Completed</span>
+                            <a href="/pillar3-lesson1" class="btn-start-lesson">Review</a>
+                        `;
+                    }
+                } else {
+                    // Other lessons require previous quiz completion
+                    if (!previousQuizPassed) {
+                        // Lock the lesson
+                        lessonCard.style.opacity = '0.6';
+                        lessonCard.style.pointerEvents = 'none';
+                        statusDiv.innerHTML = `
+                            <span style="color: #9ca3af; font-weight: 600;">🔒 Complete Previous Lesson</span>
+                        `;
+                    } else if (completed.includes(lessonNum)) {
+                        // Lesson completed
+                        lessonCard.classList.add('completed');
+                        statusDiv.innerHTML = `
+                            <span class="completed-badge">Completed</span>
+                            <a href="pillar3-lesson${lessonNum}" class="btn-start-lesson">Review</a>
+                        `;
+                    }
+                    // If previous quiz passed but not completed, button already shows "Start Lesson"
+                }
+            }
+        }
+
+        // Check if all lessons completed and show quiz
+        function checkQuizAvailability() {
+            const userId = localStorage.getItem('userId');
+            const quizCard = document.getElementById('quizCard');
+
+            // If no userId, hide quiz
+            if (!userId || userId === 'null' || userId === 'undefined') {
+                quizCard.style.display = 'none';
+                return;
+            }
+
+            const completed = JSON.parse(localStorage.getItem(`pillar3_completed_${userId}`) || '[]');
+            const quizCompleted = localStorage.getItem(`pillar3_quiz_completed_${userId}`);
+            const quizScore = localStorage.getItem(`pillar3_quiz_score_${userId}`);
+
+            // Check if all 8 lessons are completed AND all 8 lesson quizzes are passed
+            let allQuizzesPassed = true;
+            for (let i = 17; i <= 24; i++) {
+                if (localStorage.getItem(`lesson${i}_quiz_passed_${userId}`) !== 'true') {
+                    allQuizzesPassed = false;
+                    break;
+                }
+            }
+
+            if (completed.length === 8 && allQuizzesPassed) {
+                quizCard.style.display = 'flex';
+
+                if (quizCompleted === 'true') {
+                    const statusDiv = quizCard.querySelector('.lesson-status');
+                    statusDiv.innerHTML = `
+                        <span class="quiz-completed-badge">Passed (${quizScore}%)</span>
+                        <a href="/pillar3-quiz" class="btn-start-quiz">Retake Quiz</a>
+                    `;
+                }
+            } else {
+                // Keep quiz hidden if not all lessons completed
+                quizCard.style.display = 'none';
+            }
+        }
+
         updateNav();
+        loadCompletedLessons();
+        checkQuizAvailability();
     </script>
 </body>
 </html>
