@@ -508,15 +508,15 @@
                                 <a href="/pillar2-lessons" class="btn-lesson" id="pillar2Button" style="text-decoration: none; display: inline-block;">Start Pillar</a>
                             </div>
                         </div>
-                        <div class="lesson-item" id="pillar3-item" onclick="window.location.href='/pillar3-lessons'" style="cursor: pointer;">
+                        <div class="lesson-item">
                             <div class="lesson-info">
                                 <div class="lesson-details">
-                                    <h3>Pillar 3: Credit & Debt Mastery <span style="color: #10b981; font-size: 12px; font-weight: 600; text-transform: uppercase; margin-left: 10px;">FREE</span></h3>
+                                    <h3>Pillar 3 <span style="color: #10b981; font-size: 12px; font-weight: 600; text-transform: uppercase; margin-left: 10px;">FREE</span> <span style="color: #10b981; font-size: 12px; font-weight: 600; text-transform: uppercase; margin-left: 5px;">• Available Now</span></h3>
                                     <p>Master credit scores, credit cards, and debt management.</p>
                                 </div>
                             </div>
                             <div class="lesson-status">
-                                <span class="status-badge available">Available Now</span>
+                                <a href="/pillar3-lessons" class="btn-lesson" id="pillar3Button" style="text-decoration: none; display: inline-block;">Start Pillar</a>
                             </div>
                         </div>
 
@@ -715,12 +715,14 @@
                 const pillar1QuizCompleted = localStorage.getItem(`pillar1_quiz_completed_${userId}`) === 'true';
                 const pillar2Completed = JSON.parse(localStorage.getItem(`pillar2_completed_${userId}`) || '[]');
                 const pillar2QuizCompleted = localStorage.getItem(`pillar2_quiz_completed_${userId}`) === 'true';
+                const pillar3Completed = JSON.parse(localStorage.getItem(`pillar3_completed_${userId}`) || '[]');
+                const pillar3QuizCompleted = localStorage.getItem(`pillar3_quiz_completed_${userId}`) === 'true';
 
                 const totalLessonsPerPillar = 8;
                 const totalItemsPerPillar = 9; // 8 lessons + 1 quiz
 
                 // Total completed lessons across ALL pillars
-                const totalCompletedLessons = pillar1Completed.length + pillar2Completed.length;
+                const totalCompletedLessons = pillar1Completed.length + pillar2Completed.length + pillar3Completed.length;
 
                 // Update "Lessons Completed" stat (counts all pillars)
                 document.getElementById('completedLessons').textContent = totalCompletedLessons;
@@ -767,6 +769,23 @@
                 } else {
                     // User hasn't started any lessons yet
                     pillar2Button.textContent = 'Start Pillar';
+                }
+
+                // Update Pillar 3 button text
+                const pillar3Button = document.getElementById('pillar3Button');
+
+                if (pillar3QuizCompleted === true) {
+                    // User finished everything including quiz
+                    pillar3Button.textContent = 'Review Pillar';
+                } else if (pillar3Completed.length > 0 && pillar3Completed.length < totalLessonsPerPillar) {
+                    // User started but hasn't finished all lessons
+                    pillar3Button.textContent = 'Continue Pillar';
+                } else if (pillar3Completed.length === totalLessonsPerPillar) {
+                    // User finished all 8 lessons but hasn't passed quiz
+                    pillar3Button.textContent = 'Continue Pillar';
+                } else {
+                    // User hasn't started any lessons yet
+                    pillar3Button.textContent = 'Start Pillar';
                 }
 
                 // Create a map of completed lessons
