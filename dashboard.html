@@ -520,18 +520,20 @@
                             </div>
                         </div>
 
-                        <!-- Pillar 4-11: Coming 2026 (Greyed Out) -->
-                        <div class="lesson-item locked">
+                        <!-- Pillar 4: Smart Savings & Emergency Funds (PRO/PREMIUM) -->
+                        <div class="lesson-item" id="pillar4-item">
                             <div class="lesson-info">
                                 <div class="lesson-details">
-                                    <h3>Pillar 4 <span style="color: #f59e0b; font-size: 12px; font-weight: 600; text-transform: uppercase; margin-left: 10px;">PRO</span></h3>
+                                    <h3>Pillar 4 <span style="color: #f59e0b; font-size: 12px; font-weight: 600; text-transform: uppercase; margin-left: 10px;">PRO</span> <span style="color: #f59e0b; font-size: 12px; font-weight: 600; text-transform: uppercase; margin-left: 5px;">• Available Now</span></h3>
                                     <p>Smart saving strategies and emergency fund planning.</p>
                                 </div>
                             </div>
                             <div class="lesson-status">
-                                <span class="status-badge locked">Coming 2026</span>
+                                <a href="/pillar4-lessons" class="btn-lesson" id="pillar4Button" style="text-decoration: none; display: inline-block;">Start Pillar</a>
                             </div>
                         </div>
+
+                        <!-- Pillar 5-11: Coming 2026 (Greyed Out) -->
                         <div class="lesson-item locked">
                             <div class="lesson-info">
                                 <div class="lesson-details">
@@ -717,12 +719,14 @@
                 const pillar2QuizCompleted = localStorage.getItem(`pillar2_quiz_completed_${userId}`) === 'true';
                 const pillar3Completed = JSON.parse(localStorage.getItem(`pillar3_completed_${userId}`) || '[]');
                 const pillar3QuizCompleted = localStorage.getItem(`pillar3_quiz_completed_${userId}`) === 'true';
+                const pillar4Completed = JSON.parse(localStorage.getItem(`pillar4_completed_${userId}`) || '[]');
+                const pillar4QuizCompleted = localStorage.getItem(`pillar4_quiz_completed_${userId}`) === 'true';
 
                 const totalLessonsPerPillar = 8;
                 const totalItemsPerPillar = 9; // 8 lessons + 1 quiz
 
                 // Total completed lessons across ALL pillars
-                const totalCompletedLessons = pillar1Completed.length + pillar2Completed.length + pillar3Completed.length;
+                const totalCompletedLessons = pillar1Completed.length + pillar2Completed.length + pillar3Completed.length + pillar4Completed.length;
 
                 // Update "Lessons Completed" stat (counts all pillars)
                 document.getElementById('completedLessons').textContent = totalCompletedLessons;
@@ -786,6 +790,37 @@
                 } else {
                     // User hasn't started any lessons yet
                     pillar3Button.textContent = 'Start Pillar';
+                }
+
+                // Update Pillar 4 button text and access control
+                const pillar4Item = document.getElementById('pillar4-item');
+                const pillar4Button = document.getElementById('pillar4Button');
+                const userTier = user.membership_tier; // 'free', 'pro', or 'premium'
+
+                // Check if user has access (pro or premium only)
+                if (userTier === 'free') {
+                    // Lock Pillar 4 for free users
+                    pillar4Item.classList.add('locked');
+                    pillar4Button.textContent = 'Upgrade to Pro';
+                    pillar4Button.onclick = (e) => {
+                        e.preventDefault();
+                        alert('Pillar 4 is available for Pro and Premium members only. Please upgrade your membership to access this content.');
+                        return false;
+                    };
+                } else {
+                    // Pro or Premium users have access
+                    pillar4Item.classList.remove('locked');
+                    pillar4Button.onclick = null; // Remove the lock click handler
+
+                    if (pillar4QuizCompleted === true) {
+                        pillar4Button.textContent = 'Review Pillar';
+                    } else if (pillar4Completed.length > 0 && pillar4Completed.length < totalLessonsPerPillar) {
+                        pillar4Button.textContent = 'Continue Pillar';
+                    } else if (pillar4Completed.length === totalLessonsPerPillar) {
+                        pillar4Button.textContent = 'Continue Pillar';
+                    } else {
+                        pillar4Button.textContent = 'Start Pillar';
+                    }
                 }
 
                 // Create a map of completed lessons
