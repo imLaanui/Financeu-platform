@@ -33,10 +33,8 @@ export default function ForgotPassword() {
             }
 
             // Success - show message that email was sent
-            setSuccessMsg(
-                "Password reset instructions have been sent to your email. " +
-                "Check your browser console for the reset link (email not yet configured)."
-            );
+            setSuccessMsg(data.message || "Password reset instructions have been sent to your email.");
+            setEmail(""); // Clear the email field
         } catch (error: unknown) {
             console.error("Forgot password error:", error);
             if (error instanceof Error) {
@@ -62,9 +60,9 @@ export default function ForgotPassword() {
                     {successMsg && (
                         <div className="success-message">
                             <p>{successMsg}</p>
-                            <p style={{ fontSize: "0.9rem", marginTop: "1rem" }}>
-                                <strong>Note:</strong> Email service is not configured yet.
-                                Check your browser console for the reset link, or contact support.
+                            <p style={{ fontSize: "0.9rem", marginTop: "1rem", color: "#666" }}>
+                                Please check your email inbox (and spam folder) for the reset link.
+                                The link will expire in 1 hour.
                             </p>
                         </div>
                     )}

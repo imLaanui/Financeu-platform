@@ -1,17 +1,27 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { API_URL } from "@config/api";
 import "@css/auth/login.css";
 
 export default function ResetPassword() {
     const navigate = useNavigate();
-    const [email, setEmail] = useState("");
-    const [resetCode, setResetCode] = useState("");
+    const [searchParams] = useSearchParams();
+
+    // Get token and email from URL parameters (hidden from user)
+    const [email] = useState(searchParams.get("email") || "");
+    const [token] = useState(searchParams.get("token") || "");
     const [newPassword, setNewPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
     const [errorMessage, setErrorMessage] = useState("");
     const [successMessage, setSuccessMessage] = useState("");
     const [loading, setLoading] = useState(false);
+
+    // Check if token exists on mount
+    useEffect(() => {
+        if (!token || !email) {
+            setErrorMessage("Invalid or missing reset link. Please request a new password reset link.");
+        }
+    }, [token, email]);
 
     const hideMessages = () => {
         setErrorMessage("");
@@ -21,6 +31,12 @@ export default function ResetPassword() {
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         hideMessages();
+
+        // Validation
+        if (!email || !token) {
+            setErrorMessage("Invalid reset link. Please request a new password reset link.");
+            return;
+        }
 
         if (newPassword.length < 6) {
             setErrorMessage("Password must be at least 6 characters");
@@ -38,12 +54,19 @@ export default function ResetPassword() {
             const response = await fetch(`${API_URL}/auth/reset-password`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ email, resetCode, newPassword }),
+                credentials: "include",
+                body: JSON.stringify({
+                    email,
+                    token,
+                    newPassword
+                }),
             });
 
-            const data: { error?: string } = await response.json();
+            const data: { error?: string; message?: string } = await response.json();
 
-            if (!response.ok) throw new Error(data.error || "Failed to reset password");
+            if (!response.ok) {
+                throw new Error(data.error || "Failed to reset password");
+            }
 
             setSuccessMessage("Password reset successful! Redirecting to login...");
             setTimeout(() => navigate("/login"), 2000);
@@ -61,40 +84,13 @@ export default function ResetPassword() {
                 <div className="auth-card">
                     <div className="auth-header">
                         <h1>Reset Your Password</h1>
-                        <p>Enter your reset code and new password</p>
+                        <p>Enter your new password below</p>
                     </div>
 
                     {errorMessage && <div className="error-message">{errorMessage}</div>}
                     {successMessage && <div className="success-message">{successMessage}</div>}
 
                     <form onSubmit={handleSubmit}>
-                        <div className="form-group">
-                            <label htmlFor="email">Email Address</label>
-                            <input
-                                type="email"
-                                id="email"
-                                name="email"
-                                required
-                                placeholder="you@example.com"
-                                value={email}
-                                onChange={(e) => setEmail(e.target.value)}
-                            />
-                        </div>
-
-                        <div className="form-group">
-                            <label htmlFor="resetCode">Reset Code</label>
-                            <input
-                                type="text"
-                                id="resetCode"
-                                name="resetCode"
-                                required
-                                maxLength={6}
-                                placeholder="Enter your 6-digit code"
-                                value={resetCode}
-                                onChange={(e) => setResetCode(e.target.value)}
-                            />
-                        </div>
-
                         <div className="form-group">
                             <label htmlFor="newPassword">New Password</label>
                             <input
@@ -105,6 +101,7 @@ export default function ResetPassword() {
                                 placeholder="Enter new password (min 6 characters)"
                                 value={newPassword}
                                 onChange={(e) => setNewPassword(e.target.value)}
+                                disabled={!email || !token}
                             />
                         </div>
 
@@ -118,17 +115,22 @@ export default function ResetPassword() {
                                 placeholder="Confirm new password"
                                 value={confirmPassword}
                                 onChange={(e) => setConfirmPassword(e.target.value)}
+                                disabled={!email || !token}
                             />
                         </div>
 
-                        <button type="submit" className="btn-submit" disabled={loading}>
+                        <button
+                            type="submit"
+                            className="btn-submit"
+                            disabled={loading || !email || !token}
+                        >
                             {loading ? "Resetting password..." : "Reset Password"}
                         </button>
                     </form>
 
                     <div className="auth-footer">
                         <p>
-                            Don't have a code? <a href="/forgot-password">Get reset code</a>
+                            Don't have a reset link? <a href="/forgot-password">Request reset link</a>
                         </p>
                         <p style={{ marginTop: "10px" }}>
                             Remember your password? <a href="/login">Log in</a>
