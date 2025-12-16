@@ -434,7 +434,7 @@
                         lessonCard.style.opacity = '0.6';
                         lessonCard.style.pointerEvents = 'none';
                         const statusDiv = lessonCard.querySelector('.lesson-status');
-                        statusDiv.innerHTML = `<span style="color: #9ca3af; font-weight: 600;">🔒 Complete Previous Lesson</span>`;
+                        statusDiv.innerHTML = `<span style="color: #9ca3af; font-weight: 600; white-space: nowrap;">🔒 Complete Previous Lesson</span>`;
                     }
                 }
                 return;
@@ -466,7 +466,7 @@
                         lessonCard.style.opacity = '0.6';
                         lessonCard.style.pointerEvents = 'none';
                         statusDiv.innerHTML = `
-                            <span style="color: #9ca3af; font-weight: 600;">🔒 Complete Previous Lesson</span>
+                            <span style="color: #9ca3af; font-weight: 600; white-space: nowrap;">🔒 Complete Previous Lesson</span>
                         `;
                     } else if (completed.includes(lessonNum)) {
                         // Lesson completed

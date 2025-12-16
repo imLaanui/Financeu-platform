@@ -20,7 +20,7 @@
         .lesson-section ul { line-height: 1.8; color: var(--text-secondary); margin-left: 20px; margin-bottom: 15px; }
         .visual-box { background: linear-gradient(135deg, #0A1A2F15 0%, #00A67615 100%); border-left: 4px solid var(--primary-color); padding: 25px; border-radius: 12px; margin: 20px 0; position: relative; box-shadow: 0 2px 8px rgba(59, 130, 246, 0.1); }
         .visual-box h3 { color: var(--primary-color); margin-bottom: 15px; font-size: 18px; font-weight: 700; }
-        .mistakes-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin: 20px 0; }
+        .mistakes-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; margin: 20px 0; }
         .mistake-card { background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%); border: 2px solid #dc2626; border-radius: 12px; padding: 20px; text-align: center; transition: all 0.3s; }
         .mistake-icon { font-size: 40px; margin-bottom: 10px; }
         .mistake-title { font-weight: 700; color: #dc2626; font-size: 14px; margin-bottom: 8px; }
@@ -96,29 +96,29 @@
         <a href="/pillar4-lessons" class="back-link">← Back to Pillar 4 Lessons</a>
         <div class="lesson-header">
             <div class="lesson-number">LESSON 4</div>
-            <h1>The 50/30/20 Budget Rule</h1>
+            <h1>High-Yield Savings Accounts</h1>
         </div>
 
         <!-- Screen 1 -->
         <div class="lesson-screen active" data-screen="1">
             <div class="screen-progress">Screen 1 of 8</div>
             <div class="lesson-section">
-                <h2>The 50/30/20 Budget Rule</h2>
+                <h2>High-Yield Savings Accounts</h2>
                 <div class="intro-cards">
                     <div class="intro-card">
-                        <div class="intro-card-icon">📊</div>
+                        <div class="intro-card-icon">💰</div>
                         <h3>The Problem</h3>
-                        <p>Most people don't know how much to allocate to different spending categories</p>
+                        <p>Traditional bank accounts pay almost no interest on your savings</p>
                     </div>
                     <div class="intro-card">
-                        <div class="intro-card-icon">💡</div>
+                        <div class="intro-card-icon">📈</div>
                         <h3>Why It Matters</h3>
-                        <p>A simple budgeting framework helps you balance needs, wants, and savings</p>
+                        <p>High-yield accounts can earn you 10-20x more interest than regular savings</p>
                     </div>
                     <div class="intro-card">
                         <div class="intro-card-icon">🎯</div>
                         <h3>What You'll Learn</h3>
-                        <p>How to split your income: 50% needs, 30% wants, 20% savings</p>
+                        <p>What makes an account "high-yield" and why FDIC insurance matters</p>
                     </div>
                 </div>
             </div>
@@ -132,19 +132,19 @@
         <div class="lesson-screen" data-screen="2">
             <div class="screen-progress">Screen 2 of 8</div>
             <div class="lesson-section">
-                <h2>Core Concept: The 50/30/20 Framework</h2>
-                <p><strong>The 50/30/20 rule is a simple budgeting method that divides your after-tax income into three categories:</strong></p>
+                <h2>Core Concept: What Is a High-Yield Savings Account?</h2>
+                <p><strong>A high-yield savings account (HYSA) is a type of savings account that pays significantly more interest than traditional savings accounts.</strong></p>
                 <div class="visual-box">
-                    <h3>50% - Needs (Essentials)</h3>
-                    <p>Housing, utilities, groceries, transportation, insurance, minimum debt payments. These are things you MUST have to survive.</p>
+                    <h3>APY: Annual Percentage Yield</h3>
+                    <p>High-yield accounts offer APYs of 4-5% (as of 2024-2025), compared to 0.01-0.1% at traditional banks. This means your money grows 10-50x faster!</p>
                 </div>
                 <div class="visual-box">
-                    <h3>30% - Wants (Discretionary)</h3>
-                    <p>Dining out, entertainment, hobbies, subscriptions, vacations, shopping. These enhance your life but aren't essential.</p>
+                    <h3>FDIC Insurance: Your Safety Net</h3>
+                    <p>Look for "FDIC Insured" - this means the federal government protects up to $250,000 of your deposits per account, even if the bank fails.</p>
                 </div>
                 <div class="visual-box">
-                    <h3>20% - Savings & Debt Payoff</h3>
-                    <p>Emergency fund, retirement accounts, investments, extra debt payments beyond minimums. This is your future security.</p>
+                    <h3>Online Banks vs Traditional Banks</h3>
+                    <p>Most high-yield accounts are from online banks (Ally, Marcus, SoFi). They have lower overhead costs, so they pass savings to you as higher interest rates.</p>
                 </div>
             </div>
             <div class="screen-navigation">
@@ -161,18 +161,18 @@
                     <h3>Quick Check</h3>
                 </div>
                 <div class="checkpoint-question">
-                    <div class="question-text">Which of these would be categorized as a "need"?</div>
+                    <div class="question-text">What does FDIC insurance protect?</div>
                     <div class="checkpoint-option" onclick="checkCheckpoint1(0)">
-                        <input type="radio" name="checkpoint1"><span>A) Netflix subscription</span>
+                        <input type="radio" name="checkpoint1"><span>A) Your investments in the stock market</span>
                     </div>
                     <div class="checkpoint-option" onclick="checkCheckpoint1(1)">
-                        <input type="radio" name="checkpoint1"><span>B) Rent payment</span>
+                        <input type="radio" name="checkpoint1"><span>B) Up to $250,000 of your bank deposits</span>
                     </div>
                     <div class="checkpoint-option" onclick="checkCheckpoint1(2)">
-                        <input type="radio" name="checkpoint1"><span>C) Concert tickets</span>
+                        <input type="radio" name="checkpoint1"><span>C) Your credit card from fraud</span>
                     </div>
                     <div class="checkpoint-option" onclick="checkCheckpoint1(3)">
-                        <input type="radio" name="checkpoint1"><span>D) Designer clothes</span>
+                        <input type="radio" name="checkpoint1"><span>D) Your cryptocurrency holdings</span>
                     </div>
                 </div>
                 <div class="checkpoint-feedback" id="checkpoint1-feedback">
@@ -191,34 +191,27 @@
         <div class="lesson-screen" data-screen="4">
             <div class="screen-progress">Screen 4 of 8</div>
             <div class="lesson-section">
-                <h2>Example: $3,000 Monthly Income</h2>
+                <h2>Real-World Example: The Power of High-Yield Accounts</h2>
                 <div class="visual-box">
-                    <h3>50% Needs = $1,500</h3>
+                    <h3>Traditional Savings Account (0.05% APY)</h3>
                     <ul>
-                        <li>Rent: $900</li>
-                        <li>Groceries: $300</li>
-                        <li>Utilities: $100</li>
-                        <li>Transportation: $150</li>
-                        <li>Insurance: $50</li>
+                        <li>Starting balance: $5,000</li>
+                        <li>Interest earned in 1 year: $2.50</li>
+                        <li>Balance after 1 year: $5,002.50</li>
                     </ul>
                 </div>
                 <div class="visual-box">
-                    <h3>30% Wants = $900</h3>
+                    <h3>High-Yield Savings Account (4.5% APY)</h3>
                     <ul>
-                        <li>Dining out: $200</li>
-                        <li>Entertainment: $150</li>
-                        <li>Subscriptions: $50</li>
-                        <li>Shopping: $300</li>
-                        <li>Fun money: $200</li>
+                        <li>Starting balance: $5,000</li>
+                        <li>Interest earned in 1 year: $225</li>
+                        <li>Balance after 1 year: $5,225</li>
                     </ul>
                 </div>
                 <div class="visual-box">
-                    <h3>20% Savings = $600</h3>
-                    <ul>
-                        <li>Emergency fund: $300</li>
-                        <li>Retirement: $200</li>
-                        <li>Extra debt payment: $100</li>
-                    </ul>
+                    <h3>The Difference</h3>
+                    <p><strong>You earned $222.50 more just by choosing a high-yield account!</strong></p>
+                    <p>That's free money for doing nothing except moving your savings to a better bank.</p>
                 </div>
             </div>
             <div class="screen-navigation">
@@ -235,18 +228,18 @@
                     <h3>Apply What You Learned</h3>
                 </div>
                 <div class="checkpoint-question">
-                    <div class="question-text">If you earn $2,000/month after taxes, how much should you allocate to savings?</div>
+                    <div class="question-text">Why do online banks typically offer higher interest rates than traditional banks?</div>
                     <div class="checkpoint-option" onclick="checkCheckpoint2(0)">
-                        <input type="radio" name="checkpoint2"><span>A) $200</span>
+                        <input type="radio" name="checkpoint2"><span>A) They have more money</span>
                     </div>
                     <div class="checkpoint-option" onclick="checkCheckpoint2(1)">
-                        <input type="radio" name="checkpoint2"><span>B) $400</span>
+                        <input type="radio" name="checkpoint2"><span>B) They have lower overhead costs and pass savings to customers</span>
                     </div>
                     <div class="checkpoint-option" onclick="checkCheckpoint2(2)">
-                        <input type="radio" name="checkpoint2"><span>C) $600</span>
+                        <input type="radio" name="checkpoint2"><span>C) They are less regulated</span>
                     </div>
                     <div class="checkpoint-option" onclick="checkCheckpoint2(3)">
-                        <input type="radio" name="checkpoint2"><span>D) $1,000</span>
+                        <input type="radio" name="checkpoint2"><span>D) They invest your money in stocks</span>
                     </div>
                 </div>
                 <div class="checkpoint-feedback" id="checkpoint2-feedback">
@@ -268,24 +261,24 @@
                 <h2>Avoid These Mistakes</h2>
                 <div class="mistakes-grid">
                     <div class="mistake-card">
-                        <div class="mistake-icon">🎭</div>
-                        <div class="mistake-title">Mislabeling Wants as Needs</div>
-                        <div class="mistake-desc">Premium cable isn't a need—basic shelter is</div>
+                        <div class="mistake-icon">🏦</div>
+                        <div class="mistake-title">Ignoring FDIC Insurance</div>
+                        <div class="mistake-desc">Always verify the account is FDIC insured</div>
                     </div>
                     <div class="mistake-card">
-                        <div class="mistake-icon">📱</div>
-                        <div class="mistake-title">Too Many Subscriptions</div>
-                        <div class="mistake-desc">$10 here, $15 there—they add up fast</div>
+                        <div class="mistake-icon">📉</div>
+                        <div class="mistake-title">Chasing the Highest Rate</div>
+                        <div class="mistake-desc">Small rate differences aren't worth switching constantly</div>
                     </div>
                     <div class="mistake-card">
-                        <div class="mistake-icon">💳</div>
-                        <div class="mistake-title">Ignoring the 20% Rule</div>
-                        <div class="mistake-desc">Skipping savings means no financial security</div>
+                        <div class="mistake-icon">💸</div>
+                        <div class="mistake-title">Not Reading the Fine Print</div>
+                        <div class="mistake-desc">Watch for minimum balances and monthly fees</div>
                     </div>
                     <div class="mistake-card">
-                        <div class="mistake-icon">⚖️</div>
-                        <div class="mistake-title">Being Too Rigid</div>
-                        <div class="mistake-desc">Adjust percentages based on your situation</div>
+                        <div class="mistake-icon">⏰</div>
+                        <div class="mistake-title">Leaving Money in Low-Yield Accounts</div>
+                        <div class="mistake-desc">You're losing hundreds of dollars in interest every year</div>
                     </div>
                 </div>
             </div>
@@ -303,24 +296,24 @@
                     <div class="checklist-title">🎯 Your Action Plan</div>
                     <div class="checklist-item" onclick="toggleChecklistItem(this)">
                         <div class="checklist-checkbox"></div>
-                        <div>Calculate your monthly after-tax income</div>
+                        <div>Research high-yield savings accounts (Ally, Marcus, SoFi, etc.)</div>
                     </div>
                     <div class="checklist-item" onclick="toggleChecklistItem(this)">
                         <div class="checklist-checkbox"></div>
-                        <div>List all expenses and categorize as needs, wants, or savings</div>
+                        <div>Verify FDIC insurance and check current APY rates</div>
                     </div>
                     <div class="checklist-item" onclick="toggleChecklistItem(this)">
                         <div class="checklist-checkbox"></div>
-                        <div>Calculate current percentages for each category</div>
+                        <div>Open a high-yield savings account online (takes ~10 minutes)</div>
                     </div>
                     <div class="checklist-item" onclick="toggleChecklistItem(this)">
                         <div class="checklist-checkbox"></div>
-                        <div>Adjust spending to align with 50/30/20 (or your custom split)</div>
+                        <div>Transfer your emergency fund to the new account</div>
                     </div>
                 </div>
                 <div class="reflection-box">
                     <div class="reflection-title">Quick Reflection</div>
-                    <p>Are your current percentages close to 50/30/20? If not, what's one area where you can make an adjustment?</p>
+                    <p>How much more could you earn by moving $5,000 from a 0.05% account to a 4.5% account? (Hint: about $222/year!)</p>
                 </div>
             </div>
             <div class="screen-navigation">
@@ -404,9 +397,9 @@
         }
 
         const quizData = [
-            { question: "In the 50/30/20 rule, what percentage should go to needs?", options: ["30%", "50%", "20%", "40%"], correct: 1 },
-            { question: "Which category does 'dining out' fall under?", options: ["Needs", "Wants", "Savings", "Emergency fund"], correct: 1 },
-            { question: "If you earn $4,000/month, how much should go to savings according to the 50/30/20 rule?", options: ["$400", "$600", "$800", "$1,000"], correct: 2 }
+            { question: "What does APY stand for?", options: ["Annual Payment Year", "Annual Percentage Yield", "Average Personal Yield", "Asset Protection Year"], correct: 1 },
+            { question: "How much of your deposits does FDIC insurance protect per account?", options: ["$50,000", "$100,000", "$250,000", "$500,000"], correct: 2 },
+            { question: "What is a typical APY range for high-yield savings accounts?", options: ["0.01-0.1%", "1-2%", "4-5%", "10-15%"], correct: 2 }
         ];
 
         let userAnswers = [];
@@ -502,7 +495,7 @@
                 alert('Please complete the quiz first!');
                 return;
             }
-            const success = await completeLesson('pillar4_lesson4', 4, 2);
+            const success = await completeLesson('pillar4_lesson4', 4, 4);
             if (success) window.location.href = 'pillar4-lessons.html';
         }
 
@@ -533,7 +526,7 @@
             });
             const feedback = document.getElementById('checkpoint1-feedback');
             feedback.querySelector('.checkpoint-feedback-title').textContent = selected === correct ? 'Correct!' : 'Not quite!';
-            feedback.querySelector('.checkpoint-explanation').textContent = 'Rent is a need—you must have shelter. Netflix, concerts, and designer clothes are wants.';
+            feedback.querySelector('.checkpoint-explanation').textContent = 'FDIC insurance protects up to $250,000 of your deposits per account. This federal protection means your money is safe even if the bank fails.';
             feedback.classList.add('show', selected === correct ? 'correct' : 'incorrect');
             document.getElementById('checkpoint1-continue').classList.add('show');
         }
@@ -552,7 +545,7 @@
             });
             const feedback = document.getElementById('checkpoint2-feedback');
             feedback.querySelector('.checkpoint-feedback-title').textContent = selected === correct ? 'Excellent!' : 'Not quite!';
-            feedback.querySelector('.checkpoint-explanation').textContent = '20% of $2,000 = $400. This should go to savings and debt payoff.';
+            feedback.querySelector('.checkpoint-explanation').textContent = 'Online banks have lower overhead costs because they don\'t maintain physical branches. They pass these savings to customers through higher interest rates.';
             feedback.classList.add('show', selected === correct ? 'correct' : 'incorrect');
             document.getElementById('checkpoint2-continue').classList.add('show');
         }
