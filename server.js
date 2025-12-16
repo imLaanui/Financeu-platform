@@ -670,6 +670,18 @@ app.get('/dashboard', (req, res) => {
   res.sendFile(path.join(__dirname, 'dashboard.html'));
 });
 
+// Pillar 4 routes (requires PRO or PREMIUM tier)
+app.get('/pillar4-lessons', authenticateToken, requireTier(['pro', 'premium']), (req, res) => {
+  res.sendFile(path.join(__dirname, 'pillar4-lessons.html'));
+});
+
+// Pillar 4 individual lessons (requires PRO or PREMIUM tier)
+for (let i = 1; i <= 8; i++) {
+  app.get(`/pillar4-lesson${i}`, authenticateToken, requireTier(['pro', 'premium']), (req, res) => {
+    res.sendFile(path.join(__dirname, `pillar4-lesson${i}.html`));
+  });
+}
+
 // ==================== ERROR HANDLING ====================
 
 // 404 handler
