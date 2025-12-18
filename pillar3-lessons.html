@@ -362,6 +362,7 @@
     </footer>
 
     <script src="config.js"></script>
+    <script src="lesson-sync.js"></script>
     <script src="animations.js"></script>
     <script>
         // Check authentication status and update nav
@@ -516,9 +517,16 @@
             }
         }
 
-        updateNav();
-        loadCompletedLessons();
-        checkQuizAvailability();
+        // Initialize page with progress sync
+        async function initializePage() {
+            await updateNav();
+            const syncResult = await syncLessonProgress();
+            console.log('Sync result:', syncResult);
+            loadCompletedLessons();
+            checkQuizAvailability();
+        }
+
+        initializePage();
     </script>
 </body>
 </html>
