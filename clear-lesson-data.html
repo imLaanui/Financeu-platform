@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clear Lesson Data - FinanceU</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 40px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+        .warning {
+            background: #fef3c7;
+            border-left: 4px solid #f59e0b;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+        .data-section {
+            background: #f9fafb;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        .btn {
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            margin: 10px 5px;
+        }
+        .btn-danger {
+            background: #dc2626;
+            color: white;
+        }
+        .btn-danger:hover {
+            background: #b91c1c;
+        }
+        .btn-primary {
+            background: var(--primary-color);
+            color: white;
+        }
+        .btn-primary:hover {
+            background: #2563eb;
+        }
+        pre {
+            background: #1e293b;
+            color: #e2e8f0;
+            padding: 15px;
+            border-radius: 8px;
+            overflow-x: auto;
+            font-size: 14px;
+        }
+        .success {
+            background: #d1fae5;
+            border-left: 4px solid #10b981;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            display: none;
+        }
+        .success.show {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-wrapper">
+                <div class="logo"><a href="/" style="color: inherit; text-decoration: none;">Finance<span class="logo-accent">U</span></a></div>
+                <ul class="nav-links">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="dashboard">Dashboard</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h1>Clear Lesson Completion Data</h1>
+        <p>This utility helps you debug and clear lesson completion data if lessons are incorrectly showing as completed.</p>
+
+        <div class="warning">
+            <h3 style="margin-top: 0;">⚠️ Warning</h3>
+            <p>This will permanently delete your lesson progress data from your browser. You cannot undo this action. Your actual backend data will not be affected.</p>
+        </div>
+
+        <div class="data-section">
+            <h3>Current localStorage Data</h3>
+            <p>User ID: <strong id="currentUserId">Not logged in</strong></p>
+            <button class="btn btn-primary" onclick="showData()">View Current Data</button>
+            <pre id="dataDisplay" style="display: none;"></pre>
+        </div>
+
+        <div class="data-section">
+            <h3>Clear Options</h3>
+            <button class="btn btn-danger" onclick="clearAllLessonData()">Clear All Lesson Completion Data</button>
+            <button class="btn btn-danger" onclick="clearPillar(1)">Clear Pillar 1 Only</button>
+            <button class="btn btn-danger" onclick="clearPillar(2)">Clear Pillar 2 Only</button>
+            <button class="btn btn-danger" onclick="clearPillar(3)">Clear Pillar 3 Only</button>
+            <button class="btn btn-danger" onclick="clearPillar(4)">Clear Pillar 4 Only</button>
+        </div>
+
+        <div class="success" id="successMessage">
+            <h3 style="margin-top: 0;">✅ Success</h3>
+            <p id="successText"></p>
+        </div>
+
+        <div class="data-section">
+            <h3>Instructions</h3>
+            <ol>
+                <li>Click "View Current Data" to see what's stored in your browser</li>
+                <li>If you see lessons marked as completed that shouldn't be, click "Clear All Lesson Completion Data"</li>
+                <li>Refresh your lesson pages to verify the fix</li>
+                <li>You'll need to complete lessons again to restore legitimate progress</li>
+            </ol>
+        </div>
+
+        <div class="data-section">
+            <h3>Alternative: Sync from Backend</h3>
+            <button class="btn btn-primary" onclick="syncFromBackend()">Re-sync Progress from Server</button>
+            <p style="margin-top: 10px; font-size: 14px; color: #6b7280;">This will fetch your actual progress from the backend and overwrite localStorage.</p>
+        </div>
+    </div>
+
+    <script src="config.js"></script>
+    <script>
+        function getUserId() {
+            const userId = localStorage.getItem('userId');
+            if (!userId || userId === 'null' || userId === 'undefined') {
+                return null;
+            }
+            return userId;
+        }
+
+        function updateUserId() {
+            const userId = getUserId();
+            document.getElementById('currentUserId').textContent = userId || 'Not logged in';
+        }
+
+        function showData() {
+            const userId = getUserId();
+            if (!userId) {
+                alert('You need to be logged in to view data');
+                return;
+            }
+
+            const data = {};
+
+            // Collect all lesson-related localStorage data
+            for (let pillar = 1; pillar <= 4; pillar++) {
+                data[`pillar${pillar}_completed`] = JSON.parse(localStorage.getItem(`pillar${pillar}_completed_${userId}`) || '[]');
+
+                // Check individual lesson quiz status
+                data[`pillar${pillar}_quizzes`] = {};
+                for (let lesson = 1; lesson <= 8; lesson++) {
+                    const quizKey = pillar === 1
+                        ? `lesson${lesson}_quiz_passed_${userId}`
+                        : `pillar${pillar}_lesson${lesson}_quiz_passed_${userId}`;
+                    const quizPassed = localStorage.getItem(quizKey);
+                    if (quizPassed) {
+                        data[`pillar${pillar}_quizzes`][`lesson${lesson}`] = quizPassed;
+                    }
+                }
+            }
+
+            const display = document.getElementById('dataDisplay');
+            display.textContent = JSON.stringify(data, null, 2);
+            display.style.display = 'block';
+        }
+
+        function clearAllLessonData() {
+            if (!confirm('Are you sure you want to clear ALL lesson completion data? This cannot be undone.')) {
+                return;
+            }
+
+            const userId = getUserId();
+            if (!userId) {
+                alert('You need to be logged in to clear data');
+                return;
+            }
+
+            let clearedCount = 0;
+
+            // Clear all pillar completion data
+            for (let pillar = 1; pillar <= 4; pillar++) {
+                const key = `pillar${pillar}_completed_${userId}`;
+                if (localStorage.getItem(key)) {
+                    localStorage.removeItem(key);
+                    clearedCount++;
+                }
+
+                // Clear quiz completion data
+                for (let lesson = 1; lesson <= 8; lesson++) {
+                    const quizKey = pillar === 1
+                        ? `lesson${lesson}_quiz_passed_${userId}`
+                        : `pillar${pillar}_lesson${lesson}_quiz_passed_${userId}`;
+                    if (localStorage.getItem(quizKey)) {
+                        localStorage.removeItem(quizKey);
+                        clearedCount++;
+                    }
+                }
+
+                // Clear pillar quiz data
+                const pillarQuizKey = `pillar${pillar}_quiz_completed_${userId}`;
+                if (localStorage.getItem(pillarQuizKey)) {
+                    localStorage.removeItem(pillarQuizKey);
+                    clearedCount++;
+                }
+
+                const pillarQuizScoreKey = `pillar${pillar}_quiz_score_${userId}`;
+                if (localStorage.getItem(pillarQuizScoreKey)) {
+                    localStorage.removeItem(pillarQuizScoreKey);
+                    clearedCount++;
+                }
+            }
+
+            showSuccess(`Cleared ${clearedCount} data items. Please refresh your lesson pages.`);
+        }
+
+        function clearPillar(pillarNum) {
+            if (!confirm(`Are you sure you want to clear Pillar ${pillarNum} completion data? This cannot be undone.`)) {
+                return;
+            }
+
+            const userId = getUserId();
+            if (!userId) {
+                alert('You need to be logged in to clear data');
+                return;
+            }
+
+            let clearedCount = 0;
+
+            // Clear pillar completion data
+            const key = `pillar${pillarNum}_completed_${userId}`;
+            if (localStorage.getItem(key)) {
+                localStorage.removeItem(key);
+                clearedCount++;
+            }
+
+            // Clear quiz completion data
+            for (let lesson = 1; lesson <= 8; lesson++) {
+                const quizKey = pillarNum === 1
+                    ? `lesson${lesson}_quiz_passed_${userId}`
+                    : `pillar${pillarNum}_lesson${lesson}_quiz_passed_${userId}`;
+                if (localStorage.getItem(quizKey)) {
+                    localStorage.removeItem(quizKey);
+                    clearedCount++;
+                }
+            }
+
+            // Clear pillar quiz data
+            const pillarQuizKey = `pillar${pillarNum}_quiz_completed_${userId}`;
+            if (localStorage.getItem(pillarQuizKey)) {
+                localStorage.removeItem(pillarQuizKey);
+                clearedCount++;
+            }
+
+            const pillarQuizScoreKey = `pillar${pillarNum}_quiz_score_${userId}`;
+            if (localStorage.getItem(pillarQuizScoreKey)) {
+                localStorage.removeItem(pillarQuizScoreKey);
+                clearedCount++;
+            }
+
+            showSuccess(`Cleared ${clearedCount} data items for Pillar ${pillarNum}. Please refresh your lesson pages.`);
+        }
+
+        async function syncFromBackend() {
+            const userId = getUserId();
+            const token = localStorage.getItem('token');
+
+            if (!userId || !token) {
+                alert('You need to be logged in to sync from backend');
+                return;
+            }
+
+            try {
+                // Fetch user progress from backend
+                const response = await fetch(`${API_URL}/progress`, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+
+                if (!response.ok) {
+                    throw new Error('Failed to fetch progress from backend');
+                }
+
+                const progress = await response.json();
+
+                // Clear existing localStorage data
+                clearAllLessonData();
+
+                // Update localStorage with backend data
+                // Note: This assumes your backend returns progress in a specific format
+                // You may need to adjust this based on your actual backend response structure
+                if (progress.completedLessons) {
+                    for (const lessonId in progress.completedLessons) {
+                        // Parse lessonId format: pillar1_lesson1, pillar2_lesson3, etc.
+                        const match = lessonId.match(/pillar(\d+)_lesson(\d+)/);
+                        if (match) {
+                            const pillar = parseInt(match[1]);
+                            const lesson = parseInt(match[2]);
+
+                            // Add to completed array
+                            const key = `pillar${pillar}_completed_${userId}`;
+                            const completed = JSON.parse(localStorage.getItem(key) || '[]');
+                            if (!completed.includes(lesson)) {
+                                completed.push(lesson);
+                                localStorage.setItem(key, JSON.stringify(completed));
+                            }
+                        }
+                    }
+                }
+
+                showSuccess('Successfully synced progress from backend! Please refresh your lesson pages.');
+            } catch (error) {
+                alert(`Error syncing from backend: ${error.message}`);
+            }
+        }
+
+        function showSuccess(message) {
+            const successDiv = document.getElementById('successMessage');
+            const successText = document.getElementById('successText');
+            successText.textContent = message;
+            successDiv.classList.add('show');
+
+            setTimeout(() => {
+                successDiv.classList.remove('show');
+            }, 5000);
+        }
+
+        // Initialize
+        updateUserId();
+    </script>
+</body>
+</html>
