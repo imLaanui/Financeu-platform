@@ -110,7 +110,7 @@
             box-shadow: 0 2px 8px rgba(59, 130, 246, 0.1);
         }
         .visual-box::before {
-            content: '📊';
+            content: '';
             position: absolute;
             top: 20px;
             right: 20px;
@@ -152,7 +152,7 @@
             box-shadow: 0 2px 8px rgba(16, 185, 129, 0.1);
         }
         .action-box::before {
-            content: '🎯';
+            content: '';
             position: absolute;
             top: 20px;
             right: 20px;
@@ -176,7 +176,7 @@
             box-shadow: 0 2px 8px rgba(245, 158, 11, 0.1);
         }
         .reflection-box::before {
-            content: '💭';
+            content: '';
             position: absolute;
             top: 20px;
             right: 20px;
@@ -200,7 +200,7 @@
             box-shadow: 0 2px 8px rgba(220, 38, 38, 0.1);
         }
         .mistakes-list::before {
-            content: '⚠️';
+            content: '';
             position: absolute;
             top: 20px;
             right: 20px;
@@ -1067,7 +1067,7 @@
                         <div class="mistake-desc">Don't sacrifice health or insurance</div>
                     </div>
                     <div class="mistake-card">
-                        <div class="mistake-icon">😔</div>
+                        <div class="mistake-icon"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="20" fill="#FEE2E2"/><circle cx="24" cy="24" r="16" stroke="#DC2626" stroke-width="2" fill="none"/><circle cx="18" cy="20" r="2" fill="#DC2626"/><circle cx="30" cy="20" r="2" fill="#DC2626"/><path d="M16 30 Q24 26 32 30" stroke="#DC2626" stroke-width="2" fill="none"/></svg></div>
                         <div class="mistake-title">Complete Deprivation</div>
                         <div class="mistake-desc">No fun leads to binge spending</div>
                     </div>
@@ -1077,7 +1077,7 @@
                         <div class="mistake-desc">10 minutes saves 10-30%</div>
                     </div>
                     <div class="mistake-card">
-                        <div class="mistake-icon">☕</div>
+                        <div class="mistake-icon"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="20" fill="#FEF3C7"/><path d="M16 20 L16 28 C16 30 18 32 20 32 L28 32 C30 32 32 30 32 28 L32 20" stroke="#F59E0B" stroke-width="2" fill="none"/><line x1="16" y1="20" x2="32" y2="20" stroke="#F59E0B" stroke-width="2"/><path d="M32 22 L34 22 C35 22 36 23 36 24 C36 25 35 26 34 26 L32 26" stroke="#F59E0B" stroke-width="2" fill="none"/></svg></div>
                         <div class="mistake-title">Only Small Cuts</div>
                         <div class="mistake-desc">Focus on big recurring bills first</div>
                     </div>
@@ -1094,7 +1094,7 @@
             <div class="screen-progress">Screen 7 of 8</div>
             <div class="lesson-section">
                 <div class="action-checklist">
-                    <div class="checklist-title">🎯 Your Action Plan</div>
+                    <div class="checklist-title"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="20" fill="#DBEAFE"/><circle cx="24" cy="24" r="14" stroke="#3B82F6" stroke-width="2" fill="none"/><circle cx="24" cy="24" r="8" stroke="#3B82F6" stroke-width="2" fill="none"/><circle cx="24" cy="24" r="3" fill="#3B82F6"/></svg> Your Action Plan</div>
                     <p style="text-align: center; color: var(--text-secondary); margin-bottom: 15px; font-size: 14px;">
                         Complete these smart savings steps:
                     </p>
@@ -1121,7 +1121,7 @@
                 </div>
 
                 <div class="reflection-box" style="margin-top: 20px;">
-                    <div class="reflection-icon">💭</div>
+                    <div class="reflection-icon"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="20" fill="#F3F4F6"/><circle cx="24" cy="22" r="8" fill="#6B7280" opacity="0.3"/><circle cx="24" cy="22" r="8" stroke="#6B7280" stroke-width="2" fill="none"/><circle cx="18" cy="32" r="3" fill="#6B7280" opacity="0.5"/><circle cx="14" cy="36" r="2" fill="#6B7280" opacity="0.3"/></svg></div>
                     <div class="reflection-title">Quick Reflection</div>
                     <div class="reflection-text">
                         Which expenses bring you joy vs. habit? The goal is to cut the mindless spending while keeping what truly enriches your life.
@@ -1457,7 +1457,7 @@
 
                 resultDiv.innerHTML = `
                     <div class="quiz-result pass">
-                        <div class="result-icon">🎉</div>
+                        <div class="result-icon"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="20" fill="#D1FAE5"/><circle cx="24" cy="24" r="14" stroke="#00A676" stroke-width="2" fill="none"/><path d="M18 22 L20 18 L22 22" stroke="#00A676" stroke-width="2" fill="none"/><path d="M26 22 L28 18 L30 22" stroke="#00A676" stroke-width="2" fill="none"/><path d="M16 26 Q24 32 32 26" stroke="#00A676" stroke-width="2" fill="none"/></svg></div>
                         <div class="result-text" style="color: #10b981;">Quiz Passed!</div>
                         <div class="result-score">You scored ${correct} out of ${currentQuestions.length} (${percentage}%)</div>
                         <p style="color: var(--text-secondary);">Great job! You can now finish the lesson and move to the next one.</p>
@@ -1466,7 +1466,7 @@
             } else {
                 resultDiv.innerHTML = `
                     <div class="quiz-result fail">
-                        <div class="result-icon">📚</div>
+                        <div class="result-icon"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="20" fill="#EDE9FE"/><rect x="16" y="12" width="16" height="24" rx="1" stroke="#8B5CF6" stroke-width="2" fill="none"/><line x1="20" y1="18" x2="28" y2="18" stroke="#8B5CF6" stroke-width="1.5"/><line x1="20" y1="22" x2="28" y2="22" stroke="#8B5CF6" stroke-width="1.5"/><line x1="20" y1="26" x2="25" y2="26" stroke="#8B5CF6" stroke-width="1.5"/></svg></div>
                         <div class="result-text" style="color: #dc2626;">Not quite there yet</div>
                         <div class="result-score">You scored ${correct} out of ${currentQuestions.length} (${percentage}%)</div>
                         <p style="color: var(--text-secondary); margin-bottom: 15px;">You need 100% to pass. Review the lesson and try again!</p>
@@ -1508,7 +1508,7 @@
             item.classList.toggle('checked');
             const checkbox = item.querySelector('.checklist-checkbox');
             if (item.classList.contains('checked')) {
-                checkbox.textContent = '✓';
+                checkbox.innerHTML = '<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 8 L6 12 L14 4" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
             } else {
                 checkbox.textContent = '';
             }
@@ -1553,12 +1553,12 @@
 
             if (isCorrect) {
                 feedback.classList.add('correct');
-                feedbackIcon.textContent = '🎉';
+                feedbackIcon.textContent = '✓';
                 feedbackTitle.textContent = 'Correct!';
                 feedbackExplanation.textContent = 'Great job! Reviewing and negotiating recurring bills is the best first step because it provides ongoing monthly savings with minimal effort. One phone call can save you $20-50 every single month.';
             } else {
                 feedback.classList.add('incorrect');
-                feedbackIcon.textContent = '💡';
+                feedbackIcon.textContent = '•';
                 feedbackTitle.textContent = 'Not quite, but that\'s okay!';
                 feedbackExplanation.textContent = 'Reviewing and negotiating recurring bills is the best first step because it provides ongoing monthly savings with minimal effort. One phone call can save you $20-50 every single month. The correct answer is "Review and negotiate recurring bills."';
             }
@@ -1599,12 +1599,12 @@
 
             if (isCorrect) {
                 feedback.classList.add('correct');
-                feedbackIcon.textContent = '🎉';
+                feedbackIcon.textContent = '✓';
                 feedbackTitle.textContent = 'Excellent!';
                 feedbackExplanation.textContent = 'Perfect! Cutting recurring monthly expenses provides the most savings because you save that amount every single month. A $50 monthly reduction equals $600 per year, while skipping one coffee saves you only a few dollars once.';
             } else {
                 feedback.classList.add('incorrect');
-                feedbackIcon.textContent = '💡';
+                feedbackIcon.textContent = '•';
                 feedbackTitle.textContent = 'Good thinking, but there\'s a better answer!';
                 feedbackExplanation.textContent = 'Cutting recurring monthly expenses provides the most savings because you save that amount every single month. A $50 monthly reduction equals $600 per year, while skipping one coffee saves you only a few dollars once. The best answer is "Cutting recurring monthly expenses."';
             }

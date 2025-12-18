@@ -109,7 +109,7 @@
             box-shadow: 0 2px 8px rgba(59, 130, 246, 0.1);
         }
         .visual-box::before {
-            content: '📊';
+            content: '';
             position: absolute;
             top: 20px;
             right: 20px;
@@ -151,7 +151,7 @@
             box-shadow: 0 2px 8px rgba(16, 185, 129, 0.1);
         }
         .action-box::before {
-            content: '🎯';
+            content: '';
             position: absolute;
             top: 20px;
             right: 20px;
@@ -175,7 +175,7 @@
             box-shadow: 0 2px 8px rgba(245, 158, 11, 0.1);
         }
         .reflection-box::before {
-            content: '💭';
+            content: '';
             position: absolute;
             top: 20px;
             right: 20px;
@@ -199,7 +199,7 @@
             box-shadow: 0 2px 8px rgba(220, 38, 38, 0.1);
         }
         .mistakes-list::before {
-            content: '⚠️';
+            content: '';
             position: absolute;
             top: 20px;
             right: 20px;
@@ -922,7 +922,7 @@
                         <p>Complex budgets feel overwhelming and impossible to stick with</p>
                     </div>
                     <div class="intro-card">
-                        <div class="intro-card-icon">💪</div>
+                        <div class="intro-card-icon"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="20" fill="#D1FAE5"/><path d="M16 24 Q18 20 22 22 Q24 24 24 28 L24 32" stroke="#00A676" stroke-width="2.5" stroke-linecap="round" fill="none"/><path d="M32 24 Q30 20 26 22 Q24 24 24 28" stroke="#00A676" stroke-width="2.5" stroke-linecap="round" fill="none"/><circle cx="22" cy="20" r="3" fill="#00A676" opacity="0.3"/><circle cx="26" cy="20" r="3" fill="#00A676" opacity="0.3"/></svg></div>
                         <h3>The Solution</h3>
                         <p>Simple rules become automatic habits</p>
                     </div>
@@ -1209,7 +1209,7 @@
                 </div>
 
                 <div class="reflection-box">
-                    <div class="reflection-icon">💭</div>
+                    <div class="reflection-icon"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="20" fill="#F3F4F6"/><circle cx="24" cy="22" r="8" fill="#6B7280" opacity="0.3"/><circle cx="24" cy="22" r="8" stroke="#6B7280" stroke-width="2" fill="none"/><circle cx="18" cy="32" r="3" fill="#6B7280" opacity="0.5"/><circle cx="14" cy="36" r="2" fill="#6B7280" opacity="0.3"/></svg></div>
                     <div class="reflection-title">Quick Reflection</div>
                     <div class="reflection-text">
                         Does your current spending match this rule? If not, what's one category where you could make adjustments?
@@ -1545,7 +1545,7 @@
 
                 resultDiv.innerHTML = `
                     <div class="quiz-result pass">
-                        <div class="result-icon">🎉</div>
+                        <div class="result-icon"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="20" fill="#D1FAE5"/><circle cx="24" cy="24" r="14" stroke="#00A676" stroke-width="2" fill="none"/><path d="M18 22 L20 18 L22 22" stroke="#00A676" stroke-width="2" fill="none"/><path d="M26 22 L28 18 L30 22" stroke="#00A676" stroke-width="2" fill="none"/><path d="M16 26 Q24 32 32 26" stroke="#00A676" stroke-width="2" fill="none"/></svg></div>
                         <div class="result-text" style="color: #10b981;">Quiz Passed!</div>
                         <div class="result-score">You scored ${correct} out of ${currentQuestions.length} (${percentage}%)</div>
                         <p style="color: var(--text-secondary);">Great job! You can now finish the lesson and move to the next one.</p>
@@ -1554,7 +1554,7 @@
             } else {
                 resultDiv.innerHTML = `
                     <div class="quiz-result fail">
-                        <div class="result-icon">📚</div>
+                        <div class="result-icon"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="20" fill="#EDE9FE"/><rect x="16" y="12" width="16" height="24" rx="1" stroke="#8B5CF6" stroke-width="2" fill="none"/><line x1="20" y1="18" x2="28" y2="18" stroke="#8B5CF6" stroke-width="1.5"/><line x1="20" y1="22" x2="28" y2="22" stroke="#8B5CF6" stroke-width="1.5"/><line x1="20" y1="26" x2="25" y2="26" stroke="#8B5CF6" stroke-width="1.5"/></svg></div>
                         <div class="result-text" style="color: #dc2626;">Not quite there yet</div>
                         <div class="result-score">You scored ${correct} out of ${currentQuestions.length} (${percentage}%)</div>
                         <p style="color: var(--text-secondary); margin-bottom: 15px;">You need 75% to pass. Review the lesson and try again!</p>
@@ -1626,7 +1626,7 @@
             item.classList.toggle('checked');
             const checkbox = item.querySelector('.checklist-checkbox');
             if (item.classList.contains('checked')) {
-                checkbox.textContent = '✓';
+                checkbox.innerHTML = '<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 8 L6 12 L14 4" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
             } else {
                 checkbox.textContent = '';
             }
@@ -1668,12 +1668,12 @@
 
             if (isCorrect) {
                 feedback.classList.add('correct');
-                feedbackIcon.textContent = '🎉';
+                feedbackIcon.textContent = '✓';
                 feedbackTitle.textContent = 'Correct!';
                 feedbackExplanation.textContent = 'Perfect! Rent is a need - something you can\'t live without. It falls in the 50% needs category along with other essentials like food, utilities, and insurance.';
             } else {
                 feedback.classList.add('incorrect');
-                feedbackIcon.textContent = '💡';
+                feedbackIcon.textContent = '•';
                 feedbackTitle.textContent = 'Not quite, but that\'s okay!';
                 feedbackExplanation.textContent = 'Rent is a need - something you can\'t live without. It falls in the 50% needs category along with other essentials like food, utilities, and insurance. The correct answer is Needs (50%).';
             }
@@ -1714,12 +1714,12 @@
 
             if (isCorrect) {
                 feedback.classList.add('correct');
-                feedbackIcon.textContent = '🎉';
+                feedbackIcon.textContent = '✓';
                 feedbackTitle.textContent = 'Excellent!';
                 feedbackExplanation.textContent = 'Exactly right! If your needs exceed 50%, you need to either reduce fixed costs (get a roommate, move to a cheaper place, shop for better insurance rates) or increase your income. The rule is a guideline - adjust it for your situation.';
             } else {
                 feedback.classList.add('incorrect');
-                feedbackIcon.textContent = '💡';
+                feedbackIcon.textContent = '•';
                 feedbackTitle.textContent = 'Good thinking, but there\'s a better answer!';
                 feedbackExplanation.textContent = 'If your needs exceed 50%, you need to either reduce fixed costs (get a roommate, move to a cheaper place, shop for better insurance rates) or increase your income. The best answer is to find ways to reduce fixed costs or increase income.';
             }

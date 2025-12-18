@@ -862,7 +862,7 @@
             <div class="screen-progress">Screen 7 of 8</div>
             <div class="lesson-section">
                 <div class="action-checklist">
-                    <div class="checklist-title">🎯 Your Utilization Action Plan</div>
+                    <div class="checklist-title"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="20" fill="#DBEAFE"/><circle cx="24" cy="24" r="14" stroke="#3B82F6" stroke-width="2" fill="none"/><circle cx="24" cy="24" r="8" stroke="#3B82F6" stroke-width="2" fill="none"/><circle cx="24" cy="24" r="3" fill="#3B82F6"/></svg> Your Utilization Action Plan</div>
                     <p style="text-align: center; color: var(--text-secondary); margin-bottom: 15px; font-size: 14px;">
                         Take these steps to optimize your credit utilization:
                     </p>
@@ -995,7 +995,7 @@
             item.classList.toggle('checked');
             const checkbox = item.querySelector('.checklist-checkbox');
             if (item.classList.contains('checked')) {
-                checkbox.textContent = '✓';
+                checkbox.innerHTML = '<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 8 L6 12 L14 4" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
             } else {
                 checkbox.textContent = '';
             }
@@ -1115,7 +1115,7 @@
 
                 resultDiv.innerHTML = \`
                     <div class="quiz-result pass">
-                        <div class="result-icon">🎉</div>
+                        <div class="result-icon"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="20" fill="#D1FAE5"/><circle cx="24" cy="24" r="14" stroke="#00A676" stroke-width="2" fill="none"/><path d="M18 22 L20 18 L22 22" stroke="#00A676" stroke-width="2" fill="none"/><path d="M26 22 L28 18 L30 22" stroke="#00A676" stroke-width="2" fill="none"/><path d="M16 26 Q24 32 32 26" stroke="#00A676" stroke-width="2" fill="none"/></svg></div>
                         <div class="result-text" style="color: #10b981;">Perfect Score!</div>
                         <div class="result-score">You got all \${quizData.length} questions correct!</div>
                         <p style="color: var(--text-secondary); font-size: 16px; font-weight: 600;">Excellent! Click "Finish Lesson" to continue.</p>
@@ -1124,7 +1124,7 @@
             } else {
                 resultDiv.innerHTML = \`
                     <div class="quiz-result fail">
-                        <div class="result-icon">📚</div>
+                        <div class="result-icon"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="20" fill="#EDE9FE"/><rect x="16" y="12" width="16" height="24" rx="1" stroke="#8B5CF6" stroke-width="2" fill="none"/><line x1="20" y1="18" x2="28" y2="18" stroke="#8B5CF6" stroke-width="1.5"/><line x1="20" y1="22" x2="28" y2="22" stroke="#8B5CF6" stroke-width="1.5"/><line x1="20" y1="26" x2="25" y2="26" stroke="#8B5CF6" stroke-width="1.5"/></svg></div>
                         <div class="result-text" style="color: #dc2626;">Not Quite</div>
                         <div class="result-score">You scored \${correct} out of \${quizData.length}</div>
                         <p style="color: var(--text-secondary); margin-bottom: 15px; font-size: 16px; font-weight: 600;">You need all 3 correct. Review the lesson and try again!</p>
@@ -1188,12 +1188,12 @@
 
             if (isCorrect) {
                 feedback.classList.add('correct');
-                feedbackIcon.textContent = '🎉';
+                feedbackIcon.textContent = '✓';
                 feedbackTitle.textContent = 'Correct!';
                 feedbackExplanation.textContent = 'Credit utilization accounts for 30% of your credit score, making it the second most important factor after payment history.';
             } else {
                 feedback.classList.add('incorrect');
-                feedbackIcon.textContent = '💡';
+                feedbackIcon.textContent = '•';
                 feedbackTitle.textContent = 'Not quite!';
                 feedbackExplanation.textContent = 'The correct answer is 30%. This makes utilization one of the most impactful factors you can control.';
             }
@@ -1232,12 +1232,12 @@
 
             if (isCorrect) {
                 feedback.classList.add('correct');
-                feedbackIcon.textContent = '🎉';
+                feedbackIcon.textContent = '✓';
                 feedbackTitle.textContent = 'Excellent!';
                 feedbackExplanation.textContent = '30% of $5,000 is $1,500. Keep your balance at or below this amount to maintain good utilization.';
             } else {
                 feedback.classList.add('incorrect');
-                feedbackIcon.textContent = '💡';
+                feedbackIcon.textContent = '•';
                 feedbackTitle.textContent = 'Good thinking, but...';
                 feedbackExplanation.textContent = 'The correct answer is $1,500. Calculate by multiplying $5,000 × 0.30 = $1,500.';
             }

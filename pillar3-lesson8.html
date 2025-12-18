@@ -1009,7 +1009,7 @@
 
                 resultDiv.innerHTML = `
                     <div class="quiz-result pass">
-                        <div class="result-icon">🎉</div>
+                        <div class="result-icon"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="20" fill="#D1FAE5"/><circle cx="24" cy="24" r="14" stroke="#00A676" stroke-width="2" fill="none"/><path d="M18 22 L20 18 L22 22" stroke="#00A676" stroke-width="2" fill="none"/><path d="M26 22 L28 18 L30 22" stroke="#00A676" stroke-width="2" fill="none"/><path d="M16 26 Q24 32 32 26" stroke="#00A676" stroke-width="2" fill="none"/></svg></div>
                         <div class="result-text" style="color: #10b981;">Perfect Score!</div>
                         <div class="result-score">You got all ${quizData.length} questions correct!</div>
                         <p style="color: var(--text-secondary); font-size: 18px; font-weight: 600;">Excellent! Click "Complete Lesson" to continue to the final quiz.</p>
@@ -1018,7 +1018,7 @@
             } else {
                 resultDiv.innerHTML = `
                     <div class="quiz-result fail">
-                        <div class="result-icon">📚</div>
+                        <div class="result-icon"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="20" fill="#EDE9FE"/><rect x="16" y="12" width="16" height="24" rx="1" stroke="#8B5CF6" stroke-width="2" fill="none"/><line x1="20" y1="18" x2="28" y2="18" stroke="#8B5CF6" stroke-width="1.5"/><line x1="20" y1="22" x2="28" y2="22" stroke="#8B5CF6" stroke-width="1.5"/><line x1="20" y1="26" x2="25" y2="26" stroke="#8B5CF6" stroke-width="1.5"/></svg></div>
                         <div class="result-text" style="color: #dc2626;">Not Quite</div>
                         <div class="result-score">You scored ${correct} out of ${quizData.length}</div>
                         <p style="color: var(--text-secondary); margin-bottom: 15px; font-size: 18px; font-weight: 600;">You need all 3 correct. Review the lesson and try again!</p>

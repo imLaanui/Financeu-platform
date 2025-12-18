@@ -1020,7 +1020,7 @@
                         <div class="mistake-desc">Pick 1-3 priorities, not 10</div>
                     </div>
                     <div class="mistake-card">
-                        <div class="mistake-icon">🚀</div>
+                        <div class="mistake-icon"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="20" fill="#EFF6FF"/><path d="M24 12 L28 28 L24 26 L20 28 Z" fill="#3B82F6" opacity="0.3"/><path d="M24 12 L28 28 L24 26 L20 28 Z" stroke="#3B82F6" stroke-width="2" fill="none"/><path d="M20 28 L18 34 L24 30 L30 34 L28 28" stroke="#3B82F6" stroke-width="2" fill="none"/><circle cx="24" cy="20" r="2" fill="#3B82F6"/></svg></div>
                         <div class="mistake-title">Too Aggressive</div>
                         <div class="mistake-desc">Unrealistic goals lead to failure</div>
                     </div>
@@ -1070,7 +1070,7 @@
             <div class="screen-progress">Screen 7 of 8</div>
             <div class="lesson-section">
                 <div class="action-checklist">
-                    <div class="checklist-title">🎯 Your Action Plan</div>
+                    <div class="checklist-title"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="20" fill="#DBEAFE"/><circle cx="24" cy="24" r="14" stroke="#3B82F6" stroke-width="2" fill="none"/><circle cx="24" cy="24" r="8" stroke="#3B82F6" stroke-width="2" fill="none"/><circle cx="24" cy="24" r="3" fill="#3B82F6"/></svg> Your Action Plan</div>
                     <p style="text-align: center; color: var(--text-secondary); margin-bottom: 15px; font-size: 14px;">
                         Complete this exercise now:
                     </p>
@@ -1097,7 +1097,7 @@
                 </div>
 
                 <div class="reflection-box">
-                    <div class="reflection-icon">💭</div>
+                    <div class="reflection-icon"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="20" fill="#F3F4F6"/><circle cx="24" cy="22" r="8" fill="#6B7280" opacity="0.3"/><circle cx="24" cy="22" r="8" stroke="#6B7280" stroke-width="2" fill="none"/><circle cx="18" cy="32" r="3" fill="#6B7280" opacity="0.5"/><circle cx="14" cy="36" r="2" fill="#6B7280" opacity="0.3"/></svg></div>
                     <div class="reflection-title">Quick Reflection</div>
                     <div class="reflection-text">
                         What's the one financial achievement that would make you feel most proud or relieved? That's probably where you should start.
@@ -1244,7 +1244,7 @@
             item.classList.toggle('checked');
             const checkbox = item.querySelector('.checklist-checkbox');
             if (item.classList.contains('checked')) {
-                checkbox.textContent = '✓';
+                checkbox.innerHTML = '<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 8 L6 12 L14 4" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
             } else {
                 checkbox.textContent = '';
             }
@@ -1463,7 +1463,7 @@
 
                 resultDiv.innerHTML = `
                     <div class="quiz-result pass">
-                        <div class="result-icon">🎉</div>
+                        <div class="result-icon"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="20" fill="#D1FAE5"/><circle cx="24" cy="24" r="14" stroke="#00A676" stroke-width="2" fill="none"/><path d="M18 22 L20 18 L22 22" stroke="#00A676" stroke-width="2" fill="none"/><path d="M26 22 L28 18 L30 22" stroke="#00A676" stroke-width="2" fill="none"/><path d="M16 26 Q24 32 32 26" stroke="#00A676" stroke-width="2" fill="none"/></svg></div>
                         <div class="result-text" style="color: #10b981;">Quiz Passed!</div>
                         <div class="result-score">You scored ${correct} out of ${currentQuestions.length} (${percentage}%)</div>
                         <p style="color: var(--text-secondary);">Great job! You can now finish the lesson and move to the next one.</p>
@@ -1472,7 +1472,7 @@
             } else {
                 resultDiv.innerHTML = `
                     <div class="quiz-result fail">
-                        <div class="result-icon">📚</div>
+                        <div class="result-icon"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="20" fill="#EDE9FE"/><rect x="16" y="12" width="16" height="24" rx="1" stroke="#8B5CF6" stroke-width="2" fill="none"/><line x1="20" y1="18" x2="28" y2="18" stroke="#8B5CF6" stroke-width="1.5"/><line x1="20" y1="22" x2="28" y2="22" stroke="#8B5CF6" stroke-width="1.5"/><line x1="20" y1="26" x2="25" y2="26" stroke="#8B5CF6" stroke-width="1.5"/></svg></div>
                         <div class="result-text" style="color: #dc2626;">Not quite there yet</div>
                         <div class="result-score">You scored ${correct} out of ${currentQuestions.length} (${percentage}%)</div>
                         <p style="color: var(--text-secondary); margin-bottom: 15px;">You need 75% to pass. Review the lesson and try again!</p>
@@ -1548,12 +1548,12 @@
 
             if (isCorrect) {
                 feedback.classList.add('correct');
-                feedbackIcon.textContent = '🎉';
+                feedbackIcon.textContent = '✓';
                 feedbackTitle.textContent = 'Correct!';
                 feedbackExplanation.textContent = 'The "M" in SMART stands for Measurable. You need numbers to track your progress.';
             } else {
                 feedback.classList.add('incorrect');
-                feedbackIcon.textContent = '💡';
+                feedbackIcon.textContent = '•';
                 feedbackTitle.textContent = 'Not quite!';
                 feedbackExplanation.textContent = 'The "M" in SMART stands for Measurable. Goals need specific numbers so you can track progress.';
             }
@@ -1594,12 +1594,12 @@
 
             if (isCorrect) {
                 feedback.classList.add('correct');
-                feedbackIcon.textContent = '🎉';
+                feedbackIcon.textContent = '✓';
                 feedbackTitle.textContent = 'Excellent!';
                 feedbackExplanation.textContent = 'This goal is Specific ($500 for vacation), Measurable ($500), Achievable, Relevant, and Time-bound (June 30).';
             } else {
                 feedback.classList.add('incorrect');
-                feedbackIcon.textContent = '💡';
+                feedbackIcon.textContent = '•';
                 feedbackTitle.textContent = 'Good thinking, but...';
                 feedbackExplanation.textContent = 'The SMART goal is "I\'ll save $500 by June 30 for vacation" - it has all five elements.';
             }

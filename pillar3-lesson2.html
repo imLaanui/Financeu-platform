@@ -539,12 +539,12 @@
                 <h2>Starting from Zero</h2>
                 <div class="intro-cards">
                     <div class="intro-card">
-                        <div class="intro-card-icon">🚀</div>
+                        <div class="intro-card-icon"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="20" fill="#EFF6FF"/><path d="M24 12 L28 28 L24 26 L20 28 Z" fill="#3B82F6" opacity="0.3"/><path d="M24 12 L28 28 L24 26 L20 28 Z" stroke="#3B82F6" stroke-width="2" fill="none"/><path d="M20 28 L18 34 L24 30 L30 34 L28 28" stroke="#3B82F6" stroke-width="2" fill="none"/><circle cx="24" cy="20" r="2" fill="#3B82F6"/></svg></div>
                         <h3>The Problem</h3>
                         <p>26 million Americans have no credit history. You need credit to build credit - a catch-22</p>
                     </div>
                     <div class="intro-card">
-                        <div class="intro-card-icon">💪</div>
+                        <div class="intro-card-icon"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="20" fill="#D1FAE5"/><path d="M16 24 Q18 20 22 22 Q24 24 24 28 L24 32" stroke="#00A676" stroke-width="2.5" stroke-linecap="round" fill="none"/><path d="M32 24 Q30 20 26 22 Q24 24 24 28" stroke="#00A676" stroke-width="2.5" stroke-linecap="round" fill="none"/><circle cx="22" cy="20" r="3" fill="#00A676" opacity="0.3"/><circle cx="26" cy="20" r="3" fill="#00A676" opacity="0.3"/></svg></div>
                         <h3>The Solution</h3>
                         <p>Three proven methods to break into the credit system from scratch</p>
                     </div>
@@ -991,7 +991,7 @@
 
                 resultDiv.innerHTML = `
                     <div class="quiz-result pass">
-                        <div class="result-icon">🎉</div>
+                        <div class="result-icon"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="20" fill="#D1FAE5"/><circle cx="24" cy="24" r="14" stroke="#00A676" stroke-width="2" fill="none"/><path d="M18 22 L20 18 L22 22" stroke="#00A676" stroke-width="2" fill="none"/><path d="M26 22 L28 18 L30 22" stroke="#00A676" stroke-width="2" fill="none"/><path d="M16 26 Q24 32 32 26" stroke="#00A676" stroke-width="2" fill="none"/></svg></div>
                         <div class="result-text" style="color: #10b981;">Perfect Score!</div>
                         <div class="result-score">You got all ${quizData.length} questions correct!</div>
                         <p style="color: var(--text-secondary); font-size: 16px; font-weight: 600;">Excellent! Click "Finish Lesson" to continue.</p>
@@ -1000,7 +1000,7 @@
             } else {
                 resultDiv.innerHTML = `
                     <div class="quiz-result fail">
-                        <div class="result-icon">📚</div>
+                        <div class="result-icon"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="20" fill="#EDE9FE"/><rect x="16" y="12" width="16" height="24" rx="1" stroke="#8B5CF6" stroke-width="2" fill="none"/><line x1="20" y1="18" x2="28" y2="18" stroke="#8B5CF6" stroke-width="1.5"/><line x1="20" y1="22" x2="28" y2="22" stroke="#8B5CF6" stroke-width="1.5"/><line x1="20" y1="26" x2="25" y2="26" stroke="#8B5CF6" stroke-width="1.5"/></svg></div>
                         <div class="result-text" style="color: #dc2626;">Not Quite</div>
                         <div class="result-score">You scored ${correct} out of ${quizData.length}</div>
                         <p style="color: var(--text-secondary); margin-bottom: 15px; font-size: 16px; font-weight: 600;">You need all 3 correct. Review the lesson and try again!</p>
@@ -1065,12 +1065,12 @@
 
             if (isCorrect) {
                 feedback.classList.add('correct');
-                feedbackIcon.textContent = '🎉';
+                feedbackIcon.textContent = '✓';
                 feedbackTitle.textContent = 'Correct!';
                 feedbackExplanation.textContent = 'Secured cards are specifically designed for people with no credit. Your deposit secures the credit line, making it low-risk for the bank, so they approve you even without a credit history.';
             } else {
                 feedback.classList.add('incorrect');
-                feedbackIcon.textContent = '💡';
+                feedbackIcon.textContent = '•';
                 feedbackTitle.textContent = 'Not quite!';
                 feedbackExplanation.textContent = 'The correct answer is B. Secured cards are specifically designed for people with no credit. Your deposit secures the credit line, making it low-risk for the bank, so they approve you even without a credit history.';
             }
@@ -1109,12 +1109,12 @@
 
             if (isCorrect) {
                 feedback.classList.add('correct');
-                feedbackIcon.textContent = '🎉';
+                feedbackIcon.textContent = '✓';
                 feedbackTitle.textContent = 'Excellent!';
                 feedbackExplanation.textContent = 'When you become an authorized user, both the good AND bad history of that account appear on your credit report. This is why you should only become an authorized user on accounts with perfect payment history.';
             } else {
                 feedback.classList.add('incorrect');
-                feedbackIcon.textContent = '💡';
+                feedbackIcon.textContent = '•';
                 feedbackTitle.textContent = 'Good thinking, but...';
                 feedbackExplanation.textContent = 'The correct answer is C. When you become an authorized user, both the good AND bad history of that account appear on your credit report. This is why you should only become an authorized user on accounts with perfect payment history.';
             }
