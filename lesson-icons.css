@@ -1,0 +1,76 @@
+/* Lesson Icon Library - SVG-based icons matching website design */
+
+.icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    margin-bottom: 10px;
+}
+
+.icon-large {
+    width: 64px;
+    height: 64px;
+}
+
+/* Icon Container Styles */
+.intro-card-icon {
+    width: 56px;
+    height: 56px;
+    margin: 0 auto 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.mistake-icon {
+    width: 48px;
+    height: 48px;
+    margin: 0 auto 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* SVG Icon Styles */
+.icon svg {
+    width: 100%;
+    height: 100%;
+}
+
+/* Specific Icon Types */
+.icon-problem {
+    background: #FEE2E2;
+    border-radius: 50%;
+}
+
+.icon-solution {
+    background: #D1FAE5;
+    border-radius: 50%;
+}
+
+.icon-goal {
+    background: #DBEAFE;
+    border-radius: 50%;
+}
+
+.icon-warning {
+    background: #FEF3C7;
+    border-radius: 50%;
+}
+
+.icon-success {
+    background: #D1FAE5;
+    border-radius: 50%;
+}
+
+.icon-error {
+    background: #FEE2E2;
+    border-radius: 50%;
+}
+
+.icon-info {
+    background: #EFF6FF;
+    border-radius: 50%;
+}
