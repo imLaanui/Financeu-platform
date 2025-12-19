@@ -206,27 +206,27 @@
                 <h2>More Saving Traps to Avoid</h2>
                 <div class="trap-grid">
                     <div class="trap-card">
-                        <div class="trap-icon">🎯</div>
+                        <div class="trap-icon"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="10" cy="10" r="8" stroke="#EF4444" stroke-width="1.5" fill="none"/><circle cx="10" cy="10" r="5" stroke="#EF4444" stroke-width="1.5" fill="none"/><circle cx="10" cy="10" r="2" fill="#EF4444"/></svg></div>
                         <div class="trap-title">Keeping Up with Friends</div>
                         <div class="trap-desc">Your friends upgrade, so you feel pressure to match their lifestyle—even if you can't afford it</div>
                     </div>
                     <div class="trap-card">
-                        <div class="trap-icon">🔔</div>
+                        <div class="trap-icon"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M10 3 C8 3 6 5 6 7 L6 11 L4 13 L16 13 L14 11 L14 7 C14 5 12 3 10 3 Z" fill="#F59E0B"/><path d="M8 13 C8 15 9 16 10 16 C11 16 12 15 12 13" stroke="#F59E0B" stroke-width="1.5" fill="none"/></svg></div>
                         <div class="trap-title">Subscription Creep</div>
                         <div class="trap-desc">$10/month here, $15 there—before you know it, subscriptions cost $200+ monthly</div>
                     </div>
                     <div class="trap-card">
-                        <div class="trap-icon">🎁</div>
+                        <div class="trap-icon"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="4" y="8" width="12" height="9" fill="#EF4444"/><rect x="3" y="6" width="14" height="2" fill="#F59E0B"/><rect x="9" y="6" width="2" height="11" fill="#FCD34D"/><path d="M10 6 C10 4 11 3 12 3 C13 3 13 4 13 5 C13 6 12 6 10 6" fill="#10B981"/><path d="M10 6 C10 4 9 3 8 3 C7 3 7 4 7 5 C7 6 8 6 10 6" fill="#10B981"/></svg></div>
                         <div class="trap-title">Reward Yourself" Mentality</div>
                         <div class="trap-desc">Every small achievement becomes an excuse to spend: "I deserve this!"</div>
                     </div>
                     <div class="trap-card">
-                        <div class="trap-icon">📦</div>
+                        <div class="trap-icon"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 6 L10 2 L17 6 L17 14 L10 18 L3 14 Z" stroke="#B45309" stroke-width="1.5" fill="none"/><polyline points="3,6 10,10 17,6" stroke="#B45309" stroke-width="1.5" fill="none"/><line x1="10" y1="10" x2="10" y2="18" stroke="#B45309" stroke-width="1.5"/></svg></div>
                         <div class="trap-title">One-Click Buying</div>
                         <div class="trap-desc">Online shopping makes impulse purchases too easy—no time to think before buying</div>
                     </div>
                     <div class="trap-card">
-                        <div class="trap-icon">💳</div>
+                        <div class="trap-icon"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="2" y="5" width="16" height="10" rx="2" fill="#3B82F6"/><rect x="2" y="7" width="16" height="2" fill="#1D4ED8"/></svg></div>
                         <div class="trap-title">Hidden Fees</div>
                         <div class="trap-desc">Bank fees, unused gym memberships, forgotten trials—small charges that add up</div>
                     </div>
@@ -502,9 +502,9 @@
                 const userId = localStorage.getItem('userId');
                 localStorage.setItem(`pillar4_lesson7_quiz_passed_${userId}`, 'true');
                 document.getElementById('finishBtn').disabled = false;
-                resultDiv.innerHTML = `<div class="quiz-result pass"><div style="font-size: 48px;">🎉</div><div style="font-size: 24px; font-weight: 700; color: #10b981;">Quiz Passed!</div><p>Great job! You can now finish the lesson.</p></div>`;
+                resultDiv.innerHTML = `<div class="quiz-result pass"><div style="font-size: 48px;"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="4" cy="4" r="1" fill="#F59E0B"/><circle cx="16" cy="4" r="1" fill="#EF4444"/><circle cx="4" cy="16" r="1" fill="#3B82F6"/><circle cx="16" cy="16" r="1" fill="#10B981"/><path d="M10 6 L12 14 L8 14 Z" fill="#F59E0B"/><rect x="8" y="14" width="4" height="2" fill="#EF4444"/></svg></div><div style="font-size: 24px; font-weight: 700; color: #10b981;">Quiz Passed!</div><p>Great job! You can now finish the lesson.</p></div>`;
             } else {
-                resultDiv.innerHTML = `<div class="quiz-result fail"><div style="font-size: 48px;">📚</div><div style="font-size: 24px; font-weight: 700; color: #dc2626;">Not quite there yet</div><p>You need 100% to pass. Review and try again!</p><button class="btn-retry" onclick="retryQuiz()">Retry Quiz</button></div>`;
+                resultDiv.innerHTML = `<div class="quiz-result fail"><div style="font-size: 48px;"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="5" width="4" height="12" fill="#3B82F6"/><rect x="8" y="5" width="4" height="12" fill="#10B981"/><rect x="13" y="5" width="4" height="12" fill="#F59E0B"/></svg></div><div style="font-size: 24px; font-weight: 700; color: #dc2626;">Not quite there yet</div><p>You need 100% to pass. Review and try again!</p><button class="btn-retry" onclick="retryQuiz()">Retry Quiz</button></div>`;
             }
             document.getElementById('submitQuiz').style.display = 'none';
         }
@@ -578,7 +578,7 @@
         function toggleChecklistItem(item) {
             item.classList.toggle('checked');
             const checkbox = item.querySelector('.checklist-checkbox');
-            checkbox.textContent = item.classList.contains('checked') ? '✓' : '';
+            checkbox.textContent = item.classList.contains('checked') ? '<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 8 L6 12 L14 4" stroke="currentColor" stroke-width="2" fill="none"/></svg>' : '';
         }
 
         updateNav();

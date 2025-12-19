@@ -614,7 +614,7 @@
             line-height: 1.5;
         }
         .debt-card li::before {
-            content: '✓';
+            content: '<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 8 L6 12 L14 4" stroke="currentColor" stroke-width="2" fill="none"/></svg>';
             margin-right: 8px;
             font-weight: 700;
         }
@@ -622,7 +622,7 @@
             color: #10b981;
         }
         .debt-card.bad li::before {
-            content: '✗';
+            content: '<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 3 L13 13 M13 3 L3 13" stroke="currentColor" stroke-width="2"/></svg>';
             color: #dc2626;
         }
 
@@ -762,7 +762,7 @@
                         <p>Builds wealth or increases your earning potential over time</p>
                     </div>
                     <div class="intro-card">
-                        <div class="intro-card-icon">⛔</div>
+                        <div class="intro-card-icon"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="10" cy="10" r="7" fill="#EF4444"/><circle cx="10" cy="10" r="5" fill="white"/><circle cx="10" cy="10" r="3" fill="#EF4444"/></svg></div>
                         <h3>Bad Debt</h3>
                         <p>Depreciating assets and high interest that drain your finances</p>
                     </div>
@@ -785,7 +785,7 @@
 
                 <div class="debt-comparison">
                     <div class="debt-card good">
-                        <h3>✅ Good Debt</h3>
+                        <h3><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="8" cy="8" r="7" fill="#10B981"/><path d="M4 8 L7 11 L12 5" stroke="white" stroke-width="2" fill="none"/></svg> Good Debt</h3>
                         <ul>
                             <li style="margin-bottom: 10px;"><strong>Mortgage:</strong> Appreciating asset, tax benefits</li>
                             <li style="margin-bottom: 10px;"><strong>Student loans:</strong> Higher earning potential</li>
@@ -793,7 +793,7 @@
                         </ul>
                     </div>
                     <div class="debt-card bad">
-                        <h3>⛔ Bad Debt</h3>
+                        <h3><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="10" cy="10" r="7" fill="#EF4444"/><circle cx="10" cy="10" r="5" fill="white"/><circle cx="10" cy="10" r="3" fill="#EF4444"/></svg> Bad Debt</h3>
                         <ul>
                             <li style="margin-bottom: 10px;"><strong>Credit card debt:</strong> For consumables, high interest</li>
                             <li style="margin-bottom: 10px;"><strong>Car loans:</strong> For expensive vehicles that depreciate</li>
@@ -802,7 +802,7 @@
                     </div>
                 </div>
 
-                <p style="margin-top: 20px; text-align: center;"><strong>💡 Key:</strong> Good debt is an investment in your future. Bad debt drains your resources.</p>
+                <p style="margin-top: 20px; text-align: center;"><strong><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="10" cy="8" r="4" fill="#FCD34D"/><rect x="8" y="12" width="4" height="3" fill="#FCD34D"/><rect x="7" y="15" width="6" height="1" fill="#FCD34D"/></svg> Key:</strong> Good debt is an investment in your future. Bad debt drains your resources.</p>
             </div>
             <div class="screen-navigation">
                 <button class="btn-nav btn-prev" onclick="previousScreen()"><span>←</span> Previous</button>
@@ -861,7 +861,7 @@
                 <p style="text-align: center; margin-bottom: 20px;">A key metric lenders use to assess your financial health:</p>
 
                 <div class="visual-box">
-                    <h3>📊 DTI Formula</h3>
+                    <h3><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="10" width="3" height="7" fill="#3B82F6"/><rect x="8" y="7" width="3" height="10" fill="#10B981"/><rect x="13" y="4" width="3" height="13" fill="#F59E0B"/></svg> DTI Formula</h3>
                     <p style="text-align: center; font-size: 24px; font-weight: 700; color: var(--primary-color); margin: 15px 0;">
                         Monthly Debt Payments ÷ Monthly Income = DTI%
                     </p>
@@ -872,17 +872,17 @@
 
                 <div class="example-cards">
                     <div class="example-card">
-                        <div class="example-emoji">🟢</div>
+                        <div class="example-emoji"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="10" cy="10" r="6" fill="#10B981"/></svg></div>
                         <div class="example-title">Ideal: Under 20%</div>
                         <div class="example-desc">You're in great shape. Easy to manage debts and save.</div>
                     </div>
                     <div class="example-card">
-                        <div class="example-emoji">🟡</div>
+                        <div class="example-emoji"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="10" cy="10" r="6" fill="#F59E0B"/></svg></div>
                         <div class="example-title">Acceptable: Under 36%</div>
                         <div class="example-desc">Most lenders prefer this. Manageable but watch closely.</div>
                     </div>
                     <div class="example-card">
-                        <div class="example-emoji">🔴</div>
+                        <div class="example-emoji"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="10" cy="10" r="6" fill="#EF4444"/></svg></div>
                         <div class="example-title">High Risk: Over 43%</div>
                         <div class="example-desc">Warning zone. May struggle to get approved for new loans.</div>
                     </div>
@@ -945,14 +945,14 @@
 
                 <div class="debt-comparison">
                     <div class="debt-card good">
-                        <h3>✅ Good Debt Example</h3>
+                        <h3><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="8" cy="8" r="7" fill="#10B981"/><path d="M4 8 L7 11 L12 5" stroke="white" stroke-width="2" fill="none"/></svg> Good Debt Example</h3>
                         <p style="margin: 10px 0; font-weight: 600;">Student loan for engineering degree:</p>
                         <p style="margin: 0; font-size: 14px; line-height: 1.6;">
                             $40K debt → $75K starting salary. ROI is positive. The investment in education pays off through higher earning potential.
                         </p>
                     </div>
                     <div class="debt-card bad">
-                        <h3>⛔ Bad Debt Example</h3>
+                        <h3><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="10" cy="10" r="7" fill="#EF4444"/><circle cx="10" cy="10" r="5" fill="white"/><circle cx="10" cy="10" r="3" fill="#EF4444"/></svg> Bad Debt Example</h3>
                         <p style="margin: 10px 0; font-weight: 600;">Credit card debt for clothes and dinners:</p>
                         <p style="margin: 0; font-size: 14px; line-height: 1.6;">
                             $5K at 22% APR. No asset created, just growing interest. You're paying for experiences long after they're over.
@@ -961,7 +961,7 @@
                 </div>
 
                 <div class="visual-box" style="margin-top: 20px;">
-                    <h3>💡 The Test</h3>
+                    <h3><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="10" cy="8" r="4" fill="#FCD34D"/><rect x="8" y="12" width="4" height="3" fill="#FCD34D"/><rect x="7" y="15" width="6" height="1" fill="#FCD34D"/></svg> The Test</h3>
                     <p style="margin: 0; text-align: center;">Ask yourself: "Will this debt increase my net worth or earning potential?"</p>
                     <p style="margin: 8px 0 0 0; text-align: center; font-size: 14px;">If yes = potentially good debt. If no = bad debt.</p>
                 </div>
@@ -1004,7 +1004,7 @@
                 </div>
 
                 <div class="reflection-box" style="margin-top: 20px;">
-                    <div class="reflection-icon" style="font-size: 40px; margin-bottom: 10px; text-align: center;">💭</div>
+                    <div class="reflection-icon" style="font-size: 40px; margin-bottom: 10px; text-align: center;"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><ellipse cx="10" cy="8" rx="7" ry="5" fill="#DBEAFE"/><circle cx="4" cy="13" r="2" fill="#DBEAFE"/><circle cx="2" cy="16" r="1" fill="#DBEAFE"/></svg></div>
                     <div class="reflection-title" style="text-align: center; color: #f59e0b; font-size: 18px; font-weight: 700; margin-bottom: 10px;">Quick Reflection</div>
                     <div class="reflection-text" style="text-align: center; color: var(--text-secondary); font-size: 14px; line-height: 1.6;">
                         Focus on eliminating high-interest bad debt first. These drain your resources the fastest. Good debt can wait if it has low interest rates.
@@ -1329,10 +1329,10 @@
 
             if (isCorrect) {
                 element.classList.add('correct');
-                element.innerHTML += ' ✓ Correct!';
+                element.innerHTML += ' <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 8 L6 12 L14 4" stroke="currentColor" stroke-width="2" fill="none"/></svg> Correct!';
             } else {
                 element.classList.add('incorrect');
-                element.innerHTML += ' ✗';
+                element.innerHTML += ' <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 3 L13 13 M13 3 L3 13" stroke="currentColor" stroke-width="2"/></svg>';
                 options.forEach(opt => {
                     if (opt.onclick && opt.onclick.toString().includes('true')) {
                         opt.classList.add('correct');
@@ -1359,16 +1359,16 @@
             let color = '';
 
             if (utilization <= 10) {
-                feedback = '🌟 Excellent! This helps your score.';
+                feedback = '<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><polygon points="10,2 12,8 18,8 13,12 15,18 10,14 5,18 7,12 2,8 8,8" fill="#FCD34D"/></svg> Excellent! This helps your score.';
                 color = '#D1FAE5';
             } else if (utilization <= 30) {
-                feedback = '✅ Good! You\'re in the sweet spot.';
+                feedback = '<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="8" cy="8" r="7" fill="#10B981"/><path d="M4 8 L7 11 L12 5" stroke="white" stroke-width="2" fill="none"/></svg> Good! You\'re in the sweet spot.';
                 color = '#FEF3C7';
             } else if (utilization <= 50) {
-                feedback = '⚠️ Fair - Try to pay down to under 30%.';
+                feedback = '<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8 2 L14 14 L2 14 Z" fill="#F59E0B"/><path d="M8 6 L8 10 M8 11.5 L8 12.5" stroke="white" stroke-width="1.5"/></svg>️ Fair - Try to pay down to under 30%.';
                 color = '#FED7AA';
             } else {
-                feedback = '🚨 High! This is hurting your score. Pay down ASAP.';
+                feedback = '<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="10" cy="10" r="7" fill="#EF4444"/><path d="M10 6 L10 11 M10 13 L10 14" stroke="white" stroke-width="2"/></svg> High! This is hurting your score. Pay down ASAP.';
                 color = '#FEE2E2';
             }
 
@@ -1470,7 +1470,7 @@
 
             if (isCorrect) {
                 feedback.classList.add('correct');
-                feedbackIcon.textContent = '✓';
+                feedbackIcon.textContent = '<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 8 L6 12 L14 4" stroke="currentColor" stroke-width="2" fill="none"/></svg>';
                 feedbackTitle.textContent = 'Correct!';
                 feedbackExplanation.textContent = 'Excellent! A mortgage is typically considered good debt because you\'re building equity in an appreciating asset (real estate historically increases in value). Plus, mortgage interest may be tax-deductible. The home can generate wealth over time.';
             } else {
@@ -1516,7 +1516,7 @@
 
             if (isCorrect) {
                 feedback.classList.add('correct');
-                feedbackIcon.textContent = '✓';
+                feedbackIcon.textContent = '<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 8 L6 12 L14 4" stroke="currentColor" stroke-width="2" fill="none"/></svg>';
                 feedbackTitle.textContent = 'Excellent!';
                 feedbackExplanation.textContent = 'Perfect! Lenders prefer DTI under 36%, and under 20% is ideal. At 20%, you have plenty of breathing room in your budget. Above 43% is considered high risk, and you may struggle to get approved for new loans or face higher interest rates.';
             } else {
@@ -1551,10 +1551,10 @@
 
             if (isCorrect) {
                 element.classList.add('correct');
-                element.innerHTML += ' ✓ Correct!';
+                element.innerHTML += ' <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 8 L6 12 L14 4" stroke="currentColor" stroke-width="2" fill="none"/></svg> Correct!';
             } else {
                 element.classList.add('incorrect');
-                element.innerHTML += ' ✗';
+                element.innerHTML += ' <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 3 L13 13 M13 3 L3 13" stroke="currentColor" stroke-width="2"/></svg>';
                 options.forEach(opt => {
                     if (opt.onclick && opt.onclick.toString().includes('true')) {
                         opt.classList.add('correct');
@@ -1581,16 +1581,16 @@
             let color = '';
 
             if (utilization <= 10) {
-                feedback = '🌟 Excellent! This helps your score.';
+                feedback = '<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><polygon points="10,2 12,8 18,8 13,12 15,18 10,14 5,18 7,12 2,8 8,8" fill="#FCD34D"/></svg> Excellent! This helps your score.';
                 color = '#D1FAE5';
             } else if (utilization <= 30) {
-                feedback = '✅ Good! You\'re in the sweet spot.';
+                feedback = '<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="8" cy="8" r="7" fill="#10B981"/><path d="M4 8 L7 11 L12 5" stroke="white" stroke-width="2" fill="none"/></svg> Good! You\'re in the sweet spot.';
                 color = '#FEF3C7';
             } else if (utilization <= 50) {
-                feedback = '⚠️ Fair - Try to pay down to under 30%.';
+                feedback = '<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8 2 L14 14 L2 14 Z" fill="#F59E0B"/><path d="M8 6 L8 10 M8 11.5 L8 12.5" stroke="white" stroke-width="1.5"/></svg>️ Fair - Try to pay down to under 30%.';
                 color = '#FED7AA';
             } else {
-                feedback = '🚨 High! This is hurting your score. Pay down ASAP.';
+                feedback = '<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="10" cy="10" r="7" fill="#EF4444"/><path d="M10 6 L10 11 M10 13 L10 14" stroke="white" stroke-width="2"/></svg> High! This is hurting your score. Pay down ASAP.';
                 color = '#FEE2E2';
             }
 

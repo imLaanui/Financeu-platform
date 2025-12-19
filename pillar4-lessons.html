@@ -324,7 +324,7 @@
             <!-- Final Quiz -->
             <div class="quiz-card" id="quizCard" style="display: none;">
                 <div class="lesson-info">
-                    <h3>🎓 Final Quiz</h3>
+                    <h3><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><polygon points="10,5 2,9 10,13 18,9" fill="#3B82F6"/><polygon points="10,13 6,11 6,14 10,16 14,14 14,11" fill="#60A5FA"/></svg> Final Quiz</h3>
                     <p>Test your knowledge of all 8 lessons • 16 questions • 80% to pass</p>
                 </div>
                 <div class="lesson-status">
@@ -435,7 +435,7 @@
                         lessonCard.style.opacity = '0.6';
                         lessonCard.style.pointerEvents = 'none';
                         const statusDiv = lessonCard.querySelector('.lesson-status');
-                        statusDiv.innerHTML = `<span style="color: #9ca3af; font-weight: 600; white-space: nowrap;">🔒 Complete Previous Lesson</span>`;
+                        statusDiv.innerHTML = `<span style="color: #9ca3af; font-weight: 600; white-space: nowrap;"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="5" y="9" width="10" height="8" rx="1" fill="#6B7280"/><path d="M7 9 L7 6 C7 4.3 8.3 3 10 3 C11.7 3 13 4.3 13 6 L13 9" stroke="#6B7280" stroke-width="2" fill="none"/></svg> Complete Previous Lesson</span>`;
                     }
                 }
                 return;
@@ -467,7 +467,7 @@
                         lessonCard.style.opacity = '0.6';
                         lessonCard.style.pointerEvents = 'none';
                         statusDiv.innerHTML = `
-                            <span style="color: #9ca3af; font-weight: 600; white-space: nowrap;">🔒 Complete Previous Lesson</span>
+                            <span style="color: #9ca3af; font-weight: 600; white-space: nowrap;"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="5" y="9" width="10" height="8" rx="1" fill="#6B7280"/><path d="M7 9 L7 6 C7 4.3 8.3 3 10 3 C11.7 3 13 4.3 13 6 L13 9" stroke="#6B7280" stroke-width="2" fill="none"/></svg> Complete Previous Lesson</span>
                         `;
                     } else if (completed.includes(lessonNum)) {
                         // Lesson completed

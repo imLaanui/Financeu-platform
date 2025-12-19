@@ -235,7 +235,7 @@
 
             if (passed) {
                 content.className = 'result-content pass';
-                message.textContent = 'Congratulations! You Passed! 🎉';
+                message.textContent = 'Congratulations! You Passed! <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="4" cy="4" r="1" fill="#F59E0B"/><circle cx="16" cy="4" r="1" fill="#EF4444"/><circle cx="4" cy="16" r="1" fill="#3B82F6"/><circle cx="16" cy="16" r="1" fill="#10B981"/><path d="M10 6 L12 14 L8 14 Z" fill="#F59E0B"/><rect x="8" y="14" width="4" height="2" fill="#EF4444"/></svg>';
                 score.className = 'result-score pass';
                 score.textContent = `${percentage}%`;
                 details.textContent = `You answered ${correct} out of ${shuffledQuestions.length} questions correctly.`;

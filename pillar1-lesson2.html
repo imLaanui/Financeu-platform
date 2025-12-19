@@ -1048,7 +1048,7 @@
 
                     <div class="budget-item">
                         <div class="budget-item-header">
-                            <div class="budget-item-label">💰 Total Income</div>
+                            <div class="budget-item-label"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="10" cy="10" r="8" fill="#10B981"/><text x="10" y="14" text-anchor="middle" font-size="10" fill="white" font-weight="bold">$</text></svg> Total Income</div>
                             <div class="budget-item-value">$1,000</div>
                         </div>
                         <div class="budget-item-bar">
@@ -1058,7 +1058,7 @@
 
                     <div class="budget-item">
                         <div class="budget-item-header">
-                            <div class="budget-item-label">🏠 Rent</div>
+                            <div class="budget-item-label"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 10 L10 3 L17 10 L17 17 L3 17 Z" fill="#3B82F6"/><rect x="8" y="12" width="4" height="5" fill="#60A5FA"/></svg> Rent</div>
                             <div class="budget-item-value">$400</div>
                         </div>
                         <div class="budget-item-bar">
@@ -1068,7 +1068,7 @@
 
                     <div class="budget-item">
                         <div class="budget-item-header">
-                            <div class="budget-item-label">🍔 Food</div>
+                            <div class="budget-item-label"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 7 L16 7 C16 5 15 4 13 4 L7 4 C5 4 4 5 4 7" fill="#F59E0B"/><rect x="3" y="7" width="14" height="2" fill="#10B981"/><rect x="3" y="9" width="14" height="2" fill="#B45309"/><rect x="3" y="11" width="14" height="2" fill="#F59E0B"/></svg> Food</div>
                             <div class="budget-item-value">$250</div>
                         </div>
                         <div class="budget-item-bar">
@@ -1078,7 +1078,7 @@
 
                     <div class="budget-item">
                         <div class="budget-item-header">
-                            <div class="budget-item-label">📱 Phone Bill</div>
+                            <div class="budget-item-label"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="6" y="2" width="8" height="16" rx="1" stroke="#3B82F6" stroke-width="1.5" fill="none"/><circle cx="10" cy="15" r="1" fill="#3B82F6"/></svg> Phone Bill</div>
                             <div class="budget-item-value">$50</div>
                         </div>
                         <div class="budget-item-bar">
@@ -1088,7 +1088,7 @@
 
                     <div class="budget-item">
                         <div class="budget-item-header">
-                            <div class="budget-item-label">🎬 Entertainment</div>
+                            <div class="budget-item-label"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="2" y="5" width="16" height="11" rx="1" fill="#1F2937"/><rect x="2" y="3" width="16" height="2" fill="#FCD34D"/><rect x="3" y="3" width="2" height="2" fill="#1F2937"/><rect x="7" y="3" width="2" height="2" fill="#1F2937"/><rect x="11" y="3" width="2" height="2" fill="#1F2937"/><rect x="15" y="3" width="2" height="2" fill="#1F2937"/></svg> Entertainment</div>
                             <div class="budget-item-value">$100</div>
                         </div>
                         <div class="budget-item-bar">
@@ -1098,7 +1098,7 @@
 
                     <div class="budget-item">
                         <div class="budget-item-header">
-                            <div class="budget-item-label">🚗 Transportation</div>
+                            <div class="budget-item-label"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="8" width="14" height="6" rx="1" fill="#3B82F6"/><path d="M4 8 L6 5 L14 5 L16 8" fill="#60A5FA"/><circle cx="6" cy="14" r="1.5" fill="#1F2937"/><circle cx="14" cy="14" r="1.5" fill="#1F2937"/></svg> Transportation</div>
                             <div class="budget-item-value">$80</div>
                         </div>
                         <div class="budget-item-bar">
@@ -1108,7 +1108,7 @@
 
                     <div class="budget-item">
                         <div class="budget-item-header">
-                            <div class="budget-item-label">📦 Miscellaneous</div>
+                            <div class="budget-item-label"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 6 L10 2 L17 6 L17 14 L10 18 L3 14 Z" stroke="#B45309" stroke-width="1.5" fill="none"/><polyline points="3,6 10,10 17,6" stroke="#B45309" stroke-width="1.5" fill="none"/><line x1="10" y1="10" x2="10" y2="18" stroke="#B45309" stroke-width="1.5"/></svg> Miscellaneous</div>
                             <div class="budget-item-value">$70</div>
                         </div>
                         <div class="budget-item-bar">
@@ -1670,7 +1670,7 @@
 
             if (isCorrect) {
                 feedback.classList.add('correct');
-                feedbackIcon.textContent = '✓';
+                feedbackIcon.textContent = '<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 8 L6 12 L14 4" stroke="currentColor" stroke-width="2" fill="none"/></svg>';
                 feedbackTitle.textContent = 'Correct!';
                 feedbackExplanation.textContent = 'Excellent! The golden rule is that income should be greater than expenses. This is how you build wealth over time. The difference between income and expenses (the surplus) is what you can save and invest for your future.';
             } else {
@@ -1716,7 +1716,7 @@
 
             if (isCorrect) {
                 feedback.classList.add('correct');
-                feedbackIcon.textContent = '✓';
+                feedbackIcon.textContent = '<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 8 L6 12 L14 4" stroke="currentColor" stroke-width="2" fill="none"/></svg>';
                 feedbackTitle.textContent = 'Excellent!';
                 feedbackExplanation.textContent = 'Perfect! When expenses ($2,100) exceed income ($2,000), you\'re going $100 into debt each month. That\'s $1,200 per year! You need to either reduce expenses (cut unnecessary spending) or increase income (get a side hustle, ask for a raise) to avoid accumulating debt.';
             } else {

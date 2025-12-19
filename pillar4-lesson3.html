@@ -516,9 +516,9 @@
                 const userId = localStorage.getItem('userId');
                 localStorage.setItem(`pillar4_lesson3_quiz_passed_${userId}`, 'true');
                 document.getElementById('finishBtn').disabled = false;
-                resultDiv.innerHTML = `<div class="quiz-result pass"><div style="font-size: 48px;">🎉</div><div style="font-size: 24px; font-weight: 700; color: #10b981;">Quiz Passed!</div><p>Great job! You can now finish the lesson.</p></div>`;
+                resultDiv.innerHTML = `<div class="quiz-result pass"><div style="font-size: 48px;"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="4" cy="4" r="1" fill="#F59E0B"/><circle cx="16" cy="4" r="1" fill="#EF4444"/><circle cx="4" cy="16" r="1" fill="#3B82F6"/><circle cx="16" cy="16" r="1" fill="#10B981"/><path d="M10 6 L12 14 L8 14 Z" fill="#F59E0B"/><rect x="8" y="14" width="4" height="2" fill="#EF4444"/></svg></div><div style="font-size: 24px; font-weight: 700; color: #10b981;">Quiz Passed!</div><p>Great job! You can now finish the lesson.</p></div>`;
             } else {
-                resultDiv.innerHTML = `<div class="quiz-result fail"><div style="font-size: 48px;">📚</div><div style="font-size: 24px; font-weight: 700; color: #dc2626;">Not quite there yet</div><p>You need 100% to pass. Review and try again!</p><button class="btn-retry" onclick="retryQuiz()">Retry Quiz</button></div>`;
+                resultDiv.innerHTML = `<div class="quiz-result fail"><div style="font-size: 48px;"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="5" width="4" height="12" fill="#3B82F6"/><rect x="8" y="5" width="4" height="12" fill="#10B981"/><rect x="13" y="5" width="4" height="12" fill="#F59E0B"/></svg></div><div style="font-size: 24px; font-weight: 700; color: #dc2626;">Not quite there yet</div><p>You need 100% to pass. Review and try again!</p><button class="btn-retry" onclick="retryQuiz()">Retry Quiz</button></div>`;
             }
             document.getElementById('submitQuiz').style.display = 'none';
         }
@@ -591,7 +591,7 @@
         function toggleChecklistItem(item) {
             item.classList.toggle('checked');
             const checkbox = item.querySelector('.checklist-checkbox');
-            checkbox.textContent = item.classList.contains('checked') ? '✓' : '';
+            checkbox.textContent = item.classList.contains('checked') ? '<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 8 L6 12 L14 4" stroke="currentColor" stroke-width="2" fill="none"/></svg>' : '';
         }
 
         updateNav();
