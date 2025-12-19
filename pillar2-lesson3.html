@@ -10,6 +10,33 @@
     <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.svg">
     <link rel="stylesheet" href="styles.css">
     <style>
+        /* SVG Icon Alignment Fixes */
+        svg {
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        .intro-card-icon svg,
+        .mistake-icon svg,
+        .reflection-icon svg,
+        .result-icon svg {
+            display: block;
+            margin: 0 auto;
+        }
+
+        .budget-method-emoji svg,
+        .budget-item-label svg {
+            display: inline-block;
+            vertical-align: middle;
+            margin-right: 8px;
+        }
+
+        p svg, li svg, span svg {
+            display: inline-block;
+            vertical-align: middle;
+            margin: 0 2px;
+        }
+
         .lesson-container {
             max-width: 900px;
             margin: 0 auto;
@@ -754,7 +781,7 @@
                 <ul class="nav-links">
                     <li><a href="/">Home</a></li>
                     <li><a href="dashboard">Dashboard</a></li>
-                    <li id="authButtons" style="opacity: 0;">
+                    <li id="authButtons" style=" opacity: 0;">
                     </li>
                 </ul>
             </div>
@@ -778,21 +805,12 @@
                 <h2>Why Emergency Funds Matter</h2>
                 <div class="intro-cards">
                     <div class="intro-card">
-                        <div class="intro-card-icon"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="24" cy="24" r="20" fill="#FEE2E2"/>
-        <path d="M24 14V26" stroke="#DC2626" stroke-width="3" stroke-linecap="round"/>
-        <circle cx="24" cy="32" r="2" fill="#DC2626"/>
-    </svg></div>
+                        <div class="intro-card-icon"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="20" fill="#FEE2E2"/><path d="M24 14V26" stroke="#DC2626" stroke-width="3" stroke-linecap="round"/><circle cx="24" cy="32" r="2" fill="#DC2626"/></svg></div>
                         <h3>The Problem</h3>
                         <p>Unexpected expenses derail finances and force people into debt</p>
                     </div>
                     <div class="intro-card">
-                        <div class="intro-card-icon"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="24" cy="24" r="20" fill="#D1FAE5"/>
-        <path d="M24 10 L32 14 L32 24 C32 30 28 34 24 38 C20 34 16 30 16 24 L16 14 Z" fill="#00A676" opacity="0.3"/>
-        <path d="M24 10 L32 14 L32 24 C32 30 28 34 24 38 C20 34 16 30 16 24 L16 14 Z" stroke="#00A676" stroke-width="2" fill="none"/>
-        <path d="M20 24 L22 26 L28 20" stroke="#00A676" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-    </svg></div>
+                        <div class="intro-card-icon"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="20" fill="#D1FAE5"/><path d="M24 10 L32 14 L32 24 C32 30 28 34 24 38 C20 34 16 30 16 24 L16 14 Z" fill="#00A676" opacity="0.3"/><path d="M24 10 L32 14 L32 24 C32 30 28 34 24 38 C20 34 16 30 16 24 L16 14 Z" stroke="#00A676" stroke-width="2" fill="none"/><path d="M20 24 L22 26 L28 20" stroke="#00A676" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
                         <h3>The Solution</h3>
                         <p>An emergency fund prevents financial disasters from becoming life disasters</p>
                     </div>
@@ -993,16 +1011,12 @@
                 <h2>Avoid These Mistakes</h2>
                 <div class="mistakes-grid">
                     <div class="mistake-card">
-                        <div class="mistake-icon"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="4" y="6" width="12" height="11" rx="1" stroke="#EF4444" stroke-width="1.5" fill="none"/><path d="M7 6 C7 4 8.3 3 10 3 C11.7 3 13 4 13 6" stroke="#EF4444" stroke-width="1.5" fill="none"/></svg>️</div>
+                        <div class="mistake-icon"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="4" y="6" width="12" height="11" rx="1" stroke="#EF4444" stroke-width="1.5" fill="none"/><path d="M7 6 C7 4 8.3 3 10 3 C11.7 3 13 4 13 6" stroke="#EF4444" stroke-width="1.5" fill="none"/></svg></div>
                         <div class="mistake-title">Non-Emergency Use</div>
                         <div class="mistake-desc">A sale on a TV is not an emergency</div>
                     </div>
                     <div class="mistake-card">
-                        <div class="mistake-icon"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="24" cy="24" r="20" fill="#D1FAE5"/>
-        <path d="M12 30 L18 24 L24 28 L30 18 L36 22" stroke="#00A676" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-        <path d="M30 14 L36 14 L36 20" stroke="#00A676" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-    </svg></div>
+                        <div class="mistake-icon"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="20" fill="#D1FAE5"/><path d="M12 30 L18 24 L24 28 L30 18 L36 22" stroke="#00A676" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M30 14 L36 14 L36 20" stroke="#00A676" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
                         <div class="mistake-title">Investing It</div>
                         <div class="mistake-desc">Market could drop when you need it</div>
                     </div>
@@ -1012,13 +1026,7 @@
                         <div class="mistake-desc">Rebuild after using it</div>
                     </div>
                     <div class="mistake-card">
-                        <div class="mistake-icon"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="24" cy="24" r="20" fill="#EFF6FF"/>
-        <rect x="12" y="18" width="24" height="16" rx="2" fill="#3B82F6" opacity="0.3"/>
-        <rect x="12" y="18" width="24" height="16" rx="2" stroke="#3B82F6" stroke-width="2" fill="none"/>
-        <rect x="12" y="21" width="24" height="4" fill="#3B82F6"/>
-        <line x1="15" y1="29" x2="21" y2="29" stroke="#3B82F6" stroke-width="1.5" stroke-linecap="round"/>
-    </svg></div>
+                        <div class="mistake-icon"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="20" fill="#EFF6FF"/><rect x="12" y="18" width="24" height="16" rx="2" fill="#3B82F6" opacity="0.3"/><rect x="12" y="18" width="24" height="16" rx="2" stroke="#3B82F6" stroke-width="2" fill="none"/><rect x="12" y="21" width="24" height="4" fill="#3B82F6"/><line x1="15"y1="29"x2="21"y2="29" stroke="#3B82F6" stroke-width="1.5" stroke-linecap="round"/></svg></div>
                         <div class="mistake-title">Too Accessible</div>
                         <div class="mistake-desc">Don't link to your debit card</div>
                     </div>
@@ -1125,7 +1133,7 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <p style="font-size: 0.85rem; opacity: 0.8; margin-bottom: 10px;">Disclaimer: FinanceU provides educational content only and does not offer financial, legal, or investment advice. Always consult with a qualified professional before making financial decisions.</p>
+                <p style=" font-size: 0.85rem; opacity: 0.8; margin-bottom: 10px;">Disclaimer: FinanceU provides educational content only and does not offer financial, legal, or investment advice. Always consult with a qualified professional before making financial decisions.</p>
                 <p>&copy; 2025 FinanceU. All rights reserved.</p>
             </div>
         </div>
@@ -1437,7 +1445,7 @@
             } else {
                 resultDiv.innerHTML = `
                     <div class="quiz-result fail">
-                        <div class="result-icon"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="20" fill="#EDE9FE"/><rect x="16" y="12" width="16" height="24" rx="1" stroke="#8B5CF6" stroke-width="2" fill="none"/><line x1="20" y1="18" x2="28" y2="18" stroke="#8B5CF6" stroke-width="1.5"/><line x1="20" y1="22" x2="28" y2="22" stroke="#8B5CF6" stroke-width="1.5"/><line x1="20" y1="26" x2="25" y2="26" stroke="#8B5CF6" stroke-width="1.5"/></svg></div>
+                        <div class="result-icon"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="20" fill="#EDE9FE"/><rect x="16" y="12" width="16" height="24" rx="1" stroke="#8B5CF6" stroke-width="2" fill="none"/><line x1="20"y1="18"x2="28"y2="18" stroke="#8B5CF6" stroke-width="1.5"/><line x1="20"y1="22"x2="28"y2="22" stroke="#8B5CF6" stroke-width="1.5"/><line x1="20"y1="26"x2="25"y2="26" stroke="#8B5CF6" stroke-width="1.5"/></svg></div>
                         <div class="result-text" style="color: #dc2626;">Not quite there yet</div>
                         <div class="result-score">You scored ${correct} out of ${currentQuestions.length} (${percentage}%)</div>
                         <p style="color: var(--text-secondary); margin-bottom: 15px;">You need 75% to pass. Review the lesson and try again!</p>

@@ -10,6 +10,33 @@
     <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.svg">
     <link rel="stylesheet" href="styles.css">
     <style>
+        /* SVG Icon Alignment Fixes */
+        svg {
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        .intro-card-icon svg,
+        .mistake-icon svg,
+        .reflection-icon svg,
+        .result-icon svg {
+            display: block;
+            margin: 0 auto;
+        }
+
+        .budget-method-emoji svg,
+        .budget-item-label svg {
+            display: inline-block;
+            vertical-align: middle;
+            margin-right: 8px;
+        }
+
+        p svg, li svg, span svg {
+            display: inline-block;
+            vertical-align: middle;
+            margin: 0 2px;
+        }
+
         .lesson-container {
             max-width: 800px;
             margin: 0 auto;
@@ -729,7 +756,7 @@
                 <ul class="nav-links">
                     <li><a href="/">Home</a></li>
                     <li><a href="dashboard">Dashboard</a></li>
-                    <li id="authButtons" style="opacity: 0;">
+                    <li id="authButtons" style=" opacity: 0;">
                     </li>
                     </li>
                 </ul>
@@ -754,10 +781,7 @@
                 <h2>Not All Debt Is Equal</h2>
                 <div class="intro-cards">
                     <div class="intro-card">
-                        <div class="intro-card-icon"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="24" cy="24" r="20" fill="#D1FAE5"/>
-        <path d="M14 24 L20 30 L34 16" stroke="#00A676" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-    </svg></div>
+                        <div class="intro-card-icon"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="20" fill="#D1FAE5"/><path d="M14 24 L20 30 L34 16" stroke="#00A676" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
                         <h3>Good Debt</h3>
                         <p>Builds wealth or increases your earning potential over time</p>
                     </div>
@@ -1004,7 +1028,7 @@
                 </div>
 
                 <div class="reflection-box" style="margin-top: 20px;">
-                    <div class="reflection-icon" style="font-size: 40px; margin-bottom: 10px; text-align: center;"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><ellipse cx="10" cy="8" rx="7" ry="5" fill="#DBEAFE"/><circle cx="4" cy="13" r="2" fill="#DBEAFE"/><circle cx="2" cy="16" r="1" fill="#DBEAFE"/></svg></div>
+                    <div class="reflection-icon" style=" font-size: 40px; margin-bottom: 10px; text-align: center;"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><ellipse cx="10" cy="8" rx="7" ry="5" fill="#DBEAFE"/><circle cx="4" cy="13" r="2" fill="#DBEAFE"/><circle cx="2" cy="16" r="1" fill="#DBEAFE"/></svg></div>
                     <div class="reflection-title" style="text-align: center; color: #f59e0b; font-size: 18px; font-weight: 700; margin-bottom: 10px;">Quick Reflection</div>
                     <div class="reflection-text" style="text-align: center; color: var(--text-secondary); font-size: 14px; line-height: 1.6;">
                         Focus on eliminating high-interest bad debt first. These drain your resources the fastest. Good debt can wait if it has low interest rates.
@@ -1067,7 +1091,7 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <p style="font-size: 0.85rem; opacity: 0.8; margin-bottom: 10px;">Disclaimer: FinanceU provides educational content only and does not offer financial, legal, or investment advice. Always consult with a qualified professional before making financial decisions.</p>
+                <p style=" font-size: 0.85rem; opacity: 0.8; margin-bottom: 10px;">Disclaimer: FinanceU provides educational content only and does not offer financial, legal, or investment advice. Always consult with a qualified professional before making financial decisions.</p>
                 <p>&copy; 2025 FinanceU. All rights reserved.</p>
             </div>
         </div>
@@ -1276,7 +1300,7 @@
             } else {
                 resultDiv.innerHTML = `
                     <div class="quiz-result fail">
-                        <div class="result-icon"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="20" fill="#EDE9FE"/><rect x="16" y="12" width="16" height="24" rx="1" stroke="#8B5CF6" stroke-width="2" fill="none"/><line x1="20" y1="18" x2="28" y2="18" stroke="#8B5CF6" stroke-width="1.5"/><line x1="20" y1="22" x2="28" y2="22" stroke="#8B5CF6" stroke-width="1.5"/><line x1="20" y1="26" x2="25" y2="26" stroke="#8B5CF6" stroke-width="1.5"/></svg></div>
+                        <div class="result-icon"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="20" fill="#EDE9FE"/><rect x="16" y="12" width="16" height="24" rx="1" stroke="#8B5CF6" stroke-width="2" fill="none"/><line x1="20"y1="18"x2="28"y2="18" stroke="#8B5CF6" stroke-width="1.5"/><line x1="20"y1="22"x2="28"y2="22" stroke="#8B5CF6" stroke-width="1.5"/><line x1="20"y1="26"x2="25"y2="26" stroke="#8B5CF6" stroke-width="1.5"/></svg></div>
                         <div class="result-text" style="color: #dc2626;">Not quite there yet</div>
                         <div class="result-score">You scored ${correct} out of ${quizData.length} (${percentage}%)</div>
                         <p style="color: var(--text-secondary); margin-bottom: 15px;">You need 100% to pass. Review the lesson and try again!</p>
@@ -1365,14 +1389,14 @@
                 feedback = '<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="8" cy="8" r="7" fill="#10B981"/><path d="M4 8 L7 11 L12 5" stroke="white" stroke-width="2" fill="none"/></svg> Good! You\'re in the sweet spot.';
                 color = '#FEF3C7';
             } else if (utilization <= 50) {
-                feedback = '<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8 2 L14 14 L2 14 Z" fill="#F59E0B"/><path d="M8 6 L8 10 M8 11.5 L8 12.5" stroke="white" stroke-width="1.5"/></svg>️ Fair - Try to pay down to under 30%.';
+                feedback = '<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8 2 L14 14 L2 14 Z" fill="#F59E0B"/><path d="M8 6 L8 10 M8 11.5 L8 12.5" stroke="white" stroke-width="1.5"/></svg> Fair - Try to pay down to under 30%.';
                 color = '#FED7AA';
             } else {
                 feedback = '<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="10" cy="10" r="7" fill="#EF4444"/><path d="M10 6 L10 11 M10 13 L10 14" stroke="white" stroke-width="2"/></svg> High! This is hurting your score. Pay down ASAP.';
                 color = '#FEE2E2';
             }
 
-            resultDiv.innerHTML = `<strong>${message}</strong><br><span style="font-size: 15px;">${feedback}</span>`;
+            resultDiv.innerHTML = `<strong>${message}</strong><br><span style=" font-size: 15px;">${feedback}</span>`;
             resultDiv.style.background = color;
         }
 
@@ -1587,14 +1611,14 @@
                 feedback = '<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="8" cy="8" r="7" fill="#10B981"/><path d="M4 8 L7 11 L12 5" stroke="white" stroke-width="2" fill="none"/></svg> Good! You\'re in the sweet spot.';
                 color = '#FEF3C7';
             } else if (utilization <= 50) {
-                feedback = '<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8 2 L14 14 L2 14 Z" fill="#F59E0B"/><path d="M8 6 L8 10 M8 11.5 L8 12.5" stroke="white" stroke-width="1.5"/></svg>️ Fair - Try to pay down to under 30%.';
+                feedback = '<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8 2 L14 14 L2 14 Z" fill="#F59E0B"/><path d="M8 6 L8 10 M8 11.5 L8 12.5" stroke="white" stroke-width="1.5"/></svg> Fair - Try to pay down to under 30%.';
                 color = '#FED7AA';
             } else {
                 feedback = '<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="10" cy="10" r="7" fill="#EF4444"/><path d="M10 6 L10 11 M10 13 L10 14" stroke="white" stroke-width="2"/></svg> High! This is hurting your score. Pay down ASAP.';
                 color = '#FEE2E2';
             }
 
-            resultDiv.innerHTML = `<strong>${message}</strong><br><span style="font-size: 15px;">${feedback}</span>`;
+            resultDiv.innerHTML = `<strong>${message}</strong><br><span style=" font-size: 15px;">${feedback}</span>`;
             resultDiv.style.background = color;
         }
 

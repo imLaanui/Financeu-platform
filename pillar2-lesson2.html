@@ -10,6 +10,33 @@
     <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.svg">
     <link rel="stylesheet" href="styles.css">
     <style>
+        /* SVG Icon Alignment Fixes */
+        svg {
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        .intro-card-icon svg,
+        .mistake-icon svg,
+        .reflection-icon svg,
+        .result-icon svg {
+            display: block;
+            margin: 0 auto;
+        }
+
+        .budget-method-emoji svg,
+        .budget-item-label svg {
+            display: inline-block;
+            vertical-align: middle;
+            margin-right: 8px;
+        }
+
+        p svg, li svg, span svg {
+            display: inline-block;
+            vertical-align: middle;
+            margin: 0 2px;
+        }
+
         .lesson-container {
             max-width: 900px;
             margin: 0 auto;
@@ -892,7 +919,7 @@
                 <ul class="nav-links">
                     <li><a href="/">Home</a></li>
                     <li><a href="dashboard">Dashboard</a></li>
-                    <li id="authButtons" style="opacity: 0;">
+                    <li id="authButtons" style=" opacity: 0;">
                     </li>
                     </li>
                 </ul>
@@ -927,12 +954,7 @@
                         <p>Simple rules become automatic habits</p>
                     </div>
                     <div class="intro-card">
-                        <div class="intro-card-icon"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="24" cy="24" r="20" fill="#DBEAFE"/>
-        <circle cx="24" cy="24" r="14" stroke="#3B82F6" stroke-width="2" fill="none"/>
-        <circle cx="24" cy="24" r="8" stroke="#3B82F6" stroke-width="2" fill="none"/>
-        <circle cx="24" cy="24" r="3" fill="#3B82F6"/>
-    </svg></div>
+                        <div class="intro-card-icon"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="20" fill="#DBEAFE"/><circle cx="24" cy="24" r="14" stroke="#3B82F6" stroke-width="2" fill="none"/><circle cx="24" cy="24" r="8" stroke="#3B82F6" stroke-width="2" fill="none"/><circle cx="24" cy="24" r="3" fill="#3B82F6"/></svg></div>
                         <h3>Your Goal</h3>
                         <p>Split income into three simple categories</p>
                     </div>
@@ -1049,7 +1071,7 @@
                             <div class="budget-item-bar">
                                 <div class="budget-item-fill needs-bar" style="width: 50%;">50%</div>
                             </div>
-                            <p style="font-size: 12px; color: var(--text-secondary); margin-top: 5px;">
+                            <p style=" font-size: 12px; color: var(--text-secondary); margin-top: 5px;">
                                 Rent, groceries, utilities, car payment, insurance
                             </p>
                         </div>
@@ -1062,7 +1084,7 @@
                             <div class="budget-item-bar">
                                 <div class="budget-item-fill wants-bar" style="width: 30%;">30%</div>
                             </div>
-                            <p style="font-size: 12px; color: var(--text-secondary); margin-top: 5px;">
+                            <p style=" font-size: 12px; color: var(--text-secondary); margin-top: 5px;">
                                 Gym, streaming, dining out, hobbies
                             </p>
                         </div>
@@ -1075,7 +1097,7 @@
                             <div class="budget-item-bar">
                                 <div class="budget-item-fill savings-bar" style="width: 20%;">20%</div>
                             </div>
-                            <p style="font-size: 12px; color: var(--text-secondary); margin-top: 5px;">
+                            <p style=" font-size: 12px; color: var(--text-secondary); margin-top: 5px;">
                                 Emergency fund, 401k contribution
                             </p>
                         </div>
@@ -1142,30 +1164,22 @@
                 <h2>Avoid These Mistakes</h2>
                 <div class="mistakes-grid">
                     <div class="mistake-card">
-                        <div class="mistake-icon"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="24" cy="24" r="20" fill="#FEE2E2"/>
-        <path d="M16 16 L32 32 M32 16 L16 32" stroke="#DC2626" stroke-width="3" stroke-linecap="round"/>
-    </svg></div>
+                        <div class="mistake-icon"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="20" fill="#FEE2E2"/><path d="M16 16 L32 32 M32 16 L16 32" stroke="#DC2626" stroke-width="3" stroke-linecap="round"/></svg></div>
                         <div class="mistake-title">Miscategorizing</div>
                         <div class="mistake-desc">Premium cable is a want, not a need</div>
                     </div>
                     <div class="mistake-card">
-                        <div class="mistake-icon"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="2" y="8" width="4" height="10" fill="#3B82F6"/><rect x="8" y="4" width="4" height="14" fill="#10B981"/><rect x="14" y="6" width="4" height="12" fill="#F59E0B"/></svg>️</div>
+                        <div class="mistake-icon"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="2" y="8" width="4" height="10" fill="#3B82F6"/><rect x="8" y="4" width="4" height="14" fill="#10B981"/><rect x="14" y="6" width="4" height="12" fill="#F59E0B"/></svg></div>
                         <div class="mistake-title">Not Adjusting</div>
                         <div class="mistake-desc">High-cost areas need flexibility</div>
                     </div>
                     <div class="mistake-card">
-                        <div class="mistake-icon"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="10" cy="10" r="7" stroke="#EF4444" stroke-width="2" fill="none"/><line x1="5" y1="5" x2="15" y2="15" stroke="#EF4444" stroke-width="2"/></svg></div>
+                        <div class="mistake-icon"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="10" cy="10" r="7" stroke="#EF4444" stroke-width="2" fill="none"/><line x1="5"y1="5"x2="15"y2="15" stroke="#EF4444" stroke-width="2"/></svg></div>
                         <div class="mistake-title">Ignoring It</div>
                         <div class="mistake-desc">The principle still matters even if not exact</div>
                     </div>
                     <div class="mistake-card">
-                        <div class="mistake-icon"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="24" cy="24" r="20" fill="#DBEAFE"/>
-        <circle cx="24" cy="24" r="14" stroke="#3B82F6" stroke-width="2" fill="none"/>
-        <circle cx="24" cy="24" r="8" stroke="#3B82F6" stroke-width="2" fill="none"/>
-        <circle cx="24" cy="24" r="3" fill="#3B82F6"/>
-    </svg></div>
+                        <div class="mistake-icon"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="20" fill="#DBEAFE"/><circle cx="24" cy="24" r="14" stroke="#3B82F6" stroke-width="2" fill="none"/><circle cx="24" cy="24" r="8" stroke="#3B82F6" stroke-width="2" fill="none"/><circle cx="24" cy="24" r="3" fill="#3B82F6"/></svg></div>
                         <div class="mistake-title">Too Rigid</div>
                         <div class="mistake-desc">It's a guideline, not a law</div>
                     </div>
@@ -1272,7 +1286,7 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <p style="font-size: 0.85rem; opacity: 0.8; margin-bottom: 10px;">Disclaimer: FinanceU provides educational content only and does not offer financial, legal, or investment advice. Always consult with a qualified professional before making financial decisions.</p>
+                <p style=" font-size: 0.85rem; opacity: 0.8; margin-bottom: 10px;">Disclaimer: FinanceU provides educational content only and does not offer financial, legal, or investment advice. Always consult with a qualified professional before making financial decisions.</p>
                 <p>&copy; 2025 FinanceU. All rights reserved.</p>
             </div>
         </div>
@@ -1554,7 +1568,7 @@
             } else {
                 resultDiv.innerHTML = `
                     <div class="quiz-result fail">
-                        <div class="result-icon"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="20" fill="#EDE9FE"/><rect x="16" y="12" width="16" height="24" rx="1" stroke="#8B5CF6" stroke-width="2" fill="none"/><line x1="20" y1="18" x2="28" y2="18" stroke="#8B5CF6" stroke-width="1.5"/><line x1="20" y1="22" x2="28" y2="22" stroke="#8B5CF6" stroke-width="1.5"/><line x1="20" y1="26" x2="25" y2="26" stroke="#8B5CF6" stroke-width="1.5"/></svg></div>
+                        <div class="result-icon"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="20" fill="#EDE9FE"/><rect x="16" y="12" width="16" height="24" rx="1" stroke="#8B5CF6" stroke-width="2" fill="none"/><line x1="20"y1="18"x2="28"y2="18" stroke="#8B5CF6" stroke-width="1.5"/><line x1="20"y1="22"x2="28"y2="22" stroke="#8B5CF6" stroke-width="1.5"/><line x1="20"y1="26"x2="25"y2="26" stroke="#8B5CF6" stroke-width="1.5"/></svg></div>
                         <div class="result-text" style="color: #dc2626;">Not quite there yet</div>
                         <div class="result-score">You scored ${correct} out of ${currentQuestions.length} (${percentage}%)</div>
                         <p style="color: var(--text-secondary); margin-bottom: 15px;">You need 75% to pass. Review the lesson and try again!</p>

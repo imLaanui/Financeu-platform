@@ -10,6 +10,33 @@
     <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.svg">
     <link rel="stylesheet" href="styles.css">
     <style>
+        /* SVG Icon Alignment Fixes */
+        svg {
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        .intro-card-icon svg,
+        .mistake-icon svg,
+        .reflection-icon svg,
+        .result-icon svg {
+            display: block;
+            margin: 0 auto;
+        }
+
+        .budget-method-emoji svg,
+        .budget-item-label svg {
+            display: inline-block;
+            vertical-align: middle;
+            margin-right: 8px;
+        }
+
+        p svg, li svg, span svg {
+            display: inline-block;
+            vertical-align: middle;
+            margin: 0 2px;
+        }
+
         .lesson-container {
             max-width: 800px;
             margin: 0 auto;
@@ -659,7 +686,7 @@
                 <ul class="nav-links">
                     <li><a href="/">Home</a></li>
                     <li><a href="dashboard">Dashboard</a></li>
-                    <li id="authButtons" style="opacity: 0;"></li>
+                    <li id="authButtons" style=" opacity: 0;"></li>
                 </ul>
             </div>
         </div>
@@ -682,32 +709,17 @@
                 <h2>Why Credit Cards Matter</h2>
                 <div class="intro-cards">
                     <div class="intro-card">
-                        <div class="intro-card-icon"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="24" cy="24" r="20" fill="#EFF6FF"/>
-        <rect x="12" y="18" width="24" height="16" rx="2" fill="#3B82F6" opacity="0.3"/>
-        <rect x="12" y="18" width="24" height="16" rx="2" stroke="#3B82F6" stroke-width="2" fill="none"/>
-        <rect x="12" y="21" width="24" height="4" fill="#3B82F6"/>
-        <line x1="15" y1="29" x2="21" y2="29" stroke="#3B82F6" stroke-width="1.5" stroke-linecap="round"/>
-    </svg></div>
+                        <div class="intro-card-icon"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="20" fill="#EFF6FF"/><rect x="12" y="18" width="24" height="16" rx="2" fill="#3B82F6" opacity="0.3"/><rect x="12" y="18" width="24" height="16" rx="2" stroke="#3B82F6" stroke-width="2" fill="none"/><rect x="12" y="21" width="24" height="4" fill="#3B82F6"/><line x1="15"y1="29"x2="21"y2="29" stroke="#3B82F6" stroke-width="1.5" stroke-linecap="round"/></svg></div>
                         <h3>The Problem</h3>
                         <p>Credit cards can be powerful tools or dangerous traps depending on how you use them</p>
                     </div>
                     <div class="intro-card">
-                        <div class="intro-card-icon"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="24" cy="24" r="20" fill="#EDE9FE"/>
-        <rect x="16" y="12" width="16" height="24" rx="1" stroke="#8B5CF6" stroke-width="2" fill="none"/>
-        <line x1="20" y1="18" x2="28" y2="18" stroke="#8B5CF6" stroke-width="1.5"/>
-        <line x1="20" y1="22" x2="28" y2="22" stroke="#8B5CF6" stroke-width="1.5"/>
-        <line x1="20" y1="26" x2="25" y2="26" stroke="#8B5CF6" stroke-width="1.5"/>
-    </svg></div>
+                        <div class="intro-card-icon"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="20" fill="#EDE9FE"/><rect x="16" y="12" width="16" height="24" rx="1" stroke="#8B5CF6" stroke-width="2" fill="none"/><line x1="20"y1="18"x2="28"y2="18" stroke="#8B5CF6" stroke-width="1.5"/><line x1="20"y1="22"x2="28"y2="22" stroke="#8B5CF6" stroke-width="1.5"/><line x1="20"y1="26"x2="25"y2="26" stroke="#8B5CF6" stroke-width="1.5"/></svg></div>
                         <h3>The Solution</h3>
                         <p>Learn the key features, benefits, and pitfalls to use credit cards strategically</p>
                     </div>
                     <div class="intro-card">
-                        <div class="intro-card-icon"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="24" cy="24" r="20" fill="#D1FAE5"/>
-        <path d="M14 24 L20 30 L34 16" stroke="#00A676" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-    </svg></div>
+                        <div class="intro-card-icon"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="20" fill="#D1FAE5"/><path d="M14 24 L20 30 L34 16" stroke="#00A676" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
                         <h3>Your Goal</h3>
                         <p>Choose the right card and use it to build credit while earning rewards</p>
                     </div>
@@ -738,7 +750,7 @@
                         <div class="feature-desc">Cash back, travel points, or other perks on every purchase</div>
                     </div>
                     <div class="feature-box">
-                        <div class="feature-icon"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M10 2 L4 5 L4 10 C4 14 10 18 10 18 C10 18 16 14 16 10 L16 5 Z" fill="#10B981"/></svg>️</div>
+                        <div class="feature-icon"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M10 2 L4 5 L4 10 C4 14 10 18 10 18 C10 18 16 14 16 10 L16 5 Z" fill="#10B981"/></svg></div>
                         <div class="feature-title">Purchase Protection</div>
                         <div class="feature-desc">Fraud protection and extended warranties on purchases</div>
                     </div>
@@ -812,7 +824,7 @@
                         <div class="warning-desc">Average APR is 20-25%. If you carry a $3,000 balance at 22% APR and make minimum payments, you'll pay $4,000+ in interest over 10 years.</div>
                     </div>
                     <div class="warning-box">
-                        <div class="warning-title"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8 2 L14 14 L2 14 Z" fill="#F59E0B"/><path d="M8 6 L8 10 M8 11.5 L8 12.5" stroke="white" stroke-width="1.5"/></svg>️ Minimum Payment Trap</div>
+                        <div class="warning-title"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8 2 L14 14 L2 14 Z" fill="#F59E0B"/><path d="M8 6 L8 10 M8 11.5 L8 12.5" stroke="white" stroke-width="1.5"/></svg> Minimum Payment Trap</div>
                         <div class="warning-desc">Paying only the minimum keeps you in debt for years. On a $2,000 balance, minimum payments take 10+ years to pay off.</div>
                     </div>
                     <div class="warning-box">
@@ -883,7 +895,7 @@
                 <h2>Choosing the Right Card</h2>
                 <p>Different cards serve different purposes. Match the card to your needs:</p>
 
-                <ul style="font-size: 16px; line-height: 1.8; margin-top: 15px;">
+                <ul style=" font-size: 16px; line-height: 1.8; margin-top: 15px;">
                     <li><strong>Building Credit:</strong> Secured cards or student cards with no annual fee</li>
                     <li><strong>Everyday Spending:</strong> Cash back cards (1.5-2% back on everything)</li>
                     <li><strong>Specific Categories:</strong> Cards with bonus rewards on gas, groceries, or dining</li>
@@ -989,7 +1001,7 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <p style="font-size: 0.85rem; opacity: 0.8; margin-bottom: 10px;">Disclaimer: FinanceU provides educational content only and does not offer financial, legal, or investment advice. Always consult with a qualified professional before making financial decisions.</p>
+                <p style=" font-size: 0.85rem; opacity: 0.8; margin-bottom: 10px;">Disclaimer: FinanceU provides educational content only and does not offer financial, legal, or investment advice. Always consult with a qualified professional before making financial decisions.</p>
                 <p>&copy; 2025 FinanceU. All rights reserved.</p>
             </div>
         </div>
@@ -1179,7 +1191,7 @@
             } else {
                 resultDiv.innerHTML = \`
                     <div class="quiz-result fail">
-                        <div class="result-icon"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="20" fill="#EDE9FE"/><rect x="16" y="12" width="16" height="24" rx="1" stroke="#8B5CF6" stroke-width="2" fill="none"/><line x1="20" y1="18" x2="28" y2="18" stroke="#8B5CF6" stroke-width="1.5"/><line x1="20" y1="22" x2="28" y2="22" stroke="#8B5CF6" stroke-width="1.5"/><line x1="20" y1="26" x2="25" y2="26" stroke="#8B5CF6" stroke-width="1.5"/></svg></div>
+                        <div class="result-icon"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="20" fill="#EDE9FE"/><rect x="16" y="12" width="16" height="24" rx="1" stroke="#8B5CF6" stroke-width="2" fill="none"/><line x1="20"y1="18"x2="28"y2="18" stroke="#8B5CF6" stroke-width="1.5"/><line x1="20"y1="22"x2="28"y2="22" stroke="#8B5CF6" stroke-width="1.5"/><line x1="20"y1="26"x2="25"y2="26" stroke="#8B5CF6" stroke-width="1.5"/></svg></div>
                         <div class="result-text" style="color: #dc2626;">Not Quite</div>
                         <div class="result-score">You scored \${correct} out of \${quizData.length}</div>
                         <p style="color: var(--text-secondary); margin-bottom: 15px; font-size: 16px; font-weight: 600;">You need all 3 correct. Review the lesson and try again!</p>

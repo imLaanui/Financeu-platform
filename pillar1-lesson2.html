@@ -10,6 +10,33 @@
     <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.svg">
     <link rel="stylesheet" href="styles.css">
     <style>
+        /* SVG Icon Alignment Fixes */
+        svg {
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        .intro-card-icon svg,
+        .mistake-icon svg,
+        .reflection-icon svg,
+        .result-icon svg {
+            display: block;
+            margin: 0 auto;
+        }
+
+        .budget-method-emoji svg,
+        .budget-item-label svg {
+            display: inline-block;
+            vertical-align: middle;
+            margin-right: 8px;
+        }
+
+        p svg, li svg, span svg {
+            display: inline-block;
+            vertical-align: middle;
+            margin: 0 2px;
+        }
+
         .lesson-container {
             max-width: 800px;
             margin: 0 auto;
@@ -874,7 +901,7 @@
                 <ul class="nav-links">
                     <li><a href="/">Home</a></li>
                     <li><a href="dashboard">Dashboard</a></li>
-                    <li id="authButtons" style="opacity: 0;">
+                    <li id="authButtons" style=" opacity: 0;">
                     </li>
                 </ul>
             </div>
@@ -898,30 +925,17 @@
                 <h2>Understanding Income and Expenses</h2>
                 <div class="intro-cards">
                     <div class="intro-card">
-                        <div class="intro-card-icon"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="24" cy="24" r="20" fill="#DBEAFE"/>
-        <circle cx="24" cy="24" r="14" stroke="#3B82F6" stroke-width="2" fill="none"/>
-        <circle cx="24" cy="24" r="8" stroke="#3B82F6" stroke-width="2" fill="none"/>
-        <circle cx="24" cy="24" r="3" fill="#3B82F6"/>
-    </svg></div>
+                        <div class="intro-card-icon"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="20" fill="#DBEAFE"/><circle cx="24" cy="24" r="14" stroke="#3B82F6" stroke-width="2" fill="none"/><circle cx="24" cy="24" r="8" stroke="#3B82F6" stroke-width="2" fill="none"/><circle cx="24" cy="24" r="3" fill="#3B82F6"/></svg></div>
                         <h3>The Problem</h3>
                         <p>Most people track what they earn, but have no idea where it all goes</p>
                     </div>
                     <div class="intro-card">
-                        <div class="intro-card-icon"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="24" cy="24" r="20" fill="#FEF3C7"/>
-        <circle cx="24" cy="20" r="6" fill="#F59E0B" opacity="0.3"/>
-        <path d="M24 14 C28 14 30 16 30 20 C30 23 28 25 27 26 L27 30 L21 30 L21 26 C20 25 18 23 18 20 C18 16 20 14 24 14" stroke="#F59E0B" stroke-width="2"/>
-        <line x1="20" y1="32" x2="28" y2="32" stroke="#F59E0B" stroke-width="2" stroke-linecap="round"/>
-    </svg></div>
+                        <div class="intro-card-icon"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="20" fill="#FEF3C7"/><circle cx="24" cy="20" r="6" fill="#F59E0B" opacity="0.3"/><path d="M24 14 C28 14 30 16 30 20 C30 23 28 25 27 26 L27 30 L21 30 L21 26 C20 25 18 23 18 20 C18 16 20 14 24 14" stroke="#F59E0B" stroke-width="2"/><line x1="20"y1="32"x2="28"y2="32" stroke="#F59E0B" stroke-width="2" stroke-linecap="round"/></svg></div>
                         <h3>Why It Matters</h3>
                         <p>The gap between what you make and what you spend determines your entire financial future</p>
                     </div>
                     <div class="intro-card">
-                        <div class="intro-card-icon"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="24" cy="24" r="20" fill="#D1FAE5"/>
-        <path d="M14 24 L20 30 L34 16" stroke="#00A676" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-    </svg></div>
+                        <div class="intro-card-icon"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="20" fill="#D1FAE5"/><path d="M14 24 L20 30 L34 16" stroke="#00A676" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
                         <h3>Your Goal</h3>
                         <p>Learn the golden rule of personal finance and how to apply it starting today</p>
                     </div>
@@ -1108,7 +1122,7 @@
 
                     <div class="budget-item">
                         <div class="budget-item-header">
-                            <div class="budget-item-label"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 6 L10 2 L17 6 L17 14 L10 18 L3 14 Z" stroke="#B45309" stroke-width="1.5" fill="none"/><polyline points="3,6 10,10 17,6" stroke="#B45309" stroke-width="1.5" fill="none"/><line x1="10" y1="10" x2="10" y2="18" stroke="#B45309" stroke-width="1.5"/></svg> Miscellaneous</div>
+                            <div class="budget-item-label"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 6 L10 2 L17 6 L17 14 L10 18 L3 14 Z" stroke="#B45309" stroke-width="1.5" fill="none"/><polyline points="3,6 10,10 17,6" stroke="#B45309" stroke-width="1.5" fill="none"/><line x1="10"y1="10"x2="10"y2="18" stroke="#B45309" stroke-width="1.5"/></svg> Miscellaneous</div>
                             <div class="budget-item-value">$70</div>
                         </div>
                         <div class="budget-item-bar">
@@ -1178,26 +1192,22 @@
                 <h2>Common Mistakes to Avoid</h2>
                 <div class="mistakes-grid">
                     <div class="mistake-card">
-                        <div class="mistake-icon"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="24" cy="24" r="20" fill="#FEE2E2"/>
-        <path d="M12 18 L18 24 L24 20 L30 30 L36 26" stroke="#DC2626" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-        <path d="M30 34 L36 34 L36 28" stroke="#DC2626" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-    </svg></div>
+                        <div class="mistake-icon"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="20" fill="#FEE2E2"/><path d="M12 18 L18 24 L24 20 L30 30 L36 26" stroke="#DC2626" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M30 34 L36 34 L36 28" stroke="#DC2626" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
                         <div class="mistake-title">Only Focusing on Income</div>
                         <div class="mistake-desc">Earning more won't help if you spend it all</div>
                     </div>
                     <div class="mistake-card">
-                        <div class="mistake-icon"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="20" fill="#EFF6FF"/><rect x="14" y="16" width="20" height="18" rx="2" stroke="#3B82F6" stroke-width="2" fill="none"/><line x1="14" y1="22" x2="34" y2="22" stroke="#3B82F6" stroke-width="2"/><line x1="19" y1="14" x2="19" y2="18" stroke="#3B82F6" stroke-width="2" stroke-linecap="round"/><line x1="29" y1="14" x2="29" y2="18" stroke="#3B82F6" stroke-width="2" stroke-linecap="round"/></svg></div>
+                        <div class="mistake-icon"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="20" fill="#EFF6FF"/><rect x="14" y="16" width="20" height="18" rx="2" stroke="#3B82F6" stroke-width="2" fill="none"/><line x1="14"y1="22"x2="34"y2="22" stroke="#3B82F6" stroke-width="2"/><line x1="19"y1="14"x2="19"y2="18" stroke="#3B82F6" stroke-width="2" stroke-linecap="round"/><line x1="29"y1="14"x2="29"y2="18" stroke="#3B82F6" stroke-width="2" stroke-linecap="round"/></svg></div>
                         <div class="mistake-title">Forgetting Irregulars</div>
                         <div class="mistake-desc">Car repairs, holidays add up quickly</div>
                     </div>
                     <div class="mistake-card">
-                        <div class="mistake-icon"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="20" fill="#FCE7F3"/><rect x="16" y="22" width="16" height="12" rx="1" stroke="#EC4899" stroke-width="2" fill="none"/><rect x="14" y="18" width="20" height="4" rx="1" fill="#EC4899" opacity="0.3"/><rect x="14" y="18" width="20" height="4" rx="1" stroke="#EC4899" stroke-width="2" fill="none"/><line x1="24" y1="18" x2="24" y2="34" stroke="#EC4899" stroke-width="2"/><path d="M24 18 Q20 14 18 16" stroke="#EC4899" stroke-width="2" fill="none"/><path d="M24 18 Q28 14 30 16" stroke="#EC4899" stroke-width="2" fill="none"/></svg></div>
+                        <div class="mistake-icon"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="20" fill="#FCE7F3"/><rect x="16" y="22" width="16" height="12" rx="1" stroke="#EC4899" stroke-width="2" fill="none"/><rect x="14" y="18" width="20" height="4" rx="1" fill="#EC4899" opacity="0.3"/><rect x="14" y="18" width="20" height="4" rx="1" stroke="#EC4899" stroke-width="2" fill="none"/><line x1="24"y1="18"x2="24"y2="34" stroke="#EC4899" stroke-width="2"/><path d="M24 18 Q20 14 18 16" stroke="#EC4899" stroke-width="2" fill="none"/><path d="M24 18 Q28 14 30 16" stroke="#EC4899" stroke-width="2" fill="none"/></svg></div>
                         <div class="mistake-title">Treating Gifts as Income</div>
                         <div class="mistake-desc">Birthday money isn't reliable income</div>
                     </div>
                     <div class="mistake-card">
-                        <div class="mistake-icon"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="20" fill="#FEF3C7"/><path d="M16 20 L16 28 C16 30 18 32 20 32 L28 32 C30 32 32 30 32 28 L32 20" stroke="#F59E0B" stroke-width="2" fill="none"/><line x1="16" y1="20" x2="32" y2="20" stroke="#F59E0B" stroke-width="2"/><path d="M32 22 L34 22 C35 22 36 23 36 24 C36 25 35 26 34 26 L32 26" stroke="#F59E0B" stroke-width="2" fill="none"/></svg></div>
+                        <div class="mistake-icon"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="20" fill="#FEF3C7"/><path d="M16 20 L16 28 C16 30 18 32 20 32 L28 32 C30 32 32 30 32 28 L32 20" stroke="#F59E0B" stroke-width="2" fill="none"/><line x1="16"y1="20"x2="32"y2="20" stroke="#F59E0B" stroke-width="2"/><path d="M32 22 L34 22 C35 22 36 23 36 24 C36 25 35 26 34 26 L32 26" stroke="#F59E0B" stroke-width="2" fill="none"/></svg></div>
                         <div class="mistake-title">Ignoring Small Buys</div>
                         <div class="mistake-desc">$5 daily = $1,825 per year</div>
                     </div>
@@ -1304,7 +1314,7 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <p style="font-size: 0.85rem; opacity: 0.8; margin-bottom: 10px;">Disclaimer: FinanceU provides educational content only and does not offer financial, legal, or investment advice. Always consult with a qualified professional before making financial decisions.</p>
+                <p style=" font-size: 0.85rem; opacity: 0.8; margin-bottom: 10px;">Disclaimer: FinanceU provides educational content only and does not offer financial, legal, or investment advice. Always consult with a qualified professional before making financial decisions.</p>
                 <p>&copy; 2025 FinanceU. All rights reserved.</p>
             </div>
         </div>
@@ -1587,7 +1597,7 @@
             } else {
                 resultDiv.innerHTML = `
                     <div class="quiz-result fail">
-                        <div class="result-icon"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="20" fill="#EDE9FE"/><rect x="16" y="12" width="16" height="24" rx="1" stroke="#8B5CF6" stroke-width="2" fill="none"/><line x1="20" y1="18" x2="28" y2="18" stroke="#8B5CF6" stroke-width="1.5"/><line x1="20" y1="22" x2="28" y2="22" stroke="#8B5CF6" stroke-width="1.5"/><line x1="20" y1="26" x2="25" y2="26" stroke="#8B5CF6" stroke-width="1.5"/></svg></div>
+                        <div class="result-icon"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="20" fill="#EDE9FE"/><rect x="16" y="12" width="16" height="24" rx="1" stroke="#8B5CF6" stroke-width="2" fill="none"/><line x1="20"y1="18"x2="28"y2="18" stroke="#8B5CF6" stroke-width="1.5"/><line x1="20"y1="22"x2="28"y2="22" stroke="#8B5CF6" stroke-width="1.5"/><line x1="20"y1="26"x2="25"y2="26" stroke="#8B5CF6" stroke-width="1.5"/></svg></div>
                         <div class="result-text" style="color: #dc2626;">Not quite there yet</div>
                         <div class="result-score">You scored ${correct} out of ${currentQuestions.length} (${percentage}%)</div>
                         <p style="color: var(--text-secondary); margin-bottom: 15px;">You need 100% to pass. Review the lesson and try again!</p>

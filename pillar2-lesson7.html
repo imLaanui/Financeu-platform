@@ -10,6 +10,33 @@
     <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.svg">
     <link rel="stylesheet" href="styles.css">
     <style>
+        /* SVG Icon Alignment Fixes */
+        svg {
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        .intro-card-icon svg,
+        .mistake-icon svg,
+        .reflection-icon svg,
+        .result-icon svg {
+            display: block;
+            margin: 0 auto;
+        }
+
+        .budget-method-emoji svg,
+        .budget-item-label svg {
+            display: inline-block;
+            vertical-align: middle;
+            margin-right: 8px;
+        }
+
+        p svg, li svg, span svg {
+            display: inline-block;
+            vertical-align: middle;
+            margin: 0 2px;
+        }
+
         .lesson-container {
             max-width: 800px;
             margin: 0 auto;
@@ -769,7 +796,7 @@
                 <ul class="nav-links">
                     <li><a href="/">Home</a></li>
                     <li><a href="dashboard">Dashboard</a></li>
-                    <li id="authButtons" style="opacity: 0;">
+                    <li id="authButtons" style=" opacity: 0;">
                     </li>
                     </li>
                 </ul>
@@ -799,21 +826,12 @@
                         <p>All savings feel the same - but they shouldn't</p>
                     </div>
                     <div class="intro-card">
-                        <div class="intro-card-icon"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="24" cy="24" r="20" fill="#FCE7F3"/>
-        <circle cx="24" cy="24" r="12" stroke="#EC4899" stroke-width="2" fill="none"/>
-        <path d="M24 18 L24 24 L28 28" stroke="#EC4899" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-    </svg></div>
+                        <div class="intro-card-icon"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="20" fill="#FCE7F3"/><circle cx="24" cy="24" r="12" stroke="#EC4899" stroke-width="2" fill="none"/><path d="M24 18 L24 24 L28 28" stroke="#EC4899" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
                         <h3>The Solution</h3>
                         <p>Different goals need different strategies based on timeline</p>
                     </div>
                     <div class="intro-card">
-                        <div class="intro-card-icon"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="24" cy="24" r="20" fill="#DBEAFE"/>
-        <circle cx="24" cy="24" r="14" stroke="#3B82F6" stroke-width="2" fill="none"/>
-        <circle cx="24" cy="24" r="8" stroke="#3B82F6" stroke-width="2" fill="none"/>
-        <circle cx="24" cy="24" r="3" fill="#3B82F6"/>
-    </svg></div>
+                        <div class="intro-card-icon"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="20" fill="#DBEAFE"/><circle cx="24" cy="24" r="14" stroke="#3B82F6" stroke-width="2" fill="none"/><circle cx="24" cy="24" r="8" stroke="#3B82F6" stroke-width="2" fill="none"/><circle cx="24" cy="24" r="3" fill="#3B82F6"/></svg></div>
                         <h3>Your Goal</h3>
                         <p>Match your savings strategy to when you need the money</p>
                     </div>
@@ -836,7 +854,7 @@
 
                 <div class="timeline-cards">
                     <div class="timeline-card">
-                        <div class="timeline-emoji"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="14" cy="5" r="2" fill="#FCD34D"/><path d="M2 12 L18 12 C18 15 16 17 13 17 L7 17 C4 17 2 15 2 12" fill="#60A5FA"/><path d="M2 12 L18 12" stroke="#FCD34D" stroke-width="3"/></svg>️</div>
+                        <div class="timeline-emoji"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="14" cy="5" r="2" fill="#FCD34D"/><path d="M2 12 L18 12 C18 15 16 17 13 17 L7 17 C4 17 2 15 2 12" fill="#60A5FA"/><path d="M2 12 L18 12" stroke="#FCD34D" stroke-width="3"/></svg></div>
                         <div class="timeline-title">Short (0-2 years)</div>
                         <div class="timeline-desc">Vacation, gifts, car down payment</div>
                         <div class="timeline-strategy">High-yield savings</div>
@@ -921,7 +939,7 @@
                         <div class="timeline-strategy">Regular savings</div>
                     </div>
                     <div class="timeline-card">
-                        <div class="timeline-emoji"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 10 L8 8 L8 3 L10 2 L10 8 L18 6 L18 8 L10 11 L10 15 L12 16 L12 17 L10 16 L8 17 L8 16 L10 15 L10 11 L2 12 Z" fill="#3B82F6"/></svg>️</div>
+                        <div class="timeline-emoji"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 10 L8 8 L8 3 L10 2 L10 8 L18 6 L18 8 L10 11 L10 15 L12 16 L12 17 L10 16 L8 17 L8 16 L10 15 L10 11 L2 12 Z" fill="#3B82F6"/></svg></div>
                         <div class="timeline-title">Vacation Fund</div>
                         <div class="timeline-desc">$5,000 • 1 year away</div>
                         <div class="timeline-strategy">High-yield (4%)</div>
@@ -1000,11 +1018,7 @@
                         <div class="mistake-desc">One account = confusion about what's for what</div>
                     </div>
                     <div class="mistake-card">
-                        <div class="mistake-icon"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="24" cy="24" r="20" fill="#FEE2E2"/>
-        <path d="M12 18 L18 24 L24 20 L30 30 L36 26" stroke="#DC2626" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-        <path d="M30 34 L36 34 L36 28" stroke="#DC2626" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-    </svg></div>
+                        <div class="mistake-icon"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="20" fill="#FEE2E2"/><path d="M12 18 L18 24 L24 20 L30 30 L36 26" stroke="#DC2626" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M30 34 L36 34 L36 28" stroke="#DC2626" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
                         <div class="mistake-title">Investing Short-term $</div>
                         <div class="mistake-desc">Market drops 20% right when you need it</div>
                     </div>
@@ -1014,7 +1028,7 @@
                         <div class="mistake-desc">Balance future security with today's rewards</div>
                     </div>
                     <div class="mistake-card">
-                        <div class="mistake-icon"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="10" cy="10" r="7" stroke="#EF4444" stroke-width="2" fill="none"/><line x1="5" y1="5" x2="15" y2="15" stroke="#EF4444" stroke-width="2"/></svg></div>
+                        <div class="mistake-icon"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="10" cy="10" r="7" stroke="#EF4444" stroke-width="2" fill="none"/><line x1="5"y1="5"x2="15"y2="15" stroke="#EF4444" stroke-width="2"/></svg></div>
                         <div class="mistake-title">Raiding Long-term $</div>
                         <div class="mistake-desc">Retirement fund isn't for vacation splurges</div>
                     </div>
@@ -1058,7 +1072,7 @@
                 </div>
 
                 <div class="reflection-box" style="margin-top: 20px;">
-                    <div class="reflection-icon" style="font-size: 40px; margin-bottom: 10px; text-align: center;"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><ellipse cx="10" cy="8" rx="7" ry="5" fill="#DBEAFE"/><circle cx="4" cy="13" r="2" fill="#DBEAFE"/><circle cx="2" cy="16" r="1" fill="#DBEAFE"/></svg></div>
+                    <div class="reflection-icon" style=" font-size: 40px; margin-bottom: 10px; text-align: center;"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><ellipse cx="10" cy="8" rx="7" ry="5" fill="#DBEAFE"/><circle cx="4" cy="13" r="2" fill="#DBEAFE"/><circle cx="2" cy="16" r="1" fill="#DBEAFE"/></svg></div>
                     <div class="reflection-title" style="text-align: center; color: #f59e0b; font-size: 18px; font-weight: 700; margin-bottom: 10px;">Quick Reflection</div>
                     <div class="reflection-text" style="text-align: center; color: var(--text-secondary); font-size: 14px; line-height: 1.6;">
                         Which goals matter most? Fund critical goals (emergency, retirement) fully before nice-to-haves (vacation). This builds real security.
@@ -1121,7 +1135,7 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <p style="font-size: 0.85rem; opacity: 0.8; margin-bottom: 10px;">Disclaimer: FinanceU provides educational content only and does not offer financial, legal, or investment advice. Always consult with a qualified professional before making financial decisions.</p>
+                <p style=" font-size: 0.85rem; opacity: 0.8; margin-bottom: 10px;">Disclaimer: FinanceU provides educational content only and does not offer financial, legal, or investment advice. Always consult with a qualified professional before making financial decisions.</p>
                 <p>&copy; 2025 FinanceU. All rights reserved.</p>
             </div>
         </div>
@@ -1403,7 +1417,7 @@
             } else {
                 resultDiv.innerHTML = `
                     <div class="quiz-result fail">
-                        <div class="result-icon"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="20" fill="#EDE9FE"/><rect x="16" y="12" width="16" height="24" rx="1" stroke="#8B5CF6" stroke-width="2" fill="none"/><line x1="20" y1="18" x2="28" y2="18" stroke="#8B5CF6" stroke-width="1.5"/><line x1="20" y1="22" x2="28" y2="22" stroke="#8B5CF6" stroke-width="1.5"/><line x1="20" y1="26" x2="25" y2="26" stroke="#8B5CF6" stroke-width="1.5"/></svg></div>
+                        <div class="result-icon"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="20" fill="#EDE9FE"/><rect x="16" y="12" width="16" height="24" rx="1" stroke="#8B5CF6" stroke-width="2" fill="none"/><line x1="20"y1="18"x2="28"y2="18" stroke="#8B5CF6" stroke-width="1.5"/><line x1="20"y1="22"x2="28"y2="22" stroke="#8B5CF6" stroke-width="1.5"/><line x1="20"y1="26"x2="25"y2="26" stroke="#8B5CF6" stroke-width="1.5"/></svg></div>
                         <div class="result-text" style="color: #dc2626;">Not quite there yet</div>
                         <div class="result-score">You scored ${correct} out of ${currentQuestions.length} (${percentage}%)</div>
                         <p style="color: var(--text-secondary); margin-bottom: 15px;">You need 100% to pass. Review the lesson and try again!</p>

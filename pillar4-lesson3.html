@@ -7,6 +7,33 @@
     <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
     <link rel="stylesheet" href="styles.css">
     <style>
+        /* SVG Icon Alignment Fixes */
+        svg {
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        .intro-card-icon svg,
+        .mistake-icon svg,
+        .reflection-icon svg,
+        .result-icon svg {
+            display: block;
+            margin: 0 auto;
+        }
+
+        .budget-method-emoji svg,
+        .budget-item-label svg {
+            display: inline-block;
+            vertical-align: middle;
+            margin-right: 8px;
+        }
+
+        p svg, li svg, span svg {
+            display: inline-block;
+            vertical-align: middle;
+            margin: 0 2px;
+        }
+
         .lesson-container { max-width: 800px; margin: 0 auto; padding: 40px 20px; }
         .lesson-header { text-align: center; margin-bottom: 40px; padding: 30px; background: linear-gradient(135deg, #0A1A2F 0%, #1a3a5c 100%); border-radius: 16px; position: relative; overflow: hidden; }
         .lesson-header::before { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: radial-gradient(circle, rgba(59, 130, 246, 0.1) 0%, transparent 70%); animation: rotate 20s linear infinite; }
@@ -86,7 +113,7 @@
                 <ul class="nav-links">
                     <li><a href="/">Home</a></li>
                     <li><a href="dashboard">Dashboard</a></li>
-                    <li id="authButtons" style="opacity: 0;"></li>
+                    <li id="authButtons" style=" opacity: 0;"></li>
                 </ul>
             </div>
         </div>
@@ -106,31 +133,17 @@
                 <h2>Building Your Emergency Fund</h2>
                 <div class="intro-cards">
                     <div class="intro-card">
-                        <div class="intro-card-icon"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="24" cy="24" r="20" fill="#FEE2E2"/>
-        <path d="M24 14V26" stroke="#DC2626" stroke-width="3" stroke-linecap="round"/>
-        <circle cx="24" cy="32" r="2" fill="#DC2626"/>
-    </svg></div>
+                        <div class="intro-card-icon"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="20" fill="#FEE2E2"/><path d="M24 14V26" stroke="#DC2626" stroke-width="3" stroke-linecap="round"/><circle cx="24" cy="32" r="2" fill="#DC2626"/></svg></div>
                         <h3>The Problem</h3>
                         <p>Most people live paycheck to paycheck without a financial safety net</p>
                     </div>
                     <div class="intro-card">
-                        <div class="intro-card-icon"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="24" cy="24" r="20" fill="#D1FAE5"/>
-        <path d="M24 10 L32 14 L32 24 C32 30 28 34 24 38 C20 34 16 30 16 24 L16 14 Z" fill="#00A676" opacity="0.3"/>
-        <path d="M24 10 L32 14 L32 24 C32 30 28 34 24 38 C20 34 16 30 16 24 L16 14 Z" stroke="#00A676" stroke-width="2" fill="none"/>
-        <path d="M20 24 L22 26 L28 20" stroke="#00A676" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-    </svg></div>
+                        <div class="intro-card-icon"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="20" fill="#D1FAE5"/><path d="M24 10 L32 14 L32 24 C32 30 28 34 24 38 C20 34 16 30 16 24 L16 14 Z" fill="#00A676" opacity="0.3"/><path d="M24 10 L32 14 L32 24 C32 30 28 34 24 38 C20 34 16 30 16 24 L16 14 Z" stroke="#00A676" stroke-width="2" fill="none"/><path d="M20 24 L22 26 L28 20" stroke="#00A676" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
                         <h3>Why It Matters</h3>
                         <p>An emergency fund protects you from unexpected expenses and financial stress</p>
                     </div>
                     <div class="intro-card">
-                        <div class="intro-card-icon"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="24" cy="24" r="20" fill="#DBEAFE"/>
-        <circle cx="24" cy="24" r="14" stroke="#3B82F6" stroke-width="2" fill="none"/>
-        <circle cx="24" cy="24" r="8" stroke="#3B82F6" stroke-width="2" fill="none"/>
-        <circle cx="24" cy="24" r="3" fill="#3B82F6"/>
-    </svg></div>
+                        <div class="intro-card-icon"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="20" fill="#DBEAFE"/><circle cx="24" cy="24" r="14" stroke="#3B82F6" stroke-width="2" fill="none"/><circle cx="24" cy="24" r="8" stroke="#3B82F6" stroke-width="2" fill="none"/><circle cx="24" cy="24" r="3" fill="#3B82F6"/></svg></div>
                         <h3>What You'll Learn</h3>
                         <p>Why you need 3-6 months of expenses saved and how to build it step-by-step</p>
                     </div>
@@ -279,42 +292,22 @@
                 <h2>Avoid These Mistakes</h2>
                 <div class="mistakes-grid">
                     <div class="mistake-card">
-                        <div class="mistake-icon"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="24" cy="24" r="20" fill="#DBEAFE"/>
-        <circle cx="24" cy="24" r="14" stroke="#3B82F6" stroke-width="2" fill="none"/>
-        <circle cx="24" cy="24" r="8" stroke="#3B82F6" stroke-width="2" fill="none"/>
-        <circle cx="24" cy="24" r="3" fill="#3B82F6"/>
-    </svg></div>
+                        <div class="mistake-icon"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="20" fill="#DBEAFE"/><circle cx="24" cy="24" r="14" stroke="#3B82F6" stroke-width="2" fill="none"/><circle cx="24" cy="24" r="8" stroke="#3B82F6" stroke-width="2" fill="none"/><circle cx="24" cy="24" r="3" fill="#3B82F6"/></svg></div>
                         <div class="mistake-title">Setting Unrealistic Goals</div>
                         <div class="mistake-desc">Don't aim for 6 months right away—start with $500</div>
                     </div>
                     <div class="mistake-card">
-                        <div class="mistake-icon"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="24" cy="24" r="20" fill="#FEE2E2"/>
-        <path d="M12 18 L18 24 L24 20 L30 30 L36 26" stroke="#DC2626" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-        <path d="M30 34 L36 34 L36 28" stroke="#DC2626" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-    </svg></div>
+                        <div class="mistake-icon"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="20" fill="#FEE2E2"/><path d="M12 18 L18 24 L24 20 L30 30 L36 26" stroke="#DC2626" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M30 34 L36 34 L36 28" stroke="#DC2626" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
                         <div class="mistake-title">Using It for Non-Emergencies</div>
                         <div class="mistake-desc">A new phone isn't an emergency—medical bills are</div>
                     </div>
                     <div class="mistake-card">
-                        <div class="mistake-icon"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="24" cy="24" r="20" fill="#EFF6FF"/>
-        <path d="M12 20 L24 12 L36 20" stroke="#3B82F6" stroke-width="2" fill="none"/>
-        <rect x="14" y="20" width="4" height="12" fill="#3B82F6"/>
-        <rect x="22" y="20" width="4" height="12" fill="#3B82F6"/>
-        <rect x="30" y="20" width="4" height="12" fill="#3B82F6"/>
-        <rect x="12" y="32" width="24" height="3" fill="#3B82F6"/>
-    </svg></div>
+                        <div class="mistake-icon"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="20" fill="#EFF6FF"/><path d="M12 20 L24 12 L36 20" stroke="#3B82F6" stroke-width="2" fill="none"/><rect x="14" y="20" width="4" height="12" fill="#3B82F6"/><rect x="22" y="20" width="4" height="12" fill="#3B82F6"/><rect x="30" y="20" width="4" height="12" fill="#3B82F6"/><rect x="12" y="32" width="24" height="3" fill="#3B82F6"/></svg></div>
                         <div class="mistake-title">Keeping It Too Accessible</div>
                         <div class="mistake-desc">In your checking account? You'll spend it</div>
                     </div>
                     <div class="mistake-card">
-                        <div class="mistake-icon"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="24" cy="24" r="20" fill="#F3F4F6"/>
-        <rect x="18" y="16" width="4" height="16" rx="1" fill="#6B7280"/>
-        <rect x="26" y="16" width="4" height="16" rx="1" fill="#6B7280"/>
-    </svg></div>
+                        <div class="mistake-icon"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="20" fill="#F3F4F6"/><rect x="18" y="16" width="4" height="16" rx="1" fill="#6B7280"/><rect x="26" y="16" width="4" height="16" rx="1" fill="#6B7280"/></svg></div>
                         <div class="mistake-title">Waiting to Start</div>
                         <div class="mistake-desc">"I'll save when I earn more" means never starting</div>
                     </div>
@@ -516,9 +509,9 @@
                 const userId = localStorage.getItem('userId');
                 localStorage.setItem(`pillar4_lesson3_quiz_passed_${userId}`, 'true');
                 document.getElementById('finishBtn').disabled = false;
-                resultDiv.innerHTML = `<div class="quiz-result pass"><div style="font-size: 48px;"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="4" cy="4" r="1" fill="#F59E0B"/><circle cx="16" cy="4" r="1" fill="#EF4444"/><circle cx="4" cy="16" r="1" fill="#3B82F6"/><circle cx="16" cy="16" r="1" fill="#10B981"/><path d="M10 6 L12 14 L8 14 Z" fill="#F59E0B"/><rect x="8" y="14" width="4" height="2" fill="#EF4444"/></svg></div><div style="font-size: 24px; font-weight: 700; color: #10b981;">Quiz Passed!</div><p>Great job! You can now finish the lesson.</p></div>`;
+                resultDiv.innerHTML = `<div class="quiz-result pass"><div style=" font-size: 48px;"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="4" cy="4" r="1" fill="#F59E0B"/><circle cx="16" cy="4" r="1" fill="#EF4444"/><circle cx="4" cy="16" r="1" fill="#3B82F6"/><circle cx="16" cy="16" r="1" fill="#10B981"/><path d="M10 6 L12 14 L8 14 Z" fill="#F59E0B"/><rect x="8" y="14" width="4" height="2" fill="#EF4444"/></svg></div><div style=" font-size: 24px; font-weight: 700; color: #10b981;">Quiz Passed!</div><p>Great job! You can now finish the lesson.</p></div>`;
             } else {
-                resultDiv.innerHTML = `<div class="quiz-result fail"><div style="font-size: 48px;"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="5" width="4" height="12" fill="#3B82F6"/><rect x="8" y="5" width="4" height="12" fill="#10B981"/><rect x="13" y="5" width="4" height="12" fill="#F59E0B"/></svg></div><div style="font-size: 24px; font-weight: 700; color: #dc2626;">Not quite there yet</div><p>You need 100% to pass. Review and try again!</p><button class="btn-retry" onclick="retryQuiz()">Retry Quiz</button></div>`;
+                resultDiv.innerHTML = `<div class="quiz-result fail"><div style=" font-size: 48px;"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="5" width="4" height="12" fill="#3B82F6"/><rect x="8" y="5" width="4" height="12" fill="#10B981"/><rect x="13" y="5" width="4" height="12" fill="#F59E0B"/></svg></div><div style=" font-size: 24px; font-weight: 700; color: #dc2626;">Not quite there yet</div><p>You need 100% to pass. Review and try again!</p><button class="btn-retry" onclick="retryQuiz()">Retry Quiz</button></div>`;
             }
             document.getElementById('submitQuiz').style.display = 'none';
         }

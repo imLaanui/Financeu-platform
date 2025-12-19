@@ -10,6 +10,33 @@
     <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.svg">
     <link rel="stylesheet" href="styles.css">
     <style>
+        /* SVG Icon Alignment Fixes */
+        svg {
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        .intro-card-icon svg,
+        .mistake-icon svg,
+        .reflection-icon svg,
+        .result-icon svg {
+            display: block;
+            margin: 0 auto;
+        }
+
+        .budget-method-emoji svg,
+        .budget-item-label svg {
+            display: inline-block;
+            vertical-align: middle;
+            margin-right: 8px;
+        }
+
+        p svg, li svg, span svg {
+            display: inline-block;
+            vertical-align: middle;
+            margin: 0 2px;
+        }
+
         .lesson-container{max-width:800px;margin:0 auto;padding:30px 20px}
         .lesson-header{text-align:center;margin-bottom:30px;padding:25px;background:linear-gradient(135deg,#0A1A2F 0%,#1a3a5c 100%);border-radius:16px;position:relative;overflow:hidden}
         .lesson-header::before{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:radial-gradient(circle,rgba(255,255,255,0.1) 0%,transparent 70%);animation:rotate 20s linear infinite}
@@ -116,7 +143,7 @@
                 <ul class="nav-links">
                     <li><a href="/">Home</a></li>
                     <li><a href="dashboard">Dashboard</a></li>
-                    <li id="authButtons" style="opacity:0;"></li>
+                    <li id="authButtons" style=" opacity:0;"></li>
                 </ul>
             </div>
         </div>
@@ -136,31 +163,17 @@
                 <h2>Navigating Student Loan Debt</h2>
                 <div class="intro-cards">
                     <div class="intro-card">
-                        <div class="intro-card-icon"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="24" cy="24" r="20" fill="#EDE9FE"/>
-        <rect x="16" y="12" width="16" height="24" rx="1" stroke="#8B5CF6" stroke-width="2" fill="none"/>
-        <line x1="20" y1="18" x2="28" y2="18" stroke="#8B5CF6" stroke-width="1.5"/>
-        <line x1="20" y1="22" x2="28" y2="22" stroke="#8B5CF6" stroke-width="1.5"/>
-        <line x1="20" y1="26" x2="25" y2="26" stroke="#8B5CF6" stroke-width="1.5"/>
-    </svg></div>
+                        <div class="intro-card-icon"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="20" fill="#EDE9FE"/><rect x="16" y="12" width="16" height="24" rx="1" stroke="#8B5CF6" stroke-width="2" fill="none"/><line x1="20"y1="18"x2="28"y2="18" stroke="#8B5CF6" stroke-width="1.5"/><line x1="20"y1="22"x2="28"y2="22" stroke="#8B5CF6" stroke-width="1.5"/><line x1="20"y1="26"x2="25"y2="26" stroke="#8B5CF6" stroke-width="1.5"/></svg></div>
                         <h3>The Problem</h3>
                         <p>Student loans can be overwhelming with complex repayment options and long timelines</p>
                     </div>
                     <div class="intro-card">
-                        <div class="intro-card-icon"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="24" cy="24" r="20" fill="#FEF3C7"/>
-        <circle cx="24" cy="20" r="6" fill="#F59E0B" opacity="0.3"/>
-        <path d="M24 14 C28 14 30 16 30 20 C30 23 28 25 27 26 L27 30 L21 30 L21 26 C20 25 18 23 18 20 C18 16 20 14 24 14" stroke="#F59E0B" stroke-width="2"/>
-        <line x1="20" y1="32" x2="28" y2="32" stroke="#F59E0B" stroke-width="2" stroke-linecap="round"/>
-    </svg></div>
+                        <div class="intro-card-icon"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="20" fill="#FEF3C7"/><circle cx="24" cy="20" r="6" fill="#F59E0B" opacity="0.3"/><path d="M24 14 C28 14 30 16 30 20 C30 23 28 25 27 26 L27 30 L21 30 L21 26 C20 25 18 23 18 20 C18 16 20 14 24 14" stroke="#F59E0B" stroke-width="2"/><line x1="20"y1="32"x2="28"y2="32" stroke="#F59E0B" stroke-width="2" stroke-linecap="round"/></svg></div>
                         <h3>The Solution</h3>
                         <p>Understand federal vs private loans, repayment plans, and strategic payoff methods</p>
                     </div>
                     <div class="intro-card">
-                        <div class="intro-card-icon"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="24" cy="24" r="20" fill="#D1FAE5"/>
-        <path d="M14 24 L20 30 L34 16" stroke="#00A676" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-    </svg></div>
+                        <div class="intro-card-icon"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="20" fill="#D1FAE5"/><path d="M14 24 L20 30 L34 16" stroke="#00A676" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
                         <h3>Your Goal</h3>
                         <p>Create a smart repayment strategy that minimizes interest and maximizes benefits</p>
                     </div>
@@ -178,7 +191,7 @@
                 <h2>Federal vs Private Student Loans</h2>
                 
                 <p><strong>Federal Loans (Always better when possible):</strong></p>
-                <ul style="font-size:16px;line-height:1.8;margin-top:10px;">
+                <ul style=" font-size:16px;line-height:1.8;margin-top:10px;">
                     <li>Fixed interest rates (usually lower)</li>
                     <li>Income-driven repayment plans available</li>
                     <li>Loan forgiveness programs (Public Service, Teacher, etc.)</li>
@@ -187,7 +200,7 @@
                 </ul>
 
                 <p style="margin-top:20px;"><strong>Private Loans (Last resort):</strong></p>
-                <ul style="font-size:16px;line-height:1.8;margin-top:10px;">
+                <ul style=" font-size:16px;line-height:1.8;margin-top:10px;">
                     <li>Variable OR fixed rates (often higher)</li>
                     <li>Credit check required - may need cosigner</li>
                     <li>No federal protections or forgiveness</li>
@@ -260,7 +273,7 @@
                 <p style="margin-top:15px;"><strong>3. Extended Repayment (25 years):</strong> Lower monthly payments but much more interest over time</p>
 
                 <p style="margin-top:15px;"><strong>4. Income-Driven Repayment (20-25 years):</strong></p>
-                <ul style="font-size:16px;line-height:1.8;margin-left:30px;margin-top:10px;">
+                <ul style=" font-size:16px;line-height:1.8;margin-left:30px;margin-top:10px;">
                     <li>IBR (Income-Based): 10-15% of discretionary income</li>
                     <li>PAYE (Pay As You Earn): 10% of discretionary income</li>
                     <li>REPAYE: 10% of discretionary income, no income cap</li>
@@ -422,7 +435,7 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <p style="font-size:0.85rem;opacity:0.8;margin-bottom:10px;">Disclaimer: FinanceU provides educational content only and does not offer financial, legal, or investment advice. Always consult with a qualified professional before making financial decisions.</p>
+                <p style=" font-size:0.85rem;opacity:0.8;margin-bottom:10px;">Disclaimer: FinanceU provides educational content only and does not offer financial, legal, or investment advice. Always consult with a qualified professional before making financial decisions.</p>
                 <p>&copy; 2025 FinanceU. All rights reserved.</p>
             </div>
         </div>
@@ -440,7 +453,7 @@
         function initQuiz(){const u=localStorage.getItem('userId');if(!u||u==='null'||u==='undefined'){console.error('No valid userId found');document.getElementById('finishBtn').disabled=true;return}const q=localStorage.getItem(\`pillar3_lesson6_quiz_passed_\${u}\`);if(q==='true'){quizPassed=true;document.getElementById('finishBtn').disabled=false;document.getElementById('quizContainer').style.display='none';return}renderQuiz()}
         function renderQuiz(){const qc=document.getElementById('quizQuestions');qc.innerHTML='';userAnswers=new Array(quizData.length).fill(null);quizData.forEach((q,qi)=>{const qcard=document.createElement('div');qcard.className='question-card';qcard.innerHTML=\`<div class="question-text">Question \${qi+1}: \${q.question}</div>\${q.options.map((o,oi)=>\`<div class="answer-option" onclick="selectAnswer(\${qi},\${oi})"><input type="radio" name="question\${qi}" value="\${oi}" style="margin-right:10px;">\${o}</div>\`).join('')}\`;qc.appendChild(qcard)});document.getElementById('submitQuiz').disabled=false;document.getElementById('quizResult').innerHTML=''}
         function selectAnswer(qi,oi){userAnswers[qi]=oi;const qcard=document.querySelectorAll('.question-card')[qi];const opts=qcard.querySelectorAll('.answer-option');opts.forEach((opt,idx)=>{opt.classList.remove('selected');if(idx===oi){opt.classList.add('selected');opt.querySelector('input').checked=true}})}
-        function submitQuiz(){if(userAnswers.includes(null)){alert('Please answer all questions before submitting.');return}let correct=0;quizData.forEach((q,i)=>{if(userAnswers[i]===q.correct){correct++}});const passed=correct===quizData.length;document.querySelectorAll('.question-card').forEach((card,qi)=>{const opts=card.querySelectorAll('.answer-option');opts.forEach((opt,oi)=>{opt.style.pointerEvents='none';if(oi===quizData[qi].correct){opt.classList.add('correct')}else if(oi===userAnswers[qi]&&oi!==quizData[qi].correct){opt.classList.add('incorrect')}})});const resultDiv=document.getElementById('quizResult');if(passed){quizPassed=true;const u=localStorage.getItem('userId');localStorage.setItem(\`pillar3_lesson6_quiz_passed_\${u}\`,'true');document.getElementById('finishBtn').disabled=false;resultDiv.innerHTML=\`<div class="quiz-result pass"><div class="result-icon"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="20" fill="#D1FAE5"/><circle cx="24" cy="24" r="14" stroke="#00A676" stroke-width="2" fill="none"/><path d="M18 22 L20 18 L22 22" stroke="#00A676" stroke-width="2" fill="none"/><path d="M26 22 L28 18 L30 22" stroke="#00A676" stroke-width="2" fill="none"/><path d="M16 26 Q24 32 32 26" stroke="#00A676" stroke-width="2" fill="none"/></svg></div><div class="result-text" style="color:#10b981;">Perfect Score!</div><div class="result-score">You got all \${quizData.length} questions correct!</div><p style="color:var(--text-secondary);font-size:16px;font-weight:600;">Excellent! Click "Finish Lesson" to continue.</p></div>\`}else{resultDiv.innerHTML=\`<div class="quiz-result fail"><div class="result-icon"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="20" fill="#EDE9FE"/><rect x="16" y="12" width="16" height="24" rx="1" stroke="#8B5CF6" stroke-width="2" fill="none"/><line x1="20" y1="18" x2="28" y2="18" stroke="#8B5CF6" stroke-width="1.5"/><line x1="20" y1="22" x2="28" y2="22" stroke="#8B5CF6" stroke-width="1.5"/><line x1="20" y1="26" x2="25" y2="26" stroke="#8B5CF6" stroke-width="1.5"/></svg></div><div class="result-text" style="color:#dc2626;">Not Quite</div><div class="result-score">You scored \${correct} out of \${quizData.length}</div><p style="color:var(--text-secondary);margin-bottom:15px;font-size:16px;font-weight:600;">You need all 3 correct. Review the lesson and try again!</p><button class="btn-retry" onclick="retryQuiz()">Retry Quiz</button></div>\`}document.getElementById('submitQuiz').style.display='none'}
+        function submitQuiz(){if(userAnswers.includes(null)){alert('Please answer all questions before submitting.');return}let correct=0;quizData.forEach((q,i)=>{if(userAnswers[i]===q.correct){correct++}});const passed=correct===quizData.length;document.querySelectorAll('.question-card').forEach((card,qi)=>{const opts=card.querySelectorAll('.answer-option');opts.forEach((opt,oi)=>{opt.style.pointerEvents='none';if(oi===quizData[qi].correct){opt.classList.add('correct')}else if(oi===userAnswers[qi]&&oi!==quizData[qi].correct){opt.classList.add('incorrect')}})});const resultDiv=document.getElementById('quizResult');if(passed){quizPassed=true;const u=localStorage.getItem('userId');localStorage.setItem(\`pillar3_lesson6_quiz_passed_\${u}\`,'true');document.getElementById('finishBtn').disabled=false;resultDiv.innerHTML=\`<div class="quiz-result pass"><div class="result-icon"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="20" fill="#D1FAE5"/><circle cx="24" cy="24" r="14" stroke="#00A676" stroke-width="2" fill="none"/><path d="M18 22 L20 18 L22 22" stroke="#00A676" stroke-width="2" fill="none"/><path d="M26 22 L28 18 L30 22" stroke="#00A676" stroke-width="2" fill="none"/><path d="M16 26 Q24 32 32 26" stroke="#00A676" stroke-width="2" fill="none"/></svg></div><div class="result-text" style="color:#10b981;">Perfect Score!</div><div class="result-score">You got all \${quizData.length} questions correct!</div><p style="color:var(--text-secondary);font-size:16px;font-weight:600;">Excellent! Click "Finish Lesson" to continue.</p></div>\`}else{resultDiv.innerHTML=\`<div class="quiz-result fail"><div class="result-icon"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="20" fill="#EDE9FE"/><rect x="16" y="12" width="16" height="24" rx="1" stroke="#8B5CF6" stroke-width="2" fill="none"/><line x1="20"y1="18"x2="28"y2="18" stroke="#8B5CF6" stroke-width="1.5"/><line x1="20"y1="22"x2="28"y2="22" stroke="#8B5CF6" stroke-width="1.5"/><line x1="20"y1="26"x2="25"y2="26" stroke="#8B5CF6" stroke-width="1.5"/></svg></div><div class="result-text" style="color:#dc2626;">Not Quite</div><div class="result-score">You scored \${correct} out of \${quizData.length}</div><p style="color:var(--text-secondary);margin-bottom:15px;font-size:16px;font-weight:600;">You need all 3 correct. Review the lesson and try again!</p><button class="btn-retry" onclick="retryQuiz()">Retry Quiz</button></div>\`}document.getElementById('submitQuiz').style.display='none'}
         function retryQuiz(){renderQuiz();document.getElementById('submitQuiz').style.display='block'}
         async function finishLesson(){if(!quizPassed){alert('Please complete the quiz first!');return}const success=await completeLesson('pillar3_lesson6',3,6);if(success){window.location.href='pillar3-lessons.html'}}
         updateNav();initQuiz();

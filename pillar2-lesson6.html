@@ -10,6 +10,33 @@
     <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.svg">
     <link rel="stylesheet" href="styles.css">
     <style>
+        /* SVG Icon Alignment Fixes */
+        svg {
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        .intro-card-icon svg,
+        .mistake-icon svg,
+        .reflection-icon svg,
+        .result-icon svg {
+            display: block;
+            margin: 0 auto;
+        }
+
+        .budget-method-emoji svg,
+        .budget-item-label svg {
+            display: inline-block;
+            vertical-align: middle;
+            margin-right: 8px;
+        }
+
+        p svg, li svg, span svg {
+            display: inline-block;
+            vertical-align: middle;
+            margin: 0 2px;
+        }
+
         .lesson-container {
             max-width: 800px;
             margin: 0 auto;
@@ -812,7 +839,7 @@
                 <ul class="nav-links">
                     <li><a href="/">Home</a></li>
                     <li><a href="dashboard">Dashboard</a></li>
-                    <li id="authButtons" style="opacity: 0;">
+                    <li id="authButtons" style=" opacity: 0;">
                     </li>
                     </li>
                 </ul>
@@ -847,11 +874,7 @@
                         <p>Automation removes willpower from the equation</p>
                     </div>
                     <div class="intro-card">
-                        <div class="intro-card-icon"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="24" cy="24" r="20" fill="#FEF3C7"/>
-        <circle cx="24" cy="24" r="14" stroke="#F59E0B" stroke-width="2"/>
-        <path d="M24 16V32M20 20C20 18 22 16 24 16C26 16 28 18 28 20C28 22 26 22 24 22C22 22 20 22 20 24C20 26 22 28 24 28C26 28 28 26 28 24" stroke="#F59E0B" stroke-width="2" stroke-linecap="round"/>
-    </svg></div>
+                        <div class="intro-card-icon"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="20" fill="#FEF3C7"/><circle cx="24" cy="24" r="14" stroke="#F59E0B" stroke-width="2"/><path d="M24 16V32M20 20C20 18 22 16 24 16C26 16 28 18 28 20C28 22 26 22 24 22C22 22 20 22 20 24C20 26 22 28 24 28C26 28 28 26 28 24" stroke="#F59E0B" stroke-width="2" stroke-linecap="round"/></svg></div>
                         <h3>Your Goal</h3>
                         <p>Save thousands automatically without thinking</p>
                     </div>
@@ -874,7 +897,7 @@
 
                 <div class="automation-cards">
                     <div class="automation-card">
-                        <div class="automation-emoji"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="4" width="14" height="13" rx="1" stroke="#EF4444" stroke-width="1.5" fill="none"/><rect x="3" y="7" width="14" height="1" fill="#EF4444"/><line x1="7" y1="2" x2="7" y2="6" stroke="#EF4444" stroke-width="1.5"/><line x1="13" y1="2" x2="13" y2="6" stroke="#EF4444" stroke-width="1.5"/></svg></div>
+                        <div class="automation-emoji"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="4" width="14" height="13" rx="1" stroke="#EF4444" stroke-width="1.5" fill="none"/><rect x="3" y="7" width="14" height="1" fill="#EF4444"/><line x1="7"y1="2"x2="7"y2="6" stroke="#EF4444" stroke-width="1.5"/><line x1="13"y1="2"x2="13"y2="6" stroke="#EF4444" stroke-width="1.5"/></svg></div>
                         <div class="automation-name">Auto Transfers</div>
                         <div class="automation-desc">Move money on payday</div>
                     </div>
@@ -1052,24 +1075,12 @@
                 <h2>Avoid These Mistakes</h2>
                 <div class="mistakes-grid">
                     <div class="mistake-card">
-                        <div class="mistake-icon"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="24" cy="24" r="20" fill="#FEE2E2"/>
-        <path d="M12 18 L18 24 L24 20 L30 30 L36 26" stroke="#DC2626" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-        <path d="M30 34 L36 34 L36 28" stroke="#DC2626" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-    </svg></div>
+                        <div class="mistake-icon"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="20" fill="#FEE2E2"/><path d="M12 18 L18 24 L24 20 L30 30 L36 26" stroke="#DC2626" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M30 34 L36 34 L36 28" stroke="#DC2626" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
                         <div class="mistake-title">Automating Too Much</div>
                         <div class="mistake-desc">Start small to avoid overdrafts</div>
                     </div>
                     <div class="mistake-card">
-                        <div class="mistake-icon"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="24" cy="24" r="20" fill="#EFF6FF"/>
-        <path d="M12 32 L16 28 L20 30 L24 22 L28 26 L32 18" stroke="#3B82F6" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-        <circle cx="16" cy="28" r="2" fill="#3B82F6"/>
-        <circle cx="20" cy="30" r="2" fill="#3B82F6"/>
-        <circle cx="24" cy="22" r="2" fill="#3B82F6"/>
-        <circle cx="28" cy="26" r="2" fill="#3B82F6"/>
-        <circle cx="32" cy="18" r="2" fill="#3B82F6"/>
-    </svg></div>
+                        <div class="mistake-icon"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="20" fill="#EFF6FF"/><path d="M12 32 L16 28 L20 30 L24 22 L28 26 L32 18" stroke="#3B82F6" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><circle cx="16" cy="28" r="2" fill="#3B82F6"/><circle cx="20" cy="30" r="2" fill="#3B82F6"/><circle cx="24" cy="22" r="2" fill="#3B82F6"/><circle cx="28" cy="26" r="2" fill="#3B82F6"/><circle cx="32" cy="18" r="2" fill="#3B82F6"/></svg></div>
                         <div class="mistake-title">Ignoring Income Changes</div>
                         <div class="mistake-desc">Review every 3-6 months</div>
                     </div>
@@ -1079,7 +1090,7 @@
                         <div class="mistake-desc">Check quarterly for issues</div>
                     </div>
                     <div class="mistake-card">
-                        <div class="mistake-icon"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="10" cy="10" r="7" stroke="#EF4444" stroke-width="2" fill="none"/><line x1="5" y1="5" x2="15" y2="15" stroke="#EF4444" stroke-width="2"/></svg></div>
+                        <div class="mistake-icon"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="10" cy="10" r="7" stroke="#EF4444" stroke-width="2" fill="none"/><line x1="5"y1="5"x2="15"y2="15" stroke="#EF4444" stroke-width="2"/></svg></div>
                         <div class="mistake-title">No Budget First</div>
                         <div class="mistake-desc">Understand cash flow before automating</div>
                     </div>
@@ -1186,7 +1197,7 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <p style="font-size: 0.85rem; opacity: 0.8; margin-bottom: 10px;">Disclaimer: FinanceU provides educational content only and does not offer financial, legal, or investment advice. Always consult with a qualified professional before making financial decisions.</p>
+                <p style=" font-size: 0.85rem; opacity: 0.8; margin-bottom: 10px;">Disclaimer: FinanceU provides educational content only and does not offer financial, legal, or investment advice. Always consult with a qualified professional before making financial decisions.</p>
                 <p>&copy; 2025 FinanceU. All rights reserved.</p>
             </div>
         </div>
@@ -1468,7 +1479,7 @@
             } else {
                 resultDiv.innerHTML = `
                     <div class="quiz-result fail">
-                        <div class="result-icon"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="20" fill="#EDE9FE"/><rect x="16" y="12" width="16" height="24" rx="1" stroke="#8B5CF6" stroke-width="2" fill="none"/><line x1="20" y1="18" x2="28" y2="18" stroke="#8B5CF6" stroke-width="1.5"/><line x1="20" y1="22" x2="28" y2="22" stroke="#8B5CF6" stroke-width="1.5"/><line x1="20" y1="26" x2="25" y2="26" stroke="#8B5CF6" stroke-width="1.5"/></svg></div>
+                        <div class="result-icon"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="20" fill="#EDE9FE"/><rect x="16" y="12" width="16" height="24" rx="1" stroke="#8B5CF6" stroke-width="2" fill="none"/><line x1="20"y1="18"x2="28"y2="18" stroke="#8B5CF6" stroke-width="1.5"/><line x1="20"y1="22"x2="28"y2="22" stroke="#8B5CF6" stroke-width="1.5"/><line x1="20"y1="26"x2="25"y2="26" stroke="#8B5CF6" stroke-width="1.5"/></svg></div>
                         <div class="result-text" style="color: #dc2626;">Not quite there yet</div>
                         <div class="result-score">You scored ${correct} out of ${currentQuestions.length} (${percentage}%)</div>
                         <p style="color: var(--text-secondary); margin-bottom: 15px;">You need 100% to pass. Review the lesson and try again!</p>

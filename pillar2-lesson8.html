@@ -10,6 +10,33 @@
     <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.svg">
     <link rel="stylesheet" href="styles.css">
     <style>
+        /* SVG Icon Alignment Fixes */
+        svg {
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        .intro-card-icon svg,
+        .mistake-icon svg,
+        .reflection-icon svg,
+        .result-icon svg {
+            display: block;
+            margin: 0 auto;
+        }
+
+        .budget-method-emoji svg,
+        .budget-item-label svg {
+            display: inline-block;
+            vertical-align: middle;
+            margin-right: 8px;
+        }
+
+        p svg, li svg, span svg {
+            display: inline-block;
+            vertical-align: middle;
+            margin: 0 2px;
+        }
+
         .lesson-container {
             max-width: 800px;
             margin: 0 auto;
@@ -764,7 +791,7 @@
                 <ul class="nav-links">
                     <li><a href="/">Home</a></li>
                     <li><a href="dashboard">Dashboard</a></li>
-                    <li id="authButtons" style="opacity: 0;">
+                    <li id="authButtons" style=" opacity: 0;">
                     </li>
                     </li>
                 </ul>
@@ -794,22 +821,12 @@
                         <p>Most budgets fail - not from math errors but behavioral mistakes</p>
                     </div>
                     <div class="intro-card">
-                        <div class="intro-card-icon"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="24" cy="24" r="20" fill="#D1FAE5"/>
-        <path d="M24 10 L32 14 L32 24 C32 30 28 34 24 38 C20 34 16 30 16 24 L16 14 Z" fill="#00A676" opacity="0.3"/>
-        <path d="M24 10 L32 14 L32 24 C32 30 28 34 24 38 C20 34 16 30 16 24 L16 14 Z" stroke="#00A676" stroke-width="2" fill="none"/>
-        <path d="M20 24 L22 26 L28 20" stroke="#00A676" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-    </svg></div>
+                        <div class="intro-card-icon"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="20" fill="#D1FAE5"/><path d="M24 10 L32 14 L32 24 C32 30 28 34 24 38 C20 34 16 30 16 24 L16 14 Z" fill="#00A676" opacity="0.3"/><path d="M24 10 L32 14 L32 24 C32 30 28 34 24 38 C20 34 16 30 16 24 L16 14 Z" stroke="#00A676" stroke-width="2" fill="none"/><path d="M20 24 L22 26 L28 20" stroke="#00A676" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
                         <h3>The Solution</h3>
                         <p>Know the pitfalls and build systems to avoid them</p>
                     </div>
                     <div class="intro-card">
-                        <div class="intro-card-icon"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="24" cy="24" r="20" fill="#DBEAFE"/>
-        <circle cx="24" cy="24" r="14" stroke="#3B82F6" stroke-width="2" fill="none"/>
-        <circle cx="24" cy="24" r="8" stroke="#3B82F6" stroke-width="2" fill="none"/>
-        <circle cx="24" cy="24" r="3" fill="#3B82F6"/>
-    </svg></div>
+                        <div class="intro-card-icon"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="20" fill="#DBEAFE"/><circle cx="24" cy="24" r="14" stroke="#3B82F6" stroke-width="2" fill="none"/><circle cx="24" cy="24" r="8" stroke="#3B82F6" stroke-width="2" fill="none"/><circle cx="24" cy="24" r="3" fill="#3B82F6"/></svg></div>
                         <h3>Your Goal</h3>
                         <p>Create a sustainable budget you'll actually stick to</p>
                     </div>
@@ -832,12 +849,12 @@
 
                 <div class="example-cards">
                     <div class="example-card">
-                        <div class="example-emoji"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="10" cy="10" r="7" stroke="#EF4444" stroke-width="2" fill="none"/><line x1="5" y1="5" x2="15" y2="15" stroke="#EF4444" stroke-width="2"/></svg></div>
+                        <div class="example-emoji"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="10" cy="10" r="7" stroke="#EF4444" stroke-width="2" fill="none"/><line x1="5"y1="5"x2="15"y2="15" stroke="#EF4444" stroke-width="2"/></svg></div>
                         <div class="example-title">Too Restrictive</div>
                         <div class="example-desc">Zero fun money = burnout. Include guilt-free spending.</div>
                     </div>
                     <div class="example-card">
-                        <div class="example-emoji"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="4" width="14" height="13" rx="1" stroke="#EF4444" stroke-width="1.5" fill="none"/><rect x="3" y="7" width="14" height="1" fill="#EF4444"/><line x1="7" y1="2" x2="7" y2="6" stroke="#EF4444" stroke-width="1.5"/><line x1="13" y1="2" x2="13" y2="6" stroke="#EF4444" stroke-width="1.5"/></svg></div>
+                        <div class="example-emoji"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="4" width="14" height="13" rx="1" stroke="#EF4444" stroke-width="1.5" fill="none"/><rect x="3" y="7" width="14" height="1" fill="#EF4444"/><line x1="7"y1="2"x2="7"y2="6" stroke="#EF4444" stroke-width="1.5"/><line x1="13"y1="2"x2="13"y2="6" stroke="#EF4444" stroke-width="1.5"/></svg></div>
                         <div class="example-title">Irregular Expenses</div>
                         <div class="example-desc">Divide annual costs by 12. Budget monthly for car insurance, gifts.</div>
                     </div>
@@ -1006,11 +1023,7 @@
                         <div class="mistake-desc">80% success is great! Perfect = unsustainable</div>
                     </div>
                     <div class="mistake-card">
-                        <div class="mistake-icon"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="24" cy="24" r="20" fill="#FEE2E2"/>
-        <path d="M12 18 L18 24 L24 20 L30 30 L36 26" stroke="#DC2626" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-        <path d="M30 34 L36 34 L36 28" stroke="#DC2626" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-    </svg></div>
+                        <div class="mistake-icon"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="20" fill="#FEE2E2"/><path d="M12 18 L18 24 L24 20 L30 30 L36 26" stroke="#DC2626" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M30 34 L36 34 L36 28" stroke="#DC2626" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
                         <div class="mistake-title">Not Tracking</div>
                         <div class="mistake-desc">Check weekly, not just when creating it</div>
                     </div>
@@ -1020,15 +1033,7 @@
                         <div class="mistake-desc">Your budget is unique to your life</div>
                     </div>
                     <div class="mistake-card">
-                        <div class="mistake-icon"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="24" cy="24" r="20" fill="#EFF6FF"/>
-        <path d="M12 32 L16 28 L20 30 L24 22 L28 26 L32 18" stroke="#3B82F6" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-        <circle cx="16" cy="28" r="2" fill="#3B82F6"/>
-        <circle cx="20" cy="30" r="2" fill="#3B82F6"/>
-        <circle cx="24" cy="22" r="2" fill="#3B82F6"/>
-        <circle cx="28" cy="26" r="2" fill="#3B82F6"/>
-        <circle cx="32" cy="18" r="2" fill="#3B82F6"/>
-    </svg></div>
+                        <div class="mistake-icon"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="20" fill="#EFF6FF"/><path d="M12 32 L16 28 L20 30 L24 22 L28 26 L32 18" stroke="#3B82F6" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><circle cx="16" cy="28" r="2" fill="#3B82F6"/><circle cx="20" cy="30" r="2" fill="#3B82F6"/><circle cx="24" cy="22" r="2" fill="#3B82F6"/><circle cx="28" cy="26" r="2" fill="#3B82F6"/><circle cx="32" cy="18" r="2" fill="#3B82F6"/></svg></div>
                         <div class="mistake-title">Too Detailed</div>
                         <div class="mistake-desc">Don't track every coffee. Major categories only</div>
                     </div>
@@ -1077,7 +1082,7 @@
                 </div>
 
                 <div class="reflection-box" style="margin-top: 20px;">
-                    <div class="reflection-icon" style="font-size: 40px; margin-bottom: 10px; text-align: center;"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><ellipse cx="10" cy="8" rx="7" ry="5" fill="#DBEAFE"/><circle cx="4" cy="13" r="2" fill="#DBEAFE"/><circle cx="2" cy="16" r="1" fill="#DBEAFE"/></svg></div>
+                    <div class="reflection-icon" style=" font-size: 40px; margin-bottom: 10px; text-align: center;"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><ellipse cx="10" cy="8" rx="7" ry="5" fill="#DBEAFE"/><circle cx="4" cy="13" r="2" fill="#DBEAFE"/><circle cx="2" cy="16" r="1" fill="#DBEAFE"/></svg></div>
                     <div class="reflection-title" style="text-align: center; color: #f59e0b; font-size: 18px; font-weight: 700; margin-bottom: 10px;">Quick Reflection</div>
                     <div class="reflection-text" style="text-align: center; color: var(--text-secondary); font-size: 14px; line-height: 1.6;">
                         Why did past budgets fail? Too restrictive? Too complex? Learn from failures to build a system that actually works.
@@ -1140,7 +1145,7 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <p style="font-size: 0.85rem; opacity: 0.8; margin-bottom: 10px;">Disclaimer: FinanceU provides educational content only and does not offer financial, legal, or investment advice. Always consult with a qualified professional before making financial decisions.</p>
+                <p style=" font-size: 0.85rem; opacity: 0.8; margin-bottom: 10px;">Disclaimer: FinanceU provides educational content only and does not offer financial, legal, or investment advice. Always consult with a qualified professional before making financial decisions.</p>
                 <p>&copy; 2025 FinanceU. All rights reserved.</p>
             </div>
         </div>
@@ -1422,7 +1427,7 @@
             } else {
                 resultDiv.innerHTML = `
                     <div class="quiz-result fail">
-                        <div class="result-icon"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="20" fill="#EDE9FE"/><rect x="16" y="12" width="16" height="24" rx="1" stroke="#8B5CF6" stroke-width="2" fill="none"/><line x1="20" y1="18" x2="28" y2="18" stroke="#8B5CF6" stroke-width="1.5"/><line x1="20" y1="22" x2="28" y2="22" stroke="#8B5CF6" stroke-width="1.5"/><line x1="20" y1="26" x2="25" y2="26" stroke="#8B5CF6" stroke-width="1.5"/></svg></div>
+                        <div class="result-icon"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="20" fill="#EDE9FE"/><rect x="16" y="12" width="16" height="24" rx="1" stroke="#8B5CF6" stroke-width="2" fill="none"/><line x1="20"y1="18"x2="28"y2="18" stroke="#8B5CF6" stroke-width="1.5"/><line x1="20"y1="22"x2="28"y2="22" stroke="#8B5CF6" stroke-width="1.5"/><line x1="20"y1="26"x2="25"y2="26" stroke="#8B5CF6" stroke-width="1.5"/></svg></div>
                         <div class="result-text" style="color: #dc2626;">Not quite there yet</div>
                         <div class="result-score">You scored ${correct} out of ${currentQuestions.length} (${percentage}%)</div>
                         <p style="color: var(--text-secondary); margin-bottom: 15px;">You need 100% to pass. Review the lesson and try again!</p>

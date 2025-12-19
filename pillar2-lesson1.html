@@ -10,6 +10,33 @@
     <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.svg">
     <link rel="stylesheet" href="styles.css">
     <style>
+        /* SVG Icon Alignment Fixes */
+        svg {
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        .intro-card-icon svg,
+        .mistake-icon svg,
+        .reflection-icon svg,
+        .result-icon svg {
+            display: block;
+            margin: 0 auto;
+        }
+
+        .budget-method-emoji svg,
+        .budget-item-label svg {
+            display: inline-block;
+            vertical-align: middle;
+            margin-right: 8px;
+        }
+
+        p svg, li svg, span svg {
+            display: inline-block;
+            vertical-align: middle;
+            margin: 0 2px;
+        }
+
         .lesson-container {
             max-width: 900px;
             margin: 0 auto;
@@ -828,7 +855,7 @@
                 <ul class="nav-links">
                     <li><a href="/">Home</a></li>
                     <li><a href="dashboard">Dashboard</a></li>
-                    <li id="authButtons" style="opacity: 0;">
+                    <li id="authButtons" style=" opacity: 0;">
                     </li>
                 </ul>
             </div>
@@ -862,12 +889,7 @@
                         <p>A budget gives you control and eliminates financial stress</p>
                     </div>
                     <div class="intro-card">
-                        <div class="intro-card-icon"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="24" cy="24" r="20" fill="#DBEAFE"/>
-        <circle cx="24" cy="24" r="14" stroke="#3B82F6" stroke-width="2" fill="none"/>
-        <circle cx="24" cy="24" r="8" stroke="#3B82F6" stroke-width="2" fill="none"/>
-        <circle cx="24" cy="24" r="3" fill="#3B82F6"/>
-    </svg></div>
+                        <div class="intro-card-icon"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="20" fill="#DBEAFE"/><circle cx="24" cy="24" r="14" stroke="#3B82F6" stroke-width="2" fill="none"/><circle cx="24" cy="24" r="8" stroke="#3B82F6" stroke-width="2" fill="none"/><circle cx="24" cy="24" r="3" fill="#3B82F6"/></svg></div>
                         <h3>Your Goal</h3>
                         <p>Track every dollar and make your money work for you</p>
                     </div>
@@ -918,7 +940,7 @@
                         <div class="budget-method-desc">Needs/Wants/Savings</div>
                     </div>
                     <div class="budget-method-card">
-                        <div class="budget-method-emoji"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="2" y="5" width="16" height="10" rx="1" stroke="#3B82F6" stroke-width="1.5" fill="none"/><polyline points="2,6 10,11 18,6" stroke="#3B82F6" stroke-width="1.5" fill="none"/></svg>️</div>
+                        <div class="budget-method-emoji"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="2" y="5" width="16" height="10" rx="1" stroke="#3B82F6" stroke-width="1.5" fill="none"/><polyline points="2,6 10,11 18,6" stroke="#3B82F6" stroke-width="1.5" fill="none"/></svg></div>
                         <div class="budget-method-name">Envelope</div>
                         <div class="budget-method-desc">Cash for categories</div>
                     </div>
@@ -1054,7 +1076,7 @@
 
                         <div class="budget-item">
                             <div class="budget-item-header">
-                                <div class="budget-item-label"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M10 2 L4 5 L4 10 C4 14 10 18 10 18 C10 18 16 14 16 10 L16 5 Z" fill="#10B981"/></svg>️ Insurance</div>
+                                <div class="budget-item-label"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M10 2 L4 5 L4 10 C4 14 10 18 10 18 C10 18 16 14 16 10 L16 5 Z" fill="#10B981"/></svg> Insurance</div>
                                 <div class="budget-item-value">$150</div>
                             </div>
                             <div class="budget-item-bar">
@@ -1064,7 +1086,7 @@
 
                         <div class="budget-item">
                             <div class="budget-item-header">
-                                <div class="budget-item-label"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 6 L10 2 L17 6 L17 14 L10 18 L3 14 Z" stroke="#B45309" stroke-width="1.5" fill="none"/><polyline points="3,6 10,10 17,6" stroke="#B45309" stroke-width="1.5" fill="none"/><line x1="10" y1="10" x2="10" y2="18" stroke="#B45309" stroke-width="1.5"/></svg> Other</div>
+                                <div class="budget-item-label"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 6 L10 2 L17 6 L17 14 L10 18 L3 14 Z" stroke="#B45309" stroke-width="1.5" fill="none"/><polyline points="3,6 10,10 17,6" stroke="#B45309" stroke-width="1.5" fill="none"/><line x1="10"y1="10"x2="10"y2="18" stroke="#B45309" stroke-width="1.5"/></svg> Other</div>
                                 <div class="budget-item-value">$300</div>
                             </div>
                             <div class="budget-item-bar">
@@ -1135,17 +1157,17 @@
                 <h2>Avoid These Mistakes</h2>
                 <div class="mistakes-grid">
                     <div class="mistake-card">
-                        <div class="mistake-icon"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="10" cy="10" r="7" stroke="#EF4444" stroke-width="2" fill="none"/><line x1="5" y1="5" x2="15" y2="15" stroke="#EF4444" stroke-width="2"/></svg></div>
+                        <div class="mistake-icon"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="10" cy="10" r="7" stroke="#EF4444" stroke-width="2" fill="none"/><line x1="5"y1="5"x2="15"y2="15" stroke="#EF4444" stroke-width="2"/></svg></div>
                         <div class="mistake-title">Too Restrictive</div>
                         <div class="mistake-desc">Being too strict leads to burnout</div>
                     </div>
                     <div class="mistake-card">
-                        <div class="mistake-icon"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="20" fill="#EFF6FF"/><rect x="14" y="16" width="20" height="18" rx="2" stroke="#3B82F6" stroke-width="2" fill="none"/><line x1="14" y1="22" x2="34" y2="22" stroke="#3B82F6" stroke-width="2"/><line x1="19" y1="14" x2="19" y2="18" stroke="#3B82F6" stroke-width="2" stroke-linecap="round"/><line x1="29" y1="14" x2="29" y2="18" stroke="#3B82F6" stroke-width="2" stroke-linecap="round"/></svg></div>
+                        <div class="mistake-icon"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="20" fill="#EFF6FF"/><rect x="14" y="16" width="20" height="18" rx="2" stroke="#3B82F6" stroke-width="2" fill="none"/><line x1="14"y1="22"x2="34"y2="22" stroke="#3B82F6" stroke-width="2"/><line x1="19"y1="14"x2="19"y2="18" stroke="#3B82F6" stroke-width="2" stroke-linecap="round"/><line x1="29"y1="14"x2="29"y2="18" stroke="#3B82F6" stroke-width="2" stroke-linecap="round"/></svg></div>
                         <div class="mistake-title">Forgetting Irregulars</div>
                         <div class="mistake-desc">Car repairs, holidays add up</div>
                     </div>
                     <div class="mistake-card">
-                        <div class="mistake-icon"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="20" fill="#FEF3C7"/><path d="M16 20 L16 28 C16 30 18 32 20 32 L28 32 C30 32 32 30 32 28 L32 20" stroke="#F59E0B" stroke-width="2" fill="none"/><line x1="16" y1="20" x2="32" y2="20" stroke="#F59E0B" stroke-width="2"/><path d="M32 22 L34 22 C35 22 36 23 36 24 C36 25 35 26 34 26 L32 26" stroke="#F59E0B" stroke-width="2" fill="none"/></svg></div>
+                        <div class="mistake-icon"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="20" fill="#FEF3C7"/><path d="M16 20 L16 28 C16 30 18 32 20 32 L28 32 C30 32 32 30 32 28 L32 20" stroke="#F59E0B" stroke-width="2" fill="none"/><line x1="16"y1="20"x2="32"y2="20" stroke="#F59E0B" stroke-width="2"/><path d="M32 22 L34 22 C35 22 36 23 36 24 C36 25 35 26 34 26 L32 26" stroke="#F59E0B" stroke-width="2" fill="none"/></svg></div>
                         <div class="mistake-title">Ignoring Small Buys</div>
                         <div class="mistake-desc">Daily coffee = hundreds/month</div>
                     </div>
@@ -1155,12 +1177,7 @@
                         <div class="mistake-desc">One bad month doesn't mean failure</div>
                     </div>
                     <div class="mistake-card">
-                        <div class="mistake-icon"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="24" cy="24" r="20" fill="#F3F4F6"/>
-        <rect x="18" y="22" width="12" height="10" rx="1" fill="#6B7280"/>
-        <path d="M20 22 L20 18 C20 16 21 14 24 14 C27 14 28 16 28 18 L28 22" stroke="#6B7280" stroke-width="2" fill="none"/>
-        <circle cx="24" cy="27" r="1.5" fill="#F9FAFB"/>
-    </svg></div>
+                        <div class="mistake-icon"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="20" fill="#F3F4F6"/><rect x="18" y="22" width="12" height="10" rx="1" fill="#6B7280"/><path d="M20 22 L20 18 C20 16 21 14 24 14 C27 14 28 16 28 18 L28 22" stroke="#6B7280" stroke-width="2" fill="none"/><circle cx="24" cy="27" r="1.5" fill="#F9FAFB"/></svg></div>
                         <div class="mistake-title">Never Adjusting</div>
                         <div class="mistake-desc">Life changes, budget should too</div>
                     </div>
@@ -1267,7 +1284,7 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <p style="font-size: 0.85rem; opacity: 0.8; margin-bottom: 10px;">Disclaimer: FinanceU provides educational content only and does not offer financial, legal, or investment advice. Always consult with a qualified professional before making financial decisions.</p>
+                <p style=" font-size: 0.85rem; opacity: 0.8; margin-bottom: 10px;">Disclaimer: FinanceU provides educational content only and does not offer financial, legal, or investment advice. Always consult with a qualified professional before making financial decisions.</p>
                 <p>&copy; 2025 FinanceU. All rights reserved.</p>
             </div>
         </div>
@@ -1348,7 +1365,7 @@
                 } else if (result === 0) {
                     messageDiv.textContent = '<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6 8 C6 6 7 5 8 5 C9 5 10 6 10 8 L10 15 C10 16 9 17 8 17 C7 17 6 16 6 15 Z" fill="#F59E0B"/><circle cx="8" cy="5" r="2" fill="#F59E0B"/></svg> Balanced budget! Every dollar is assigned. Make sure to include savings.';
                 } else {
-                    messageDiv.textContent = '<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8 2 L14 14 L2 14 Z" fill="#F59E0B"/><path d="M8 6 L8 10 M8 11.5 L8 12.5" stroke="white" stroke-width="1.5"/></svg>️ You\'re spending more than you earn. Time to cut expenses or boost income!';
+                    messageDiv.textContent = '<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8 2 L14 14 L2 14 Z" fill="#F59E0B"/><path d="M8 6 L8 10 M8 11.5 L8 12.5" stroke="white" stroke-width="1.5"/></svg> You\'re spending more than you earn. Time to cut expenses or boost income!';
                 }
             }
         }
@@ -1586,7 +1603,7 @@
             } else {
                 resultDiv.innerHTML = `
                     <div class="quiz-result fail">
-                        <div class="result-icon"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="20" fill="#EDE9FE"/><rect x="16" y="12" width="16" height="24" rx="1" stroke="#8B5CF6" stroke-width="2" fill="none"/><line x1="20" y1="18" x2="28" y2="18" stroke="#8B5CF6" stroke-width="1.5"/><line x1="20" y1="22" x2="28" y2="22" stroke="#8B5CF6" stroke-width="1.5"/><line x1="20" y1="26" x2="25" y2="26" stroke="#8B5CF6" stroke-width="1.5"/></svg></div>
+                        <div class="result-icon"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="20" fill="#EDE9FE"/><rect x="16" y="12" width="16" height="24" rx="1" stroke="#8B5CF6" stroke-width="2" fill="none"/><line x1="20"y1="18"x2="28"y2="18" stroke="#8B5CF6" stroke-width="1.5"/><line x1="20"y1="22"x2="28"y2="22" stroke="#8B5CF6" stroke-width="1.5"/><line x1="20"y1="26"x2="25"y2="26" stroke="#8B5CF6" stroke-width="1.5"/></svg></div>
                         <div class="result-text" style="color: #dc2626;">Not quite there yet</div>
                         <div class="result-score">You scored ${correct} out of ${currentQuestions.length} (${percentage}%)</div>
                         <p style="color: var(--text-secondary); margin-bottom: 15px;">You need 75% to pass. Review the lesson and try again!</p>

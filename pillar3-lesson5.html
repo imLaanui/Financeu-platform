@@ -10,6 +10,33 @@
     <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.svg">
     <link rel="stylesheet" href="styles.css">
     <style>
+        /* SVG Icon Alignment Fixes */
+        svg {
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        .intro-card-icon svg,
+        .mistake-icon svg,
+        .reflection-icon svg,
+        .result-icon svg {
+            display: block;
+            margin: 0 auto;
+        }
+
+        .budget-method-emoji svg,
+        .budget-item-label svg {
+            display: inline-block;
+            vertical-align: middle;
+            margin-right: 8px;
+        }
+
+        p svg, li svg, span svg {
+            display: inline-block;
+            vertical-align: middle;
+            margin: 0 2px;
+        }
+
         .lesson-container {
             max-width: 800px;
             margin: 0 auto;
@@ -633,7 +660,7 @@
                 <ul class="nav-links">
                     <li><a href="/">Home</a></li>
                     <li><a href="dashboard">Dashboard</a></li>
-                    <li id="authButtons" style="opacity: 0;"></li>
+                    <li id="authButtons" style=" opacity: 0;"></li>
                 </ul>
             </div>
         </div>
@@ -653,25 +680,12 @@
                 <h2>The 30% Rule That Boosts Your Score</h2>
                 <div class="intro-cards">
                     <div class="intro-card">
-                        <div class="intro-card-icon"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="24" cy="24" r="20" fill="#EFF6FF"/>
-        <path d="M12 32 L16 28 L20 30 L24 22 L28 26 L32 18" stroke="#3B82F6" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-        <circle cx="16" cy="28" r="2" fill="#3B82F6"/>
-        <circle cx="20" cy="30" r="2" fill="#3B82F6"/>
-        <circle cx="24" cy="22" r="2" fill="#3B82F6"/>
-        <circle cx="28" cy="26" r="2" fill="#3B82F6"/>
-        <circle cx="32" cy="18" r="2" fill="#3B82F6"/>
-    </svg></div>
+                        <div class="intro-card-icon"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="20" fill="#EFF6FF"/><path d="M12 32 L16 28 L20 30 L24 22 L28 26 L32 18" stroke="#3B82F6" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><circle cx="16" cy="28" r="2" fill="#3B82F6"/><circle cx="20" cy="30" r="2" fill="#3B82F6"/><circle cx="24" cy="22" r="2" fill="#3B82F6"/><circle cx="28" cy="26" r="2" fill="#3B82F6"/><circle cx="32" cy="18" r="2" fill="#3B82F6"/></svg></div>
                         <h3>The Problem</h3>
                         <p>Credit utilization is 30% of your score but most people don't understand it</p>
                     </div>
                     <div class="intro-card">
-                        <div class="intro-card-icon"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="24" cy="24" r="20" fill="#DBEAFE"/>
-        <circle cx="24" cy="24" r="14" stroke="#3B82F6" stroke-width="2" fill="none"/>
-        <circle cx="24" cy="24" r="8" stroke="#3B82F6" stroke-width="2" fill="none"/>
-        <circle cx="24" cy="24" r="3" fill="#3B82F6"/>
-    </svg></div>
+                        <div class="intro-card-icon"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="20" fill="#DBEAFE"/><circle cx="24" cy="24" r="14" stroke="#3B82F6" stroke-width="2" fill="none"/><circle cx="24" cy="24" r="8" stroke="#3B82F6" stroke-width="2" fill="none"/><circle cx="24" cy="24" r="3" fill="#3B82F6"/></svg></div>
                         <h3>The Solution</h3>
                         <p>Keep your utilization below 30%, ideally under 10% for best results</p>
                     </div>
@@ -779,7 +793,7 @@
 
                 <p style="margin-top: 20px;"><strong>Why this works:</strong> Utilization has no memory. Unlike payment history, which stays on your report for years, utilization is recalculated every month. Lower it today, see results next month.</p>
 
-                <ul style="font-size: 16px; line-height: 1.8; margin-top: 15px;">
+                <ul style=" font-size: 16px; line-height: 1.8; margin-top: 15px;">
                     <li><strong>Per-card utilization matters:</strong> Keep EACH card under 30%, not just overall</li>
                     <li><strong>Timing matters:</strong> Balance is reported on your statement date, not due date</li>
                     <li><strong>$0 is not best:</strong> Using 1-10% shows you actively use credit responsibly</li>
@@ -848,7 +862,7 @@
                 <p>If you have multiple cards, spread spending across them to keep each card's utilization low rather than maxing out one card.</p>
 
                 <div class="highlight-box" style="margin-top: 25px;">
-                    <h3><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8 2 L14 14 L2 14 Z" fill="#F59E0B"/><path d="M8 6 L8 10 M8 11.5 L8 12.5" stroke="white" stroke-width="1.5"/></svg>️ Warning</h3>
+                    <h3><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8 2 L14 14 L2 14 Z" fill="#F59E0B"/><path d="M8 6 L8 10 M8 11.5 L8 12.5" stroke="white" stroke-width="1.5"/></svg> Warning</h3>
                     <p>These strategies only work if you're paying in full. Never carry high balances just to "use" credit - the interest will cost you far more than any credit score benefit.</p>
                 </div>
             </div>
@@ -940,7 +954,7 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <p style="font-size: 0.85rem; opacity: 0.8; margin-bottom: 10px;">Disclaimer: FinanceU provides educational content only and does not offer financial, legal, or investment advice. Always consult with a qualified professional before making financial decisions.</p>
+                <p style=" font-size: 0.85rem; opacity: 0.8; margin-bottom: 10px;">Disclaimer: FinanceU provides educational content only and does not offer financial, legal, or investment advice. Always consult with a qualified professional before making financial decisions.</p>
                 <p>&copy; 2025 FinanceU. All rights reserved.</p>
             </div>
         </div>
@@ -1124,7 +1138,7 @@
             } else {
                 resultDiv.innerHTML = \`
                     <div class="quiz-result fail">
-                        <div class="result-icon"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="20" fill="#EDE9FE"/><rect x="16" y="12" width="16" height="24" rx="1" stroke="#8B5CF6" stroke-width="2" fill="none"/><line x1="20" y1="18" x2="28" y2="18" stroke="#8B5CF6" stroke-width="1.5"/><line x1="20" y1="22" x2="28" y2="22" stroke="#8B5CF6" stroke-width="1.5"/><line x1="20" y1="26" x2="25" y2="26" stroke="#8B5CF6" stroke-width="1.5"/></svg></div>
+                        <div class="result-icon"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="20" fill="#EDE9FE"/><rect x="16" y="12" width="16" height="24" rx="1" stroke="#8B5CF6" stroke-width="2" fill="none"/><line x1="20"y1="18"x2="28"y2="18" stroke="#8B5CF6" stroke-width="1.5"/><line x1="20"y1="22"x2="28"y2="22" stroke="#8B5CF6" stroke-width="1.5"/><line x1="20"y1="26"x2="25"y2="26" stroke="#8B5CF6" stroke-width="1.5"/></svg></div>
                         <div class="result-text" style="color: #dc2626;">Not Quite</div>
                         <div class="result-score">You scored \${correct} out of \${quizData.length}</div>
                         <p style="color: var(--text-secondary); margin-bottom: 15px; font-size: 16px; font-weight: 600;">You need all 3 correct. Review the lesson and try again!</p>

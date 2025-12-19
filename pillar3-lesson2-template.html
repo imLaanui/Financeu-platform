@@ -10,6 +10,33 @@
     <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.svg">
     <link rel="stylesheet" href="styles.css">
     <style>
+        /* SVG Icon Alignment Fixes */
+        svg {
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        .intro-card-icon svg,
+        .mistake-icon svg,
+        .reflection-icon svg,
+        .result-icon svg {
+            display: block;
+            margin: 0 auto;
+        }
+
+        .budget-method-emoji svg,
+        .budget-item-label svg {
+            display: inline-block;
+            vertical-align: middle;
+            margin-right: 8px;
+        }
+
+        p svg, li svg, span svg {
+            display: inline-block;
+            vertical-align: middle;
+            margin: 0 2px;
+        }
+
         .lesson-container {
             max-width: 800px;
             margin: 0 auto;
@@ -723,7 +750,7 @@
                 <ul class="nav-links">
                     <li><a href="/">Home</a></li>
                     <li><a href="dashboard">Dashboard</a></li>
-                    <li id="authButtons" style="opacity: 0;"></li>
+                    <li id="authButtons" style=" opacity: 0;"></li>
                 </ul>
             </div>
         </div>
@@ -970,12 +997,12 @@
                         <div class="mistake-desc">Using over 30% of your credit limit hurts your score</div>
                     </div>
                     <div class="mistake-card">
-                        <div class="mistake-icon"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="5" cy="5" r="2" stroke="#6B7280" stroke-width="1.5" fill="none"/><circle cx="5" cy="15" r="2" stroke="#6B7280" stroke-width="1.5" fill="none"/><line x1="7" y1="7" x2="15" y2="13" stroke="#6B7280" stroke-width="1.5"/><line x1="7" y1="13" x2="15" y2="7" stroke="#6B7280" stroke-width="1.5"/></svg>️</div>
+                        <div class="mistake-icon"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="5" cy="5" r="2" stroke="#6B7280" stroke-width="1.5" fill="none"/><circle cx="5" cy="15" r="2" stroke="#6B7280" stroke-width="1.5" fill="none"/><line x1="7"y1="7"x2="15"y2="13" stroke="#6B7280" stroke-width="1.5"/><line x1="7"y1="13"x2="15"y2="7" stroke="#6B7280" stroke-width="1.5"/></svg></div>
                         <div class="mistake-title">Closing Old Cards</div>
                         <div class="mistake-desc">Reduces credit history length and available credit</div>
                     </div>
                     <div class="mistake-card">
-                        <div class="mistake-icon"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="8" cy="8" r="5" stroke="#6B7280" stroke-width="1.5" fill="none"/><line x1="12" y1="12" x2="17" y2="17" stroke="#6B7280" stroke-width="1.5"/></svg></div>
+                        <div class="mistake-icon"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="8" cy="8" r="5" stroke="#6B7280" stroke-width="1.5" fill="none"/><line x1="12"y1="12"x2="17"y2="17" stroke="#6B7280" stroke-width="1.5"/></svg></div>
                         <div class="mistake-title">Too Many Inquiries</div>
                         <div class="mistake-desc">Multiple credit applications in short time hurts score</div>
                     </div>
@@ -1074,7 +1101,7 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <p style="font-size: 0.85rem; opacity: 0.8; margin-bottom: 10px;">Disclaimer: FinanceU provides educational content only and does not offer financial, legal, or investment advice. Always consult with a qualified professional before making financial decisions.</p>
+                <p style=" font-size: 0.85rem; opacity: 0.8; margin-bottom: 10px;">Disclaimer: FinanceU provides educational content only and does not offer financial, legal, or investment advice. Always consult with a qualified professional before making financial decisions.</p>
                 <p>&copy; 2025 FinanceU. All rights reserved.</p>
             </div>
         </div>

@@ -10,6 +10,33 @@
     <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.svg">
     <link rel="stylesheet" href="styles.css">
     <style>
+        /* SVG Icon Alignment Fixes */
+        svg {
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        .intro-card-icon svg,
+        .mistake-icon svg,
+        .reflection-icon svg,
+        .result-icon svg {
+            display: block;
+            margin: 0 auto;
+        }
+
+        .budget-method-emoji svg,
+        .budget-item-label svg {
+            display: inline-block;
+            vertical-align: middle;
+            margin-right: 8px;
+        }
+
+        p svg, li svg, span svg {
+            display: inline-block;
+            vertical-align: middle;
+            margin: 0 2px;
+        }
+
         .lesson-container {
             max-width: 800px;
             margin: 0 auto;
@@ -760,7 +787,7 @@
                 <ul class="nav-links">
                     <li><a href="/">Home</a></li>
                     <li><a href="dashboard">Dashboard</a></li>
-                    <li id="authButtons" style="opacity: 0;">
+                    <li id="authButtons" style=" opacity: 0;">
                     </li>
                 </ul>
             </div>
@@ -784,33 +811,17 @@
                 <h2>Why Banking Matters</h2>
                 <div class="intro-cards">
                     <div class="intro-card">
-                        <div class="intro-card-icon"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="24" cy="24" r="20" fill="#EFF6FF"/>
-        <path d="M12 20 L24 12 L36 20" stroke="#3B82F6" stroke-width="2" fill="none"/>
-        <rect x="14" y="20" width="4" height="12" fill="#3B82F6"/>
-        <rect x="22" y="20" width="4" height="12" fill="#3B82F6"/>
-        <rect x="30" y="20" width="4" height="12" fill="#3B82F6"/>
-        <rect x="12" y="32" width="24" height="3" fill="#3B82F6"/>
-    </svg></div>
+                        <div class="intro-card-icon"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="20" fill="#EFF6FF"/><path d="M12 20 L24 12 L36 20" stroke="#3B82F6" stroke-width="2" fill="none"/><rect x="14" y="20" width="4" height="12" fill="#3B82F6"/><rect x="22" y="20" width="4" height="12" fill="#3B82F6"/><rect x="30" y="20" width="4" height="12" fill="#3B82F6"/><rect x="12" y="32" width="24" height="3" fill="#3B82F6"/></svg></div>
                         <h3>The Problem</h3>
                         <p>Most people choose banks randomly and pay hundreds in unnecessary fees every year</p>
                     </div>
                     <div class="intro-card">
-                        <div class="intro-card-icon"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="24" cy="24" r="20" fill="#FEF3C7"/>
-        <circle cx="24" cy="24" r="14" stroke="#F59E0B" stroke-width="2"/>
-        <path d="M24 16V32M20 20C20 18 22 16 24 16C26 16 28 18 28 20C28 22 26 22 24 22C22 22 20 22 20 24C20 26 22 28 24 28C26 28 28 26 28 24" stroke="#F59E0B" stroke-width="2" stroke-linecap="round"/>
-    </svg></div>
+                        <div class="intro-card-icon"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="20" fill="#FEF3C7"/><circle cx="24" cy="24" r="14" stroke="#F59E0B" stroke-width="2"/><path d="M24 16V32M20 20C20 18 22 16 24 16C26 16 28 18 28 20C28 22 26 22 24 22C22 22 20 22 20 24C20 26 22 28 24 28C26 28 28 26 28 24" stroke="#F59E0B" stroke-width="2" stroke-linecap="round"/></svg></div>
                         <h3>The Solution</h3>
                         <p>The right bank account setup saves you money and makes managing finances effortless</p>
                     </div>
                     <div class="intro-card">
-                        <div class="intro-card-icon"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="24" cy="24" r="20" fill="#DBEAFE"/>
-        <circle cx="24" cy="24" r="14" stroke="#3B82F6" stroke-width="2" fill="none"/>
-        <circle cx="24" cy="24" r="8" stroke="#3B82F6" stroke-width="2" fill="none"/>
-        <circle cx="24" cy="24" r="3" fill="#3B82F6"/>
-    </svg></div>
+                        <div class="intro-card-icon"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="20" fill="#DBEAFE"/><circle cx="24" cy="24" r="14" stroke="#3B82F6" stroke-width="2" fill="none"/><circle cx="24" cy="24" r="8" stroke="#3B82F6" stroke-width="2" fill="none"/><circle cx="24" cy="24" r="3" fill="#3B82F6"/></svg></div>
                         <h3>Your Goal</h3>
                         <p>Learn how banks work, which accounts you need, and how to avoid fees</p>
                     </div>
@@ -839,7 +850,7 @@
                 <p style="margin-top: 20px; font-weight: 600;">Types of Financial Institutions:</p>
                 <div class="bank-types-cards">
                     <div class="bank-type-card">
-                        <div class="bank-type-emoji"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 8 L10 3 L18 8" stroke="#6B7280" stroke-width="1.5" fill="none"/><rect x="4" y="8" width="2" height="7" fill="#6B7280"/><rect x="9" y="8" width="2" height="7" fill="#6B7280"/><rect x="14" y="8" width="2" height="7" fill="#6B7280"/><rect x="2" y="15" width="16" height="2" fill="#6B7280"/></svg>️</div>
+                        <div class="bank-type-emoji"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 8 L10 3 L18 8" stroke="#6B7280" stroke-width="1.5" fill="none"/><rect x="4" y="8" width="2" height="7" fill="#6B7280"/><rect x="9" y="8" width="2" height="7" fill="#6B7280"/><rect x="14" y="8" width="2" height="7" fill="#6B7280"/><rect x="2" y="15" width="16" height="2" fill="#6B7280"/></svg></div>
                         <div class="bank-type-name">Traditional Banks</div>
                         <div class="bank-type-desc">Physical branches, full services, often higher fees</div>
                     </div>
@@ -925,14 +936,14 @@
                 <div class="account-types">
                     <div class="account-card">
                         <h4 style="color: #10b981; margin-bottom: 10px;">Checking Account</h4>
-                        <p style="font-size: 14px; line-height: 1.6;"><strong>Purpose:</strong> Daily transactions<br>
+                        <p style=" font-size: 14px; line-height: 1.6;"><strong>Purpose:</strong> Daily transactions<br>
                         <strong>Features:</strong> Debit card, checks, bill pay<br>
                         <strong>Interest:</strong> Usually none or very low<br>
                         <strong>Best For:</strong> Money you need to access frequently</p>
                     </div>
                     <div class="account-card">
                         <h4 style="color: #3b82f6; margin-bottom: 10px;">Savings Account</h4>
-                        <p style="font-size: 14px; line-height: 1.6;"><strong>Purpose:</strong> Storing money for later<br>
+                        <p style=" font-size: 14px; line-height: 1.6;"><strong>Purpose:</strong> Storing money for later<br>
                         <strong>Features:</strong> Earns interest, limited transactions<br>
                         <strong>Interest:</strong> Small but guaranteed<br>
                         <strong>Best For:</strong> Emergency funds, short-term goals</p>
@@ -995,16 +1006,12 @@
                 <h2>Avoid These Mistakes</h2>
                 <div class="mistakes-grid">
                     <div class="mistake-card">
-                        <div class="mistake-icon"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="8" cy="8" r="5" stroke="#6B7280" stroke-width="1.5" fill="none"/><line x1="12" y1="12" x2="17" y2="17" stroke="#6B7280" stroke-width="1.5"/></svg></div>
+                        <div class="mistake-icon"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="8" cy="8" r="5" stroke="#6B7280" stroke-width="1.5" fill="none"/><line x1="12"y1="12"x2="17"y2="17" stroke="#6B7280" stroke-width="1.5"/></svg></div>
                         <div class="mistake-title">Not Comparing Options</div>
                         <div class="mistake-desc">Banks have different fees and perks. Shop around!</div>
                     </div>
                     <div class="mistake-card">
-                        <div class="mistake-icon"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="24" cy="24" r="20" fill="#FEE2E2"/>
-        <path d="M12 18 L18 24 L24 20 L30 30 L36 26" stroke="#DC2626" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-        <path d="M30 34 L36 34 L36 28" stroke="#DC2626" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-    </svg></div>
+                        <div class="mistake-icon"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="20" fill="#FEE2E2"/><path d="M12 18 L18 24 L24 20 L30 30 L36 26" stroke="#DC2626" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M30 34 L36 34 L36 28" stroke="#DC2626" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
                         <div class="mistake-title">Ignoring Fees</div>
                         <div class="mistake-desc">Monthly, overdraft, ATM fees add up fast</div>
                     </div>
@@ -1014,14 +1021,7 @@
                         <div class="mistake-desc">$30-$35 each time. Track your balance!</div>
                     </div>
                     <div class="mistake-card">
-                        <div class="mistake-icon"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="24" cy="24" r="20" fill="#EFF6FF"/>
-        <path d="M12 20 L24 12 L36 20" stroke="#3B82F6" stroke-width="2" fill="none"/>
-        <rect x="14" y="20" width="4" height="12" fill="#3B82F6"/>
-        <rect x="22" y="20" width="4" height="12" fill="#3B82F6"/>
-        <rect x="30" y="20" width="4" height="12" fill="#3B82F6"/>
-        <rect x="12" y="32" width="24" height="3" fill="#3B82F6"/>
-    </svg></div>
+                        <div class="mistake-icon"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="20" fill="#EFF6FF"/><path d="M12 20 L24 12 L36 20" stroke="#3B82F6" stroke-width="2" fill="none"/><rect x="14" y="20" width="4" height="12" fill="#3B82F6"/><rect x="22" y="20" width="4" height="12" fill="#3B82F6"/><rect x="30" y="20" width="4" height="12" fill="#3B82F6"/><rect x="12" y="32" width="24" height="3" fill="#3B82F6"/></svg></div>
                         <div class="mistake-title">All Money in Checking</div>
                         <div class="mistake-desc">Move extra to savings to earn interest</div>
                     </div>
@@ -1136,7 +1136,7 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <p style="font-size: 0.85rem; opacity: 0.8; margin-bottom: 10px;">Disclaimer: FinanceU provides educational content only and does not offer financial, legal, or investment advice. Always consult with a qualified professional before making financial decisions.</p>
+                <p style=" font-size: 0.85rem; opacity: 0.8; margin-bottom: 10px;">Disclaimer: FinanceU provides educational content only and does not offer financial, legal, or investment advice. Always consult with a qualified professional before making financial decisions.</p>
                 <p>&copy; 2025 FinanceU. All rights reserved.</p>
             </div>
         </div>
@@ -1419,7 +1419,7 @@
             } else {
                 resultDiv.innerHTML = `
                     <div class="quiz-result fail">
-                        <div class="result-icon"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="20" fill="#EDE9FE"/><rect x="16" y="12" width="16" height="24" rx="1" stroke="#8B5CF6" stroke-width="2" fill="none"/><line x1="20" y1="18" x2="28" y2="18" stroke="#8B5CF6" stroke-width="1.5"/><line x1="20" y1="22" x2="28" y2="22" stroke="#8B5CF6" stroke-width="1.5"/><line x1="20" y1="26" x2="25" y2="26" stroke="#8B5CF6" stroke-width="1.5"/></svg></div>
+                        <div class="result-icon"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="20" fill="#EDE9FE"/><rect x="16" y="12" width="16" height="24" rx="1" stroke="#8B5CF6" stroke-width="2" fill="none"/><line x1="20"y1="18"x2="28"y2="18" stroke="#8B5CF6" stroke-width="1.5"/><line x1="20"y1="22"x2="28"y2="22" stroke="#8B5CF6" stroke-width="1.5"/><line x1="20"y1="26"x2="25"y2="26" stroke="#8B5CF6" stroke-width="1.5"/></svg></div>
                         <div class="result-text" style="color: #dc2626;">Not quite there yet</div>
                         <div class="result-score">You scored ${correct} out of ${currentQuestions.length} (${percentage}%)</div>
                         <p style="color: var(--text-secondary); margin-bottom: 15px;">You need 100% to pass. Review the lesson and try again!</p>
