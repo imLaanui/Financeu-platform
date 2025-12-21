@@ -615,6 +615,17 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- Reset Progress Section -->
+                <div style="margin-top: 3rem; padding: 2rem; background: #f9fafb; border-radius: 12px; border: 2px dashed #e5e7eb;">
+                    <div style="text-align: center;">
+                        <h3 style="color: #6b7280; font-size: 1rem; margin-bottom: 0.5rem;">Development Tools</h3>
+                        <p style="color: #9ca3af; font-size: 0.875rem; margin-bottom: 1rem;">Reset your progress to test lessons from the beginning</p>
+                        <button onclick="resetProgress()" style="padding: 0.75rem 1.5rem; background: #ef4444; color: white; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; transition: background 0.2s;">
+                            Reset All Progress
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -830,6 +841,39 @@
                 console.error('Logout error:', error);
                 window.location.href = '/index.html';
             }
+        }
+
+        // Reset progress function
+        function resetProgress() {
+            const confirmed = confirm('Are you sure you want to reset all your progress?\n\nThis will clear:\n- All completed lessons\n- All quiz scores\n- All lesson progress\n\nThis action cannot be undone.');
+
+            if (!confirmed) return;
+
+            const userId = localStorage.getItem('userId');
+            if (!userId || userId === 'null' || userId === 'undefined') {
+                alert('No user logged in. Nothing to reset.');
+                return;
+            }
+
+            // Clear all progress data for current user
+            const keysToRemove = [];
+            for (let i = 0; i < localStorage.length; i++) {
+                const key = localStorage.key(i);
+                if (key.includes(userId) && (
+                    key.includes('completed') ||
+                    key.includes('quiz_passed') ||
+                    key.includes('quiz_score') ||
+                    key.includes('quiz_completed')
+                )) {
+                    keysToRemove.push(key);
+                }
+            }
+
+            // Remove all progress keys
+            keysToRemove.forEach(key => localStorage.removeItem(key));
+
+            alert(`Progress reset successfully!\n\nCleared ${keysToRemove.length} progress items.\n\nThe page will now refresh.`);
+            window.location.reload();
         }
 
         // Show upgrade message
