@@ -759,6 +759,453 @@
             font-size: 14px;
             line-height: 1.6;
         }
+
+        /* ========== CALCULATOR STYLES ========== */
+
+        /* Mini Calculator Widget */
+        .mini-calculator {
+            background: linear-gradient(135deg, #F0F9FF 0%, #E0F2FE 100%);
+            border: 2px solid #3B82F6;
+            border-radius: 16px;
+            padding: 24px;
+            margin: 32px 0;
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.15);
+            transition: all 0.3s;
+        }
+
+        .mini-calculator:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(59, 130, 246, 0.25);
+        }
+
+        .mini-calc-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 600;
+            color: #1E40AF;
+            margin-bottom: 16px;
+            font-size: 1.1rem;
+        }
+
+        .mini-calc-header svg {
+            color: #3B82F6;
+        }
+
+        .mini-calc-body {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .mini-calc-input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .mini-calc-input-group label {
+            font-size: 0.95rem;
+            color: #475569;
+            font-weight: 500;
+        }
+
+        .mini-calc-input-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: white;
+            padding: 12px 16px;
+            border-radius: 8px;
+            border: 2px solid #CBD5E1;
+            transition: border-color 0.2s;
+        }
+
+        .mini-calc-input-wrapper:focus-within {
+            border-color: #3B82F6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+
+        .mini-calc-dollar {
+            font-weight: 600;
+            color: #10B981;
+            font-size: 1.1rem;
+        }
+
+        .mini-calc-input-wrapper input {
+            border: none;
+            outline: none;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #1E293B;
+            width: 80px;
+            padding: 0;
+        }
+
+        .mini-calc-period {
+            color: #64748B;
+            font-size: 0.95rem;
+        }
+
+        .mini-calc-result {
+            background: white;
+            padding: 16px;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 1rem;
+            color: #475569;
+            border: 1px solid #E2E8F0;
+        }
+
+        .mini-calc-result strong {
+            color: #10B981;
+            font-size: 1.4rem;
+            display: block;
+            margin-top: 8px;
+        }
+
+        .mini-calc-link {
+            background: linear-gradient(135deg, #3B82F6 0%, #2563EB 100%);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-align: center;
+            font-size: 0.95rem;
+        }
+
+        .mini-calc-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
+        }
+
+        @media (max-width: 768px) {
+            .mini-calculator {
+                padding: 20px;
+                margin: 24px 0;
+            }
+
+            .mini-calc-input-wrapper input {
+                width: 60px;
+            }
+
+            .mini-calc-result strong {
+                font-size: 1.2rem;
+            }
+        }
+
+        /* Tab Navigation */
+        .calculator-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #e5e7eb;
+            flex-wrap: wrap;
+        }
+        .calculator-tab {
+            padding: 12px 24px;
+            background: transparent;
+            border: none;
+            border-bottom: 3px solid transparent;
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--text-secondary);
+            transition: all 0.3s;
+            font-size: 16px;
+        }
+        .calculator-tab.active {
+            color: var(--primary-color);
+            border-bottom-color: var(--primary-color);
+        }
+        .calculator-tab:hover {
+            color: var(--primary-color);
+            background: rgba(59, 130, 246, 0.05);
+        }
+
+        /* Tab Content */
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.3s ease-in;
+        }
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Preset Buttons */
+        .preset-buttons {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 25px;
+            justify-content: center;
+        }
+        .btn-preset {
+            padding: 10px 20px;
+            background: linear-gradient(135deg, #F8FAFC 0%, #E2E8F0 100%);
+            border: 2px solid #CBD5E1;
+            border-radius: 8px;
+            font-weight: 600;
+            color: var(--text-primary);
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 14px;
+        }
+        .btn-preset:hover {
+            background: linear-gradient(135deg, #E2E8F0 0%, #CBD5E1 100%);
+            border-color: var(--primary-color);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.2);
+        }
+        .btn-preset.active {
+            background: linear-gradient(135deg, #3B82F6 0%, #2563EB 100%);
+            color: white;
+            border-color: #1D4ED8;
+        }
+
+        /* Comparison Grid */
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        .saver-card {
+            background: linear-gradient(135deg, #F8FAFC 0%, #F1F5F9 100%);
+            border: 2px solid #E2E8F0;
+            border-radius: 12px;
+            padding: 24px;
+            transition: all 0.3s;
+        }
+        .saver-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(59, 130, 246, 0.15);
+            border-color: var(--primary-color);
+        }
+        .saver-card.saver-a {
+            border-left: 4px solid #3B82F6;
+        }
+        .saver-card.saver-b {
+            border-left: 4px solid #F59E0B;
+        }
+        .saver-card h3 {
+            color: var(--primary-color);
+            font-size: 20px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        /* Input Groups */
+        .input-group {
+            margin-bottom: 20px;
+        }
+        .input-group label {
+            display: block;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+        .input-controls {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        .input-controls input[type="range"] {
+            flex: 1;
+            height: 6px;
+            border-radius: 3px;
+            background: #E2E8F0;
+            outline: none;
+            -webkit-appearance: none;
+        }
+        .input-controls input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: var(--primary-color);
+            cursor: pointer;
+            box-shadow: 0 2px 6px rgba(59, 130, 246, 0.4);
+            transition: all 0.2s;
+        }
+        .input-controls input[type="range"]::-webkit-slider-thumb:hover {
+            transform: scale(1.2);
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.6);
+        }
+        .input-controls input[type="range"]::-moz-range-thumb {
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: var(--primary-color);
+            cursor: pointer;
+            border: none;
+            box-shadow: 0 2px 6px rgba(59, 130, 246, 0.4);
+        }
+        .number-input-wrapper {
+            display: flex;
+            align-items: center;
+            background: white;
+            border: 2px solid #E2E8F0;
+            border-radius: 8px;
+            padding: 8px 12px;
+            min-width: 100px;
+            transition: all 0.2s;
+        }
+        .number-input-wrapper:focus-within {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+        .number-input-wrapper .prefix,
+        .number-input-wrapper .suffix {
+            color: var(--text-secondary);
+            font-weight: 600;
+            margin: 0 4px;
+        }
+        .number-input-wrapper input[type="number"] {
+            border: none;
+            outline: none;
+            width: 100%;
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--primary-color);
+            text-align: center;
+        }
+        .number-input-wrapper input[type="number"]::-webkit-inner-spin-button,
+        .number-input-wrapper input[type="number"]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        /* Results Display */
+        .results-summary {
+            background: linear-gradient(135deg, #DBEAFE 0%, #BFDBFE 100%);
+            border: 2px solid #3B82F6;
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+        .result-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(59, 130, 246, 0.2);
+        }
+        .result-row:last-child {
+            border-bottom: none;
+            padding-top: 12px;
+            margin-top: 8px;
+            border-top: 2px solid #3B82F6;
+        }
+        .result-label {
+            font-weight: 500;
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+        .result-value {
+            font-weight: 700;
+            color: var(--primary-color);
+            font-size: 16px;
+        }
+        .result-value.highlight {
+            color: #10B981;
+            font-size: 20px;
+        }
+
+        /* Chart Container */
+        .chart-container {
+            background: white;
+            border-radius: 12px;
+            padding: 24px;
+            margin: 20px 0;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        .chart-title {
+            text-align: center;
+            color: var(--primary-color);
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+        .chart-container canvas {
+            display: block;
+            max-width: 100%;
+            height: auto;
+        }
+
+        /* Key Insights */
+        .key-insight {
+            background: linear-gradient(135deg, #FEF3C7 0%, #FDE68A 100%);
+            border-left: 4px solid #F59E0B;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .key-insight-icon {
+            font-size: 32px;
+            flex-shrink: 0;
+        }
+        .key-insight-text {
+            font-weight: 600;
+            color: var(--text-primary);
+            line-height: 1.6;
+            font-size: 16px;
+        }
+        .key-insight-text strong {
+            color: #D97706;
+        }
+
+        /* Personal Calculator */
+        .personal-calculator {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* Delay Calculator */
+        .delay-calculator {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .calculator-tabs {
+                flex-direction: column;
+            }
+            .calculator-tab {
+                width: 100%;
+                text-align: center;
+            }
+            .comparison-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            .preset-buttons {
+                flex-direction: column;
+            }
+            .btn-preset {
+                width: 100%;
+            }
+            .input-controls {
+                flex-direction: column;
+                gap: 10px;
+            }
+            .input-controls input[type="range"] {
+                width: 100%;
+            }
+            .number-input-wrapper {
+                width: 100%;
+            }
+            .key-insight {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
     </style>
 </head>
 <body>
@@ -830,6 +1277,36 @@
                     <li><strong>Small Amounts Add Up:</strong> Saving $5/day = $1,825/year. Over 10 years at 5% interest, that becomes $24,000+.</li>
                 </ul>
                 <p>Think of saving like planting a tree. The sooner you plant it, the bigger it grows. The longer you wait, the less time it has to mature.</p>
+
+                <!-- Mini Calculator Widget -->
+                <div class="mini-calculator">
+                    <div class="mini-calc-header">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="4" y="2" width="16" height="20" rx="2"></rect>
+                            <line x1="8" y1="6" x2="16" y2="6"></line>
+                            <line x1="8" y1="10" x2="16" y2="10"></line>
+                            <line x1="8" y1="14" x2="16" y2="14"></line>
+                            <line x1="8" y1="18" x2="12" y2="18"></line>
+                        </svg>
+                        Try It Yourself
+                    </div>
+                    <div class="mini-calc-body">
+                        <div class="mini-calc-input-group">
+                            <label for="dailySavings">If I save</label>
+                            <div class="mini-calc-input-wrapper">
+                                <span class="mini-calc-dollar">$</span>
+                                <input type="number" id="dailySavings" value="5" min="0" max="100" step="0.5" oninput="calculateMini()">
+                                <span class="mini-calc-period">per day</span>
+                            </div>
+                        </div>
+                        <div class="mini-calc-result">
+                            In 10 years at 5% interest: <strong id="miniResult">$24,201</strong>
+                        </div>
+                        <button class="mini-calc-link" onclick="showScreen(4)">
+                            See Full Calculator →
+                        </button>
+                    </div>
+                </div>
             </div>
             <div class="screen-navigation">
                 <button class="btn-nav btn-prev" onclick="previousScreen()"><span>←</span> Previous</button>
@@ -880,34 +1357,271 @@
             </div>
         </div>
 
-        <!-- Screen 4: Simple Example -->
+        <!-- Screen 4: Interactive Calculator Hub -->
         <div class="lesson-screen" data-screen="4">
             <div class="screen-progress">Screen 4 of 8</div>
             <div class="lesson-section">
-                <h2>Real-World Example</h2>
-                <p>Meet Alex and Jamie, both 22 years old and earning $40,000/year:</p>
+                <h2>Interactive Savings Calculator</h2>
+                <p style="margin-bottom: 20px;">See the power of compound savings with your own numbers!</p>
 
-                <div class="visual-box">
-                    <h3>Alex: Starts Saving Now</h3>
-                    <ul>
-                        <li>Saves $200/month ($2,400/year)</li>
-                        <li>Continues for 10 years, then stops</li>
-                        <li>Total invested: $24,000</li>
-                        <li><strong>At age 65 (with 7% returns): $338,000</strong></li>
-                    </ul>
+                <!-- Tab Navigation -->
+                <div class="calculator-tabs">
+                    <button class="calculator-tab active" onclick="switchTab('comparison')">Compare Savers</button>
+                    <button class="calculator-tab" onclick="switchTab('personal')">Your Calculator</button>
+                    <button class="calculator-tab" onclick="switchTab('delay')">Cost of Delay</button>
                 </div>
 
-                <div class="visual-box">
-                    <h3>Jamie: Waits 10 Years to Start</h3>
-                    <ul>
-                        <li>Waits until age 32 to start saving</li>
-                        <li>Saves $200/month for 33 years</li>
-                        <li>Total invested: $79,200</li>
-                        <li><strong>At age 65 (with 7% returns): $328,000</strong></li>
-                    </ul>
+                <!-- Tab 1: Side-by-Side Comparison -->
+                <div class="tab-content active" id="tab-comparison">
+                    <div class="preset-buttons">
+                        <button class="btn-preset active" onclick="loadPreset('alex-jamie')">Alex vs Jamie</button>
+                        <button class="btn-preset" onclick="loadPreset('early-start')">Early Start</button>
+                        <button class="btn-preset" onclick="loadPreset('late-start')">Late Start</button>
+                    </div>
+
+                    <div class="comparison-grid">
+                        <!-- Saver A Card -->
+                        <div class="saver-card saver-a">
+                            <h3>Saver A (Early Start)</h3>
+
+                            <div class="input-group">
+                                <label for="saverA-age">Starting Age</label>
+                                <div class="input-controls">
+                                    <input type="range" id="saverA-age-slider" min="18" max="65" value="22" oninput="syncInput('saverA-age', this.value)">
+                                    <div class="number-input-wrapper">
+                                        <input type="number" id="saverA-age-input" min="18" max="65" value="22" oninput="syncSlider('saverA-age', this.value)">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="input-group">
+                                <label for="saverA-monthly">Monthly Savings</label>
+                                <div class="input-controls">
+                                    <input type="range" id="saverA-monthly-slider" min="0" max="2000" step="25" value="200" oninput="syncInput('saverA-monthly', this.value)">
+                                    <div class="number-input-wrapper">
+                                        <span class="prefix">$</span>
+                                        <input type="number" id="saverA-monthly-input" min="0" max="2000" step="25" value="200" oninput="syncSlider('saverA-monthly', this.value)">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="input-group">
+                                <label for="saverA-years">Years Saving</label>
+                                <div class="input-controls">
+                                    <input type="range" id="saverA-years-slider" min="1" max="50" value="10" oninput="syncInput('saverA-years', this.value)">
+                                    <div class="number-input-wrapper">
+                                        <input type="number" id="saverA-years-input" min="1" max="50" value="10" oninput="syncSlider('saverA-years', this.value)">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="input-group">
+                                <label for="saverA-return">Return Rate (%)</label>
+                                <div class="input-controls">
+                                    <input type="range" id="saverA-return-slider" min="0" max="15" step="0.5" value="7" oninput="syncInput('saverA-return', this.value)">
+                                    <div class="number-input-wrapper">
+                                        <input type="number" id="saverA-return-input" min="0" max="15" step="0.5" value="7" oninput="syncSlider('saverA-return', this.value)">
+                                        <span class="suffix">%</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="results-summary">
+                                <div class="result-row">
+                                    <span class="result-label">Total Invested:</span>
+                                    <span class="result-value" id="saverA-invested">$24,000</span>
+                                </div>
+                                <div class="result-row">
+                                    <span class="result-label">At Age 65:</span>
+                                    <span class="result-value highlight" id="saverA-final">$338,000</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Saver B Card -->
+                        <div class="saver-card saver-b">
+                            <h3>Saver B (Late Start)</h3>
+
+                            <div class="input-group">
+                                <label for="saverB-age">Starting Age</label>
+                                <div class="input-controls">
+                                    <input type="range" id="saverB-age-slider" min="18" max="65" value="32" oninput="syncInput('saverB-age', this.value)">
+                                    <div class="number-input-wrapper">
+                                        <input type="number" id="saverB-age-input" min="18" max="65" value="32" oninput="syncSlider('saverB-age', this.value)">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="input-group">
+                                <label for="saverB-monthly">Monthly Savings</label>
+                                <div class="input-controls">
+                                    <input type="range" id="saverB-monthly-slider" min="0" max="2000" step="25" value="200" oninput="syncInput('saverB-monthly', this.value)">
+                                    <div class="number-input-wrapper">
+                                        <span class="prefix">$</span>
+                                        <input type="number" id="saverB-monthly-input" min="0" max="2000" step="25" value="200" oninput="syncSlider('saverB-monthly', this.value)">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="input-group">
+                                <label for="saverB-years">Years Saving</label>
+                                <div class="input-controls">
+                                    <input type="range" id="saverB-years-slider" min="1" max="50" value="33" oninput="syncInput('saverB-years', this.value)">
+                                    <div class="number-input-wrapper">
+                                        <input type="number" id="saverB-years-input" min="1" max="50" value="33" oninput="syncSlider('saverB-years', this.value)">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="input-group">
+                                <label for="saverB-return">Return Rate (%)</label>
+                                <div class="input-controls">
+                                    <input type="range" id="saverB-return-slider" min="0" max="15" step="0.5" value="7" oninput="syncInput('saverB-return', this.value)">
+                                    <div class="number-input-wrapper">
+                                        <input type="number" id="saverB-return-input" min="0" max="15" step="0.5" value="7" oninput="syncSlider('saverB-return', this.value)">
+                                        <span class="suffix">%</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="results-summary">
+                                <div class="result-row">
+                                    <span class="result-label">Total Invested:</span>
+                                    <span class="result-value" id="saverB-invested">$79,200</span>
+                                </div>
+                                <div class="result-row">
+                                    <span class="result-label">At Age 65:</span>
+                                    <span class="result-value highlight" id="saverB-final">$328,000</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="chart-container">
+                        <div class="chart-title">Growth Over Time</div>
+                        <canvas id="lineChart" width="800" height="400"></canvas>
+                    </div>
+
+                    <div class="key-insight">
+                        <div class="key-insight-icon">💡</div>
+                        <div class="key-insight-text" id="comparison-insight">
+                            Saver A invested <strong>$55,200 LESS</strong> but ended up with <strong>$10,000 MORE</strong>. That's the power of starting early!
+                        </div>
+                    </div>
                 </div>
 
-                <p style="margin-top: 20px;"><strong>The Result:</strong> Alex invested $55,200 LESS but ended up with MORE money. That's the power of starting early!</p>
+                <!-- Tab 2: Personal Calculator -->
+                <div class="tab-content" id="tab-personal">
+                    <div class="personal-calculator">
+                        <div class="input-group">
+                            <label for="personal-current-age">Your Current Age</label>
+                            <div class="input-controls">
+                                <input type="range" id="personal-current-age-slider" min="18" max="65" value="25" oninput="syncInput('personal-current-age', this.value)">
+                                <div class="number-input-wrapper">
+                                    <input type="number" id="personal-current-age-input" min="18" max="65" value="25" oninput="syncSlider('personal-current-age', this.value)">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="input-group">
+                            <label for="personal-target-age">Target Age</label>
+                            <div class="input-controls">
+                                <input type="range" id="personal-target-age-slider" min="18" max="75" value="65" oninput="syncInput('personal-target-age', this.value)">
+                                <div class="number-input-wrapper">
+                                    <input type="number" id="personal-target-age-input" min="18" max="75" value="65" oninput="syncSlider('personal-target-age', this.value)">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="input-group">
+                            <label for="personal-monthly">Monthly Savings</label>
+                            <div class="input-controls">
+                                <input type="range" id="personal-monthly-slider" min="0" max="2000" step="25" value="200" oninput="syncInput('personal-monthly', this.value)">
+                                <div class="number-input-wrapper">
+                                    <span class="prefix">$</span>
+                                    <input type="number" id="personal-monthly-input" min="0" max="2000" step="25" value="200" oninput="syncSlider('personal-monthly', this.value)">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="input-group">
+                            <label for="personal-return">Expected Return (%)</label>
+                            <div class="input-controls">
+                                <input type="range" id="personal-return-slider" min="0" max="15" step="0.5" value="7" oninput="syncInput('personal-return', this.value)">
+                                <div class="number-input-wrapper">
+                                    <input type="number" id="personal-return-input" min="0" max="15" step="0.5" value="7" oninput="syncSlider('personal-return', this.value)">
+                                    <span class="suffix">%</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="results-summary" style="max-width: 500px; margin: 30px auto;">
+                            <h3 style="text-align: center; margin-bottom: 20px; color: var(--primary-color);">Your Results</h3>
+                            <div class="result-row">
+                                <span class="result-label">Years Saving:</span>
+                                <span class="result-value" id="personal-years">40 years</span>
+                            </div>
+                            <div class="result-row">
+                                <span class="result-label">Total Invested:</span>
+                                <span class="result-value" id="personal-invested">$96,000</span>
+                            </div>
+                            <div class="result-row">
+                                <span class="result-label">Compound Growth:</span>
+                                <span class="result-value" id="personal-growth">$428,000</span>
+                            </div>
+                            <div class="result-row">
+                                <span class="result-label">Final Amount:</span>
+                                <span class="result-value highlight" id="personal-final">$524,000</span>
+                            </div>
+                        </div>
+
+                        <div class="chart-container">
+                            <div class="chart-title">Your Savings Timeline</div>
+                            <canvas id="personalChart" width="800" height="400"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tab 3: Impact of Delay -->
+                <div class="tab-content" id="tab-delay">
+                    <div class="delay-calculator">
+                        <p style="text-align: center; font-size: 18px; margin-bottom: 30px;">
+                            Move the slider to see how each year of delay impacts your savings
+                        </p>
+
+                        <div class="input-group" style="max-width: 600px; margin: 0 auto 30px;">
+                            <label for="delay-start-age" style="font-size: 18px; text-align: center; display: block;">Starting Age</label>
+                            <div class="input-controls">
+                                <input type="range" id="delay-start-age-slider" min="22" max="40" value="22" oninput="syncInput('delay-start-age', this.value)" style="flex: 1;">
+                                <div class="number-input-wrapper">
+                                    <input type="number" id="delay-start-age-input" min="22" max="40" value="22" oninput="syncSlider('delay-start-age', this.value)">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="results-summary" style="max-width: 600px; margin: 30px auto;">
+                            <h3 style="text-align: center; margin-bottom: 20px; color: var(--primary-color);">Impact Analysis</h3>
+                            <div class="result-row">
+                                <span class="result-label">If you start at age <span id="delay-age-display">22</span>:</span>
+                                <span class="result-value highlight" id="delay-amount-now">$338,000</span>
+                            </div>
+                            <div class="result-row">
+                                <span class="result-label">If you wait 1 year (age <span id="delay-age-next">23</span>):</span>
+                                <span class="result-value" id="delay-amount-next">$317,000</span>
+                            </div>
+                            <div class="result-row" style="background: #FEE2E2; padding: 15px; border-radius: 8px; margin-top: 10px;">
+                                <span class="result-label" style="color: #DC2626; font-weight: 700;">Cost of Waiting:</span>
+                                <span class="result-value" style="color: #DC2626; font-size: 24px;" id="delay-cost">-$21,000</span>
+                            </div>
+                        </div>
+
+                        <div class="chart-container">
+                            <div class="chart-title">Cost of Each Year You Wait</div>
+                            <canvas id="delayChart" width="800" height="400"></canvas>
+                        </div>
+                    </div>
+                </div>
+
             </div>
             <div class="screen-navigation">
                 <button class="btn-nav btn-prev" onclick="previousScreen()"><span>←</span> Previous</button>
@@ -1093,6 +1807,432 @@
     <script src="lesson-completion.js"></script>
     <script src="animations.js"></script>
     <script>
+        // ============ CALCULATOR SYSTEM ============
+
+        // Compound Interest Calculation Engine
+        function calculateCompoundInterest(startAge, monthly, years, annualRate) {
+            const monthlyRate = annualRate / 12 / 100;
+            const months = years * 12;
+            let balance = 0;
+            const timeline = [{ age: startAge, amount: 0 }];
+
+            for (let i = 1; i <= months; i++) {
+                balance = balance * (1 + monthlyRate) + monthly;
+
+                if (i % 12 === 0) {
+                    timeline.push({
+                        age: startAge + Math.floor(i / 12),
+                        amount: Math.round(balance)
+                    });
+                }
+            }
+
+            const totalInvested = monthly * months;
+            const compoundGrowth = Math.round(balance) - totalInvested;
+
+            return {
+                finalAmount: Math.round(balance),
+                totalInvested: totalInvested,
+                compoundGrowth: compoundGrowth,
+                timeline: timeline
+            };
+        }
+
+        // Format number as currency
+        function formatCurrency(num) {
+            return '$' + Math.round(num).toLocaleString();
+        }
+
+        // Sync slider and input
+        function syncSlider(id, value) {
+            document.getElementById(id + '-slider').value = value;
+            calculateAll();
+        }
+
+        function syncInput(id, value) {
+            document.getElementById(id + '-input').value = value;
+            calculateAll();
+        }
+
+        // Tab Switching
+        function switchTab(tabName) {
+            // Remove active from all tabs and content
+            document.querySelectorAll('.calculator-tab').forEach(tab => tab.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+
+            // Add active to selected tab
+            event.target.classList.add('active');
+            document.getElementById('tab-' + tabName).classList.add('active');
+
+            // Redraw charts for the active tab
+            setTimeout(() => {
+                if (tabName === 'comparison') {
+                    calculateComparison();
+                } else if (tabName === 'personal') {
+                    calculatePersonal();
+                } else if (tabName === 'delay') {
+                    calculateDelay();
+                }
+            }, 50);
+        }
+
+        // Load Preset Scenarios
+        function loadPreset(preset) {
+            // Remove active from all preset buttons
+            document.querySelectorAll('.btn-preset').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+
+            if (preset === 'alex-jamie') {
+                document.getElementById('saverA-age-input').value = 22;
+                document.getElementById('saverA-age-slider').value = 22;
+                document.getElementById('saverA-monthly-input').value = 200;
+                document.getElementById('saverA-monthly-slider').value = 200;
+                document.getElementById('saverA-years-input').value = 10;
+                document.getElementById('saverA-years-slider').value = 10;
+                document.getElementById('saverA-return-input').value = 7;
+                document.getElementById('saverA-return-slider').value = 7;
+
+                document.getElementById('saverB-age-input').value = 32;
+                document.getElementById('saverB-age-slider').value = 32;
+                document.getElementById('saverB-monthly-input').value = 200;
+                document.getElementById('saverB-monthly-slider').value = 200;
+                document.getElementById('saverB-years-input').value = 33;
+                document.getElementById('saverB-years-slider').value = 33;
+                document.getElementById('saverB-return-input').value = 7;
+                document.getElementById('saverB-return-slider').value = 7;
+            } else if (preset === 'early-start') {
+                document.getElementById('saverA-age-input').value = 25;
+                document.getElementById('saverA-age-slider').value = 25;
+                document.getElementById('saverA-monthly-input').value = 150;
+                document.getElementById('saverA-monthly-slider').value = 150;
+                document.getElementById('saverA-years-input').value = 15;
+                document.getElementById('saverA-years-slider').value = 15;
+
+                document.getElementById('saverB-age-input').value = 40;
+                document.getElementById('saverB-age-slider').value = 40;
+                document.getElementById('saverB-monthly-input').value = 300;
+                document.getElementById('saverB-monthly-slider').value = 300;
+                document.getElementById('saverB-years-input').value = 25;
+                document.getElementById('saverB-years-slider').value = 25;
+            } else if (preset === 'late-start') {
+                document.getElementById('saverA-age-input').value = 35;
+                document.getElementById('saverA-age-slider').value = 35;
+                document.getElementById('saverA-monthly-input').value = 300;
+                document.getElementById('saverA-monthly-slider').value = 300;
+                document.getElementById('saverA-years-input').value = 30;
+                document.getElementById('saverA-years-slider').value = 30;
+
+                document.getElementById('saverB-age-input').value = 45;
+                document.getElementById('saverB-age-slider').value = 45;
+                document.getElementById('saverB-monthly-input').value = 400;
+                document.getElementById('saverB-monthly-slider').value = 400;
+                document.getElementById('saverB-years-input').value = 20;
+                document.getElementById('saverB-years-slider').value = 20;
+            }
+
+            calculateComparison();
+        }
+
+        // Calculate All (used by input sync)
+        function calculateAll() {
+            const activeTab = document.querySelector('.tab-content.active');
+            if (activeTab.id === 'tab-comparison') {
+                calculateComparison();
+            } else if (activeTab.id === 'tab-personal') {
+                calculatePersonal();
+            } else if (activeTab.id === 'tab-delay') {
+                calculateDelay();
+            }
+        }
+
+        // Calculate Comparison Tab
+        function calculateComparison() {
+            const saverA = {
+                age: parseInt(document.getElementById('saverA-age-input').value),
+                monthly: parseInt(document.getElementById('saverA-monthly-input').value),
+                years: parseInt(document.getElementById('saverA-years-input').value),
+                return: parseFloat(document.getElementById('saverA-return-input').value)
+            };
+
+            const saverB = {
+                age: parseInt(document.getElementById('saverB-age-input').value),
+                monthly: parseInt(document.getElementById('saverB-monthly-input').value),
+                years: parseInt(document.getElementById('saverB-years-input').value),
+                return: parseFloat(document.getElementById('saverB-return-input').value)
+            };
+
+            const resultsA = calculateCompoundInterest(saverA.age, saverA.monthly, saverA.years, saverA.return);
+            const resultsB = calculateCompoundInterest(saverB.age, saverB.monthly, saverB.years, saverB.return);
+
+            // Update results
+            document.getElementById('saverA-invested').textContent = formatCurrency(resultsA.totalInvested);
+            document.getElementById('saverA-final').textContent = formatCurrency(resultsA.finalAmount);
+            document.getElementById('saverB-invested').textContent = formatCurrency(resultsB.totalInvested);
+            document.getElementById('saverB-final').textContent = formatCurrency(resultsB.finalAmount);
+
+            // Update insight
+            const diff = resultsA.finalAmount - resultsB.finalAmount;
+            const investDiff = resultsA.totalInvested - resultsB.totalInvested;
+            const insightEl = document.getElementById('comparison-insight');
+
+            if (diff > 0) {
+                insightEl.innerHTML = `Saver A invested <strong>${formatCurrency(Math.abs(investDiff))} ${investDiff < 0 ? 'LESS' : 'MORE'}</strong> but ended up with <strong>${formatCurrency(Math.abs(diff))} MORE</strong>. That's the power of starting early!`;
+            } else {
+                insightEl.innerHTML = `Saver B ended up with <strong>${formatCurrency(Math.abs(diff))} MORE</strong> by investing <strong>${formatCurrency(Math.abs(investDiff))} ${investDiff > 0 ? 'MORE' : 'LESS'}</strong> over time.`;
+            }
+
+            // Draw chart
+            drawLineChart('lineChart', resultsA, resultsB, 'Saver A', 'Saver B');
+        }
+
+        // Calculate Personal Tab
+        function calculatePersonal() {
+            const currentAge = parseInt(document.getElementById('personal-current-age-input').value);
+            const targetAge = parseInt(document.getElementById('personal-target-age-input').value);
+            const monthly = parseInt(document.getElementById('personal-monthly-input').value);
+            const returnRate = parseFloat(document.getElementById('personal-return-input').value);
+
+            const years = targetAge - currentAge;
+            const results = calculateCompoundInterest(currentAge, monthly, years, returnRate);
+
+            document.getElementById('personal-years').textContent = years + ' years';
+            document.getElementById('personal-invested').textContent = formatCurrency(results.totalInvested);
+            document.getElementById('personal-growth').textContent = formatCurrency(results.compoundGrowth);
+            document.getElementById('personal-final').textContent = formatCurrency(results.finalAmount);
+
+            drawSingleLineChart('personalChart', results, 'Your Savings');
+        }
+
+        // Calculate Delay Tab
+        function calculateDelay() {
+            const startAge = parseInt(document.getElementById('delay-start-age-input').value);
+            const monthly = 200;
+            const returnRate = 7;
+            const years = 65 - startAge;
+
+            const resultsNow = calculateCompoundInterest(startAge, monthly, years, returnRate);
+            const resultsNext = calculateCompoundInterest(startAge + 1, monthly, years - 1, returnRate);
+
+            const cost = resultsNow.finalAmount - resultsNext.finalAmount;
+
+            document.getElementById('delay-age-display').textContent = startAge;
+            document.getElementById('delay-age-next').textContent = startAge + 1;
+            document.getElementById('delay-amount-now').textContent = formatCurrency(resultsNow.finalAmount);
+            document.getElementById('delay-amount-next').textContent = formatCurrency(resultsNext.finalAmount);
+            document.getElementById('delay-cost').textContent = '-' + formatCurrency(cost);
+
+            drawDelayChart('delayChart', startAge, monthly, returnRate);
+        }
+
+        // Draw Line Chart (Comparison)
+        function drawLineChart(canvasId, dataA, dataB, labelA, labelB) {
+            const canvas = document.getElementById(canvasId);
+            if (!canvas) return;
+
+            const ctx = canvas.getContext('2d');
+            const width = canvas.width;
+            const height = canvas.height;
+            const padding = 60;
+
+            ctx.clearRect(0, 0, width, height);
+
+            const maxAmount = Math.max(
+                ...dataA.timeline.map(p => p.amount),
+                ...dataB.timeline.map(p => p.amount)
+            );
+
+            const minAge = Math.min(dataA.timeline[0].age, dataB.timeline[0].age);
+            const maxAge = Math.max(
+                dataA.timeline[dataA.timeline.length - 1].age,
+                dataB.timeline[dataB.timeline.length - 1].age
+            );
+
+            // Draw grid
+            ctx.strokeStyle = '#E5E7EB';
+            ctx.lineWidth = 1;
+            for (let i = 0; i <= 5; i++) {
+                const y = padding + (height - padding * 2) * i / 5;
+                ctx.beginPath();
+                ctx.moveTo(padding, y);
+                ctx.lineTo(width - padding, y);
+                ctx.stroke();
+
+                const label = formatCurrency(maxAmount * (1 - i / 5));
+                ctx.fillStyle = '#6B7280';
+                ctx.font = '12px sans-serif';
+                ctx.textAlign = 'right';
+                ctx.fillText(label, padding - 10, y + 4);
+            }
+
+            // Draw Saver A curve
+            drawCurve(ctx, dataA.timeline, width, height, padding, maxAmount, minAge, maxAge, '#3B82F6');
+
+            // Draw Saver B curve
+            drawCurve(ctx, dataB.timeline, width, height, padding, maxAmount, minAge, maxAge, '#F59E0B');
+
+            // Draw legend
+            ctx.fillStyle = '#3B82F6';
+            ctx.fillRect(width - 150, 20, 20, 3);
+            ctx.fillStyle = '#000';
+            ctx.font = '14px sans-serif';
+            ctx.textAlign = 'left';
+            ctx.fillText(labelA, width - 125, 24);
+
+            ctx.fillStyle = '#F59E0B';
+            ctx.fillRect(width - 150, 40, 20, 3);
+            ctx.fillStyle = '#000';
+            ctx.fillText(labelB, width - 125, 44);
+        }
+
+        // Draw single line chart
+        function drawSingleLineChart(canvasId, data, label) {
+            const canvas = document.getElementById(canvasId);
+            if (!canvas) return;
+
+            const ctx = canvas.getContext('2d');
+            const width = canvas.width;
+            const height = canvas.height;
+            const padding = 60;
+
+            ctx.clearRect(0, 0, width, height);
+
+            const maxAmount = Math.max(...data.timeline.map(p => p.amount));
+            const minAge = data.timeline[0].age;
+            const maxAge = data.timeline[data.timeline.length - 1].age;
+
+            // Draw grid
+            ctx.strokeStyle = '#E5E7EB';
+            ctx.lineWidth = 1;
+            for (let i = 0; i <= 5; i++) {
+                const y = padding + (height - padding * 2) * i / 5;
+                ctx.beginPath();
+                ctx.moveTo(padding, y);
+                ctx.lineTo(width - padding, y);
+                ctx.stroke();
+
+                const labelText = formatCurrency(maxAmount * (1 - i / 5));
+                ctx.fillStyle = '#6B7280';
+                ctx.font = '12px sans-serif';
+                ctx.textAlign = 'right';
+                ctx.fillText(labelText, padding - 10, y + 4);
+            }
+
+            // Draw curve
+            drawCurve(ctx, data.timeline, width, height, padding, maxAmount, minAge, maxAge, '#10B981');
+        }
+
+        // Draw delay chart
+        function drawDelayChart(canvasId, startAge, monthly, returnRate) {
+            const canvas = document.getElementById(canvasId);
+            if (!canvas) return;
+
+            const ctx = canvas.getContext('2d');
+            const width = canvas.width;
+            const height = canvas.height;
+            const padding = 60;
+
+            ctx.clearRect(0, 0, width, height);
+
+            const data = [];
+            for (let age = 22; age <= 40; age++) {
+                const years = 65 - age;
+                const result = calculateCompoundInterest(age, monthly, years, returnRate);
+                data.push({ age: age, amount: result.finalAmount });
+            }
+
+            const maxAmount = Math.max(...data.map(d => d.amount));
+
+            // Draw grid
+            ctx.strokeStyle = '#E5E7EB';
+            ctx.lineWidth = 1;
+            for (let i = 0; i <= 5; i++) {
+                const y = padding + (height - padding * 2) * i / 5;
+                ctx.beginPath();
+                ctx.moveTo(padding, y);
+                ctx.lineTo(width - padding, y);
+                ctx.stroke();
+            }
+
+            // Draw bars
+            const barWidth = (width - padding * 2) / data.length * 0.8;
+            data.forEach((d, i) => {
+                const x = padding + (width - padding * 2) / data.length * i;
+                const barHeight = (d.amount / maxAmount) * (height - padding * 2);
+                const y = height - padding - barHeight;
+
+                // Color based on age
+                const ratio = i / (data.length - 1);
+                ctx.fillStyle = ratio < 0.3 ? '#10B981' : ratio < 0.7 ? '#F59E0B' : '#DC2626';
+                ctx.fillRect(x, y, barWidth, barHeight);
+
+                // Highlight current age
+                if (d.age === startAge) {
+                    ctx.strokeStyle = '#000';
+                    ctx.lineWidth = 3;
+                    ctx.strokeRect(x - 2, y - 2, barWidth + 4, barHeight + 4);
+                }
+            });
+        }
+
+        // Helper: Draw curve on canvas
+        function drawCurve(ctx, timeline, width, height, padding, maxAmount, minAge, maxAge, color) {
+            ctx.strokeStyle = color;
+            ctx.lineWidth = 3;
+            ctx.beginPath();
+
+            timeline.forEach((point, index) => {
+                const x = padding + ((point.age - minAge) / (maxAge - minAge)) * (width - padding * 2);
+                const y = height - padding - (point.amount / maxAmount) * (height - padding * 2);
+
+                if (index === 0) {
+                    ctx.moveTo(x, y);
+                } else {
+                    ctx.lineTo(x, y);
+                }
+            });
+
+            ctx.stroke();
+
+            // Add shaded area
+            ctx.globalAlpha = 0.1;
+            ctx.fillStyle = color;
+            const lastPoint = timeline[timeline.length - 1];
+            const lastX = padding + ((lastPoint.age - minAge) / (maxAge - minAge)) * (width - padding * 2);
+            ctx.lineTo(lastX, height - padding);
+            ctx.lineTo(padding, height - padding);
+            ctx.closePath();
+            ctx.fill();
+            ctx.globalAlpha = 1.0;
+        }
+
+        // Initialize calculator on page load
+        function initCalculator() {
+            calculateComparison();
+            calculatePersonal();
+            calculateDelay();
+            calculateMini();
+        }
+
+        // Mini Calculator for Screen 2
+        function calculateMini() {
+            const dailyAmount = parseFloat(document.getElementById('dailySavings').value) || 0;
+            const years = 10;
+            const annualRate = 5; // 5% return
+            const monthlyAmount = dailyAmount * 365 / 12;
+            const monthlyRate = annualRate / 12 / 100;
+            const months = years * 12;
+
+            let balance = 0;
+            for (let i = 0; i < months; i++) {
+                balance = balance * (1 + monthlyRate) + monthlyAmount;
+            }
+
+            const finalAmount = Math.round(balance);
+            document.getElementById('miniResult').textContent = '$' + finalAmount.toLocaleString();
+        }
+
+        // ============ END CALCULATOR SYSTEM ============
+
         // Check authentication status and update nav
                 async function updateNav() {
             const authButtons = document.getElementById('authButtons');
@@ -1451,6 +2591,7 @@
 
         document.addEventListener('DOMContentLoaded', function() {
             showScreen(1);
+            initCalculator();
         });
 
         function toggleChecklistItem(item) {
