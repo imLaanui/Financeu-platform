@@ -282,14 +282,14 @@
                 </div>
             </div>
 
-            <!-- Lesson 2 - Coming Soon -->
-            <div class="lesson-card" data-lesson="2" style="opacity: 0.6; pointer-events: none;">
+            <!-- Lesson 2 -->
+            <div class="lesson-card" data-lesson="2">
                 <div class="lesson-info">
-                    <h3>Lesson 2 - Coming Soon</h3>
-                    <p>More banking lessons will be available soon</p>
+                    <h3>Lesson 2 - Checking Accounts</h3>
+                    <p>Learn what checking accounts are, how to use debit cards, and manage your everyday money</p>
                 </div>
                 <div class="lesson-status">
-                    <span style="color: #9ca3af; font-weight: 600;">Unavailable</span>
+                    <a href="/pillar1-lesson2" class="btn-start-lesson">Start Lesson</a>
                 </div>
             </div>
 
@@ -471,12 +471,11 @@
 
             const completed = JSON.parse(localStorage.getItem(`pillar1_completed_${userId}`) || '[]');
 
-            // Only handle Lesson 1 - Lessons 2-8 are "Coming Soon" and handled by HTML
+            // Handle Lesson 1 (always unlocked)
             const lesson1Card = document.querySelector(`[data-lesson="1"]`);
             if (lesson1Card) {
                 const statusDiv = lesson1Card.querySelector('.lesson-status');
 
-                // Lesson 1 is always unlocked
                 if (completed.includes(1)) {
                     lesson1Card.classList.add('completed');
                     statusDiv.innerHTML = `
@@ -484,6 +483,30 @@
                         <a href="/pillar1-lesson1" class="btn-start-lesson">Review</a>
                     `;
                 }
+            }
+
+            // Handle Lesson 2 (requires lesson 1 quiz to be passed)
+            const lesson2Card = document.querySelector(`[data-lesson="2"]`);
+            if (lesson2Card) {
+                const statusDiv = lesson2Card.querySelector('.lesson-status');
+                const lesson1QuizPassed = localStorage.getItem(`lesson1_quiz_passed_${userId}`) === 'true';
+
+                if (!lesson1QuizPassed) {
+                    // Lock lesson 2
+                    lesson2Card.style.opacity = '0.6';
+                    lesson2Card.style.pointerEvents = 'none';
+                    statusDiv.innerHTML = `
+                        <span style="color: #9ca3af; font-weight: 600;"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="5" y="9" width="10" height="8" rx="1" fill="#6B7280"/><path d="M7 9 L7 6 C7 4.3 8.3 3 10 3 C11.7 3 13 4.3 13 6 L13 9" stroke="#6B7280" stroke-width="2" fill="none"/></svg> Complete Lesson 1</span>
+                    `;
+                } else if (completed.includes(2)) {
+                    // Lesson 2 completed
+                    lesson2Card.classList.add('completed');
+                    statusDiv.innerHTML = `
+                        <span class="completed-badge">Completed</span>
+                        <a href="/pillar1-lesson2" class="btn-start-lesson">Review</a>
+                    `;
+                }
+                // If lesson 1 quiz passed but not completed, button already shows "Start Lesson"
             }
         }
 

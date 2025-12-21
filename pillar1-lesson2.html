@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lesson 2 - Understanding Income and Expenses - FinanceU</title>
+    <title>Lesson 2 - Checking Accounts - FinanceU</title>
     <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
     <link rel="icon" type="image/svg+xml" sizes="16x16" href="assets/favicon-16x16.svg">
     <link rel="icon" type="image/svg+xml" sizes="32x32" href="assets/favicon-32x32.svg">
@@ -150,31 +150,25 @@
             font-size: 18px;
             font-weight: 700;
         }
-        .income-expense-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
+        .money-flow {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
             margin-top: 15px;
         }
-        .income-box {
-            background: #10b98120;
-            padding: 20px;
+        .flow-item {
+            text-align: center;
+            padding: 15px;
+            background: white;
             border-radius: 8px;
-            border: 2px solid #10b981;
+            flex: 1;
+            min-width: 120px;
         }
-        .expense-box {
-            background: #dc262620;
-            padding: 20px;
-            border-radius: 8px;
-            border: 2px solid #dc2626;
-        }
-        .income-box h4 {
-            color: #10b981;
-            margin-bottom: 10px;
-        }
-        .expense-box h4 {
-            color: #dc2626;
-            margin-bottom: 10px;
+        .flow-arrow {
+            font-size: 24px;
+            color: var(--primary-color);
         }
         .action-box {
             background: linear-gradient(135deg, #10b98120 0%, #d1fae540 100%);
@@ -592,11 +586,6 @@
         .btn-continue:hover {
             background: #2563eb;
         }
-        @media (max-width: 768px) {
-            .income-expense-grid {
-                grid-template-columns: 1fr;
-            }
-        }
 
         /* SCREEN 1: Animated Icons */
         .intro-cards {
@@ -644,122 +633,6 @@
             font-size: 14px;
             line-height: 1.5;
             margin: 0;
-        }
-
-        /* SCREEN 2: Budget Method Cards */
-        .budget-methods {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 15px;
-            margin: 20px 0;
-        }
-        .budget-method-card {
-            background: white;
-            border: 2px solid #e5e7eb;
-            border-radius: 8px;
-            padding: 15px;
-            text-align: center;
-            transition: all 0.3s;
-        }
-        .budget-method-card:hover {
-            border-color: var(--primary-color);
-            transform: translateY(-3px);
-            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.2);
-        }
-        .budget-method-emoji {
-            font-size: 32px;
-            margin-bottom: 8px;
-        }
-        .budget-method-name {
-            font-weight: 700;
-            color: var(--text-primary);
-            font-size: 14px;
-            margin-bottom: 5px;
-        }
-        .budget-method-desc {
-            font-size: 12px;
-            color: var(--text-secondary);
-            line-height: 1.4;
-        }
-
-        /* SCREEN 4: Visual Budget Chart */
-        .budget-breakdown {
-            margin: 20px 0;
-        }
-        .budget-chart {
-            background: white;
-            border-radius: 12px;
-            padding: 20px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-        }
-        .budget-chart-title {
-            text-align: center;
-            color: var(--primary-color);
-            font-size: 18px;
-            font-weight: 700;
-            margin-bottom: 15px;
-        }
-        .budget-item {
-            margin-bottom: 12px;
-        }
-        .budget-item-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 5px;
-        }
-        .budget-item-label {
-            font-weight: 600;
-            color: var(--text-primary);
-            font-size: 14px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        .budget-item-value {
-            font-weight: 700;
-            color: var(--primary-color);
-            font-size: 14px;
-        }
-        .budget-item-bar {
-            height: 24px;
-            background: #f3f4f6;
-            border-radius: 6px;
-            overflow: hidden;
-            position: relative;
-        }
-        .budget-item-fill {
-            height: 100%;
-            background: linear-gradient(90deg, #0A1A2F 0%, #00A676 100%);
-            border-radius: 6px;
-            transition: width 1s ease-out;
-            display: flex;
-            align-items: center;
-            justify-content: flex-end;
-            padding-right: 8px;
-            color: white;
-            font-size: 12px;
-            font-weight: 600;
-        }
-        .income-bar {
-            background: linear-gradient(90deg, #10b981 0%, #059669 100%);
-        }
-        .budget-summary {
-            background: linear-gradient(135deg, #0A1A2F15 0%, #00A67615 100%);
-            border-radius: 8px;
-            padding: 15px;
-            margin-top: 15px;
-            text-align: center;
-        }
-        .budget-summary-label {
-            font-size: 14px;
-            color: var(--text-secondary);
-            margin-bottom: 5px;
-        }
-        .budget-summary-value {
-            font-size: 28px;
-            font-weight: 700;
-            color: #10b981;
         }
 
         /* SCREEN 6: Visual Mistakes */
@@ -867,13 +740,9 @@
             color: var(--text-primary);
             font-weight: 500;
         }
-        .reflection-box {
-            background: linear-gradient(135deg, #f59e0b15 0%, #fef3c730 100%);
-            border: 2px solid #f59e0b;
-            border-radius: 12px;
-            padding: 20px;
-            margin: 20px 0;
-            text-align: center;
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
         }
         .reflection-icon {
             font-size: 40px;
@@ -903,6 +772,7 @@
                     <li><a href="dashboard">Dashboard</a></li>
                     <li id="authButtons" style=" opacity: 0;">
                     </li>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -915,29 +785,29 @@
         <!-- Header -->
         <div class="lesson-header">
             <div class="lesson-number">LESSON 2</div>
-            <h1>Understanding Income and Expenses</h1>
+            <h1>Checking Accounts: Your Everyday Money Hub</h1>
         </div>
 
         <!-- Screen 1: Quick Intro -->
         <div class="lesson-screen active" data-screen="1">
             <div class="screen-progress">Screen 1 of 8</div>
             <div class="lesson-section">
-                <h2>Understanding Income and Expenses</h2>
+                <h2>Checking Accounts: Your Everyday Money Hub</h2>
                 <div class="intro-cards">
                     <div class="intro-card">
-                        <div class="intro-card-icon"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="20" fill="#DBEAFE"/><circle cx="24" cy="24" r="14" stroke="#3B82F6" stroke-width="2" fill="none"/><circle cx="24" cy="24" r="8" stroke="#3B82F6" stroke-width="2" fill="none"/><circle cx="24" cy="24" r="3" fill="#3B82F6"/></svg></div>
-                        <h3>The Problem</h3>
-                        <p>Most people track what they earn, but have no idea where it all goes</p>
+                        <div class="intro-card-icon"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="20" fill="#DBEAFE"/><rect x="14" y="16" width="20" height="16" rx="2" stroke="#3B82F6" stroke-width="2" fill="none"/><line x1="14" y1="22" x2="34" y2="22" stroke="#3B82F6" stroke-width="2"/><circle cx="18" cy="27" r="1.5" fill="#3B82F6"/></svg></div>
+                        <h3>The Situation</h3>
+                        <p>You need a place to keep your everyday money and pay for stuff without carrying cash everywhere</p>
                     </div>
                     <div class="intro-card">
                         <div class="intro-card-icon"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="20" fill="#FEF3C7"/><circle cx="24" cy="20" r="6" fill="#F59E0B" opacity="0.3"/><path d="M24 14 C28 14 30 16 30 20 C30 23 28 25 27 26 L27 30 L21 30 L21 26 C20 25 18 23 18 20 C18 16 20 14 24 14" stroke="#F59E0B" stroke-width="2"/><line x1="20"y1="32"x2="28"y2="32" stroke="#F59E0B" stroke-width="2" stroke-linecap="round"/></svg></div>
                         <h3>Why It Matters</h3>
-                        <p>The gap between what you make and what you spend determines your entire financial future</p>
+                        <p>A checking account is how most people manage their daily spending and bills</p>
                     </div>
                     <div class="intro-card">
                         <div class="intro-card-icon"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="20" fill="#D1FAE5"/><path d="M14 24 L20 30 L34 16" stroke="#00A676" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-                        <h3>Your Goal</h3>
-                        <p>Learn the golden rule of personal finance and how to apply it starting today</p>
+                        <h3>What You'll Learn</h3>
+                        <p>What checking accounts are, how to use debit cards, check your balance, and pay for everyday stuff</p>
                     </div>
                 </div>
             </div>
@@ -947,39 +817,25 @@
             </div>
         </div>
 
-        <!-- Screen 2: Core Concept -->
+        <!-- Screen 2: What is a Checking Account? -->
         <div class="lesson-screen" data-screen="2">
             <div class="screen-progress">Screen 2 of 8</div>
             <div class="lesson-section">
-                <h2>The Money Flow</h2>
-                <p style="text-align: center; font-size: 18px; font-weight: 700; color: var(--primary-color); margin-bottom: 20px;">
-                    Income - Expenses = Your Financial Future
-                </p>
+                <h2>So What Even Is a Checking Account?</h2>
+                <p><strong>Let's keep this super simple.</strong></p>
+                <p>A checking account is basically a bank account made for your everyday spending. It's where your paycheck goes, and it's what you use to pay for groceries, gas, rent, Netflix, whatever. Think of it as your "spending account."</p>
 
-                <div class="budget-methods">
-                    <div class="budget-method-card">
-                        <div class="budget-method-emoji"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="20" fill="#FEF3C7"/><circle cx="24" cy="24" r="14" stroke="#F59E0B" stroke-width="2"/><path d="M24 16V32M20 20C20 18 22 16 24 16C26 16 28 18 28 20C28 22 26 22 24 22C22 22 20 22 20 24C20 26 22 28 24 28C26 28 28 26 28 24" stroke="#F59E0B" stroke-width="2" stroke-linecap="round"/></svg></div>
-                        <div class="budget-method-name">Income</div>
-                        <div class="budget-method-desc">Money coming in</div>
-                    </div>
-                    <div class="budget-method-card">
-                        <div class="budget-method-emoji"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="20" fill="#FEE2E2"/><path d="M12 18 L18 24 L24 20 L30 30 L36 26" stroke="#DC2626" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M30 34 L36 34 L36 28" stroke="#DC2626" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-                        <div class="budget-method-name">Expenses</div>
-                        <div class="budget-method-desc">Money going out</div>
-                    </div>
-                    <div class="budget-method-card">
-                        <div class="budget-method-emoji"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="20" fill="#D1FAE5"/><path d="M12 30 L18 24 L24 28 L30 18 L36 22" stroke="#00A676" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M30 14 L36 14 L36 20" stroke="#00A676" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-                        <div class="budget-method-name">Surplus</div>
-                        <div class="budget-method-desc">Build wealth</div>
-                    </div>
-                    <div class="budget-method-card">
-                        <div class="budget-method-emoji"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="20" fill="#FEE2E2"/><path d="M12 18 L18 24 L24 20 L30 30 L36 26" stroke="#DC2626" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M30 34 L36 34 L36 28" stroke="#DC2626" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-                        <div class="budget-method-name">Deficit</div>
-                        <div class="budget-method-desc">Going into debt</div>
-                    </div>
-                </div>
+                <p><strong>Here's the thing:</strong> Unlike a savings account where you're trying to let money sit and grow, a checking account is meant for money that's constantly moving in and out. You're using it all the time.</p>
 
-                <p style="margin-top: 20px;"><strong>The Golden Rule:</strong> If your income is greater than your expenses, you're building wealth. If your expenses are greater than your income, you're going into debt.</p>
+                <p><strong>Why do people use checking accounts?</strong></p>
+                <ul>
+                    <li><strong>It's safer than carrying cash:</strong> You don't want to walk around with $500 in your pocket. With a checking account, your money is in the bank, protected.</li>
+                    <li><strong>Pay for anything, anywhere:</strong> Use your debit card at stores, online, gas stations, wherever. No need for cash.</li>
+                    <li><strong>Easy bill payments:</strong> Set up automatic payments for rent, utilities, subscriptions. The money comes straight out of your checking account.</li>
+                    <li><strong>Get paid faster:</strong> Direct deposit means your paycheck hits your account instantly. No waiting to cash a check.</li>
+                </ul>
+
+                <p><strong>The bottom line:</strong> A checking account is your home base for daily money stuff. It's not where you save, it's where you spend.</p>
             </div>
             <div class="screen-navigation">
                 <button class="btn-nav btn-prev" onclick="previousScreen()"><span>←</span> Previous</button>
@@ -997,22 +853,22 @@
                 </div>
 
                 <div class="checkpoint-question">
-                    <div class="checkpoint-question-text">What's the golden rule of personal finance regarding income and expenses?</div>
+                    <div class="checkpoint-question-text">What's the main purpose of a checking account?</div>
                     <div class="checkpoint-option" onclick="checkCheckpoint1(0)">
                         <input type="radio" name="checkpoint1" value="0">
-                        <span>A) Expenses should always equal income</span>
+                        <span>A) To save money for the future and earn interest</span>
                     </div>
                     <div class="checkpoint-option" onclick="checkCheckpoint1(1)">
                         <input type="radio" name="checkpoint1" value="1">
-                        <span>B) Income should be greater than expenses to build wealth</span>
+                        <span>B) For everyday spending like bills, groceries, and gas</span>
                     </div>
                     <div class="checkpoint-option" onclick="checkCheckpoint1(2)">
                         <input type="radio" name="checkpoint1" value="2">
-                        <span>C) Income doesn't matter as long as you're happy</span>
+                        <span>C) To invest in stocks and bonds</span>
                     </div>
                     <div class="checkpoint-option" onclick="checkCheckpoint1(3)">
                         <input type="radio" name="checkpoint1" value="3">
-                        <span>D) Expenses should be greater than income</span>
+                        <span>D) Only for receiving your paycheck</span>
                     </div>
                 </div>
 
@@ -1030,111 +886,31 @@
             </div>
         </div>
 
-        <!-- Screen 4: Simple Example -->
+        <!-- Screen 4: Getting and Using a Debit Card -->
         <div class="lesson-screen" data-screen="4">
             <div class="screen-progress">Screen 4 of 8</div>
             <div class="lesson-section">
-                <h2>Simple Example</h2>
-                <p>Meet Alex, a college student:</p>
-                <p><strong>Alex's Monthly Income:</strong></p>
+                <h2>Your Debit Card: The Key to Your Checking Account</h2>
+                <p><strong>When you open a checking account, you get a debit card.</strong></p>
+                <p>This little plastic card (or digital card in your phone) is connected directly to your checking account. When you swipe it or tap it, money comes straight out of your account. It's not a credit card where you borrow money. It's your money, right now.</p>
+
+                <p><strong>How do you get one?</strong></p>
                 <ul>
-                    <li>Part-time job: $800</li>
-                    <li>Allowance from parents: $200</li>
-                    <li><strong>Total Income: $1,000</strong></li>
+                    <li><strong>Open a checking account:</strong> The bank automatically gives you a debit card when you sign up</li>
+                    <li><strong>Wait for it in the mail:</strong> Usually takes 5 to 10 business days to arrive at your address</li>
+                    <li><strong>Activate it:</strong> Call the number on the sticker or activate it through the bank's app</li>
+                    <li><strong>Set your PIN:</strong> This is your 4-digit security code. Don't forget it, and don't share it</li>
                 </ul>
-                <p><strong>Alex's Monthly Expenses:</strong></p>
+
+                <p><strong>Using your debit card:</strong></p>
                 <ul>
-                    <li>Rent (shared apartment): $400</li>
-                    <li>Food: $250</li>
-                    <li>Phone bill: $50</li>
-                    <li>Entertainment: $100</li>
-                    <li>Gas/transportation: $80</li>
-                    <li>Misc. purchases: $70</li>
-                    <li><strong>Total Expenses: $950</strong></li>
+                    <li><strong>In stores:</strong> Insert, swipe, or tap your card. Enter your PIN or sign if asked</li>
+                    <li><strong>Online:</strong> Enter your card number, expiration date, and CVV (the 3 digits on the back)</li>
+                    <li><strong>At ATMs:</strong> Withdraw cash, check your balance, or deposit checks</li>
+                    <li><strong>Apple Pay, Google Pay:</strong> Add your card to your phone for tap-to-pay</li>
                 </ul>
-                <p><strong>The Result:</strong> Alex has $50 left over each month ($1,000 - $950 = $50). This is called a surplus, and it's money Alex can save or invest for the future.</p>
-            </div>
 
-            <!-- Budget Breakdown Visual -->
-            <div class="budget-breakdown">
-                <div class="budget-chart">
-                    <div class="budget-chart-title">Alex's Monthly Budget Breakdown</div>
-
-                    <div class="budget-item">
-                        <div class="budget-item-header">
-                            <div class="budget-item-label"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="10" cy="10" r="8" fill="#10B981"/><text x="10" y="14" text-anchor="middle" font-size="10" fill="white" font-weight="bold">$</text></svg> Total Income</div>
-                            <div class="budget-item-value">$1,000</div>
-                        </div>
-                        <div class="budget-item-bar">
-                            <div class="budget-item-fill income-bar" style="width: 100%;">100%</div>
-                        </div>
-                    </div>
-
-                    <div class="budget-item">
-                        <div class="budget-item-header">
-                            <div class="budget-item-label"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 10 L10 3 L17 10 L17 17 L3 17 Z" fill="#3B82F6"/><rect x="8" y="12" width="4" height="5" fill="#60A5FA"/></svg> Rent</div>
-                            <div class="budget-item-value">$400</div>
-                        </div>
-                        <div class="budget-item-bar">
-                            <div class="budget-item-fill" style="width: 40%;">40%</div>
-                        </div>
-                    </div>
-
-                    <div class="budget-item">
-                        <div class="budget-item-header">
-                            <div class="budget-item-label"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 7 L16 7 C16 5 15 4 13 4 L7 4 C5 4 4 5 4 7" fill="#F59E0B"/><rect x="3" y="7" width="14" height="2" fill="#10B981"/><rect x="3" y="9" width="14" height="2" fill="#B45309"/><rect x="3" y="11" width="14" height="2" fill="#F59E0B"/></svg> Food</div>
-                            <div class="budget-item-value">$250</div>
-                        </div>
-                        <div class="budget-item-bar">
-                            <div class="budget-item-fill" style="width: 25%;">25%</div>
-                        </div>
-                    </div>
-
-                    <div class="budget-item">
-                        <div class="budget-item-header">
-                            <div class="budget-item-label"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="6" y="2" width="8" height="16" rx="1" stroke="#3B82F6" stroke-width="1.5" fill="none"/><circle cx="10" cy="15" r="1" fill="#3B82F6"/></svg> Phone Bill</div>
-                            <div class="budget-item-value">$50</div>
-                        </div>
-                        <div class="budget-item-bar">
-                            <div class="budget-item-fill" style="width: 5%;">5%</div>
-                        </div>
-                    </div>
-
-                    <div class="budget-item">
-                        <div class="budget-item-header">
-                            <div class="budget-item-label"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="2" y="5" width="16" height="11" rx="1" fill="#1F2937"/><rect x="2" y="3" width="16" height="2" fill="#FCD34D"/><rect x="3" y="3" width="2" height="2" fill="#1F2937"/><rect x="7" y="3" width="2" height="2" fill="#1F2937"/><rect x="11" y="3" width="2" height="2" fill="#1F2937"/><rect x="15" y="3" width="2" height="2" fill="#1F2937"/></svg> Entertainment</div>
-                            <div class="budget-item-value">$100</div>
-                        </div>
-                        <div class="budget-item-bar">
-                            <div class="budget-item-fill" style="width: 10%;">10%</div>
-                        </div>
-                    </div>
-
-                    <div class="budget-item">
-                        <div class="budget-item-header">
-                            <div class="budget-item-label"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="8" width="14" height="6" rx="1" fill="#3B82F6"/><path d="M4 8 L6 5 L14 5 L16 8" fill="#60A5FA"/><circle cx="6" cy="14" r="1.5" fill="#1F2937"/><circle cx="14" cy="14" r="1.5" fill="#1F2937"/></svg> Transportation</div>
-                            <div class="budget-item-value">$80</div>
-                        </div>
-                        <div class="budget-item-bar">
-                            <div class="budget-item-fill" style="width: 8%;">8%</div>
-                        </div>
-                    </div>
-
-                    <div class="budget-item">
-                        <div class="budget-item-header">
-                            <div class="budget-item-label"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 6 L10 2 L17 6 L17 14 L10 18 L3 14 Z" stroke="#B45309" stroke-width="1.5" fill="none"/><polyline points="3,6 10,10 17,6" stroke="#B45309" stroke-width="1.5" fill="none"/><line x1="10"y1="10"x2="10"y2="18" stroke="#B45309" stroke-width="1.5"/></svg> Miscellaneous</div>
-                            <div class="budget-item-value">$70</div>
-                        </div>
-                        <div class="budget-item-bar">
-                            <div class="budget-item-fill" style="width: 7%;">7%</div>
-                        </div>
-                    </div>
-
-                    <div class="budget-summary">
-                        <div class="budget-summary-label">Monthly Surplus</div>
-                        <div class="budget-summary-value">$50</div>
-                    </div>
-                </div>
+                <p><strong>Important:</strong> Only spend what's in your account. If you try to spend more, the purchase might get declined, or you could get hit with an overdraft fee (we'll talk about that later).</p>
             </div>
             <div class="screen-navigation">
                 <button class="btn-nav btn-prev" onclick="previousScreen()"><span>←</span> Previous</button>
@@ -1152,22 +928,22 @@
                 </div>
 
                 <div class="checkpoint-question">
-                    <div class="checkpoint-question-text">Your monthly income is $2,000 and your expenses are $2,100. What should you do?</div>
+                    <div class="checkpoint-question-text">What happens when you use a debit card to buy something?</div>
                     <div class="checkpoint-option" onclick="checkCheckpoint2(0)">
                         <input type="radio" name="checkpoint2" value="0">
-                        <span>A) Nothing, it's close enough</span>
+                        <span>A) The bank loans you money that you pay back later</span>
                     </div>
                     <div class="checkpoint-option" onclick="checkCheckpoint2(1)">
                         <input type="radio" name="checkpoint2" value="1">
-                        <span>B) Reduce expenses or increase income - you're going into debt</span>
+                        <span>B) Money comes directly out of your checking account</span>
                     </div>
                     <div class="checkpoint-option" onclick="checkCheckpoint2(2)">
                         <input type="radio" name="checkpoint2" value="2">
-                        <span>C) Celebrate because you're spending almost everything</span>
+                        <span>C) It takes 30 days for the money to leave your account</span>
                     </div>
                     <div class="checkpoint-option" onclick="checkCheckpoint2(3)">
                         <input type="radio" name="checkpoint2" value="3">
-                        <span>D) Increase spending since you're doing well</span>
+                        <span>D) You can spend unlimited money from your savings</span>
                     </div>
                 </div>
 
@@ -1185,33 +961,46 @@
             </div>
         </div>
 
-        <!-- Screen 6: Common Mistakes -->
+        <!-- Screen 6: How to Check Your Balance and Navigate Your Account -->
         <div class="lesson-screen" data-screen="6">
             <div class="screen-progress">Screen 6 of 8</div>
             <div class="lesson-section">
-                <h2>Common Mistakes to Avoid</h2>
-                <div class="mistakes-grid">
-                    <div class="mistake-card">
-                        <div class="mistake-icon"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="20" fill="#FEE2E2"/><path d="M12 18 L18 24 L24 20 L30 30 L36 26" stroke="#DC2626" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M30 34 L36 34 L36 28" stroke="#DC2626" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-                        <div class="mistake-title">Only Focusing on Income</div>
-                        <div class="mistake-desc">Earning more won't help if you spend it all</div>
-                    </div>
-                    <div class="mistake-card">
-                        <div class="mistake-icon"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="20" fill="#EFF6FF"/><rect x="14" y="16" width="20" height="18" rx="2" stroke="#3B82F6" stroke-width="2" fill="none"/><line x1="14"y1="22"x2="34"y2="22" stroke="#3B82F6" stroke-width="2"/><line x1="19"y1="14"x2="19"y2="18" stroke="#3B82F6" stroke-width="2" stroke-linecap="round"/><line x1="29"y1="14"x2="29"y2="18" stroke="#3B82F6" stroke-width="2" stroke-linecap="round"/></svg></div>
-                        <div class="mistake-title">Forgetting Irregulars</div>
-                        <div class="mistake-desc">Car repairs, holidays add up quickly</div>
-                    </div>
-                    <div class="mistake-card">
-                        <div class="mistake-icon"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="20" fill="#FCE7F3"/><rect x="16" y="22" width="16" height="12" rx="1" stroke="#EC4899" stroke-width="2" fill="none"/><rect x="14" y="18" width="20" height="4" rx="1" fill="#EC4899" opacity="0.3"/><rect x="14" y="18" width="20" height="4" rx="1" stroke="#EC4899" stroke-width="2" fill="none"/><line x1="24"y1="18"x2="24"y2="34" stroke="#EC4899" stroke-width="2"/><path d="M24 18 Q20 14 18 16" stroke="#EC4899" stroke-width="2" fill="none"/><path d="M24 18 Q28 14 30 16" stroke="#EC4899" stroke-width="2" fill="none"/></svg></div>
-                        <div class="mistake-title">Treating Gifts as Income</div>
-                        <div class="mistake-desc">Birthday money isn't reliable income</div>
-                    </div>
-                    <div class="mistake-card">
-                        <div class="mistake-icon"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="20" fill="#FEF3C7"/><path d="M16 20 L16 28 C16 30 18 32 20 32 L28 32 C30 32 32 30 32 28 L32 20" stroke="#F59E0B" stroke-width="2" fill="none"/><line x1="16"y1="20"x2="32"y2="20" stroke="#F59E0B" stroke-width="2"/><path d="M32 22 L34 22 C35 22 36 23 36 24 C36 25 35 26 34 26 L32 26" stroke="#F59E0B" stroke-width="2" fill="none"/></svg></div>
-                        <div class="mistake-title">Ignoring Small Buys</div>
-                        <div class="mistake-desc">$5 daily = $1,825 per year</div>
-                    </div>
-                </div>
+                <h2>How to Check Your Balance and Navigate Your Account</h2>
+                <p><strong>You need to know how much money you have. That's where checking your balance comes in.</strong></p>
+                <p>Here are the easiest ways to check:</p>
+
+                <p><strong>1. Mobile App (Easiest Way):</strong></p>
+                <ul>
+                    <li>Download your bank's app from the App Store or Google Play</li>
+                    <li>Log in with your username and password</li>
+                    <li>Your balance shows up right on the home screen</li>
+                    <li>You can see recent transactions, what cleared, what's pending</li>
+                </ul>
+
+                <p><strong>2. Bank Website:</strong></p>
+                <ul>
+                    <li>Go to your bank's website and click "Login" or "Sign In" (usually top right)</li>
+                    <li>Enter your credentials</li>
+                    <li>Your account dashboard shows your balance immediately</li>
+                    <li>Click on "Checking" to see all transactions</li>
+                </ul>
+
+                <p><strong>3. ATM:</strong></p>
+                <ul>
+                    <li>Insert your debit card and enter your PIN</li>
+                    <li>Select "Check Balance" or "Balance Inquiry"</li>
+                    <li>It'll show on screen or print a receipt</li>
+                </ul>
+
+                <p><strong>Key things to look for in your account:</strong></p>
+                <ul>
+                    <li><strong>Available Balance:</strong> This is what you can actually spend right now</li>
+                    <li><strong>Current Balance:</strong> Includes pending transactions that haven't cleared yet</li>
+                    <li><strong>Recent Transactions:</strong> Shows every purchase, deposit, and withdrawal</li>
+                    <li><strong>Pending Transactions:</strong> Stuff you bought that hasn't hit your account yet</li>
+                </ul>
+
+                <p><strong>Pro tip:</strong> Check your balance regularly (like every few days) so you always know what you can spend. No surprises.</p>
             </div>
             <div class="screen-navigation">
                 <button class="btn-nav btn-prev" onclick="previousScreen()"><span>←</span> Previous</button>
@@ -1219,44 +1008,44 @@
             </div>
         </div>
 
-        <!-- Screen 7: Micro Action + Quick Reflection -->
+        <!-- Screen 7: Using Your Checking Account for Everything -->
         <div class="lesson-screen" data-screen="7">
             <div class="screen-progress">Screen 7 of 8</div>
             <div class="lesson-section">
-                <div class="action-checklist">
-                    <div class="checklist-title"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="20" fill="#DBEAFE"/><circle cx="24" cy="24" r="14" stroke="#3B82F6" stroke-width="2" fill="none"/><circle cx="24" cy="24" r="8" stroke="#3B82F6" stroke-width="2" fill="none"/><circle cx="24" cy="24" r="3" fill="#3B82F6"/></svg> Your Action Plan</div>
-                    <p style="text-align: center; color: var(--text-secondary); margin-bottom: 15px; font-size: 14px;">
-                        Complete this 5-minute exercise now:
-                    </p>
-                    <div class="checklist-item" onclick="toggleChecklistItem(this)">
-                        <div class="checklist-checkbox"></div>
-                        <div class="checklist-text">List 3 sources of income you have (or could have)</div>
-                    </div>
-                    <div class="checklist-item" onclick="toggleChecklistItem(this)">
-                        <div class="checklist-checkbox"></div>
-                        <div class="checklist-text">Write down your 5 most regular expenses</div>
-                    </div>
-                    <div class="checklist-item" onclick="toggleChecklistItem(this)">
-                        <div class="checklist-checkbox"></div>
-                        <div class="checklist-text">Calculate: Total Income - Total Expenses = ?</div>
-                    </div>
-                    <div class="checklist-item" onclick="toggleChecklistItem(this)">
-                        <div class="checklist-checkbox"></div>
-                        <div class="checklist-text">Identify if you have a surplus or deficit</div>
-                    </div>
-                    <div class="checklist-item" onclick="toggleChecklistItem(this)">
-                        <div class="checklist-checkbox"></div>
-                        <div class="checklist-text">If deficit: identify one expense to reduce</div>
-                    </div>
-                </div>
+                <h2>Using Your Checking Account: Bills, Groceries, and Everything Else</h2>
+                <p><strong>Now that you have a checking account, here's how you actually use it in real life.</strong></p>
 
-                <div class="reflection-box">
-                    <div class="reflection-icon"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="20" fill="#F3F4F6"/><circle cx="24" cy="22" r="8" fill="#6B7280" opacity="0.3"/><circle cx="24" cy="22" r="8" stroke="#6B7280" stroke-width="2" fill="none"/><circle cx="18" cy="32" r="3" fill="#6B7280" opacity="0.5"/><circle cx="14" cy="36" r="2" fill="#6B7280" opacity="0.3"/></svg></div>
-                    <div class="reflection-title">Quick Reflection</div>
-                    <div class="reflection-text">
-                        Do you currently have more money coming in than going out? If yes, what are you doing with the extra? If no, which expenses could you reduce? There's no judgment here—just honest awareness.
-                    </div>
-                </div>
+                <p><strong>Paying for Everyday Stuff:</strong></p>
+                <ul>
+                    <li><strong>Groceries:</strong> Swipe your debit card at checkout. Money comes out of your checking account immediately.</li>
+                    <li><strong>Gas:</strong> Insert your card at the pump, enter your ZIP code, fill up. Easy.</li>
+                    <li><strong>Online shopping:</strong> Enter your debit card info like you would a credit card. It works the same way.</li>
+                    <li><strong>Restaurants, coffee shops, whatever:</strong> Just tap, insert, or swipe your card.</li>
+                </ul>
+
+                <p><strong>Setting Up Bill Payments:</strong></p>
+                <ul>
+                    <li><strong>Automatic payments:</strong> Most bills (rent, utilities, phone, subscriptions) can auto-pay from your checking account each month</li>
+                    <li><strong>One-time payments:</strong> Log into your bank app, go to "Pay Bills" or "Send Money," enter the amount and who it's going to</li>
+                    <li><strong>Scheduled payments:</strong> Set up future payments so you don't forget (like rent on the 1st of each month)</li>
+                </ul>
+
+                <p><strong>Transferring Money:</strong></p>
+                <ul>
+                    <li><strong>To friends/family:</strong> Use Venmo, Cash App, Zelle (connected to your checking account)</li>
+                    <li><strong>Between your accounts:</strong> Transfer from checking to savings (or vice versa) through your bank app</li>
+                    <li><strong>Direct deposit:</strong> Give your employer your checking account number and routing number for automatic paychecks</li>
+                </ul>
+
+                <p><strong>Tips for staying on top of it:</strong></p>
+                <ul>
+                    <li>Check your balance before making big purchases</li>
+                    <li>Set up low balance alerts so you don't overdraft</li>
+                    <li>Review your transactions weekly to catch any mistakes or fraud</li>
+                    <li>Keep a buffer (like $100-200) so you never hit zero</li>
+                </ul>
+
+                <p><strong>Bottom line:</strong> Your checking account is the hub for all your daily money moves. Once you get the hang of it, it becomes second nature.</p>
             </div>
             <div class="screen-navigation">
                 <button class="btn-nav btn-prev" onclick="previousScreen()"><span>←</span> Previous</button>
@@ -1269,13 +1058,13 @@
             <div class="screen-progress">Screen 8 of 8</div>
             <!-- Lesson Quiz -->
             <div class="quiz-container" id="quizContainer">
-                <div class="quiz-header">
-                    <h2>Lesson Quiz</h2>
-                    <p>Answer these questions to unlock the next lesson. You need to answer 3 out of 4 correctly to pass.</p>
-                </div>
-                <div id="quizQuestions"></div>
-                <button class="btn-submit-quiz" id="submitQuiz" onclick="submitQuiz()">Submit Quiz</button>
-                <div id="quizResult"></div>
+            <div class="quiz-header">
+                <h2>Lesson Quiz</h2>
+                <p>Answer these questions to unlock the next lesson. You need to answer 3 out of 4 correctly to pass.</p>
+            </div>
+            <div id="quizQuestions"></div>
+            <button class="btn-submit-quiz" id="submitQuiz" onclick="submitQuiz()">Submit Quiz</button>
+            <div id="quizResult"></div>
             </div>
 
             <!-- Finish Button -->
@@ -1325,7 +1114,7 @@
     <script src="animations.js"></script>
     <script>
         // Check authentication status and update nav
-        async function updateNav() {
+                async function updateNav() {
             const authButtons = document.getElementById('authButtons');
 
             // Check localStorage for cached auth state and render immediately
@@ -1357,7 +1146,6 @@
                 authButtons.style.opacity = '1';
             }
         }
-
         // Logout function
         async function logout() {
             localStorage.removeItem('authState');
@@ -1380,22 +1168,46 @@
             {
                 versions: [
                     {
-                        question: "What is the golden rule about income and expenses?",
+                        question: "What is the main purpose of a checking account?",
                         options: [
-                            "Income should be greater than expenses to build wealth",
-                            "Expenses should always equal income",
-                            "Income doesn't matter as long as you're happy",
-                            "Expenses should be greater than income to build credit"
+                            "To save money and earn interest over time",
+                            "For everyday spending like bills, groceries, and gas",
+                            "To invest in stocks and mutual funds",
+                            "Only for storing emergency funds"
+                        ],
+                        correct: 1
+                    },
+                    {
+                        question: "What makes a checking account different from a savings account?",
+                        options: [
+                            "Checking accounts are for frequent transactions and spending",
+                            "Checking accounts earn more interest",
+                            "You can only access a checking account once per month",
+                            "Checking accounts have higher minimum balances"
                         ],
                         correct: 0
+                    }
+                ]
+            },
+            {
+                versions: [
+                    {
+                        question: "What happens when you use your debit card to make a purchase?",
+                        options: [
+                            "The bank loans you money that you repay later",
+                            "Money comes directly out of your checking account",
+                            "It charges your credit card",
+                            "The money is taken from your savings account"
+                        ],
+                        correct: 1
                     },
                     {
-                        question: "What happens when your expenses are greater than your income?",
+                        question: "How long does it typically take to receive your debit card after opening a checking account?",
                         options: [
-                            "You build wealth",
-                            "You go into debt",
-                            "You break even",
-                            "Your savings increase"
+                            "Immediately at the bank",
+                            "5 to 10 business days in the mail",
+                            "6 months after approval",
+                            "You have to buy your own card"
                         ],
                         correct: 1
                     }
@@ -1404,72 +1216,48 @@
             {
                 versions: [
                     {
-                        question: "Which of the following is considered income?",
+                        question: "What's the easiest way to check your checking account balance?",
                         options: [
-                            "Rent payment",
-                            "Wages from your job",
-                            "Grocery shopping",
-                            "Entertainment subscriptions"
-                        ],
-                        correct: 1
-                    },
-                    {
-                        question: "Which of these is an example of an expense?",
-                        options: [
-                            "Your salary",
-                            "Allowance from parents",
-                            "Food and groceries",
-                            "Side hustle earnings"
+                            "Call the bank every time you need to know",
+                            "Wait for your monthly statement",
+                            "Use your bank's mobile app",
+                            "Drive to the bank branch"
                         ],
                         correct: 2
+                    },
+                    {
+                        question: "What's the difference between 'available balance' and 'current balance'?",
+                        options: [
+                            "There is no difference, they're the same thing",
+                            "Available balance is what you can spend right now; current balance includes pending transactions",
+                            "Current balance is always lower than available balance",
+                            "Available balance is only updated once per month"
+                        ],
+                        correct: 1
                     }
                 ]
             },
             {
                 versions: [
                     {
-                        question: "In the lesson example, Alex has $1,000 income and $950 expenses. What is this $50 difference called?",
+                        question: "Which of these can you do with a checking account?",
                         options: [
-                            "A deficit",
-                            "A surplus",
-                            "A debt",
-                            "An investment"
+                            "Only receive your paycheck",
+                            "Pay bills, buy groceries, and transfer money to friends",
+                            "Invest in real estate",
+                            "Apply for a mortgage"
                         ],
                         correct: 1
                     },
                     {
-                        question: "If you have $1,000 coming in and $950 going out, how much can you save or invest?",
+                        question: "What's a smart habit to avoid overdrafting your checking account?",
                         options: [
-                            "$1,000",
-                            "$950",
-                            "$50",
-                            "$1,950"
+                            "Never check your balance",
+                            "Spend as much as you want and hope for the best",
+                            "Check your balance regularly and keep a buffer amount",
+                            "Close your account every month"
                         ],
                         correct: 2
-                    }
-                ]
-            },
-            {
-                versions: [
-                    {
-                        question: "According to the lesson, how much is $5 spent daily over a year?",
-                        options: [
-                            "$150",
-                            "$500",
-                            "$1,000",
-                            "$1,825"
-                        ],
-                        correct: 3
-                    },
-                    {
-                        question: "What common mistake involves small daily purchases?",
-                        options: [
-                            "Tracking them too carefully",
-                            "Ignoring small expenses that add up quickly",
-                            "Always paying cash for them",
-                            "Avoiding them completely"
-                        ],
-                        correct: 1
                     }
                 ]
             }
@@ -1624,20 +1412,13 @@
                 alert('Please complete the quiz first!');
                 return;
             }
-            const success = await completeLesson('pillar1_lesson2', 1, 2);
-            if (success) {
-                window.location.href = 'pillar1-lessons.html';
-            }
-        }
 
-        // Interactive Checklist
-        function toggleChecklistItem(item) {
-            item.classList.toggle('checked');
-            const checkbox = item.querySelector('.checklist-checkbox');
-            if (item.classList.contains('checked')) {
-                checkbox.innerHTML = '<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 8 L6 12 L14 4" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
-            } else {
-                checkbox.textContent = '';
+            // Use shared completion function
+            const success = await completeLesson('pillar1_lesson2', 1, 2);
+
+            if (success) {
+                // Redirect back to lessons page
+                window.location.href = 'pillar1-lessons.html';
             }
         }
 
@@ -1652,7 +1433,7 @@
             if (checkpoint1Answered) return;
             checkpoint1Answered = true;
 
-            const correctOption = 1; // B) Income should be greater than expenses to build wealth
+            const correctOption = 1; // B) They usually have lower fees and better interest rates
             const isCorrect = selectedOption === correctOption;
 
             // Get elements
@@ -1680,14 +1461,14 @@
 
             if (isCorrect) {
                 feedback.classList.add('correct');
-                feedbackIcon.textContent = '<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 8 L6 12 L14 4" stroke="currentColor" stroke-width="2" fill="none"/></svg>';
-                feedbackTitle.textContent = 'Correct!';
-                feedbackExplanation.textContent = 'Excellent! The golden rule is that income should be greater than expenses. This is how you build wealth over time. The difference between income and expenses (the surplus) is what you can save and invest for your future.';
+                feedbackIcon.innerHTML = '<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 8 L6 12 L14 4" stroke="currentColor" stroke-width="2" fill="none"/></svg>';
+                feedbackTitle.textContent = 'Exactly right!';
+                feedbackExplanation.textContent = 'Perfect! Checking accounts are designed for everyday spending. Your paycheck goes in, and you use it for bills, groceries, gas, and all your daily expenses. It\'s your money hub.';
             } else {
                 feedback.classList.add('incorrect');
                 feedbackIcon.textContent = '•';
-                feedbackTitle.textContent = 'Not quite, but that\'s okay!';
-                feedbackExplanation.textContent = 'The golden rule of personal finance is that income should be greater than expenses. When you spend less than you earn, the surplus can be saved or invested, helping you build wealth over time. If expenses exceed income, you go into debt.';
+                feedbackTitle.textContent = 'Not quite, but no worries!';
+                feedbackExplanation.textContent = 'Checking accounts are for everyday spending, not saving or investing. Think of it as your active money account that you use all the time for bills and purchases.';
             }
 
             feedback.classList.add('show');
@@ -1698,7 +1479,7 @@
             if (checkpoint2Answered) return;
             checkpoint2Answered = true;
 
-            const correctOption = 1; // B) Reduce expenses or increase income - you're going into debt
+            const correctOption = 1; // B) Traditional bank
             const isCorrect = selectedOption === correctOption;
 
             // Get elements
@@ -1726,14 +1507,14 @@
 
             if (isCorrect) {
                 feedback.classList.add('correct');
-                feedbackIcon.textContent = '<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 8 L6 12 L14 4" stroke="currentColor" stroke-width="2" fill="none"/></svg>';
-                feedbackTitle.textContent = 'Excellent!';
-                feedbackExplanation.textContent = 'Perfect! When expenses ($2,100) exceed income ($2,000), you\'re going $100 into debt each month. That\'s $1,200 per year! You need to either reduce expenses (cut unnecessary spending) or increase income (get a side hustle, ask for a raise) to avoid accumulating debt.';
+                feedbackIcon.innerHTML = '<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 8 L6 12 L14 4" stroke="currentColor" stroke-width="2" fill="none"/></svg>';
+                feedbackTitle.textContent = 'Exactly!';
+                feedbackExplanation.textContent = 'Yep! When you use a debit card, the money comes straight out of your checking account. It\'s not a loan like a credit card. It\'s your own money being spent immediately.';
             } else {
                 feedback.classList.add('incorrect');
                 feedbackIcon.textContent = '•';
-                feedbackTitle.textContent = 'Good thinking, but there\'s a better answer!';
-                feedbackExplanation.textContent = 'When your expenses ($2,100) are greater than your income ($2,000), you\'re going $100 into debt every single month. This adds up to $1,200 per year in debt! The best solution is to reduce expenses or find ways to increase income. The correct answer is to reduce expenses or increase income.';
+                feedbackTitle.textContent = 'Not quite!';
+                feedbackExplanation.textContent = 'A debit card is connected directly to your checking account. When you buy something, the money comes out of your account right away. It\'s not borrowed money, it\'s your money.';
             }
 
             feedback.classList.add('show');
@@ -1785,6 +1566,17 @@
         document.addEventListener('DOMContentLoaded', function() {
             showScreen(1);
         });
+
+        // Interactive Checklist
+        function toggleChecklistItem(item) {
+            item.classList.toggle('checked');
+            const checkbox = item.querySelector('.checklist-checkbox');
+            if (item.classList.contains('checked')) {
+                checkbox.innerHTML = '<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 8 L6 12 L14 4" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+            } else {
+                checkbox.textContent = '';
+            }
+        }
     </script>
 </body>
 </html>
