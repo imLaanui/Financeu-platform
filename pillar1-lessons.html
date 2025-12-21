@@ -293,14 +293,14 @@
                 </div>
             </div>
 
-            <!-- Lesson 3 - Coming Soon -->
-            <div class="lesson-card" data-lesson="3" style="opacity: 0.6; pointer-events: none;">
+            <!-- Lesson 3 -->
+            <div class="lesson-card" data-lesson="3">
                 <div class="lesson-info">
-                    <h3>Lesson 3 - Coming Soon</h3>
-                    <p>More banking lessons will be available soon</p>
+                    <h3>Lesson 3 - Savings Accounts</h3>
+                    <p>Learn what savings accounts are, how they earn interest, and how to manage your savings properly</p>
                 </div>
                 <div class="lesson-status">
-                    <span style="color: #9ca3af; font-weight: 600;">Unavailable</span>
+                    <a href="/pillar1-lesson3" class="btn-start-lesson">Start Lesson</a>
                 </div>
             </div>
 
@@ -507,6 +507,30 @@
                     `;
                 }
                 // If lesson 1 quiz passed but not completed, button already shows "Start Lesson"
+            }
+
+            // Handle Lesson 3 (requires lesson 2 quiz to be passed)
+            const lesson3Card = document.querySelector(`[data-lesson="3"]`);
+            if (lesson3Card) {
+                const statusDiv = lesson3Card.querySelector('.lesson-status');
+                const lesson2QuizPassed = localStorage.getItem(`lesson2_quiz_passed_${userId}`) === 'true';
+
+                if (!lesson2QuizPassed) {
+                    // Lock lesson 3
+                    lesson3Card.style.opacity = '0.6';
+                    lesson3Card.style.pointerEvents = 'none';
+                    statusDiv.innerHTML = `
+                        <span style="color: #9ca3af; font-weight: 600;"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="5" y="9" width="10" height="8" rx="1" fill="#6B7280"/><path d="M7 9 L7 6 C7 4.3 8.3 3 10 3 C11.7 3 13 4.3 13 6 L13 9" stroke="#6B7280" stroke-width="2" fill="none"/></svg> Complete Lesson 2</span>
+                    `;
+                } else if (completed.includes(3)) {
+                    // Lesson 3 completed
+                    lesson3Card.classList.add('completed');
+                    statusDiv.innerHTML = `
+                        <span class="completed-badge">Completed</span>
+                        <a href="/pillar1-lesson3" class="btn-start-lesson">Review</a>
+                    `;
+                }
+                // If lesson 2 quiz passed but not completed, button already shows "Start Lesson"
             }
         }
 

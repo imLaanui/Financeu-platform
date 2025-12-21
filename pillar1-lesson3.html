@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lesson 3 - The Time Value of Money - FinanceU</title>
+    <title>Lesson 3 - Savings Accounts - FinanceU</title>
     <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
     <link rel="icon" type="image/svg+xml" sizes="16x16" href="assets/favicon-16x16.svg">
     <link rel="icon" type="image/svg+xml" sizes="32x32" href="assets/favicon-32x32.svg">
@@ -46,7 +46,7 @@
             text-align: center;
             margin-bottom: 40px;
             padding: 30px;
-            background: linear-gradient(135deg, #EFF6FF 0%, #DBEAFE 100%);
+            background: linear-gradient(135deg, #0A1A2F 0%, #1a3a5c 100%);
             border-radius: 16px;
             position: relative;
             overflow: hidden;
@@ -67,13 +67,13 @@
         }
         .lesson-header h1 {
             font-size: 36px;
-            color: var(--text-primary);
+            color: white;
             margin-bottom: 10px;
             position: relative;
             z-index: 1;
         }
         .lesson-header .lesson-number {
-            color: var(--primary-color);
+            color: rgba(255, 255, 255, 0.9);
             font-size: 18px;
             font-weight: 700;
             margin-bottom: 5px;
@@ -150,27 +150,25 @@
             font-size: 18px;
             font-weight: 700;
         }
-        .timeline {
+        .money-flow {
             display: flex;
             justify-content: space-around;
-            align-items: flex-end;
-            margin-top: 20px;
-            gap: 10px;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 15px;
         }
-        .timeline-item {
+        .flow-item {
             text-align: center;
-            flex: 1;
-        }
-        .timeline-box {
-            background: white;
             padding: 15px;
+            background: white;
             border-radius: 8px;
-            margin-bottom: 10px;
+            flex: 1;
+            min-width: 120px;
         }
-        .timeline-box.highlight {
-            background: #10b981;
-            color: white;
-            font-weight: bold;
+        .flow-arrow {
+            font-size: 24px;
+            color: var(--primary-color);
         }
         .action-box {
             background: linear-gradient(135deg, #10b98120 0%, #d1fae540 100%);
@@ -588,11 +586,6 @@
         .btn-continue:hover {
             background: #2563eb;
         }
-        @media (max-width: 768px) {
-            .timeline {
-                flex-direction: column;
-            }
-        }
 
         /* SCREEN 1: Animated Icons */
         .intro-cards {
@@ -640,42 +633,6 @@
             font-size: 14px;
             line-height: 1.5;
             margin: 0;
-        }
-
-        /* SCREEN 2: Budget Method Cards */
-        .budget-methods {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 15px;
-            margin: 20px 0;
-        }
-        .budget-method-card {
-            background: white;
-            border: 2px solid #e5e7eb;
-            border-radius: 8px;
-            padding: 15px;
-            text-align: center;
-            transition: all 0.3s;
-        }
-        .budget-method-card:hover {
-            border-color: var(--primary-color);
-            transform: translateY(-3px);
-            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.2);
-        }
-        .budget-method-emoji {
-            font-size: 32px;
-            margin-bottom: 8px;
-        }
-        .budget-method-name {
-            font-weight: 700;
-            color: var(--text-primary);
-            font-size: 14px;
-            margin-bottom: 5px;
-        }
-        .budget-method-desc {
-            font-size: 12px;
-            color: var(--text-secondary);
-            line-height: 1.4;
         }
 
         /* SCREEN 6: Visual Mistakes */
@@ -783,13 +740,9 @@
             color: var(--text-primary);
             font-weight: 500;
         }
-        .reflection-box {
-            background: linear-gradient(135deg, #f59e0b15 0%, #fef3c730 100%);
-            border: 2px solid #f59e0b;
-            border-radius: 12px;
-            padding: 20px;
-            margin: 20px 0;
-            text-align: center;
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
         }
         .reflection-icon {
             font-size: 40px;
@@ -819,6 +772,7 @@
                     <li><a href="dashboard">Dashboard</a></li>
                     <li id="authButtons" style=" opacity: 0;">
                     </li>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -831,29 +785,29 @@
         <!-- Header -->
         <div class="lesson-header">
             <div class="lesson-number">LESSON 3</div>
-            <h1>The Time Value of Money</h1>
+            <h1>Savings Accounts: Where Your Money Grows</h1>
         </div>
 
         <!-- Screen 1: Quick Intro -->
         <div class="lesson-screen active" data-screen="1">
             <div class="screen-progress">Screen 1 of 8</div>
             <div class="lesson-section">
-                <h2>The Time Value of Money</h2>
+                <h2>Savings Accounts: Where Your Money Grows</h2>
                 <div class="intro-cards">
                     <div class="intro-card">
-                        <div class="intro-card-icon"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="20" fill="#FCE7F3"/><circle cx="24" cy="24" r="12" stroke="#EC4899" stroke-width="2" fill="none"/><path d="M24 18 L24 24 L28 28" stroke="#EC4899" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-                        <h3>The Problem</h3>
-                        <p>Most people think $100 today equals $100 in a year—it doesn't</p>
+                        <div class="intro-card-icon"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="20" fill="#DBEAFE"/><rect x="14" y="16" width="20" height="16" rx="2" stroke="#3B82F6" stroke-width="2" fill="none"/><line x1="14" y1="22" x2="34" y2="22" stroke="#3B82F6" stroke-width="2"/><circle cx="18" cy="27" r="1.5" fill="#3B82F6"/></svg></div>
+                        <h3>The Situation</h3>
+                        <p>You want a safe place to store money you're not planning to spend right away</p>
                     </div>
                     <div class="intro-card">
-                        <div class="intro-card-icon"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="20" fill="#D1FAE5"/><path d="M16 24 Q18 20 22 22 Q24 24 24 28 L24 32" stroke="#00A676" stroke-width="2.5" stroke-linecap="round" fill="none"/><path d="M32 24 Q30 20 26 22 Q24 24 24 28" stroke="#00A676" stroke-width="2.5" stroke-linecap="round" fill="none"/><circle cx="22" cy="20" r="3" fill="#00A676" opacity="0.3"/><circle cx="26" cy="20" r="3" fill="#00A676" opacity="0.3"/></svg></div>
+                        <div class="intro-card-icon"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="20" fill="#FEF3C7"/><circle cx="24" cy="20" r="6" fill="#F59E0B" opacity="0.3"/><path d="M24 14 C28 14 30 16 30 20 C30 23 28 25 27 26 L27 30 L21 30 L21 26 C20 25 18 23 18 20 C18 16 20 14 24 14" stroke="#F59E0B" stroke-width="2"/><line x1="20"y1="32"x2="28"y2="32" stroke="#F59E0B" stroke-width="2" stroke-linecap="round"/></svg></div>
                         <h3>Why It Matters</h3>
-                        <p>Understanding time value is the difference between struggling financially and building real wealth</p>
+                        <p>Savings accounts keep your money separate from spending money and earn interest over time</p>
                     </div>
                     <div class="intro-card">
-                        <div class="intro-card-icon"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="20" fill="#EFF6FF"/><path d="M24 12 L28 28 L24 26 L20 28 Z" fill="#3B82F6" opacity="0.3"/><path d="M24 12 L28 28 L24 26 L20 28 Z" stroke="#3B82F6" stroke-width="2" fill="none"/><path d="M20 28 L18 34 L24 30 L30 34 L28 28" stroke="#3B82F6" stroke-width="2" fill="none"/><circle cx="24" cy="20" r="2" fill="#3B82F6"/></svg></div>
-                        <h3>Your Goal</h3>
-                        <p>See why starting now—not "someday"—is the most powerful financial decision you can make</p>
+                        <div class="intro-card-icon"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="20" fill="#D1FAE5"/><path d="M14 24 L20 30 L34 16" stroke="#00A676" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                        <h3>What You'll Learn</h3>
+                        <p>What savings accounts are, how they earn interest, and how to manage your savings without accidentally spending it</p>
                     </div>
                 </div>
             </div>
@@ -863,39 +817,25 @@
             </div>
         </div>
 
-        <!-- Screen 2: Core Concept -->
+        <!-- Screen 2: What is a Savings Account? -->
         <div class="lesson-screen" data-screen="2">
             <div class="screen-progress">Screen 2 of 8</div>
             <div class="lesson-section">
-                <h2>Why Time Affects Money's Value</h2>
-                <p style="text-align: center; font-size: 18px; font-weight: 700; color: var(--primary-color); margin-bottom: 20px;">
-                    Money Now > Money Later
-                </p>
+                <h2>What Even Is a Savings Account?</h2>
+                <p><strong>Okay, let's break this down.</strong></p>
+                <p>A savings account is a bank account specifically designed for money you want to keep safe and not touch for a while. It's not for your everyday spending. It's for money you're setting aside for later.</p>
 
-                <div class="budget-methods">
-                    <div class="budget-method-card">
-                        <div class="budget-method-emoji"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="20" fill="#D1FAE5"/><path d="M12 30 L18 24 L24 28 L30 18 L36 22" stroke="#00A676" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M30 14 L36 14 L36 20" stroke="#00A676" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-                        <div class="budget-method-name">Growth Potential</div>
-                        <div class="budget-method-desc">Invest now, earn returns</div>
-                    </div>
-                    <div class="budget-method-card">
-                        <div class="budget-method-emoji"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="20" fill="#D1FAE5"/><path d="M12 30 L18 24 L24 28 L30 18 L36 22" stroke="#00A676" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M30 14 L36 14 L36 20" stroke="#00A676" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-                        <div class="budget-method-name">Inflation</div>
-                        <div class="budget-method-desc">Prices increase over time</div>
-                    </div>
-                    <div class="budget-method-card">
-                        <div class="budget-method-emoji"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="20" fill="#DBEAFE"/><circle cx="24" cy="24" r="14" stroke="#3B82F6" stroke-width="2" fill="none"/><circle cx="24" cy="24" r="8" stroke="#3B82F6" stroke-width="2" fill="none"/><circle cx="24" cy="24" r="3" fill="#3B82F6"/></svg></div>
-                        <div class="budget-method-name">Opportunity Cost</div>
-                        <div class="budget-method-desc">Options and flexibility</div>
-                    </div>
-                    <div class="budget-method-card">
-                        <div class="budget-method-emoji"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="20" fill="#FEF3C7"/><path d="M24 14 L34 32 L14 32 Z" fill="#F59E0B" opacity="0.3"/><path d="M24 14 L34 32 L14 32 Z" stroke="#F59E0B" stroke-width="2" fill="none"/><path d="M24 22V26" stroke="#F59E0B" stroke-width="2" stroke-linecap="round"/><circle cx="24" cy="29" r="1.5" fill="#F59E0B"/></svg></div>
-                        <div class="budget-method-name">Risk</div>
-                        <div class="budget-method-desc">Future isn't guaranteed</div>
-                    </div>
-                </div>
+                <p><strong>Why is it separate from checking?</strong> Simple: so you don't accidentally spend it. When your savings is in a different account, it's not sitting there tempting you every time you buy coffee. It's out of sight, out of mind, and actually growing.</p>
 
-                <p style="margin-top: 20px; text-align: center;"><strong>This is why lenders charge interest and why investing early is so powerful. Time is literally money.</strong></p>
+                <p><strong>The main differences from checking:</strong></p>
+                <ul>
+                    <li><strong>No debit card:</strong> You can't swipe a card at the store and spend from your savings. You have to intentionally transfer money out first.</li>
+                    <li><strong>Earns interest:</strong> Your money grows over time. Not a ton, but it's something. The bank pays you a small percentage for keeping your money there.</li>
+                    <li><strong>Limited transactions:</strong> Some banks limit how many times you can withdraw per month. This is to keep you from using it like a checking account.</li>
+                    <li><strong>Higher minimum balances:</strong> Some savings accounts require you to keep a certain amount in there (like $300) to avoid fees.</li>
+                </ul>
+
+                <p><strong>Bottom line:</strong> Savings is for money you want to keep safe and let grow. Checking is for money you're actively using.</p>
             </div>
             <div class="screen-navigation">
                 <button class="btn-nav btn-prev" onclick="previousScreen()"><span>←</span> Previous</button>
@@ -913,22 +853,22 @@
                 </div>
 
                 <div class="checkpoint-question">
-                    <div class="checkpoint-question-text">Why is $100 today worth more than $100 in a year?</div>
+                    <div class="checkpoint-question-text">Why is a savings account kept separate from your checking account?</div>
                     <div class="checkpoint-option" onclick="checkCheckpoint1(0)">
                         <input type="radio" name="checkpoint1" value="0">
-                        <span>A) It's not, they're equal</span>
+                        <span>A) Banks require it by law</span>
                     </div>
                     <div class="checkpoint-option" onclick="checkCheckpoint1(1)">
                         <input type="radio" name="checkpoint1" value="1">
-                        <span>B) Because of inflation and opportunity cost</span>
+                        <span>B) So you don't accidentally spend your savings money</span>
                     </div>
                     <div class="checkpoint-option" onclick="checkCheckpoint1(2)">
                         <input type="radio" name="checkpoint1" value="2">
-                        <span>C) Because paper money degrades</span>
+                        <span>C) Savings accounts are more secure than checking</span>
                     </div>
                     <div class="checkpoint-option" onclick="checkCheckpoint1(3)">
                         <input type="radio" name="checkpoint1" value="3">
-                        <span>D) Because of bank fees</span>
+                        <span>D) You earn more interest if they're separate</span>
                     </div>
                 </div>
 
@@ -946,34 +886,26 @@
             </div>
         </div>
 
-        <!-- Screen 4: Simple Example -->
+        <!-- Screen 4: How Savings Accounts Earn Interest -->
         <div class="lesson-screen" data-screen="4">
             <div class="screen-progress">Screen 4 of 8</div>
             <div class="lesson-section">
-                <h2>Simple Example</h2>
-                <p>Imagine someone offers you a choice:</p>
-                <p><strong>Option A:</strong> Receive $1,000 today<br>
-                <strong>Option B:</strong> Receive $1,000 one year from now</p>
-                <p>Which should you choose? Option A, always!</p>
-                <p>Here's why: If you take $1,000 today and put it in a savings account earning 5% interest, you'll have $1,050 in one year. That's $50 more than waiting. Even if you don't invest it, you have the option to use it for emergencies, opportunities, or needs that might arise this year.</p>
-                <p>Now flip it: Would you lend someone $1,000 today if they promised to pay you back exactly $1,000 in a year? Probably not, because you're losing the opportunity to grow that money. That's why lenders charge interest—they need to be compensated for giving up that growth potential.</p>
-            </div>
+                <h2>How Your Savings Account Earns Interest</h2>
+                <p><strong>This is where savings accounts get cool. Your money actually grows.</strong></p>
+                <p>When you put money in a savings account, the bank pays you interest. That means they give you a little extra money just for keeping your cash there. It's not life-changing money, but it adds up over time.</p>
 
-            <!-- Mini Visual -->
-            <div class="visual-box">
-                <h3>$100 Saved at Age 20 vs. Age 30</h3>
-                <p style=" font-size: 14px; margin-bottom: 15px;">Assuming 7% annual growth until age 65:</p>
-                <div class="timeline">
-                    <div class="timeline-item">
-                        <div class="timeline-box highlight">$1,497</div>
-                        <p style=" font-size: 13px; color: var(--text-secondary);">Started at 20<br>(45 years growth)</p>
-                    </div>
-                    <div class="timeline-item">
-                        <div class="timeline-box">$761</div>
-                        <p style=" font-size: 13px; color: var(--text-secondary);">Started at 30<br>(35 years growth)</p>
-                    </div>
-                </div>
-                <p style="margin-top: 20px; text-align: center; font-weight: 600; color: var(--primary-color);">Starting 10 years earlier nearly doubles your money!</p>
+                <p><strong>How does it work?</strong></p>
+                <ul>
+                    <li><strong>Interest rate:</strong> Banks advertise something like "0.50% APY" or "4.00% APY." That's how much your money grows each year.</li>
+                    <li><strong>Compounding:</strong> You earn interest on your original amount PLUS the interest you already earned. It's like interest earning interest.</li>
+                    <li><strong>Monthly deposits:</strong> Usually, the bank adds the interest to your account every month. So you see your balance slowly climb.</li>
+                </ul>
+
+                <p><strong>Example:</strong> Say you have $1,000 in savings with a 4% APY. After one year, you'd have about $1,040. You didn't do anything. Your money just grew while sitting there.</p>
+
+                <p><strong>Real talk though:</strong> Regular savings accounts usually have pretty low interest rates (like 0.01% to 0.50% at traditional banks). That's not much. Online banks often offer way better rates (3% to 5%), which is why a lot of people use them for savings. We'll cover better savings options in a later lesson.</p>
+
+                <p><strong>The point:</strong> Even a little interest is better than nothing. And over time, it makes a difference.</p>
             </div>
             <div class="screen-navigation">
                 <button class="btn-nav btn-prev" onclick="previousScreen()"><span>←</span> Previous</button>
@@ -991,22 +923,22 @@
                 </div>
 
                 <div class="checkpoint-question">
-                    <div class="checkpoint-question-text">Sarah invests $100/month starting at 25. Tom invests $200/month starting at 35. Both stop at 65. Who likely has more?</div>
+                    <div class="checkpoint-question-text">What does it mean when a savings account earns "interest"?</div>
                     <div class="checkpoint-option" onclick="checkCheckpoint2(0)">
                         <input type="radio" name="checkpoint2" value="0">
-                        <span>A) Tom (he invested more per month)</span>
+                        <span>A) You have to pay the bank a fee every month</span>
                     </div>
                     <div class="checkpoint-option" onclick="checkCheckpoint2(1)">
                         <input type="radio" name="checkpoint2" value="1">
-                        <span>B) Sarah (she started earlier)</span>
+                        <span>B) The bank pays you money for keeping your cash there</span>
                     </div>
                     <div class="checkpoint-option" onclick="checkCheckpoint2(2)">
                         <input type="radio" name="checkpoint2" value="2">
-                        <span>C) They'll have the same</span>
+                        <span>C) Your money stays exactly the same forever</span>
                     </div>
                     <div class="checkpoint-option" onclick="checkCheckpoint2(3)">
                         <input type="radio" name="checkpoint2" value="3">
-                        <span>D) Neither will have much</span>
+                        <span>D) You lose money over time</span>
                     </div>
                 </div>
 
@@ -1024,33 +956,42 @@
             </div>
         </div>
 
-        <!-- Screen 6: Common Mistakes -->
+        <!-- Screen 6: Finding and Managing Your Savings on Bank Websites -->
         <div class="lesson-screen" data-screen="6">
             <div class="screen-progress">Screen 6 of 8</div>
             <div class="lesson-section">
-                <h2>Common Mistakes to Avoid</h2>
-                <div class="mistakes-grid">
-                    <div class="mistake-card">
-                        <div class="mistake-icon">⏳</div>
-                        <div class="mistake-title">"I'll Start Later"</div>
-                        <div class="mistake-desc">Every year you wait costs you years of potential growth</div>
-                    </div>
-                    <div class="mistake-card">
-                        <div class="mistake-icon"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="20" fill="#FEE2E2"/><path d="M12 18 L18 24 L24 20 L30 30 L36 26" stroke="#DC2626" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M30 34 L36 34 L36 28" stroke="#DC2626" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-                        <div class="mistake-title">Only Thinking Today</div>
-                        <div class="mistake-desc">$50 today could be $150 in 20 years if invested</div>
-                    </div>
-                    <div class="mistake-card">
-                        <div class="mistake-icon"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="20" fill="#FEE2E2"/><path d="M12 18 L18 24 L24 20 L30 30 L36 26" stroke="#DC2626" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M30 34 L36 34 L36 28" stroke="#DC2626" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-                        <div class="mistake-title">Ignoring Inflation</div>
-                        <div class="mistake-desc">Money under mattress loses value every year</div>
-                    </div>
-                    <div class="mistake-card">
-                        <div class="mistake-icon"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 10 L6 7 L10 11 L14 7 L17 10" stroke="#3B82F6" stroke-width="2" fill="none" stroke-linejoin="round"/></svg></div>
-                        <div class="mistake-title">Not Asking for Payment</div>
-                        <div class="mistake-desc">Getting money sooner matters—ask when you'll be repaid</div>
-                    </div>
-                </div>
+                <h2>Finding Your Savings Account on Your Bank's Website or App</h2>
+                <p><strong>Once you have a savings account, here's how to actually access it and move money around.</strong></p>
+
+                <p><strong>Finding the Savings Section:</strong></p>
+                <ul>
+                    <li><strong>Mobile App:</strong> After logging in, you'll see all your accounts listed. Look for "Savings" or "Savings Account." Tap it to see your balance.</li>
+                    <li><strong>Website:</strong> Log in and look for "Accounts" or "My Accounts." Your savings should be listed there, usually below your checking.</li>
+                    <li><strong>Dashboard View:</strong> Most banks show all account balances on the main dashboard. You'll see checking and savings side by side.</li>
+                </ul>
+
+                <p><strong>Checking Your Savings Balance:</strong></p>
+                <ul>
+                    <li>Click or tap on your savings account</li>
+                    <li>You'll see your current balance, recent deposits, and any interest you've earned</li>
+                    <li>You can view transaction history to see when money went in or out</li>
+                </ul>
+
+                <p><strong>Transferring Money to Savings:</strong></p>
+                <ul>
+                    <li>Look for "Transfer" or "Move Money" (usually in the menu or on the dashboard)</li>
+                    <li>Select "From" account (your checking) and "To" account (your savings)</li>
+                    <li>Enter the amount you want to move</li>
+                    <li>Hit "Transfer" and it's done instantly (or within 1 business day)</li>
+                </ul>
+
+                <p><strong>Transferring Money Out of Savings:</strong></p>
+                <ul>
+                    <li>Same process, just reverse: From savings → To checking</li>
+                    <li>Remember: Some banks limit how many times you can do this per month (usually 6 transfers)</li>
+                </ul>
+
+                <p><strong>Pro tip:</strong> Set up automatic transfers. Like every payday, move $50 from checking to savings. It happens automatically, so you don't forget.</p>
             </div>
             <div class="screen-navigation">
                 <button class="btn-nav btn-prev" onclick="previousScreen()"><span>←</span> Previous</button>
@@ -1058,44 +999,37 @@
             </div>
         </div>
 
-        <!-- Screen 7: Micro Action + Quick Reflection -->
+        <!-- Screen 7: Using Your Savings Account the Right Way -->
         <div class="lesson-screen" data-screen="7">
             <div class="screen-progress">Screen 7 of 8</div>
             <div class="lesson-section">
-                <div class="action-checklist">
-                    <div class="checklist-title"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="20" fill="#DBEAFE"/><circle cx="24" cy="24" r="14" stroke="#3B82F6" stroke-width="2" fill="none"/><circle cx="24" cy="24" r="8" stroke="#3B82F6" stroke-width="2" fill="none"/><circle cx="24" cy="24" r="3" fill="#3B82F6"/></svg> Calculate Your "Coffee Future"</div>
-                    <p style="text-align: center; color: var(--text-secondary); margin-bottom: 15px; font-size: 14px;">
-                        Complete this exercise to see the power of time:
-                    </p>
-                    <div class="checklist-item" onclick="toggleChecklistItem(this)">
-                        <div class="checklist-checkbox"></div>
-                        <div class="checklist-text">Pick something you buy regularly (coffee, snacks, subscription)</div>
-                    </div>
-                    <div class="checklist-item" onclick="toggleChecklistItem(this)">
-                        <div class="checklist-checkbox"></div>
-                        <div class="checklist-text">Multiply weekly cost by 52 to get annual spending</div>
-                    </div>
-                    <div class="checklist-item" onclick="toggleChecklistItem(this)">
-                        <div class="checklist-checkbox"></div>
-                        <div class="checklist-text">Multiply annual amount by 30 for future value estimate</div>
-                    </div>
-                    <div class="checklist-item" onclick="toggleChecklistItem(this)">
-                        <div class="checklist-checkbox"></div>
-                        <div class="checklist-text">Compare: is this purchase worth the future cost?</div>
-                    </div>
-                    <div class="checklist-item" onclick="toggleChecklistItem(this)">
-                        <div class="checklist-checkbox"></div>
-                        <div class="checklist-text">Decide: keep it or redirect to savings/investments</div>
-                    </div>
-                </div>
+                <h2>How to Actually Use a Savings Account (Without Messing It Up)</h2>
+                <p><strong>Okay, so you have a savings account. Now what? Here's how to use it properly.</strong></p>
 
-                <div class="reflection-box">
-                    <div class="reflection-icon"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="20" fill="#F3F4F6"/><circle cx="24" cy="22" r="8" fill="#6B7280" opacity="0.3"/><circle cx="24" cy="22" r="8" stroke="#6B7280" stroke-width="2" fill="none"/><circle cx="18" cy="32" r="3" fill="#6B7280" opacity="0.5"/><circle cx="14" cy="36" r="2" fill="#6B7280" opacity="0.3"/></svg></div>
-                    <div class="reflection-title">Quick Reflection</div>
-                    <div class="reflection-text">
-                        What could change in your life if you started building wealth today, even with small amounts? The goal isn't to never spend—it's to understand that every financial decision is also a decision about your future.
-                    </div>
-                </div>
+                <p><strong>What savings is FOR:</strong></p>
+                <ul>
+                    <li><strong>Emergency fund:</strong> Money for unexpected stuff like car repairs, medical bills, or losing your job</li>
+                    <li><strong>Short-term goals:</strong> Saving for a trip, a new laptop, moving out, whatever</li>
+                    <li><strong>Financial cushion:</strong> Just having money set aside so you feel more secure</li>
+                </ul>
+
+                <p><strong>What savings is NOT for:</strong></p>
+                <ul>
+                    <li><strong>Everyday spending:</strong> Don't dip into savings to buy lunch or go shopping. That's what checking is for.</li>
+                    <li><strong>Impulse purchases:</strong> If you're constantly transferring money out for random stuff, you're not really saving.</li>
+                </ul>
+
+                <p><strong>How to avoid accidentally spending your savings:</strong></p>
+                <ul>
+                    <li><strong>Out of sight, out of mind:</strong> Keep it in a separate account. Don't link it to a debit card.</li>
+                    <li><strong>Set a rule:</strong> Only transfer money out for true emergencies or when you hit your savings goal.</li>
+                    <li><strong>Automate it:</strong> Set up automatic transfers from checking to savings every payday. You won't even miss it.</li>
+                    <li><strong>Name your savings:</strong> Some banks let you name accounts. Call it "Emergency Fund" or "Vacation Fund" so you remember what it's for.</li>
+                </ul>
+
+                <p><strong>A word on regular savings accounts:</strong> They're fine for getting started, but honestly? Regular savings accounts at traditional banks have terrible interest rates (like 0.01%). You're barely earning anything. Later, we'll talk about high-yield savings accounts and other options that actually grow your money faster. But for now, a regular savings account is better than nothing.</p>
+
+                <p><strong>Bottom line:</strong> Treat your savings like it's off-limits. The whole point is to build up money you don't touch.</p>
             </div>
             <div class="screen-navigation">
                 <button class="btn-nav btn-prev" onclick="previousScreen()"><span>←</span> Previous</button>
@@ -1108,13 +1042,13 @@
             <div class="screen-progress">Screen 8 of 8</div>
             <!-- Lesson Quiz -->
             <div class="quiz-container" id="quizContainer">
-                <div class="quiz-header">
-                    <h2>Lesson Quiz</h2>
-                    <p>Answer these questions to unlock the next lesson. You need to answer 3 out of 4 correctly to pass.</p>
-                </div>
-                <div id="quizQuestions"></div>
-                <button class="btn-submit-quiz" id="submitQuiz" onclick="submitQuiz()">Submit Quiz</button>
-                <div id="quizResult"></div>
+            <div class="quiz-header">
+                <h2>Lesson Quiz</h2>
+                <p>Answer these questions to unlock the next lesson. You need to answer 3 out of 4 correctly to pass.</p>
+            </div>
+            <div id="quizQuestions"></div>
+            <button class="btn-submit-quiz" id="submitQuiz" onclick="submitQuiz()">Submit Quiz</button>
+            <div id="quizResult"></div>
             </div>
 
             <!-- Finish Button -->
@@ -1164,7 +1098,7 @@
     <script src="animations.js"></script>
     <script>
         // Check authentication status and update nav
-        async function updateNav() {
+                async function updateNav() {
             const authButtons = document.getElementById('authButtons');
 
             // Check localStorage for cached auth state and render immediately
@@ -1196,7 +1130,6 @@
                 authButtons.style.opacity = '1';
             }
         }
-
         // Logout function
         async function logout() {
             localStorage.removeItem('authState');
@@ -1219,22 +1152,46 @@
             {
                 versions: [
                     {
-                        question: "Why is a dollar today worth more than a dollar tomorrow?",
+                        question: "What is the main purpose of a savings account?",
                         options: [
-                            "Because of inflation only",
-                            "Because it has the potential to grow and earn returns",
-                            "Because dollars lose value immediately",
-                            "Because tomorrow never comes"
+                            "For everyday spending and bills",
+                            "To store money you don't plan to spend right away and let it earn interest",
+                            "To buy stocks and bonds",
+                            "Only for receiving paychecks"
                         ],
                         correct: 1
                     },
                     {
-                        question: "What is the main concept of the time value of money?",
+                        question: "Why should you keep your savings separate from checking?",
                         options: [
-                            "Money loses all value over time",
-                            "Money available now is worth more than the same amount in the future",
-                            "Future money is always worth more",
-                            "Time and money are unrelated"
+                            "So you don't accidentally spend your savings money",
+                            "Banks require it by law",
+                            "Checking accounts are more secure",
+                            "It's more convenient to have multiple accounts"
+                        ],
+                        correct: 0
+                    }
+                ]
+            },
+            {
+                versions: [
+                    {
+                        question: "How does a savings account earn interest?",
+                        options: [
+                            "You have to pay the bank a monthly fee",
+                            "The bank pays you money for keeping your cash there",
+                            "Your money stays exactly the same forever",
+                            "You lose money over time"
+                        ],
+                        correct: 1
+                    },
+                    {
+                        question: "If you have $1,000 in a savings account with 4% APY, about how much will you have after one year?",
+                        options: [
+                            "$1,000 (no change)",
+                            "$1,040",
+                            "$1,400",
+                            "$5,000"
                         ],
                         correct: 1
                     }
@@ -1243,22 +1200,22 @@
             {
                 versions: [
                     {
-                        question: "According to the lesson, what would $100 saved at age 20 be worth at age 65 (assuming 7% growth)?",
+                        question: "How can you transfer money from checking to savings?",
                         options: [
-                            "$500",
-                            "$761",
-                            "$1,000",
-                            "$1,497"
+                            "You have to go to the bank in person every time",
+                            "Use the 'Transfer' or 'Move Money' feature in your bank's app or website",
+                            "You can't transfer money between accounts",
+                            "You need to mail a check to yourself"
                         ],
-                        correct: 3
+                        correct: 1
                     },
                     {
-                        question: "Starting to save 10 years earlier can have what effect on your money?",
+                        question: "Where can you find your savings account on your bank's app?",
                         options: [
-                            "No significant difference",
-                            "Nearly doubles your money",
-                            "Triples your money",
-                            "Reduces your returns"
+                            "Hidden in settings, impossible to find",
+                            "Listed with all your accounts, usually below checking",
+                            "You can only see it on paper statements",
+                            "Only visible on desktop computers"
                         ],
                         correct: 1
                     }
@@ -1267,46 +1224,22 @@
             {
                 versions: [
                     {
-                        question: "If someone offers you $1,000 today or $1,000 in one year, which should you choose?",
+                        question: "What should you NOT use your savings account for?",
                         options: [
-                            "Wait for one year to get it",
-                            "Take it today because it can grow and has more value now",
-                            "It doesn't matter, they're the same",
-                            "Wait because future money is safer"
-                        ],
-                        correct: 1
-                    },
-                    {
-                        question: "Why would lenders charge interest on money they lend?",
-                        options: [
-                            "To be greedy",
-                            "Because it's required by law",
-                            "To compensate for giving up the opportunity to grow that money",
-                            "To punish borrowers"
+                            "Emergency funds",
+                            "Saving for a vacation",
+                            "Buying lunch and everyday shopping",
+                            "A financial cushion"
                         ],
                         correct: 2
-                    }
-                ]
-            },
-            {
-                versions: [
-                    {
-                        question: "What common mistake involves delaying saving for the future?",
-                        options: [
-                            "Starting too early",
-                            "Thinking 'I'll start saving later'",
-                            "Saving too much now",
-                            "Ignoring current needs"
-                        ],
-                        correct: 1
                     },
                     {
-                        question: "According to the lesson, what is a consequence of money sitting under your mattress?",
+                        question: "According to the lesson, what's one downside of regular savings accounts at traditional banks?",
                         options: [
-                            "It grows slowly",
-                            "It stays the same forever",
-                            "It loses value every year due to inflation",
-                            "It becomes more valuable"
+                            "They don't keep your money safe",
+                            "You can't access your money",
+                            "They have very low interest rates (like 0.01%)",
+                            "They charge huge monthly fees"
                         ],
                         correct: 2
                     }
@@ -1463,20 +1396,13 @@
                 alert('Please complete the quiz first!');
                 return;
             }
-            const success = await completeLesson('pillar1_lesson3', 1, 3);
-            if (success) {
-                window.location.href = 'pillar1-lessons.html';
-            }
-        }
 
-        // Interactive Checklist
-        function toggleChecklistItem(item) {
-            item.classList.toggle('checked');
-            const checkbox = item.querySelector('.checklist-checkbox');
-            if (item.classList.contains('checked')) {
-                checkbox.innerHTML = '<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 8 L6 12 L14 4" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
-            } else {
-                checkbox.textContent = '';
+            // Use shared completion function
+            const success = await completeLesson('pillar1_lesson3', 1, 3);
+
+            if (success) {
+                // Redirect back to lessons page
+                window.location.href = 'pillar1-lessons.html';
             }
         }
 
@@ -1491,7 +1417,7 @@
             if (checkpoint1Answered) return;
             checkpoint1Answered = true;
 
-            const correctOption = 1; // B) Because of inflation and opportunity cost
+            const correctOption = 1; // B) They usually have lower fees and better interest rates
             const isCorrect = selectedOption === correctOption;
 
             // Get elements
@@ -1519,14 +1445,14 @@
 
             if (isCorrect) {
                 feedback.classList.add('correct');
-                feedbackIcon.textContent = '<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 8 L6 12 L14 4" stroke="currentColor" stroke-width="2" fill="none"/></svg>';
-                feedbackTitle.textContent = 'Correct!';
-                feedbackExplanation.textContent = 'Excellent! $100 today is worth more because of inflation (money loses purchasing power over time) and opportunity cost (you could invest it and earn returns). Having money now gives you options and growth potential that you don\'t have if you wait.';
+                feedbackIcon.innerHTML = '<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 8 L6 12 L14 4" stroke="currentColor" stroke-width="2" fill="none"/></svg>';
+                feedbackTitle.textContent = 'Exactly right!';
+                feedbackExplanation.textContent = 'Yep! When your savings is in a separate account, you won\'t accidentally spend it on everyday stuff. It keeps your savings safe and out of reach so it can actually grow.';
             } else {
                 feedback.classList.add('incorrect');
                 feedbackIcon.textContent = '•';
-                feedbackTitle.textContent = 'Not quite, but that\'s okay!';
-                feedbackExplanation.textContent = 'The correct answer is because of inflation and opportunity cost. Money today can be invested to grow, and inflation means prices increase over time, so the same dollar amount buys less in the future. This is the fundamental principle of the time value of money.';
+                feedbackTitle.textContent = 'Not quite, but no worries!';
+                feedbackExplanation.textContent = 'The main reason to keep savings separate is so you don\'t accidentally spend it. When it\'s in a different account from your everyday money, you\'re less likely to dip into it for random purchases.';
             }
 
             feedback.classList.add('show');
@@ -1537,7 +1463,7 @@
             if (checkpoint2Answered) return;
             checkpoint2Answered = true;
 
-            const correctOption = 1; // B) Sarah (she started earlier)
+            const correctOption = 1; // B) Traditional bank
             const isCorrect = selectedOption === correctOption;
 
             // Get elements
@@ -1565,14 +1491,14 @@
 
             if (isCorrect) {
                 feedback.classList.add('correct');
-                feedbackIcon.textContent = '<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 8 L6 12 L14 4" stroke="currentColor" stroke-width="2" fill="none"/></svg>';
-                feedbackTitle.textContent = 'Excellent!';
-                feedbackExplanation.textContent = 'Perfect! Even though Tom invests double per month, Sarah started 10 years earlier. Those extra years of compound growth are incredibly powerful. Sarah\'s money has more time to grow, which often matters more than the monthly amount. This is why starting early is so crucial!';
+                feedbackIcon.innerHTML = '<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 8 L6 12 L14 4" stroke="currentColor" stroke-width="2" fill="none"/></svg>';
+                feedbackTitle.textContent = 'Exactly!';
+                feedbackExplanation.textContent = 'Perfect! Interest is the bank paying you money for keeping your cash there. It\'s how your savings grows over time. The higher the interest rate (APY), the faster your money grows.';
             } else {
                 feedback.classList.add('incorrect');
                 feedbackIcon.textContent = '•';
-                feedbackTitle.textContent = 'Good thinking, but there\'s a better answer!';
-                feedbackExplanation.textContent = 'Sarah will likely have more! Even though Tom invests $200/month versus Sarah\'s $100/month, Sarah started 10 years earlier. Time is the most powerful factor in compound growth. Those extra 10 years give Sarah\'s money significantly more time to grow, often making up for the lower monthly contribution.';
+                feedbackTitle.textContent = 'Not quite!';
+                feedbackExplanation.textContent = 'Interest means the bank pays YOU money. When you keep money in a savings account, the bank uses it and pays you a percentage back. That\'s how your savings grows over time.';
             }
 
             feedback.classList.add('show');
@@ -1624,6 +1550,17 @@
         document.addEventListener('DOMContentLoaded', function() {
             showScreen(1);
         });
+
+        // Interactive Checklist
+        function toggleChecklistItem(item) {
+            item.classList.toggle('checked');
+            const checkbox = item.querySelector('.checklist-checkbox');
+            if (item.classList.contains('checked')) {
+                checkbox.innerHTML = '<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 8 L6 12 L14 4" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+            } else {
+                checkbox.textContent = '';
+            }
+        }
     </script>
 </body>
 </html>
