@@ -906,6 +906,44 @@
                 <p><strong>Real talk though:</strong> Regular savings accounts usually have pretty low interest rates (like 0.01% to 0.50% at traditional banks). That's not much. Online banks often offer way better rates (3% to 5%), which is why a lot of people use them for savings. We'll cover better savings options in a later lesson.</p>
 
                 <p><strong>The point:</strong> Even a little interest is better than nothing. And over time, it makes a difference.</p>
+
+                <!-- Interactive Savings Calculator -->
+                <div style="background: linear-gradient(135deg, #F0F9FF 0%, #E0F2FE 100%); border-radius: 12px; padding: 30px; margin-top: 30px; border: 2px solid #3B82F6;">
+                    <h3 style="color: #0A1A2F; margin-top: 0; margin-bottom: 20px; text-align: center;">Play With the Numbers</h3>
+                    <p style="text-align: center; color: #475569; margin-bottom: 25px;">Move the sliders to see how your savings would grow over time</p>
+
+                    <div style="margin-bottom: 25px;">
+                        <label style="display: block; font-weight: 600; color: #1E293B; margin-bottom: 8px;">Starting Amount: $<span id="startAmount">1000</span></label>
+                        <input type="range" id="startAmountSlider" min="100" max="10000" step="100" value="1000" style="width: 100%; height: 8px; border-radius: 5px; background: #cbd5e1; outline: none; -webkit-appearance: none;" oninput="updateCalculator()">
+                    </div>
+
+                    <div style="margin-bottom: 25px;">
+                        <label style="display: block; font-weight: 600; color: #1E293B; margin-bottom: 8px;">Interest Rate (APY): <span id="interestRate">4.0</span>%</label>
+                        <input type="range" id="interestRateSlider" min="0.01" max="10" step="0.1" value="4.0" style="width: 100%; height: 8px; border-radius: 5px; background: #cbd5e1; outline: none; -webkit-appearance: none;" oninput="updateCalculator()">
+                    </div>
+
+                    <div style="margin-bottom: 25px;">
+                        <label style="display: block; font-weight: 600; color: #1E293B; margin-bottom: 8px;">Years: <span id="years">5</span></label>
+                        <input type="range" id="yearsSlider" min="1" max="30" step="1" value="5" style="width: 100%; height: 8px; border-radius: 5px; background: #cbd5e1; outline: none; -webkit-appearance: none;" oninput="updateCalculator()">
+                    </div>
+
+                    <div style="background: white; border-radius: 8px; padding: 20px; margin-top: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 15px;">
+                            <div>
+                                <div style="color: #64748b; font-size: 14px; margin-bottom: 5px;">You Start With</div>
+                                <div style="color: #0A1A2F; font-size: 24px; font-weight: 700;" id="startDisplay">$1,000</div>
+                            </div>
+                            <div>
+                                <div style="color: #64748b; font-size: 14px; margin-bottom: 5px;">Interest Earned</div>
+                                <div style="color: #10B981; font-size: 24px; font-weight: 700;" id="interestEarned">$217</div>
+                            </div>
+                        </div>
+                        <div style="border-top: 2px solid #E2E8F0; padding-top: 15px;">
+                            <div style="color: #64748b; font-size: 14px; margin-bottom: 5px;">You End Up With</div>
+                            <div style="color: #3B82F6; font-size: 32px; font-weight: 700;" id="finalAmount">$1,217</div>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="screen-navigation">
                 <button class="btn-nav btn-prev" onclick="previousScreen()"><span>←</span> Previous</button>
@@ -1505,6 +1543,29 @@
             continueBtn.classList.add('show');
         }
 
+        // Interactive Savings Calculator
+        function updateCalculator() {
+            // Get slider values
+            const startAmount = parseFloat(document.getElementById('startAmountSlider').value);
+            const interestRate = parseFloat(document.getElementById('interestRateSlider').value);
+            const years = parseInt(document.getElementById('yearsSlider').value);
+
+            // Update display labels
+            document.getElementById('startAmount').textContent = startAmount.toLocaleString();
+            document.getElementById('interestRate').textContent = interestRate.toFixed(2);
+            document.getElementById('years').textContent = years;
+
+            // Calculate compound interest: A = P(1 + r)^t
+            const rate = interestRate / 100;
+            const finalAmount = startAmount * Math.pow((1 + rate), years);
+            const interestEarned = finalAmount - startAmount;
+
+            // Format and update results
+            document.getElementById('startDisplay').textContent = '$' + startAmount.toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 });
+            document.getElementById('interestEarned').textContent = '$' + interestEarned.toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 });
+            document.getElementById('finalAmount').textContent = '$' + finalAmount.toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 });
+        }
+
         // Multi-screen navigation
         let currentScreen = 1;
         const totalScreens = 8;
@@ -1546,9 +1607,10 @@
             }
         }
 
-        // Initialize first screen on page load
+        // Initialize on page load
         document.addEventListener('DOMContentLoaded', function() {
             showScreen(1);
+            updateCalculator(); // Initialize calculator with default values
         });
 
         // Interactive Checklist
