@@ -790,7 +790,6 @@
 
         <!-- Screen 1: Quick Intro -->
         <div class="lesson-screen active" data-screen="1">
-            <div class="screen-progress">Screen 1 of 8</div>
             <div class="lesson-section">
                 <h2>Savings Accounts: Where Your Money Grows</h2>
                 <div class="intro-cards">
@@ -819,7 +818,6 @@
 
         <!-- Screen 2: What is a Savings Account? -->
         <div class="lesson-screen" data-screen="2">
-            <div class="screen-progress">Screen 2 of 8</div>
             <div class="lesson-section">
                 <h2>What Even Is a Savings Account?</h2>
                 <p><strong>Okay, let's break this down.</strong></p>
@@ -845,7 +843,6 @@
 
         <!-- Screen 3: Checkpoint Question 1 -->
         <div class="lesson-screen" data-screen="3">
-            <div class="screen-progress">Screen 3 of 8</div>
             <div class="checkpoint-container">
                 <div class="checkpoint-header">
                     <h3>Quick Check</h3>
@@ -888,7 +885,6 @@
 
         <!-- Screen 4: How Savings Accounts Earn Interest -->
         <div class="lesson-screen" data-screen="4">
-            <div class="screen-progress">Screen 4 of 8</div>
             <div class="lesson-section">
                 <h2>How Your Savings Account Earns Interest</h2>
                 <p><strong>This is where savings accounts get cool. Your money actually grows.</strong></p>
@@ -905,29 +901,55 @@
 
                 <p><strong>Real talk though:</strong> Regular savings accounts usually have pretty low interest rates (like 0.01% to 0.50% at traditional banks). That's not much. Online banks often offer way better rates (3% to 5%), which is why a lot of people use them for savings. We'll cover better savings options in a later lesson.</p>
 
-                <p><strong>The point:</strong> Even a little interest is better than nothing. And over time, it makes a difference.</p>
+                <p><strong>The point:</strong> Even a little interest is better than nothing. And over time, it makes a difference. Let's try it out in the next screen.</p>
+            </div>
+            <div class="screen-navigation">
+                <button class="btn-nav btn-prev" onclick="previousScreen()"><span>←</span> Previous</button>
+                <button class="btn-nav" onclick="nextScreen()">Next <span>→</span></button>
+            </div>
+        </div>
 
-                <!-- Interactive Savings Calculator -->
-                <div style="background: linear-gradient(135deg, #F0F9FF 0%, #E0F2FE 100%); border-radius: 12px; padding: 30px; margin-top: 30px; border: 2px solid #3B82F6;">
-                    <h3 style="color: #0A1A2F; margin-top: 0; margin-bottom: 20px; text-align: center;">Play With the Numbers</h3>
-                    <p style="text-align: center; color: #475569; margin-bottom: 25px;">Move the sliders to see how your savings would grow over time</p>
+        <!-- Screen 5: Interactive Savings Calculator -->
+        <div class="lesson-screen" data-screen="5">
+            <div class="lesson-section">
+                <h2>Try It Yourself: Savings Calculator</h2>
+                <p style="text-align: center; margin-bottom: 30px;"><strong>Play with the numbers below to see how your savings would grow over time.</strong></p>
 
+                <div style="background: linear-gradient(135deg, #F0F9FF 0%, #E0F2FE 100%); border-radius: 12px; padding: 30px; border: 2px solid #3B82F6;">
                     <div style="margin-bottom: 25px;">
-                        <label style="display: block; font-weight: 600; color: #1E293B; margin-bottom: 8px;">Starting Amount: $<span id="startAmount">1000</span></label>
-                        <input type="range" id="startAmountSlider" min="100" max="10000" step="100" value="1000" style="width: 100%; height: 8px; border-radius: 5px; background: #cbd5e1; outline: none; -webkit-appearance: none;" oninput="updateCalculator()">
+                        <label style="display: block; font-weight: 600; color: #1E293B; margin-bottom: 12px;">Starting Amount</label>
+                        <div style="display: grid; grid-template-columns: 1fr auto; gap: 15px; align-items: center;">
+                            <input type="range" id="startAmountSlider" min="100" max="10000" step="100" value="1000" style="width: 100%; height: 8px; border-radius: 5px; background: #cbd5e1; outline: none; -webkit-appearance: none;" oninput="updateFromSlider('startAmount')">
+                            <div style="display: flex; align-items: center; gap: 5px;">
+                                <span style="font-weight: 600; color: #475569;">$</span>
+                                <input type="number" id="startAmountInput" min="100" max="10000" step="100" value="1000" style="width: 110px; padding: 8px 12px; border: 2px solid #cbd5e1; border-radius: 8px; font-size: 16px; font-weight: 600;" oninput="updateFromInput('startAmount')">
+                            </div>
+                        </div>
                     </div>
 
                     <div style="margin-bottom: 25px;">
-                        <label style="display: block; font-weight: 600; color: #1E293B; margin-bottom: 8px;">Interest Rate (APY): <span id="interestRate">4.0</span>%</label>
-                        <input type="range" id="interestRateSlider" min="0.01" max="10" step="0.1" value="4.0" style="width: 100%; height: 8px; border-radius: 5px; background: #cbd5e1; outline: none; -webkit-appearance: none;" oninput="updateCalculator()">
+                        <label style="display: block; font-weight: 600; color: #1E293B; margin-bottom: 12px;">Interest Rate (APY)</label>
+                        <div style="display: grid; grid-template-columns: 1fr auto; gap: 15px; align-items: center;">
+                            <input type="range" id="interestRateSlider" min="0.01" max="15" step="0.1" value="4.0" style="width: 100%; height: 8px; border-radius: 5px; background: #cbd5e1; outline: none; -webkit-appearance: none;" oninput="updateFromSlider('interestRate')">
+                            <div style="display: flex; align-items: center; gap: 5px;">
+                                <input type="number" id="interestRateInput" min="0.01" max="15" step="0.1" value="4.0" style="width: 90px; padding: 8px 12px; border: 2px solid #cbd5e1; border-radius: 8px; font-size: 16px; font-weight: 600;" oninput="updateFromInput('interestRate')">
+                                <span style="font-weight: 600; color: #475569;">%</span>
+                            </div>
+                        </div>
                     </div>
 
                     <div style="margin-bottom: 25px;">
-                        <label style="display: block; font-weight: 600; color: #1E293B; margin-bottom: 8px;">Years: <span id="years">5</span></label>
-                        <input type="range" id="yearsSlider" min="1" max="30" step="1" value="5" style="width: 100%; height: 8px; border-radius: 5px; background: #cbd5e1; outline: none; -webkit-appearance: none;" oninput="updateCalculator()">
+                        <label style="display: block; font-weight: 600; color: #1E293B; margin-bottom: 12px;">Number of Years</label>
+                        <div style="display: grid; grid-template-columns: 1fr auto; gap: 15px; align-items: center;">
+                            <input type="range" id="yearsSlider" min="1" max="30" step="1" value="5" style="width: 100%; height: 8px; border-radius: 5px; background: #cbd5e1; outline: none; -webkit-appearance: none;" oninput="updateFromSlider('years')">
+                            <div style="display: flex; align-items: center; gap: 5px;">
+                                <input type="number" id="yearsInput" min="1" max="30" step="1" value="5" style="width: 90px; padding: 8px 12px; border: 2px solid #cbd5e1; border-radius: 8px; font-size: 16px; font-weight: 600;" oninput="updateFromInput('years')">
+                                <span style="font-weight: 600; color: #475569;">years</span>
+                            </div>
+                        </div>
                     </div>
 
-                    <div style="background: white; border-radius: 8px; padding: 20px; margin-top: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                    <div style="background: white; border-radius: 8px; padding: 20px; margin-top: 30px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
                         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 15px;">
                             <div>
                                 <div style="color: #64748b; font-size: 14px; margin-bottom: 5px;">You Start With</div>
@@ -951,9 +973,8 @@
             </div>
         </div>
 
-        <!-- Screen 5: Checkpoint Question 2 -->
-        <div class="lesson-screen" data-screen="5">
-            <div class="screen-progress">Screen 5 of 8</div>
+        <!-- Screen 6: Checkpoint Question 2 -->
+        <div class="lesson-screen" data-screen="6">
             <div class="checkpoint-container">
                 <div class="checkpoint-header">
                     <h3>Quick Check: Apply What You Learned</h3>
@@ -994,9 +1015,8 @@
             </div>
         </div>
 
-        <!-- Screen 6: Finding and Managing Your Savings on Bank Websites -->
-        <div class="lesson-screen" data-screen="6">
-            <div class="screen-progress">Screen 6 of 8</div>
+        <!-- Screen 7: Finding and Managing Your Savings on Bank Websites -->
+        <div class="lesson-screen" data-screen="7">
             <div class="lesson-section">
                 <h2>Finding Your Savings Account on Your Bank's Website or App</h2>
                 <p><strong>Once you have a savings account, here's how to actually access it and move money around.</strong></p>
@@ -1037,9 +1057,8 @@
             </div>
         </div>
 
-        <!-- Screen 7: Using Your Savings Account the Right Way -->
-        <div class="lesson-screen" data-screen="7">
-            <div class="screen-progress">Screen 7 of 8</div>
+        <!-- Screen 8: Using Your Savings Account the Right Way -->
+        <div class="lesson-screen" data-screen="8">
             <div class="lesson-section">
                 <h2>How to Actually Use a Savings Account (Without Messing It Up)</h2>
                 <p><strong>Okay, so you have a savings account. Now what? Here's how to use it properly.</strong></p>
@@ -1075,9 +1094,8 @@
             </div>
         </div>
 
-        <!-- Screen 8: Quiz -->
-        <div class="lesson-screen" data-screen="8">
-            <div class="screen-progress">Screen 8 of 8</div>
+        <!-- Screen 9: Quiz -->
+        <div class="lesson-screen" data-screen="9">
             <!-- Lesson Quiz -->
             <div class="quiz-container" id="quizContainer">
             <div class="quiz-header">
@@ -1544,16 +1562,38 @@
         }
 
         // Interactive Savings Calculator
+        function updateFromSlider(field) {
+            // Get slider value and update corresponding input
+            const slider = document.getElementById(field + 'Slider');
+            const input = document.getElementById(field + 'Input');
+            input.value = slider.value;
+            updateCalculator();
+        }
+
+        function updateFromInput(field) {
+            // Get input value and update corresponding slider
+            const slider = document.getElementById(field + 'Slider');
+            const input = document.getElementById(field + 'Input');
+
+            // Validate and constrain input value
+            let value = parseFloat(input.value);
+            const min = parseFloat(slider.min);
+            const max = parseFloat(slider.max);
+
+            if (isNaN(value)) value = min;
+            if (value < min) value = min;
+            if (value > max) value = max;
+
+            input.value = value;
+            slider.value = value;
+            updateCalculator();
+        }
+
         function updateCalculator() {
-            // Get slider values
+            // Get values from sliders
             const startAmount = parseFloat(document.getElementById('startAmountSlider').value);
             const interestRate = parseFloat(document.getElementById('interestRateSlider').value);
             const years = parseInt(document.getElementById('yearsSlider').value);
-
-            // Update display labels
-            document.getElementById('startAmount').textContent = startAmount.toLocaleString();
-            document.getElementById('interestRate').textContent = interestRate.toFixed(2);
-            document.getElementById('years').textContent = years;
 
             // Calculate compound interest: A = P(1 + r)^t
             const rate = interestRate / 100;
@@ -1568,7 +1608,7 @@
 
         // Multi-screen navigation
         let currentScreen = 1;
-        const totalScreens = 8;
+        const totalScreens = 9;
 
         function showScreen(screenNumber) {
             // Hide all screens
