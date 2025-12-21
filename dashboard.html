@@ -760,70 +760,8 @@
                     pillar1Button.textContent = 'Start Pillar';
                 }
 
-                // Update Pillar 2 button text
-                const pillar2Button = document.getElementById('pillar2Button');
-
-                if (pillar2QuizCompleted === true) {
-                    // User finished everything including quiz
-                    pillar2Button.textContent = 'Review Pillar';
-                } else if (pillar2Completed.length > 0 && pillar2Completed.length < totalLessonsPerPillar) {
-                    // User started but hasn't finished all lessons
-                    pillar2Button.textContent = 'Continue Pillar';
-                } else if (pillar2Completed.length === totalLessonsPerPillar) {
-                    // User finished all 8 lessons but hasn't passed quiz
-                    pillar2Button.textContent = 'Continue Pillar';
-                } else {
-                    // User hasn't started any lessons yet
-                    pillar2Button.textContent = 'Start Pillar';
-                }
-
-                // Update Pillar 3 button text
-                const pillar3Button = document.getElementById('pillar3Button');
-
-                if (pillar3QuizCompleted === true) {
-                    // User finished everything including quiz
-                    pillar3Button.textContent = 'Review Pillar';
-                } else if (pillar3Completed.length > 0 && pillar3Completed.length < totalLessonsPerPillar) {
-                    // User started but hasn't finished all lessons
-                    pillar3Button.textContent = 'Continue Pillar';
-                } else if (pillar3Completed.length === totalLessonsPerPillar) {
-                    // User finished all 8 lessons but hasn't passed quiz
-                    pillar3Button.textContent = 'Continue Pillar';
-                } else {
-                    // User hasn't started any lessons yet
-                    pillar3Button.textContent = 'Start Pillar';
-                }
-
-                // Update Pillar 4 button text and access control
-                const pillar4Item = document.getElementById('pillar4-item');
-                const pillar4Button = document.getElementById('pillar4Button');
-                const userTier = user.membership_tier; // 'free', 'pro', or 'premium'
-
-                // Check if user has access (pro or premium only)
-                if (userTier === 'free') {
-                    // Lock Pillar 4 for free users
-                    pillar4Item.classList.add('locked');
-                    pillar4Button.textContent = 'Upgrade to Pro';
-                    pillar4Button.onclick = (e) => {
-                        e.preventDefault();
-                        alert('Pillar 4 is available for Pro and Premium members only. Please upgrade your membership to access this content.');
-                        return false;
-                    };
-                } else {
-                    // Pro or Premium users have access
-                    pillar4Item.classList.remove('locked');
-                    pillar4Button.onclick = null; // Remove the lock click handler
-
-                    if (pillar4QuizCompleted === true) {
-                        pillar4Button.textContent = 'Review Pillar';
-                    } else if (pillar4Completed.length > 0 && pillar4Completed.length < totalLessonsPerPillar) {
-                        pillar4Button.textContent = 'Continue Pillar';
-                    } else if (pillar4Completed.length === totalLessonsPerPillar) {
-                        pillar4Button.textContent = 'Continue Pillar';
-                    } else {
-                        pillar4Button.textContent = 'Start Pillar';
-                    }
-                }
+                // Pillars 2, 3, 4 are now locked (Available 2026)
+                // No button updates needed for locked pillars
 
                 // Create a map of completed lessons
                 const completedMap = {};
