@@ -466,98 +466,34 @@
 
             // If no userId, don't load any progress (user not logged in)
             if (!userId || userId === 'null' || userId === 'undefined') {
-                // Lock all lessons except lesson 1
-                for (let lessonNum = 2; lessonNum <= 8; lessonNum++) {
-                    const lessonCard = document.querySelector(`[data-lesson="${lessonNum}"]`);
-                    if (lessonCard) {
-                        lessonCard.style.opacity = '0.6';
-                        lessonCard.style.pointerEvents = 'none';
-                        const statusDiv = lessonCard.querySelector('.lesson-status');
-                        statusDiv.innerHTML = `<span style="color: #9ca3af; font-weight: 600;"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="5" y="9" width="10" height="8" rx="1" fill="#6B7280"/><path d="M7 9 L7 6 C7 4.3 8.3 3 10 3 C11.7 3 13 4.3 13 6 L13 9" stroke="#6B7280" stroke-width="2" fill="none"/></svg> Complete Previous Lesson</span>`;
-                    }
-                }
                 return;
             }
 
             const completed = JSON.parse(localStorage.getItem(`pillar1_completed_${userId}`) || '[]');
 
-            // Handle each lesson
-            for (let lessonNum = 1; lessonNum <= 8; lessonNum++) {
-                const lessonCard = document.querySelector(`[data-lesson="${lessonNum}"]`);
-                if (!lessonCard) continue;
+            // Only handle Lesson 1 - Lessons 2-8 are "Coming Soon" and handled by HTML
+            const lesson1Card = document.querySelector(`[data-lesson="1"]`);
+            if (lesson1Card) {
+                const statusDiv = lesson1Card.querySelector('.lesson-status');
 
-                const statusDiv = lessonCard.querySelector('.lesson-status');
-                const previousQuizPassed = lessonNum === 1 || localStorage.getItem(`lesson${lessonNum - 1}_quiz_passed_${userId}`) === 'true';
-
-                if (lessonNum === 1) {
-                    // Lesson 1 is always unlocked
-                    if (completed.includes(1)) {
-                        lessonCard.classList.add('completed');
-                        statusDiv.innerHTML = `
-                            <span class="completed-badge">Completed</span>
-                            <a href="/pillar1-lesson1" class="btn-start-lesson">Review</a>
-                        `;
-                    }
-                } else {
-                    // Other lessons require previous quiz completion
-                    if (!previousQuizPassed) {
-                        // Lock the lesson
-                        lessonCard.style.opacity = '0.6';
-                        lessonCard.style.pointerEvents = 'none';
-                        statusDiv.innerHTML = `
-                            <span style="color: #9ca3af; font-weight: 600;"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="5" y="9" width="10" height="8" rx="1" fill="#6B7280"/><path d="M7 9 L7 6 C7 4.3 8.3 3 10 3 C11.7 3 13 4.3 13 6 L13 9" stroke="#6B7280" stroke-width="2" fill="none"/></svg> Complete Previous Lesson</span>
-                        `;
-                    } else if (completed.includes(lessonNum)) {
-                        // Lesson completed
-                        lessonCard.classList.add('completed');
-                        statusDiv.innerHTML = `
-                            <span class="completed-badge">Completed</span>
-                            <a href="pillar1-lesson${lessonNum}" class="btn-start-lesson">Review</a>
-                        `;
-                    }
-                    // If previous quiz passed but not completed, button already shows "Start Lesson"
+                // Lesson 1 is always unlocked
+                if (completed.includes(1)) {
+                    lesson1Card.classList.add('completed');
+                    statusDiv.innerHTML = `
+                        <span class="completed-badge">Completed</span>
+                        <a href="/pillar1-lesson1" class="btn-start-lesson">Review</a>
+                    `;
                 }
             }
         }
 
         // Check if all lessons completed and show quiz
         function checkQuizAvailability() {
-            const userId = localStorage.getItem('userId');
             const quizCard = document.getElementById('quizCard');
 
-            // If no userId, hide quiz
-            if (!userId || userId === 'null' || userId === 'undefined') {
-                quizCard.style.display = 'none';
-                return;
-            }
-
-            const completed = JSON.parse(localStorage.getItem(`pillar1_completed_${userId}`) || '[]');
-            const quizCompleted = localStorage.getItem(`pillar1_quiz_completed_${userId}`);
-            const quizScore = localStorage.getItem(`pillar1_quiz_score_${userId}`);
-
-            // Check if all 8 lessons are completed AND all 8 lesson quizzes are passed
-            let allQuizzesPassed = true;
-            for (let i = 1; i <= 8; i++) {
-                if (localStorage.getItem(`lesson${i}_quiz_passed_${userId}`) !== 'true') {
-                    allQuizzesPassed = false;
-                    break;
-                }
-            }
-
-            if (completed.length === 8 && allQuizzesPassed) {
-                quizCard.style.display = 'flex';
-
-                if (quizCompleted === 'true') {
-                    const statusDiv = quizCard.querySelector('.lesson-status');
-                    statusDiv.innerHTML = `
-                        <span class="quiz-completed-badge">Passed (${quizScore}%)</span>
-                        <a href="/pillar1-quiz" class="btn-start-quiz">Retake Quiz</a>
-                    `;
-                }
-            } else {
-                // Keep quiz hidden if not all lessons completed
-                quizCard.style.display = 'none';
-            }
+            // Hide quiz card since only Lesson 1 is available (Lessons 2-8 coming soon)
+            // Final quiz will be shown when all lessons are released
+            quizCard.style.display = 'none';
         }
 
         // Initialize page with progress sync
