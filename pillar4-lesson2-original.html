@@ -105,257 +105,6 @@
         .checkpoint-feedback.incorrect { border-left: 4px solid #f59e0b; }
         .btn-continue { display: none; width: 100%; max-width: 300px; margin: 20px auto; padding: 15px; background: var(--primary-color); color: white; border-radius: 8px; font-size: 16px; font-weight: 600; border: none; cursor: pointer; }
         .btn-continue.show { display: block; }
-
-        /* Gamification Styles */
-        .gamification-header {
-            position: sticky;
-            top: 60px;
-            z-index: 999;
-            background: linear-gradient(135deg, #0A1A2F 0%, #1a3a5c 100%);
-            padding: 15px 20px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 20px;
-            animation: slideDown 0.4s ease-out;
-        }
-        @keyframes slideDown {
-            from { transform: translateY(-100%); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
-        }
-        .points-display {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            background: rgba(255, 255, 255, 0.1);
-            padding: 10px 20px;
-            border-radius: 8px;
-            backdrop-filter: blur(10px);
-        }
-        .points-value {
-            font-size: 28px;
-            font-weight: 700;
-            color: #F59E0B;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-        }
-        .points-label {
-            font-size: 12px;
-            color: rgba(255, 255, 255, 0.8);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-        .xp-container {
-            flex: 1;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-        .level-badge {
-            background: linear-gradient(135deg, #10B981, #00A676);
-            color: white;
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-weight: 700;
-            font-size: 14px;
-            box-shadow: 0 4px 8px rgba(16, 185, 129, 0.4);
-            white-space: nowrap;
-        }
-        .xp-bar-container {
-            flex: 1;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 20px;
-            height: 32px;
-            position: relative;
-            overflow: hidden;
-            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
-        }
-        .xp-bar-fill {
-            height: 100%;
-            background: linear-gradient(90deg, #3B82F6, #60A5FA);
-            border-radius: 20px;
-            transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            overflow: hidden;
-        }
-        .xp-bar-fill::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-            animation: shimmer 2s infinite;
-        }
-        @keyframes shimmer {
-            0% { transform: translateX(-100%); }
-            100% { transform: translateX(100%); }
-        }
-        .xp-text {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            color: white;
-            font-weight: 600;
-            font-size: 14px;
-            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
-            z-index: 1;
-        }
-        .achievements-summary {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            background: rgba(255, 255, 255, 0.1);
-            padding: 10px 20px;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        .achievements-summary:hover {
-            background: rgba(255, 255, 255, 0.15);
-            transform: translateY(-2px);
-        }
-        .achievement-count {
-            color: white;
-            font-weight: 600;
-            font-size: 16px;
-        }
-
-        /* Point Notification */
-        .point-notification {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%) translateY(20px);
-            background: linear-gradient(135deg, #10B981, #00A676);
-            color: white;
-            padding: 20px 30px;
-            border-radius: 12px;
-            box-shadow: 0 8px 24px rgba(16, 185, 129, 0.4);
-            z-index: 10000;
-            opacity: 0;
-            pointer-events: none;
-            transition: all 0.3s ease-out;
-        }
-        .point-notification.show {
-            animation: floatUp 2s ease-out;
-        }
-        @keyframes floatUp {
-            0% { opacity: 0; transform: translate(-50%, -50%) translateY(20px) scale(0.8); }
-            20% { opacity: 1; transform: translate(-50%, -50%) translateY(-10px) scale(1.1); }
-            80% { opacity: 1; transform: translate(-50%, -50%) translateY(-30px) scale(1); }
-            100% { opacity: 0; transform: translate(-50%, -50%) translateY(-50px) scale(0.9); }
-        }
-        .point-amount {
-            font-size: 36px;
-            font-weight: 700;
-            text-align: center;
-            margin-bottom: 5px;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-        }
-        .point-reason {
-            font-size: 14px;
-            text-align: center;
-            opacity: 0.9;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        /* Achievement Modal */
-        .achievement-modal {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(8px);
-            z-index: 10000;
-            display: none;
-            align-items: center;
-            justify-content: center;
-            animation: fadeIn 0.3s ease-out;
-        }
-        .achievement-modal.show {
-            display: flex;
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-        .achievement-content {
-            background: white;
-            padding: 40px;
-            border-radius: 16px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
-            text-align: center;
-            max-width: 400px;
-            animation: scaleIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-        @keyframes scaleIn {
-            0% { transform: scale(0.5) rotate(-10deg); opacity: 0; }
-            60% { transform: scale(1.1) rotate(2deg); }
-            100% { transform: scale(1) rotate(0); opacity: 1; }
-        }
-        .achievement-icon-large {
-            margin: 0 auto 20px;
-            animation: bounce 1s infinite;
-        }
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
-        .btn-close-achievement {
-            padding: 12px 30px;
-            background: var(--primary-color);
-            color: white;
-            border: none;
-            border-radius: 8px;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        .btn-close-achievement:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(10, 26, 47, 0.3);
-        }
-
-        /* Confetti Particles */
-        .confetti-particle {
-            position: fixed;
-            width: 10px;
-            height: 10px;
-            top: -10px;
-            border-radius: 50%;
-            animation: confettiFall 3s ease-out forwards;
-            z-index: 10001;
-            pointer-events: none;
-        }
-        @keyframes confettiFall {
-            0% { transform: translateY(0) rotateZ(0deg); opacity: 1; }
-            100% { transform: translateY(100vh) rotateZ(720deg); opacity: 0; }
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .gamification-header {
-                flex-direction: column;
-                gap: 10px;
-                padding: 10px;
-                top: 50px;
-            }
-            .xp-container {
-                width: 100%;
-            }
-            .points-display,
-            .achievements-summary {
-                width: 100%;
-                justify-content: center;
-            }
-        }
     </style>
 </head>
 <body>
@@ -371,30 +120,6 @@
             </div>
         </div>
     </nav>
-
-    <!-- Gamification Header -->
-    <div class="gamification-header" id="gamificationHeader">
-        <div class="points-display">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="10" fill="#F59E0B"/><path d="M12 6 L14 10 L18 10 L15 13 L16 17 L12 15 L8 17 L9 13 L6 10 L10 10 Z" fill="#FFF"/></svg>
-            <div>
-                <div class="points-value" id="pointsValue">0</div>
-                <div class="points-label">Points</div>
-            </div>
-        </div>
-
-        <div class="xp-container">
-            <div class="level-badge" id="levelBadge">Lvl 1</div>
-            <div class="xp-bar-container">
-                <div class="xp-bar-fill" id="xpBarFill" style="width: 0%"></div>
-                <span class="xp-text" id="xpText">0 / 300 XP</span>
-            </div>
-        </div>
-
-        <div class="achievements-summary" onclick="showAchievementsSummary()" title="View all achievements">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2 L15 8 L22 9 L17 14 L18 21 L12 18 L6 21 L7 14 L2 9 L9 8 Z" fill="#F59E0B" stroke="#FFF" stroke-width="2"/></svg>
-            <span class="achievement-count" id="achievementCount">0/12</span>
-        </div>
-    </div>
 
     <div class="lesson-container">
         <a href="/pillar4-lessons" class="back-link">← Back to Pillar 4 Lessons</a>
@@ -674,333 +399,10 @@
         </div>
     </footer>
 
-    <!-- Achievement Modal -->
-    <div class="achievement-modal" id="achievementModal">
-        <div class="achievement-content">
-            <div class="achievement-icon-large">
-                <svg width="120" height="120" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <circle cx="60" cy="60" r="50" fill="#F59E0B" opacity="0.2"/>
-                    <circle cx="60" cy="60" r="40" fill="#F59E0B" opacity="0.3"/>
-                    <path d="M60 10 L75 40 L110 45 L85 70 L90 105 L60 90 L30 105 L35 70 L10 45 L45 40 Z" fill="#F59E0B" stroke="#FFF" stroke-width="3"/>
-                </svg>
-            </div>
-            <h2 style="color: #F59E0B; margin: 15px 0 10px;">Achievement Unlocked!</h2>
-            <h3 class="achievement-name" style="color: var(--primary-color); font-size: 24px; margin: 10px 0;">Achievement Name</h3>
-            <p class="achievement-desc" style="color: var(--text-secondary); margin-bottom: 20px;">Achievement description</p>
-            <div class="achievement-points" style="font-size: 22px; color: #F59E0B; font-weight: 700; margin-bottom: 20px;">+0 Points</div>
-            <button class="btn-close-achievement" onclick="closeAchievementModal()">Awesome!</button>
-        </div>
-    </div>
-
-    <!-- Achievements Summary Modal -->
-    <div class="achievement-modal" id="achievementsSummaryModal">
-        <div class="achievement-content" style="max-width: 600px; max-height: 80vh; overflow-y: auto;">
-            <h2 style="color: var(--primary-color); margin-bottom: 20px;">Your Achievements</h2>
-            <div id="achievementsList" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; margin-bottom: 20px;"></div>
-            <button class="btn-close-achievement" onclick="closeAchievementsSummary()">Close</button>
-        </div>
-    </div>
-
     <script src="config.js"></script>
     <script src="lesson-completion.js"></script>
     <script src="animations.js"></script>
     <script>
-        // ============ GAMIFICATION SYSTEM ============
-
-        // Gamification State
-        const gamificationState = {
-            points: {
-                total: 0,
-                screenPoints: [],
-                checkpoint1: 0,
-                checkpoint2: 0,
-                quiz: 0,
-                bonuses: []
-            },
-            xp: {
-                current: 0,
-                level: 1,
-                levelThresholds: [0, 300, 700, 1200, 2000]
-            },
-            achievements: [
-                { id: 'emergency_ready', name: 'Emergency Ready', description: 'Completed the lesson', earned: false, earnedDate: null, points: 0 },
-                { id: 'quick_learner', name: 'Quick Learner', description: 'Finished in under 10 minutes', earned: false, earnedDate: null, points: 75 },
-                { id: 'checkpoint_champion', name: 'Checkpoint Champion', description: 'Both checkpoints correct on first try', earned: false, earnedDate: null, points: 100 },
-                { id: 'priority_master', name: 'Priority Master', description: 'Quiz perfect score on first attempt', earned: false, earnedDate: null, points: 100 },
-                { id: 'action_taker', name: 'Action Taker', description: 'Complete all checklist items', earned: false, earnedDate: null, points: 100 },
-                { id: 'triple_crown', name: 'Triple Crown', description: 'All checkpoints + quiz perfect first try', earned: false, earnedDate: null, points: 200 },
-                { id: 'savings_strategist', name: 'Savings Strategist', description: 'Score 1,000+ total points', earned: false, earnedDate: null, points: 0 },
-                { id: 'perfect_student', name: 'Perfect Student', description: 'Max score (1,400+ points)', earned: false, earnedDate: null, points: 0 },
-                { id: 'knowledge_seeker', name: 'Knowledge Seeker', description: 'Read all 8 screens', earned: false, earnedDate: null, points: 50 },
-                { id: 'fast_finisher', name: 'Fast Finisher', description: 'Complete under 5 minutes', earned: false, earnedDate: null, points: 100 },
-                { id: 'persistent_learner', name: 'Persistent Learner', description: 'Complete after multiple quiz attempts', earned: false, earnedDate: null, points: 50 },
-                { id: 'reflection_master', name: 'Reflection Master', description: 'Complete reflection prompt', earned: false, earnedDate: null, points: 25 }
-            ],
-            progress: {
-                screensViewed: [],
-                checkpointsCorrect: [],
-                quizAttempts: 0,
-                checklistComplete: false,
-                startTime: null,
-                endTime: null
-            },
-            unlocks: {
-                screens: [true, false, false, false, false, false, false, false],
-                bonusContent: false
-            }
-        };
-
-        // Initialize Gamification
-        function initGamification() {
-            loadGamificationState();
-            gamificationState.progress.startTime = gamificationState.progress.startTime || Date.now();
-            updateAllDisplays();
-            saveGamificationState();
-        }
-
-        // Save State to LocalStorage
-        function saveGamificationState() {
-            const userId = localStorage.getItem('userId');
-            if (!userId || userId === 'null' || userId === 'undefined') return;
-            const storageKey = `gamification_pillar4_lesson2_${userId}`;
-            localStorage.setItem(storageKey, JSON.stringify(gamificationState));
-        }
-
-        // Load State from LocalStorage
-        function loadGamificationState() {
-            const userId = localStorage.getItem('userId');
-            if (!userId || userId === 'null' || userId === 'undefined') return;
-            const storageKey = `gamification_pillar4_lesson2_${userId}`;
-            const saved = localStorage.getItem(storageKey);
-            if (saved) {
-                try {
-                    const loaded = JSON.parse(saved);
-                    Object.assign(gamificationState, loaded);
-                } catch (e) {
-                    console.error('Failed to load gamification state:', e);
-                }
-            }
-        }
-
-        // Award Points
-        function awardPoints(amount, reason, showNotification = true) {
-            gamificationState.points.total += amount;
-            gamificationState.xp.current += amount;
-
-            if (showNotification) {
-                showPointNotification(amount, reason);
-            }
-
-            checkLevelUp();
-            updatePointsDisplay();
-            updateXPBar();
-            saveGamificationState();
-
-            if (amount >= 100) {
-                triggerConfetti();
-            }
-
-            setTimeout(checkAchievements, 100);
-        }
-
-        // Update Displays
-        function updateAllDisplays() {
-            updatePointsDisplay();
-            updateXPBar();
-            updateAchievementsDisplay();
-        }
-
-        function updatePointsDisplay() {
-            document.getElementById('pointsValue').textContent = gamificationState.points.total;
-        }
-
-        function updateXPBar() {
-            const { current, level, levelThresholds } = gamificationState.xp;
-            const currentThreshold = levelThresholds[level - 1] || 0;
-            const nextThreshold = levelThresholds[level] || levelThresholds[levelThresholds.length - 1];
-            const progress = ((current - currentThreshold) / (nextThreshold - currentThreshold)) * 100;
-
-            document.getElementById('xpBarFill').style.width = Math.min(progress, 100) + '%';
-            document.getElementById('xpText').textContent = `${current} / ${nextThreshold} XP`;
-            document.getElementById('levelBadge').textContent = `Lvl ${level}`;
-        }
-
-        function updateAchievementsDisplay() {
-            const earned = gamificationState.achievements.filter(a => a.earned).length;
-            const total = gamificationState.achievements.length;
-            document.getElementById('achievementCount').textContent = `${earned}/${total}`;
-        }
-
-        // Level System
-        function calculateLevel(xp) {
-            const thresholds = gamificationState.xp.levelThresholds;
-            for (let i = thresholds.length - 1; i >= 0; i--) {
-                if (xp >= thresholds[i]) return i + 1;
-            }
-            return 1;
-        }
-
-        function checkLevelUp() {
-            const currentLevel = gamificationState.xp.level;
-            const newLevel = calculateLevel(gamificationState.xp.current);
-
-            if (newLevel > currentLevel) {
-                gamificationState.xp.level = newLevel;
-                showLevelUpAnimation(newLevel);
-            }
-        }
-
-        function showLevelUpAnimation(level) {
-            showPointNotification(0, `Level ${level} Unlocked!`);
-            triggerConfetti();
-        }
-
-        // Point Notification
-        function showPointNotification(amount, reason) {
-            const notification = document.createElement('div');
-            notification.className = 'point-notification';
-            notification.innerHTML = `
-                <div class="point-amount">${amount > 0 ? '+' + amount : ''}</div>
-                <div class="point-reason">${reason}</div>
-            `;
-
-            document.body.appendChild(notification);
-
-            setTimeout(() => notification.classList.add('show'), 10);
-            setTimeout(() => {
-                notification.remove();
-            }, 2100);
-        }
-
-        // Confetti Effect
-        function triggerConfetti() {
-            for (let i = 0; i < 50; i++) {
-                const confetti = document.createElement('div');
-                confetti.className = 'confetti-particle';
-                confetti.style.left = Math.random() * 100 + '%';
-                confetti.style.animationDelay = Math.random() * 0.5 + 's';
-                const colors = ['#3B82F6', '#10B981', '#F59E0B'];
-                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-                document.body.appendChild(confetti);
-
-                setTimeout(() => confetti.remove(), 3000);
-            }
-        }
-
-        // Achievement System
-        function checkAchievements() {
-            const checks = [
-                {
-                    id: 'emergency_ready',
-                    condition: () => quizPassed && gamificationState.progress.endTime
-                },
-                {
-                    id: 'quick_learner',
-                    condition: () => getSessionDuration() < 600000 && quizPassed
-                },
-                {
-                    id: 'checkpoint_champion',
-                    condition: () => gamificationState.progress.checkpointsCorrect.length === 2
-                },
-                {
-                    id: 'priority_master',
-                    condition: () => gamificationState.progress.quizAttempts === 1 && quizPassed
-                },
-                {
-                    id: 'action_taker',
-                    condition: () => gamificationState.progress.checklistComplete
-                },
-                {
-                    id: 'triple_crown',
-                    condition: () => gamificationState.progress.checkpointsCorrect.length === 2 &&
-                                    gamificationState.progress.quizAttempts === 1 && quizPassed
-                },
-                {
-                    id: 'savings_strategist',
-                    condition: () => gamificationState.points.total >= 1000
-                },
-                {
-                    id: 'perfect_student',
-                    condition: () => gamificationState.points.total >= 1400
-                },
-                {
-                    id: 'knowledge_seeker',
-                    condition: () => gamificationState.progress.screensViewed.length === 8
-                },
-                {
-                    id: 'fast_finisher',
-                    condition: () => getSessionDuration() < 300000 && quizPassed
-                },
-                {
-                    id: 'persistent_learner',
-                    condition: () => gamificationState.progress.quizAttempts > 1 && quizPassed
-                },
-                {
-                    id: 'reflection_master',
-                    condition: () => gamificationState.progress.screensViewed.includes(7)
-                }
-            ];
-
-            checks.forEach(check => {
-                const achievement = gamificationState.achievements.find(a => a.id === check.id);
-                if (achievement && !achievement.earned && check.condition()) {
-                    unlockAchievement(achievement);
-                }
-            });
-        }
-
-        function unlockAchievement(achievement) {
-            achievement.earned = true;
-            achievement.earnedDate = Date.now();
-
-            showAchievementModal(achievement);
-            if (achievement.points > 0) {
-                awardPoints(achievement.points, achievement.name, false);
-            }
-            updateAchievementsDisplay();
-            saveGamificationState();
-        }
-
-        function showAchievementModal(achievement) {
-            const modal = document.getElementById('achievementModal');
-            modal.querySelector('.achievement-name').textContent = achievement.name;
-            modal.querySelector('.achievement-desc').textContent = achievement.description;
-            modal.querySelector('.achievement-points').textContent = achievement.points > 0 ? `+${achievement.points} Points` : 'Achievement Completed!';
-
-            modal.classList.add('show');
-            triggerConfetti();
-        }
-
-        function closeAchievementModal() {
-            document.getElementById('achievementModal').classList.remove('show');
-        }
-
-        function showAchievementsSummary() {
-            const modal = document.getElementById('achievementsSummaryModal');
-            const list = document.getElementById('achievementsList');
-
-            list.innerHTML = gamificationState.achievements.map(a => `
-                <div style="background: ${a.earned ? '#d1fae5' : '#f3f4f6'}; padding: 15px; border-radius: 8px; border: 2px solid ${a.earned ? '#10b981' : '#e5e7eb'};">
-                    <div style="font-weight: 700; color: ${a.earned ? '#10b981' : '#6b7280'}; margin-bottom: 5px;">${a.name}</div>
-                    <div style="font-size: 12px; color: #6b7280;">${a.description}</div>
-                    ${a.earned ? `<div style="font-size: 11px; color: #10b981; margin-top: 5px;">✓ Unlocked</div>` : ''}
-                </div>
-            `).join('');
-
-            modal.classList.add('show');
-        }
-
-        function closeAchievementsSummary() {
-            document.getElementById('achievementsSummaryModal').classList.remove('show');
-        }
-
-        // Helper Functions
-        function getSessionDuration() {
-            return Date.now() - gamificationState.progress.startTime;
-        }
-
-        // ============ END GAMIFICATION SYSTEM ============
-
         async function updateNav() {
             const authButtons = document.getElementById('authButtons');
             const cachedAuth = localStorage.getItem('authState');
@@ -1099,18 +501,12 @@
                 alert('Please answer all questions before submitting.');
                 return;
             }
-
-            // Gamification: Track quiz attempt
-            gamificationState.progress.quizAttempts++;
-
             let correct = 0;
             quizData.forEach((q, index) => {
                 if (userAnswers[index] === q.correct) correct++;
             });
             const percentage = Math.round((correct / quizData.length) * 100);
             const passed = percentage === 100;
-            const isFirstAttempt = gamificationState.progress.quizAttempts === 1;
-
             document.querySelectorAll('.question-card').forEach((card, qIndex) => {
                 const options = card.querySelectorAll('.answer-option');
                 options.forEach((opt, oIndex) => {
@@ -1119,22 +515,13 @@
                     else if (oIndex === userAnswers[qIndex] && oIndex !== quizData[qIndex].correct) opt.classList.add('incorrect');
                 });
             });
-
             const resultDiv = document.getElementById('quizResult');
             if (passed) {
                 quizPassed = true;
                 const userId = localStorage.getItem('userId');
                 localStorage.setItem(`pillar4_lesson2_quiz_passed_${userId}`, 'true');
                 document.getElementById('finishBtn').disabled = false;
-
-                // Gamification: Award points
-                const basePoints = isFirstAttempt ? 300 : 150;
-                const bonusPoints = isFirstAttempt ? 100 : 0;
-                const totalPoints = basePoints + bonusPoints;
-                awardPoints(totalPoints, isFirstAttempt ? 'Quiz Perfect - First Try!' : 'Quiz Passed!');
-                gamificationState.points.quiz = totalPoints;
-
-                resultDiv.innerHTML = `<div class="quiz-result pass"><div style=" font-size: 48px;"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="4" cy="4" r="1" fill="#F59E0B"/><circle cx="16" cy="4" r="1" fill="#EF4444"/><circle cx="4" cy="16" r="1" fill="#3B82F6"/><circle cx="16" cy="16" r="1" fill="#10B981"/><path d="M10 6 L12 14 L8 14 Z" fill="#F59E0B"/><rect x="8" y="14" width="4" height="2" fill="#EF4444"/></svg></div><div style=" font-size: 24px; font-weight: 700; color: #10b981;">Quiz Passed! +${totalPoints} points</div><p>Great job! You can now finish the lesson.</p></div>`;
+                resultDiv.innerHTML = `<div class="quiz-result pass"><div style=" font-size: 48px;"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="4" cy="4" r="1" fill="#F59E0B"/><circle cx="16" cy="4" r="1" fill="#EF4444"/><circle cx="4" cy="16" r="1" fill="#3B82F6"/><circle cx="16" cy="16" r="1" fill="#10B981"/><path d="M10 6 L12 14 L8 14 Z" fill="#F59E0B"/><rect x="8" y="14" width="4" height="2" fill="#EF4444"/></svg></div><div style=" font-size: 24px; font-weight: 700; color: #10b981;">Quiz Passed!</div><p>Great job! You can now finish the lesson.</p></div>`;
             } else {
                 resultDiv.innerHTML = `<div class="quiz-result fail"><div style=" font-size: 48px;"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="5" width="4" height="12" fill="#3B82F6"/><rect x="8" y="5" width="4" height="12" fill="#10B981"/><rect x="13" y="5" width="4" height="12" fill="#F59E0B"/></svg></div><div style=" font-size: 24px; font-weight: 700; color: #dc2626;">Not quite there yet</div><p>You need 100% to pass. Review and try again!</p><button class="btn-retry" onclick="retryQuiz()">Retry Quiz</button></div>`;
             }
@@ -1151,32 +538,6 @@
                 alert('Please complete the quiz first!');
                 return;
             }
-
-            // Gamification: Mark end time and check final achievements
-            gamificationState.progress.endTime = Date.now();
-            const duration = getSessionDuration();
-
-            // Award speed bonuses
-            if (duration < 300000 && !gamificationState.points.bonuses.includes('fast_finisher')) {
-                gamificationState.points.bonuses.push('fast_finisher');
-                // Fast finisher achievement will be triggered by checkAchievements
-            }
-            if (duration < 600000 && !gamificationState.points.bonuses.includes('quick_learner')) {
-                gamificationState.points.bonuses.push('quick_learner');
-                // Quick learner achievement will be triggered by checkAchievements
-            }
-
-            // Award perfection bonus
-            if (gamificationState.progress.checkpointsCorrect.length === 2 &&
-                gamificationState.progress.quizAttempts === 1 &&
-                !gamificationState.points.bonuses.includes('perfection')) {
-                gamificationState.points.bonuses.push('perfection');
-                awardPoints(200, 'Perfection Bonus!');
-            }
-
-            checkAchievements();
-            saveGamificationState();
-
             const success = await completeLesson('pillar4_lesson2', 4, 2);
             if (success) window.location.href = 'pillar4-lessons.html';
         }
@@ -1188,18 +549,6 @@
             if (targetScreen) {
                 targetScreen.classList.add('active');
                 currentScreen = screenNumber;
-
-                // Gamification: Award points if first time viewing
-                if (!gamificationState.progress.screensViewed.includes(screenNumber)) {
-                    gamificationState.progress.screensViewed.push(screenNumber);
-                    awardPoints(50, `Screen ${screenNumber} Completed`);
-
-                    // Unlock next screen
-                    if (screenNumber < 8) {
-                        gamificationState.unlocks.screens[screenNumber] = true;
-                    }
-                }
-
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             }
         }
@@ -1211,8 +560,6 @@
             if (checkpoint1Answered) return;
             checkpoint1Answered = true;
             const correct = 1;
-            const isCorrect = selected === correct;
-
             document.querySelectorAll('[name="checkpoint1"]').forEach((radio, index) => {
                 const optionDiv = radio.parentElement;
                 optionDiv.style.pointerEvents = 'none';
@@ -1220,20 +567,10 @@
                 else if (index === selected) optionDiv.classList.add('incorrect');
                 if (index === selected) radio.checked = true;
             });
-
-            // Gamification: Award points
-            const points = isCorrect ? 150 : 25;
-            awardPoints(points, isCorrect ? 'Checkpoint 1 - Perfect!' : 'Checkpoint 1 Completed');
-            gamificationState.points.checkpoint1 = points;
-
-            if (isCorrect) {
-                gamificationState.progress.checkpointsCorrect.push(1);
-            }
-
             const feedback = document.getElementById('checkpoint1-feedback');
-            feedback.querySelector('.checkpoint-feedback-title').textContent = isCorrect ? `Correct! +${points} points` : `Not quite! +${points} points`;
+            feedback.querySelector('.checkpoint-feedback-title').textContent = selected === correct ? 'Correct!' : 'Not quite!';
             feedback.querySelector('.checkpoint-explanation').textContent = 'Your starter emergency fund ($500-$1,000) should come FIRST. This protects you from having to use debt when unexpected expenses happen, which would derail other goals like investing.';
-            feedback.classList.add('show', isCorrect ? 'correct' : 'incorrect');
+            feedback.classList.add('show', selected === correct ? 'correct' : 'incorrect');
             document.getElementById('checkpoint1-continue').classList.add('show');
         }
 
@@ -1242,8 +579,6 @@
             if (checkpoint2Answered) return;
             checkpoint2Answered = true;
             const correct = 1;
-            const isCorrect = selected === correct;
-
             document.querySelectorAll('[name="checkpoint2"]').forEach((radio, index) => {
                 const optionDiv = radio.parentElement;
                 optionDiv.style.pointerEvents = 'none';
@@ -1251,41 +586,21 @@
                 else if (index === selected) optionDiv.classList.add('incorrect');
                 if (index === selected) radio.checked = true;
             });
-
-            // Gamification: Award points
-            const points = isCorrect ? 150 : 25;
-            awardPoints(points, isCorrect ? 'Checkpoint 2 - Perfect!' : 'Checkpoint 2 Completed');
-            gamificationState.points.checkpoint2 = points;
-
-            if (isCorrect) {
-                gamificationState.progress.checkpointsCorrect.push(2);
-            }
-
             const feedback = document.getElementById('checkpoint2-feedback');
-            feedback.querySelector('.checkpoint-feedback-title').textContent = isCorrect ? `Excellent! +${points} points` : `Not quite! +${points} points`;
+            feedback.querySelector('.checkpoint-feedback-title').textContent = selected === correct ? 'Excellent!' : 'Not quite!';
             feedback.querySelector('.checkpoint-explanation').textContent = 'With a starter emergency fund in place, your next priority is paying off high-interest debt (20% APR). This debt costs you more than you can earn investing, so eliminating it comes before building a full emergency fund.';
-            feedback.classList.add('show', isCorrect ? 'correct' : 'incorrect');
+            feedback.classList.add('show', selected === correct ? 'correct' : 'incorrect');
             document.getElementById('checkpoint2-continue').classList.add('show');
         }
 
         function toggleChecklistItem(item) {
             item.classList.toggle('checked');
             const checkbox = item.querySelector('.checklist-checkbox');
-            checkbox.innerHTML = item.classList.contains('checked') ? '<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 8 L6 12 L14 4" stroke="currentColor" stroke-width="2" fill="none"/></svg>' : '';
-
-            // Gamification: Check if all items are checked
-            const allItems = document.querySelectorAll('.checklist-item');
-            const checkedItems = document.querySelectorAll('.checklist-item.checked');
-
-            if (allItems.length === checkedItems.length && !gamificationState.progress.checklistComplete) {
-                gamificationState.progress.checklistComplete = true;
-                awardPoints(100, 'All Checklist Items Completed!');
-            }
+            checkbox.textContent = item.classList.contains('checked') ? '<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 8 L6 12 L14 4" stroke="currentColor" stroke-width="2" fill="none"/></svg>' : '';
         }
 
         updateNav();
         initQuiz();
-        initGamification();
         showScreen(1);
     </script>
 </body>
