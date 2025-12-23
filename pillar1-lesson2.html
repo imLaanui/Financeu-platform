@@ -1457,14 +1457,6 @@
                         </button>
                     ` : ''}
 
-                    ${isLastQuestion && !quizPassed ? `
-                        <div style="display: flex; justify-content: center; margin-top: 32px;">
-                            <button class="quiz-submit" onclick="retryQuiz()" style="background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%); max-width: 400px; display: block;">
-                                🔄 Try Again
-                            </button>
-                        </div>
-                    ` : ''}
-
                     <div class="quiz-nav" style="${currentQuizQuestion === 0 ? 'justify-content: center;' : ''}">
                         ${currentQuizQuestion > 0 ? `
                             <button class="quiz-nav-btn" onclick="previousResult()">
