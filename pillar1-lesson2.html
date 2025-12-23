@@ -1327,9 +1327,11 @@
                     <div class="quiz-progress">${currentQuizQuestion + 1} / ${quizQuestions.length}</div>
 
                     ${isLastQuestion && allAnswered && !quizPassed ? `
-                        <button class="quiz-submit" onclick="submitQuiz()" style="display: block; width: 100%; margin: 32px 0 0 0;">
-                            Submit Quiz
-                        </button>
+                        <div style="display: flex; justify-content: center; margin-top: 32px;">
+                            <button class="quiz-submit" onclick="submitQuiz()" style="max-width: 400px;">
+                                Submit Quiz
+                            </button>
+                        </div>
                     ` : ''}
 
                     ${isLastQuestion && quizPassed ? `
@@ -1408,11 +1410,15 @@
                 currentQuizQuestion = 0;
                 showQuizResults();
                 resultDiv.innerHTML = `
-                    <div class="quiz-result" style="background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%); border-color: #ef4444;">
+                    <div class="quiz-result" style="background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%); border-color: #ef4444; margin-top: 24px;">
                         <div class="result-icon">📚</div>
                         <div class="result-title">Not Quite There</div>
                         <div class="result-text">You got ${correct} out of ${quizQuestions.length}. Review the lesson and try again!</div>
-                        <button class="quiz-submit" onclick="retryQuiz()" style="margin-top: 15px; background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);">Try Again</button>
+                        <div style="display: flex; justify-content: center; margin-top: 20px;">
+                            <button class="quiz-submit" onclick="retryQuiz()" style="background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%); max-width: 300px; display: block;">
+                                🔄 Try Again
+                            </button>
+                        </div>
                     </div>
                 `;
             }
@@ -1453,7 +1459,7 @@
 
                     ${isLastQuestion && !quizPassed ? `
                         <div style="display: flex; justify-content: center; margin-top: 32px;">
-                            <button class="quiz-submit" onclick="retryQuiz()" style="background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%); max-width: 300px;">
+                            <button class="quiz-submit" onclick="retryQuiz()" style="background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%); max-width: 400px; display: block;">
                                 🔄 Try Again
                             </button>
                         </div>
