@@ -1247,12 +1247,18 @@
 
         function initQuiz() {
             const userId = localStorage.getItem('userId');
+            console.log('initQuiz - userId:', userId);
+
             if (!userId || userId === 'null' || userId === 'undefined') {
+                console.log('No valid userId, rendering quiz anyway');
                 document.getElementById('finishBtn').disabled = true;
+                renderCurrentQuestion();
                 return;
             }
 
             const quizPassedStatus = localStorage.getItem(`lesson2_quiz_passed_${userId}`);
+            console.log('Quiz passed status:', quizPassedStatus);
+
             if (quizPassedStatus === 'true') {
                 quizPassed = true;
                 document.getElementById('finishBtn').disabled = false;
@@ -1267,7 +1273,10 @@
 
         function renderCurrentQuestion() {
             const container = document.getElementById('quizContainer');
+            console.log('renderCurrentQuestion - container:', container);
+
             const q = quizQuestions[currentQuizQuestion];
+            console.log('Current question:', currentQuizQuestion, q);
 
             // Save scroll position
             const scrollY = window.scrollY;
@@ -1303,6 +1312,8 @@
 
             // Restore scroll position
             window.scrollTo(0, scrollY);
+
+            console.log('Quiz HTML rendered, container children:', container.children.length);
 
             // Show submit button only on last question if all answered
             const submitBtn = document.getElementById('submitQuiz');
