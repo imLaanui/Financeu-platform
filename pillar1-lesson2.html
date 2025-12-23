@@ -555,19 +555,19 @@
 
         .quiz-submit {
             width: 100%;
-            max-width: 400px;
-            padding: 18px;
+            max-width: 500px;
+            padding: 20px;
             background: linear-gradient(135deg, #3B82F6 0%, #8B5CF6 100%);
             color: white;
             border: none;
-            border-radius: 50px;
+            border-radius: 16px;
             font-size: 18px;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
-            margin: 32px auto 0 auto;
-            display: block;
-            box-shadow: 0 4px 20px rgba(59, 130, 246, 0.3);
+            margin: 32px auto;
+            display: none;
+            box-shadow: 0 8px 30px rgba(59, 130, 246, 0.4);
         }
 
         .quiz-submit:hover {
@@ -964,7 +964,7 @@
             </div>
             <div class="visual-side">
                 <div class="quiz-container" id="quizContainer"></div>
-                <button class="quiz-submit" id="submitQuiz" onclick="submitQuiz()" disabled>Submit Quiz</button>
+                <button class="quiz-submit" id="submitQuiz" onclick="submitQuiz()">Submit Quiz</button>
                 <div id="quizResult"></div>
                 <button class="finish-btn" id="finishBtn" onclick="finishLesson()" disabled style="display: none; margin-top: 20px;">Complete Lesson →</button>
             </div>
@@ -1165,6 +1165,9 @@
             const container = document.getElementById('quizContainer');
             const q = quizQuestions[currentQuizQuestion];
 
+            // Save scroll position
+            const scrollY = window.scrollY;
+
             container.innerHTML = `
                 <div class="quiz-card">
                     <div class="quiz-number">Question ${currentQuizQuestion + 1} of ${quizQuestions.length}</div>
@@ -1189,10 +1192,14 @@
                 </div>
             `;
 
+            // Restore scroll position
+            window.scrollTo(0, scrollY);
+
             // Show submit button only on last question if all answered
             const submitBtn = document.getElementById('submitQuiz');
             if (currentQuizQuestion === quizQuestions.length - 1 && !userAnswers.includes(null)) {
                 submitBtn.style.display = 'block';
+                submitBtn.disabled = false;
             } else {
                 submitBtn.style.display = 'none';
             }
