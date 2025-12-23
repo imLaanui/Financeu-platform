@@ -40,7 +40,8 @@
         .lesson-container {
             max-width: 100%;
             margin: 0;
-            padding: 40px 60px;
+            padding: 40px 40px;
+            background: #f8fafc;
         }
 
         @media (max-width: 768px) {
@@ -51,11 +52,20 @@
         .lesson-header {
             text-align: center;
             margin-bottom: 40px;
+            margin-left: -40px;
+            margin-right: -40px;
             padding: 30px;
             background: linear-gradient(135deg, #0A1A2F 0%, #1a3a5c 100%);
-            border-radius: 16px;
+            border-radius: 0;
             position: relative;
             overflow: hidden;
+        }
+
+        @media (max-width: 768px) {
+            .lesson-header {
+                margin-left: -20px;
+                margin-right: -20px;
+            }
         }
         .lesson-header::before {
             content: '';
@@ -93,6 +103,9 @@
             padding: 30px;
             border-radius: 12px;
             margin-bottom: 25px;
+            margin-left: auto;
+            margin-right: auto;
+            max-width: 1000px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
             position: relative;
             border-left: 4px solid transparent;
@@ -247,7 +260,7 @@
         }
         .btn-finish {
             display: block;
-            width: 100%;
+            width: calc(100% - 60px);
             max-width: 400px;
             margin: 30px auto;
             padding: 18px;
@@ -265,9 +278,12 @@
         .btn-finish:hover {
             background: #2563eb;
         }
+        .back-link-wrapper {
+            max-width: 1000px;
+            margin: 0 auto 20px auto;
+        }
         .back-link {
             display: inline-block;
-            margin-bottom: 20px;
             color: var(--primary-color);
             text-decoration: none;
             font-weight: 600;
@@ -280,7 +296,8 @@
             border: 2px solid var(--primary-color);
             border-radius: 12px;
             padding: 30px;
-            margin: 40px 0 30px 0;
+            margin: 40px auto 30px auto;
+            max-width: 1000px;
         }
         .quiz-header {
             text-align: center;
@@ -430,8 +447,11 @@
             align-items: center;
             gap: 15px;
             margin-top: 30px;
+            margin-left: auto;
+            margin-right: auto;
             padding-top: 20px;
             border-top: 2px solid #e5e7eb;
+            max-width: 1000px;
         }
         .btn-nav {
             padding: 12px 24px;
@@ -473,7 +493,8 @@
             border: 2px solid #7DD3FC;
             border-radius: 12px;
             padding: 30px;
-            margin: 20px 0;
+            margin: 20px auto;
+            max-width: 1000px;
         }
         .checkpoint-header {
             text-align: center;
@@ -786,7 +807,9 @@
 
     <!-- Lesson Content -->
     <div class="lesson-container">
-        <a href="/pillar1-lessons" class="back-link">← Back to Pillar 1 Lessons</a>
+        <div class="back-link-wrapper">
+            <a href="/pillar1-lessons" class="back-link">← Back to Pillar 1 Lessons</a>
+        </div>
 
         <!-- Header -->
         <div class="lesson-header">
