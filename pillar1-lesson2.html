@@ -1263,8 +1263,20 @@
                 quizPassed = true;
                 document.getElementById('finishBtn').disabled = false;
                 document.getElementById('finishBtn').style.display = 'block';
-                document.getElementById('quizContainer').style.display = 'none';
                 document.getElementById('submitQuiz').style.display = 'none';
+
+                // Show quiz passed message with retake option
+                const container = document.getElementById('quizContainer');
+                container.innerHTML = `
+                    <div class="quiz-result">
+                        <div class="result-icon">🎉</div>
+                        <div class="result-title">Quiz Already Completed!</div>
+                        <div class="result-text">You've already passed this quiz with a perfect score. You can complete the lesson or retake the quiz to review.</div>
+                        <button class="quiz-submit" onclick="retakeQuiz()" style="display: block; margin-top: 24px; background: linear-gradient(135deg, #3B82F6 0%, #8B5CF6 100%);">
+                            🔄 Retake Quiz
+                        </button>
+                    </div>
+                `;
                 return;
             }
 
@@ -1443,6 +1455,22 @@
             userAnswers = new Array(quizQuestions.length).fill(null);
             currentQuizQuestion = 0;
             document.getElementById('quizResult').innerHTML = '';
+            renderCurrentQuestion();
+        }
+
+        function retakeQuiz() {
+            // Reset quiz state for review
+            userAnswers = new Array(quizQuestions.length).fill(null);
+            currentQuizQuestion = 0;
+            // Keep quizPassed true since they already passed
+            quizPassed = true;
+
+            // Clear result but keep finish button visible
+            document.getElementById('quizResult').innerHTML = '';
+            document.getElementById('finishBtn').style.display = 'block';
+            document.getElementById('finishBtn').disabled = false;
+            document.getElementById('submitQuiz').style.display = 'none';
+
             renderCurrentQuestion();
         }
 
