@@ -1448,6 +1448,12 @@
                         </button>
                     ` : ''}
 
+                    ${isLastQuestion && !quizPassed ? `
+                        <button class="quiz-submit" onclick="retryQuiz()" style="display: block; width: 100%; margin: 32px 0 0 0; background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);">
+                            🔄 Try Again
+                        </button>
+                    ` : ''}
+
                     <div class="quiz-nav">
                         <button class="quiz-nav-btn" onclick="previousResult()" ${currentQuizQuestion === 0 ? 'disabled' : ''}>
                             ← Previous
