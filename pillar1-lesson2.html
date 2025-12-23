@@ -400,8 +400,8 @@
 
         .quiz-card {
             background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
-            padding: 56px;
-            border-radius: 32px;
+            padding: 40px;
+            border-radius: 24px;
             box-shadow: 0 20px 60px rgba(0,0,0,0.08);
             border: 1px solid rgba(0,0,0,0.05);
             animation: slideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1);
@@ -439,34 +439,34 @@
         }
 
         .quiz-question {
-            font-size: 28px;
-            font-weight: 800;
+            font-size: 22px;
+            font-weight: 700;
             color: #0f172a;
-            margin-bottom: 40px;
-            line-height: 1.3;
-            letter-spacing: -0.02em;
+            margin-bottom: 28px;
+            line-height: 1.4;
+            letter-spacing: -0.01em;
         }
 
         .quiz-options-grid {
             display: flex;
             flex-direction: column;
-            gap: 16px;
-            margin-bottom: 40px;
+            gap: 12px;
+            margin-bottom: 32px;
         }
 
         .quiz-option {
             position: relative;
             background: white;
-            border: 3px solid #e2e8f0;
-            padding: 24px 28px;
-            border-radius: 16px;
+            border: 2px solid #e2e8f0;
+            padding: 18px 22px;
+            border-radius: 12px;
             cursor: pointer;
             transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-            font-size: 17px;
+            font-size: 16px;
             color: #1e293b;
             display: flex;
             align-items: center;
-            gap: 16px;
+            gap: 12px;
             box-shadow: 0 2px 8px rgba(0,0,0,0.04);
         }
 
@@ -645,15 +645,16 @@
 
         @media (max-width: 768px) {
             .quiz-card {
-                padding: 40px 28px;
+                padding: 28px 20px;
             }
 
             .quiz-question {
-                font-size: 24px;
+                font-size: 20px;
             }
 
             .quiz-option {
-                padding: 20px 24px;
+                padding: 16px 18px;
+                font-size: 15px;
             }
         }
 
@@ -1337,10 +1338,12 @@
                         </button>
                     ` : ''}
 
-                    <div class="quiz-nav">
-                        <button class="quiz-nav-btn" onclick="previousQuizQuestion()" ${currentQuizQuestion === 0 ? 'disabled' : ''}>
-                            ← Previous
-                        </button>
+                    <div class="quiz-nav" style="${currentQuizQuestion === 0 ? 'justify-content: center;' : ''}">
+                        ${currentQuizQuestion > 0 ? `
+                            <button class="quiz-nav-btn" onclick="previousQuizQuestion()">
+                                ← Previous
+                            </button>
+                        ` : ''}
                         <button class="quiz-nav-btn" onclick="nextQuizQuestion()" ${currentQuizQuestion === quizQuestions.length - 1 ? 'disabled' : ''}>
                             Next →
                         </button>
@@ -1449,15 +1452,19 @@
                     ` : ''}
 
                     ${isLastQuestion && !quizPassed ? `
-                        <button class="quiz-submit" onclick="retryQuiz()" style="display: block; width: 100%; margin: 32px 0 0 0; background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);">
-                            🔄 Try Again
-                        </button>
+                        <div style="display: flex; justify-content: center; margin-top: 32px;">
+                            <button class="quiz-submit" onclick="retryQuiz()" style="background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%); max-width: 300px;">
+                                🔄 Try Again
+                            </button>
+                        </div>
                     ` : ''}
 
-                    <div class="quiz-nav">
-                        <button class="quiz-nav-btn" onclick="previousResult()" ${currentQuizQuestion === 0 ? 'disabled' : ''}>
-                            ← Previous
-                        </button>
+                    <div class="quiz-nav" style="${currentQuizQuestion === 0 ? 'justify-content: center;' : ''}">
+                        ${currentQuizQuestion > 0 ? `
+                            <button class="quiz-nav-btn" onclick="previousResult()">
+                                ← Previous
+                            </button>
+                        ` : ''}
                         <button class="quiz-nav-btn" onclick="nextResult()" ${currentQuizQuestion === quizQuestions.length - 1 ? 'disabled' : ''}>
                             Next →
                         </button>
