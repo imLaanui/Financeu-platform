@@ -1261,9 +1261,6 @@
 
             if (quizPassedStatus === 'true') {
                 quizPassed = true;
-                document.getElementById('finishBtn').disabled = false;
-                document.getElementById('finishBtn').style.display = 'block';
-                document.getElementById('submitQuiz').style.display = 'none';
 
                 // Show quiz passed message with retake option
                 const container = document.getElementById('quizContainer');
@@ -1271,7 +1268,7 @@
                     <div class="quiz-result">
                         <div class="result-icon">🎉</div>
                         <div class="result-title">Quiz Already Completed!</div>
-                        <div class="result-text">You've already passed this quiz with a perfect score. You can complete the lesson or retake the quiz to review.</div>
+                        <div class="result-text">You've already passed this quiz with a perfect score. Click the button below to review the questions, or navigate to the last question to complete the lesson.</div>
                         <button class="quiz-submit" onclick="retakeQuiz()" style="display: block; margin-top: 24px; background: linear-gradient(135deg, #3B82F6 0%, #8B5CF6 100%);">
                             🔄 Retake Quiz
                         </button>
@@ -1293,6 +1290,9 @@
             // Save scroll position
             const scrollY = window.scrollY;
 
+            const isLastQuestion = currentQuizQuestion === quizQuestions.length - 1;
+            const allAnswered = !userAnswers.includes(null);
+
             container.innerHTML = `
                 <div class="quiz-card">
                     <div class="quiz-number">Question ${currentQuizQuestion + 1} of ${quizQuestions.length}</div>
@@ -1311,6 +1311,19 @@
                         <div class="quiz-progress-fill" style="width: ${((currentQuizQuestion + 1) / quizQuestions.length) * 100}%"></div>
                     </div>
                     <div class="quiz-progress">${currentQuizQuestion + 1} / ${quizQuestions.length}</div>
+
+                    ${isLastQuestion && allAnswered && !quizPassed ? `
+                        <button class="quiz-submit" onclick="submitQuiz()" style="display: block; width: 100%; margin: 32px 0 0 0;">
+                            Submit Quiz
+                        </button>
+                    ` : ''}
+
+                    ${isLastQuestion && quizPassed ? `
+                        <button class="finish-btn" onclick="finishLesson()" style="display: block; width: 100%; margin: 32px 0 0 0;">
+                            Complete Lesson →
+                        </button>
+                    ` : ''}
+
                     <div class="quiz-nav">
                         <button class="quiz-nav-btn" onclick="previousQuizQuestion()" ${currentQuizQuestion === 0 ? 'disabled' : ''}>
                             ← Previous
@@ -1326,15 +1339,6 @@
             window.scrollTo(0, scrollY);
 
             console.log('Quiz HTML rendered, container children:', container.children.length);
-
-            // Show submit button only on last question if all answered
-            const submitBtn = document.getElementById('submitQuiz');
-            if (currentQuizQuestion === quizQuestions.length - 1 && !userAnswers.includes(null)) {
-                submitBtn.style.display = 'block';
-                submitBtn.disabled = false;
-            } else {
-                submitBtn.style.display = 'none';
-            }
         }
 
         function nextQuizQuestion() {
@@ -1367,26 +1371,26 @@
             const passed = correct === quizQuestions.length;
             const resultDiv = document.getElementById('quizResult');
 
-            // Show results on all questions
-            currentQuizQuestion = 0;
-            showQuizResults();
-
             if (passed) {
                 quizPassed = true;
                 const userId = localStorage.getItem('userId');
                 localStorage.setItem(`lesson2_quiz_passed_${userId}`, 'true');
 
+                // Show results starting at last question so they see the Complete Lesson button
+                currentQuizQuestion = quizQuestions.length - 1;
+                showQuizResults();
+
                 resultDiv.innerHTML = `
                     <div class="quiz-result">
                         <div class="result-icon">🎉</div>
                         <div class="result-title">Perfect Score!</div>
-                        <div class="result-text">You got all ${correct} out of ${quizQuestions.length} correct. You're ready to manage your checking account!</div>
+                        <div class="result-text">You got all ${correct} out of ${quizQuestions.length} correct. Click the Complete Lesson button below to finish!</div>
                     </div>
                 `;
-
-                document.getElementById('finishBtn').disabled = false;
-                document.getElementById('finishBtn').style.display = 'block';
             } else {
+                // Show results starting at first question for review
+                currentQuizQuestion = 0;
+                showQuizResults();
                 resultDiv.innerHTML = `
                     <div class="quiz-result" style="background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%); border-color: #ef4444;">
                         <div class="result-icon">📚</div>
@@ -1396,13 +1400,12 @@
                     </div>
                 `;
             }
-
-            document.getElementById('submitQuiz').style.display = 'none';
         }
 
         function showQuizResults() {
             const container = document.getElementById('quizContainer');
             const q = quizQuestions[currentQuizQuestion];
+            const isLastQuestion = currentQuizQuestion === quizQuestions.length - 1;
 
             container.innerHTML = `
                 <div class="quiz-card">
@@ -1425,6 +1428,13 @@
                         <div class="quiz-progress-fill" style="width: ${((currentQuizQuestion + 1) / quizQuestions.length) * 100}%"></div>
                     </div>
                     <div class="quiz-progress">${currentQuizQuestion + 1} / ${quizQuestions.length} • Review Your Answers</div>
+
+                    ${isLastQuestion && quizPassed ? `
+                        <button class="finish-btn" onclick="finishLesson()" style="display: block; width: 100%; margin: 32px 0 0 0;">
+                            Complete Lesson →
+                        </button>
+                    ` : ''}
+
                     <div class="quiz-nav">
                         <button class="quiz-nav-btn" onclick="previousResult()" ${currentQuizQuestion === 0 ? 'disabled' : ''}>
                             ← Previous
@@ -1465,11 +1475,8 @@
             // Keep quizPassed true since they already passed
             quizPassed = true;
 
-            // Clear result but keep finish button visible
+            // Clear result
             document.getElementById('quizResult').innerHTML = '';
-            document.getElementById('finishBtn').style.display = 'block';
-            document.getElementById('finishBtn').disabled = false;
-            document.getElementById('submitQuiz').style.display = 'none';
 
             renderCurrentQuestion();
         }
