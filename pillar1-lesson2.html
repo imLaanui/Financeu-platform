@@ -1262,15 +1262,18 @@
             if (quizPassedStatus === 'true') {
                 quizPassed = true;
 
-                // Show quiz passed message with retake option
+                // Show quiz passed message with retake and complete options
                 const container = document.getElementById('quizContainer');
                 container.innerHTML = `
-                    <div class="quiz-result">
+                    <div class="quiz-result" style="margin-top: 0;">
                         <div class="result-icon">🎉</div>
                         <div class="result-title">Quiz Already Completed!</div>
-                        <div class="result-text">You've already passed this quiz with a perfect score. Click the button below to review the questions, or navigate to the last question to complete the lesson.</div>
+                        <div class="result-text">You've already passed this quiz with a perfect score. You can review the questions or complete the lesson.</div>
                         <button class="quiz-submit" onclick="retakeQuiz()" style="display: block; margin-top: 24px; background: linear-gradient(135deg, #3B82F6 0%, #8B5CF6 100%);">
                             🔄 Retake Quiz
+                        </button>
+                        <button class="finish-btn" onclick="finishLesson()" style="display: block; width: 100%; margin-top: 16px;">
+                            Complete Lesson →
                         </button>
                     </div>
                 `;
