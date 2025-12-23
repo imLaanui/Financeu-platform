@@ -1496,16 +1496,17 @@
         function retryQuiz() {
             userAnswers = new Array(quizQuestions.length).fill(null);
             currentQuizQuestion = 0;
+            quizPassed = false;
             document.getElementById('quizResult').innerHTML = '';
             renderCurrentQuestion();
         }
 
         function retakeQuiz() {
-            // Reset quiz state for review
+            // Reset quiz state for retaking
             userAnswers = new Array(quizQuestions.length).fill(null);
             currentQuizQuestion = 0;
-            // Keep quizPassed true since they already passed
-            quizPassed = true;
+            // Reset quizPassed so they can submit again
+            quizPassed = false;
 
             // Clear result
             document.getElementById('quizResult').innerHTML = '';
