@@ -83,18 +83,29 @@
         /* Chapter Sections */
         .chapter {
             min-height: 100vh;
-            display: flex;
+            display: none;
             align-items: flex-start;
             justify-content: center;
             padding: 120px 40px 80px;
-            opacity: 1;
-            transform: translateY(0);
-            transition: opacity 0.8s ease, transform 0.8s ease;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
         }
 
-        .chapter.visible {
-            opacity: 1;
-            transform: translateY(0);
+        .chapter.active {
+            display: flex;
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .chapter-content {
@@ -643,6 +654,46 @@
             }
         }
 
+        /* Fixed Navigation Controls */
+        .nav-controls {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            display: flex;
+            gap: 12px;
+            z-index: 50;
+        }
+
+        .nav-control-btn {
+            width: 56px;
+            height: 56px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 24px;
+            color: white;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+
+        .nav-control-btn:hover:not(:disabled) {
+            background: rgba(59, 130, 246, 0.3);
+            border-color: #3B82F6;
+            transform: scale(1.1);
+            box-shadow: 0 8px 25px rgba(59, 130, 246, 0.4);
+        }
+
+        .nav-control-btn:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+            transform: none;
+        }
+
         /* Smooth Scroll */
         html {
             scroll-behavior: smooth;
@@ -670,21 +721,21 @@
 
         <!-- Progress Dots -->
         <div class="progress-dots">
-            <div class="progress-dot active" data-label="Start" onclick="scrollToChapter(0)"></div>
-            <div class="progress-dot" data-label="The Story" onclick="scrollToChapter(1)"></div>
-            <div class="progress-dot" data-label="How It Works" onclick="scrollToChapter(2)"></div>
-            <div class="progress-dot" data-label="Growth" onclick="scrollToChapter(3)"></div>
-            <div class="progress-dot" data-label="Calculator" onclick="scrollToChapter(4)"></div>
-            <div class="progress-dot" data-label="Using It" onclick="scrollToChapter(5)"></div>
-            <div class="progress-dot" data-label="Quiz" onclick="scrollToChapter(6)"></div>
+            <div class="progress-dot active" data-label="Start" onclick="showChapter(0)"></div>
+            <div class="progress-dot" data-label="The Story" onclick="showChapter(1)"></div>
+            <div class="progress-dot" data-label="How It Works" onclick="showChapter(2)"></div>
+            <div class="progress-dot" data-label="Growth" onclick="showChapter(3)"></div>
+            <div class="progress-dot" data-label="Calculator" onclick="showChapter(4)"></div>
+            <div class="progress-dot" data-label="Using It" onclick="showChapter(5)"></div>
+            <div class="progress-dot" data-label="Quiz" onclick="showChapter(6)"></div>
         </div>
 
         <!-- Chapter 0: Hero -->
-        <div class="chapter hero-chapter visible" id="chapter-0">
+        <div class="chapter hero-chapter active" id="chapter-0">
             <div class="chapter-content">
                 <h1 class="hero-title">Your Money's Journey</h1>
                 <p class="hero-subtitle">Discover how savings accounts help your money grow while you sleep. This isn't just a lesson—it's the beginning of your financial story.</p>
-                <button class="start-journey-btn" onclick="scrollToChapter(1)">Begin Your Journey →</button>
+                <button class="start-journey-btn" onclick="showChapter(1)">Begin Your Journey →</button>
             </div>
         </div>
 
@@ -707,9 +758,9 @@
                     <p class="story-text" style="margin-top: 32px; font-style: italic; opacity: 0.9;">Think of it as a garden where you plant money seeds and watch them grow over time.</p>
                 </div>
                 <div class="chapter-nav">
-                    <button class="nav-btn" onclick="scrollToChapter(0)">← Previous</button>
+                    <button class="nav-btn" onclick="showChapter(0)">← Previous</button>
                     <div class="nav-spacer"></div>
-                    <button class="nav-btn" onclick="scrollToChapter(2)">Next →</button>
+                    <button class="nav-btn" onclick="showChapter(2)">Next →</button>
                 </div>
             </div>
         </div>
@@ -738,9 +789,9 @@
                     </ul>
                 </div>
                 <div class="chapter-nav">
-                    <button class="nav-btn" onclick="scrollToChapter(1)">← Previous</button>
+                    <button class="nav-btn" onclick="showChapter(1)">← Previous</button>
                     <div class="nav-spacer"></div>
-                    <button class="nav-btn" onclick="scrollToChapter(3)">Next →</button>
+                    <button class="nav-btn" onclick="showChapter(3)">Next →</button>
                 </div>
             </div>
         </div>
@@ -770,9 +821,9 @@
                     <p class="story-text" style="text-align: center; margin-top: 32px; opacity: 0.8;">The longer you leave your money in savings, the more it grows. Time is your greatest asset.</p>
                 </div>
                 <div class="chapter-nav">
-                    <button class="nav-btn" onclick="scrollToChapter(2)">← Previous</button>
+                    <button class="nav-btn" onclick="showChapter(2)">← Previous</button>
                     <div class="nav-spacer"></div>
-                    <button class="nav-btn" onclick="scrollToChapter(4)">Next →</button>
+                    <button class="nav-btn" onclick="showChapter(4)">Next →</button>
                 </div>
             </div>
         </div>
@@ -820,9 +871,9 @@
                     <p class="story-text" style="text-align: center; margin-top: 32px; opacity: 0.8;">Notice how time makes a huge difference? That's the power of compound interest.</p>
                 </div>
                 <div class="chapter-nav">
-                    <button class="nav-btn" onclick="scrollToChapter(3)">← Previous</button>
+                    <button class="nav-btn" onclick="showChapter(3)">← Previous</button>
                     <div class="nav-spacer"></div>
-                    <button class="nav-btn" onclick="scrollToChapter(5)">Next →</button>
+                    <button class="nav-btn" onclick="showChapter(5)">Next →</button>
                 </div>
             </div>
         </div>
@@ -858,9 +909,9 @@
                     </div>
                 </div>
                 <div class="chapter-nav">
-                    <button class="nav-btn" onclick="scrollToChapter(4)">← Previous</button>
+                    <button class="nav-btn" onclick="showChapter(4)">← Previous</button>
                     <div class="nav-spacer"></div>
-                    <button class="nav-btn" onclick="scrollToChapter(6)">Next →</button>
+                    <button class="nav-btn" onclick="showChapter(6)">Next →</button>
                 </div>
             </div>
         </div>
@@ -883,11 +934,17 @@
                 <button class="finish-btn" id="finishBtn" onclick="finishLesson()" disabled style="display: none;">Complete Journey →</button>
 
                 <div class="chapter-nav">
-                    <button class="nav-btn" onclick="scrollToChapter(5)">← Previous</button>
+                    <button class="nav-btn" onclick="showChapter(5)">← Previous</button>
                     <div class="nav-spacer"></div>
                 </div>
             </div>
         </div>
+    </div>
+
+    <!-- Navigation Controls -->
+    <div class="nav-controls">
+        <button class="nav-control-btn" id="prevBtn" onclick="previousChapter()">←</button>
+        <button class="nav-control-btn" id="nextBtn" onclick="nextChapter()">→</button>
     </div>
 
     <!-- Footer -->
@@ -970,12 +1027,43 @@
         }
 
         // Chapter Navigation
-        function scrollToChapter(index) {
+        let currentChapter = 0;
+        const totalChapters = 7; // 0-6
+
+        function showChapter(index) {
+            if (index < 0 || index >= totalChapters) return;
+
+            // Hide all chapters
+            document.querySelectorAll('.chapter').forEach(chapter => {
+                chapter.classList.remove('active');
+            });
+
+            // Show selected chapter
             const chapter = document.getElementById(`chapter-${index}`);
             if (chapter) {
-                chapter.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                chapter.classList.add('active');
+                currentChapter = index;
                 updateProgressDots(index);
+                updateNavButtons();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
             }
+        }
+
+        function nextChapter() {
+            if (currentChapter < totalChapters - 1) {
+                showChapter(currentChapter + 1);
+            }
+        }
+
+        function previousChapter() {
+            if (currentChapter > 0) {
+                showChapter(currentChapter - 1);
+            }
+        }
+
+        function updateNavButtons() {
+            document.getElementById('prevBtn').disabled = currentChapter === 0;
+            document.getElementById('nextBtn').disabled = currentChapter === totalChapters - 1;
         }
 
         function updateProgressDots(activeIndex) {
@@ -989,27 +1077,13 @@
             });
         }
 
-        // Intersection Observer for chapters
-        const observerOptions = {
-            threshold: 0.5,
-            rootMargin: '-100px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-
-                    // Update progress dots
-                    const chapterId = entry.target.id;
-                    const chapterIndex = parseInt(chapterId.split('-')[1]);
-                    updateProgressDots(chapterIndex);
-                }
-            });
-        }, observerOptions);
-
-        document.querySelectorAll('.chapter').forEach(chapter => {
-            observer.observe(chapter);
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowLeft') {
+                previousChapter();
+            } else if (e.key === 'ArrowRight') {
+                nextChapter();
+            }
         });
 
         // Money Growth Animation
@@ -1241,6 +1315,7 @@
         updateNav();
         initQuiz();
         updateCalculation();
+        updateNavButtons();
     </script>
 </body>
 </html>
