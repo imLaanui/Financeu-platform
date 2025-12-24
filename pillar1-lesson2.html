@@ -395,12 +395,10 @@
         .quiz-container {
             max-width: 800px;
             margin: 0 auto;
-            padding: 40px 20px 120px;
+            padding: 40px 20px;
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
-            min-height: 60vh;
         }
 
         .quiz-card {
@@ -595,11 +593,7 @@
         }
 
         .quiz-submit {
-            position: fixed;
-            bottom: 30px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 90%;
+            width: 100%;
             max-width: 500px;
             padding: 20px;
             background: linear-gradient(135deg, #3B82F6 0%, #8B5CF6 100%);
@@ -612,11 +606,11 @@
             transition: all 0.3s ease;
             display: block;
             box-shadow: 0 8px 30px rgba(59, 130, 246, 0.4);
-            z-index: 1000;
+            margin: 32px auto;
         }
 
         .quiz-submit:hover {
-            transform: translateX(-50%) translateY(-2px);
+            transform: translateY(-2px);
             box-shadow: 0 10px 30px rgba(59, 130, 246, 0.3);
         }
 
@@ -631,8 +625,9 @@
             padding: 40px;
             border-radius: 24px;
             text-align: center;
-            margin: 32px auto 0 auto;
-            max-width: 600px;
+            margin: 0 auto;
+            max-width: 800px;
+            width: 100%;
         }
 
         .result-icon {
@@ -692,11 +687,7 @@
         }
 
         .finish-btn {
-            position: fixed;
-            bottom: 30px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 90%;
+            width: 100%;
             max-width: 500px;
             padding: 20px;
             background: linear-gradient(135deg, #10b981 0%, #059669 100%);
@@ -708,11 +699,12 @@
             cursor: pointer;
             transition: all 0.3s ease;
             box-shadow: 0 8px 25px rgba(16, 185, 129, 0.3);
-            z-index: 1000;
+            margin: 20px auto;
+            display: block;
         }
 
         .finish-btn:hover {
-            transform: translateX(-50%) translateY(-2px);
+            transform: translateY(-2px);
             box-shadow: 0 12px 35px rgba(16, 185, 129, 0.4);
         }
 
