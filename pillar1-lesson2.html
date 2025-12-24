@@ -407,6 +407,7 @@
             animation: slideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1);
             position: relative;
             overflow: hidden;
+            margin-bottom: 24px;
         }
 
         .quiz-card::before {
@@ -424,19 +425,6 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        .quiz-number {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 10px 24px;
-            background: linear-gradient(135deg, #3B82F6 0%, #8B5CF6 100%);
-            color: white;
-            border-radius: 25px;
-            font-size: 14px;
-            font-weight: 700;
-            margin-bottom: 32px;
-            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
-        }
 
         .quiz-question {
             font-size: 22px;
@@ -584,64 +572,6 @@
             justify-content: center;
         }
 
-        .quiz-nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-top: 48px;
-            gap: 20px;
-            padding-top: 32px;
-            border-top: 2px solid #e2e8f0;
-        }
-
-        .quiz-nav-btn {
-            padding: 16px 40px;
-            background: white;
-            border: 2px solid #e2e8f0;
-            border-radius: 16px;
-            color: #475569;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-        }
-
-        .quiz-nav-btn:hover:not(:disabled) {
-            background: #f8fafc;
-            border-color: #3B82F6;
-            color: #3B82F6;
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(59, 130, 246, 0.15);
-        }
-
-        .quiz-nav-btn:disabled {
-            opacity: 0.4;
-            cursor: not-allowed;
-        }
-
-        .quiz-progress {
-            text-align: center;
-            color: #64748b;
-            font-size: 15px;
-            font-weight: 600;
-        }
-
-        .quiz-progress-bar {
-            height: 6px;
-            background: #e2e8f0;
-            border-radius: 10px;
-            margin: 24px 0 12px 0;
-            overflow: hidden;
-        }
-
-        .quiz-progress-fill {
-            height: 100%;
-            background: linear-gradient(90deg, #3B82F6 0%, #8B5CF6 100%);
-            border-radius: 10px;
-            transition: width 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-            box-shadow: 0 0 10px rgba(59, 130, 246, 0.5);
-        }
 
         @media (max-width: 768px) {
             .quiz-card {
@@ -671,7 +601,7 @@
             cursor: pointer;
             transition: all 0.3s ease;
             margin: 32px auto;
-            display: none;
+            display: block;
             box-shadow: 0 8px 30px rgba(59, 130, 246, 0.4);
         }
 
@@ -1254,133 +1184,83 @@
 
         let userAnswers = new Array(quizQuestions.length).fill(null);
         let quizPassed = false;
-        let currentQuizQuestion = 0;
 
         function initQuiz() {
             const userId = localStorage.getItem('userId');
-            console.log('initQuiz - userId:', userId);
-
             if (!userId || userId === 'null' || userId === 'undefined') {
-                console.log('No valid userId, rendering quiz anyway');
                 document.getElementById('finishBtn').disabled = true;
-                renderCurrentQuestion();
                 return;
             }
 
             const quizPassedStatus = localStorage.getItem(`lesson2_quiz_passed_${userId}`);
-            console.log('Quiz passed status:', quizPassedStatus);
-
             if (quizPassedStatus === 'true') {
                 quizPassed = true;
-
-                // Show quiz passed message with retake and complete options
-                const container = document.getElementById('quizContainer');
-                container.innerHTML = `
-                    <div class="quiz-result" style="margin-top: 0;">
-                        <div class="result-icon">🎉</div>
-                        <div class="result-title">Quiz Already Completed!</div>
-                        <div class="result-text">You've already passed this quiz with a perfect score. You can review the questions or complete the lesson.</div>
-                        <button class="quiz-submit" onclick="retakeQuiz()" style="display: block; margin-top: 24px; background: linear-gradient(135deg, #3B82F6 0%, #8B5CF6 100%);">
-                            🔄 Retake Quiz
-                        </button>
-                        <button class="finish-btn" onclick="finishLesson()" style="display: block; width: 100%; margin-top: 16px;">
-                            Complete Lesson →
-                        </button>
-                    </div>
-                `;
+                document.getElementById('finishBtn').disabled = false;
+                document.getElementById('finishBtn').style.display = 'block';
+                document.getElementById('quizContainer').style.display = 'none';
+                document.getElementById('submitQuiz').style.display = 'none';
                 return;
             }
 
-            renderCurrentQuestion();
+            renderQuiz();
         }
 
-        function renderCurrentQuestion() {
+        function renderQuiz() {
             const container = document.getElementById('quizContainer');
-            console.log('renderCurrentQuestion - container:', container);
+            container.innerHTML = '';
 
-            const q = quizQuestions[currentQuizQuestion];
-            console.log('Current question:', currentQuizQuestion, q);
-
-            // Save scroll position
-            const scrollY = window.scrollY;
-
-            const isLastQuestion = currentQuizQuestion === quizQuestions.length - 1;
-            const allAnswered = !userAnswers.includes(null);
-
-            container.innerHTML = `
-                <div class="quiz-card">
-                    <div class="quiz-number">Question ${currentQuizQuestion + 1} of ${quizQuestions.length}</div>
-                    <div class="quiz-question">${q.question}</div>
+            quizQuestions.forEach((q, qIndex) => {
+                const card = document.createElement('div');
+                card.className = 'quiz-card';
+                card.innerHTML = `
+                    <div class="quiz-question">${qIndex + 1}. ${q.question}</div>
                     <div class="quiz-options-grid">
                         ${q.options.map((option, oIndex) => `
-                            <div class="quiz-option ${userAnswers[currentQuizQuestion] === oIndex ? 'selected' : ''}"
-                                 onclick="selectAnswer(${currentQuizQuestion}, ${oIndex})"
-                                 data-q="${currentQuizQuestion}"
-                                 data-o="${oIndex}">
+                            <div class="quiz-option" onclick="selectAnswer(${qIndex}, ${oIndex})" data-q="${qIndex}" data-o="${oIndex}">
                                 ${option}
                             </div>
                         `).join('')}
                     </div>
-                    <div class="quiz-progress-bar">
-                        <div class="quiz-progress-fill" style="width: ${((currentQuizQuestion + 1) / quizQuestions.length) * 100}%"></div>
-                    </div>
-                    <div class="quiz-progress">${currentQuizQuestion + 1} / ${quizQuestions.length}</div>
+                `;
+                container.appendChild(card);
+            });
 
-                    ${isLastQuestion && allAnswered && !quizPassed ? `
-                        <div style="display: flex; justify-content: center; margin-top: 32px;">
-                            <button class="quiz-submit" onclick="submitQuiz()" style="max-width: 400px; display: block;">
-                                Submit Quiz
-                            </button>
-                        </div>
-                    ` : ''}
-
-                    ${isLastQuestion && quizPassed ? `
-                        <button class="finish-btn" onclick="finishLesson()" style="display: block; width: 100%; margin: 32px 0 0 0;">
-                            Complete Lesson →
-                        </button>
-                    ` : ''}
-
-                    <div class="quiz-nav" style="${currentQuizQuestion === 0 ? 'justify-content: center;' : ''}">
-                        ${currentQuizQuestion > 0 ? `
-                            <button class="quiz-nav-btn" onclick="previousQuizQuestion()">
-                                ← Previous
-                            </button>
-                        ` : ''}
-                        <button class="quiz-nav-btn" onclick="nextQuizQuestion()" ${currentQuizQuestion === quizQuestions.length - 1 ? 'disabled' : ''}>
-                            Next →
-                        </button>
-                    </div>
-                </div>
-            `;
-
-            // Restore scroll position
-            window.scrollTo(0, scrollY);
-
-            console.log('Quiz HTML rendered, container children:', container.children.length);
-        }
-
-        function nextQuizQuestion() {
-            if (currentQuizQuestion < quizQuestions.length - 1) {
-                currentQuizQuestion++;
-                renderCurrentQuestion();
-            }
-        }
-
-        function previousQuizQuestion() {
-            if (currentQuizQuestion > 0) {
-                currentQuizQuestion--;
-                renderCurrentQuestion();
-            }
+            checkQuizComplete();
         }
 
         function selectAnswer(questionIndex, optionIndex) {
             userAnswers[questionIndex] = optionIndex;
-            renderCurrentQuestion();
+
+            // Update visual selection
+            const options = document.querySelectorAll(`[data-q="${questionIndex}"]`);
+            options.forEach((opt, idx) => {
+                opt.classList.remove('selected');
+                if (idx === optionIndex) {
+                    opt.classList.add('selected');
+                }
+            });
+
+            checkQuizComplete();
+        }
+
+        function checkQuizComplete() {
+            const allAnswered = !userAnswers.includes(null);
+            document.getElementById('submitQuiz').disabled = !allAnswered;
         }
 
         function submitQuiz() {
             let correct = 0;
             quizQuestions.forEach((q, index) => {
+                const options = document.querySelectorAll(`[data-q="${index}"]`);
+                options.forEach((opt, oIndex) => {
+                    opt.style.pointerEvents = 'none';
+                    if (oIndex === q.correct) {
+                        opt.classList.add('correct');
+                    } else if (oIndex === userAnswers[index] && oIndex !== q.correct) {
+                        opt.classList.add('incorrect');
+                    }
+                });
+
                 if (userAnswers[index] === q.correct) {
                     correct++;
                 }
@@ -1394,116 +1274,35 @@
                 const userId = localStorage.getItem('userId');
                 localStorage.setItem(`lesson2_quiz_passed_${userId}`, 'true');
 
-                // Show results starting at last question so they see the Complete Lesson button
-                currentQuizQuestion = quizQuestions.length - 1;
-                showQuizResults();
-
                 resultDiv.innerHTML = `
                     <div class="quiz-result">
                         <div class="result-icon">🎉</div>
                         <div class="result-title">Perfect Score!</div>
-                        <div class="result-text">You got all ${correct} out of ${quizQuestions.length} correct. Click the Complete Lesson button below to finish!</div>
+                        <div class="result-text">You got all ${correct} out of ${quizQuestions.length} questions correct. You're ready to manage your checking account like a pro!</div>
                     </div>
                 `;
+
+                document.getElementById('finishBtn').disabled = false;
+                document.getElementById('finishBtn').style.display = 'block';
             } else {
-                // Show results starting at first question for review
-                currentQuizQuestion = 0;
-                showQuizResults();
                 resultDiv.innerHTML = `
-                    <div class="quiz-result" style="background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%); border-color: #ef4444; margin-top: 24px;">
+                    <div class="quiz-result" style="background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%); border-color: #ef4444;">
                         <div class="result-icon">📚</div>
                         <div class="result-title">Not Quite There</div>
-                        <div class="result-text">You got ${correct} out of ${quizQuestions.length}. Review the lesson and try again!</div>
-                        <div style="display: flex; justify-content: center; margin-top: 20px;">
-                            <button class="quiz-submit" onclick="retryQuiz()" style="background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%); max-width: 300px; display: block;">
-                                🔄 Try Again
-                            </button>
-                        </div>
+                        <div class="result-text">You got ${correct} out of ${quizQuestions.length}. Review the lesson and try again—you need 100% to pass.</div>
+                        <button class="quiz-submit" onclick="retryQuiz()" style="margin-top: 20px; background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);">Try Again</button>
                     </div>
                 `;
             }
-        }
 
-        function showQuizResults() {
-            const container = document.getElementById('quizContainer');
-            const q = quizQuestions[currentQuizQuestion];
-            const isLastQuestion = currentQuizQuestion === quizQuestions.length - 1;
-
-            container.innerHTML = `
-                <div class="quiz-card">
-                    <div class="quiz-number">Question ${currentQuizQuestion + 1} of ${quizQuestions.length}</div>
-                    <div class="quiz-question">${q.question}</div>
-                    <div class="quiz-options-grid">
-                        ${q.options.map((option, oIndex) => {
-                            let className = 'quiz-option';
-                            if (oIndex === q.correct) {
-                                className += ' correct';
-                            } else if (oIndex === userAnswers[currentQuizQuestion] && oIndex !== q.correct) {
-                                className += ' incorrect';
-                            }
-                            return `<div class="${className}" style="pointer-events: none;" data-q="${currentQuizQuestion}" data-o="${oIndex}">
-                                ${option}
-                            </div>`;
-                        }).join('')}
-                    </div>
-                    <div class="quiz-progress-bar">
-                        <div class="quiz-progress-fill" style="width: ${((currentQuizQuestion + 1) / quizQuestions.length) * 100}%"></div>
-                    </div>
-                    <div class="quiz-progress">${currentQuizQuestion + 1} / ${quizQuestions.length} • Review Your Answers</div>
-
-                    ${isLastQuestion && quizPassed ? `
-                        <button class="finish-btn" onclick="finishLesson()" style="display: block; width: 100%; margin: 32px 0 0 0;">
-                            Complete Lesson →
-                        </button>
-                    ` : ''}
-
-                    <div class="quiz-nav" style="${currentQuizQuestion === 0 ? 'justify-content: center;' : ''}">
-                        ${currentQuizQuestion > 0 ? `
-                            <button class="quiz-nav-btn" onclick="previousResult()">
-                                ← Previous
-                            </button>
-                        ` : ''}
-                        <button class="quiz-nav-btn" onclick="nextResult()" ${currentQuizQuestion === quizQuestions.length - 1 ? 'disabled' : ''}>
-                            Next →
-                        </button>
-                    </div>
-                </div>
-            `;
-        }
-
-        function nextResult() {
-            if (currentQuizQuestion < quizQuestions.length - 1) {
-                currentQuizQuestion++;
-                showQuizResults();
-            }
-        }
-
-        function previousResult() {
-            if (currentQuizQuestion > 0) {
-                currentQuizQuestion--;
-                showQuizResults();
-            }
+            document.getElementById('submitQuiz').style.display = 'none';
         }
 
         function retryQuiz() {
             userAnswers = new Array(quizQuestions.length).fill(null);
-            currentQuizQuestion = 0;
-            quizPassed = false;
             document.getElementById('quizResult').innerHTML = '';
-            renderCurrentQuestion();
-        }
-
-        function retakeQuiz() {
-            // Reset quiz state for retaking
-            userAnswers = new Array(quizQuestions.length).fill(null);
-            currentQuizQuestion = 0;
-            // Reset quizPassed so they can submit again
-            quizPassed = false;
-
-            // Clear result
-            document.getElementById('quizResult').innerHTML = '';
-
-            renderCurrentQuestion();
+            renderQuiz();
+            document.getElementById('submitQuiz').style.display = 'block';
         }
 
         async function finishLesson() {
