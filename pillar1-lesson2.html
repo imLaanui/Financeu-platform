@@ -1007,10 +1007,14 @@
                 <p class="content-text">Let's make sure you've got the essentials down. Answer all questions correctly to complete the lesson.</p>
             </div>
             <div class="visual-side">
-                <div class="quiz-container" id="quizContainer"></div>
-                <button class="quiz-submit" id="submitQuiz" onclick="submitQuiz()">Submit Quiz</button>
-                <div id="quizResult"></div>
-                <button class="finish-btn" id="finishBtn" onclick="finishLesson()" disabled style="display: none; margin-top: 20px;">Complete Lesson →</button>
+                <div class="quiz-container" id="quizContainer">
+                    <!-- Questions will be inserted here by JavaScript -->
+                </div>
+                <div style="max-width: 800px; margin: 0 auto; width: 100%;">
+                    <button class="quiz-submit" id="submitQuiz" onclick="submitQuiz()">Submit Quiz</button>
+                    <div id="quizResult"></div>
+                    <button class="finish-btn" id="finishBtn" onclick="finishLesson()" disabled style="display: none;">Complete Lesson →</button>
+                </div>
             </div>
         </div>
     </div>
