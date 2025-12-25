@@ -1188,19 +1188,20 @@ html {
    ============================================ */
 
 body.homepage-dark {
-    background-color: #FAFAFA !important;
-    color: #1F2937 !important;
+    background-color: #FFFFFF !important;
+    color: #1a1a1a !important;
 }
 
-/* Navigation - Clean Blue & White */
+/* Navigation - Solid and Clear */
 body.homepage-dark .navbar {
     background-color: #FFFFFF !important;
-    border-bottom: 1px solid #E5E7EB !important;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06) !important;
+    border-bottom: 2px solid #2563eb !important;
+    box-shadow: none !important;
 }
 
 body.homepage-dark .logo {
-    color: #1F2937;
+    color: #000000;
+    font-weight: 700;
 }
 
 body.homepage-dark .logo-accent {
@@ -1208,257 +1209,288 @@ body.homepage-dark .logo-accent {
 }
 
 body.homepage-dark .nav-links a {
-    color: #4B5563;
+    color: #1a1a1a;
+    font-weight: 500;
 }
 
 body.homepage-dark .nav-links a:hover {
     color: #2563eb;
+    text-decoration: underline;
 }
 
 body.homepage-dark .btn-primary {
-    background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+    background: #2563eb;
     color: #FFFFFF;
-    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);
+    box-shadow: none;
+    font-weight: 600;
 }
 
 body.homepage-dark .nav-links .btn-primary:hover {
-    background: linear-gradient(135deg, #1d4ed8 0%, #1e40af 100%) !important;
-    box-shadow: 0 6px 16px rgba(37, 99, 235, 0.35) !important;
+    background: #1d4ed8 !important;
+    box-shadow: none !important;
 }
 
 body.homepage-dark .btn-primary:hover {
-    background: linear-gradient(135deg, #1d4ed8 0%, #1e40af 100%);
-    box-shadow: 0 8px 20px rgba(37, 99, 235, 0.4);
+    background: #1d4ed8;
+    box-shadow: none;
 }
 
-/* Hero Section - Blue Gradient */
+/* Hero Section - Clean and Direct */
 body.homepage-dark .hero {
-    background: linear-gradient(135deg, #EFF6FF 0%, #DBEAFE 50%, #EFF6FF 100%) !important;
-    border-bottom: 1px solid #E5E7EB !important;
+    background: #FFFFFF !important;
+    border-bottom: 1px solid #e5e5e5 !important;
+    padding: 120px 20px 80px !important;
 }
 
 body.homepage-dark .hero-title {
-    color: #1F2937 !important;
+    color: #000000 !important;
+    font-weight: 800 !important;
+    line-height: 1.1 !important;
 }
 
 body.homepage-dark .highlight {
     color: #2563eb;
+    border-bottom: 4px solid #2563eb;
 }
 
 body.homepage-dark .hero-subtitle {
-    color: #4B5563;
+    color: #4a4a4a;
     opacity: 1;
+    font-size: 20px;
+    font-weight: 400;
 }
 
-/* Problem Section - Clean White */
+/* Problem Section - Simple and Clear */
 body.homepage-dark .problem-section {
-    background-color: #FFFFFF !important;
+    background-color: #f8f8f8 !important;
 }
 
 body.homepage-dark .problem-content h2 {
-    color: #1F2937;
+    color: #000000;
+    font-weight: 700;
 }
 
 body.homepage-dark .problem-card {
     background: #FFFFFF !important;
-    border: 2px solid #E5E7EB !important;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05) !important;
+    border: 1px solid #d4d4d4 !important;
+    box-shadow: none !important;
+    border-radius: 8px !important;
 }
 
 body.homepage-dark .problem-card:hover {
     border-color: #2563eb;
-    box-shadow: 0 8px 24px rgba(37, 99, 235, 0.15);
-    transform: translateY(-4px);
+    box-shadow: none;
+    transform: none;
 }
 
 body.homepage-dark .problem-card h3 {
-    color: #1F2937;
+    color: #000000;
+    font-weight: 600;
 }
 
 body.homepage-dark .problem-card p {
-    color: #6B7280;
+    color: #4a4a4a;
+    line-height: 1.6;
 }
 
-/* Solution Section - Light Blue */
+/* Solution Section - Direct */
 body.homepage-dark .solution-section {
-    background: linear-gradient(135deg, #F9FAFB 0%, #F3F4F6 100%);
-    border-top: 1px solid #E5E7EB;
-    border-bottom: 1px solid #E5E7EB;
+    background: #FFFFFF;
+    border-top: 1px solid #e5e5e5;
+    border-bottom: 1px solid #e5e5e5;
 }
 
 body.homepage-dark .section-title {
-    color: #1F2937;
+    color: #000000;
+    font-weight: 700;
 }
 
 body.homepage-dark .section-subtitle {
-    color: #6B7280;
+    color: #4a4a4a;
 }
 
-/* Features Section - White Cards */
+/* Features Section - Straightforward */
 body.homepage-dark .features-section {
-    background-color: #FAFAFA;
+    background-color: #f8f8f8;
 }
 
 body.homepage-dark .feature-card {
     background: #FFFFFF;
-    border: 2px solid #E5E7EB;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    border: 1px solid #d4d4d4;
+    box-shadow: none;
+    border-radius: 8px;
 }
 
 body.homepage-dark .feature-card:hover {
     border-color: #2563eb;
-    box-shadow: 0 8px 24px rgba(37, 99, 235, 0.15);
+    box-shadow: none;
 }
 
 body.homepage-dark .feature-card h3 {
-    color: #1F2937;
+    color: #000000;
+    font-weight: 600;
 }
 
 body.homepage-dark .feature-card p {
-    color: #6B7280;
+    color: #4a4a4a;
+    line-height: 1.6;
 }
 
 body.homepage-dark .feature-card::after {
-    background: linear-gradient(90deg, transparent, #2563eb, transparent);
+    display: none;
 }
 
-/* Pricing Section - Clean White Cards */
+/* Pricing Section - Clear and Honest */
 body.homepage-dark .pricing-section {
     background: #FFFFFF;
-    border-top: 1px solid #E5E7EB;
-    border-bottom: 1px solid #E5E7EB;
+    border-top: 1px solid #e5e5e5;
+    border-bottom: 1px solid #e5e5e5;
 }
 
 body.homepage-dark .pricing-card {
     background: #FFFFFF;
-    border: 2px solid #E5E7EB;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    border: 2px solid #d4d4d4;
+    box-shadow: none;
+    border-radius: 8px;
 }
 
 body.homepage-dark .pricing-card:hover {
     border-color: #2563eb;
-    box-shadow: 0 8px 24px rgba(37, 99, 235, 0.15);
+    box-shadow: none;
 }
 
 body.homepage-dark .pricing-card-featured {
     border-color: #2563eb;
-    box-shadow: 0 12px 32px rgba(37, 99, 235, 0.2);
-    background: linear-gradient(135deg, #EFF6FF 0%, #DBEAFE 100%);
+    border-width: 3px;
+    box-shadow: none;
+    background: #FFFFFF;
 }
 
 body.homepage-dark .pricing-header h3 {
-    color: #1F2937;
+    color: #000000;
+    font-weight: 700;
 }
 
 body.homepage-dark .price-amount {
     color: #2563eb;
+    font-weight: 800;
 }
 
 body.homepage-dark .price-period,
 body.homepage-dark .pricing-description {
-    color: #6B7280;
+    color: #4a4a4a;
 }
 
 body.homepage-dark .feature-included {
-    color: #1F2937;
+    color: #1a1a1a;
 }
 
 body.homepage-dark .feature-excluded {
-    color: #9CA3AF;
+    color: #999999;
 }
 
 body.homepage-dark .pricing-guarantee p {
-    color: #6B7280;
+    color: #4a4a4a;
 }
 
 body.homepage-dark .popular-badge {
-    background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+    background: #2563eb;
     color: #FFFFFF;
-    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+    box-shadow: none;
+    font-weight: 600;
 }
 
 body.homepage-dark .pricing-header {
-    border-bottom-color: #E5E7EB;
+    border-bottom-color: #e5e5e5;
 }
 
 body.homepage-dark .pricing-guarantee {
-    border-top-color: #E5E7EB;
+    border-top-color: #e5e5e5;
 }
 
-/* Testimonials Section - Light */
+/* Testimonials Section - Simple */
 body.homepage-dark .testimonials-section {
-    background-color: #F9FAFB;
+    background-color: #f8f8f8;
 }
 
 body.homepage-dark .testimonial-card {
     background: #FFFFFF;
-    border: 2px solid #E5E7EB;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    border: 1px solid #d4d4d4;
+    box-shadow: none;
+    border-radius: 8px;
 }
 
 body.homepage-dark .testimonial-text {
-    color: #374151;
+    color: #1a1a1a;
+    line-height: 1.6;
 }
 
 body.homepage-dark .testimonial-author strong {
-    color: #1F2937;
+    color: #000000;
+    font-weight: 600;
 }
 
 body.homepage-dark .testimonial-author span {
-    color: #6B7280;
+    color: #666666;
 }
 
-/* CTA Section - Blue Gradient */
+/* CTA Section - Bold and Clear */
 body.homepage-dark .cta-section {
-    background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+    background: #2563eb;
     border-top: none;
     border-bottom: none;
 }
 
 body.homepage-dark .cta-content h2 {
     color: #FFFFFF;
+    font-weight: 700;
 }
 
 body.homepage-dark .cta-content p {
-    color: #E0E7FF;
+    color: #FFFFFF;
+    opacity: 0.9;
 }
 
 body.homepage-dark .cta-section .btn-primary {
     background: #FFFFFF;
     color: #2563eb;
+    font-weight: 600;
 }
 
 body.homepage-dark .cta-section .btn-primary:hover {
-    background: #F9FAFB;
+    background: #f0f0f0;
     color: #1d4ed8;
 }
 
-/* Footer - Light Grey */
+/* Footer - Professional */
 body.homepage-dark .footer {
-    background-color: #F9FAFB;
-    border-top: 1px solid #E5E7EB;
+    background-color: #1a1a1a;
+    border-top: none;
 }
 
 body.homepage-dark .footer-section h4 {
-    color: #1F2937;
+    color: #FFFFFF;
+    font-weight: 600;
 }
 
 body.homepage-dark .footer-section p {
-    color: #6B7280;
+    color: #cccccc;
 }
 
 body.homepage-dark .footer-section a {
-    color: #4B5563;
+    color: #cccccc;
+    font-weight: 400;
 }
 
 body.homepage-dark .footer-section a:hover {
-    color: #2563eb;
+    color: #FFFFFF;
+    text-decoration: underline;
 }
 
 body.homepage-dark .footer-bottom {
-    border-top: 1px solid #E5E7EB;
+    border-top: 1px solid #333333;
 }
 
 body.homepage-dark .footer-bottom p {
-    color: #9CA3AF;
+    color: #999999;
 }
