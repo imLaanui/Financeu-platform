@@ -1188,15 +1188,15 @@ html {
    ============================================ */
 
 body.homepage-dark {
-    background-color: #0A0A0B;
-    color: #E5E5E5;
+    background-color: #0A0A0B !important;
+    color: #E5E5E5 !important;
 }
 
 /* Navigation - Dark Premium */
 body.homepage-dark .navbar {
-    background-color: #141416;
-    border-bottom: 1px solid #1F1F23;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+    background-color: #141416 !important;
+    border-bottom: 1px solid #1F1F23 !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5) !important;
 }
 
 body.homepage-dark .logo {
@@ -1233,12 +1233,12 @@ body.homepage-dark .btn-primary:hover {
 
 /* Hero Section - Premium Dark */
 body.homepage-dark .hero {
-    background: linear-gradient(135deg, #141416 0%, #1A1A1D 50%, #141416 100%);
-    border-bottom: 1px solid #1F1F23;
+    background: linear-gradient(135deg, #141416 0%, #1A1A1D 50%, #141416 100%) !important;
+    border-bottom: 1px solid #1F1F23 !important;
 }
 
 body.homepage-dark .hero-title {
-    color: #FFFFFF;
+    color: #FFFFFF !important;
 }
 
 body.homepage-dark .highlight {
@@ -1252,7 +1252,7 @@ body.homepage-dark .hero-subtitle {
 
 /* Problem Section - Elegant Grey */
 body.homepage-dark .problem-section {
-    background-color: #0A0A0B;
+    background-color: #0A0A0B !important;
 }
 
 body.homepage-dark .problem-content h2 {
@@ -1260,9 +1260,9 @@ body.homepage-dark .problem-content h2 {
 }
 
 body.homepage-dark .problem-card {
-    background: linear-gradient(135deg, #141416 0%, #1A1A1D 100%);
-    border: 1px solid #1F1F23;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+    background: linear-gradient(135deg, #141416 0%, #1A1A1D 100%) !important;
+    border: 1px solid #1F1F23 !important;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4) !important;
 }
 
 body.homepage-dark .problem-card:hover {
