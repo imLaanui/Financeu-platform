@@ -306,14 +306,14 @@
                 </div>
             </div>
 
-            <!-- Lesson 4 - Coming Soon -->
-            <div class="lesson-card" data-lesson="4" style="opacity: 0.6; pointer-events: none;">
+            <!-- Lesson 4 -->
+            <div class="lesson-card" data-lesson="4">
                 <div class="lesson-info">
-                    <h3>Lesson 4 - Coming Soon</h3>
-                    <p>More banking lessons will be available soon</p>
+                    <h3>Lesson 4 - High-Yield Savings Accounts</h3>
+                    <p>Learn how to make your savings work harder with high-yield accounts and understand the real difference they make</p>
                 </div>
                 <div class="lesson-status">
-                    <span style="color: #9ca3af; font-weight: 600;">Unavailable</span>
+                    <a href="/path1-lesson4" class="btn-start-lesson">Start Lesson</a>
                 </div>
             </div>
 
@@ -321,39 +321,6 @@
             <div class="lesson-card" data-lesson="5" style="opacity: 0.6; pointer-events: none;">
                 <div class="lesson-info">
                     <h3>Lesson 5 - Coming Soon</h3>
-                    <p>More banking lessons will be available soon</p>
-                </div>
-                <div class="lesson-status">
-                    <span style="color: #9ca3af; font-weight: 600;">Unavailable</span>
-                </div>
-            </div>
-
-            <!-- Lesson 6 - Coming Soon -->
-            <div class="lesson-card" data-lesson="6" style="opacity: 0.6; pointer-events: none;">
-                <div class="lesson-info">
-                    <h3>Lesson 6 - Coming Soon</h3>
-                    <p>More banking lessons will be available soon</p>
-                </div>
-                <div class="lesson-status">
-                    <span style="color: #9ca3af; font-weight: 600;">Unavailable</span>
-                </div>
-            </div>
-
-            <!-- Lesson 7 - Coming Soon -->
-            <div class="lesson-card" data-lesson="7" style="opacity: 0.6; pointer-events: none;">
-                <div class="lesson-info">
-                    <h3>Lesson 7 - Coming Soon</h3>
-                    <p>More banking lessons will be available soon</p>
-                </div>
-                <div class="lesson-status">
-                    <span style="color: #9ca3af; font-weight: 600;">Unavailable</span>
-                </div>
-            </div>
-
-            <!-- Lesson 8 - Coming Soon -->
-            <div class="lesson-card" data-lesson="8" style="opacity: 0.6; pointer-events: none;">
-                <div class="lesson-info">
-                    <h3>Lesson 8 - Coming Soon</h3>
                     <p>More banking lessons will be available soon</p>
                 </div>
                 <div class="lesson-status">
@@ -533,6 +500,30 @@
                     `;
                 }
                 // If lesson 2 quiz passed but not completed, button already shows "Start Lesson"
+            }
+
+            // Handle Lesson 4 (requires lesson 3 quiz to be passed)
+            const lesson4Card = document.querySelector(`[data-lesson="4"]`);
+            if (lesson4Card) {
+                const statusDiv = lesson4Card.querySelector('.lesson-status');
+                const lesson3QuizPassed = localStorage.getItem(`lesson3_quiz_passed_${userId}`) === 'true';
+
+                if (!lesson3QuizPassed) {
+                    // Lock lesson 4
+                    lesson4Card.style.opacity = '0.6';
+                    lesson4Card.style.pointerEvents = 'none';
+                    statusDiv.innerHTML = `
+                        <span style="color: #9ca3af; font-weight: 600; white-space: nowrap;"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="5" y="9" width="10" height="8" rx="1" fill="#6B7280"/><path d="M7 9 L7 6 C7 4.3 8.3 3 10 3 C11.7 3 13 4.3 13 6 L13 9" stroke="#6B7280" stroke-width="2" fill="none"/></svg> Complete Lesson 3</span>
+                    `;
+                } else if (completed.includes(4)) {
+                    // Lesson 4 completed
+                    lesson4Card.classList.add('completed');
+                    statusDiv.innerHTML = `
+                        <span class="completed-badge">Completed</span>
+                        <a href="/path1-lesson4" class="btn-start-lesson">Review</a>
+                    `;
+                }
+                // If lesson 3 quiz passed but not completed, button already shows "Start Lesson"
             }
         }
 
