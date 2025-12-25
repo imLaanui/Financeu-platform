@@ -1188,230 +1188,231 @@ html {
    ============================================ */
 
 body.homepage-dark {
-    background-color: #0A0A0B !important;
-    color: #E5E5E5 !important;
+    background-color: #FAFAFA !important;
+    color: #1F2937 !important;
 }
 
-/* Navigation - Dark Premium */
+/* Navigation - Clean Blue & White */
 body.homepage-dark .navbar {
-    background-color: #141416 !important;
-    border-bottom: 1px solid #1F1F23 !important;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5) !important;
+    background-color: #FFFFFF !important;
+    border-bottom: 1px solid #E5E7EB !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06) !important;
 }
 
 body.homepage-dark .logo {
-    color: #FFFFFF;
+    color: #1F2937;
 }
 
 body.homepage-dark .logo-accent {
-    color: #00A676;
+    color: #2563eb;
 }
 
 body.homepage-dark .nav-links a {
-    color: #C4C4C7;
+    color: #4B5563;
 }
 
 body.homepage-dark .nav-links a:hover {
-    color: #FFFFFF;
+    color: #2563eb;
 }
 
 body.homepage-dark .btn-primary {
-    background: linear-gradient(135deg, #00A676 0%, #008C62 100%);
-    color: #0A0A0B;
-    box-shadow: 0 4px 12px rgba(0, 166, 118, 0.25);
+    background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+    color: #FFFFFF;
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);
 }
 
 body.homepage-dark .nav-links .btn-primary:hover {
-    background: linear-gradient(135deg, #00B87F 0%, #00A073 100%) !important;
-    box-shadow: 0 6px 16px rgba(0, 166, 118, 0.35) !important;
+    background: linear-gradient(135deg, #1d4ed8 0%, #1e40af 100%) !important;
+    box-shadow: 0 6px 16px rgba(37, 99, 235, 0.35) !important;
 }
 
 body.homepage-dark .btn-primary:hover {
-    background: linear-gradient(135deg, #00B87F 0%, #00A073 100%);
-    box-shadow: 0 8px 20px rgba(0, 166, 118, 0.4);
+    background: linear-gradient(135deg, #1d4ed8 0%, #1e40af 100%);
+    box-shadow: 0 8px 20px rgba(37, 99, 235, 0.4);
 }
 
-/* Hero Section - Premium Dark */
+/* Hero Section - Blue Gradient */
 body.homepage-dark .hero {
-    background: linear-gradient(135deg, #141416 0%, #1A1A1D 50%, #141416 100%) !important;
-    border-bottom: 1px solid #1F1F23 !important;
+    background: linear-gradient(135deg, #EFF6FF 0%, #DBEAFE 50%, #EFF6FF 100%) !important;
+    border-bottom: 1px solid #E5E7EB !important;
 }
 
 body.homepage-dark .hero-title {
-    color: #FFFFFF !important;
+    color: #1F2937 !important;
 }
 
 body.homepage-dark .highlight {
-    color: #00A676;
+    color: #2563eb;
 }
 
 body.homepage-dark .hero-subtitle {
-    color: #B8B8BC;
+    color: #4B5563;
     opacity: 1;
 }
 
-/* Problem Section - Elegant Grey */
+/* Problem Section - Clean White */
 body.homepage-dark .problem-section {
-    background-color: #0A0A0B !important;
+    background-color: #FFFFFF !important;
 }
 
 body.homepage-dark .problem-content h2 {
-    color: #FFFFFF;
+    color: #1F2937;
 }
 
 body.homepage-dark .problem-card {
-    background: linear-gradient(135deg, #141416 0%, #1A1A1D 100%) !important;
-    border: 1px solid #1F1F23 !important;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4) !important;
+    background: #FFFFFF !important;
+    border: 2px solid #E5E7EB !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05) !important;
 }
 
 body.homepage-dark .problem-card:hover {
-    border-color: #2A2A2F;
-    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.6);
-    transform: translateY(-8px);
+    border-color: #2563eb;
+    box-shadow: 0 8px 24px rgba(37, 99, 235, 0.15);
+    transform: translateY(-4px);
 }
 
 body.homepage-dark .problem-card h3 {
-    color: #FFFFFF;
+    color: #1F2937;
 }
 
 body.homepage-dark .problem-card p {
-    color: #B8B8BC;
+    color: #6B7280;
 }
 
-/* Solution Section - Premium */
+/* Solution Section - Light Blue */
 body.homepage-dark .solution-section {
-    background: linear-gradient(135deg, #141416 0%, #1A1A1D 100%);
-    border-top: 1px solid #1F1F23;
-    border-bottom: 1px solid #1F1F23;
+    background: linear-gradient(135deg, #F9FAFB 0%, #F3F4F6 100%);
+    border-top: 1px solid #E5E7EB;
+    border-bottom: 1px solid #E5E7EB;
 }
 
 body.homepage-dark .section-title {
-    color: #FFFFFF;
+    color: #1F2937;
 }
 
 body.homepage-dark .section-subtitle {
-    color: #B8B8BC;
+    color: #6B7280;
 }
 
-/* Features Section - Luxurious Dark */
+/* Features Section - White Cards */
 body.homepage-dark .features-section {
-    background-color: #0A0A0B;
+    background-color: #FAFAFA;
 }
 
 body.homepage-dark .feature-card {
-    background: linear-gradient(135deg, #141416 0%, #1A1A1D 100%);
-    border: 1px solid #1F1F23;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+    background: #FFFFFF;
+    border: 2px solid #E5E7EB;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
 
 body.homepage-dark .feature-card:hover {
-    border-color: #2A2A2F;
-    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6);
+    border-color: #2563eb;
+    box-shadow: 0 8px 24px rgba(37, 99, 235, 0.15);
 }
 
 body.homepage-dark .feature-card h3 {
-    color: #FFFFFF;
+    color: #1F2937;
 }
 
 body.homepage-dark .feature-card p {
-    color: #B8B8BC;
+    color: #6B7280;
 }
 
 body.homepage-dark .feature-card::after {
-    background: linear-gradient(90deg, transparent, #00A676, transparent);
+    background: linear-gradient(90deg, transparent, #2563eb, transparent);
 }
 
-/* Pricing Section - Premium Cards */
+/* Pricing Section - Clean White Cards */
 body.homepage-dark .pricing-section {
-    background: linear-gradient(135deg, #141416 0%, #1A1A1D 100%);
-    border-top: 1px solid #1F1F23;
-    border-bottom: 1px solid #1F1F23;
+    background: #FFFFFF;
+    border-top: 1px solid #E5E7EB;
+    border-bottom: 1px solid #E5E7EB;
 }
 
 body.homepage-dark .pricing-card {
-    background: linear-gradient(135deg, #1A1A1D 0%, #141416 100%);
-    border: 2px solid #1F1F23;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+    background: #FFFFFF;
+    border: 2px solid #E5E7EB;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
 
 body.homepage-dark .pricing-card:hover {
-    border-color: #00A676;
-    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6);
+    border-color: #2563eb;
+    box-shadow: 0 8px 24px rgba(37, 99, 235, 0.15);
 }
 
 body.homepage-dark .pricing-card-featured {
-    border-color: #00A676;
-    box-shadow: 0 12px 32px rgba(0, 166, 118, 0.3);
+    border-color: #2563eb;
+    box-shadow: 0 12px 32px rgba(37, 99, 235, 0.2);
+    background: linear-gradient(135deg, #EFF6FF 0%, #DBEAFE 100%);
 }
 
 body.homepage-dark .pricing-header h3 {
-    color: #FFFFFF;
+    color: #1F2937;
 }
 
 body.homepage-dark .price-amount {
-    color: #00A676;
+    color: #2563eb;
 }
 
 body.homepage-dark .price-period,
 body.homepage-dark .pricing-description {
-    color: #B8B8BC;
+    color: #6B7280;
 }
 
 body.homepage-dark .feature-included {
-    color: #E5E5E5;
+    color: #1F2937;
 }
 
 body.homepage-dark .feature-excluded {
-    color: #6B6B6F;
+    color: #9CA3AF;
 }
 
 body.homepage-dark .pricing-guarantee p {
-    color: #B8B8BC;
+    color: #6B7280;
 }
 
 body.homepage-dark .popular-badge {
-    background: linear-gradient(135deg, #00A676 0%, #008C62 100%);
+    background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
     color: #FFFFFF;
-    box-shadow: 0 4px 12px rgba(0, 166, 118, 0.3);
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
 }
 
 body.homepage-dark .pricing-header {
-    border-bottom-color: #1F1F23;
+    border-bottom-color: #E5E7EB;
 }
 
 body.homepage-dark .pricing-guarantee {
-    border-top-color: #1F1F23;
+    border-top-color: #E5E7EB;
 }
 
-/* Testimonials Section - Elegant */
+/* Testimonials Section - Light */
 body.homepage-dark .testimonials-section {
-    background-color: #0A0A0B;
+    background-color: #F9FAFB;
 }
 
 body.homepage-dark .testimonial-card {
-    background: linear-gradient(135deg, #141416 0%, #1A1A1D 100%);
-    border: 1px solid #1F1F23;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+    background: #FFFFFF;
+    border: 2px solid #E5E7EB;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
 
 body.homepage-dark .testimonial-text {
-    color: #E5E5E5;
+    color: #374151;
 }
 
 body.homepage-dark .testimonial-author strong {
-    color: #FFFFFF;
+    color: #1F2937;
 }
 
 body.homepage-dark .testimonial-author span {
-    color: #9A9A9E;
+    color: #6B7280;
 }
 
-/* CTA Section - Bold Premium */
+/* CTA Section - Blue Gradient */
 body.homepage-dark .cta-section {
-    background: linear-gradient(135deg, #141416 0%, #1A1A1D 50%, #141416 100%);
-    border-top: 1px solid #1F1F23;
-    border-bottom: 1px solid #1F1F23;
+    background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+    border-top: none;
+    border-bottom: none;
 }
 
 body.homepage-dark .cta-content h2 {
@@ -1419,35 +1420,45 @@ body.homepage-dark .cta-content h2 {
 }
 
 body.homepage-dark .cta-content p {
-    color: #B8B8BC;
+    color: #E0E7FF;
 }
 
-/* Footer - Deep Dark */
+body.homepage-dark .cta-section .btn-primary {
+    background: #FFFFFF;
+    color: #2563eb;
+}
+
+body.homepage-dark .cta-section .btn-primary:hover {
+    background: #F9FAFB;
+    color: #1d4ed8;
+}
+
+/* Footer - Light Grey */
 body.homepage-dark .footer {
-    background-color: #0A0A0B;
-    border-top: 1px solid #1F1F23;
+    background-color: #F9FAFB;
+    border-top: 1px solid #E5E7EB;
 }
 
 body.homepage-dark .footer-section h4 {
-    color: #FFFFFF;
+    color: #1F2937;
 }
 
 body.homepage-dark .footer-section p {
-    color: #9A9A9E;
+    color: #6B7280;
 }
 
 body.homepage-dark .footer-section a {
-    color: #B8B8BC;
+    color: #4B5563;
 }
 
 body.homepage-dark .footer-section a:hover {
-    color: #FFFFFF;
+    color: #2563eb;
 }
 
 body.homepage-dark .footer-bottom {
-    border-top: 1px solid #1F1F23;
+    border-top: 1px solid #E5E7EB;
 }
 
 body.homepage-dark .footer-bottom p {
-    color: #6B6B6F;
+    color: #9CA3AF;
 }
