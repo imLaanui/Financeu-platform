@@ -9,401 +9,614 @@
     <link rel="icon" type="image/svg+xml" sizes="32x32" href="assets/favicon-32x32.svg">
     <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.svg">
     <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
-        .lesson-container {
-            max-width: 700px;
-            margin: 0 auto;
-            padding: 40px 20px;
-        }
-        .lesson-header {
-            text-align: center;
-            margin-bottom: 40px;
-            padding: 30px;
+        body {
             background: #FFFFFF;
-            border: 1px solid #e5e5e5;
-            border-radius: 16px;
-        }
-        .lesson-header h1 {
-            font-size: 36px;
-            color: #000000;
-            margin-bottom: 10px;
-        }
-        .lesson-header .lesson-number {
-            color: #2563eb;
-            font-size: 18px;
-            font-weight: 700;
-            margin-bottom: 5px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-        .lesson-intro {
-            background: #eff6ff;
-            border: 2px solid #2563eb;
-            border-radius: 12px;
-            padding: 25px;
-            margin-bottom: 30px;
-            text-align: center;
-        }
-        .lesson-intro p {
-            color: #1e40af;
-            font-size: 16px;
-            line-height: 1.6;
-            margin: 0;
+            overflow-x: hidden;
         }
 
-        /* Phone Container */
-        .phone-container {
-            background: #000000;
-            border-radius: 40px;
-            padding: 12px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
-            margin: 30px auto;
-            max-width: 400px;
+        .back-link {
+            position: fixed;
+            top: 100px;
+            left: 40px;
+            z-index: 100;
+            padding: 10px 20px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            color: #2563eb;
+            text-decoration: none;
+            font-weight: 600;
         }
-        .phone-screen {
-            background: #f8f9fa;
-            border-radius: 30px;
-            overflow: hidden;
-            position: relative;
+
+        .back-link:hover {
+            transform: translateX(-3px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
         }
-        .phone-header {
-            background: #FFFFFF;
-            padding: 15px;
-            border-bottom: 1px solid #e5e5e5;
-            display: flex;
-            align-items: center;
-            gap: 12px;
+
+        /* Progress Bar */
+        .progress-container {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 8px;
+            background: #f1f5f9;
+            z-index: 100;
         }
-        .phone-avatar {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
+
+        .progress-bar {
+            height: 100%;
             background: #2563eb;
-            display: flex;
+            transition: width 0.3s ease;
+            border-radius: 0 4px 4px 0;
+        }
+
+        /* Chapter Sections */
+        .chapter {
+            min-height: 100vh;
+            display: none;
             align-items: center;
             justify-content: center;
-            color: white;
-            font-weight: 700;
-            font-size: 16px;
-        }
-        .phone-contact-info h3 {
-            margin: 0;
-            font-size: 16px;
-            color: #000000;
-        }
-        .phone-contact-info p {
-            margin: 0;
-            font-size: 12px;
-            color: #6b7280;
+            padding: 120px 40px 80px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
         }
 
-        /* Chat Messages */
-        .chat-container {
-            padding: 20px;
-            min-height: 500px;
-            max-height: 600px;
-            overflow-y: auto;
-        }
-        .message {
-            margin-bottom: 15px;
+        .chapter.active {
             display: flex;
-            animation: slideIn 0.3s ease-out;
+            animation: fadeInUp 0.6s ease forwards;
         }
-        @keyframes slideIn {
+
+        @keyframes fadeInUp {
             from {
                 opacity: 0;
-                transform: translateY(10px);
+                transform: translateY(20px);
             }
             to {
                 opacity: 1;
                 transform: translateY(0);
             }
         }
-        .message.sent {
-            justify-content: flex-end;
-        }
-        .message.received {
-            justify-content: flex-start;
-        }
-        .message-bubble {
-            max-width: 75%;
-            padding: 12px 16px;
-            border-radius: 18px;
-            word-wrap: break-word;
-            line-height: 1.4;
-        }
-        .message.sent .message-bubble {
-            background: #2563eb;
-            color: white;
-            border-bottom-right-radius: 4px;
-        }
-        .message.received .message-bubble {
-            background: white;
-            color: #000000;
-            border-bottom-left-radius: 4px;
-            border: 1px solid #e5e5e5;
-        }
-        .message-time {
-            font-size: 11px;
-            margin-top: 4px;
-            opacity: 0.7;
-            text-align: right;
-        }
-        .message.received .message-time {
-            text-align: left;
+
+        .chapter-content {
+            max-width: 1000px;
+            width: 100%;
         }
 
-        /* Special Message Types */
-        .highlight-box {
-            background: #fef3c7;
-            border: 2px solid #f59e0b;
-            border-radius: 12px;
-            padding: 15px;
-            margin: 20px 0;
+        /* Hero Chapter */
+        .hero-chapter {
+            background: #FFFFFF;
             text-align: center;
         }
-        .highlight-box strong {
-            color: #d97706;
-            font-size: 18px;
-            display: block;
-            margin-bottom: 8px;
-        }
-        .highlight-box p {
-            color: #78350f;
-            margin: 0;
+
+        .lesson-number {
+            color: #2563eb;
             font-size: 14px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
         }
 
-        .data-box {
-            background: white;
-            border: 2px solid #2563eb;
-            border-radius: 12px;
-            padding: 20px;
-            margin: 20px 0;
-        }
-        .data-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 12px 0;
-            border-bottom: 1px solid #e5e5e5;
-        }
-        .data-row:last-child {
-            border-bottom: none;
-        }
-        .data-label {
-            font-weight: 600;
-            color: #4b5563;
-            font-size: 14px;
-        }
-        .data-value {
+        .hero-title {
+            font-size: clamp(40px, 6vw, 72px);
             font-weight: 800;
-            color: #2563eb;
-            font-size: 18px;
+            color: #000000;
+            margin-bottom: 24px;
+            line-height: 1.1;
         }
-        .data-value.bad {
+
+        .hero-subtitle {
+            font-size: 20px;
+            color: #4a4a4a;
+            margin-bottom: 40px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Content Chapter */
+        .content-chapter {
+            background: #f8f9fa;
+        }
+
+        .section-number {
+            display: inline-block;
+            padding: 8px 20px;
+            background: #2563eb;
+            color: white;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 24px;
+        }
+
+        .content-title {
+            font-size: clamp(32px, 4vw, 48px);
+            font-weight: 800;
+            color: #000000;
+            margin-bottom: 24px;
+            line-height: 1.2;
+        }
+
+        .content-text {
+            font-size: 18px;
+            line-height: 1.8;
+            color: #4a4a4a;
+            margin-bottom: 20px;
+        }
+
+        .content-text strong {
+            color: #000000;
+            font-weight: 700;
+        }
+
+        .highlight-box {
+            background: white;
+            border-left: 4px solid #2563eb;
+            padding: 24px;
+            border-radius: 8px;
+            margin: 30px 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        .highlight-box h3 {
+            color: #2563eb;
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .highlight-box p {
+            color: #4a4a4a;
+            font-size: 16px;
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        /* Comparison Grid */
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            margin: 40px 0;
+        }
+
+        .comparison-card {
+            background: white;
+            padding: 32px;
+            border-radius: 16px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .comparison-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+        }
+
+        .comparison-card.losing {
+            border-color: #dc2626;
+        }
+
+        .comparison-card.winning {
+            border-color: #10b981;
+        }
+
+        .comparison-card h3 {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .comparison-card.losing h3 {
             color: #dc2626;
         }
-        .data-value.good {
+
+        .comparison-card.winning h3 {
             color: #10b981;
         }
 
-        /* Action Buttons */
-        .action-section {
+        .rate {
+            font-size: 48px;
+            font-weight: 800;
+            margin: 20px 0;
+        }
+
+        .comparison-card.losing .rate {
+            color: #dc2626;
+        }
+
+        .comparison-card.winning .rate {
+            color: #10b981;
+        }
+
+        .comparison-details {
+            color: #4a4a4a;
+            font-size: 16px;
+            line-height: 1.6;
+        }
+
+        .comparison-details p {
+            margin: 8px 0;
+        }
+
+        /* Calculator Chapter */
+        .calculator-chapter {
+            background: #FFFFFF;
+        }
+
+        .calculator-container {
             background: white;
-            border-radius: 12px;
-            padding: 25px;
-            margin: 30px 0;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 16px;
+            padding: 40px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+            border: 1px solid #e5e5e5;
         }
-        .action-section h3 {
+
+        .calculator-inputs {
+            display: grid;
+            gap: 24px;
+            margin-bottom: 32px;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .input-group label {
+            font-weight: 700;
             color: #000000;
-            margin-bottom: 20px;
-            font-size: 22px;
+            font-size: 16px;
         }
-        .action-list {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-        .action-item {
-            background: #f8f9fa;
-            border-left: 4px solid #2563eb;
-            padding: 15px;
-            margin-bottom: 12px;
+
+        .input-group input[type="number"],
+        .input-group input[type="range"] {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #e5e5e5;
             border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            transition: border-color 0.2s;
         }
-        .action-item strong {
+
+        .input-group input[type="number"]:focus {
+            outline: none;
+            border-color: #2563eb;
+        }
+
+        .input-group input[type="range"] {
+            padding: 0;
+            height: 8px;
+            -webkit-appearance: none;
+            appearance: none;
+            background: #e5e5e5;
+            border: none;
+        }
+
+        .input-group input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            background: #2563eb;
+            cursor: pointer;
+            border-radius: 50%;
+        }
+
+        .input-group input[type="range"]::-moz-range-thumb {
+            width: 20px;
+            height: 20px;
+            background: #2563eb;
+            cursor: pointer;
+            border-radius: 50%;
+            border: none;
+        }
+
+        .range-value {
+            font-size: 18px;
+            font-weight: 700;
             color: #2563eb;
-            display: block;
-            margin-bottom: 5px;
+            text-align: right;
         }
-        .action-item p {
-            color: #4b5563;
-            margin: 0;
+
+        .chart-container {
+            position: relative;
+            height: 400px;
+            margin-top: 40px;
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 20px;
+        }
+
+        .results-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 32px;
+        }
+
+        .result-card {
+            background: #f8f9fa;
+            padding: 24px;
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .result-label {
             font-size: 14px;
+            color: #4a4a4a;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 12px;
+        }
+
+        .result-value {
+            font-size: 36px;
+            font-weight: 800;
+            margin-bottom: 8px;
+        }
+
+        .result-card.traditional .result-value {
+            color: #dc2626;
+        }
+
+        .result-card.high-yield .result-value {
+            color: #10b981;
+        }
+
+        .result-description {
+            font-size: 14px;
+            color: #4a4a4a;
+        }
+
+        .difference-card {
+            grid-column: 1 / -1;
+            background: #2563eb;
+            color: white;
+            padding: 24px;
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .difference-card h3 {
+            font-size: 20px;
+            margin-bottom: 12px;
+            font-weight: 700;
+        }
+
+        .difference-amount {
+            font-size: 48px;
+            font-weight: 800;
+            margin-bottom: 8px;
+        }
+
+        .difference-description {
+            font-size: 16px;
+            opacity: 0.9;
+        }
+
+        /* Action Steps */
+        .action-steps {
+            display: grid;
+            gap: 20px;
+            margin-top: 40px;
+        }
+
+        .action-step {
+            background: white;
+            padding: 24px;
+            border-radius: 12px;
+            border-left: 4px solid #2563eb;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            display: flex;
+            gap: 20px;
+            align-items: start;
+        }
+
+        .step-number {
+            background: #2563eb;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 18px;
+            flex-shrink: 0;
+        }
+
+        .step-content h4 {
+            color: #000000;
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .step-content p {
+            color: #4a4a4a;
+            font-size: 16px;
+            line-height: 1.6;
+            margin: 0;
         }
 
         /* Navigation */
-        .lesson-navigation {
+        .chapter-nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-top: 40px;
-            padding-top: 20px;
+            margin-top: 60px;
+            padding-top: 30px;
             border-top: 2px solid #e5e5e5;
         }
-        .btn-nav {
-            padding: 12px 24px;
+
+        .nav-btn {
+            padding: 14px 32px;
             background: #2563eb;
             color: white;
             border: none;
             border-radius: 8px;
             font-size: 16px;
-            font-weight: 600;
+            font-weight: 700;
             cursor: pointer;
             transition: all 0.2s;
         }
-        .btn-nav:hover {
+
+        .nav-btn:hover {
             background: #1d4ed8;
             transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
         }
-        .btn-nav:disabled {
+
+        .nav-btn:disabled {
             background: #d1d5db;
             cursor: not-allowed;
             transform: none;
         }
-        .btn-nav.btn-prev {
+
+        .nav-btn.prev {
             background: #6b7280;
         }
-        .btn-nav.btn-prev:hover {
+
+        .nav-btn.prev:hover {
             background: #4b5563;
-        }
-
-        /* Lesson Screens */
-        .lesson-screen {
-            display: none;
-        }
-        .lesson-screen.active {
-            display: block;
-        }
-
-        .back-link {
-            display: inline-block;
-            margin-bottom: 20px;
-            color: #2563eb;
-            text-decoration: none;
-            font-weight: 600;
-        }
-        .back-link:hover {
-            text-decoration: underline;
         }
 
         /* Quiz Styles */
         .quiz-container {
-            background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+            background: white;
+            border-radius: 16px;
+            padding: 40px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.08);
             border: 2px solid #2563eb;
-            border-radius: 12px;
-            padding: 30px;
-            margin: 40px 0 30px 0;
         }
+
         .quiz-header {
             text-align: center;
-            margin-bottom: 25px;
+            margin-bottom: 40px;
         }
+
         .quiz-header h2 {
             color: #2563eb;
-            font-size: 28px;
-            margin-bottom: 10px;
+            font-size: 32px;
+            margin-bottom: 12px;
         }
+
         .quiz-header p {
-            color: var(--text-secondary);
-            font-size: 16px;
-        }
-        .question-card {
-            background: white;
-            padding: 25px;
-            border-radius: 8px;
-            margin-bottom: 20px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-        .question-text {
+            color: #4a4a4a;
             font-size: 18px;
-            font-weight: 600;
-            color: var(--text-primary);
-            margin-bottom: 15px;
         }
+
+        .question-card {
+            background: #f8f9fa;
+            padding: 32px;
+            border-radius: 12px;
+            margin-bottom: 24px;
+        }
+
+        .question-text {
+            font-size: 20px;
+            font-weight: 700;
+            color: #000000;
+            margin-bottom: 20px;
+        }
+
         .answer-option {
-            background: #f9fafb;
-            padding: 15px;
-            border: 2px solid #e5e7eb;
+            background: white;
+            padding: 16px 20px;
+            border: 2px solid #e5e5e5;
             border-radius: 8px;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
             cursor: pointer;
             transition: all 0.2s;
+            font-size: 16px;
+            color: #000000;
         }
+
         .answer-option:hover {
             border-color: #2563eb;
             background: #eff6ff;
         }
+
         .answer-option.selected {
             border-color: #2563eb;
             background: #dbeafe;
         }
+
         .answer-option.correct {
             border-color: #10b981;
             background: #d1fae5;
         }
+
         .answer-option.incorrect {
             border-color: #dc2626;
             background: #fee2e2;
         }
+
         .btn-submit-quiz {
             display: block;
             width: 100%;
             max-width: 300px;
-            margin: 20px auto;
-            padding: 15px;
+            margin: 32px auto;
+            padding: 16px;
             background: #2563eb;
             color: white;
-            text-align: center;
-            border-radius: 8px;
-            font-size: 16px;
-            font-weight: 600;
             border: none;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: 700;
             cursor: pointer;
             transition: background 0.2s;
         }
+
         .btn-submit-quiz:hover {
             background: #1d4ed8;
         }
+
         .btn-submit-quiz:disabled {
             background: #9ca3af;
             cursor: not-allowed;
         }
+
         .quiz-result {
             background: white;
-            padding: 25px;
-            border-radius: 8px;
+            padding: 32px;
+            border-radius: 12px;
             text-align: center;
-            margin-top: 20px;
+            margin-top: 24px;
         }
+
         .quiz-result.pass {
             border: 3px solid #10b981;
         }
+
         .quiz-result.fail {
             border: 3px solid #dc2626;
         }
+
         .result-text {
-            font-size: 24px;
-            font-weight: 700;
-            margin-bottom: 10px;
+            font-size: 28px;
+            font-weight: 800;
+            margin-bottom: 12px;
         }
+
         .result-score {
-            font-size: 18px;
-            color: var(--text-secondary);
-            margin-bottom: 20px;
+            font-size: 20px;
+            color: #4a4a4a;
+            margin-bottom: 24px;
         }
+
         .btn-retry {
             padding: 12px 24px;
             background: #f59e0b;
@@ -411,64 +624,38 @@
             border: none;
             border-radius: 8px;
             font-size: 16px;
-            font-weight: 600;
+            font-weight: 700;
             cursor: pointer;
-            transition: background 0.2s;
         }
+
         .btn-retry:hover {
             background: #d97706;
         }
+
         .btn-finish {
             display: block;
             width: 100%;
             max-width: 400px;
-            margin: 30px auto;
+            margin: 40px auto 0;
             padding: 18px;
             background: #2563eb;
             color: white;
-            text-align: center;
-            text-decoration: none;
+            border: none;
             border-radius: 8px;
             font-size: 18px;
-            font-weight: 600;
-            transition: background 0.2s;
-            border: none;
+            font-weight: 700;
             cursor: pointer;
+            transition: background 0.2s;
         }
+
         .btn-finish:hover {
             background: #1d4ed8;
         }
+
         .btn-finish:disabled {
             background: #9ca3af;
             cursor: not-allowed;
             opacity: 0.6;
-        }
-
-        .typing-indicator {
-            display: flex;
-            gap: 4px;
-            padding: 12px 16px;
-        }
-        .typing-dot {
-            width: 8px;
-            height: 8px;
-            background: #9ca3af;
-            border-radius: 50%;
-            animation: typing 1.4s infinite;
-        }
-        .typing-dot:nth-child(2) {
-            animation-delay: 0.2s;
-        }
-        .typing-dot:nth-child(3) {
-            animation-delay: 0.4s;
-        }
-        @keyframes typing {
-            0%, 60%, 100% {
-                transform: translateY(0);
-            }
-            30% {
-                transform: translateY(-10px);
-            }
         }
     </style>
 </head>
@@ -481,473 +668,215 @@
                 <ul class="nav-links">
                     <li><a href="/">Home</a></li>
                     <li><a href="dashboard">Dashboard</a></li>
-                    <li id="authButtons" style="opacity: 0;">
-                    </li>
+                    <li id="authButtons" style="opacity: 0;"></li>
                 </ul>
             </div>
         </div>
     </nav>
 
-    <!-- Lesson Content -->
-    <div class="lesson-container">
-        <a href="/path1-lessons" class="back-link">← Back to Path 1 Lessons</a>
+    <a href="/path1-lessons" class="back-link">← Back</a>
 
-        <!-- Header -->
-        <div class="lesson-header">
+    <!-- Progress Bar -->
+    <div class="progress-container">
+        <div class="progress-bar" id="progressBar"></div>
+    </div>
+
+    <!-- Chapter 1: Hero -->
+    <div class="chapter hero-chapter active" data-chapter="1">
+        <div class="chapter-content">
             <div class="lesson-number">LESSON 4</div>
-            <h1>High-Yield Savings: The Group Chat That Changed Everything</h1>
+            <h1 class="hero-title">High-Yield Savings Accounts</h1>
+            <p class="hero-subtitle">Stop leaving money on the table. Learn how to make your savings work 40x harder with the same safety.</p>
+            <div class="chapter-nav">
+                <div></div>
+                <button class="nav-btn" onclick="nextChapter()">Start Learning →</button>
+            </div>
         </div>
+    </div>
 
-        <div class="lesson-intro">
-            <p><strong>Format:</strong> You're reading a real text conversation between Alex (who just discovered high-yield savings) and Jordan (their skeptical best friend). Watch how Alex explains everything through their chat.</p>
-        </div>
+    <!-- Chapter 2: The Problem -->
+    <div class="chapter content-chapter" data-chapter="2">
+        <div class="chapter-content">
+            <span class="section-number">The Problem</span>
+            <h2 class="content-title">Your Bank Is Paying You Almost Nothing</h2>
+            <p class="content-text">Most traditional banks pay <strong>0.01% to 0.10% APY</strong> on savings accounts. That means if you have $5,000 saved, you earn about <strong>$5 per year</strong>.</p>
+            <p class="content-text">Why? Because they can get away with it. They take your money, lend it out at 7-20% interest, and pocket the difference.</p>
 
-        <!-- Screen 1: The Discovery -->
-        <div class="lesson-screen active" data-screen="1">
-            <div class="phone-container">
-                <div class="phone-screen">
-                    <div class="phone-header">
-                        <div class="phone-avatar">A</div>
-                        <div class="phone-contact-info">
-                            <h3>Alex</h3>
-                            <p>Online</p>
-                        </div>
+            <div class="highlight-box">
+                <h3>The Reality Check</h3>
+                <p>With inflation around 3% per year, your money sitting in a traditional savings account is actually <strong>losing value</strong>. You're going backwards.</p>
+            </div>
+
+            <div class="comparison-grid">
+                <div class="comparison-card losing">
+                    <h3>Traditional Savings</h3>
+                    <div class="rate">0.01%</div>
+                    <div class="comparison-details">
+                        <p><strong>$5,000 saved</strong></p>
+                        <p>After 1 year: $5,000.50</p>
+                        <p><strong>Earned: $0.50</strong></p>
+                        <p style="margin-top: 12px; font-style: italic;">Basically nothing. Not even worth checking.</p>
                     </div>
-                    <div class="chat-container" id="chat1">
-                        <div class="message received">
-                            <div class="message-content">
-                                <div class="message-bubble">DUDE. I just found out I've been losing money for 3 years.</div>
-                                <div class="message-time">2:47 PM</div>
-                            </div>
-                        </div>
-                        <div class="message sent">
-                            <div class="message-content">
-                                <div class="message-bubble">what happened?? did you get scammed?</div>
-                                <div class="message-time">2:47 PM</div>
-                            </div>
-                        </div>
-                        <div class="message received">
-                            <div class="message-content">
-                                <div class="message-bubble">Worse. My bank has been paying me $5 a year in interest on my $5,000 savings.</div>
-                                <div class="message-time">2:48 PM</div>
-                            </div>
-                        </div>
-                        <div class="message received">
-                            <div class="message-content">
-                                <div class="message-bubble">I could have been earning $225/year. I've lost like $600.</div>
-                                <div class="message-time">2:48 PM</div>
-                            </div>
-                        </div>
-                        <div class="message sent">
-                            <div class="message-content">
-                                <div class="message-bubble">wait how is that even possible</div>
-                                <div class="message-time">2:49 PM</div>
-                            </div>
-                        </div>
-                        <div class="message received">
-                            <div class="message-content">
-                                <div class="message-bubble">High-yield savings accounts. They pay like 4-5% interest instead of 0.01%</div>
-                                <div class="message-time">2:49 PM</div>
-                            </div>
-                        </div>
-                        <div class="message sent">
-                            <div class="message-content">
-                                <div class="message-bubble">that sounds too good to be true lol</div>
-                                <div class="message-time">2:50 PM</div>
-                            </div>
-                        </div>
-                        <div class="message received">
-                            <div class="message-content">
-                                <div class="message-bubble">I thought so too but I looked it up. It's legit. Let me show you the math</div>
-                                <div class="message-time">2:50 PM</div>
-                            </div>
-                        </div>
+                </div>
+                <div class="comparison-card winning">
+                    <h3>High-Yield Savings</h3>
+                    <div class="rate">4.50%</div>
+                    <div class="comparison-details">
+                        <p><strong>$5,000 saved</strong></p>
+                        <p>After 1 year: $5,225</p>
+                        <p><strong>Earned: $225</strong></p>
+                        <p style="margin-top: 12px; font-style: italic;">Real money for doing literally nothing.</p>
                     </div>
                 </div>
             </div>
 
-            <div class="lesson-navigation">
-                <div style="width: 100px;"></div>
-                <button class="btn-nav" onclick="nextScreen()">Continue Reading →</button>
+            <div class="chapter-nav">
+                <button class="nav-btn prev" onclick="prevChapter()">← Back</button>
+                <button class="nav-btn" onclick="nextChapter()">Continue →</button>
             </div>
         </div>
+    </div>
 
-        <!-- Screen 2: The Math -->
-        <div class="lesson-screen" data-screen="2">
-            <div class="phone-container">
-                <div class="phone-screen">
-                    <div class="phone-header">
-                        <div class="phone-avatar">A</div>
-                        <div class="phone-contact-info">
-                            <h3>Alex</h3>
-                            <p>Online</p>
-                        </div>
+    <!-- Chapter 3: Interactive Calculator -->
+    <div class="chapter calculator-chapter" data-chapter="3">
+        <div class="chapter-content">
+            <span class="section-number">Interactive Calculator</span>
+            <h2 class="content-title">See Your Own Numbers</h2>
+            <p class="content-text">Adjust the values below to see how much you could be earning with a high-yield savings account.</p>
+
+            <div class="calculator-container">
+                <div class="calculator-inputs">
+                    <div class="input-group">
+                        <label for="savingsAmount">How much do you have saved?</label>
+                        <input type="range" id="savingsAmountSlider" min="100" max="50000" value="5000" step="100" oninput="updateCalculator()">
+                        <div class="range-value">$<span id="savingsAmountValue">5,000</span></div>
                     </div>
-                    <div class="chat-container">
-                        <div class="message received">
-                            <div class="message-content">
-                                <div class="message-bubble">Regular savings account:</div>
-                            </div>
-                        </div>
-                        <div class="data-box">
-                            <div class="data-row">
-                                <span class="data-label">Your Money</span>
-                                <span class="data-value">$5,000</span>
-                            </div>
-                            <div class="data-row">
-                                <span class="data-label">Bank's Rate</span>
-                                <span class="data-value bad">0.01% APY</span>
-                            </div>
-                            <div class="data-row">
-                                <span class="data-label">After 1 Year</span>
-                                <span class="data-value bad">$5,000.50</span>
-                            </div>
-                            <div class="data-row">
-                                <span class="data-label">Interest Earned</span>
-                                <span class="data-value bad">$0.50</span>
-                            </div>
-                        </div>
-                        <div class="message received">
-                            <div class="message-content">
-                                <div class="message-bubble">High-yield savings account:</div>
-                            </div>
-                        </div>
-                        <div class="data-box">
-                            <div class="data-row">
-                                <span class="data-label">Your Money</span>
-                                <span class="data-value">$5,000</span>
-                            </div>
-                            <div class="data-row">
-                                <span class="data-label">Bank's Rate</span>
-                                <span class="data-value good">4.50% APY</span>
-                            </div>
-                            <div class="data-row">
-                                <span class="data-label">After 1 Year</span>
-                                <span class="data-value good">$5,225</span>
-                            </div>
-                            <div class="data-row">
-                                <span class="data-label">Interest Earned</span>
-                                <span class="data-value good">$225</span>
-                            </div>
-                        </div>
-                        <div class="highlight-box">
-                            <strong>The Difference: $224.50 per year</strong>
-                            <p>That's free money just for moving your savings to a different account.</p>
-                        </div>
-                        <div class="message sent">
-                            <div class="message-content">
-                                <div class="message-bubble">okay that's actually insane</div>
-                                <div class="message-time">2:52 PM</div>
-                            </div>
-                        </div>
-                        <div class="message sent">
-                            <div class="message-content">
-                                <div class="message-bubble">but why isn't everyone doing this???</div>
-                                <div class="message-time">2:52 PM</div>
-                            </div>
-                        </div>
+                    <div class="input-group">
+                        <label for="timeYears">For how many years?</label>
+                        <input type="range" id="timeYearsSlider" min="1" max="10" value="5" step="1" oninput="updateCalculator()">
+                        <div class="range-value"><span id="timeYearsValue">5</span> years</div>
+                    </div>
+                </div>
+
+                <div class="chart-container">
+                    <canvas id="growthChart"></canvas>
+                </div>
+
+                <div class="results-grid">
+                    <div class="result-card traditional">
+                        <div class="result-label">Traditional (0.01%)</div>
+                        <div class="result-value" id="traditionalResult">$5,002.50</div>
+                        <div class="result-description">Total after <span id="yearsTraditional">5</span> years</div>
+                    </div>
+                    <div class="result-card high-yield">
+                        <div class="result-label">High-Yield (4.50%)</div>
+                        <div class="result-value" id="highYieldResult">$6,230.47</div>
+                        <div class="result-description">Total after <span id="yearsHighYield">5</span> years</div>
+                    </div>
+                    <div class="difference-card">
+                        <h3>You're Missing Out On</h3>
+                        <div class="difference-amount" id="differenceAmount">$1,227.97</div>
+                        <div class="difference-description">That's free money just for moving your savings to a different account.</div>
                     </div>
                 </div>
             </div>
 
-            <div class="lesson-navigation">
-                <button class="btn-nav btn-prev" onclick="previousScreen()">← Back</button>
-                <button class="btn-nav" onclick="nextScreen()">Continue →</button>
+            <div class="chapter-nav">
+                <button class="nav-btn prev" onclick="prevChapter()">← Back</button>
+                <button class="nav-btn" onclick="nextChapter()">Continue →</button>
             </div>
         </div>
+    </div>
 
-        <!-- Screen 3: The Skepticism -->
-        <div class="lesson-screen" data-screen="3">
-            <div class="phone-container">
-                <div class="phone-screen">
-                    <div class="phone-header">
-                        <div class="phone-avatar">A</div>
-                        <div class="phone-contact-info">
-                            <h3>Alex</h3>
-                            <p>Online</p>
-                        </div>
+    <!-- Chapter 4: How It Works -->
+    <div class="chapter content-chapter" data-chapter="4">
+        <div class="chapter-content">
+            <span class="section-number">How It Works</span>
+            <h2 class="content-title">Why High-Yield Accounts Pay More</h2>
+            <p class="content-text">High-yield savings accounts are offered by <strong>online banks</strong> like Marcus (Goldman Sachs), Ally Bank, American Express, and Discover.</p>
+            <p class="content-text"><strong>No physical branches = way lower costs.</strong> They pass those savings on to you through higher interest rates.</p>
+
+            <div class="highlight-box">
+                <h3>Same Safety, Better Returns</h3>
+                <p>High-yield accounts have the <strong>exact same FDIC insurance</strong> as traditional banks (up to $250,000 per account). Your money is just as safe.</p>
+            </div>
+
+            <p class="content-text"><strong>Common Questions:</strong></p>
+            <p class="content-text"><strong>Q: What's the catch?</strong><br>A: No catch. Online-only = lower costs = higher rates for you.</p>
+            <p class="content-text"><strong>Q: Can I access my money quickly?</strong><br>A: Yes. Transfer back to checking takes 1-3 days. It's a savings account - you shouldn't need instant access.</p>
+            <p class="content-text"><strong>Q: Will rates drop?</strong><br>A: Rates fluctuate with the economy, but high-yield will always pay way more than traditional banks.</p>
+
+            <div class="chapter-nav">
+                <button class="nav-btn prev" onclick="prevChapter()">← Back</button>
+                <button class="nav-btn" onclick="nextChapter()">Continue →</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Chapter 5: Action Steps -->
+    <div class="chapter calculator-chapter" data-chapter="5">
+        <div class="chapter-content">
+            <span class="section-number">Take Action</span>
+            <h2 class="content-title">How to Open a High-Yield Account</h2>
+            <p class="content-text">It takes 10 minutes. Here's exactly what to do:</p>
+
+            <div class="action-steps">
+                <div class="action-step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h4>Compare Banks</h4>
+                        <p>Go to NerdWallet or Bankrate. Look for accounts with 4%+ APY, $0 minimum balance, and no monthly fees.</p>
                     </div>
-                    <div class="chat-container">
-                        <div class="message received">
-                            <div class="message-content">
-                                <div class="message-bubble">Most people don't know about it, or they think it's risky</div>
-                                <div class="message-time">2:53 PM</div>
-                            </div>
-                        </div>
-                        <div class="message sent">
-                            <div class="message-content">
-                                <div class="message-bubble">wait IS it risky?</div>
-                                <div class="message-time">2:53 PM</div>
-                            </div>
-                        </div>
-                        <div class="message received">
-                            <div class="message-content">
-                                <div class="message-bubble">Literally the exact same risk as your regular bank. Same FDIC insurance up to $250k</div>
-                                <div class="message-time">2:53 PM</div>
-                            </div>
-                        </div>
-                        <div class="message received">
-                            <div class="message-content">
-                                <div class="message-bubble">These are real banks. Marcus is backed by Goldman Sachs. Ally has been around since 1919.</div>
-                                <div class="message-time">2:54 PM</div>
-                            </div>
-                        </div>
-                        <div class="message sent">
-                            <div class="message-content">
-                                <div class="message-bubble">ok but why would they pay so much more?</div>
-                                <div class="message-time">2:54 PM</div>
-                            </div>
-                        </div>
-                        <div class="message sent">
-                            <div class="message-content">
-                                <div class="message-bubble">what's the catch</div>
-                                <div class="message-time">2:54 PM</div>
-                            </div>
-                        </div>
-                        <div class="message received">
-                            <div class="message-content">
-                                <div class="message-bubble">No catch. They're online banks = no physical branches = way lower costs</div>
-                                <div class="message-time">2:55 PM</div>
-                            </div>
-                        </div>
-                        <div class="message received">
-                            <div class="message-content">
-                                <div class="message-bubble">They pass those savings on to you through higher interest rates</div>
-                                <div class="message-time">2:55 PM</div>
-                            </div>
-                        </div>
-                        <div class="message sent">
-                            <div class="message-content">
-                                <div class="message-bubble">what if I need my money quickly</div>
-                                <div class="message-time">2:55 PM</div>
-                            </div>
-                        </div>
-                        <div class="message received">
-                            <div class="message-content">
-                                <div class="message-bubble">You can transfer it back to your regular checking account. Takes 1-3 days</div>
-                                <div class="message-time">2:56 PM</div>
-                            </div>
-                        </div>
-                        <div class="message received">
-                            <div class="message-content">
-                                <div class="message-bubble">It's a SAVINGS account, not checking. You're not supposed to touch it every day anyway</div>
-                                <div class="message-time">2:56 PM</div>
-                            </div>
-                        </div>
+                </div>
+                <div class="action-step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h4>Open Account Online</h4>
+                        <p>Click "Open Account" on their website. You'll need your ID, social security number, and address. Takes 10 minutes.</p>
+                    </div>
+                </div>
+                <div class="action-step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h4>Link Your Current Bank</h4>
+                        <p>Enter your current bank's routing and account numbers. This lets you transfer money between accounts.</p>
+                    </div>
+                </div>
+                <div class="action-step">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h4>Transfer Your Savings</h4>
+                        <p>Move your savings money to the high-yield account. Keep your checking account for daily expenses.</p>
+                    </div>
+                </div>
+                <div class="action-step">
+                    <div class="step-number">5</div>
+                    <div class="step-content">
+                        <h4>Watch It Grow</h4>
+                        <p>Check back monthly. You'll see real interest adding up - it's addicting in the best way.</p>
                     </div>
                 </div>
             </div>
 
-            <div class="lesson-navigation">
-                <button class="btn-nav btn-prev" onclick="previousScreen()">← Back</button>
-                <button class="btn-nav" onclick="nextScreen()">Continue →</button>
+            <div class="highlight-box" style="margin-top: 40px;">
+                <h3>The Bottom Line</h3>
+                <p>If someone offered you $200+ every year for 10 minutes of work, you'd do it. That's what this is. <strong>The biggest mistake is doing nothing.</strong></p>
+            </div>
+
+            <div class="chapter-nav">
+                <button class="nav-btn prev" onclick="prevChapter()">← Back</button>
+                <button class="nav-btn" onclick="nextChapter()">Take Quiz →</button>
             </div>
         </div>
+    </div>
 
-        <!-- Screen 4: The Reality Check -->
-        <div class="lesson-screen" data-screen="4">
-            <div class="phone-container">
-                <div class="phone-screen">
-                    <div class="phone-header">
-                        <div class="phone-avatar">A</div>
-                        <div class="phone-contact-info">
-                            <h3>Alex</h3>
-                            <p>Online</p>
-                        </div>
-                    </div>
-                    <div class="chat-container">
-                        <div class="message sent">
-                            <div class="message-content">
-                                <div class="message-bubble">okay you're convincing me</div>
-                                <div class="message-time">2:57 PM</div>
-                            </div>
-                        </div>
-                        <div class="message sent">
-                            <div class="message-content">
-                                <div class="message-bubble">but isn't switching banks a huge pain??</div>
-                                <div class="message-time">2:57 PM</div>
-                            </div>
-                        </div>
-                        <div class="message received">
-                            <div class="message-content">
-                                <div class="message-bubble">I literally opened my account in 10 minutes on my phone</div>
-                                <div class="message-time">2:57 PM</div>
-                            </div>
-                        </div>
-                        <div class="message received">
-                            <div class="message-content">
-                                <div class="message-bubble">You don't even have to close your old account. Just move your savings money.</div>
-                                <div class="message-time">2:58 PM</div>
-                            </div>
-                        </div>
-                        <div class="message received">
-                            <div class="message-content">
-                                <div class="message-bubble">Keep your checking account for daily stuff. High-yield for money you're actually saving.</div>
-                                <div class="message-time">2:58 PM</div>
-                            </div>
-                        </div>
-                        <div class="message sent">
-                            <div class="message-content">
-                                <div class="message-bubble">what did you need to open it?</div>
-                                <div class="message-time">2:58 PM</div>
-                            </div>
-                        </div>
-                        <div class="message received">
-                            <div class="message-content">
-                                <div class="message-bubble">ID, social security number, address. Stuff you already have</div>
-                                <div class="message-time">2:59 PM</div>
-                            </div>
-                        </div>
-                        <div class="message sent">
-                            <div class="message-content">
-                                <div class="message-bubble">which bank did you use?</div>
-                                <div class="message-time">2:59 PM</div>
-                            </div>
-                        </div>
-                        <div class="message received">
-                            <div class="message-content">
-                                <div class="message-bubble">Marcus. But honestly Ally, Discover, American Express all have similar rates around 4-5%</div>
-                                <div class="message-time">2:59 PM</div>
-                            </div>
-                        </div>
-                        <div class="message received">
-                            <div class="message-content">
-                                <div class="message-bubble">Just google "best high yield savings accounts 2025" and pick one with good reviews</div>
-                                <div class="message-time">3:00 PM</div>
-                            </div>
-                        </div>
-                        <div class="message received">
-                            <div class="message-content">
-                                <div class="message-bubble">Don't overthink it. The rates are all pretty close. The real mistake is doing nothing.</div>
-                                <div class="message-time">3:00 PM</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="lesson-navigation">
-                <button class="btn-nav btn-prev" onclick="previousScreen()">← Back</button>
-                <button class="btn-nav" onclick="nextScreen()">Continue →</button>
-            </div>
-        </div>
-
-        <!-- Screen 5: The Action Plan -->
-        <div class="lesson-screen" data-screen="5">
-            <div class="phone-container">
-                <div class="phone-screen">
-                    <div class="phone-header">
-                        <div class="phone-avatar">A</div>
-                        <div class="phone-contact-info">
-                            <h3>Alex</h3>
-                            <p>Online</p>
-                        </div>
-                    </div>
-                    <div class="chat-container">
-                        <div class="message sent">
-                            <div class="message-content">
-                                <div class="message-bubble">alright I'm doing this</div>
-                                <div class="message-time">3:01 PM</div>
-                            </div>
-                        </div>
-                        <div class="message sent">
-                            <div class="message-content">
-                                <div class="message-bubble">walk me through it</div>
-                                <div class="message-time">3:01 PM</div>
-                            </div>
-                        </div>
-                        <div class="message received">
-                            <div class="message-content">
-                                <div class="message-bubble">OK here's exactly what I did:</div>
-                                <div class="message-time">3:01 PM</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="action-section">
-                <h3>Alex's Step-by-Step Guide:</h3>
-                <ul class="action-list">
-                    <li class="action-item">
-                        <strong>1. Compare Banks</strong>
-                        <p>Go to NerdWallet or Bankrate. Look for accounts with 4%+ APY, $0 minimum balance, no monthly fees.</p>
-                    </li>
-                    <li class="action-item">
-                        <strong>2. Open Account (10 minutes)</strong>
-                        <p>Click "Open Account" on the bank's website. Fill out the form with your info. They verify your identity instantly.</p>
-                    </li>
-                    <li class="action-item">
-                        <strong>3. Link Your Current Bank</strong>
-                        <p>Enter your current bank's routing and account numbers (find these on your checks or banking app). Takes 2-3 days to verify.</p>
-                    </li>
-                    <li class="action-item">
-                        <strong>4. Transfer Your Savings</strong>
-                        <p>Move your savings money (not your bill money). Keep enough in checking for daily expenses.</p>
-                    </li>
-                    <li class="action-item">
-                        <strong>5. Watch It Grow</strong>
-                        <p>Check back in a month. You'll actually see interest adding up. It's addicting in the best way.</p>
-                    </li>
-                </ul>
-            </div>
-
-            <div class="phone-container">
-                <div class="phone-screen">
-                    <div class="phone-header">
-                        <div class="phone-avatar">A</div>
-                        <div class="phone-contact-info">
-                            <h3>Alex</h3>
-                            <p>Online</p>
-                        </div>
-                    </div>
-                    <div class="chat-container">
-                        <div class="message sent">
-                            <div class="message-content">
-                                <div class="message-bubble">wait that's actually super easy</div>
-                                <div class="message-time">3:05 PM</div>
-                            </div>
-                        </div>
-                        <div class="message received">
-                            <div class="message-content">
-                                <div class="message-bubble">I know right? I was expecting it to be way harder</div>
-                                <div class="message-time">3:05 PM</div>
-                            </div>
-                        </div>
-                        <div class="message received">
-                            <div class="message-content">
-                                <div class="message-bubble">That's why I'm so mad I waited 3 years. I literally gave away $600 because I was too lazy to spend 10 minutes</div>
-                                <div class="message-time">3:06 PM</div>
-                            </div>
-                        </div>
-                        <div class="message sent">
-                            <div class="message-content">
-                                <div class="message-bubble">I'm opening one right now</div>
-                                <div class="message-time">3:06 PM</div>
-                            </div>
-                        </div>
-                        <div class="message received">
-                            <div class="message-content">
-                                <div class="message-bubble">YES!!! Text me when you're done. Proud of you for actually doing it and not just talking about it</div>
-                                <div class="message-time">3:07 PM</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="lesson-navigation">
-                <button class="btn-nav btn-prev" onclick="previousScreen()">← Back</button>
-                <button class="btn-nav" onclick="nextScreen()">Take The Quiz →</button>
-            </div>
-        </div>
-
-        <!-- Screen 6: Quiz -->
-        <div class="lesson-screen" data-screen="6">
+    <!-- Chapter 6: Quiz -->
+    <div class="chapter content-chapter" data-chapter="6">
+        <div class="chapter-content">
             <div class="quiz-container" id="quizContainer">
                 <div class="quiz-header">
-                    <h2>Quick Check: Did You Get It?</h2>
-                    <p>Answer these 4 questions to show you understood the conversation. Need all correct to pass.</p>
+                    <h2>Knowledge Check</h2>
+                    <p>Answer these 4 questions to complete the lesson. Need all correct to pass.</p>
                 </div>
                 <div id="quizQuestions"></div>
                 <button class="btn-submit-quiz" id="submitQuiz" onclick="submitQuiz()">Submit Answers</button>
@@ -956,8 +885,8 @@
 
             <button class="btn-finish" id="finishBtn" onclick="finishLesson()" disabled>Complete Lesson</button>
 
-            <div class="lesson-navigation">
-                <button class="btn-nav btn-prev" onclick="previousScreen()">← Back</button>
+            <div class="chapter-nav">
+                <button class="nav-btn prev" onclick="prevChapter()">← Back</button>
                 <div></div>
             </div>
         </div>
@@ -999,6 +928,10 @@
     <script src="lesson-completion.js"></script>
     <script src="animations.js"></script>
     <script>
+        let currentChapter = 1;
+        const totalChapters = 6;
+        let growthChart = null;
+
         async function updateNav() {
             const authButtons = document.getElementById('authButtons');
             const cachedAuth = localStorage.getItem('authState');
@@ -1031,76 +964,172 @@
             localStorage.removeItem('token');
             localStorage.removeItem('userId');
             try {
-                await fetch(`${API_URL}/auth/logout`, {
-                    method: 'POST',
-                    credentials: 'include'
-                });
+                await fetch(`${API_URL}/auth/logout`, { method: 'POST', credentials: 'include' });
                 window.location.href = '/index.html';
             } catch (error) {
                 window.location.href = '/index.html';
             }
         }
 
+        function showChapter(chapterNum) {
+            document.querySelectorAll('.chapter').forEach(ch => ch.classList.remove('active'));
+            const targetChapter = document.querySelector(`.chapter[data-chapter="${chapterNum}"]`);
+            if (targetChapter) {
+                targetChapter.classList.add('active');
+                currentChapter = chapterNum;
+                updateProgressBar();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+
+                if (chapterNum === 3 && !growthChart) {
+                    setTimeout(initChart, 100);
+                }
+            }
+        }
+
+        function nextChapter() {
+            if (currentChapter < totalChapters) {
+                showChapter(currentChapter + 1);
+            }
+        }
+
+        function prevChapter() {
+            if (currentChapter > 1) {
+                showChapter(currentChapter - 1);
+            }
+        }
+
+        function updateProgressBar() {
+            const progress = (currentChapter / totalChapters) * 100;
+            document.getElementById('progressBar').style.width = progress + '%';
+        }
+
+        function initChart() {
+            const ctx = document.getElementById('growthChart').getContext('2d');
+            growthChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: [],
+                    datasets: [{
+                        label: 'Traditional Savings (0.01%)',
+                        data: [],
+                        borderColor: '#dc2626',
+                        backgroundColor: 'rgba(220, 38, 38, 0.1)',
+                        borderWidth: 3,
+                        tension: 0.4
+                    }, {
+                        label: 'High-Yield Savings (4.50%)',
+                        data: [],
+                        borderColor: '#10b981',
+                        backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                        borderWidth: 3,
+                        tension: 0.4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: true,
+                            position: 'top',
+                            labels: {
+                                font: { size: 14, weight: 'bold' },
+                                padding: 15
+                            }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return context.dataset.label + ': $' + context.parsed.y.toFixed(2);
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: false,
+                            ticks: {
+                                callback: function(value) {
+                                    return '$' + value.toLocaleString();
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+            updateCalculator();
+        }
+
+        function updateCalculator() {
+            const principal = parseFloat(document.getElementById('savingsAmountSlider').value);
+            const years = parseInt(document.getElementById('timeYearsSlider').value);
+            const traditionalRate = 0.0001;
+            const highYieldRate = 0.045;
+
+            document.getElementById('savingsAmountValue').textContent = principal.toLocaleString();
+            document.getElementById('timeYearsValue').textContent = years;
+
+            const labels = [];
+            const traditionalData = [];
+            const highYieldData = [];
+
+            for (let year = 0; year <= years; year++) {
+                labels.push('Year ' + year);
+                traditionalData.push(principal * Math.pow(1 + traditionalRate, year));
+                highYieldData.push(principal * Math.pow(1 + highYieldRate, year));
+            }
+
+            const traditionalFinal = principal * Math.pow(1 + traditionalRate, years);
+            const highYieldFinal = principal * Math.pow(1 + highYieldRate, years);
+            const difference = highYieldFinal - traditionalFinal;
+
+            document.getElementById('traditionalResult').textContent = '$' + traditionalFinal.toFixed(2);
+            document.getElementById('highYieldResult').textContent = '$' + highYieldFinal.toFixed(2);
+            document.getElementById('differenceAmount').textContent = '$' + difference.toFixed(2);
+            document.getElementById('yearsTraditional').textContent = years;
+            document.getElementById('yearsHighYield').textContent = years;
+
+            if (growthChart) {
+                growthChart.data.labels = labels;
+                growthChart.data.datasets[0].data = traditionalData;
+                growthChart.data.datasets[1].data = highYieldData;
+                growthChart.update();
+            }
+        }
+
         const quizData = [
             {
-                versions: [
-                    {
-                        question: "According to Alex, how much interest does a high-yield savings account typically pay compared to traditional banks?",
-                        options: [
-                            "About the same",
-                            "2-3 times more",
-                            "40-50 times more (4-5% vs 0.01%)",
-                            "10 times more"
-                        ],
-                        correct: 2
-                    }
-                ]
+                question: "What's the typical interest rate for high-yield savings accounts as of 2025?",
+                options: ["0.01% APY", "1.00% APY", "4.00-5.00% APY", "10.00% APY"],
+                correct: 2
             },
             {
-                versions: [
-                    {
-                        question: "Why can online banks afford to pay higher interest rates?",
-                        options: [
-                            "They take bigger risks with your money",
-                            "No physical branches = lower costs",
-                            "They charge hidden fees",
-                            "They're promotional rates that will drop soon"
-                        ],
-                        correct: 1
-                    }
-                ]
+                question: "Why can online banks offer higher interest rates?",
+                options: [
+                    "They take bigger risks with your money",
+                    "No physical branches = lower costs",
+                    "They charge hidden fees",
+                    "It's a temporary promotion"
+                ],
+                correct: 1
             },
             {
-                versions: [
-                    {
-                        question: "Are high-yield savings accounts FDIC insured the same as regular banks?",
-                        options: [
-                            "No, they're riskier",
-                            "Only up to $50,000",
-                            "Yes, same FDIC insurance up to $250,000",
-                            "They don't have insurance"
-                        ],
-                        correct: 2
-                    }
-                ]
+                question: "Are high-yield savings accounts FDIC insured like regular banks?",
+                options: [
+                    "No, they're riskier",
+                    "Only up to $50,000",
+                    "Yes, up to $250,000 per account",
+                    "No insurance needed"
+                ],
+                correct: 2
             },
             {
-                versions: [
-                    {
-                        question: "According to Alex's conversation, what's the biggest mistake people make?",
-                        options: [
-                            "Choosing the wrong bank",
-                            "Not researching enough",
-                            "Doing nothing because it seems like too much work",
-                            "Transferring all their money at once"
-                        ],
-                        correct: 2
-                    }
-                ]
+                question: "How much could you earn on $5,000 over 1 year at 4.50% APY?",
+                options: ["$5", "$50", "$225", "$500"],
+                correct: 2
             }
         ];
 
-        let currentQuestions = [];
         let userAnswers = [];
         let quizPassed = false;
 
@@ -1117,15 +1146,15 @@
                 document.getElementById('quizContainer').style.display = 'none';
                 return;
             }
-            currentQuestions = quizData.map(q => q.versions[0]);
             renderQuiz();
         }
 
         function renderQuiz() {
             const questionsContainer = document.getElementById('quizQuestions');
             questionsContainer.innerHTML = '';
-            userAnswers = new Array(currentQuestions.length).fill(null);
-            currentQuestions.forEach((q, qIndex) => {
+            userAnswers = new Array(quizData.length).fill(null);
+
+            quizData.forEach((q, qIndex) => {
                 const questionCard = document.createElement('div');
                 questionCard.className = 'question-card';
                 questionCard.innerHTML = `
@@ -1139,6 +1168,7 @@
                 `;
                 questionsContainer.appendChild(questionCard);
             });
+
             document.getElementById('submitQuiz').disabled = false;
             document.getElementById('quizResult').innerHTML = '';
         }
@@ -1162,22 +1192,24 @@
                 return;
             }
             let correct = 0;
-            currentQuestions.forEach((q, index) => {
+            quizData.forEach((q, index) => {
                 if (userAnswers[index] === q.correct) correct++;
             });
-            const percentage = Math.round((correct / currentQuestions.length) * 100);
+            const percentage = Math.round((correct / quizData.length) * 100);
             const passed = percentage === 100;
+
             document.querySelectorAll('.question-card').forEach((card, qIndex) => {
                 const options = card.querySelectorAll('.answer-option');
                 options.forEach((opt, oIndex) => {
                     opt.style.pointerEvents = 'none';
-                    if (oIndex === currentQuestions[qIndex].correct) {
+                    if (oIndex === quizData[qIndex].correct) {
                         opt.classList.add('correct');
                     } else if (oIndex === userAnswers[qIndex]) {
                         opt.classList.add('incorrect');
                     }
                 });
             });
+
             const resultDiv = document.getElementById('quizResult');
             if (passed) {
                 quizPassed = true;
@@ -1186,17 +1218,17 @@
                 document.getElementById('finishBtn').disabled = false;
                 resultDiv.innerHTML = `
                     <div class="quiz-result pass">
-                        <div class="result-text" style="color: #10b981;">Perfect! You Got It 🎉</div>
-                        <div class="result-score">${correct} out of ${currentQuestions.length} correct</div>
-                        <p style="color: var(--text-secondary);">You understood the conversation. Now go open that account!</p>
+                        <div class="result-text" style="color: #10b981;">Perfect Score!</div>
+                        <div class="result-score">${correct} out of ${quizData.length} correct</div>
+                        <p style="color: #4a4a4a;">You understand high-yield savings accounts. Now go open one!</p>
                     </div>
                 `;
             } else {
                 resultDiv.innerHTML = `
                     <div class="quiz-result fail">
                         <div class="result-text" style="color: #dc2626;">Not Quite</div>
-                        <div class="result-score">${correct} out of ${currentQuestions.length} correct</div>
-                        <p style="color: var(--text-secondary); margin-bottom: 15px;">Need all correct to pass. Re-read the conversation and try again!</p>
+                        <div class="result-score">${correct} out of ${quizData.length} correct</div>
+                        <p style="color: #4a4a4a; margin-bottom: 15px;">Need all correct to pass. Review the lesson and try again!</p>
                         <button class="btn-retry" onclick="retryQuiz()">Try Again</button>
                     </div>
                 `;
@@ -1220,35 +1252,9 @@
             }
         }
 
-        let currentScreen = 1;
-        const totalScreens = 6;
-
-        function showScreen(screenNumber) {
-            document.querySelectorAll('.lesson-screen').forEach(screen => {
-                screen.classList.remove('active');
-            });
-            const targetScreen = document.querySelector(`.lesson-screen[data-screen="${screenNumber}"]`);
-            if (targetScreen) {
-                targetScreen.classList.add('active');
-                currentScreen = screenNumber;
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            }
-        }
-
-        function nextScreen() {
-            if (currentScreen < totalScreens) {
-                showScreen(currentScreen + 1);
-            }
-        }
-
-        function previousScreen() {
-            if (currentScreen > 1) {
-                showScreen(currentScreen - 1);
-            }
-        }
-
         updateNav();
         initQuiz();
+        updateProgressBar();
     </script>
 </body>
 </html>
