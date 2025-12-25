@@ -41,36 +41,36 @@
 
 /* Specific Icon Types */
 .icon-problem {
-    background: #FEE2E2;
+    background: rgba(239, 68, 68, 0.15);
     border-radius: 50%;
 }
 
 .icon-solution {
-    background: #D1FAE5;
+    background: rgba(0, 166, 118, 0.15);
     border-radius: 50%;
 }
 
 .icon-goal {
-    background: #DBEAFE;
+    background: rgba(59, 130, 246, 0.15);
     border-radius: 50%;
 }
 
 .icon-warning {
-    background: #FEF3C7;
+    background: rgba(245, 158, 11, 0.15);
     border-radius: 50%;
 }
 
 .icon-success {
-    background: #D1FAE5;
+    background: rgba(0, 166, 118, 0.15);
     border-radius: 50%;
 }
 
 .icon-error {
-    background: #FEE2E2;
+    background: rgba(239, 68, 68, 0.15);
     border-radius: 50%;
 }
 
 .icon-info {
-    background: #EFF6FF;
+    background: rgba(59, 130, 246, 0.15);
     border-radius: 50%;
 }
