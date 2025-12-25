@@ -1182,3 +1182,272 @@ html {
         scroll-behavior: auto;
     }
 }
+
+/* ============================================
+   PREMIUM DARK THEME - HOMEPAGE ONLY
+   ============================================ */
+
+body.homepage-dark {
+    background-color: #0A0A0B;
+    color: #E5E5E5;
+}
+
+/* Navigation - Dark Premium */
+body.homepage-dark .navbar {
+    background-color: #141416;
+    border-bottom: 1px solid #1F1F23;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+}
+
+body.homepage-dark .logo {
+    color: #FFFFFF;
+}
+
+body.homepage-dark .logo-accent {
+    color: #00A676;
+}
+
+body.homepage-dark .nav-links a {
+    color: #C4C4C7;
+}
+
+body.homepage-dark .nav-links a:hover {
+    color: #FFFFFF;
+}
+
+body.homepage-dark .btn-primary {
+    background: linear-gradient(135deg, #00A676 0%, #008C62 100%);
+    color: #0A0A0B;
+    box-shadow: 0 4px 12px rgba(0, 166, 118, 0.25);
+}
+
+body.homepage-dark .nav-links .btn-primary:hover {
+    background: linear-gradient(135deg, #00B87F 0%, #00A073 100%) !important;
+    box-shadow: 0 6px 16px rgba(0, 166, 118, 0.35) !important;
+}
+
+body.homepage-dark .btn-primary:hover {
+    background: linear-gradient(135deg, #00B87F 0%, #00A073 100%);
+    box-shadow: 0 8px 20px rgba(0, 166, 118, 0.4);
+}
+
+/* Hero Section - Premium Dark */
+body.homepage-dark .hero {
+    background: linear-gradient(135deg, #141416 0%, #1A1A1D 50%, #141416 100%);
+    border-bottom: 1px solid #1F1F23;
+}
+
+body.homepage-dark .hero-title {
+    color: #FFFFFF;
+}
+
+body.homepage-dark .highlight {
+    color: #00A676;
+}
+
+body.homepage-dark .hero-subtitle {
+    color: #B8B8BC;
+    opacity: 1;
+}
+
+/* Problem Section - Elegant Grey */
+body.homepage-dark .problem-section {
+    background-color: #0A0A0B;
+}
+
+body.homepage-dark .problem-content h2 {
+    color: #FFFFFF;
+}
+
+body.homepage-dark .problem-card {
+    background: linear-gradient(135deg, #141416 0%, #1A1A1D 100%);
+    border: 1px solid #1F1F23;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+body.homepage-dark .problem-card:hover {
+    border-color: #2A2A2F;
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.6);
+    transform: translateY(-8px);
+}
+
+body.homepage-dark .problem-card h3 {
+    color: #FFFFFF;
+}
+
+body.homepage-dark .problem-card p {
+    color: #B8B8BC;
+}
+
+/* Solution Section - Premium */
+body.homepage-dark .solution-section {
+    background: linear-gradient(135deg, #141416 0%, #1A1A1D 100%);
+    border-top: 1px solid #1F1F23;
+    border-bottom: 1px solid #1F1F23;
+}
+
+body.homepage-dark .section-title {
+    color: #FFFFFF;
+}
+
+body.homepage-dark .section-subtitle {
+    color: #B8B8BC;
+}
+
+/* Features Section - Luxurious Dark */
+body.homepage-dark .features-section {
+    background-color: #0A0A0B;
+}
+
+body.homepage-dark .feature-card {
+    background: linear-gradient(135deg, #141416 0%, #1A1A1D 100%);
+    border: 1px solid #1F1F23;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+body.homepage-dark .feature-card:hover {
+    border-color: #2A2A2F;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6);
+}
+
+body.homepage-dark .feature-card h3 {
+    color: #FFFFFF;
+}
+
+body.homepage-dark .feature-card p {
+    color: #B8B8BC;
+}
+
+body.homepage-dark .feature-card::after {
+    background: linear-gradient(90deg, transparent, #00A676, transparent);
+}
+
+/* Pricing Section - Premium Cards */
+body.homepage-dark .pricing-section {
+    background: linear-gradient(135deg, #141416 0%, #1A1A1D 100%);
+    border-top: 1px solid #1F1F23;
+    border-bottom: 1px solid #1F1F23;
+}
+
+body.homepage-dark .pricing-card {
+    background: linear-gradient(135deg, #1A1A1D 0%, #141416 100%);
+    border: 2px solid #1F1F23;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+body.homepage-dark .pricing-card:hover {
+    border-color: #00A676;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6);
+}
+
+body.homepage-dark .pricing-card-featured {
+    border-color: #00A676;
+    box-shadow: 0 12px 32px rgba(0, 166, 118, 0.3);
+}
+
+body.homepage-dark .pricing-header h3 {
+    color: #FFFFFF;
+}
+
+body.homepage-dark .price-amount {
+    color: #00A676;
+}
+
+body.homepage-dark .price-period,
+body.homepage-dark .pricing-description {
+    color: #B8B8BC;
+}
+
+body.homepage-dark .feature-included {
+    color: #E5E5E5;
+}
+
+body.homepage-dark .feature-excluded {
+    color: #6B6B6F;
+}
+
+body.homepage-dark .pricing-guarantee p {
+    color: #B8B8BC;
+}
+
+body.homepage-dark .popular-badge {
+    background: linear-gradient(135deg, #00A676 0%, #008C62 100%);
+    color: #FFFFFF;
+    box-shadow: 0 4px 12px rgba(0, 166, 118, 0.3);
+}
+
+body.homepage-dark .pricing-header {
+    border-bottom-color: #1F1F23;
+}
+
+body.homepage-dark .pricing-guarantee {
+    border-top-color: #1F1F23;
+}
+
+/* Testimonials Section - Elegant */
+body.homepage-dark .testimonials-section {
+    background-color: #0A0A0B;
+}
+
+body.homepage-dark .testimonial-card {
+    background: linear-gradient(135deg, #141416 0%, #1A1A1D 100%);
+    border: 1px solid #1F1F23;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+body.homepage-dark .testimonial-text {
+    color: #E5E5E5;
+}
+
+body.homepage-dark .testimonial-author strong {
+    color: #FFFFFF;
+}
+
+body.homepage-dark .testimonial-author span {
+    color: #9A9A9E;
+}
+
+/* CTA Section - Bold Premium */
+body.homepage-dark .cta-section {
+    background: linear-gradient(135deg, #141416 0%, #1A1A1D 50%, #141416 100%);
+    border-top: 1px solid #1F1F23;
+    border-bottom: 1px solid #1F1F23;
+}
+
+body.homepage-dark .cta-content h2 {
+    color: #FFFFFF;
+}
+
+body.homepage-dark .cta-content p {
+    color: #B8B8BC;
+}
+
+/* Footer - Deep Dark */
+body.homepage-dark .footer {
+    background-color: #0A0A0B;
+    border-top: 1px solid #1F1F23;
+}
+
+body.homepage-dark .footer-section h4 {
+    color: #FFFFFF;
+}
+
+body.homepage-dark .footer-section p {
+    color: #9A9A9E;
+}
+
+body.homepage-dark .footer-section a {
+    color: #B8B8BC;
+}
+
+body.homepage-dark .footer-section a:hover {
+    color: #FFFFFF;
+}
+
+body.homepage-dark .footer-bottom {
+    border-top: 1px solid #1F1F23;
+}
+
+body.homepage-dark .footer-bottom p {
+    color: #6B6B6F;
+}
