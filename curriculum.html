@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Curriculum - FinanceU</title>
+    <title>Learning Paths - FinanceU</title>
     <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
     <link rel="icon" type="image/svg+xml" sizes="16x16" href="assets/favicon-16x16.svg">
     <link rel="icon" type="image/svg+xml" sizes="32x32" href="assets/favicon-32x32.svg">
@@ -66,18 +66,18 @@
             text-transform: uppercase;
             letter-spacing: 1px;
         }
-        .pillar-info {
+        .path-info {
             background: white;
             padding: 80px 20px;
             text-align: center;
         }
-        .pillar-info h2 {
+        .path-info h2 {
             font-size: 42px;
             margin-bottom: 20px;
             color: var(--text-dark);
             font-weight: 700;
         }
-        .pillar-info p {
+        .path-info p {
             font-size: 20px;
             color: var(--text-secondary);
             max-width: 900px;
@@ -85,12 +85,12 @@
             line-height: 1.8;
         }
 
-        /* Premium Pillar Cards */
-        .pillars-section {
+        /* Premium Path Cards */
+        .paths-section {
             background: linear-gradient(to bottom, #f9fafb 0%, white 100%);
             padding: 60px 20px;
         }
-        .pillar-card-premium {
+        .path-card-premium {
             background: white;
             border-radius: 16px;
             padding: 0;
@@ -103,11 +103,11 @@
             display: flex;
             flex-direction: column;
         }
-        .pillar-card-premium:hover {
+        .path-card-premium:hover {
             transform: translateY(-8px);
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
         }
-        .pillar-card-premium::before {
+        .path-card-premium::before {
             content: '';
             position: absolute;
             top: 0;
@@ -119,17 +119,17 @@
             transform-origin: left;
             transition: transform 0.4s ease-out;
         }
-        .pillar-card-premium:hover::before {
+        .path-card-premium:hover::before {
             transform: scaleX(1);
         }
-        .pillar-card-header {
+        .path-card-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding: 20px 20px 12px;
             border-bottom: 1px solid #f3f4f6;
         }
-        .pillar-icon {
+        .path-icon {
             width: 56px;
             height: 56px;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -141,10 +141,10 @@
             transition: transform 0.3s ease-out;
             flex-shrink: 0;
         }
-        .pillar-card-premium:hover .pillar-icon {
+        .path-card-premium:hover .path-icon {
             transform: scale(1.1) rotate(5deg);
         }
-        .pillar-badges {
+        .path-badges {
             display: flex;
             gap: 6px;
             flex-direction: column;
@@ -186,13 +186,13 @@
             background-color: #9ca3af;
             color: white;
         }
-        .pillar-card-body {
+        .path-card-body {
             padding: 20px;
             flex: 1;
             display: flex;
             flex-direction: column;
         }
-        .pillar-number {
+        .path-number {
             font-size: 13px;
             color: var(--secondary-color);
             font-weight: 700;
@@ -200,20 +200,20 @@
             letter-spacing: 1px;
             margin-bottom: 6px;
         }
-        .pillar-title {
+        .path-title {
             font-size: 24px;
             font-weight: 700;
             color: var(--text-dark);
             margin-bottom: 12px;
             line-height: 1.2;
         }
-        .pillar-description {
+        .path-description {
             font-size: 15px;
             color: var(--text-secondary);
             line-height: 1.6;
             margin-bottom: 16px;
         }
-        .pillar-meta {
+        .path-meta {
             display: flex;
             gap: 20px;
             margin-bottom: 16px;
@@ -229,10 +229,10 @@
         .meta-icon {
             font-size: 16px;
         }
-        .pillar-topics {
+        .path-topics {
             margin-bottom: 16px;
         }
-        .pillar-topics h4 {
+        .path-topics h4 {
             font-size: 13px;
             font-weight: 700;
             color: var(--text-dark);
@@ -259,11 +259,11 @@
             color: var(--secondary-color);
             font-weight: 700;
         }
-        .pillar-card-footer {
+        .path-card-footer {
             padding: 0 20px 20px;
             margin-top: auto;
         }
-        .pillar-cta {
+        .path-cta {
             width: 100%;
             padding: 12px 20px;
             background: linear-gradient(135deg, #0A1A2F 0%, #1a3a5c 100%);
@@ -278,27 +278,27 @@
             display: inline-block;
             text-align: center;
         }
-        .pillar-cta:hover {
+        .path-cta:hover {
             transform: translateY(-2px);
             box-shadow: 0 10px 25px rgba(10, 26, 47, 0.3);
         }
-        .pillar-cta.disabled {
+        .path-cta.disabled {
             background: #9ca3af;
             cursor: not-allowed;
             opacity: 0.7;
         }
-        .pillar-cta.disabled:hover {
+        .path-cta.disabled:hover {
             transform: none;
             box-shadow: none;
         }
-        .pillar-card-premium.completed {
+        .path-card-premium.completed {
             background: linear-gradient(135deg, #f0fdf4 0%, #d1fae5 100%);
             border: 3px solid #00A676;
         }
-        .pillar-card-premium.completed .pillar-icon {
+        .path-card-premium.completed .path-icon {
             background: linear-gradient(135deg, #00A676 0%, #10b981 100%);
         }
-        .pillar-card-premium.completed .pillar-cta {
+        .path-card-premium.completed .path-cta {
             background: linear-gradient(135deg, #00A676 0%, #10b981 100%);
         }
         .completed-badge {
@@ -311,7 +311,7 @@
             text-transform: uppercase;
             letter-spacing: 0.5px;
         }
-        .pillars-grid {
+        .paths-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
             gap: 24px;
@@ -326,7 +326,7 @@
             .curriculum-hero p {
                 font-size: 18px;
             }
-            .pillars-grid {
+            .paths-grid {
                 grid-template-columns: 1fr;
             }
             .stat-number {
@@ -342,7 +342,7 @@
             <div class="nav-wrapper">
                 <div class="logo"><a href="/" style="color: inherit; text-decoration: none;">Finance<span class="logo-accent">U</span></a></div>
                 <ul class="nav-links">
-                    <li><a href="/curriculum">Curriculum</a></li>
+                    <li><a href="/curriculum">Learning Paths</a></li>
                     <li><a href="/#features">Features</a></li>
                     <li><a href="/#pricing">Pricing</a></li>
                     <li><a href="/about">About</a></li>
@@ -356,56 +356,56 @@
     <!-- Curriculum Hero Section -->
     <section class="curriculum-hero">
         <div class="curriculum-hero-content">
-            <h1>Master Money in 11 Pillars</h1>
+            <h1>Master Money in 5 Learning Paths</h1>
             <p>A complete financial education designed for college students. Learn the real system, not just theory.</p>
 
             <div class="curriculum-stats">
                 <div class="stat-item">
-                    <span class="stat-number">11</span>
-                    <span class="stat-label">Core Pillars</span>
+                    <span class="stat-number">5</span>
+                    <span class="stat-label">Learning Paths</span>
                 </div>
                 <div class="stat-item">
-                    <span class="stat-number">88</span>
+                    <span class="stat-number">25</span>
                     <span class="stat-label">Total Lessons</span>
                 </div>
                 <div class="stat-item">
-                    <span class="stat-number">20+</span>
+                    <span class="stat-number">10+</span>
                     <span class="stat-label">Hours of Content</span>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- What is a Pillar Section -->
-    <section class="pillar-info">
+    <!-- What is a Learning Path Section -->
+    <section class="path-info">
         <div class="container">
-            <h2>What is a Pillar?</h2>
-            <p>Think of each pillar as a building block of financial knowledge. Master all 11, and you'll understand the complete money system. These aren't random tips or theoretical lessons. They're practical skills that work together to help you manage money, build wealth, and actually know what you're doing with your finances.</p>
+            <h2>What is a Learning Path?</h2>
+            <p>Think of each path as your journey through a key area of finance. Master all 5 paths, and you'll understand the complete money system. These aren't random tips or theoretical lessons. They're practical skills that work together to help you manage money, build wealth, and actually know what you're doing with your finances.</p>
         </div>
     </section>
 
-    <!-- Pillars Section -->
-    <section class="pillars-section">
+    <!-- Paths Section -->
+    <section class="paths-section">
         <div class="container">
-            <div class="pillars-grid">
-                <!-- Pillar 1 -->
-                <div class="pillar-card-premium">
-                    <div class="pillar-card-header">
-                        <div class="pillar-icon">💡</div>
-                        <div class="pillar-badges">
+            <div class="paths-grid">
+                <!-- Path 1 -->
+                <div class="path-card-premium">
+                    <div class="path-card-header">
+                        <div class="path-icon">💡</div>
+                        <div class="path-badges">
                             <span class="availability-badge available">Available Now</span>
                             <span class="tier-badge free">Free</span>
                         </div>
                     </div>
-                    <div class="pillar-card-body">
-                        <div class="pillar-number">Pillar 1</div>
-                        <h3 class="pillar-title">Financial Literacy Foundations</h3>
-                        <p class="pillar-description">Start your journey with the fundamentals. Learn how money actually works, understand banking basics, and build the foundation for every financial decision you'll make. No more feeling lost when people talk about finances.</p>
+                    <div class="path-card-body">
+                        <div class="path-number">Path 1</div>
+                        <h3 class="path-title">Financial Literacy Foundations</h3>
+                        <p class="path-description">Start your journey with the fundamentals. Learn how money actually works, understand banking basics, and build the foundation for every financial decision you'll make.</p>
 
-                        <div class="pillar-meta">
+                        <div class="path-meta">
                             <div class="meta-item">
                                 <span class="meta-icon">📚</span>
-                                <span>8 Lessons</span>
+                                <span>5 Lessons</span>
                             </div>
                             <div class="meta-item">
                                 <span class="meta-icon">⏱️</span>
@@ -413,41 +413,39 @@
                             </div>
                         </div>
 
-                        <div class="pillar-topics">
+                        <div class="path-topics">
                             <h4>What You'll Learn</h4>
                             <ul class="topics-list">
                                 <li>How the banking system works</li>
                                 <li>Understanding interest rates</li>
-                                <li>Checking vs. savings accounts</li>
+                                <li>Account types explained</li>
                                 <li>Financial terminology decoded</li>
                             </ul>
                         </div>
-
-
                     </div>
-                    <div class="pillar-card-footer">
-                        <a href="#" id="pillar1StartBtn" class="pillar-cta">Start Learning Free →</a>
+                    <div class="path-card-footer">
+                        <a href="#" id="path1StartBtn" class="path-cta">Start Learning Free →</a>
                     </div>
                 </div>
 
-                <!-- Pillar 2 -->
-                <div class="pillar-card-premium">
-                    <div class="pillar-card-header">
-                        <div class="pillar-icon">💰</div>
-                        <div class="pillar-badges">
+                <!-- Path 2 -->
+                <div class="path-card-premium">
+                    <div class="path-card-header">
+                        <div class="path-icon">💰</div>
+                        <div class="path-badges">
                             <span class="availability-badge available">Available Now</span>
                             <span class="tier-badge free">Free</span>
                         </div>
                     </div>
-                    <div class="pillar-card-body">
-                        <div class="pillar-number">Pillar 2</div>
-                        <h3 class="pillar-title">Budgeting and Saving</h3>
-                        <p class="pillar-description">Master the art of managing your money and building financial security. Learn to create budgets that work, build emergency funds, automate savings, and cut expenses without sacrificing your lifestyle. Take control of your finances today.</p>
+                    <div class="path-card-body">
+                        <div class="path-number">Path 2</div>
+                        <h3 class="path-title">Budgeting and Saving</h3>
+                        <p class="path-description">Master the art of managing your money and building financial security. Learn to create budgets that work, build emergency funds, and take control of your finances.</p>
 
-                        <div class="pillar-meta">
+                        <div class="path-meta">
                             <div class="meta-item">
                                 <span class="meta-icon">📚</span>
-                                <span>8 Lessons</span>
+                                <span>5 Lessons</span>
                             </div>
                             <div class="meta-item">
                                 <span class="meta-icon">⏱️</span>
@@ -455,41 +453,39 @@
                             </div>
                         </div>
 
-                        <div class="pillar-topics">
+                        <div class="path-topics">
                             <h4>What You'll Learn</h4>
                             <ul class="topics-list">
-                                <li>Creating budgets that actually work</li>
-                                <li>The 50/30/20 budgeting rule</li>
-                                <li>Building an emergency fund</li>
+                                <li>Creating budgets that work</li>
+                                <li>The 50/30/20 rule</li>
+                                <li>Building emergency funds</li>
                                 <li>Automating your savings</li>
                             </ul>
                         </div>
-
-
                     </div>
-                    <div class="pillar-card-footer">
-                        <a href="#" id="pillar2StartBtn" class="pillar-cta">Start Learning Free →</a>
+                    <div class="path-card-footer">
+                        <a href="#" id="path2StartBtn" class="path-cta">Start Learning Free →</a>
                     </div>
                 </div>
 
-                <!-- Pillar 3 -->
-                <div class="pillar-card-premium">
-                    <div class="pillar-card-header">
-                        <div class="pillar-icon">💳</div>
-                        <div class="pillar-badges">
+                <!-- Path 3 -->
+                <div class="path-card-premium">
+                    <div class="path-card-header">
+                        <div class="path-icon">💳</div>
+                        <div class="path-badges">
                             <span class="availability-badge available">Available Now</span>
                             <span class="tier-badge free">Free</span>
                         </div>
                     </div>
-                    <div class="pillar-card-body">
-                        <div class="pillar-number">Pillar 3</div>
-                        <h3 class="pillar-title">Credit & Debt Mastery</h3>
-                        <p class="pillar-description">Credit cards aren't scary.when you know how to use them. Master credit scores, avoid debt traps, and learn to use credit as a tool, not a burden. Stop making expensive mistakes and start building a strong credit history from day one.</p>
+                    <div class="path-card-body">
+                        <div class="path-number">Path 3</div>
+                        <h3 class="path-title">Credit & Debt Mastery</h3>
+                        <p class="path-description">Master credit scores, avoid debt traps, and learn to use credit as a tool, not a burden. Build a strong credit history from day one.</p>
 
-                        <div class="pillar-meta">
+                        <div class="path-meta">
                             <div class="meta-item">
                                 <span class="meta-icon">📚</span>
-                                <span>8 Lessons</span>
+                                <span>5 Lessons</span>
                             </div>
                             <div class="meta-item">
                                 <span class="meta-icon">⏱️</span>
@@ -497,41 +493,39 @@
                             </div>
                         </div>
 
-                        <div class="pillar-topics">
+                        <div class="path-topics">
                             <h4>What You'll Learn</h4>
                             <ul class="topics-list">
-                                <li>How credit scores really work</li>
-                                <li>Choosing your first credit card</li>
+                                <li>How credit scores work</li>
+                                <li>Choosing credit cards</li>
                                 <li>Avoiding debt traps</li>
                                 <li>Student loan strategies</li>
                             </ul>
                         </div>
-
-
                     </div>
-                    <div class="pillar-card-footer">
-                        <button class="pillar-cta" id="pillar3StartBtn" onclick="window.location.href='/pillar3-lessons'">Start Learning Free →</button>
+                    <div class="path-card-footer">
+                        <button class="path-cta" id="path3StartBtn" onclick="window.location.href='/path3-lessons'">Start Learning Free →</button>
                     </div>
                 </div>
 
-                <!-- Pillar 4 -->
-                <div class="pillar-card-premium">
-                    <div class="pillar-card-header">
-                        <div class="pillar-icon">🏦</div>
-                        <div class="pillar-badges">
+                <!-- Path 4 -->
+                <div class="path-card-premium">
+                    <div class="path-card-header">
+                        <div class="path-icon">📈</div>
+                        <div class="path-badges">
                             <span class="availability-badge coming-soon">Coming 2026</span>
                             <span class="tier-badge pro">Pro</span>
                         </div>
                     </div>
-                    <div class="pillar-card-body">
-                        <div class="pillar-number">Pillar 4</div>
-                        <h3 class="pillar-title">Smart Saving Strategies</h3>
-                        <p class="pillar-description">Saving isn't about deprivation.it's about freedom. Build an emergency fund that actually protects you, automate your savings so you don't have to think about it, and learn where to keep your money so it grows while you sleep.</p>
+                    <div class="path-card-body">
+                        <div class="path-number">Path 4</div>
+                        <h3 class="path-title">Investing Fundamentals</h3>
+                        <p class="path-description">Start building wealth today. Understand stocks, bonds, index funds, and how compound interest can make you wealthy over time.</p>
 
-                        <div class="pillar-meta">
+                        <div class="path-meta">
                             <div class="meta-item">
                                 <span class="meta-icon">📚</span>
-                                <span>8 Lessons</span>
+                                <span>5 Lessons</span>
                             </div>
                             <div class="meta-item">
                                 <span class="meta-icon">⏱️</span>
@@ -539,314 +533,57 @@
                             </div>
                         </div>
 
-                        <div class="pillar-topics">
+                        <div class="path-topics">
                             <h4>What You'll Learn</h4>
                             <ul class="topics-list">
-                                <li>Building an emergency fund</li>
-                                <li>High-yield savings accounts</li>
-                                <li>Automating your savings</li>
-                                <li>The 50/30/20 rule explained</li>
+                                <li>Stocks vs bonds vs funds</li>
+                                <li>Opening brokerage accounts</li>
+                                <li>Compound interest power</li>
+                                <li>Dollar-cost averaging</li>
                             </ul>
                         </div>
-
-
                     </div>
-                    <div class="pillar-card-footer">
-                        <button class="pillar-cta disabled">Coming 2026 • Pro Plan</button>
+                    <div class="path-card-footer">
+                        <button class="path-cta disabled">Coming 2026 • Pro Plan</button>
                     </div>
                 </div>
 
-                <!-- Pillar 5 -->
-                <div class="pillar-card-premium">
-                    <div class="pillar-card-header">
-                        <div class="pillar-icon">📈</div>
-                        <div class="pillar-badges">
+                <!-- Path 5 -->
+                <div class="path-card-premium">
+                    <div class="path-card-header">
+                        <div class="path-icon">💼</div>
+                        <div class="path-badges">
                             <span class="availability-badge coming-soon">Coming 2026</span>
-                            <span class="tier-badge pro">Pro</span>
+                            <span class="tier-badge premium">Premium</span>
                         </div>
                     </div>
-                    <div class="pillar-card-body">
-                        <div class="pillar-number">Pillar 5</div>
-                        <h3 class="pillar-title">Investing 101</h3>
-                        <p class="pillar-description">Investing isn't just for rich people. Start building wealth today, even with $50. Understand stocks, bonds, index funds, and how compound interest can make you wealthy over time. The sooner you start, the richer you'll be.</p>
+                    <div class="path-card-body">
+                        <div class="path-number">Path 5</div>
+                        <h3 class="path-title">Career & Wealth Building</h3>
+                        <p class="path-description">The fastest way to build wealth? Earn more. Learn to negotiate salary, find opportunities, and build multiple income streams.</p>
 
-                        <div class="pillar-meta">
+                        <div class="path-meta">
                             <div class="meta-item">
                                 <span class="meta-icon">📚</span>
-                                <span>8 Lessons</span>
+                                <span>5 Lessons</span>
                             </div>
                             <div class="meta-item">
                                 <span class="meta-icon">⏱️</span>
-                                <span>2.5 hours</span>
                             </div>
                         </div>
 
-                        <div class="pillar-topics">
-                            <h4>What You'll Learn</h4>
-                            <ul class="topics-list">
-                                <li>Stocks vs. bonds vs. index funds</li>
-                                <li>Opening your first brokerage account</li>
-                                <li>The power of compound interest</li>
-                                <li>Dollar-cost averaging strategy</li>
-                            </ul>
-                        </div>
-
-
-                    </div>
-                    <div class="pillar-card-footer">
-                        <button class="pillar-cta disabled">Coming 2026 • Pro Plan</button>
-                    </div>
-                </div>
-
-                <!-- Pillar 6 -->
-                <div class="pillar-card-premium">
-                    <div class="pillar-card-header">
-                        <div class="pillar-icon">💰</div>
-                        <div class="pillar-badges">
-                            <span class="availability-badge coming-soon">Coming 2026</span>
-                            <span class="tier-badge pro">Pro</span>
-                        </div>
-                    </div>
-                    <div class="pillar-card-body">
-                        <div class="pillar-number">Pillar 6</div>
-                        <h3 class="pillar-title">Budgeting That Works</h3>
-                        <p class="pillar-description">Forget boring spreadsheets. Learn budgeting methods that actually fit your lifestyle. Track your spending without obsessing, cut costs without feeling cheap, and still have money for the things you love. Budget smart, not hard.</p>
-
-                        <div class="pillar-meta">
-                            <div class="meta-item">
-                                <span class="meta-icon">📚</span>
-                                <span>8 Lessons</span>
-                            </div>
-                            <div class="meta-item">
-                                <span class="meta-icon">⏱️</span>
-                                <span>2 hours</span>
-                            </div>
-                        </div>
-
-                        <div class="pillar-topics">
-                            <h4>What You'll Learn</h4>
-                            <ul class="topics-list">
-                                <li>Zero-based budgeting</li>
-                                <li>Envelope method modernized</li>
-                                <li>Tracking expenses effortlessly</li>
-                                <li>Finding money leaks</li>
-                            </ul>
-                        </div>
-
-
-                    </div>
-                    <div class="pillar-card-footer">
-                        <button class="pillar-cta disabled">Coming 2026 • Pro Plan</button>
-                    </div>
-                </div>
-
-                <!-- Pillar 7 -->
-                <div class="pillar-card-premium">
-                    <div class="pillar-card-header">
-                        <div class="pillar-icon">💼</div>
-                        <div class="pillar-badges">
-                            <span class="availability-badge coming-soon">Coming 2026</span>
-                            <span class="tier-badge pro">Pro</span>
-                        </div>
-                    </div>
-                    <div class="pillar-card-body">
-                        <div class="pillar-number">Pillar 7</div>
-                        <h3 class="pillar-title">Career & Income</h3>
-                        <p class="pillar-description">The fastest way to build wealth? Earn more. Learn to negotiate your salary, find high-paying opportunities, build multiple income streams, and maximize your earning potential. Your career is your biggest financial asset.treat it that way.</p>
-
-                        <div class="pillar-meta">
-                            <div class="meta-item">
-                                <span class="meta-icon">📚</span>
-                                <span>8 Lessons</span>
-                            </div>
-                            <div class="meta-item">
-                                <span class="meta-icon">⏱️</span>
-                                <span>2 hours</span>
-                            </div>
-                        </div>
-
-                        <div class="pillar-topics">
+                        <div class="path-topics">
                             <h4>What You'll Learn</h4>
                             <ul class="topics-list">
                                 <li>Salary negotiation tactics</li>
-                                <li>Understanding benefits packages</li>
+                                <li>Understanding benefits</li>
                                 <li>Side hustle strategies</li>
                                 <li>Building passive income</li>
                             </ul>
                         </div>
-
-
                     </div>
-                    <div class="pillar-card-footer">
-                        <button class="pillar-cta disabled">Coming 2026 • Pro Plan</button>
-                    </div>
-                </div>
-
-                <!-- Pillar 8 -->
-                <div class="pillar-card-premium">
-                    <div class="pillar-card-header">
-                        <div class="pillar-icon">📋</div>
-                        <div class="pillar-badges">
-                            <span class="availability-badge coming-soon">Coming 2026</span>
-                            <span class="tier-badge pro">Pro</span>
-                        </div>
-                    </div>
-                    <div class="pillar-card-body">
-                        <div class="pillar-number">Pillar 8</div>
-                        <h3 class="pillar-title">Taxes Simplified</h3>
-                        <p class="pillar-description">Taxes don't have to be terrifying. Understand how they work, maximize your deductions, file confidently, and stop overpaying. Learn the strategies that save thousands and avoid the mistakes that cost even more.</p>
-
-                        <div class="pillar-meta">
-                            <div class="meta-item">
-                                <span class="meta-icon">📚</span>
-                                <span class="meta-icon">8 Lessons</span>
-                            </div>
-                            <div class="meta-item">
-                                <span class="meta-icon">⏱️</span>
-                                <span>2 hours</span>
-                            </div>
-                        </div>
-
-                        <div class="pillar-topics">
-                            <h4>What You'll Learn</h4>
-                            <ul class="topics-list">
-                                <li>How taxes actually work</li>
-                                <li>Filing your first tax return</li>
-                                <li>Deductions and credits</li>
-                                <li>Tax-advantaged accounts</li>
-                            </ul>
-                        </div>
-
-
-                    </div>
-                    <div class="pillar-card-footer">
-                        <button class="pillar-cta disabled">Coming 2026 • Pro Plan</button>
-                    </div>
-                </div>
-
-                <!-- Pillar 9 -->
-                <div class="pillar-card-premium">
-                    <div class="pillar-card-header">
-                        <div class="pillar-icon">🛡️</div>
-                        <div class="pillar-badges">
-                            <span class="availability-badge coming-soon">Coming 2026</span>
-                            <span class="tier-badge premium">Premium</span>
-                        </div>
-                    </div>
-                    <div class="pillar-card-body">
-                        <div class="pillar-number">Pillar 9</div>
-                        <h3 class="pillar-title">Insurance & Protection</h3>
-                        <p class="pillar-description">Insurance is boring until you need it. Learn what coverage you actually need, what's a waste of money, and how to protect yourself and your assets without overpaying. Don't learn this the hard way.</p>
-
-                        <div class="pillar-meta">
-                            <div class="meta-item">
-                                <span class="meta-icon">📚</span>
-                                <span>8 Lessons</span>
-                            </div>
-                            <div class="meta-item">
-                                <span class="meta-icon">⏱️</span>
-                                <span>2 hours</span>
-                            </div>
-                        </div>
-
-                        <div class="pillar-topics">
-                            <h4>What You'll Learn</h4>
-                            <ul class="topics-list">
-                                <li>Health insurance essentials</li>
-                                <li>Renter's and auto insurance</li>
-                                <li>Life insurance basics</li>
-                                <li>What coverage you actually need</li>
-                            </ul>
-                        </div>
-
-
-                    </div>
-                    <div class="pillar-card-footer">
-                        <button class="pillar-cta disabled">Coming 2026 • Premium Plan</button>
-                    </div>
-                </div>
-
-                <!-- Pillar 10 -->
-                <div class="pillar-card-premium">
-                    <div class="pillar-card-header">
-                        <div class="pillar-icon">🏠</div>
-                        <div class="pillar-badges">
-                            <span class="availability-badge coming-soon">Coming 2026</span>
-                            <span class="tier-badge premium">Premium</span>
-                        </div>
-                    </div>
-                    <div class="pillar-card-body">
-                        <div class="pillar-number">Pillar 10</div>
-                        <h3 class="pillar-title">Real Estate & Big Purchases</h3>
-                        <p class="pillar-description">Buying a car, renting an apartment, or considering homeownership? Make smart decisions on the biggest purchases of your life. Learn to negotiate, understand loans, and avoid the financial traps that come with major expenses.</p>
-
-                        <div class="pillar-meta">
-                            <div class="meta-item">
-                                <span class="meta-icon">📚</span>
-                                <span>8 Lessons</span>
-                            </div>
-                            <div class="meta-item">
-                                <span class="meta-icon">⏱️</span>
-                                <span>2.5 hours</span>
-                            </div>
-                        </div>
-
-                        <div class="pillar-topics">
-                            <h4>What You'll Learn</h4>
-                            <ul class="topics-list">
-                                <li>Rent vs. buy analysis</li>
-                                <li>Understanding mortgages</li>
-                                <li>Car buying strategies</li>
-                                <li>Lease vs. buy decisions</li>
-                            </ul>
-                        </div>
-
-
-                    </div>
-                    <div class="pillar-card-footer">
-                        <button class="pillar-cta disabled">Coming 2026 • Premium Plan</button>
-                    </div>
-                </div>
-
-                <!-- Pillar 11 -->
-                <div class="pillar-card-premium">
-                    <div class="pillar-card-header">
-                        <div class="pillar-icon">🌅</div>
-                        <div class="pillar-badges">
-                            <span class="availability-badge coming-soon">Coming 2026</span>
-                            <span class="tier-badge premium">Premium</span>
-                        </div>
-                    </div>
-                    <div class="pillar-card-body">
-                        <div class="pillar-number">Pillar 11</div>
-                        <h3 class="pillar-title">Retirement Planning</h3>
-                        <p class="pillar-description">Retirement seems far away, but starting now is the smartest money move you'll ever make. Understand 401(k)s, IRAs, compound interest, and how a little effort today creates financial freedom tomorrow. Your future self will thank you.</p>
-
-                        <div class="pillar-meta">
-                            <div class="meta-item">
-                                <span class="meta-icon">📚</span>
-                                <span>8 Lessons</span>
-                            </div>
-                            <div class="meta-item">
-                                <span class="meta-icon">⏱️</span>
-                                <span>2.5 hours</span>
-                            </div>
-                        </div>
-
-                        <div class="pillar-topics">
-                            <h4>What You'll Learn</h4>
-                            <ul class="topics-list">
-                                <li>401(k) vs. Roth IRA</li>
-                                <li>Understanding employer matching</li>
-                                <li>The magic of compound interest</li>
-                                <li>How much to save for retirement</li>
-                            </ul>
-                        </div>
-
-
-                    </div>
-                    <div class="pillar-card-footer">
-                        <button class="pillar-cta disabled">Coming 2026 • Premium Plan</button>
+                    <div class="path-card-footer">
+                        <button class="path-cta disabled">Coming 2026 • Premium Plan</button>
                     </div>
                 </div>
             </div>
@@ -858,7 +595,7 @@
         <div class="container">
             <div class="cta-content">
                 <h2>Ready to Master Your Money?</h2>
-                <p>Start with Pillar 1 for free, or unlock all 11 pillars with Pro or Premium</p>
+                <p>Start with Path 1 for free, or unlock all 5 paths with Pro or Premium</p>
                 <a href="signup" class="btn-primary btn-large">Get Started Free</a>
                 <p class="cta-subtext">No credit card required • Start learning in 2 minutes</p>
             </div>
@@ -945,66 +682,63 @@
 
         updateNav();
 
-        // Check pillar completion and update UI
-        async function checkPillarCompletion() {
+        // Check path completion and update UI
+        async function checkPathCompletion() {
             const userId = localStorage.getItem('userId');
             if (!userId || userId === 'null' || userId === 'undefined') {
                 return;
             }
 
-            // Check Pillar 1 completion (8 lessons + quiz)
-            const pillar1Completed = JSON.parse(localStorage.getItem(`pillar1_completed_${userId}`) || '[]');
-            const pillar1QuizCompleted = localStorage.getItem(`pillar1_quiz_completed_${userId}`) === 'true';
-            const pillar1Card = document.querySelector('.pillar-card-premium:nth-child(1)');
-            const pillar1Badge = pillar1Card.querySelector('.availability-badge');
-            const pillar1Button = document.getElementById('pillar1StartBtn');
+            // Check Path 1 completion (5 lessons)
+            const path1Completed = JSON.parse(localStorage.getItem(`path1_completed_${userId}`) || '[]');
+            const path1Card = document.querySelector('.path-card-premium:nth-child(1)');
+            const path1Badge = path1Card.querySelector('.availability-badge');
+            const path1Button = document.getElementById('path1StartBtn');
 
-            if (pillar1Completed.length === 8 && pillar1QuizCompleted) {
-                pillar1Card.classList.add('completed');
-                pillar1Badge.classList.remove('available');
-                pillar1Badge.classList.add('completed-badge');
-                pillar1Badge.textContent = 'Completed';
-                pillar1Button.textContent = 'Review Pillar →';
+            if (path1Completed.length === 5) {
+                path1Card.classList.add('completed');
+                path1Badge.classList.remove('available');
+                path1Badge.classList.add('completed-badge');
+                path1Badge.textContent = 'Completed';
+                path1Button.textContent = 'Review Path →';
             }
 
-            // Check Pillar 2 completion (8 lessons + quiz)
-            const pillar2Completed = JSON.parse(localStorage.getItem(`pillar2_completed_${userId}`) || '[]');
-            const pillar2QuizCompleted = localStorage.getItem(`pillar2_quiz_completed_${userId}`) === 'true';
-            const pillar2Card = document.querySelector('.pillar-card-premium:nth-child(2)');
-            const pillar2Badge = pillar2Card.querySelector('.availability-badge');
-            const pillar2Button = document.getElementById('pillar2StartBtn');
+            // Check Path 2 completion (5 lessons)
+            const path2Completed = JSON.parse(localStorage.getItem(`path2_completed_${userId}`) || '[]');
+            const path2Card = document.querySelector('.path-card-premium:nth-child(2)');
+            const path2Badge = path2Card.querySelector('.availability-badge');
+            const path2Button = document.getElementById('path2StartBtn');
 
-            if (pillar2Completed.length === 8 && pillar2QuizCompleted) {
-                pillar2Card.classList.add('completed');
-                pillar2Badge.classList.remove('available');
-                pillar2Badge.classList.add('completed-badge');
-                pillar2Badge.textContent = 'Completed';
-                pillar2Button.textContent = 'Review Pillar →';
+            if (path2Completed.length === 5) {
+                path2Card.classList.add('completed');
+                path2Badge.classList.remove('available');
+                path2Badge.classList.add('completed-badge');
+                path2Badge.textContent = 'Completed';
+                path2Button.textContent = 'Review Path →';
             }
 
-            // Check Pillar 3 completion (8 lessons + quiz)
-            const pillar3Completed = JSON.parse(localStorage.getItem(`pillar3_completed_${userId}`) || '[]');
-            const pillar3QuizCompleted = localStorage.getItem(`pillar3_quiz_completed_${userId}`) === 'true';
-            const pillar3Card = document.querySelector('.pillar-card-premium:nth-child(3)');
-            const pillar3Badge = pillar3Card.querySelector('.availability-badge');
-            const pillar3Button = document.getElementById('pillar3StartBtn');
+            // Check Path 3 completion (5 lessons)
+            const path3Completed = JSON.parse(localStorage.getItem(`path3_completed_${userId}`) || '[]');
+            const path3Card = document.querySelector('.path-card-premium:nth-child(3)');
+            const path3Badge = path3Card.querySelector('.availability-badge');
+            const path3Button = document.getElementById('path3StartBtn');
 
-            if (pillar3Completed.length === 8 && pillar3QuizCompleted) {
-                pillar3Card.classList.add('completed');
-                pillar3Badge.classList.remove('available');
-                pillar3Badge.classList.add('completed-badge');
-                pillar3Badge.textContent = 'Completed';
-                pillar3Button.textContent = 'Review Pillar →';
+            if (path3Completed.length === 5) {
+                path3Card.classList.add('completed');
+                path3Badge.classList.remove('available');
+                path3Badge.classList.add('completed-badge');
+                path3Badge.textContent = 'Completed';
+                path3Button.textContent = 'Review Path →';
             }
         }
 
         // Run completion check on page load
-        checkPillarCompletion();
+        checkPathCompletion();
 
-        // Handle Pillar 1 Start button - check login status
-        const pillar1Btn = document.getElementById('pillar1StartBtn');
-        if (pillar1Btn) {
-            pillar1Btn.addEventListener('click', async function(e) {
+        // Handle Path 1 Start button - check login status
+        const path1Btn = document.getElementById('path1StartBtn');
+        if (path1Btn) {
+            path1Btn.addEventListener('click', async function(e) {
                 e.preventDefault();
 
                 // Check if user is logged in
@@ -1015,7 +749,7 @@
 
                     if (response.ok) {
                         // User is logged in, redirect to lessons
-                        window.location.href = 'pillar1-lessons.html';
+                        window.location.href = 'path1-lessons.html';
                     } else {
                         // User is not logged in, redirect to login
                         window.location.href = 'login.html';
@@ -1027,10 +761,10 @@
             });
         }
 
-        // Handle Pillar 2 Start button - check login status
-        const pillar2Btn = document.getElementById('pillar2StartBtn');
-        if (pillar2Btn) {
-            pillar2Btn.addEventListener('click', async function(e) {
+        // Handle Path 2 Start button - check login status
+        const path2Btn = document.getElementById('path2StartBtn');
+        if (path2Btn) {
+            path2Btn.addEventListener('click', async function(e) {
                 e.preventDefault();
 
                 // Check if user is logged in
@@ -1041,7 +775,7 @@
 
                     if (response.ok) {
                         // User is logged in, redirect to lessons
-                        window.location.href = 'pillar2-lessons.html';
+                        window.location.href = 'path2-lessons.html';
                     } else {
                         // User is not logged in, redirect to login
                         window.location.href = 'login.html';
