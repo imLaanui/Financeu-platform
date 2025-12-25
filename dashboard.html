@@ -16,10 +16,11 @@
         }
 
         .dashboard-header {
-            background: linear-gradient(135deg, #0A1A2F 0%, #1a3a5c 100%);
-            color: white;
+            background: #FFFFFF;
+            color: #1a1a1a;
             padding: 2rem 0;
             margin-bottom: 2rem;
+            border-bottom: 1px solid #e5e5e5;
         }
 
         .welcome-section {
@@ -33,30 +34,30 @@
         .welcome-text h1 {
             font-size: 2rem;
             margin-bottom: 0.25rem;
+            font-weight: 800;
+            color: #1a1a1a;
         }
 
         .welcome-text p {
             font-size: 1rem;
-            opacity: 0.9;
+            color: #6b7280;
+            font-weight: 500;
         }
 
         .membership-badge {
             display: inline-block;
             padding: 0.5rem 1rem;
-            background-color: rgba(255, 255, 255, 0.2);
+            background-color: #2563eb;
             color: white;
-            border-radius: 20px;
-            font-weight: 600;
-            text-transform: capitalize;
-            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 6px;
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 0.875rem;
+            letter-spacing: 0.5px;
         }
 
-        .membership-badge.premium {
-            background-color: #3b82f6;
-        }
-
-        .membership-badge.pro {
-            background: linear-gradient(135deg, #f59e0b 0%, #ef4444 100%);
+        .membership-badge.free {
+            background-color: #9ca3af;
         }
 
         .stats-grid {
@@ -67,35 +68,16 @@
         }
 
         .stat-card {
-            background-color: var(--bg-white);
+            background-color: #FFFFFF;
             padding: 1.5rem;
             border-radius: 12px;
-            box-shadow: var(--shadow-md);
+            border: 2px solid #d4d4d4;
             text-align: center;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .stat-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: linear-gradient(90deg, #00A676 0%, #3B82F6 50%, #F59E0B 100%);
-            opacity: 0;
-            transition: opacity 0.3s ease;
+            transition: border-color 0.2s ease;
         }
 
         .stat-card:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-lg);
-        }
-
-        .stat-card:hover::before {
-            opacity: 1;
+            border-color: #2563eb;
         }
 
         .stat-icon {
@@ -105,30 +87,17 @@
             margin-bottom: 1rem;
         }
 
-        .stat-icon svg {
-            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.05));
-            transition: transform 0.3s ease;
-        }
-
-        .stat-card:hover .stat-icon svg {
-            transform: scale(1.1);
-        }
-
         .stat-number {
             font-size: 2.5rem;
-            font-weight: 700;
-            color: #00A676;
+            font-weight: 800;
+            color: #2563eb;
             margin-bottom: 0.5rem;
-            background: linear-gradient(135deg, #00A676 0%, #3B82F6 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
         }
 
         .stat-label {
-            color: var(--text-light);
+            color: #6b7280;
             font-size: 0.875rem;
-            font-weight: 500;
+            font-weight: 600;
         }
 
         .lessons-section {
@@ -142,30 +111,38 @@
             margin-bottom: 2rem;
         }
 
+        .section-header h2 {
+            font-weight: 800;
+            color: #1a1a1a;
+        }
+
         .lesson-list {
             display: grid;
             gap: 1.5rem;
         }
 
         .lesson-item {
-            background-color: var(--bg-white);
+            background-color: #FFFFFF;
             border-radius: 12px;
             padding: 1.5rem;
-            box-shadow: var(--shadow-md);
+            border: 2px solid #d4d4d4;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            transition: all 0.3s;
+            transition: border-color 0.2s ease;
         }
 
         .lesson-item:hover {
-            transform: translateY(-3px);
-            box-shadow: var(--shadow-lg);
+            border-color: #2563eb;
         }
 
         .lesson-item.locked {
             opacity: 0.6;
             cursor: not-allowed;
+        }
+
+        .lesson-item.locked:hover {
+            border-color: #d4d4d4;
         }
 
         .lesson-info {
@@ -180,13 +157,15 @@
         }
 
         .lesson-details h3 {
-            color: var(--text-dark);
+            color: #1a1a1a;
             margin-bottom: 0.25rem;
+            font-weight: 700;
         }
 
         .lesson-details p {
-            color: var(--text-light);
+            color: #6b7280;
             font-size: 0.9rem;
+            font-weight: 500;
         }
 
         .lesson-status {
@@ -197,38 +176,38 @@
 
         .status-badge {
             padding: 0.5rem 1rem;
-            border-radius: 20px;
+            border-radius: 6px;
             font-size: 0.85rem;
-            font-weight: 600;
+            font-weight: 700;
         }
 
         .status-badge.completed {
-            background-color: #d1fae5;
-            color: var(--secondary-color);
+            background-color: #10b981;
+            color: white;
         }
 
         .status-badge.locked {
-            background-color: #fee2e2;
-            color: #dc2626;
+            background-color: #d1d5db;
+            color: #6b7280;
         }
 
         .status-badge.available {
-            background-color: #dbeafe;
-            color: var(--primary-color);
+            background-color: #2563eb;
+            color: white;
         }
 
         .btn-lesson {
             padding: 0.75rem 1.5rem;
-            background-color: var(--primary-color);
+            background-color: #2563eb;
             color: white;
             text-decoration: none;
             border-radius: 8px;
             font-weight: 600;
-            transition: all 0.3s;
+            transition: background-color 0.2s ease;
         }
 
         .btn-lesson:hover {
-            background-color: var(--primary-dark);
+            background-color: #1d4ed8;
         }
 
         .btn-lesson.disabled {
@@ -238,81 +217,50 @@
         }
 
         .upgrade-banner {
-            background: white;
-            border: 2px solid var(--border-color);
+            background: #f8f9fa;
+            border: 2px solid #d4d4d4;
             border-radius: 12px;
             margin-bottom: 2rem;
-            overflow: hidden;
         }
 
         .upgrade-header {
-            background: linear-gradient(135deg, #0A1A2F 0%, #1a3a5c 100%);
-            color: white;
+            background: #FFFFFF;
+            color: #1a1a1a;
             padding: 1.25rem;
             text-align: center;
+            border-bottom: 1px solid #d4d4d4;
         }
 
         .upgrade-header h3 {
             font-size: 1.25rem;
             margin: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
-        }
-
-        .upgrade-header h3::before {
-            content: "🔓";
-            font-size: 1.5rem;
+            font-weight: 800;
         }
 
         .upgrade-tiers {
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: 1fr;
             gap: 0;
         }
 
         .tier-option {
             padding: 1.5rem;
             text-align: center;
-            position: relative;
-        }
-
-        .tier-option:first-child {
-            border-right: 1px solid var(--border-color);
-        }
-
-        .tier-badge-banner {
-            display: inline-block;
-            padding: 0.375rem 0.875rem;
-            border-radius: 20px;
-            font-size: 0.75rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            margin-bottom: 0.75rem;
-        }
-
-        .tier-badge-banner.pro {
-            background: linear-gradient(135deg, #f59e0b 0%, #ef4444 100%);
-            color: white;
-        }
-
-        .tier-badge-banner.premium {
-            background: var(--secondary-color);
-            color: white;
         }
 
         .tier-option h4 {
             font-size: 1rem;
             margin-bottom: 0.5rem;
-            color: var(--text-dark);
+            color: #1a1a1a;
+            font-weight: 700;
         }
 
         .tier-features {
-            font-size: 0.8rem;
-            color: var(--text-secondary);
+            font-size: 0.875rem;
+            color: #6b7280;
             margin-bottom: 0.875rem;
             line-height: 1.4;
+            font-weight: 500;
         }
 
         .btn-upgrade {
@@ -323,20 +271,12 @@
             font-weight: 600;
             font-size: 0.85rem;
             display: inline-block;
-            transition: transform 0.2s;
-        }
-
-        .btn-upgrade.pro {
-            background: linear-gradient(135deg, #f59e0b 0%, #ef4444 100%);
-        }
-
-        .btn-upgrade.premium {
-            background: var(--secondary-color);
+            transition: background-color 0.2s ease;
+            background: #2563eb;
         }
 
         .btn-upgrade:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+            background: #1d4ed8;
         }
 
         .loading {
@@ -365,15 +305,6 @@
 
             .stats-grid {
                 grid-template-columns: 1fr;
-            }
-
-            .upgrade-tiers {
-                grid-template-columns: 1fr;
-            }
-
-            .tier-option:first-child {
-                border-right: none;
-                border-bottom: 1px solid var(--border-color);
             }
         }
     </style>
@@ -424,8 +355,8 @@
                     <div class="stat-card">
                         <div class="stat-icon">
                             <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <circle cx="24" cy="24" r="22" fill="#D1FAE5"/>
-                                <path d="M 14 24 L 21 31 L 34 17" stroke="#00A676" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                                <circle cx="24" cy="24" r="22" fill="#dbeafe"/>
+                                <path d="M 14 24 L 21 31 L 34 17" stroke="#2563eb" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
                             </svg>
                         </div>
                         <div class="stat-number" id="completedLessons">0</div>
@@ -434,9 +365,9 @@
                     <div class="stat-card">
                         <div class="stat-icon">
                             <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <circle cx="24" cy="24" r="22" fill="#DBEAFE"/>
-                                <circle cx="24" cy="24" r="18" stroke="#3B82F6" stroke-width="3" fill="none" stroke-dasharray="70 113"/>
-                                <circle cx="24" cy="24" r="12" fill="#3B82F6" opacity="0.2"/>
+                                <circle cx="24" cy="24" r="22" fill="#dbeafe"/>
+                                <circle cx="24" cy="24" r="18" stroke="#2563eb" stroke-width="3" fill="none" stroke-dasharray="70 113"/>
+                                <circle cx="24" cy="24" r="12" fill="#2563eb" opacity="0.2"/>
                             </svg>
                         </div>
                         <div class="stat-number" id="progressPercent">0%</div>
@@ -445,12 +376,12 @@
                     <div class="stat-card">
                         <div class="stat-icon">
                             <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <circle cx="24" cy="24" r="22" fill="#FEF3C7"/>
-                                <rect x="14" y="10" width="20" height="26" rx="2" stroke="#F59E0B" stroke-width="2.5" fill="none"/>
-                                <line x1="14" y1="16" x2="34" y2="16" stroke="#F59E0B" stroke-width="2.5"/>
-                                <circle cx="19" cy="13" r="1.5" fill="#F59E0B"/>
-                                <circle cx="24" cy="13" r="1.5" fill="#F59E0B"/>
-                                <circle cx="29" cy="13" r="1.5" fill="#F59E0B"/>
+                                <circle cx="24" cy="24" r="22" fill="#dbeafe"/>
+                                <rect x="14" y="10" width="20" height="26" rx="2" stroke="#2563eb" stroke-width="2.5" fill="none"/>
+                                <line x1="14" y1="16" x2="34" y2="16" stroke="#2563eb" stroke-width="2.5"/>
+                                <circle cx="19" cy="13" r="1.5" fill="#2563eb"/>
+                                <circle cx="24" cy="13" r="1.5" fill="#2563eb"/>
+                                <circle cx="29" cy="13" r="1.5" fill="#2563eb"/>
                             </svg>
                         </div>
                         <div class="stat-number" id="memberDays">0</div>
@@ -461,13 +392,13 @@
                 <!-- Upgrade Banner (shown for free users) -->
                 <div id="upgradeBanner" class="upgrade-banner" style="display: none;">
                     <div class="upgrade-header">
-                        <h3>Unlock Your Full Potential</h3>
+                        <h3>Unlock All 5 Learning Paths</h3>
                     </div>
                     <div class="upgrade-tiers">
                         <div class="tier-option">
-                            <h4>Unlock All Paths</h4>
-                            <p class="tier-features">Get access to all 5 learning paths with Pro or Premium membership</p>
-                            <a href="/#pricing" class="btn-upgrade pro">View Pricing</a>
+                            <h4>Get Full Access</h4>
+                            <p class="tier-features">Unlock all 5 learning paths with 25 comprehensive lessons for just $50 one-time payment</p>
+                            <a href="/#pricing" class="btn-upgrade">View Pricing</a>
                         </div>
                     </div>
                 </div>
@@ -623,8 +554,15 @@
                 // Update user info
                 document.getElementById('userName').textContent = user.name;
                 const badge = document.getElementById('membershipBadge');
-                badge.textContent = `${user.membershipTier.charAt(0).toUpperCase() + user.membershipTier.slice(1)} Member`;
-                badge.className = `membership-badge ${user.membershipTier}`;
+
+                // Update badge text: "Free" for free tier, "Member" for paid tiers
+                if (user.membershipTier === 'free') {
+                    badge.textContent = 'Free';
+                    badge.className = 'membership-badge free';
+                } else {
+                    badge.textContent = 'Member';
+                    badge.className = 'membership-badge';
+                }
 
                 // Show upgrade banner for free users
                 if (user.membershipTier === 'free') {
