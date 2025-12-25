@@ -92,59 +92,70 @@
         }
         .path-card-premium {
             background: linear-gradient(135deg, #1A1A1D 0%, #1F1F23 100%);
-            border-radius: 16px;
-            padding: 0;
+            border-radius: 20px;
+            padding: 40px;
             box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            cursor: pointer;
+            transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
-            height: 100%;
             display: flex;
-            flex-direction: column;
-            border: 1px solid #2E2E33;
+            align-items: center;
+            gap: 30px;
+            border: 2px solid #2E2E33;
+            min-height: 180px;
         }
         .path-card-premium:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 20px 40px rgba(0, 166, 118, 0.2);
+            transform: translateX(5px);
+            box-shadow: 0 12px 32px rgba(0, 166, 118, 0.3);
             border-color: #00A676;
         }
         .path-card-premium::before {
             content: '';
             position: absolute;
-            top: 0;
             left: 0;
-            right: 0;
-            height: 4px;
-            background: linear-gradient(135deg, var(--secondary-color) 0%, #3b82f6 100%);
-            transform: scaleX(0);
-            transform-origin: left;
-            transition: transform 0.4s ease-out;
+            top: 0;
+            bottom: 0;
+            width: 6px;
+            background: linear-gradient(135deg, #00A676 0%, #008060 100%);
+            transform: scaleY(0);
+            transform-origin: top;
+            transition: transform 0.3s ease;
         }
         .path-card-premium:hover::before {
-            transform: scaleX(1);
+            transform: scaleY(1);
         }
-        .path-card-header {
+        .path-card-left {
             display: flex;
-            justify-content: space-between;
             align-items: center;
-            padding: 20px 20px 12px;
-            border-bottom: 1px solid #2E2E33;
+            gap: 25px;
+            flex: 1;
+        }
+        .path-number-large {
+            font-size: 72px;
+            font-weight: 800;
+            color: #2E2E33;
+            line-height: 1;
+            min-width: 80px;
         }
         .path-icon {
-            width: 56px;
-            height: 56px;
+            width: 80px;
+            height: 80px;
             background: linear-gradient(135deg, #00A676 0%, #008060 100%);
-            border-radius: 12px;
+            border-radius: 20px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 28px;
-            transition: transform 0.3s ease-out;
+            font-size: 40px;
+            transition: all 0.3s ease;
             flex-shrink: 0;
+            box-shadow: 0 4px 16px rgba(0, 166, 118, 0.3);
         }
         .path-card-premium:hover .path-icon {
-            transform: scale(1.1) rotate(5deg);
+            transform: scale(1.05);
+            box-shadow: 0 8px 24px rgba(0, 166, 118, 0.5);
+        }
+        .path-content {
+            flex: 1;
         }
         .path-badges {
             display: flex;
@@ -203,17 +214,29 @@
             margin-bottom: 6px;
         }
         .path-title {
-            font-size: 24px;
+            font-size: 28px;
             font-weight: 700;
             color: #E5E5E5;
-            margin-bottom: 12px;
+            margin-bottom: 8px;
             line-height: 1.2;
         }
+        .path-subtitle {
+            font-size: 16px;
+            color: #9A9A9A;
+            margin-bottom: 12px;
+            font-weight: 500;
+        }
         .path-description {
-            font-size: 15px;
+            font-size: 16px;
             color: #B4B4B4;
             line-height: 1.6;
-            margin-bottom: 16px;
+            margin-bottom: 0;
+        }
+        .path-card-right {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 12px;
         }
         .path-meta {
             display: flex;
@@ -266,23 +289,23 @@
             margin-top: auto;
         }
         .path-cta {
-            width: 100%;
-            padding: 12px 20px;
+            padding: 12px 24px;
             background: linear-gradient(135deg, #00A676 0%, #008060 100%);
             color: white;
             border: none;
-            border-radius: 8px;
+            border-radius: 10px;
             font-size: 15px;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.3s ease-out;
+            transition: all 0.3s ease;
             text-decoration: none;
             display: inline-block;
             text-align: center;
+            white-space: nowrap;
         }
         .path-cta:hover {
             transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(0, 166, 118, 0.4);
+            box-shadow: 0 6px 16px rgba(0, 166, 118, 0.4);
             background: linear-gradient(135deg, #00B584 0%, #009670 100%);
         }
         .path-cta.disabled {
@@ -317,9 +340,9 @@
         }
         .paths-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-            gap: 24px;
-            max-width: 1400px;
+            grid-template-columns: 1fr;
+            gap: 20px;
+            max-width: 900px;
             margin: 0 auto;
         }
 
@@ -330,8 +353,26 @@
             .curriculum-hero p {
                 font-size: 18px;
             }
-            .paths-grid {
-                grid-template-columns: 1fr;
+            .path-card-premium {
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 30px;
+            }
+            .path-card-left {
+                width: 100%;
+            }
+            .path-card-right {
+                width: 100%;
+                align-items: flex-start;
+                margin-top: 20px;
+            }
+            .path-icon {
+                width: 60px;
+                height: 60px;
+                font-size: 30px;
+            }
+            .path-title {
+                font-size: 24px;
             }
             .stat-number {
                 font-size: 36px;
@@ -394,198 +435,78 @@
             <div class="paths-grid">
                 <!-- Path 1 -->
                 <div class="path-card-premium">
-                    <div class="path-card-header">
-                        <div class="path-icon">💡</div>
-                        <div class="path-badges">
-                            <span class="availability-badge available">Available Now</span>
-                            <span class="tier-badge free">Free</span>
+                    <div class="path-card-left">
+                        <div class="path-icon">🏦</div>
+                        <div class="path-content">
+                            <h3 class="path-title">Banking Basics</h3>
+                            <p class="path-subtitle">5 Lessons • 2 Hours</p>
+                            <p class="path-description">Understand how money actually works. Learn about checking & savings accounts, interest rates, and the banking system.</p>
                         </div>
                     </div>
-                    <div class="path-card-body">
-                        <div class="path-number">Path 1</div>
-                        <h3 class="path-title">Financial Literacy Foundations</h3>
-                        <p class="path-description">Start your journey with the fundamentals. Learn how money actually works, understand banking basics, and build the foundation for every financial decision you'll make.</p>
-
-                        <div class="path-meta">
-                            <div class="meta-item">
-                                <span class="meta-icon">📚</span>
-                                <span>5 Lessons</span>
-                            </div>
-                            <div class="meta-item">
-                                <span class="meta-icon">⏱️</span>
-                                <span>2 hours</span>
-                            </div>
-                        </div>
-
-                        <div class="path-topics">
-                            <h4>What You'll Learn</h4>
-                            <ul class="topics-list">
-                                <li>How the banking system works</li>
-                                <li>Understanding interest rates</li>
-                                <li>Account types explained</li>
-                                <li>Financial terminology decoded</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="path-card-footer">
-                        <a href="#" id="path1StartBtn" class="path-cta">Start Learning Free →</a>
+                    <div class="path-card-right">
+                        <span class="availability-badge available">Available Now</span>
+                        <span class="tier-badge free">FREE</span>
+                        <a href="#" id="path1StartBtn" class="path-cta" style="margin-top: 10px;">Start Free →</a>
                     </div>
                 </div>
 
                 <!-- Path 2 -->
                 <div class="path-card-premium">
-                    <div class="path-card-header">
+                    <div class="path-card-left">
                         <div class="path-icon">💰</div>
-                        <div class="path-badges">
-                            <span class="availability-badge available">Available Now</span>
-                            <span class="tier-badge free">Free</span>
+                        <div class="path-content">
+                            <h3 class="path-title">Budgeting & Saving</h3>
+                            <p class="path-subtitle">5 Lessons • 2 Hours</p>
+                            <p class="path-description">Master money management. Create budgets that work, build emergency funds, and automate your savings for financial security.</p>
                         </div>
                     </div>
-                    <div class="path-card-body">
-                        <div class="path-number">Path 2</div>
-                        <h3 class="path-title">Budgeting and Saving</h3>
-                        <p class="path-description">Master the art of managing your money and building financial security. Learn to create budgets that work, build emergency funds, and take control of your finances.</p>
-
-                        <div class="path-meta">
-                            <div class="meta-item">
-                                <span class="meta-icon">📚</span>
-                                <span>5 Lessons</span>
-                            </div>
-                            <div class="meta-item">
-                                <span class="meta-icon">⏱️</span>
-                                <span>2 hours</span>
-                            </div>
-                        </div>
-
-                        <div class="path-topics">
-                            <h4>What You'll Learn</h4>
-                            <ul class="topics-list">
-                                <li>Creating budgets that work</li>
-                                <li>The 50/30/20 rule</li>
-                                <li>Building emergency funds</li>
-                                <li>Automating your savings</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="path-card-footer">
-                        <a href="#" id="path2StartBtn" class="path-cta">Start Learning Free →</a>
+                    <div class="path-card-right">
+                        <span class="availability-badge coming-soon">Coming 2026</span>
                     </div>
                 </div>
 
                 <!-- Path 3 -->
                 <div class="path-card-premium">
-                    <div class="path-card-header">
+                    <div class="path-card-left">
                         <div class="path-icon">💳</div>
-                        <div class="path-badges">
-                            <span class="availability-badge available">Available Now</span>
-                            <span class="tier-badge free">Free</span>
+                        <div class="path-content">
+                            <h3 class="path-title">Credit & Debt</h3>
+                            <p class="path-subtitle">5 Lessons • 2 Hours</p>
+                            <p class="path-description">Master credit scores and avoid debt traps. Learn to use credit as a tool to build wealth, not a burden that holds you back.</p>
                         </div>
                     </div>
-                    <div class="path-card-body">
-                        <div class="path-number">Path 3</div>
-                        <h3 class="path-title">Credit & Debt Mastery</h3>
-                        <p class="path-description">Master credit scores, avoid debt traps, and learn to use credit as a tool, not a burden. Build a strong credit history from day one.</p>
-
-                        <div class="path-meta">
-                            <div class="meta-item">
-                                <span class="meta-icon">📚</span>
-                                <span>5 Lessons</span>
-                            </div>
-                            <div class="meta-item">
-                                <span class="meta-icon">⏱️</span>
-                                <span>2 hours</span>
-                            </div>
-                        </div>
-
-                        <div class="path-topics">
-                            <h4>What You'll Learn</h4>
-                            <ul class="topics-list">
-                                <li>How credit scores work</li>
-                                <li>Choosing credit cards</li>
-                                <li>Avoiding debt traps</li>
-                                <li>Student loan strategies</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="path-card-footer">
-                        <button class="path-cta" id="path3StartBtn" onclick="window.location.href='/path3-lessons'">Start Learning Free →</button>
+                    <div class="path-card-right">
+                        <span class="availability-badge coming-soon">Coming 2026</span>
                     </div>
                 </div>
 
                 <!-- Path 4 -->
                 <div class="path-card-premium">
-                    <div class="path-card-header">
+                    <div class="path-card-left">
                         <div class="path-icon">📈</div>
-                        <div class="path-badges">
-                            <span class="availability-badge coming-soon">Coming 2026</span>
+                        <div class="path-content">
+                            <h3 class="path-title">Investing Basics</h3>
+                            <p class="path-subtitle">5 Lessons • 2 Hours</p>
+                            <p class="path-description">Start building wealth. Understand stocks, bonds, index funds, and how compound interest makes you wealthy over time.</p>
                         </div>
                     </div>
-                    <div class="path-card-body">
-                        <div class="path-number">Path 4</div>
-                        <h3 class="path-title">Investing Fundamentals</h3>
-                        <p class="path-description">Start building wealth today. Understand stocks, bonds, index funds, and how compound interest can make you wealthy over time.</p>
-
-                        <div class="path-meta">
-                            <div class="meta-item">
-                                <span class="meta-icon">📚</span>
-                                <span>5 Lessons</span>
-                            </div>
-                            <div class="meta-item">
-                                <span class="meta-icon">⏱️</span>
-                                <span>2 hours</span>
-                            </div>
-                        </div>
-
-                        <div class="path-topics">
-                            <h4>What You'll Learn</h4>
-                            <ul class="topics-list">
-                                <li>Stocks vs bonds vs funds</li>
-                                <li>Opening brokerage accounts</li>
-                                <li>Compound interest power</li>
-                                <li>Dollar-cost averaging</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="path-card-footer">
-                        <button class="path-cta disabled">Coming 2026</button>
+                    <div class="path-card-right">
+                        <span class="availability-badge coming-soon">Coming 2026</span>
                     </div>
                 </div>
 
                 <!-- Path 5 -->
                 <div class="path-card-premium">
-                    <div class="path-card-header">
+                    <div class="path-card-left">
                         <div class="path-icon">💼</div>
-                        <div class="path-badges">
-                            <span class="availability-badge coming-soon">Coming 2026</span>
+                        <div class="path-content">
+                            <h3 class="path-title">Career & Income</h3>
+                            <p class="path-subtitle">5 Lessons • 2 Hours</p>
+                            <p class="path-description">The fastest way to build wealth? Earn more. Learn salary negotiation, benefits, and how to build multiple income streams.</p>
                         </div>
                     </div>
-                    <div class="path-card-body">
-                        <div class="path-number">Path 5</div>
-                        <h3 class="path-title">Career & Wealth Building</h3>
-                        <p class="path-description">The fastest way to build wealth? Earn more. Learn to negotiate salary, find opportunities, and build multiple income streams.</p>
-
-                        <div class="path-meta">
-                            <div class="meta-item">
-                                <span class="meta-icon">📚</span>
-                                <span>5 Lessons</span>
-                            </div>
-                            <div class="meta-item">
-                                <span class="meta-icon">⏱️</span>
-                            </div>
-                        </div>
-
-                        <div class="path-topics">
-                            <h4>What You'll Learn</h4>
-                            <ul class="topics-list">
-                                <li>Salary negotiation tactics</li>
-                                <li>Understanding benefits</li>
-                                <li>Side hustle strategies</li>
-                                <li>Building passive income</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="path-card-footer">
-                        <button class="path-cta disabled">Coming 2026</button>
+                    <div class="path-card-right">
+                        <span class="availability-badge coming-soon">Coming 2026</span>
                     </div>
                 </div>
             </div>
