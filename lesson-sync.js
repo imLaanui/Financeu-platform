@@ -49,7 +49,7 @@ async function syncLessonProgress() {
 
             const lessonId = record.lesson_id;
 
-            // Parse lesson IDs like "pillar1_lesson1", "pillar2_lesson3", etc.
+            // Parse lesson IDs like "path1_lesson1", "path2_lesson3", etc.
             const match = lessonId.match(/pillar(\d+)_lesson(\d+)/);
             if (match) {
                 const pillarNum = parseInt(match[1]);
@@ -96,7 +96,7 @@ async function syncLessonProgress() {
             // Save completed lessons array
             const completedKey = `pillar${pillar}_completed_${userId}`;
             localStorage.setItem(completedKey, JSON.stringify(pillarProgress[pillar].completed));
-            console.log(`📝 Pillar ${pillar}: ${pillarProgress[pillar].completed.length} lessons completed`);
+            console.log(`📝 Path ${pillar}: ${pillarProgress[pillar].completed.length} lessons completed`);
 
             // Save quiz status
             for (const [lessonNum, passed] of Object.entries(pillarProgress[pillar].quizzes)) {

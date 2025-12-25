@@ -1,0 +1,1342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checking Accounts - FinanceU</title>
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+    <link rel="icon" type="image/svg+xml" sizes="16x16" href="assets/favicon-16x16.svg">
+    <link rel="icon" type="image/svg+xml" sizes="32x32" href="assets/favicon-32x32.svg">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.svg">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 50%, #fef3c7 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Main Container */
+        .lesson-wrapper {
+            min-height: 100vh;
+            padding-top: 80px;
+        }
+
+        .back-link {
+            position: fixed;
+            top: 90px;
+            left: 30px;
+            color: #0369a1;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 15px;
+            z-index: 100;
+            padding: 10px 20px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .back-link:hover {
+            transform: translateX(-3px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+        }
+
+        /* Progress Bar */
+        .progress-container {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 8px;
+            background: rgba(255,255,255,0.5);
+            backdrop-filter: blur(10px);
+            z-index: 100;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.05);
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #3B82F6 0%, #8B5CF6 50%, #10b981 100%);
+            transition: width 0.3s ease;
+            border-radius: 0 4px 4px 0;
+            box-shadow: 0 0 20px rgba(59, 130, 246, 0.5);
+        }
+
+        /* Split Screen Layout */
+        .lesson-screen {
+            display: none;
+            min-height: calc(100vh - 80px);
+            padding: 40px;
+            animation: fadeIn 0.6s ease;
+        }
+
+        .lesson-screen.active {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        /* Content Side */
+        .content-side {
+            max-width: 600px;
+            margin-left: auto;
+        }
+
+        .section-number {
+            display: inline-block;
+            padding: 8px 20px;
+            background: linear-gradient(135deg, #3B82F6 0%, #8B5CF6 100%);
+            color: white;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 24px;
+            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+        }
+
+        .content-title {
+            font-size: clamp(36px, 5vw, 56px);
+            font-weight: 800;
+            color: #0f172a;
+            margin-bottom: 24px;
+            line-height: 1.1;
+            background: linear-gradient(135deg, #0f172a 0%, #3B82F6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .content-text {
+            font-size: 18px;
+            line-height: 1.8;
+            color: #475569;
+            margin-bottom: 20px;
+        }
+
+        .content-text strong {
+            color: #0f172a;
+            font-weight: 700;
+        }
+
+        .highlight-box {
+            background: white;
+            border-left: 4px solid #3B82F6;
+            padding: 24px;
+            border-radius: 12px;
+            margin: 24px 0;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+
+        .highlight-box p {
+            margin: 0;
+            color: #1e293b;
+            font-size: 17px;
+            line-height: 1.7;
+        }
+
+        .feature-list {
+            list-style: none;
+            margin: 24px 0;
+        }
+
+        .feature-list li {
+            padding: 16px 0;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+            display: flex;
+            align-items: start;
+            gap: 12px;
+            color: #475569;
+            font-size: 16px;
+            line-height: 1.6;
+        }
+
+        .feature-list li::before {
+            content: '✓';
+            color: #10b981;
+            font-weight: bold;
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+
+        /* Visual Side */
+        .visual-side {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        /* Hero Visual */
+        .hero-visual {
+            text-align: center;
+            padding: 60px;
+            background: white;
+            border-radius: 32px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-visual::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(59, 130, 246, 0.05) 0%, transparent 70%);
+            animation: rotate 30s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .hero-icon {
+            font-size: 120px;
+            margin-bottom: 24px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-stat {
+            font-size: 48px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #3B82F6 0%, #8B5CF6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 12px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-label {
+            font-size: 18px;
+            color: #64748b;
+            font-weight: 600;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Animated Card */
+        .animated-card {
+            width: 400px;
+            height: 250px;
+            background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .animated-card:hover {
+            transform: translateY(-10px) rotateZ(2deg);
+        }
+
+        .animated-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(139, 92, 246, 0.1) 100%);
+        }
+
+        .card-chip {
+            width: 50px;
+            height: 40px;
+            background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+            border-radius: 8px;
+            margin-bottom: 40px;
+            box-shadow: 0 4px 10px rgba(251, 191, 36, 0.3);
+        }
+
+        .card-number {
+            font-size: 24px;
+            color: white;
+            letter-spacing: 4px;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .card-holder {
+            color: rgba(255,255,255,0.9);
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* Flow Diagram */
+        .flow-diagram {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            background: white;
+            padding: 40px;
+            border-radius: 24px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+        }
+
+        .flow-item {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding: 24px;
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            border-radius: 16px;
+            border-left: 4px solid #3B82F6;
+            animation: slideIn 0.6s ease forwards;
+            opacity: 0;
+            transform: translateX(-30px);
+        }
+
+        .flow-item:nth-child(1) { animation-delay: 0.1s; }
+        .flow-item:nth-child(2) { animation-delay: 0.3s; }
+        .flow-item:nth-child(3) { animation-delay: 0.5s; }
+        .flow-item:nth-child(4) { animation-delay: 0.7s; }
+
+        @keyframes slideIn {
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .flow-icon {
+            font-size: 32px;
+            flex-shrink: 0;
+        }
+
+        .flow-text {
+            flex: 1;
+        }
+
+        .flow-text strong {
+            display: block;
+            color: #0f172a;
+            font-size: 18px;
+            margin-bottom: 4px;
+        }
+
+        .flow-text span {
+            color: #64748b;
+            font-size: 14px;
+        }
+
+        /* Comparison Cards */
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .compare-card {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .compare-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.12);
+        }
+
+        .compare-card.good {
+            border-top: 4px solid #10b981;
+        }
+
+        .compare-card.bad {
+            border-top: 4px solid #ef4444;
+        }
+
+        .compare-icon {
+            font-size: 48px;
+            margin-bottom: 16px;
+        }
+
+        .compare-title {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: #0f172a;
+        }
+
+        .compare-text {
+            font-size: 15px;
+            color: #64748b;
+            line-height: 1.6;
+        }
+
+        /* Interactive Quiz */
+        .quiz-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .quiz-card {
+            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+            padding: 40px;
+            border-radius: 24px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.08);
+            border: 1px solid rgba(0,0,0,0.05);
+            animation: slideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 24px;
+            width: 100%;
+        }
+
+        .quiz-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #3B82F6 0%, #8B5CF6 50%, #10b981 100%);
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+
+        .quiz-question {
+            font-size: 22px;
+            font-weight: 700;
+            color: #0f172a;
+            margin-bottom: 28px;
+            line-height: 1.4;
+            letter-spacing: -0.01em;
+        }
+
+        .quiz-options-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 32px;
+        }
+
+        .quiz-option {
+            position: relative;
+            background: white;
+            border: 2px solid #e2e8f0;
+            padding: 18px 22px;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            font-size: 16px;
+            color: #1e293b;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+        }
+
+        .quiz-option::before {
+            content: '';
+            width: 24px;
+            height: 24px;
+            border: 3px solid #cbd5e1;
+            border-radius: 50%;
+            flex-shrink: 0;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            background: white;
+        }
+
+        .quiz-option:hover:not(.correct):not(.incorrect) {
+            border-color: #3B82F6;
+            transform: translateY(-4px) scale(1.01);
+            box-shadow: 0 12px 32px rgba(59, 130, 246, 0.15);
+        }
+
+        .quiz-option:hover:not(.correct):not(.incorrect)::before {
+            border-color: #3B82F6;
+            transform: scale(1.1);
+        }
+
+        .quiz-option.selected {
+            background: linear-gradient(135deg, #dbeafe 0%, #e0f2fe 100%);
+            border-color: #3B82F6;
+            font-weight: 600;
+            box-shadow: 0 8px 24px rgba(59, 130, 246, 0.2);
+        }
+
+        .quiz-option.selected::before {
+            background: #3B82F6;
+            border-color: #3B82F6;
+            box-shadow: inset 0 0 0 5px white, 0 0 0 2px #3B82F6;
+            animation: pulse 0.6s ease;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.15); }
+        }
+
+        .quiz-option.correct {
+            background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
+            border-color: #10b981;
+            animation: correctAnswer 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 12px 32px rgba(16, 185, 129, 0.3);
+        }
+
+        @keyframes correctAnswer {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); box-shadow: 0 16px 48px rgba(16, 185, 129, 0.4); }
+            100% { transform: scale(1); }
+        }
+
+        .quiz-option.correct::before {
+            background: #10b981;
+            border-color: #10b981;
+            content: '✓';
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: checkmark 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        @keyframes checkmark {
+            0% { transform: scale(0) rotate(-45deg); opacity: 0; }
+            50% { transform: scale(1.3) rotate(5deg); }
+            100% { transform: scale(1) rotate(0deg); opacity: 1; }
+        }
+
+        .quiz-option.correct::after {
+            content: '';
+            position: absolute;
+            inset: -3px;
+            border-radius: 16px;
+            background: linear-gradient(135deg, #10b981, #059669);
+            opacity: 0;
+            z-index: -1;
+            animation: glow 1s ease-out;
+        }
+
+        @keyframes glow {
+            0%, 100% { opacity: 0; transform: scale(1); }
+            50% { opacity: 0.3; transform: scale(1.05); }
+        }
+
+        .quiz-option.incorrect {
+            background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
+            border-color: #ef4444;
+            animation: shake 0.5s ease;
+            box-shadow: 0 8px 24px rgba(239, 68, 68, 0.2);
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-8px); }
+            75% { transform: translateX(8px); }
+        }
+
+        .quiz-option.incorrect::before {
+            background: #ef4444;
+            border-color: #ef4444;
+            content: '×';
+            color: white;
+            font-size: 20px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+
+        @media (max-width: 768px) {
+            .quiz-card {
+                padding: 28px 20px;
+            }
+
+            .quiz-question {
+                font-size: 20px;
+            }
+
+            .quiz-option {
+                padding: 16px 18px;
+                font-size: 15px;
+            }
+        }
+
+        .quiz-submit {
+            width: 100%;
+            max-width: 500px;
+            padding: 20px;
+            background: linear-gradient(135deg, #3B82F6 0%, #8B5CF6 100%);
+            color: white;
+            border: none;
+            border-radius: 16px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: block;
+            box-shadow: 0 8px 30px rgba(59, 130, 246, 0.4);
+            margin: 32px auto;
+        }
+
+        .quiz-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.3);
+        }
+
+        .quiz-submit:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .quiz-result {
+            background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
+            border: 2px solid #10b981;
+            padding: 40px;
+            border-radius: 24px;
+            text-align: center;
+            margin: 0 auto;
+            max-width: 800px;
+            width: 100%;
+        }
+
+        .result-icon {
+            font-size: 48px;
+            margin-bottom: 12px;
+        }
+
+        .result-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: #0f172a;
+            margin-bottom: 8px;
+        }
+
+        .result-text {
+            color: #475569;
+            font-size: 16px;
+        }
+
+        /* Navigation */
+        .nav-controls {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            display: flex;
+            gap: 12px;
+            z-index: 50;
+        }
+
+        .nav-btn {
+            width: 56px;
+            height: 56px;
+            background: white;
+            border: 2px solid #e2e8f0;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 24px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .nav-btn:hover {
+            background: #3B82F6;
+            border-color: #3B82F6;
+            color: white;
+            transform: scale(1.1);
+            box-shadow: 0 8px 25px rgba(59, 130, 246, 0.3);
+        }
+
+        .nav-btn:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .finish-btn {
+            width: 100%;
+            max-width: 500px;
+            padding: 20px;
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            border: none;
+            border-radius: 16px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(16, 185, 129, 0.3);
+            margin: 20px auto;
+            display: block;
+        }
+
+        .finish-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 35px rgba(16, 185, 129, 0.4);
+        }
+
+        .finish-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        /* Quiz Full Width */
+        #screen-7.active {
+            grid-template-columns: 1fr;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        #screen-7 .content-side {
+            max-width: 100%;
+            text-align: center;
+            margin: 0 auto 40px auto;
+        }
+
+        #screen-7 .visual-side {
+            width: 100%;
+            flex-direction: column;
+            align-items: stretch;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 1024px) {
+            .lesson-screen.active {
+                grid-template-columns: 1fr;
+                gap: 40px;
+                padding: 20px;
+            }
+
+            .content-side {
+                max-width: 100%;
+                margin: 0;
+            }
+
+            .visual-side {
+                order: -1;
+            }
+
+            .animated-card {
+                width: 100%;
+                max-width: 400px;
+            }
+
+            .back-link {
+                left: 20px;
+            }
+
+            .nav-controls {
+                bottom: 20px;
+                right: 20px;
+            }
+
+            .comparison-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-wrapper">
+                <div class="logo"><a href="/" style="color: inherit; text-decoration: none;">Finance<span class="logo-accent">U</span></a></div>
+                <ul class="nav-links">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="dashboard">Dashboard</a></li>
+                    <li id="authButtons" style="opacity: 0;"></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Progress Bar -->
+    <div class="progress-container">
+        <div class="progress-bar" id="progressBar" style="width: 14.28%;"></div>
+    </div>
+
+    <!-- Back Link -->
+    <a href="/path1-lessons" class="back-link">← Back to Lessons</a>
+
+    <div class="lesson-wrapper">
+        <!-- Screen 1: Hero Intro -->
+        <div class="lesson-screen active" id="screen-1">
+            <div class="content-side">
+                <div class="section-number">Section 1 of 7</div>
+                <h1 class="content-title">Your Daily Money Hub</h1>
+                <p class="content-text">Think of a checking account as your <strong>financial command center</strong>—where your everyday money lives and moves.</p>
+                <p class="content-text">Unlike savings (where money sits and grows), a checking account is built for <strong>action</strong>. It's your spending account, your bill-paying account, your day-to-day money account.</p>
+                <div class="highlight-box">
+                    <p><strong>Here's why it matters:</strong> Your paycheck goes in, your bills come out, and you have instant access whenever you need it. It's the account you'll use every single day.</p>
+                </div>
+            </div>
+            <div class="visual-side">
+                <div class="hero-visual">
+                    <div class="hero-icon">💳</div>
+                    <div class="hero-stat">93%</div>
+                    <div class="hero-label">of Americans have a checking account</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Screen 2: What Makes It Special -->
+        <div class="lesson-screen" id="screen-2">
+            <div class="content-side">
+                <div class="section-number">Section 2 of 7</div>
+                <h1 class="content-title">What Makes Checking Special?</h1>
+                <p class="content-text">Checking accounts are designed for <strong>unlimited transactions</strong>. Swipe your debit card, write checks, pay bills online, use Venmo—do it all, as much as you want.</p>
+                <ul class="feature-list">
+                    <li><strong>Debit card access:</strong> Spend directly from your account anywhere cards are accepted</li>
+                    <li><strong>Unlimited transactions:</strong> No limits on how many times you can use your money</li>
+                    <li><strong>Bill pay:</strong> Set up automatic payments for rent, utilities, subscriptions</li>
+                    <li><strong>Easy deposits:</strong> Direct deposit from your employer, mobile check deposits</li>
+                    <li><strong>Instant access:</strong> ATMs, apps, online banking—your money is always available</li>
+                </ul>
+            </div>
+            <div class="visual-side">
+                <div class="animated-card" onclick="this.style.transform='rotateY(180deg)'">
+                    <div class="card-chip"></div>
+                    <div class="card-number">•••• •••• •••• 4242</div>
+                    <div class="card-holder">Your Name Here</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Screen 3: How Money Flows -->
+        <div class="lesson-screen" id="screen-3">
+            <div class="content-side">
+                <div class="section-number">Section 3 of 7</div>
+                <h1 class="content-title">How Money Flows</h1>
+                <p class="content-text">Your checking account is the central hub where money comes in and goes out. Understanding this flow helps you manage it better.</p>
+                <p class="content-text">Most people use checking for their <strong>monthly cash flow</strong>—everything that happens regularly with their money.</p>
+            </div>
+            <div class="visual-side">
+                <div class="flow-diagram">
+                    <div class="flow-item">
+                        <div class="flow-icon">💰</div>
+                        <div class="flow-text">
+                            <strong>Money In</strong>
+                            <span>Paycheck, side hustles, refunds</span>
+                        </div>
+                    </div>
+                    <div class="flow-item">
+                        <div class="flow-icon">🏠</div>
+                        <div class="flow-text">
+                            <strong>Bills Out</strong>
+                            <span>Rent, utilities, subscriptions</span>
+                        </div>
+                    </div>
+                    <div class="flow-item">
+                        <div class="flow-icon">🛒</div>
+                        <div class="flow-text">
+                            <strong>Daily Spending</strong>
+                            <span>Food, gas, shopping</span>
+                        </div>
+                    </div>
+                    <div class="flow-item">
+                        <div class="flow-icon">💸</div>
+                        <div class="flow-text">
+                            <strong>Transfers</strong>
+                            <span>Move to savings or investments</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Screen 4: Common Mistakes -->
+        <div class="lesson-screen" id="screen-4">
+            <div class="content-side">
+                <div class="section-number">Section 4 of 7</div>
+                <h1 class="content-title">Watch Out For These</h1>
+                <p class="content-text">Checking accounts are simple, but there are a few traps that catch people off guard. Here's what to avoid:</p>
+                <div class="highlight-box">
+                    <p><strong>Pro tip:</strong> Set up low balance alerts on your banking app. You'll get a text when your balance drops below a certain amount, preventing overdrafts before they happen.</p>
+                </div>
+            </div>
+            <div class="visual-side">
+                <div class="comparison-grid">
+                    <div class="compare-card bad">
+                        <div class="compare-icon">❌</div>
+                        <div class="compare-title">Overdrafts</div>
+                        <div class="compare-text">Spending more than you have = $35 fee per transaction</div>
+                    </div>
+                    <div class="compare-card bad">
+                        <div class="compare-icon">💸</div>
+                        <div class="compare-title">Monthly Fees</div>
+                        <div class="compare-text">Some banks charge $12-$15/month if you don't meet requirements</div>
+                    </div>
+                    <div class="compare-card good">
+                        <div class="compare-icon">✓</div>
+                        <div class="compare-title">Track Balance</div>
+                        <div class="compare-text">Check your app daily to know what you can actually spend</div>
+                    </div>
+                    <div class="compare-card good">
+                        <div class="compare-icon">🔔</div>
+                        <div class="compare-title">Set Alerts</div>
+                        <div class="compare-text">Get notified before problems happen</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Screen 5: Finding Your Account -->
+        <div class="lesson-screen" id="screen-5">
+            <div class="content-side">
+                <div class="section-number">Section 5 of 7</div>
+                <h1 class="content-title">Using Your Checking Account</h1>
+                <p class="content-text">Every bank's app and website look a bit different, but the basics are the same. Here's what you need to know:</p>
+                <ul class="feature-list">
+                    <li><strong>Check your balance:</strong> Open your app or log in to see how much you have right now</li>
+                    <li><strong>View transactions:</strong> See every purchase, deposit, and withdrawal</li>
+                    <li><strong>Transfer money:</strong> Move between checking and savings instantly</li>
+                    <li><strong>Pay bills:</strong> Set up one-time or automatic payments</li>
+                    <li><strong>Deposit checks:</strong> Take a photo with your phone—no ATM needed</li>
+                </ul>
+                <div class="highlight-box">
+                    <p><strong>Most important habit:</strong> Check your balance before any big purchase. What the app shows is what you actually have available right now.</p>
+                </div>
+            </div>
+            <div class="visual-side">
+                <div class="flow-diagram">
+                    <div class="flow-item">
+                        <div class="flow-icon">📱</div>
+                        <div class="flow-text">
+                            <strong>Open Your Bank App</strong>
+                            <span>Face ID or password to log in</span>
+                        </div>
+                    </div>
+                    <div class="flow-item">
+                        <div class="flow-icon">👁️</div>
+                        <div class="flow-text">
+                            <strong>See Your Balance</strong>
+                            <span>Shows available + pending transactions</span>
+                        </div>
+                    </div>
+                    <div class="flow-item">
+                        <div class="flow-icon">📊</div>
+                        <div class="flow-text">
+                            <strong>Check Recent Activity</strong>
+                            <span>Every transaction listed in real-time</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Screen 6: Best Practices -->
+        <div class="lesson-screen" id="screen-6">
+            <div class="content-side">
+                <div class="section-number">Section 6 of 7</div>
+                <h1 class="content-title">Smart Checking Habits</h1>
+                <p class="content-text">These simple habits will help you avoid fees, stay organized, and never run out of money unexpectedly:</p>
+                <ul class="feature-list">
+                    <li><strong>Check daily:</strong> Make it a morning routine—open the app, glance at your balance</li>
+                    <li><strong>Keep a buffer:</strong> Try to always keep $100-$200 extra as a cushion</li>
+                    <li><strong>Link to savings:</strong> Set up automatic transfers after payday</li>
+                    <li><strong>Review statements:</strong> Once a month, look for weird charges or subscriptions you forgot about</li>
+                    <li><strong>Use alerts:</strong> Low balance, large purchases, deposits—get notified for everything</li>
+                </ul>
+                <div class="highlight-box">
+                    <p><strong>Real talk:</strong> The number one reason people overdraft is not tracking pending transactions. Your app shows "available" balance, but if you have pending charges, that money is already spoken for.</p>
+                </div>
+            </div>
+            <div class="visual-side">
+                <div class="comparison-grid">
+                    <div class="compare-card good">
+                        <div class="compare-icon">📅</div>
+                        <div class="compare-title">Check Daily</div>
+                        <div class="compare-text">30 seconds every morning prevents costly surprises</div>
+                    </div>
+                    <div class="compare-card good">
+                        <div class="compare-icon">💰</div>
+                        <div class="compare-title">Keep Buffer</div>
+                        <div class="compare-text">$100-$200 cushion saves you from overdraft fees</div>
+                    </div>
+                    <div class="compare-card good">
+                        <div class="compare-icon">🔄</div>
+                        <div class="compare-title">Auto-Transfer</div>
+                        <div class="compare-text">Move money to savings right after payday</div>
+                    </div>
+                    <div class="compare-card good">
+                        <div class="compare-icon">🔍</div>
+                        <div class="compare-title">Review Monthly</div>
+                        <div class="compare-text">Catch forgotten subscriptions and weird charges</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Screen 7: Quiz -->
+        <div class="lesson-screen" id="screen-7">
+            <div class="content-side">
+                <div class="section-number">Section 7 of 7</div>
+                <h1 class="content-title">Test Your Knowledge</h1>
+                <p class="content-text">Let's make sure you've got the essentials down. Answer all questions correctly to complete the lesson.</p>
+            </div>
+            <div class="visual-side">
+                <div class="quiz-container" id="quizContainer">
+                    <!-- Questions will be inserted here by JavaScript -->
+                </div>
+                <div style="max-width: 800px; margin: 0 auto; width: 100%;">
+                    <button class="quiz-submit" id="submitQuiz" onclick="submitQuiz()">Submit Quiz</button>
+                    <div id="quizResult"></div>
+                    <button class="finish-btn" id="finishBtn" onclick="finishLesson()" disabled style="display: none;">Complete Lesson →</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation Controls -->
+    <div class="nav-controls">
+        <button class="nav-btn" id="prevBtn" onclick="previousScreen()">←</button>
+        <button class="nav-btn" id="nextBtn" onclick="nextScreen()">→</button>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>FinanceU</h4>
+                    <p>Making financial literacy accessible for everyone.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="/about">About Us</a></li>
+                        <li><a href="/careers">Careers</a></li>
+                        <li><a href="/contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="/help">Help Center</a></li>
+                        <li><a href="/privacy">Privacy Policy</a></li>
+                        <li><a href="/terms">Terms of Service</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p style="font-size: 0.85rem; opacity: 0.8; margin-bottom: 10px;">Disclaimer: FinanceU provides educational content only and does not offer financial, legal, or investment advice. Always consult with a qualified professional before making financial decisions.</p>
+                <p>&copy; 2025 FinanceU. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="config.js"></script>
+    <script src="lesson-completion.js"></script>
+    <script>
+        // Authentication
+        async function updateNav() {
+            const authButtons = document.getElementById('authButtons');
+            const cachedAuth = localStorage.getItem('authState');
+            if (cachedAuth) {
+                const authState = JSON.parse(cachedAuth);
+                authButtons.innerHTML = authState.isLoggedIn
+                    ? `<a href="#" onclick="logout(); return false;" class="btn-primary">Logout</a>`
+                    : `<a href="login" class="btn-primary">Login</a>`;
+                authButtons.style.opacity = '1';
+            }
+
+            try {
+                const response = await fetch(`${API_URL}/auth/me`, { credentials: 'include' });
+                if (response.ok) {
+                    localStorage.setItem('authState', JSON.stringify({ isLoggedIn: true }));
+                    authButtons.innerHTML = `<a href="#" onclick="logout(); return false;" class="btn-primary">Logout</a>`;
+                } else {
+                    localStorage.setItem('authState', JSON.stringify({ isLoggedIn: false }));
+                    authButtons.innerHTML = `<a href="login" class="btn-primary">Login</a>`;
+                }
+                authButtons.style.opacity = '1';
+            } catch (error) {
+                localStorage.setItem('authState', JSON.stringify({ isLoggedIn: false }));
+                authButtons.innerHTML = `<a href="login" class="btn-primary">Login</a>`;
+                authButtons.style.opacity = '1';
+            }
+        }
+
+        async function logout() {
+            localStorage.removeItem('authState');
+            localStorage.removeItem('token');
+            localStorage.removeItem('userId');
+            try {
+                await fetch(`${API_URL}/auth/logout`, {
+                    method: 'POST',
+                    credentials: 'include'
+                });
+                window.location.href = '/index.html';
+            } catch (error) {
+                window.location.href = '/index.html';
+            }
+        }
+
+        // Screen Navigation
+        let currentScreen = 1;
+        const totalScreens = 7;
+
+        function showScreen(screenNum) {
+            document.querySelectorAll('.lesson-screen').forEach(screen => {
+                screen.classList.remove('active');
+            });
+            document.getElementById(`screen-${screenNum}`).classList.add('active');
+            currentScreen = screenNum;
+            updateProgress();
+            updateNavButtons();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function nextScreen() {
+            if (currentScreen < totalScreens) {
+                showScreen(currentScreen + 1);
+            }
+        }
+
+        function previousScreen() {
+            if (currentScreen > 1) {
+                showScreen(currentScreen - 1);
+            }
+        }
+
+        function updateNavButtons() {
+            document.getElementById('prevBtn').disabled = currentScreen === 1;
+            document.getElementById('nextBtn').disabled = currentScreen === totalScreens;
+        }
+
+        function updateProgress() {
+            const progress = (currentScreen / totalScreens) * 100;
+            document.getElementById('progressBar').style.width = progress + '%';
+        }
+
+        // Quiz
+        const quizQuestions = [
+            {
+                question: "You have $200 in your checking account. You buy groceries for $45 (pending), gas for $30 (pending), and your gym charges $25 (will process tomorrow). Your app shows $200 available. How much can you safely spend?",
+                options: [
+                    "$200 - that's what the app shows",
+                    "$100 - account for all pending and upcoming charges",
+                    "$155 - subtract only the pending charges",
+                    "$170 - subtract only the processed charges"
+                ],
+                correct: 1
+            },
+            {
+                question: "Your bank charges a $12 monthly fee unless you maintain a $1,500 minimum balance OR have direct deposit. What's the smartest long-term strategy?",
+                options: [
+                    "Keep exactly $1,500 in checking at all times",
+                    "Pay the $12 fee and keep your money in savings earning interest",
+                    "Set up direct deposit and keep a buffer above $0",
+                    "Switch between accounts each month to avoid the fee"
+                ],
+                correct: 2
+            },
+            {
+                question: "You're at a store and your debit card is declined, but you know you have money. What's the MOST likely reason?",
+                options: [
+                    "The bank is closed for the day",
+                    "You have pending transactions that haven't cleared yet",
+                    "Someone stole all your money",
+                    "Your card expired last month"
+                ],
+                correct: 1
+            },
+            {
+                question: "Which scenario represents the BEST use of a checking account vs. a savings account?",
+                options: [
+                    "Keep all your money in checking for easy access",
+                    "Keep $500 in checking for monthly expenses, rest in savings earning interest",
+                    "Keep all money in savings and transfer as needed",
+                    "Split everything 50/50 between checking and savings"
+                ],
+                correct: 1
+            },
+            {
+                question: "You set up automatic bill pay for your $100 phone bill on the 15th, but your paycheck doesn't arrive until the 16th. You have $80 in your account. What will likely happen?",
+                options: [
+                    "The bill will be delayed until the 16th automatically",
+                    "You'll be charged an overdraft fee (~$35) for being -$20",
+                    "The phone company will wait for your paycheck",
+                    "The payment will be canceled with no consequences"
+                ],
+                correct: 1
+            }
+        ];
+
+        let userAnswers = new Array(quizQuestions.length).fill(null);
+        let quizPassed = false;
+
+        function initQuiz() {
+            const userId = localStorage.getItem('userId');
+            if (!userId || userId === 'null' || userId === 'undefined') {
+                document.getElementById('finishBtn').disabled = true;
+                return;
+            }
+
+            const quizPassedStatus = localStorage.getItem(`lesson2_quiz_passed_${userId}`);
+            if (quizPassedStatus === 'true') {
+                quizPassed = true;
+                document.getElementById('finishBtn').disabled = false;
+                document.getElementById('finishBtn').style.display = 'block';
+                document.getElementById('quizContainer').style.display = 'none';
+                document.getElementById('submitQuiz').style.display = 'none';
+                return;
+            }
+
+            renderQuiz();
+        }
+
+        function renderQuiz() {
+            const container = document.getElementById('quizContainer');
+            container.innerHTML = '';
+
+            quizQuestions.forEach((q, qIndex) => {
+                const card = document.createElement('div');
+                card.className = 'quiz-card';
+                card.innerHTML = `
+                    <div class="quiz-question">${qIndex + 1}. ${q.question}</div>
+                    <div class="quiz-options-grid">
+                        ${q.options.map((option, oIndex) => `
+                            <div class="quiz-option" onclick="selectAnswer(${qIndex}, ${oIndex})" data-q="${qIndex}" data-o="${oIndex}">
+                                ${option}
+                            </div>
+                        `).join('')}
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+
+            checkQuizComplete();
+        }
+
+        function selectAnswer(questionIndex, optionIndex) {
+            userAnswers[questionIndex] = optionIndex;
+
+            // Update visual selection
+            const options = document.querySelectorAll(`[data-q="${questionIndex}"]`);
+            options.forEach((opt, idx) => {
+                opt.classList.remove('selected');
+                if (idx === optionIndex) {
+                    opt.classList.add('selected');
+                }
+            });
+
+            checkQuizComplete();
+        }
+
+        function checkQuizComplete() {
+            const allAnswered = !userAnswers.includes(null);
+            document.getElementById('submitQuiz').disabled = !allAnswered;
+        }
+
+        function submitQuiz() {
+            let correct = 0;
+            quizQuestions.forEach((q, index) => {
+                const options = document.querySelectorAll(`[data-q="${index}"]`);
+                options.forEach((opt, oIndex) => {
+                    opt.style.pointerEvents = 'none';
+                    if (oIndex === q.correct) {
+                        opt.classList.add('correct');
+                    } else if (oIndex === userAnswers[index] && oIndex !== q.correct) {
+                        opt.classList.add('incorrect');
+                    }
+                });
+
+                if (userAnswers[index] === q.correct) {
+                    correct++;
+                }
+            });
+
+            const passed = correct === quizQuestions.length;
+            const resultDiv = document.getElementById('quizResult');
+
+            if (passed) {
+                quizPassed = true;
+                const userId = localStorage.getItem('userId');
+                localStorage.setItem(`lesson2_quiz_passed_${userId}`, 'true');
+
+                resultDiv.innerHTML = `
+                    <div class="quiz-result">
+                        <div class="result-icon">🎉</div>
+                        <div class="result-title">Perfect Score!</div>
+                        <div class="result-text">You got all ${correct} out of ${quizQuestions.length} questions correct. You're ready to manage your checking account like a pro!</div>
+                    </div>
+                `;
+
+                document.getElementById('finishBtn').disabled = false;
+                document.getElementById('finishBtn').style.display = 'block';
+            } else {
+                resultDiv.innerHTML = `
+                    <div class="quiz-result" style="background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%); border-color: #ef4444;">
+                        <div class="result-icon">📚</div>
+                        <div class="result-title">Not Quite There</div>
+                        <div class="result-text">You got ${correct} out of ${quizQuestions.length}. Review the lesson and try again—you need 100% to pass.</div>
+                        <button class="quiz-submit" onclick="retryQuiz()" style="margin-top: 20px; background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);">Try Again</button>
+                    </div>
+                `;
+            }
+
+            document.getElementById('submitQuiz').style.display = 'none';
+        }
+
+        function retryQuiz() {
+            userAnswers = new Array(quizQuestions.length).fill(null);
+            document.getElementById('quizResult').innerHTML = '';
+            renderQuiz();
+            document.getElementById('submitQuiz').style.display = 'block';
+        }
+
+        async function finishLesson() {
+            if (!quizPassed) {
+                alert('Please complete the quiz first!');
+                return;
+            }
+
+            const success = await completeLesson('path1_lesson2', 1, 2);
+            if (success) {
+                window.location.href = 'path1-lessons.html';
+            }
+        }
+
+        // Initialize
+        updateNav();
+        initQuiz();
+        updateNavButtons();
+        updateProgress();
+    </script>
+</body>
+</html>

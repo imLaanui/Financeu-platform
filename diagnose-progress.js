@@ -27,7 +27,7 @@ async function diagnoseProgress(email) {
         }
 
         // Organize by pillar
-        const byPillar = {
+        const byPath = {
             1: [], 2: [], 3: [], 4: []
         };
 
@@ -41,8 +41,8 @@ async function diagnoseProgress(email) {
             if (match) {
                 const pillarNum = parseInt(match[1]);
                 const lessonNum = parseInt(match[2]);
-                if (byPillar[pillarNum]) {
-                    byPillar[pillarNum].push({
+                if (byPath[pillarNum]) {
+                    byPath[pillarNum].push({
                         lesson: lessonNum,
                         id: lessonId,
                         completedAt: p.completed_at
@@ -54,7 +54,7 @@ async function diagnoseProgress(email) {
             const legacyMatch = lessonId.match(/^lesson(\d+)$/);
             if (legacyMatch) {
                 const lessonNum = parseInt(legacyMatch[1]);
-                byPillar[1].push({
+                byPath[1].push({
                     lesson: lessonNum,
                     id: lessonId,
                     completedAt: p.completed_at
@@ -65,16 +65,16 @@ async function diagnoseProgress(email) {
         // Display by pillar
         for (let pillar = 1; pillar <= 4; pillar++) {
             console.log(`\n📚 PILLAR ${pillar}:`);
-            if (byPillar[pillar].length === 0) {
+            if (byPath[pillar].length === 0) {
                 console.log('   No lessons completed');
             } else {
-                byPillar[pillar].sort((a, b) => a.lesson - b.lesson);
-                byPillar[pillar].forEach(item => {
+                byPath[pillar].sort((a, b) => a.lesson - b.lesson);
+                byPath[pillar].forEach(item => {
                     console.log(`   ✓ Lesson ${item.lesson} (${item.id}) - ${item.completedAt}`);
                 });
 
                 // Check for gaps
-                const lessonNums = byPillar[pillar].map(i => i.lesson);
+                const lessonNums = byPath[pillar].map(i => i.lesson);
                 const maxLesson = Math.max(...lessonNums);
                 for (let i = 1; i <= maxLesson; i++) {
                     if (!lessonNums.includes(i)) {

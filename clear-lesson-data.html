@@ -106,10 +106,10 @@
         <div class="data-section">
             <h3>Clear Options</h3>
             <button class="btn btn-danger" onclick="clearAllLessonData()">Clear All Lesson Completion Data</button>
-            <button class="btn btn-danger" onclick="clearPillar(1)">Clear Pillar 1 Only</button>
-            <button class="btn btn-danger" onclick="clearPillar(2)">Clear Pillar 2 Only</button>
-            <button class="btn btn-danger" onclick="clearPillar(3)">Clear Pillar 3 Only</button>
-            <button class="btn btn-danger" onclick="clearPillar(4)">Clear Pillar 4 Only</button>
+            <button class="btn btn-danger" onclick="clearPath(1)">Clear Path 1 Only</button>
+            <button class="btn btn-danger" onclick="clearPath(2)">Clear Path 2 Only</button>
+            <button class="btn btn-danger" onclick="clearPath(3)">Clear Path 3 Only</button>
+            <button class="btn btn-danger" onclick="clearPath(4)">Clear Path 4 Only</button>
         </div>
 
         <div class="success" id="successMessage">
@@ -159,18 +159,18 @@
             const data = {};
 
             // Collect all lesson-related localStorage data
-            for (let pillar = 1; pillar <= 4; pillar++) {
-                data[`pillar${pillar}_completed`] = JSON.parse(localStorage.getItem(`pillar${pillar}_completed_${userId}`) || '[]');
+            for (let path = 1; path <= 4; path++) {
+                data[`path${path}_completed`] = JSON.parse(localStorage.getItem(`path${path}_completed_${userId}`) || '[]');
 
                 // Check individual lesson quiz status
-                data[`pillar${pillar}_quizzes`] = {};
+                data[`path${path}_quizzes`] = {};
                 for (let lesson = 1; lesson <= 8; lesson++) {
-                    const quizKey = pillar === 1
+                    const quizKey = path === 1
                         ? `lesson${lesson}_quiz_passed_${userId}`
-                        : `pillar${pillar}_lesson${lesson}_quiz_passed_${userId}`;
+                        : `path${path}_lesson${lesson}_quiz_passed_${userId}`;
                     const quizPassed = localStorage.getItem(quizKey);
                     if (quizPassed) {
-                        data[`pillar${pillar}_quizzes`][`lesson${lesson}`] = quizPassed;
+                        data[`path${path}_quizzes`][`lesson${lesson}`] = quizPassed;
                     }
                 }
             }
@@ -193,9 +193,9 @@
 
             let clearedCount = 0;
 
-            // Clear all pillar completion data
-            for (let pillar = 1; pillar <= 4; pillar++) {
-                const key = `pillar${pillar}_completed_${userId}`;
+            // Clear all path completion data
+            for (let path = 1; path <= 4; path++) {
+                const key = `path${path}_completed_${userId}`;
                 if (localStorage.getItem(key)) {
                     localStorage.removeItem(key);
                     clearedCount++;
@@ -203,25 +203,25 @@
 
                 // Clear quiz completion data
                 for (let lesson = 1; lesson <= 8; lesson++) {
-                    const quizKey = pillar === 1
+                    const quizKey = path === 1
                         ? `lesson${lesson}_quiz_passed_${userId}`
-                        : `pillar${pillar}_lesson${lesson}_quiz_passed_${userId}`;
+                        : `path${path}_lesson${lesson}_quiz_passed_${userId}`;
                     if (localStorage.getItem(quizKey)) {
                         localStorage.removeItem(quizKey);
                         clearedCount++;
                     }
                 }
 
-                // Clear pillar quiz data
-                const pillarQuizKey = `pillar${pillar}_quiz_completed_${userId}`;
-                if (localStorage.getItem(pillarQuizKey)) {
-                    localStorage.removeItem(pillarQuizKey);
+                // Clear path quiz data
+                const pathQuizKey = `path${path}_quiz_completed_${userId}`;
+                if (localStorage.getItem(pathQuizKey)) {
+                    localStorage.removeItem(pathQuizKey);
                     clearedCount++;
                 }
 
-                const pillarQuizScoreKey = `pillar${pillar}_quiz_score_${userId}`;
-                if (localStorage.getItem(pillarQuizScoreKey)) {
-                    localStorage.removeItem(pillarQuizScoreKey);
+                const pathQuizScoreKey = `path${path}_quiz_score_${userId}`;
+                if (localStorage.getItem(pathQuizScoreKey)) {
+                    localStorage.removeItem(pathQuizScoreKey);
                     clearedCount++;
                 }
             }
@@ -229,8 +229,8 @@
             showSuccess(`Cleared ${clearedCount} data items. Please refresh your lesson pages.`);
         }
 
-        function clearPillar(pillarNum) {
-            if (!confirm(`Are you sure you want to clear Pillar ${pillarNum} completion data? This cannot be undone.`)) {
+        function clearPath(pathNum) {
+            if (!confirm(`Are you sure you want to clear Path ${pathNum} completion data? This cannot be undone.`)) {
                 return;
             }
 
@@ -242,8 +242,8 @@
 
             let clearedCount = 0;
 
-            // Clear pillar completion data
-            const key = `pillar${pillarNum}_completed_${userId}`;
+            // Clear path completion data
+            const key = `path${pathNum}_completed_${userId}`;
             if (localStorage.getItem(key)) {
                 localStorage.removeItem(key);
                 clearedCount++;
@@ -251,29 +251,29 @@
 
             // Clear quiz completion data
             for (let lesson = 1; lesson <= 8; lesson++) {
-                const quizKey = pillarNum === 1
+                const quizKey = pathNum === 1
                     ? `lesson${lesson}_quiz_passed_${userId}`
-                    : `pillar${pillarNum}_lesson${lesson}_quiz_passed_${userId}`;
+                    : `path${pathNum}_lesson${lesson}_quiz_passed_${userId}`;
                 if (localStorage.getItem(quizKey)) {
                     localStorage.removeItem(quizKey);
                     clearedCount++;
                 }
             }
 
-            // Clear pillar quiz data
-            const pillarQuizKey = `pillar${pillarNum}_quiz_completed_${userId}`;
-            if (localStorage.getItem(pillarQuizKey)) {
-                localStorage.removeItem(pillarQuizKey);
+            // Clear path quiz data
+            const pathQuizKey = `path${pathNum}_quiz_completed_${userId}`;
+            if (localStorage.getItem(pathQuizKey)) {
+                localStorage.removeItem(pathQuizKey);
                 clearedCount++;
             }
 
-            const pillarQuizScoreKey = `pillar${pillarNum}_quiz_score_${userId}`;
-            if (localStorage.getItem(pillarQuizScoreKey)) {
-                localStorage.removeItem(pillarQuizScoreKey);
+            const pathQuizScoreKey = `path${pathNum}_quiz_score_${userId}`;
+            if (localStorage.getItem(pathQuizScoreKey)) {
+                localStorage.removeItem(pathQuizScoreKey);
                 clearedCount++;
             }
 
-            showSuccess(`Cleared ${clearedCount} data items for Pillar ${pillarNum}. Please refresh your lesson pages.`);
+            showSuccess(`Cleared ${clearedCount} data items for Path ${pathNum}. Please refresh your lesson pages.`);
         }
 
         async function syncFromBackend() {
@@ -307,14 +307,14 @@
                 // You may need to adjust this based on your actual backend response structure
                 if (progress.completedLessons) {
                     for (const lessonId in progress.completedLessons) {
-                        // Parse lessonId format: pillar1_lesson1, pillar2_lesson3, etc.
-                        const match = lessonId.match(/pillar(\d+)_lesson(\d+)/);
+                        // Parse lessonId format: path1_lesson1, path2_lesson3, etc.
+                        const match = lessonId.match(/path(\d+)_lesson(\d+)/);
                         if (match) {
-                            const pillar = parseInt(match[1]);
+                            const path = parseInt(match[1]);
                             const lesson = parseInt(match[2]);
 
                             // Add to completed array
-                            const key = `pillar${pillar}_completed_${userId}`;
+                            const key = `path${path}_completed_${userId}`;
                             const completed = JSON.parse(localStorage.getItem(key) || '[]');
                             if (!completed.includes(lesson)) {
                                 completed.push(lesson);

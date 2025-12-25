@@ -587,14 +587,14 @@ app.get('/api/admin/users', async (req, res) => {
 
       // Calculate per-pillar progress (8 lessons per pillar)
       const pillarLessons = {
-        'pillar1': 8, 'pillar2': 8, 'pillar3': 8,
-        'pillar4': 8, 'pillar5': 8, 'pillar6': 8,
+        'path1': 8, 'path2': 8, 'path3': 8,
+        'path4': 8, 'pillar5': 8, 'pillar6': 8,
         'pillar7': 8, 'pillar8': 8, 'pillar9': 8,
-        'pillar10': 8, 'pillar11': 8
+        'path10': 8, 'path11': 8
       };
 
       const pillarProgress = {};
-      let currentPillar = null;
+      let currentPath = null;
       let currentLesson = null;
       let lastActivity = null;
 
@@ -621,7 +621,7 @@ app.get('/api/admin/users', async (req, res) => {
             (!lastActivity || new Date(p.completed_at) > new Date(lastActivity))) {
           lastActivity = p.completed_at;
           currentLesson = p.lesson_id;
-          currentPillar = p.lesson_id.split('_')[0];
+          currentPath = p.lesson_id.split('_')[0];
         }
       });
 
@@ -636,7 +636,7 @@ app.get('/api/admin/users', async (req, res) => {
           totalLessons,
           overallPercentage,
           pillarProgress,
-          currentPillar,
+          currentPath,
           currentLesson,
           lastActivity
         }
@@ -670,15 +670,15 @@ app.get('/dashboard', (req, res) => {
   res.sendFile(path.join(__dirname, 'dashboard.html'));
 });
 
-// Pillar 4 routes (requires PRO or PREMIUM tier)
-app.get('/pillar4-lessons', authenticateToken, requireTier(['pro', 'premium']), (req, res) => {
-  res.sendFile(path.join(__dirname, 'pillar4-lessons.html'));
+// Path 4 routes (requires PRO or PREMIUM tier)
+app.get('/path4-lessons', authenticateToken, requireTier(['pro', 'premium']), (req, res) => {
+  res.sendFile(path.join(__dirname, 'path4-lessons.html'));
 });
 
-// Pillar 4 individual lessons (requires PRO or PREMIUM tier)
+// Path 4 individual lessons (requires PRO or PREMIUM tier)
 for (let i = 1; i <= 8; i++) {
-  app.get(`/pillar4-lesson${i}`, authenticateToken, requireTier(['pro', 'premium']), (req, res) => {
-    res.sendFile(path.join(__dirname, `pillar4-lesson${i}.html`));
+  app.get(`/path4-lesson${i}`, authenticateToken, requireTier(['pro', 'premium']), (req, res) => {
+    res.sendFile(path.join(__dirname, `path4-lesson${i}.html`));
   });
 }
 

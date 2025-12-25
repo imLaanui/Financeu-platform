@@ -1,0 +1,1340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Money's Journey - FinanceU</title>
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+    <link rel="icon" type="image/svg+xml" sizes="16x16" href="assets/favicon-16x16.svg">
+    <link rel="icon" type="image/svg+xml" sizes="32x32" href="assets/favicon-32x32.svg">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.svg">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* Journey Container */
+        .journey-container {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            min-height: 100vh;
+            position: relative;
+        }
+
+        /* Progress Dots */
+        .progress-dots {
+            position: fixed;
+            right: 40px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 100;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .progress-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .progress-dot.active {
+            background: #3B82F6;
+            transform: scale(1.3);
+            box-shadow: 0 0 20px rgba(59, 130, 246, 0.6);
+        }
+
+        .progress-dot:hover {
+            background: rgba(255, 255, 255, 0.6);
+            transform: scale(1.2);
+        }
+
+        .progress-dot::after {
+            content: attr(data-label);
+            position: absolute;
+            right: 25px;
+            top: 50%;
+            transform: translateY(-50%);
+            white-space: nowrap;
+            color: white;
+            font-size: 12px;
+            font-weight: 600;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+        }
+
+        .progress-dot:hover::after {
+            opacity: 1;
+        }
+
+        /* Chapter Sections */
+        .chapter {
+            min-height: 100vh;
+            display: none;
+            align-items: flex-start;
+            justify-content: center;
+            padding: 120px 40px 80px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .chapter.active {
+            display: flex;
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .chapter-content {
+            max-width: 900px;
+            width: 100%;
+        }
+
+        /* Hero Chapter */
+        .hero-chapter {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #312e81 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-chapter::before {
+            content: '';
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(59, 130, 246, 0.15) 0%, transparent 70%);
+            border-radius: 50%;
+            top: -100px;
+            right: -100px;
+            animation: float 20s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            33% { transform: translate(30px, -30px) rotate(120deg); }
+            66% { transform: translate(-20px, 20px) rotate(240deg); }
+        }
+
+        .hero-title {
+            font-size: clamp(48px, 8vw, 96px);
+            font-weight: 800;
+            color: white;
+            line-height: 1.1;
+            margin-bottom: 24px;
+            background: linear-gradient(135deg, #ffffff 0%, #3B82F6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(20px, 3vw, 28px);
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 48px;
+            font-weight: 300;
+            line-height: 1.6;
+        }
+
+        .start-journey-btn {
+            padding: 20px 48px;
+            background: linear-gradient(135deg, #3B82F6 0%, #8B5CF6 100%);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 40px rgba(59, 130, 246, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .start-journey-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .start-journey-btn:hover::before {
+            left: 100%;
+        }
+
+        .start-journey-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 50px rgba(59, 130, 246, 0.4);
+        }
+
+        /* Story Card */
+        .story-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 32px;
+            padding: 48px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .chapter-label {
+            font-size: 14px;
+            font-weight: 700;
+            letter-spacing: 3px;
+            color: #3B82F6;
+            margin-bottom: 16px;
+            text-transform: uppercase;
+        }
+
+        .story-title {
+            font-size: clamp(28px, 4.5vw, 42px);
+            font-weight: 700;
+            color: white;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .story-text {
+            font-size: 17px;
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.7;
+            margin-bottom: 18px;
+        }
+
+        .story-text strong {
+            color: #3B82F6;
+            font-weight: 600;
+        }
+
+        .story-list {
+            list-style: none;
+            margin: 24px 0;
+        }
+
+        .story-list li {
+            padding: 16px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 16px;
+            line-height: 1.6;
+            display: flex;
+            align-items: start;
+            gap: 12px;
+        }
+
+        .story-list li::before {
+            content: '→';
+            color: #3B82F6;
+            font-weight: bold;
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+
+        /* Growth Visualization */
+        .growth-visual {
+            background: linear-gradient(135deg, #0f172a 0%, #1e3a5f 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .plant-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            height: 400px;
+            margin: 0 auto 40px;
+        }
+
+        .plant-pot {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 200px;
+            height: 120px;
+            background: linear-gradient(135deg, #475569 0%, #334155 100%);
+            border-radius: 0 0 20px 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .plant-pot::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            left: 10px;
+            right: 10px;
+            height: 40px;
+            background: linear-gradient(135deg, #64748b 0%, #475569 100%);
+            border-radius: 10px 10px 0 0;
+        }
+
+        .money-plant {
+            position: absolute;
+            bottom: 100px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 0;
+            background: #10b981;
+            transition: height 2s ease;
+        }
+
+        .money-plant.growing {
+            height: 200px;
+        }
+
+        .coin {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+            border-radius: 50%;
+            box-shadow: 0 4px 15px rgba(251, 191, 36, 0.4);
+            opacity: 0;
+            transform: scale(0);
+            transition: all 0.5s ease;
+        }
+
+        .coin.appear {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .coin-1 { left: 45%; top: 150px; }
+        .coin-2 { right: 45%; top: 120px; }
+        .coin-3 { left: 40%; top: 80px; }
+        .coin-4 { right: 40%; top: 60px; }
+        .coin-5 { left: 50%; top: 40px; transform: translateX(-50%); }
+
+        /* Interactive Calculator */
+        .calc-chapter {
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+        }
+
+        .calculator-glass {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 32px;
+            padding: 48px;
+            margin-top: 32px;
+        }
+
+        .calc-row {
+            margin-bottom: 32px;
+        }
+
+        .calc-label {
+            display: block;
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .calc-slider-container {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .calc-slider {
+            flex: 1;
+            height: 6px;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            outline: none;
+            -webkit-appearance: none;
+        }
+
+        .calc-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #3B82F6 0%, #8B5CF6 100%);
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);
+            transition: all 0.2s ease;
+        }
+
+        .calc-slider::-webkit-slider-thumb:hover {
+            transform: scale(1.2);
+        }
+
+        .calc-value {
+            min-width: 120px;
+            padding: 12px 20px;
+            background: rgba(59, 130, 246, 0.2);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            border-radius: 12px;
+            color: white;
+            font-size: 18px;
+            font-weight: 700;
+            text-align: center;
+        }
+
+        .calc-result {
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.2) 0%, rgba(139, 92, 246, 0.2) 100%);
+            border: 2px solid rgba(59, 130, 246, 0.4);
+            border-radius: 24px;
+            padding: 40px;
+            margin-top: 40px;
+            text-align: center;
+        }
+
+        .result-label {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 16px;
+            margin-bottom: 8px;
+        }
+
+        .result-value {
+            font-size: 56px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #3B82F6 0%, #8B5CF6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .result-growth {
+            color: #10b981;
+            font-size: 24px;
+            font-weight: 600;
+            margin-top: 12px;
+        }
+
+        /* Quiz Chapter */
+        .quiz-chapter {
+            background: linear-gradient(135deg, #312e81 0%, #1e293b 100%);
+        }
+
+        .quiz-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            padding: 40px;
+            margin-bottom: 24px;
+        }
+
+        .quiz-question {
+            font-size: 22px;
+            font-weight: 600;
+            color: white;
+            margin-bottom: 24px;
+        }
+
+        .quiz-option {
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 20px 24px;
+            margin-bottom: 12px;
+            color: rgba(255, 255, 255, 0.9);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 16px;
+        }
+
+        .quiz-option:hover {
+            background: rgba(59, 130, 246, 0.1);
+            border-color: rgba(59, 130, 246, 0.4);
+            transform: translateX(8px);
+        }
+
+        .quiz-option.selected {
+            background: rgba(59, 130, 246, 0.2);
+            border-color: #3B82F6;
+        }
+
+        .quiz-option.correct {
+            background: rgba(16, 185, 129, 0.2);
+            border-color: #10b981;
+        }
+
+        .quiz-option.incorrect {
+            background: rgba(239, 68, 68, 0.2);
+            border-color: #ef4444;
+        }
+
+        .quiz-submit {
+            width: 100%;
+            padding: 18px;
+            background: linear-gradient(135deg, #3B82F6 0%, #8B5CF6 100%);
+            color: white;
+            border: none;
+            border-radius: 16px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 24px;
+        }
+
+        .quiz-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.4);
+        }
+
+        .quiz-submit:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .quiz-result {
+            background: rgba(16, 185, 129, 0.2);
+            border: 2px solid #10b981;
+            border-radius: 24px;
+            padding: 40px;
+            text-align: center;
+            margin-top: 24px;
+        }
+
+        .result-icon-large {
+            font-size: 64px;
+            margin-bottom: 16px;
+        }
+
+        .result-title {
+            font-size: 32px;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 12px;
+        }
+
+        .result-message {
+            font-size: 18px;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .finish-btn {
+            width: 100%;
+            max-width: 400px;
+            padding: 20px;
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            border: none;
+            border-radius: 16px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 24px auto;
+            display: block;
+        }
+
+        .finish-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(16, 185, 129, 0.4);
+        }
+
+        .finish-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        /* Navigation */
+        .chapter-nav {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 40px;
+            gap: 16px;
+        }
+
+        .nav-btn {
+            padding: 14px 32px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            color: white;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .nav-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .nav-btn:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
+
+        .nav-spacer {
+            flex: 1;
+        }
+
+        /* Back Link */
+        .back-link {
+            position: absolute;
+            top: 100px;
+            left: 40px;
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+            z-index: 50;
+        }
+
+        .back-link:hover {
+            color: white;
+            transform: translateX(-4px);
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .progress-dots {
+                display: none;
+            }
+
+            .chapter {
+                padding: 60px 20px;
+            }
+
+            .story-card {
+                padding: 32px 24px;
+            }
+
+            .calculator-glass {
+                padding: 24px;
+            }
+
+            .hero-title {
+                font-size: 48px;
+            }
+
+            .back-link {
+                top: 80px;
+                left: 20px;
+            }
+
+            .calc-slider-container {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .calc-value {
+                min-width: auto;
+            }
+        }
+
+        /* Fixed Navigation Controls */
+        .nav-controls {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            display: flex;
+            gap: 12px;
+            z-index: 50;
+        }
+
+        .nav-control-btn {
+            width: 56px;
+            height: 56px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 24px;
+            color: white;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+
+        .nav-control-btn:hover:not(:disabled) {
+            background: rgba(59, 130, 246, 0.3);
+            border-color: #3B82F6;
+            transform: scale(1.1);
+            box-shadow: 0 8px 25px rgba(59, 130, 246, 0.4);
+        }
+
+        .nav-control-btn:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* Smooth Scroll */
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-wrapper">
+                <div class="logo"><a href="/" style="color: inherit; text-decoration: none;">Finance<span class="logo-accent">U</span></a></div>
+                <ul class="nav-links">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="dashboard">Dashboard</a></li>
+                    <li id="authButtons" style="opacity: 0;"></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Journey Container -->
+    <div class="journey-container">
+        <a href="/path1-lessons" class="back-link">← Back to Lessons</a>
+
+        <!-- Progress Dots -->
+        <div class="progress-dots">
+            <div class="progress-dot active" data-label="Start" onclick="showChapter(0)"></div>
+            <div class="progress-dot" data-label="The Story" onclick="showChapter(1)"></div>
+            <div class="progress-dot" data-label="How It Works" onclick="showChapter(2)"></div>
+            <div class="progress-dot" data-label="Growth" onclick="showChapter(3)"></div>
+            <div class="progress-dot" data-label="Calculator" onclick="showChapter(4)"></div>
+            <div class="progress-dot" data-label="Using It" onclick="showChapter(5)"></div>
+            <div class="progress-dot" data-label="Quiz" onclick="showChapter(6)"></div>
+        </div>
+
+        <!-- Chapter 0: Hero -->
+        <div class="chapter hero-chapter active" id="chapter-0">
+            <div class="chapter-content">
+                <h1 class="hero-title">Your Money's Journey</h1>
+                <p class="hero-subtitle">Discover how savings accounts help your money grow while you sleep. This isn't just a lesson—it's the beginning of your financial story.</p>
+                <button class="start-journey-btn" onclick="showChapter(1)">Begin Your Journey →</button>
+            </div>
+        </div>
+
+        <!-- Chapter 1: What Is A Savings Account -->
+        <div class="chapter" id="chapter-1">
+            <div class="chapter-content">
+                <div class="story-card">
+                    <div class="chapter-label">Chapter 1</div>
+                    <h2 class="story-title">Meet Your Money's New Home</h2>
+                    <p class="story-text">Imagine you have a safe place where your money doesn't just sit—it <strong>grows</strong>. That's a savings account.</p>
+                    <p class="story-text">Unlike your checking account (where you spend from daily), a savings account is designed for money you want to <strong>protect and multiply</strong>.</p>
+
+                    <ul class="story-list">
+                        <li><strong>No temptation:</strong> No debit card means you won't accidentally spend it on coffee</li>
+                        <li><strong>It earns interest:</strong> The bank pays you to keep your money there</li>
+                        <li><strong>It's separated:</strong> Out of sight, out of mind, but always growing</li>
+                        <li><strong>It's protected:</strong> FDIC insured up to $250,000</li>
+                    </ul>
+
+                    <p class="story-text" style="margin-top: 32px; font-style: italic; opacity: 0.9;">Think of it as a garden where you plant money seeds and watch them grow over time.</p>
+                </div>
+                <div class="chapter-nav">
+                    <button class="nav-btn" onclick="showChapter(0)">← Previous</button>
+                    <div class="nav-spacer"></div>
+                    <button class="nav-btn" onclick="showChapter(2)">Next →</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Chapter 2: How Interest Works -->
+        <div class="chapter" id="chapter-2">
+            <div class="chapter-content">
+                <div class="story-card">
+                    <div class="chapter-label">Chapter 2</div>
+                    <h2 class="story-title">The Magic of Interest</h2>
+                    <p class="story-text">Here's where it gets interesting: <strong>Your money earns money.</strong></p>
+                    <p class="story-text">When you deposit money in a savings account, the bank doesn't just store it. They use it to make loans and investments. In return, they pay you <strong>interest</strong>—a percentage of your balance, every month.</p>
+
+                    <div style="background: rgba(59, 130, 246, 0.1); border-left: 4px solid #3B82F6; padding: 24px; border-radius: 12px; margin: 24px 0;">
+                        <p class="story-text" style="margin: 0;"><strong>Example:</strong> You save $1,000 at 0.05% APY. After one year, you'll have $1,000.50. You earned $0.50 by doing absolutely nothing.</p>
+                    </div>
+
+                    <div style="background: rgba(139, 92, 246, 0.1); border: 2px solid rgba(139, 92, 246, 0.3); padding: 20px; border-radius: 12px; margin: 24px 0;">
+                        <p class="story-text" style="margin: 0;"><strong>💡 What about high-yield savings?</strong> There are special savings accounts called "high-yield" that offer much better interest rates (4-5% APY instead of 0.01-0.05%). We'll cover these in detail in a later lesson!</p>
+                    </div>
+
+                    <p class="story-text"><strong>But here's the catch with regular savings accounts:</strong></p>
+                    <p class="story-text">While regular savings accounts do offer <strong>compounding interest</strong> (interest earning interest), the rates are so low that the growth is barely noticeable. At 0.05% APY, you'd only earn about $50 on $10,000 after 10 years.</p>
+
+                    <p class="story-text"><strong>Compounding IS powerful—but only with better rates:</strong></p>
+                    <ul class="story-list">
+                        <li>Your original money earns interest</li>
+                        <li>That interest gets added to your balance</li>
+                        <li>Next month, you earn interest on the bigger amount</li>
+                        <li>With higher rates (like high-yield savings), this creates real wealth growth</li>
+                    </ul>
+                </div>
+                <div class="chapter-nav">
+                    <button class="nav-btn" onclick="showChapter(1)">← Previous</button>
+                    <div class="nav-spacer"></div>
+                    <button class="nav-btn" onclick="showChapter(3)">Next →</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Chapter 3: Growth Visualization -->
+        <div class="chapter growth-visual" id="chapter-3">
+            <div class="chapter-content">
+                <div class="story-card">
+                    <div class="chapter-label">Chapter 3</div>
+                    <h2 class="story-title">Watch Your Money Grow</h2>
+                    <p class="story-text" style="text-align: center; margin-bottom: 40px;">Like a plant that needs time and care, your savings grows steadily over time.</p>
+
+                    <div class="plant-container">
+                        <div class="plant-pot"></div>
+                        <div class="money-plant" id="moneyPlant"></div>
+                        <div class="coin coin-1"></div>
+                        <div class="coin coin-2"></div>
+                        <div class="coin coin-3"></div>
+                        <div class="coin coin-4"></div>
+                        <div class="coin coin-5"></div>
+                    </div>
+
+                    <button class="start-journey-btn" onclick="growMoney()" id="growBtn" style="display: block; margin: 0 auto;">
+                        Plant Your Savings 🌱
+                    </button>
+
+                    <p class="story-text" style="text-align: center; margin-top: 32px; opacity: 0.8;">The longer you leave your money in savings, the more it grows. Time is your greatest asset.</p>
+                </div>
+                <div class="chapter-nav">
+                    <button class="nav-btn" onclick="showChapter(2)">← Previous</button>
+                    <div class="nav-spacer"></div>
+                    <button class="nav-btn" onclick="showChapter(4)">Next →</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Chapter 4: Interactive Calculator -->
+        <div class="chapter calc-chapter" id="chapter-4">
+            <div class="chapter-content">
+                <div class="story-card">
+                    <div class="chapter-label">Chapter 4</div>
+                    <h2 class="story-title">See Your Future</h2>
+                    <p class="story-text" style="text-align: center;">Play with these numbers to see how your savings could grow.</p>
+
+                    <div class="calculator-glass">
+                        <div class="calc-row">
+                            <label class="calc-label">Starting Amount</label>
+                            <div class="calc-slider-container">
+                                <input type="range" class="calc-slider" min="100" max="10000" step="100" value="1000" id="startAmount" oninput="updateCalculation()">
+                                <div class="calc-value" id="startDisplay">$1,000</div>
+                            </div>
+                        </div>
+
+                        <div class="calc-row">
+                            <label class="calc-label">Interest Rate (APY)</label>
+                            <div class="calc-slider-container">
+                                <input type="range" class="calc-slider" min="0.01" max="0.05" step="0.01" value="0.05" id="interestRate" oninput="updateCalculation()">
+                                <div class="calc-value" id="rateDisplay">0.05%</div>
+                            </div>
+                        </div>
+
+                        <div class="calc-row">
+                            <label class="calc-label">Years</label>
+                            <div class="calc-slider-container">
+                                <input type="range" class="calc-slider" min="1" max="30" step="1" value="5" id="years" oninput="updateCalculation()">
+                                <div class="calc-value" id="yearsDisplay">5 years</div>
+                            </div>
+                        </div>
+
+                        <div class="calc-result">
+                            <div class="result-label">Your money grows to</div>
+                            <div class="result-value" id="finalAmount">$1,003</div>
+                            <div class="result-growth" id="interestEarned">+$3 earned</div>
+                        </div>
+                    </div>
+
+                    <p class="story-text" style="text-align: center; margin-top: 32px; opacity: 0.8; color: rgba(239, 68, 68, 0.9);"><strong>The Reality:</strong> As you can see, regular savings accounts don't earn much at all. Even after years, the growth is minimal.</p>
+
+                    <div style="background: rgba(239, 68, 68, 0.1); border: 2px solid rgba(239, 68, 68, 0.3); padding: 20px; border-radius: 12px; margin-top: 20px;">
+                        <p class="story-text" style="margin: 0; text-align: center; font-size: 15px;"><strong>⚠️ Important Truth:</strong> Regular savings accounts are great for keeping money safe and accessible, but they won't help your money grow meaningfully. That's why high-yield savings accounts (which we'll cover later) are so important for actually building wealth.</p>
+                    </div>
+                </div>
+                <div class="chapter-nav">
+                    <button class="nav-btn" onclick="showChapter(3)">← Previous</button>
+                    <div class="nav-spacer"></div>
+                    <button class="nav-btn" onclick="showChapter(5)">Next →</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Chapter 5: How To Use It -->
+        <div class="chapter" id="chapter-5">
+            <div class="chapter-content">
+                <div class="story-card">
+                    <div class="chapter-label">Chapter 5</div>
+                    <h2 class="story-title">Using Your Savings Account</h2>
+                    <p class="story-text">Now that you understand the basics (and the limitations of regular savings accounts), here's how to actually use a savings account in real life.</p>
+
+                    <div style="margin: 32px 0;">
+                        <h3 style="color: #3B82F6; font-size: 20px; margin-bottom: 16px;">✓ What savings is FOR:</h3>
+                        <ul class="story-list">
+                            <li>Emergency fund (unexpected expenses)</li>
+                            <li>Short-term goals (vacation, new laptop, moving out)</li>
+                            <li>Financial security and peace of mind</li>
+                        </ul>
+                    </div>
+
+                    <div style="margin: 32px 0;">
+                        <h3 style="color: #ef4444; font-size: 20px; margin-bottom: 16px;">✗ What savings is NOT for:</h3>
+                        <ul class="story-list">
+                            <li>Daily spending like coffee or meals</li>
+                            <li>Impulse purchases</li>
+                            <li>Bills and regular expenses (that's checking)</li>
+                        </ul>
+                    </div>
+
+                    <div style="background: rgba(139, 92, 246, 0.1); border: 2px solid rgba(139, 92, 246, 0.3); padding: 24px; border-radius: 16px; margin-top: 32px;">
+                        <p class="story-text" style="margin: 0;"><strong>Pro tip:</strong> Set up automatic transfers from checking to savings every payday. Even $50/month builds the saving habit. But remember—regular savings accounts won't grow your money much. Once you're comfortable with the habit, look into high-yield savings accounts (covered in a future lesson) to make your money actually work for you.</p>
+                    </div>
+                </div>
+                <div class="chapter-nav">
+                    <button class="nav-btn" onclick="showChapter(4)">← Previous</button>
+                    <div class="nav-spacer"></div>
+                    <button class="nav-btn" onclick="showChapter(6)">Next →</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Chapter 6: Quiz -->
+        <div class="chapter quiz-chapter" id="chapter-6">
+            <div class="chapter-content">
+                <div class="story-card">
+                    <div class="chapter-label">Final Chapter</div>
+                    <h2 class="story-title">Test Your Knowledge</h2>
+                    <p class="story-text" style="text-align: center; margin-bottom: 40px;">Let's see what you've learned. Answer all questions correctly to complete your journey.</p>
+                </div>
+
+                <div id="quizContainer"></div>
+
+                <button class="quiz-submit" id="submitQuiz" onclick="submitQuiz()" disabled>Submit Answers</button>
+
+                <div id="quizResult"></div>
+
+                <button class="finish-btn" id="finishBtn" onclick="finishLesson()" disabled style="display: none;">Complete Journey →</button>
+
+                <div class="chapter-nav">
+                    <button class="nav-btn" onclick="showChapter(5)">← Previous</button>
+                    <div class="nav-spacer"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation Controls -->
+    <div class="nav-controls">
+        <button class="nav-control-btn" id="prevBtn" onclick="previousChapter()">←</button>
+        <button class="nav-control-btn" id="nextBtn" onclick="nextChapter()">→</button>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>FinanceU</h4>
+                    <p>Making financial literacy accessible for everyone.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="/about">About Us</a></li>
+                        <li><a href="/careers">Careers</a></li>
+                        <li><a href="/contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="/help">Help Center</a></li>
+                        <li><a href="/privacy">Privacy Policy</a></li>
+                        <li><a href="/terms">Terms of Service</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p style="font-size: 0.85rem; opacity: 0.8; margin-bottom: 10px;">Disclaimer: FinanceU provides educational content only and does not offer financial, legal, or investment advice. Always consult with a qualified professional before making financial decisions.</p>
+                <p>&copy; 2025 FinanceU. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="config.js"></script>
+    <script src="lesson-completion.js"></script>
+    <script>
+        // Authentication
+        async function updateNav() {
+            const authButtons = document.getElementById('authButtons');
+            const cachedAuth = localStorage.getItem('authState');
+            if (cachedAuth) {
+                const authState = JSON.parse(cachedAuth);
+                authButtons.innerHTML = authState.isLoggedIn
+                    ? `<a href="#" onclick="logout(); return false;" class="btn-primary">Logout</a>`
+                    : `<a href="login" class="btn-primary">Login</a>`;
+                authButtons.style.opacity = '1';
+            }
+
+            try {
+                const response = await fetch(`${API_URL}/auth/me`, { credentials: 'include' });
+                if (response.ok) {
+                    localStorage.setItem('authState', JSON.stringify({ isLoggedIn: true }));
+                    authButtons.innerHTML = `<a href="#" onclick="logout(); return false;" class="btn-primary">Logout</a>`;
+                } else {
+                    localStorage.setItem('authState', JSON.stringify({ isLoggedIn: false }));
+                    authButtons.innerHTML = `<a href="login" class="btn-primary">Login</a>`;
+                }
+                authButtons.style.opacity = '1';
+            } catch (error) {
+                localStorage.setItem('authState', JSON.stringify({ isLoggedIn: false }));
+                authButtons.innerHTML = `<a href="login" class="btn-primary">Login</a>`;
+                authButtons.style.opacity = '1';
+            }
+        }
+
+        async function logout() {
+            localStorage.removeItem('authState');
+            localStorage.removeItem('token');
+            localStorage.removeItem('userId');
+            try {
+                await fetch(`${API_URL}/auth/logout`, {
+                    method: 'POST',
+                    credentials: 'include'
+                });
+                window.location.href = '/index.html';
+            } catch (error) {
+                window.location.href = '/index.html';
+            }
+        }
+
+        // Chapter Navigation
+        let currentChapter = 0;
+        const totalChapters = 7; // 0-6
+
+        function showChapter(index) {
+            if (index < 0 || index >= totalChapters) return;
+
+            // Hide all chapters
+            document.querySelectorAll('.chapter').forEach(chapter => {
+                chapter.classList.remove('active');
+            });
+
+            // Show selected chapter
+            const chapter = document.getElementById(`chapter-${index}`);
+            if (chapter) {
+                chapter.classList.add('active');
+                currentChapter = index;
+                updateProgressDots(index);
+                updateNavButtons();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        }
+
+        function nextChapter() {
+            if (currentChapter < totalChapters - 1) {
+                showChapter(currentChapter + 1);
+            }
+        }
+
+        function previousChapter() {
+            if (currentChapter > 0) {
+                showChapter(currentChapter - 1);
+            }
+        }
+
+        function updateNavButtons() {
+            document.getElementById('prevBtn').disabled = currentChapter === 0;
+            document.getElementById('nextBtn').disabled = currentChapter === totalChapters - 1;
+        }
+
+        function updateProgressDots(activeIndex) {
+            const dots = document.querySelectorAll('.progress-dot');
+            dots.forEach((dot, index) => {
+                if (index === activeIndex) {
+                    dot.classList.add('active');
+                } else {
+                    dot.classList.remove('active');
+                }
+            });
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowLeft') {
+                previousChapter();
+            } else if (e.key === 'ArrowRight') {
+                nextChapter();
+            }
+        });
+
+        // Money Growth Animation
+        let hasGrown = false;
+        function growMoney() {
+            if (hasGrown) return;
+            hasGrown = true;
+
+            const plant = document.getElementById('moneyPlant');
+            const coins = document.querySelectorAll('.coin');
+            const btn = document.getElementById('growBtn');
+
+            btn.textContent = 'Growing...';
+            btn.disabled = true;
+
+            plant.classList.add('growing');
+
+            setTimeout(() => {
+                coins.forEach((coin, index) => {
+                    setTimeout(() => {
+                        coin.classList.add('appear');
+                    }, index * 300);
+                });
+            }, 1000);
+
+            setTimeout(() => {
+                btn.textContent = 'Your Savings is Growing! 🌟';
+            }, 2500);
+        }
+
+        // Calculator
+        function updateCalculation() {
+            const startAmount = parseFloat(document.getElementById('startAmount').value);
+            const interestRate = parseFloat(document.getElementById('interestRate').value);
+            const years = parseInt(document.getElementById('years').value);
+
+            // Update displays
+            document.getElementById('startDisplay').textContent = '$' + startAmount.toLocaleString();
+            document.getElementById('rateDisplay').textContent = interestRate + '%';
+            document.getElementById('yearsDisplay').textContent = years + (years === 1 ? ' year' : ' years');
+
+            // Calculate compound interest
+            const rate = interestRate / 100;
+            const finalAmount = startAmount * Math.pow((1 + rate), years);
+            const interestEarned = finalAmount - startAmount;
+
+            document.getElementById('finalAmount').textContent = '$' + Math.round(finalAmount).toLocaleString();
+            document.getElementById('interestEarned').textContent = '+$' + Math.round(interestEarned).toLocaleString() + ' earned';
+        }
+
+        // Quiz
+        const quizQuestions = [
+            {
+                question: "Bank A offers 4.5% APY with no fees. Bank B offers 5.0% APY but charges a $5 monthly fee. You plan to keep $2,000 in the account. Which bank gives you more money after one year?",
+                options: [
+                    "Bank A - you'll earn ~$90 vs. Bank B's ~$40 (after fees)",
+                    "Bank B - the higher rate always wins",
+                    "They're exactly the same",
+                    "Bank A - but only if you keep more than $3,000"
+                ],
+                correct: 0
+            },
+            {
+                question: "You have $5,000 in a savings account earning 4% APY. Inflation is at 3% this year. What's the REAL growth of your purchasing power?",
+                options: [
+                    "4% - that's what the bank pays",
+                    "7% - add inflation and interest",
+                    "1% - interest minus inflation",
+                    "0% - inflation cancels out interest completely"
+                ],
+                correct: 2
+            },
+            {
+                question: "Your savings account has a 6-withdrawal limit per month (Regulation D). You make 7 withdrawals in one month. What's the most likely consequence?",
+                options: [
+                    "Nothing happens, it's just a suggestion",
+                    "You're charged a fee ($10-$25) for the 7th withdrawal",
+                    "Your account is immediately closed",
+                    "You can't make deposits for 30 days"
+                ],
+                correct: 1
+            },
+            {
+                question: "You save $200/month in an account with 4% APY (compounded monthly). After 2 years, approximately how much will you have?",
+                options: [
+                    "$4,800 - just your deposits",
+                    "$4,900 - deposits plus simple interest",
+                    "$5,000 - with compound interest",
+                    "$10,000 - compound interest doubles it"
+                ],
+                correct: 2
+            },
+            {
+                question: "You're building an emergency fund. Financial experts recommend saving enough to cover 3-6 months of expenses. If your monthly expenses are $2,000, what's the MINIMUM emergency fund target?",
+                options: [
+                    "$2,000 - one month is enough to start",
+                    "$6,000 - three months of expenses",
+                    "$12,000 - six months of expenses",
+                    "$24,000 - one year of expenses"
+                ],
+                correct: 1
+            }
+        ];
+
+        let userAnswers = new Array(quizQuestions.length).fill(null);
+        let quizPassed = false;
+
+        function initQuiz() {
+            const userId = localStorage.getItem('userId');
+            if (!userId || userId === 'null' || userId === 'undefined') {
+                document.getElementById('finishBtn').disabled = true;
+                return;
+            }
+
+            const quizPassedStatus = localStorage.getItem(`lesson3_quiz_passed_${userId}`);
+            if (quizPassedStatus === 'true') {
+                quizPassed = true;
+                document.getElementById('finishBtn').disabled = false;
+                document.getElementById('finishBtn').style.display = 'block';
+                document.getElementById('quizContainer').style.display = 'none';
+                document.getElementById('submitQuiz').style.display = 'none';
+                return;
+            }
+
+            renderQuiz();
+        }
+
+        function renderQuiz() {
+            const container = document.getElementById('quizContainer');
+            container.innerHTML = '';
+
+            quizQuestions.forEach((q, qIndex) => {
+                const card = document.createElement('div');
+                card.className = 'quiz-card';
+                card.innerHTML = `
+                    <div class="quiz-question">${qIndex + 1}. ${q.question}</div>
+                    ${q.options.map((option, oIndex) => `
+                        <div class="quiz-option" onclick="selectAnswer(${qIndex}, ${oIndex})" data-q="${qIndex}" data-o="${oIndex}">
+                            ${option}
+                        </div>
+                    `).join('')}
+                `;
+                container.appendChild(card);
+            });
+
+            checkQuizComplete();
+        }
+
+        function selectAnswer(questionIndex, optionIndex) {
+            userAnswers[questionIndex] = optionIndex;
+
+            // Update visual selection
+            const options = document.querySelectorAll(`[data-q="${questionIndex}"]`);
+            options.forEach((opt, idx) => {
+                opt.classList.remove('selected');
+                if (idx === optionIndex) {
+                    opt.classList.add('selected');
+                }
+            });
+
+            checkQuizComplete();
+        }
+
+        function checkQuizComplete() {
+            const allAnswered = !userAnswers.includes(null);
+            document.getElementById('submitQuiz').disabled = !allAnswered;
+        }
+
+        function submitQuiz() {
+            let correct = 0;
+            quizQuestions.forEach((q, index) => {
+                const options = document.querySelectorAll(`[data-q="${index}"]`);
+                options.forEach((opt, oIndex) => {
+                    opt.style.pointerEvents = 'none';
+                    if (oIndex === q.correct) {
+                        opt.classList.add('correct');
+                    } else if (oIndex === userAnswers[index] && oIndex !== q.correct) {
+                        opt.classList.add('incorrect');
+                    }
+                });
+
+                if (userAnswers[index] === q.correct) {
+                    correct++;
+                }
+            });
+
+            const passed = correct === quizQuestions.length;
+            const resultDiv = document.getElementById('quizResult');
+
+            if (passed) {
+                quizPassed = true;
+                const userId = localStorage.getItem('userId');
+                localStorage.setItem(`lesson3_quiz_passed_${userId}`, 'true');
+
+                resultDiv.innerHTML = `
+                    <div class="quiz-result">
+                        <div class="result-icon-large">🎉</div>
+                        <div class="result-title">Perfect Score!</div>
+                        <div class="result-message">You got all ${correct} out of ${quizQuestions.length} questions correct. You're ready to start your savings journey!</div>
+                    </div>
+                `;
+
+                document.getElementById('finishBtn').disabled = false;
+                document.getElementById('finishBtn').style.display = 'block';
+            } else {
+                resultDiv.innerHTML = `
+                    <div class="quiz-result" style="border-color: #ef4444; background: rgba(239, 68, 68, 0.2);">
+                        <div class="result-icon-large">📚</div>
+                        <div class="result-title">Not Quite There</div>
+                        <div class="result-message">You got ${correct} out of ${quizQuestions.length}. Review the lesson and try again—you need 100% to pass.</div>
+                        <button class="quiz-submit" onclick="retryQuiz()" style="margin-top: 20px; background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);">Try Again</button>
+                    </div>
+                `;
+            }
+
+            document.getElementById('submitQuiz').style.display = 'none';
+        }
+
+        function retryQuiz() {
+            userAnswers = new Array(quizQuestions.length).fill(null);
+            document.getElementById('quizResult').innerHTML = '';
+            renderQuiz();
+            document.getElementById('submitQuiz').style.display = 'block';
+        }
+
+        async function finishLesson() {
+            if (!quizPassed) {
+                alert('Please complete the quiz first!');
+                return;
+            }
+
+            const success = await completeLesson('path1_lesson3', 1, 3);
+            if (success) {
+                window.location.href = 'path1-lessons.html';
+            }
+        }
+
+        // Initialize
+        updateNav();
+        initQuiz();
+        updateCalculation();
+        updateNavButtons();
+    </script>
+</body>
+</html>
