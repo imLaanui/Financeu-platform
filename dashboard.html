@@ -16,11 +16,10 @@
         }
 
         .dashboard-header {
-            background: linear-gradient(135deg, #1A1A1D 0%, #222226 100%);
-            color: var(--text-primary);
+            background: linear-gradient(135deg, #0A1A2F 0%, #1a3a5c 100%);
+            color: white;
             padding: 2rem 0;
             margin-bottom: 2rem;
-            border-bottom: 1px solid var(--border-color);
         }
 
         .welcome-section {
@@ -44,12 +43,12 @@
         .membership-badge {
             display: inline-block;
             padding: 0.5rem 1rem;
-            background-color: var(--bg-raised);
-            color: var(--text-primary);
+            background-color: rgba(255, 255, 255, 0.2);
+            color: white;
             border-radius: 20px;
             font-weight: 600;
             text-transform: capitalize;
-            border: 2px solid var(--border-color);
+            border: 2px solid rgba(255, 255, 255, 0.3);
         }
 
         .membership-badge.premium {
@@ -68,7 +67,7 @@
         }
 
         .stat-card {
-            background-color: var(--bg-card);
+            background-color: var(--bg-white);
             padding: 1.5rem;
             border-radius: 12px;
             box-shadow: var(--shadow-md);
@@ -76,7 +75,6 @@
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             position: relative;
             overflow: hidden;
-            border: 1px solid var(--border-color);
         }
 
         .stat-card::before {
@@ -128,7 +126,7 @@
         }
 
         .stat-label {
-            color: var(--text-body);
+            color: var(--text-light);
             font-size: 0.875rem;
             font-weight: 500;
         }
@@ -150,7 +148,7 @@
         }
 
         .lesson-item {
-            background-color: var(--bg-card);
+            background-color: var(--bg-white);
             border-radius: 12px;
             padding: 1.5rem;
             box-shadow: var(--shadow-md);
@@ -158,7 +156,6 @@
             justify-content: space-between;
             align-items: center;
             transition: all 0.3s;
-            border: 1px solid var(--border-color);
         }
 
         .lesson-item:hover {
@@ -183,12 +180,12 @@
         }
 
         .lesson-details h3 {
-            color: var(--text-primary);
+            color: var(--text-dark);
             margin-bottom: 0.25rem;
         }
 
         .lesson-details p {
-            color: var(--text-body);
+            color: var(--text-light);
             font-size: 0.9rem;
         }
 
@@ -206,24 +203,24 @@
         }
 
         .status-badge.completed {
-            background-color: rgba(0, 166, 118, 0.15);
+            background-color: #d1fae5;
             color: var(--secondary-color);
         }
 
         .status-badge.locked {
-            background-color: rgba(239, 68, 68, 0.15);
-            color: #EF4444;
+            background-color: #fee2e2;
+            color: #dc2626;
         }
 
         .status-badge.available {
-            background-color: rgba(59, 130, 246, 0.15);
-            color: #3B82F6;
+            background-color: #dbeafe;
+            color: var(--primary-color);
         }
 
         .btn-lesson {
             padding: 0.75rem 1.5rem;
-            background: linear-gradient(135deg, #00A676 0%, #008c62 100%);
-            color: var(--bg-page);
+            background-color: var(--primary-color);
+            color: white;
             text-decoration: none;
             border-radius: 8px;
             font-weight: 600;
@@ -231,17 +228,17 @@
         }
 
         .btn-lesson:hover {
-            background: linear-gradient(135deg, #00b87f 0%, #00a073 100%);
+            background-color: var(--primary-dark);
         }
 
         .btn-lesson.disabled {
-            background-color: var(--text-disabled);
+            background-color: #d1d5db;
             cursor: not-allowed;
             pointer-events: none;
         }
 
         .upgrade-banner {
-            background: var(--bg-card);
+            background: white;
             border: 2px solid var(--border-color);
             border-radius: 12px;
             margin-bottom: 2rem;
@@ -249,11 +246,10 @@
         }
 
         .upgrade-header {
-            background: linear-gradient(135deg, #1A1A1D 0%, #222226 100%);
-            color: var(--text-primary);
+            background: linear-gradient(135deg, #0A1A2F 0%, #1a3a5c 100%);
+            color: white;
             padding: 1.25rem;
             text-align: center;
-            border-bottom: 1px solid var(--border-color);
         }
 
         .upgrade-header h3 {
@@ -303,25 +299,25 @@
 
         .tier-badge-banner.premium {
             background: var(--secondary-color);
-            color: var(--bg-page);
+            color: white;
         }
 
         .tier-option h4 {
             font-size: 1rem;
             margin-bottom: 0.5rem;
-            color: var(--text-primary);
+            color: var(--text-dark);
         }
 
         .tier-features {
             font-size: 0.8rem;
-            color: var(--text-body);
+            color: var(--text-secondary);
             margin-bottom: 0.875rem;
             line-height: 1.4;
         }
 
         .btn-upgrade {
             padding: 0.625rem 1.25rem;
-            color: var(--bg-page);
+            color: white;
             text-decoration: none;
             border-radius: 8px;
             font-weight: 600;
@@ -346,16 +342,15 @@
         .loading {
             text-align: center;
             padding: 4rem;
-            color: var(--text-body);
+            color: var(--text-light);
         }
 
         .error-message {
-            background-color: rgba(239, 68, 68, 0.15);
-            color: #EF4444;
+            background-color: #fee2e2;
+            color: #dc2626;
             padding: 1rem;
             border-radius: 8px;
             margin-bottom: 2rem;
-            border: 1px solid rgba(239, 68, 68, 0.3);
         }
 
         @media (max-width: 768px) {
