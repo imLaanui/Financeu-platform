@@ -1012,18 +1012,11 @@ body {
 }
 
 .nav-links a:not(.btn-primary)::after {
-    content: '';
-    position: absolute;
-    bottom: -5px;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background: var(--secondary-color);
-    transition: width 0.3s ease-out;
+    display: none;
 }
 
 .nav-links a:not(.btn-primary):hover::after {
-    width: 100%;
+    display: none;
 }
 
 /* Scroll Reveal Animation Classes */
@@ -1195,7 +1188,7 @@ body.homepage-dark {
 /* Navigation - Solid and Clear */
 body.homepage-dark .navbar {
     background-color: #FFFFFF !important;
-    border-bottom: 2px solid #2563eb !important;
+    border-bottom: 1px solid #e5e5e5 !important;
     box-shadow: none !important;
 }
 
