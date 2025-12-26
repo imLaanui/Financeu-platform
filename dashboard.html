@@ -410,14 +410,14 @@
                     </div>
                     <div class="lesson-list" id="lessonList">
                         <!-- Path 1: Banking Basics (Available) -->
-                        <div class="lesson-item">
+                        <div class="lesson-item" id="path1Item">
                             <div class="lesson-info">
                                 <div class="lesson-details">
-                                    <h3>Path 1: Banking Basics <span style="color: #10b981; font-size: 12px; font-weight: 600; text-transform: uppercase; margin-left: 10px;">FREE</span> <span style="color: #10b981; font-size: 12px; font-weight: 600; text-transform: uppercase; margin-left: 5px;">• Available Now</span></h3>
+                                    <h3>Path 1: Banking Basics <span style="color: #10b981; font-size: 12px; font-weight: 600; text-transform: uppercase; margin-left: 10px;">FREE</span> <span style="color: #10b981; font-size: 12px; font-weight: 600; text-transform: uppercase; margin-left: 5px;" id="path1AvailabilityBadge">• Available Now</span></h3>
                                     <p>Learn about different types of banks, how to choose the right one, and how to navigate banking websites.</p>
                                 </div>
                             </div>
-                            <div class="lesson-status">
+                            <div class="lesson-status" id="path1Status">
                                 <a href="/path1-lessons" class="btn-lesson" id="path1Button" style="text-decoration: none; display: inline-block;">Start Path</a>
                             </div>
                         </div>
@@ -619,17 +619,34 @@
                 let progressPercent = Math.round((totalCompletedItems / totalAvailableItems) * 100);
                 document.getElementById('progressPercent').textContent = `${progressPercent}%`;
 
-                // Update Path 1 button text
+                // Update Path 1 button text and completion status
                 const path1Button = document.getElementById('path1Button');
+                const path1Item = document.getElementById('path1Item');
+                const path1Status = document.getElementById('path1Status');
+                const path1AvailabilityBadge = document.getElementById('path1AvailabilityBadge');
 
                 if (path1QuizCompleted === true) {
-                    // User finished everything including quiz
+                    // User finished everything including final quiz - PATH COMPLETED!
                     path1Button.textContent = 'Review Path';
+
+                    // Add green border and completed badge
+                    path1Item.style.borderColor = '#10b981';
+                    path1Item.style.backgroundColor = '#f0fdf4';
+
+                    // Update availability badge to show "Complete"
+                    path1AvailabilityBadge.style.color = '#10b981';
+                    path1AvailabilityBadge.textContent = '✓ Complete';
+
+                    // Add completed badge before button
+                    path1Status.innerHTML = `
+                        <span class="status-badge completed">Completed</span>
+                        <a href="/path1-lessons" class="btn-lesson" style="text-decoration: none; display: inline-block;">Review Path</a>
+                    `;
                 } else if (path1Completed.length > 0 && path1Completed.length < totalLessonsPerPath) {
                     // User started but hasn't finished all lessons
                     path1Button.textContent = 'Continue Path';
                 } else if (path1Completed.length === totalLessonsPerPath) {
-                    // User finished all 8 lessons but hasn't passed quiz
+                    // User finished all lessons but hasn't passed final quiz
                     path1Button.textContent = 'Continue Path';
                 } else {
                     // User hasn't started any lessons yet

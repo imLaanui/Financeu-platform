@@ -191,6 +191,14 @@
             transform: translateY(-2px);
             box-shadow: 0 6px 16px rgba(251, 191, 36, 0.4);
         }
+        .quiz-card.completed {
+            background: linear-gradient(135deg, #f0fdf4 0%, #d1fae5 100%);
+            border: 2px solid #00A676;
+        }
+        .quiz-card.completed .lesson-info h3,
+        .quiz-card.completed .lesson-info p {
+            color: #065f46;
+        }
         .quiz-card .lesson-info {
             margin-left: 0;
             position: relative;
@@ -554,10 +562,41 @@
         // Check if all lessons completed and show quiz
         function checkQuizAvailability() {
             const quizCard = document.getElementById('quizCard');
+            const userId = localStorage.getItem('userId');
+            if (!userId || userId === 'null' || userId === 'undefined') {
+                quizCard.style.display = 'none';
+                return;
+            }
 
-            // Hide quiz card since only Lesson 1 is available (Lessons 2-8 coming soon)
-            // Final quiz will be shown when all lessons are released
-            quizCard.style.display = 'none';
+            // Check if user completed all 5 lessons
+            const completed = JSON.parse(localStorage.getItem(`path1_completed_${userId}`) || '[]');
+            const allLessonsCompleted = [1, 2, 3, 4, 5].every(num => completed.includes(num));
+
+            // Also check that all lesson quizzes are passed
+            const lesson1QuizPassed = localStorage.getItem(`lesson1_quiz_passed_${userId}`) === 'true';
+            const lesson2QuizPassed = localStorage.getItem(`lesson2_quiz_passed_${userId}`) === 'true';
+            const lesson3QuizPassed = localStorage.getItem(`lesson3_quiz_passed_${userId}`) === 'true';
+            const lesson4QuizPassed = localStorage.getItem(`lesson4_quiz_passed_${userId}`) === 'true';
+            const lesson5QuizPassed = localStorage.getItem(`lesson5_quiz_passed_${userId}`) === 'true';
+
+            const allQuizzesPassed = lesson1QuizPassed && lesson2QuizPassed && lesson3QuizPassed && lesson4QuizPassed && lesson5QuizPassed;
+
+            if (allLessonsCompleted && allQuizzesPassed) {
+                quizCard.style.display = 'block';
+
+                // Check if final path quiz already passed
+                const pathQuizCompleted = localStorage.getItem(`path1_quiz_completed_${userId}`) === 'true';
+                if (pathQuizCompleted) {
+                    const statusDiv = quizCard.querySelector('.lesson-status');
+                    statusDiv.innerHTML = `
+                        <span class="completed-badge">Completed</span>
+                        <a href="#quiz" class="btn-start-lesson">Review Quiz</a>
+                    `;
+                    quizCard.classList.add('completed');
+                }
+            } else {
+                quizCard.style.display = 'none';
+            }
         }
 
         // Initialize page with progress sync
