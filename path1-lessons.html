@@ -317,14 +317,14 @@
                 </div>
             </div>
 
-            <!-- Lesson 5 - Coming Soon -->
-            <div class="lesson-card" data-lesson="5" style="opacity: 0.6; pointer-events: none;">
+            <!-- Lesson 5 -->
+            <div class="lesson-card" data-lesson="5">
                 <div class="lesson-info">
-                    <h3>Lesson 5 - Coming Soon</h3>
-                    <p>More banking lessons will be available soon</p>
+                    <h3>Lesson 5 - Avoiding Fees, Overdrafts, and Common Mistakes</h3>
+                    <p>Learn how to keep your money safe and avoid costly banking mistakes that catch beginners off guard</p>
                 </div>
                 <div class="lesson-status">
-                    <span style="color: #9ca3af; font-weight: 600;">Unavailable</span>
+                    <a href="/path1-lesson5" class="btn-start-lesson">Start Lesson</a>
                 </div>
             </div>
 
@@ -524,6 +524,30 @@
                     `;
                 }
                 // If lesson 3 quiz passed but not completed, button already shows "Start Lesson"
+            }
+
+            // Handle Lesson 5 (requires lesson 4 quiz to be passed)
+            const lesson5Card = document.querySelector(`[data-lesson="5"]`);
+            if (lesson5Card) {
+                const statusDiv = lesson5Card.querySelector('.lesson-status');
+                const lesson4QuizPassed = localStorage.getItem(`lesson4_quiz_passed_${userId}`) === 'true';
+
+                if (!lesson4QuizPassed) {
+                    // Lock lesson 5
+                    lesson5Card.style.opacity = '0.6';
+                    lesson5Card.style.pointerEvents = 'none';
+                    statusDiv.innerHTML = `
+                        <span style="color: #9ca3af; font-weight: 600; white-space: nowrap;"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="5" y="9" width="10" height="8" rx="1" fill="#6B7280"/><path d="M7 9 L7 6 C7 4.3 8.3 3 10 3 C11.7 3 13 4.3 13 6 L13 9" stroke="#6B7280" stroke-width="2" fill="none"/></svg> Complete Lesson 4</span>
+                    `;
+                } else if (completed.includes(5)) {
+                    // Lesson 5 completed
+                    lesson5Card.classList.add('completed');
+                    statusDiv.innerHTML = `
+                        <span class="completed-badge">Completed</span>
+                        <a href="/path1-lesson5" class="btn-start-lesson">Review</a>
+                    `;
+                }
+                // If lesson 4 quiz passed but not completed, button already shows "Start Lesson"
             }
         }
 
