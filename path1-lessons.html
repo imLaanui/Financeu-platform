@@ -339,11 +339,11 @@
             <!-- Final Quiz -->
             <div class="quiz-card" id="quizCard" style="display: none;">
                 <div class="lesson-info">
-                    <h3><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><polygon points="10,5 2,9 10,13 18,9" fill="#3B82F6"/><polygon points="10,13 6,11 6,14 10,16 14,14 14,11" fill="#60A5FA"/></svg> Final Quiz</h3>
-                    <p>Test your knowledge of all 8 lessons • 16 questions • 80% to pass</p>
+                    <h3>🏆 Final Quiz - Banking Basics Mastery Test</h3>
+                    <p>Test your knowledge across all 5 lessons • 15 questions • 100% required to complete Path 1</p>
                 </div>
                 <div class="lesson-status">
-                    <a href="/path1-quiz" class="btn-start-quiz">Take Quiz</a>
+                    <a href="/path1-quiz" class="btn-start-quiz">Take Final Quiz</a>
                 </div>
             </div>
         </div>
@@ -455,6 +455,8 @@
 
                 if (completed.includes(1)) {
                     lesson1Card.classList.add('completed');
+                    lesson1Card.style.opacity = '1';
+                    lesson1Card.style.pointerEvents = 'auto';
                     statusDiv.innerHTML = `
                         <span class="completed-badge">Completed</span>
                         <a href="/path1-lesson1" class="btn-start-lesson">Review</a>
@@ -478,10 +480,16 @@
                 } else if (completed.includes(2)) {
                     // Lesson 2 completed
                     lesson2Card.classList.add('completed');
+                    lesson2Card.style.opacity = '1';
+                    lesson2Card.style.pointerEvents = 'auto';
                     statusDiv.innerHTML = `
                         <span class="completed-badge">Completed</span>
                         <a href="/path1-lesson2" class="btn-start-lesson">Review</a>
                     `;
+                } else if (lesson1QuizPassed) {
+                    // Lesson unlocked but not completed yet
+                    lesson2Card.style.opacity = '1';
+                    lesson2Card.style.pointerEvents = 'auto';
                 }
                 // If lesson 1 quiz passed but not completed, button already shows "Start Lesson"
             }
@@ -502,10 +510,16 @@
                 } else if (completed.includes(3)) {
                     // Lesson 3 completed
                     lesson3Card.classList.add('completed');
+                    lesson3Card.style.opacity = '1';
+                    lesson3Card.style.pointerEvents = 'auto';
                     statusDiv.innerHTML = `
                         <span class="completed-badge">Completed</span>
                         <a href="/path1-lesson3" class="btn-start-lesson">Review</a>
                     `;
+                } else if (lesson2QuizPassed) {
+                    // Lesson unlocked but not completed yet
+                    lesson3Card.style.opacity = '1';
+                    lesson3Card.style.pointerEvents = 'auto';
                 }
                 // If lesson 2 quiz passed but not completed, button already shows "Start Lesson"
             }
@@ -526,10 +540,16 @@
                 } else if (completed.includes(4)) {
                     // Lesson 4 completed
                     lesson4Card.classList.add('completed');
+                    lesson4Card.style.opacity = '1';
+                    lesson4Card.style.pointerEvents = 'auto';
                     statusDiv.innerHTML = `
                         <span class="completed-badge">Completed</span>
                         <a href="/path1-lesson4" class="btn-start-lesson">Review</a>
                     `;
+                } else if (lesson3QuizPassed) {
+                    // Lesson unlocked but not completed yet
+                    lesson4Card.style.opacity = '1';
+                    lesson4Card.style.pointerEvents = 'auto';
                 }
                 // If lesson 3 quiz passed but not completed, button already shows "Start Lesson"
             }
@@ -550,10 +570,16 @@
                 } else if (completed.includes(5)) {
                     // Lesson 5 completed
                     lesson5Card.classList.add('completed');
+                    lesson5Card.style.opacity = '1';
+                    lesson5Card.style.pointerEvents = 'auto';
                     statusDiv.innerHTML = `
                         <span class="completed-badge">Completed</span>
                         <a href="/path1-lesson5" class="btn-start-lesson">Review</a>
                     `;
+                } else if (lesson4QuizPassed) {
+                    // Lesson unlocked but not completed yet
+                    lesson5Card.style.opacity = '1';
+                    lesson5Card.style.pointerEvents = 'auto';
                 }
                 // If lesson 4 quiz passed but not completed, button already shows "Start Lesson"
             }
@@ -590,7 +616,7 @@
                     const statusDiv = quizCard.querySelector('.lesson-status');
                     statusDiv.innerHTML = `
                         <span class="completed-badge">Completed</span>
-                        <a href="#quiz" class="btn-start-lesson">Review Quiz</a>
+                        <a href="/path1-quiz" class="btn-start-quiz">Review Quiz</a>
                     `;
                     quizCard.classList.add('completed');
                 }
