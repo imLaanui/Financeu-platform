@@ -591,7 +591,7 @@
                 // ====== PILLAR 1 & 2 PROGRESS TRACKING ======
                 // Use user-specific localStorage keys to keep progress separate per account
                 const userId = user.id;
-                const path1Completed = JSON.parse(localStorage.getItem(`path1_completed_${userId}`) || '[]');
+                const path1Completed = JSON.parse(localStorage.getItem(`pillar1_completed_${userId}`) || '[]');
                 const path1QuizCompleted = localStorage.getItem(`path1_quiz_completed_${userId}`) === 'true';
                 const path2Completed = JSON.parse(localStorage.getItem(`path2_completed_${userId}`) || '[]');
                 const path2QuizCompleted = localStorage.getItem(`path2_quiz_completed_${userId}`) === 'true';

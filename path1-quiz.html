@@ -801,7 +801,7 @@
             }
 
             // Check if all 5 lessons are completed
-            const completed = JSON.parse(localStorage.getItem(`path1_completed_${userId}`) || '[]');
+            const completed = JSON.parse(localStorage.getItem(`pillar1_completed_${userId}`) || '[]');
             const allLessonsCompleted = [1, 2, 3, 4, 5].every(num => completed.includes(num));
 
             // Check if all lesson quizzes are passed

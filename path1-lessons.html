@@ -446,7 +446,7 @@
                 return;
             }
 
-            const completed = JSON.parse(localStorage.getItem(`path1_completed_${userId}`) || '[]');
+            const completed = JSON.parse(localStorage.getItem(`pillar1_completed_${userId}`) || '[]');
 
             // Handle Lesson 1 (always unlocked)
             const lesson1Card = document.querySelector(`[data-lesson="1"]`);
@@ -595,7 +595,7 @@
             }
 
             // Check if user completed all 5 lessons
-            const completed = JSON.parse(localStorage.getItem(`path1_completed_${userId}`) || '[]');
+            const completed = JSON.parse(localStorage.getItem(`pillar1_completed_${userId}`) || '[]');
             const allLessonsCompleted = [1, 2, 3, 4, 5].every(num => completed.includes(num));
 
             // Also check that all lesson quizzes are passed
@@ -625,13 +625,12 @@
             }
         }
 
-        // Initialize page with progress sync
+        // Initialize page
         async function initializePage() {
             await updateNav();
-            const syncResult = await syncLessonProgress();
-            console.log('Sync result:', syncResult);
             loadCompletedLessons();
             checkQuizAvailability();
+            console.log('✅ Page initialized - lessons and quiz loaded');
         }
 
         initializePage();
