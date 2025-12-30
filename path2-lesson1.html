@@ -796,7 +796,7 @@
                 <!-- Quiz questions will be rendered here -->
             </div>
 
-            <button class="btn btn-primary" id="submitQuiz" onclick="submitQuiz()" style="display: none;">Submit Answers</button>
+            <button class="btn btn-primary" id="submitQuiz" style="display: none;">Submit Answers</button>
 
             <div class="quiz-result" id="quizResult">
                 <!-- Result will be shown here -->
@@ -1015,13 +1015,44 @@
         }
 
         function showQuiz() {
-            document.getElementById('quizSection').classList.add('visible');
-            document.getElementById('quizSection').scrollIntoView({ behavior: 'smooth' });
+            const quizSection = document.getElementById('quizSection');
+            quizSection.classList.add('visible');
+            quizSection.scrollIntoView({ behavior: 'smooth' });
 
-            // Only render quiz if not already completed
-            if (!quizPassed) {
+            // If quiz was already passed, show completion state
+            if (quizPassed) {
+                // Show the quiz with completion message
+                const quizResult = document.getElementById('quizResult');
+                quizResult.className = 'quiz-result visible passed';
+                quizResult.innerHTML = `
+                    <div class="insight-icon">✅</div>
+                    <div class="insight-title">Quiz Already Completed</div>
+                    <div class="insight-text">You've already passed this quiz! You can retake it below or finish the lesson.</div>
+                `;
+
+                // Show finish button
+                document.getElementById('finishBtn').classList.add('visible');
+
+                // Show retake button
+                document.getElementById('submitQuiz').style.display = 'block';
+                document.getElementById('submitQuiz').textContent = 'Retake Quiz';
+                document.getElementById('submitQuiz').onclick = function() {
+                    retakeQuiz();
+                };
+            } else {
+                // Fresh quiz
                 renderQuiz();
             }
+        }
+
+        function retakeQuiz() {
+            // Clear the result
+            document.getElementById('quizResult').className = 'quiz-result';
+            document.getElementById('quizResult').innerHTML = '';
+            document.getElementById('finishBtn').classList.remove('visible');
+
+            // Render fresh quiz
+            renderQuiz();
         }
 
         // Quiz Data
@@ -1178,7 +1209,10 @@
                 container.appendChild(card);
             });
 
-            document.getElementById('submitQuiz').style.display = 'block';
+            const submitBtn = document.getElementById('submitQuiz');
+            submitBtn.style.display = 'block';
+            submitBtn.textContent = 'Submit Answers';
+            submitBtn.onclick = submitQuiz;
         }
 
         function selectAnswer(questionIndex, optionIndex) {
