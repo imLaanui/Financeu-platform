@@ -7,20 +7,18 @@
     <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
     <link rel="stylesheet" href="styles.css">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
+        body.lesson-page {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
             min-height: 100vh;
             color: #1a202c;
         }
 
-        .container {
+        body.lesson-page * {
+            box-sizing: border-box;
+        }
+
+        .lesson-container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 120px 20px 80px;
@@ -474,7 +472,7 @@
 
         /* Responsive */
         @media (max-width: 768px) {
-            .container {
+            .lesson-container {
                 padding: 100px 16px 60px;
             }
 
@@ -591,10 +589,10 @@
         }
     </style>
 </head>
-<body>
+<body class="lesson-page">
     <!-- Navigation -->
     <nav class="navbar">
-        <div class="container-nav">
+        <div class="container">
             <div class="nav-wrapper">
                 <div class="logo"><a href="/" style="color: inherit; text-decoration: none;">Finance<span class="logo-accent">U</span></a></div>
                 <ul class="nav-links">
@@ -606,7 +604,7 @@
         </div>
     </nav>
 
-    <div class="container">
+    <div class="lesson-container">
         <!-- Hero Section -->
         <div class="hero">
             <h1>💸 Where Your Money Is Actually Going</h1>

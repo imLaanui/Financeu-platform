@@ -48,7 +48,7 @@ async function completeLesson(lessonId, pillarNum, lessonNum) {
         const data = await response.json();
 
         // Also save to localStorage as a cache
-        const storageKey = `pillar${pillarNum}_completed_${userId}`;
+        const storageKey = `path${pillarNum}_completed_${userId}`;
         const completed = JSON.parse(localStorage.getItem(storageKey) || '[]');
         if (!completed.includes(lessonNum)) {
             completed.push(lessonNum);
