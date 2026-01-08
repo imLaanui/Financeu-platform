@@ -9,6 +9,7 @@
     <link rel="icon" type="image/svg+xml" sizes="32x32" href="assets/favicon-32x32.svg">
     <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.svg">
     <link rel="stylesheet" href="styles.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
     <style>
         .curriculum-hero {
             background: #FFFFFF;
@@ -313,7 +314,9 @@
                 <!-- Path 1 -->
                 <div class="path-card-premium">
                     <div class="path-card-left">
-                        <div class="path-icon">🏦</div>
+                        <div class="path-icon">
+                            <i data-lucide="landmark" class="w-12 h-12"></i>
+                        </div>
                         <div class="path-content">
                             <h3 class="path-title">Banking Basics</h3>
                             <p class="path-subtitle">5 Lessons • 2 Hours</p>
@@ -330,7 +333,9 @@
                 <!-- Path 2 -->
                 <div class="path-card-premium">
                     <div class="path-card-left">
-                        <div class="path-icon">💰</div>
+                        <div class="path-icon">
+                            <i data-lucide="coins" class="w-12 h-12"></i>
+                        </div>
                         <div class="path-content">
                             <h3 class="path-title">Budgeting & Saving</h3>
                             <p class="path-subtitle">5 Lessons • 2 Hours</p>
@@ -345,7 +350,9 @@
                 <!-- Path 3 -->
                 <div class="path-card-premium">
                     <div class="path-card-left">
-                        <div class="path-icon">💳</div>
+                        <div class="path-icon">
+                            <i data-lucide="credit-card" class="w-12 h-12"></i>
+                        </div>
                         <div class="path-content">
                             <h3 class="path-title">Credit & Debt</h3>
                             <p class="path-subtitle">5 Lessons • 2 Hours</p>
@@ -360,7 +367,9 @@
                 <!-- Path 4 -->
                 <div class="path-card-premium">
                     <div class="path-card-left">
-                        <div class="path-icon">📈</div>
+                        <div class="path-icon">
+                            <i data-lucide="trending-up" class="w-12 h-12"></i>
+                        </div>
                         <div class="path-content">
                             <h3 class="path-title">Investing Basics</h3>
                             <p class="path-subtitle">5 Lessons • 2 Hours</p>
@@ -375,7 +384,9 @@
                 <!-- Path 5 -->
                 <div class="path-card-premium">
                     <div class="path-card-left">
-                        <div class="path-icon">💼</div>
+                        <div class="path-icon">
+                            <i data-lucide="briefcase" class="w-12 h-12"></i>
+                        </div>
                         <div class="path-content">
                             <h3 class="path-title">Career & Income</h3>
                             <p class="path-subtitle">5 Lessons • 2 Hours</p>
@@ -586,6 +597,9 @@
                 }
             });
         }
+
+        // Initialize Lucide icons
+        lucide.createIcons();
     </script>
 </body>
 </html>
