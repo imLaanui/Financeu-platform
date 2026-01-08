@@ -265,15 +265,12 @@
 
                 <div class="hidden md:flex items-center space-x-6">
                     <a href="/dashboard" class="text-gray-200 font-semibold transition-colors">Dashboard</a>
-                    <a href="/courses" class="text-gray-400 hover:text-gray-200 transition-colors font-medium">Courses</a>
-                    <div class="relative">
-                        <span class="text-gray-400 font-medium cursor-not-allowed">Your Finances</span>
-                        <span class="coming-soon-badge">Coming Soon</span>
-                    </div>
-                    <div class="relative">
-                        <span class="text-gray-400 font-medium cursor-not-allowed">Quiz Me</span>
-                        <span class="coming-soon-badge">Coming Soon</span>
-                    </div>
+                    <button onclick="showComingSoon('Your Finances')" class="text-gray-400 hover:text-gray-200 transition-colors font-medium">
+                        Your Finances
+                    </button>
+                    <button onclick="showComingSoon('Quiz Me')" class="text-gray-400 hover:text-gray-200 transition-colors font-medium">
+                        Quiz Me
+                    </button>
                 </div>
 
                 <div class="flex items-center space-x-4">
@@ -310,12 +307,12 @@
                 <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-12">
                     <!-- Lessons Completed with Progress Ring -->
                     <div class="stat-card rounded-2xl p-6 relative">
-                        <div class="flex flex-col items-center">
-                            <svg class="w-32 h-32 mb-2">
+                        <div class="flex flex-col items-center justify-center relative">
+                            <svg class="w-32 h-32">
                                 <circle class="progress-ring-circle" stroke="rgba(75, 85, 99, 0.3)" stroke-width="8" fill="transparent" r="52" cx="64" cy="64"/>
                                 <circle id="lessonsProgressRing" class="progress-ring-circle progress-ring" stroke="#3b82f6" stroke-width="8" fill="transparent" r="52" cx="64" cy="64" stroke-dasharray="326.73" stroke-dashoffset="326.73"/>
                             </svg>
-                            <div class="text-center" style="margin-top: -80px;">
+                            <div class="absolute inset-0 flex flex-col items-center justify-center">
                                 <div class="text-4xl font-black text-gray-200 count-up" id="completedLessons">0</div>
                                 <div class="text-sm text-gray-400 font-medium mt-1">Lessons</div>
                             </div>
@@ -324,12 +321,12 @@
 
                     <!-- Overall Progress -->
                     <div class="stat-card rounded-2xl p-6 relative">
-                        <div class="flex flex-col items-center">
-                            <svg class="w-32 h-32 mb-2">
+                        <div class="flex flex-col items-center justify-center relative">
+                            <svg class="w-32 h-32">
                                 <circle class="progress-ring-circle" stroke="rgba(75, 85, 99, 0.3)" stroke-width="8" fill="transparent" r="52" cx="64" cy="64"/>
                                 <circle id="overallProgressRing" class="progress-ring-circle progress-ring" stroke="#10b981" stroke-width="8" fill="transparent" r="52" cx="64" cy="64" stroke-dasharray="326.73" stroke-dashoffset="326.73"/>
                             </svg>
-                            <div class="text-center" style="margin-top: -80px;">
+                            <div class="absolute inset-0 flex flex-col items-center justify-center">
                                 <div class="text-4xl font-black text-gray-200 count-up" id="progressPercent">0%</div>
                                 <div class="text-sm text-gray-400 font-medium mt-1">Progress</div>
                             </div>
@@ -581,6 +578,11 @@
         }
 
         createParticles();
+
+        // Show coming soon message
+        function showComingSoon(feature) {
+            alert(`🚀 ${feature} is coming soon!\n\nWe're working hard to bring you this feature. Stay tuned for updates!`);
+        }
     </script>
 
     <script src="config.js"></script>
