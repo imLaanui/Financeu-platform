@@ -648,7 +648,8 @@
 
             quizQuestions.forEach((q, qIndex) => {
                 const questionDiv = document.createElement('div');
-                questionDiv.className = 'comparison-card rounded-3xl p-8';
+                questionDiv.className = 'comparison-card quiz-question-card rounded-3xl p-8';
+                questionDiv.setAttribute('data-question', qIndex);
                 questionDiv.innerHTML = `
                     <h3 class="text-xl font-bold text-gray-200 mb-6">Question ${qIndex + 1}: ${q.question}</h3>
                     <div class="space-y-3">
@@ -667,7 +668,7 @@
         function selectAnswer(questionIndex, optionIndex) {
             userAnswers[questionIndex] = optionIndex;
 
-            const questionCard = document.querySelectorAll('.comparison-card')[questionIndex];
+            const questionCard = document.querySelector(`.quiz-question-card[data-question="${questionIndex}"]`);
             const options = questionCard.querySelectorAll('.quiz-option');
             options.forEach((opt, idx) => {
                 opt.classList.remove('selected');
@@ -694,7 +695,7 @@
             const passed = correct === quizQuestions.length;
 
             // Show correct/incorrect
-            document.querySelectorAll('.comparison-card').forEach((card, qIndex) => {
+            document.querySelectorAll('.quiz-question-card').forEach((card, qIndex) => {
                 const options = card.querySelectorAll('.quiz-option');
                 options.forEach((opt, oIndex) => {
                     opt.style.pointerEvents = 'none';
