@@ -73,7 +73,7 @@
             height: 100%;
             object-fit: cover;
             transform: translate(-50%, -50%);
-            opacity: 0.4;
+            opacity: 0.6;
             filter: grayscale(70%) contrast(1.1);
         }
 
@@ -84,7 +84,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.5);
+            background: rgba(0, 0, 0, 0.3);
             z-index: 1;
         }
 
@@ -471,9 +471,10 @@
     <section class="hero-section relative min-h-screen flex items-center justify-center pt-20 overflow-hidden">
         <!-- Video Background -->
         <div class="video-background">
-            <video autoplay muted loop playsinline preload="metadata" poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1920 1080'%3E%3Crect fill='%230f0f0f' width='1920' height='1080'/%3E%3C/svg%3E">
-                <source src="https://cdn.coverr.co/videos/coverr-financial-data-visualization-6945/1080p.mp4" type="video/mp4">
-                <source src="https://cdn.coverr.co/videos/coverr-stock-market-trading-9679/1080p.mp4" type="video/mp4">
+            <video autoplay muted loop playsinline preload="auto" poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1920 1080'%3E%3Crect fill='%230f0f0f' width='1920' height='1080'/%3E%3C/svg%3E">
+                <source src="https://cdn.coverr.co/videos/coverr-stock-market-data-4058/1080p.mp4" type="video/mp4">
+                <source src="https://cdn.coverr.co/videos/coverr-business-data-analysis-7299/1080p.mp4" type="video/mp4">
+                <source src="https://videos.pexels.com/video-files/3141211/3141211-uhd_2560_1440_25fps.mp4" type="video/mp4">
                 <!-- Fallback message for browsers that don't support video -->
                 Your browser does not support the video tag.
             </video>
@@ -778,6 +779,33 @@
                 const speed = 0.5 + (index * 0.1);
                 icon.style.transform = `translateY(${scrolled * speed}px)`;
             });
+        });
+
+        // Ensure hero video plays
+        document.addEventListener('DOMContentLoaded', function() {
+            const heroVideo = document.querySelector('.hero-section .video-background video');
+            if (heroVideo) {
+                // Force play the video
+                heroVideo.play().catch(error => {
+                    console.log('Hero video autoplay prevented:', error);
+                    // Try playing on user interaction
+                    document.addEventListener('click', function playOnce() {
+                        heroVideo.play();
+                        document.removeEventListener('click', playOnce);
+                    }, { once: true });
+                });
+
+                // Log video errors for debugging
+                heroVideo.addEventListener('error', function(e) {
+                    console.error('Hero video error:', e);
+                    console.error('Video source:', heroVideo.currentSrc);
+                });
+
+                // Log when video loads successfully
+                heroVideo.addEventListener('loadeddata', function() {
+                    console.log('Hero video loaded successfully:', heroVideo.currentSrc);
+                });
+            }
         });
     </script>
 </body>
