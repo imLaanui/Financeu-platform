@@ -18,8 +18,9 @@
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            background: #FFFFFF;
+            background: #0f0f0f;
             min-height: 100vh;
+            color: #d1d5db;
         }
 
         .quiz-container {
@@ -61,14 +62,14 @@
         .quiz-title {
             font-size: clamp(32px, 5vw, 48px);
             font-weight: 800;
-            color: #0f172a;
+            color: #f9fafb;
             margin-bottom: 16px;
             line-height: 1.2;
         }
 
         .quiz-description {
             font-size: 18px;
-            color: #64748b;
+            color: #9ca3af;
             max-width: 700px;
             margin: 0 auto;
             line-height: 1.7;
@@ -80,7 +81,7 @@
             left: 0;
             right: 0;
             height: 8px;
-            background: rgba(0,0,0,0.05);
+            background: rgba(255,255,255,0.05);
             z-index: 100;
         }
 
@@ -93,13 +94,14 @@
         }
 
         .question-card {
-            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+            background: linear-gradient(135deg, rgba(30, 30, 30, 0.8) 0%, rgba(20, 20, 20, 0.6) 100%);
             padding: 40px;
             border-radius: 24px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.08);
-            border: 1px solid rgba(0,0,0,0.05);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            border: 1px solid rgba(255,255,255,0.1);
             margin-bottom: 24px;
             animation: slideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            backdrop-filter: blur(10px);
         }
 
         @keyframes slideUp {
@@ -125,7 +127,7 @@
         .question-text {
             font-size: 22px;
             font-weight: 700;
-            color: #0f172a;
+            color: #f9fafb;
             margin-bottom: 28px;
             line-height: 1.4;
             letter-spacing: -0.01em;
@@ -139,29 +141,29 @@
 
         .option {
             position: relative;
-            background: white;
-            border: 2px solid #e2e8f0;
+            background: rgba(40, 40, 40, 0.6);
+            border: 2px solid rgba(255, 255, 255, 0.15);
             padding: 18px 22px;
             border-radius: 12px;
             cursor: pointer;
             transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
             font-size: 16px;
-            color: #1e293b;
+            color: #e5e7eb;
             display: flex;
             align-items: center;
             gap: 12px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
         }
 
         .option::before {
             content: '';
             width: 24px;
             height: 24px;
-            border: 3px solid #cbd5e1;
+            border: 3px solid rgba(203, 213, 225, 0.5);
             border-radius: 50%;
             flex-shrink: 0;
             transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-            background: white;
+            background: rgba(15, 15, 15, 0.8);
         }
 
         .option:hover:not(.correct):not(.incorrect) {
@@ -176,16 +178,16 @@
         }
 
         .option.selected {
-            background: linear-gradient(135deg, #dbeafe 0%, #e0f2fe 100%);
+            background: linear-gradient(135deg, rgba(37, 99, 235, 0.2) 0%, rgba(37, 99, 235, 0.15) 100%);
             border-color: #2563eb;
             font-weight: 600;
-            box-shadow: 0 8px 24px rgba(37, 99, 235, 0.2);
+            box-shadow: 0 8px 24px rgba(37, 99, 235, 0.4);
         }
 
         .option.selected::before {
             background: #2563eb;
             border-color: #2563eb;
-            box-shadow: inset 0 0 0 5px white, 0 0 0 2px #2563eb;
+            box-shadow: inset 0 0 0 5px rgba(15, 15, 15, 0.8), 0 0 0 2px #2563eb;
             animation: pulse 0.6s ease;
         }
 
@@ -195,10 +197,10 @@
         }
 
         .option.correct {
-            background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.25) 0%, rgba(16, 185, 129, 0.2) 100%);
             border-color: #10b981;
             animation: correctAnswer 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-            box-shadow: 0 12px 32px rgba(16, 185, 129, 0.3);
+            box-shadow: 0 12px 32px rgba(16, 185, 129, 0.4);
         }
 
         @keyframes correctAnswer {
@@ -227,10 +229,10 @@
         }
 
         .option.incorrect {
-            background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
+            background: linear-gradient(135deg, rgba(239, 68, 68, 0.25) 0%, rgba(239, 68, 68, 0.2) 100%);
             border-color: #ef4444;
             animation: shake 0.5s ease;
-            box-shadow: 0 8px 24px rgba(239, 68, 68, 0.2);
+            box-shadow: 0 8px 24px rgba(239, 68, 68, 0.4);
         }
 
         @keyframes shake {
@@ -279,7 +281,7 @@
         }
 
         .result-container {
-            background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.15) 0%, rgba(16, 185, 129, 0.1) 100%);
             border: 2px solid #10b981;
             padding: 40px;
             border-radius: 24px;
@@ -287,10 +289,11 @@
             margin: 0 auto;
             max-width: 800px;
             animation: slideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            backdrop-filter: blur(10px);
         }
 
         .result-container.failed {
-            background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
+            background: linear-gradient(135deg, rgba(239, 68, 68, 0.15) 0%, rgba(239, 68, 68, 0.1) 100%);
             border-color: #ef4444;
         }
 
@@ -302,12 +305,12 @@
         .result-title {
             font-size: 32px;
             font-weight: 800;
-            color: #0f172a;
+            color: #f9fafb;
             margin-bottom: 12px;
         }
 
         .result-text {
-            color: #475569;
+            color: #d1d5db;
             font-size: 18px;
             margin-bottom: 24px;
             line-height: 1.7;
@@ -377,6 +380,13 @@
             }
         }
     </style>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            lucide.createIcons();
+        });
+    </script>
 </head>
 <body class="homepage-dark">
     <!-- Navigation -->
@@ -402,7 +412,10 @@
         <a href="/path1-lessons" class="back-link">← Back to Lessons</a>
 
         <div class="quiz-header">
-            <div class="quiz-badge">🏆 FINAL QUIZ</div>
+            <div class="quiz-badge" style="display: flex; align-items: center; justify-content: center; gap: 8px;">
+                <i data-lucide="trophy" style="width: 18px; height: 18px;"></i>
+                FINAL QUIZ
+            </div>
             <h1 class="quiz-title">Banking Basics Mastery Test</h1>
             <p class="quiz-description">Test your knowledge across all 5 lessons. <strong>You must score 100% to pass and complete Path 1.</strong> Take your time and choose carefully!</p>
         </div>
@@ -751,7 +764,9 @@
 
                 resultContainer.innerHTML = `
                     <div class="result-container">
-                        <div class="result-icon">🎉</div>
+                        <div class="result-icon" style="display: flex; justify-content: center;">
+                            <i data-lucide="party-popper" style="width: 64px; height: 64px;" class="text-green-400"></i>
+                        </div>
                         <div class="result-title">Perfect Score!</div>
                         <div class="result-score">${score}%</div>
                         <div class="result-text">
@@ -761,10 +776,13 @@
                         <a href="/dashboard" class="finish-btn">Go to Dashboard →</a>
                     </div>
                 `;
+                lucide.createIcons();
             } else {
                 resultContainer.innerHTML = `
                     <div class="result-container failed">
-                        <div class="result-icon">📚</div>
+                        <div class="result-icon" style="display: flex; justify-content: center;">
+                            <i data-lucide="book-open" style="width: 64px; height: 64px;" class="text-blue-400"></i>
+                        </div>
                         <div class="result-title">Not Quite There</div>
                         <div class="result-score failed">${score}%</div>
                         <div class="result-text">
@@ -775,6 +793,7 @@
                         <a href="/path1-lessons" class="finish-btn" style="background: #6b7280;">Review Lessons</a>
                     </div>
                 `;
+                lucide.createIcons();
             }
 
             // Scroll to results

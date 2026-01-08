@@ -296,6 +296,13 @@
             animation: pulse 2s ease-in-out infinite;
         }
     </style>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            lucide.createIcons();
+        });
+    </script>
 </head>
 <body class="min-h-screen relative" style="color: #d1d5db;">
     <!-- Floating Particles -->
@@ -471,13 +478,15 @@
                         <span class="click-indicator">Click Me</span>
                         <div class="card-front">
                             <div class="w-16 h-16 mx-auto mb-4 rounded-2xl bg-blue-500/20 border-2 border-blue-500/40 flex items-center justify-center">
-                                <span class="text-3xl">🚗</span>
+                                <i data-lucide="car" class="w-8 h-8 text-gray-300"></i>
                             </div>
                             <h3 class="text-lg font-bold text-gray-200 mb-2">Scenario</h3>
                             <p class="text-gray-400 text-sm">You're saving for a car you want to buy in 2 years</p>
                         </div>
                         <div class="card-back">
-                            <div class="text-4xl mb-3">💰</div>
+                            <div class="mb-3 flex justify-center">
+                                <i data-lucide="dollar-sign" class="w-10 h-10 text-green-400"></i>
+                            </div>
                             <p class="text-green-400 font-bold mb-2">Savings Account!</p>
                             <p class="text-gray-300 text-sm mb-2">Long-term goal = savings</p>
                             <p class="text-gray-400 text-xs">Let it grow with interest while staying safe and separate from daily spending</p>
@@ -488,13 +497,15 @@
                         <span class="click-indicator">Click Me</span>
                         <div class="card-front">
                             <div class="w-16 h-16 mx-auto mb-4 rounded-2xl bg-yellow-500/20 border-2 border-yellow-500/40 flex items-center justify-center">
-                                <span class="text-3xl">☕</span>
+                                <i data-lucide="coffee" class="w-8 h-8 text-amber-600"></i>
                             </div>
                             <h3 class="text-lg font-bold text-gray-200 mb-2">Scenario</h3>
                             <p class="text-gray-400 text-sm">Money for your daily coffee runs and lunch</p>
                         </div>
                         <div class="card-back">
-                            <div class="text-4xl mb-3">💳</div>
+                            <div class="mb-3 flex justify-center">
+                                <i data-lucide="credit-card" class="w-10 h-10 text-blue-400"></i>
+                            </div>
                             <p class="text-blue-400 font-bold mb-2">Checking Account!</p>
                             <p class="text-gray-300 text-sm mb-2">Daily spending = checking</p>
                             <p class="text-gray-400 text-xs">Need easy access with your debit card for everyday purchases</p>
@@ -505,13 +516,15 @@
                         <span class="click-indicator">Click Me</span>
                         <div class="card-front">
                             <div class="w-16 h-16 mx-auto mb-4 rounded-2xl bg-purple-500/20 border-2 border-purple-500/40 flex items-center justify-center">
-                                <span class="text-3xl">🏖️</span>
+                                <i data-lucide="umbrella" class="w-8 h-8 text-cyan-400"></i>
                             </div>
                             <h3 class="text-lg font-bold text-gray-200 mb-2">Scenario</h3>
                             <p class="text-gray-400 text-sm">Emergency fund for unexpected expenses</p>
                         </div>
                         <div class="card-back">
-                            <div class="text-4xl mb-3">💰</div>
+                            <div class="mb-3 flex justify-center">
+                                <i data-lucide="dollar-sign" class="w-10 h-10 text-green-400"></i>
+                            </div>
                             <p class="text-green-400 font-bold mb-2">Savings Account!</p>
                             <p class="text-gray-300 text-sm mb-2">Emergency fund = savings</p>
                             <p class="text-gray-400 text-xs">Safe and separate, but accessible when you really need it</p>
@@ -520,7 +533,10 @@
                 </div>
 
                 <div class="content-card rounded-3xl p-6 text-center">
-                    <p class="text-gray-300"><span class="text-blue-400 font-bold">💡 Rule of thumb:</span> If you need it this week → checking. If you're building toward a goal → savings.</p>
+                    <p class="text-gray-300 flex items-start gap-2 justify-center">
+                        <i data-lucide="lightbulb" class="w-5 h-5 text-yellow-400 flex-shrink-0 mt-1"></i>
+                        <span><span class="text-blue-400 font-bold">Rule of thumb:</span> If you need it this week → checking. If you're building toward a goal → savings.</span>
+                    </p>
                 </div>
 
                 <div class="text-center mt-12">
@@ -551,7 +567,10 @@
 
                     <div class="p-6 rounded-xl bg-purple-500/10 border border-purple-500/30">
                         <p class="text-gray-300">
-                            <strong class="text-purple-400">💡 What about high-yield savings?</strong> There are special savings accounts called "high-yield" that offer much better interest rates (4-5% APY instead of 0.01-0.05%). We'll cover these in detail in a later lesson!
+                            <span class="flex items-start gap-2">
+                                <i data-lucide="lightbulb" class="w-5 h-5 text-yellow-400 flex-shrink-0 mt-1"></i>
+                                <strong class="text-purple-400">What about high-yield savings?</strong>
+                            </span> There are special savings accounts called "high-yield" that offer much better interest rates (4-5% APY instead of 0.01-0.05%). We'll cover these in detail in a later lesson!
                         </p>
                     </div>
                 </div>
@@ -564,7 +583,10 @@
 
                     <div class="p-6 rounded-xl bg-red-500/10 border border-red-500/30">
                         <p class="text-gray-300">
-                            <strong class="text-red-400">⚠️ Important Truth:</strong> Regular savings accounts are great for keeping money safe and accessible, but they won't help your money grow meaningfully. That's why high-yield savings accounts are so important for actually building wealth.
+                            <span class="flex items-start gap-2">
+                                <i data-lucide="alert-triangle" class="w-5 h-5 text-yellow-500 flex-shrink-0 mt-1"></i>
+                                <strong class="text-red-400">Important Truth:</strong>
+                            </span> Regular savings accounts are great for keeping money safe and accessible, but they won't help your money grow meaningfully. That's why high-yield savings accounts are so important for actually building wealth.
                         </p>
                     </div>
                 </div>
@@ -720,8 +742,9 @@
                 <div id="quizResult" class="hidden mt-12"></div>
 
                 <div id="finishSection" class="text-center mt-12 hidden">
-                    <button onclick="finishLesson()" class="btn-3d px-10 py-5 bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 rounded-xl font-bold text-white text-xl glow-green pulse-animation">
-                        Finish Lesson ✓
+                    <button onclick="finishLesson()" class="btn-3d px-10 py-5 bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 rounded-xl font-bold text-white text-xl glow-green pulse-animation flex items-center justify-center gap-2" style="margin: 0 auto;">
+                        Finish Lesson
+                        <i data-lucide="check" class="w-6 h-6"></i>
                     </button>
                 </div>
             </div>
@@ -868,7 +891,8 @@
             const quizPassedStatus = localStorage.getItem(`lesson3_quiz_passed_${userId}`);
             if (quizPassedStatus === 'true') {
                 quizPassed = true;
-                document.getElementById('quizContainer').innerHTML = '<div class="content-card rounded-3xl p-8 text-center"><p class="text-green-400 text-xl font-bold">✓ Quiz Already Completed</p></div>';
+                document.getElementById('quizContainer').innerHTML = '<div class="content-card rounded-3xl p-8 text-center"><p class="text-green-400 text-xl font-bold flex items-center justify-center gap-2"><i data-lucide="check-circle" class="w-6 h-6"></i> Quiz Already Completed</p></div>';
+                lucide.createIcons();
                 document.getElementById('submitQuizBtn').classList.add('hidden');
                 document.getElementById('finishSection').classList.remove('hidden');
                 return;
@@ -950,17 +974,22 @@
 
                 resultDiv.innerHTML = `
                     <div class="content-card rounded-3xl p-10 text-center glow-green">
-                        <div class="text-6xl mb-4">🎉</div>
+                        <div class="mb-4 flex justify-center">
+                            <i data-lucide="party-popper" class="w-16 h-16 text-green-400"></i>
+                        </div>
                         <h3 class="text-3xl font-bold text-green-400 mb-4">Perfect Score!</h3>
                         <p class="text-gray-300 text-lg mb-2">You scored ${correct} out of ${quizQuestions.length} (100%)</p>
                         <p class="text-gray-400">Great job! You can now finish the lesson.</p>
                     </div>
                 `;
+                lucide.createIcons();
                 document.getElementById('finishSection').classList.remove('hidden');
             } else {
                 resultDiv.innerHTML = `
                     <div class="content-card rounded-3xl p-10 text-center" style="border-color: rgba(239, 68, 68, 0.6);">
-                        <div class="text-6xl mb-4">📚</div>
+                        <div class="mb-4 flex justify-center">
+                            <i data-lucide="book-open" class="w-16 h-16 text-blue-400"></i>
+                        </div>
                         <h3 class="text-3xl font-bold text-red-400 mb-4">Not quite there yet</h3>
                         <p class="text-gray-300 text-lg mb-2">You scored ${correct} out of ${quizQuestions.length}</p>
                         <p class="text-gray-400 mb-6">You need 100% to pass. Review and try again!</p>
@@ -969,6 +998,7 @@
                         </button>
                     </div>
                 `;
+                lucide.createIcons();
             }
 
             resultDiv.classList.remove('hidden');

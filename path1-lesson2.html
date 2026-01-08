@@ -268,6 +268,13 @@
             box-shadow: 0 0 20px rgba(239, 68, 68, 0.4), 0 0 40px rgba(239, 68, 68, 0.2);
         }
     </style>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            lucide.createIcons();
+        });
+    </script>
 </head>
 <body class="min-h-screen relative" style="color: #d1d5db;">
     <!-- Floating Particles -->
@@ -566,13 +573,15 @@
                         <span class="click-indicator">Click Me</span>
                         <div class="card-front">
                             <div class="w-16 h-16 mx-auto mb-4 rounded-2xl bg-blue-500/20 border-2 border-blue-500/40 flex items-center justify-center">
-                                <span class="text-3xl">☕</span>
+                                <i data-lucide="coffee" class="w-8 h-8 text-amber-600"></i>
                             </div>
                             <h3 class="text-lg font-bold text-gray-200 mb-2">Scenario 1</h3>
                             <p class="text-gray-400 text-sm">Your balance: $10<br>You buy a $5 coffee</p>
                         </div>
                         <div class="card-back">
-                            <div class="text-4xl mb-3">✅</div>
+                            <div class="mb-3 flex justify-center">
+                                <i data-lucide="check-circle-2" class="w-10 h-10 text-green-400"></i>
+                            </div>
                             <p class="text-green-400 font-bold mb-2">Safe!</p>
                             <p class="text-gray-300 text-sm mb-2">New balance: $5</p>
                             <p class="text-gray-400 text-xs">You had enough money. Transaction approved!</p>
@@ -583,13 +592,15 @@
                         <span class="click-indicator">Click Me</span>
                         <div class="card-front">
                             <div class="w-16 h-16 mx-auto mb-4 rounded-2xl bg-yellow-500/20 border-2 border-yellow-500/40 flex items-center justify-center">
-                                <span class="text-3xl">🍕</span>
+                                <i data-lucide="pizza" class="w-8 h-8 text-orange-500"></i>
                             </div>
                             <h3 class="text-lg font-bold text-gray-200 mb-2">Scenario 2</h3>
                             <p class="text-gray-400 text-sm">Your balance: $3<br>You order $20 pizza</p>
                         </div>
                         <div class="card-back">
-                            <div class="text-4xl mb-3">⚠️</div>
+                            <div class="mb-3 flex justify-center">
+                                <i data-lucide="alert-triangle" class="w-10 h-10 text-yellow-500"></i>
+                            </div>
                             <p class="text-red-400 font-bold mb-2">Overdraft!</p>
                             <p class="text-gray-300 text-sm mb-2">Cost: $20 + $35 fee = $55</p>
                             <p class="text-gray-400 text-xs">That pizza just cost you nearly 3x more!</p>
@@ -600,13 +611,15 @@
                         <span class="click-indicator">Click Me</span>
                         <div class="card-front">
                             <div class="w-16 h-16 mx-auto mb-4 rounded-2xl bg-purple-500/20 border-2 border-purple-500/40 flex items-center justify-center">
-                                <span class="text-3xl">📱</span>
+                                <i data-lucide="smartphone" class="w-8 h-8 text-blue-400"></i>
                             </div>
                             <h3 class="text-lg font-bold text-gray-200 mb-2">Scenario 3</h3>
                             <p class="text-gray-400 text-sm">Your balance: $150<br>Netflix charges $15</p>
                         </div>
                         <div class="card-back">
-                            <div class="text-4xl mb-3">✅</div>
+                            <div class="mb-3 flex justify-center">
+                                <i data-lucide="check-circle-2" class="w-10 h-10 text-green-400"></i>
+                            </div>
                             <p class="text-green-400 font-bold mb-2">No Problem!</p>
                             <p class="text-gray-300 text-sm mb-2">New balance: $135</p>
                             <p class="text-gray-400 text-xs">Automatic payments are fine when you have buffer money!</p>
@@ -615,7 +628,10 @@
                 </div>
 
                 <div class="content-card rounded-3xl p-6 text-center">
-                    <p class="text-gray-300"><span class="text-blue-400 font-bold">💡 Key takeaway:</span> Always know your balance BEFORE you spend. That $5 coffee can become a $40 mistake.</p>
+                    <p class="text-gray-300 flex items-start gap-2 justify-center">
+                        <i data-lucide="lightbulb" class="w-5 h-5 text-yellow-400 flex-shrink-0 mt-1"></i>
+                        <span><span class="text-blue-400 font-bold">Key takeaway:</span> Always know your balance BEFORE you spend. That $5 coffee can become a $40 mistake.</span>
+                    </p>
                 </div>
 
                 <div class="text-center mt-12">
@@ -632,7 +648,7 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
                     <div class="success-card rounded-3xl p-6">
                         <div class="w-12 h-12 mb-4 rounded-xl bg-green-500/20 border-2 border-green-500/40 flex items-center justify-center">
-                            <span class="text-2xl">📱</span>
+                            <i data-lucide="smartphone" class="w-6 h-6 text-blue-400"></i>
                         </div>
                         <h3 class="text-lg font-bold text-green-400 mb-2">Check Daily</h3>
                         <p class="text-gray-300 text-sm">Make it part of your morning routine—check your balance before coffee</p>
@@ -640,7 +656,7 @@
 
                     <div class="success-card rounded-3xl p-6">
                         <div class="w-12 h-12 mb-4 rounded-xl bg-green-500/20 border-2 border-green-500/40 flex items-center justify-center">
-                            <span class="text-2xl">💰</span>
+                            <i data-lucide="dollar-sign" class="w-6 h-6 text-green-400"></i>
                         </div>
                         <h3 class="text-lg font-bold text-green-400 mb-2">Keep a Buffer</h3>
                         <p class="text-gray-300 text-sm">Always keep $100-$200 extra as a safety cushion</p>
@@ -648,7 +664,7 @@
 
                     <div class="success-card rounded-3xl p-6">
                         <div class="w-12 h-12 mb-4 rounded-xl bg-green-500/20 border-2 border-green-500/40 flex items-center justify-center">
-                            <span class="text-2xl">🔔</span>
+                            <i data-lucide="bell" class="w-6 h-6 text-blue-400"></i>
                         </div>
                         <h3 class="text-lg font-bold text-green-400 mb-2">Set Alerts</h3>
                         <p class="text-gray-300 text-sm">Low balance, large purchases, and deposits—get notified instantly</p>
@@ -656,7 +672,7 @@
 
                     <div class="success-card rounded-3xl p-6">
                         <div class="w-12 h-12 mb-4 rounded-xl bg-green-500/20 border-2 border-green-500/40 flex items-center justify-center">
-                            <span class="text-2xl">🔄</span>
+                            <i data-lucide="refresh-cw" class="w-6 h-6 text-blue-400"></i>
                         </div>
                         <h3 class="text-lg font-bold text-green-400 mb-2">Auto-Transfer</h3>
                         <p class="text-gray-300 text-sm">Move money to savings automatically after each paycheck</p>
@@ -702,8 +718,9 @@
                 <div id="quizResult" class="hidden mt-12"></div>
 
                 <div id="finishSection" class="text-center mt-12 hidden">
-                    <button onclick="finishLesson()" class="btn-3d px-10 py-5 bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 rounded-xl font-bold text-white text-xl glow-green">
-                        Finish Lesson ✓
+                    <button onclick="finishLesson()" class="btn-3d px-10 py-5 bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 rounded-xl font-bold text-white text-xl glow-green flex items-center justify-center gap-2" style="margin: 0 auto;">
+                        Finish Lesson
+                        <i data-lucide="check" class="w-6 h-6"></i>
                     </button>
                 </div>
             </div>
@@ -830,7 +847,8 @@
             const quizPassedStatus = localStorage.getItem(`lesson2_quiz_passed_${userId}`);
             if (quizPassedStatus === 'true') {
                 quizPassed = true;
-                document.getElementById('quizContainer').innerHTML = '<div class="content-card rounded-3xl p-8 text-center"><p class="text-green-400 text-xl font-bold">✓ Quiz Already Completed</p></div>';
+                document.getElementById('quizContainer').innerHTML = '<div class="content-card rounded-3xl p-8 text-center"><p class="text-green-400 text-xl font-bold flex items-center justify-center gap-2"><i data-lucide="check-circle" class="w-6 h-6"></i> Quiz Already Completed</p></div>';
+                lucide.createIcons();
                 document.getElementById('submitQuizBtn').classList.add('hidden');
                 document.getElementById('finishSection').classList.remove('hidden');
                 return;
@@ -912,17 +930,22 @@
 
                 resultDiv.innerHTML = `
                     <div class="content-card rounded-3xl p-10 text-center glow-green">
-                        <div class="text-6xl mb-4">🎉</div>
+                        <div class="mb-4 flex justify-center">
+                            <i data-lucide="party-popper" class="w-16 h-16 text-green-400"></i>
+                        </div>
                         <h3 class="text-3xl font-bold text-green-400 mb-4">Perfect Score!</h3>
                         <p class="text-gray-300 text-lg mb-2">You scored ${correct} out of ${quizQuestions.length} (100%)</p>
                         <p class="text-gray-400">Great job! You can now finish the lesson.</p>
                     </div>
                 `;
+                lucide.createIcons();
                 document.getElementById('finishSection').classList.remove('hidden');
             } else {
                 resultDiv.innerHTML = `
                     <div class="content-card rounded-3xl p-10 text-center" style="border-color: rgba(239, 68, 68, 0.6);">
-                        <div class="text-6xl mb-4">📚</div>
+                        <div class="mb-4 flex justify-center">
+                            <i data-lucide="book-open" class="w-16 h-16 text-blue-400"></i>
+                        </div>
                         <h3 class="text-3xl font-bold text-red-400 mb-4">Not quite there yet</h3>
                         <p class="text-gray-300 text-lg mb-2">You scored ${correct} out of ${quizQuestions.length}</p>
                         <p class="text-gray-400 mb-6">You need 100% to pass. Review and try again!</p>
@@ -931,6 +954,7 @@
                         </button>
                     </div>
                 `;
+                lucide.createIcons();
             }
 
             resultDiv.classList.remove('hidden');

@@ -308,6 +308,13 @@
             letter-spacing: 0.5px;
         }
     </style>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            lucide.createIcons();
+        });
+    </script>
 </head>
 <body class="min-h-screen relative" style="color: #d1d5db;">
     <!-- Floating Particles -->
@@ -632,8 +639,9 @@
                 <div id="quizResult" class="hidden mt-12"></div>
 
                 <div id="finishSection" class="text-center mt-12 hidden">
-                    <button onclick="finishLesson()" class="btn-3d px-10 py-5 bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 rounded-xl font-bold text-white text-xl glow-green pulse-animation">
-                        Finish Lesson ✓
+                    <button onclick="finishLesson()" class="btn-3d px-10 py-5 bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 rounded-xl font-bold text-white text-xl glow-green pulse-animation flex items-center justify-center gap-2" style="margin: 0 auto;">
+                        Finish Lesson
+                        <i data-lucide="check" class="w-6 h-6"></i>
                     </button>
                 </div>
             </div>
@@ -773,7 +781,8 @@
             const quizPassedStatus = localStorage.getItem(`lesson4_quiz_passed_${userId}`);
             if (quizPassedStatus === 'true') {
                 quizPassed = true;
-                document.getElementById('quizContainer').innerHTML = '<div class="content-card rounded-3xl p-8 text-center"><p class="text-green-400 text-xl font-bold">✓ Quiz Already Completed</p></div>';
+                document.getElementById('quizContainer').innerHTML = '<div class="content-card rounded-3xl p-8 text-center"><p class="text-green-400 text-xl font-bold flex items-center justify-center gap-2"><i data-lucide="check-circle" class="w-6 h-6"></i> Quiz Already Completed</p></div>';
+                lucide.createIcons();
                 document.getElementById('submitQuizBtn').classList.add('hidden');
                 document.getElementById('finishSection').classList.remove('hidden');
                 return;
@@ -855,17 +864,22 @@
 
                 resultDiv.innerHTML = `
                     <div class="content-card rounded-3xl p-10 text-center glow-green">
-                        <div class="text-6xl mb-4">🎉</div>
+                        <div class="mb-4 flex justify-center">
+                            <i data-lucide="party-popper" class="w-16 h-16 text-green-400"></i>
+                        </div>
                         <h3 class="text-3xl font-bold text-green-400 mb-4">Perfect Score!</h3>
                         <p class="text-gray-300 text-lg mb-2">You scored ${correct} out of ${quizQuestions.length} (100%)</p>
                         <p class="text-gray-400">You understand high-yield savings. Now go open one!</p>
                     </div>
                 `;
+                lucide.createIcons();
                 document.getElementById('finishSection').classList.remove('hidden');
             } else {
                 resultDiv.innerHTML = `
                     <div class="content-card rounded-3xl p-10 text-center" style="border-color: rgba(239, 68, 68, 0.6);">
-                        <div class="text-6xl mb-4">📚</div>
+                        <div class="mb-4 flex justify-center">
+                            <i data-lucide="book-open" class="w-16 h-16 text-blue-400"></i>
+                        </div>
                         <h3 class="text-3xl font-bold text-red-400 mb-4">Not quite there yet</h3>
                         <p class="text-gray-300 text-lg mb-2">You scored ${correct} out of ${quizQuestions.length}</p>
                         <p class="text-gray-400 mb-6">You need 100% to pass. Review and try again!</p>
@@ -874,6 +888,7 @@
                         </button>
                     </div>
                 `;
+                lucide.createIcons();
             }
 
             resultDiv.classList.remove('hidden');

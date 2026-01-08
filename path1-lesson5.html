@@ -266,6 +266,13 @@
             animation: pulse 2s ease-in-out infinite;
         }
     </style>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            lucide.createIcons();
+        });
+    </script>
 </head>
 <body class="min-h-screen relative" style="color: #d1d5db;">
     <!-- Floating Particles -->
@@ -331,7 +338,9 @@
                 <p class="text-center text-gray-400 mb-12">Americans pay this much in overdraft fees every year. Don't be one of them.</p>
 
                 <div class="content-card rounded-3xl p-8 text-center mb-12 pulse-animation glow-red">
-                    <div class="text-6xl mb-4">💸</div>
+                    <div class="mb-4 flex justify-center">
+                        <i data-lucide="coins" class="w-16 h-16 text-green-400"></i>
+                    </div>
                     <div class="text-7xl font-black text-red-400 mb-3">$15B+</div>
                     <p class="text-gray-300 text-lg mb-2">Paid in overdraft fees annually</p>
                     <p class="text-gray-400">Most could be avoided with simple habits you'll learn today</p>
@@ -339,19 +348,25 @@
 
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                     <div class="content-card rounded-3xl p-6 text-center">
-                        <div class="text-4xl mb-4">⚠️</div>
+                        <div class="mb-4 flex justify-center">
+                            <i data-lucide="alert-triangle" class="w-10 h-10 text-yellow-500"></i>
+                        </div>
                         <h3 class="text-xl font-bold text-gray-200 mb-2">The Reality</h3>
                         <p class="text-gray-400 text-sm">One mistake can cost you $35 or more</p>
                     </div>
 
                     <div class="content-card rounded-3xl p-6 text-center">
-                        <div class="text-4xl mb-4">🎯</div>
+                        <div class="mb-4 flex justify-center">
+                            <i data-lucide="target" class="w-10 h-10 text-purple-400"></i>
+                        </div>
                         <h3 class="text-xl font-bold text-gray-200 mb-2">The Goal</h3>
                         <p class="text-gray-400 text-sm">Learn to avoid ALL avoidable fees</p>
                     </div>
 
                     <div class="content-card rounded-3xl p-6 text-center">
-                        <div class="text-4xl mb-4">✅</div>
+                        <div class="mb-4 flex justify-center">
+                            <i data-lucide="check-circle-2" class="w-10 h-10 text-green-400"></i>
+                        </div>
                         <h3 class="text-xl font-bold text-gray-200 mb-2">The Solution</h3>
                         <p class="text-gray-400 text-sm">Simple daily habits = $0 in fees</p>
                     </div>
@@ -373,13 +388,17 @@
                     <div class="interactive-card rounded-3xl p-8 text-center" onclick="revealCard(this)">
                         <span class="click-indicator">Click Me</span>
                         <div class="card-front">
-                            <div class="text-6xl mb-4">⚠️</div>
+                            <div class="mb-4 flex justify-center">
+                                <i data-lucide="alert-triangle" class="w-16 h-16 text-yellow-500"></i>
+                            </div>
                             <h3 class="text-2xl font-bold text-gray-200 mb-2">Overdraft Fee</h3>
                             <div class="text-5xl font-black text-red-400 my-4">$35</div>
                             <p class="text-gray-400">What is this?</p>
                         </div>
                         <div class="card-back">
-                            <div class="text-4xl mb-3">💔</div>
+                            <div class="mb-3 flex justify-center">
+                                <i data-lucide="heart-crack" class="w-10 h-10 text-red-400"></i>
+                            </div>
                             <p class="text-red-400 font-bold mb-3">When you spend more than you have</p>
                             <p class="text-gray-300 text-sm mb-2">Example: $5 in account, buy $10 coffee = $35 fee</p>
                             <p class="text-green-400 text-sm font-bold">Avoid: Check balance daily, keep $50-100 buffer</p>
@@ -389,13 +408,17 @@
                     <div class="interactive-card rounded-3xl p-8 text-center" onclick="revealCard(this)">
                         <span class="click-indicator">Click Me</span>
                         <div class="card-front">
-                            <div class="text-6xl mb-4">📅</div>
+                            <div class="mb-4 flex justify-center">
+                                <i data-lucide="calendar" class="w-16 h-16 text-blue-400"></i>
+                            </div>
                             <h3 class="text-2xl font-bold text-gray-200 mb-2">Monthly Fee</h3>
                             <div class="text-5xl font-black text-red-400 my-4">$12</div>
                             <p class="text-gray-400">What is this?</p>
                         </div>
                         <div class="card-back">
-                            <div class="text-4xl mb-3">💰</div>
+                            <div class="mb-3 flex justify-center">
+                                <i data-lucide="dollar-sign" class="w-10 h-10 text-green-400"></i>
+                            </div>
                             <p class="text-red-400 font-bold mb-3">Charged monthly unless you meet requirements</p>
                             <p class="text-gray-300 text-sm mb-2">Example: Minimum $500 balance or direct deposit</p>
                             <p class="text-green-400 text-sm font-bold">Avoid: Choose banks with no monthly fees</p>
@@ -405,13 +428,17 @@
                     <div class="interactive-card rounded-3xl p-8 text-center" onclick="revealCard(this)">
                         <span class="click-indicator">Click Me</span>
                         <div class="card-front">
-                            <div class="text-6xl mb-4">🏧</div>
+                            <div class="mb-4 flex justify-center">
+                                <i data-lucide="landmark" class="w-16 h-16 text-blue-400"></i>
+                            </div>
                             <h3 class="text-2xl font-bold text-gray-200 mb-2">Out-of-Network ATM</h3>
                             <div class="text-5xl font-black text-red-400 my-4">$3-5</div>
                             <p class="text-gray-400">What is this?</p>
                         </div>
                         <div class="card-back">
-                            <div class="text-4xl mb-3">🚫</div>
+                            <div class="mb-3 flex justify-center">
+                                <i data-lucide="ban" class="w-10 h-10 text-red-400"></i>
+                            </div>
                             <p class="text-red-400 font-bold mb-3">Using an ATM not owned by your bank</p>
                             <p class="text-gray-300 text-sm mb-2">You pay BOTH your bank's fee AND the ATM owner's fee</p>
                             <p class="text-green-400 text-sm font-bold">Avoid: Use your bank's ATMs or get cash back at stores</p>
@@ -421,13 +448,17 @@
                     <div class="interactive-card rounded-3xl p-8 text-center" onclick="revealCard(this)">
                         <span class="click-indicator">Click Me</span>
                         <div class="card-front">
-                            <div class="text-6xl mb-4">💳</div>
+                            <div class="mb-4 flex justify-center">
+                                <i data-lucide="credit-card" class="w-16 h-16 text-blue-400"></i>
+                            </div>
                             <h3 class="text-2xl font-bold text-gray-200 mb-2">Insufficient Funds</h3>
                             <div class="text-5xl font-black text-red-400 my-4">$35</div>
                             <p class="text-gray-400">What is this?</p>
                         </div>
                         <div class="card-back">
-                            <div class="text-4xl mb-3">❌</div>
+                            <div class="mb-3 flex justify-center">
+                                <i data-lucide="x-circle" class="w-10 h-10 text-red-400"></i>
+                            </div>
                             <p class="text-red-400 font-bold mb-3">When a payment is declined for low balance</p>
                             <p class="text-gray-300 text-sm mb-2">Similar to overdraft, but payment doesn't go through</p>
                             <p class="text-green-400 text-sm font-bold">Avoid: Same as overdraft - check balance daily!</p>
@@ -436,7 +467,10 @@
                 </div>
 
                 <div class="content-card rounded-3xl p-6 text-center">
-                    <p class="text-gray-300"><span class="text-blue-400 font-bold">💡 Good news:</span> Many banks now offer accounts with NO monthly fees and NO overdraft fees. You just need to know what to look for.</p>
+                    <p class="text-gray-300 flex items-start gap-2 justify-center">
+                        <i data-lucide="lightbulb" class="w-5 h-5 text-yellow-400 flex-shrink-0 mt-1"></i>
+                        <span><span class="text-blue-400 font-bold">Good news:</span> Many banks now offer accounts with NO monthly fees and NO overdraft fees. You just need to know what to look for.</span>
+                    </p>
                 </div>
 
                 <div class="text-center mt-12">
@@ -521,7 +555,9 @@
                         <span class="click-indicator">Click Me</span>
                         <div class="card-front">
                             <div class="flex items-start gap-4">
-                                <div class="text-5xl">📱</div>
+                                <div class="flex justify-center">
+                                    <i data-lucide="smartphone" class="w-12 h-12 text-blue-400"></i>
+                                </div>
                                 <div>
                                     <h3 class="text-xl font-bold text-gray-200 mb-3">Alex's Coffee Run</h3>
                                     <p class="text-gray-400">Alex checked their bank app in the morning: $52 available. They bought coffee ($5), lunch ($12), and gas ($30). Later that day, their card was declined at dinner.</p>
@@ -529,10 +565,15 @@
                             </div>
                         </div>
                         <div class="card-back">
-                            <div class="text-4xl mb-4 text-center">😱</div>
+                            <div class="mb-4 flex justify-center">
+                                <i data-lucide="alert-circle" class="w-10 h-10 text-orange-500"></i>
+                            </div>
                             <p class="text-red-400 font-bold mb-3 text-center">THE MISTAKE:</p>
                             <p class="text-gray-300 text-center">Alex forgot about a pending Netflix charge ($15) that hadn't shown up yet. Their real available balance was only $37, not $52.</p>
-                            <p class="text-green-400 font-bold text-center mt-4">✓ Always account for pending charges!</p>
+                            <p class="text-green-400 font-bold text-center mt-4 flex items-center justify-center gap-2">
+                                <i data-lucide="check-circle" class="w-5 h-5"></i>
+                                Always account for pending charges!
+                            </p>
                         </div>
                     </div>
 
@@ -540,7 +581,9 @@
                         <span class="click-indicator">Click Me</span>
                         <div class="card-front">
                             <div class="flex items-start gap-4">
-                                <div class="text-5xl">🏦</div>
+                                <div class="flex justify-center">
+                                    <i data-lucide="landmark" class="w-12 h-12 text-blue-400"></i>
+                                </div>
                                 <div>
                                     <h3 class="text-xl font-bold text-gray-200 mb-3">Jordan's ATM Trip</h3>
                                     <p class="text-gray-400">Jordan needed $40 cash fast and used the nearest ATM. They withdrew the money and checked their balance later—$43.50 was taken out instead of $40.</p>
@@ -548,10 +591,15 @@
                             </div>
                         </div>
                         <div class="card-back">
-                            <div class="text-4xl mb-4 text-center">💸</div>
+                            <div class="mb-4 flex justify-center">
+                                <i data-lucide="coins" class="w-10 h-10 text-green-400"></i>
+                            </div>
                             <p class="text-red-400 font-bold mb-3 text-center">THE MISTAKE:</p>
                             <p class="text-gray-300 text-center">Jordan used an out-of-network ATM. Their bank charged $2.50, and the ATM owner charged $1.</p>
-                            <p class="text-green-400 font-bold text-center mt-4">✓ Use your bank's ATMs or get cash back at stores for free!</p>
+                            <p class="text-green-400 font-bold text-center mt-4 flex items-center justify-center gap-2">
+                                <i data-lucide="check-circle" class="w-5 h-5"></i>
+                                Use your bank's ATMs or get cash back at stores for free!
+                            </p>
                         </div>
                     </div>
 
@@ -559,7 +607,9 @@
                         <span class="click-indicator">Click Me</span>
                         <div class="card-front">
                             <div class="flex items-start gap-4">
-                                <div class="text-5xl">💳</div>
+                                <div class="flex justify-center">
+                                    <i data-lucide="credit-card" class="w-12 h-12 text-blue-400"></i>
+                                </div>
                                 <div>
                                     <h3 class="text-xl font-bold text-gray-200 mb-3">Sam's Subscription Surprise</h3>
                                     <p class="text-gray-400">Sam had $15 in their account and forgot about an old Spotify subscription. The $10.99 charge went through, followed by a $35 overdraft fee when another charge tried to process.</p>
@@ -567,10 +617,15 @@
                             </div>
                         </div>
                         <div class="card-back">
-                            <div class="text-4xl mb-4 text-center">🎵</div>
+                            <div class="mb-4 flex justify-center">
+                                <i data-lucide="music" class="w-10 h-10 text-purple-400"></i>
+                            </div>
                             <p class="text-red-400 font-bold mb-3 text-center">THE MISTAKE:</p>
                             <p class="text-gray-300 text-center">Sam didn't track their recurring subscriptions and didn't have enough buffer money.</p>
-                            <p class="text-green-400 font-bold text-center mt-4">✓ Review statements monthly to catch forgotten subscriptions!</p>
+                            <p class="text-green-400 font-bold text-center mt-4 flex items-center justify-center gap-2">
+                                <i data-lucide="check-circle" class="w-5 h-5"></i>
+                                Review statements monthly to catch forgotten subscriptions!
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -593,7 +648,9 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
                     <div class="warning-card rounded-3xl p-6">
                         <div class="flex items-start gap-4">
-                            <div class="text-4xl">🔄</div>
+                            <div class="flex justify-center">
+                                <i data-lucide="refresh-cw" class="w-10 h-10 text-blue-400"></i>
+                            </div>
                             <div>
                                 <h3 class="text-lg font-bold text-red-400 mb-2">Ignoring Pending Charges</h3>
                                 <p class="text-gray-400 text-sm">Your app shows $100, but you have $30 pending. Your real balance is $70. Always check "pending" before spending.</p>
@@ -603,7 +660,9 @@
 
                     <div class="warning-card rounded-3xl p-6">
                         <div class="flex items-start gap-4">
-                            <div class="text-4xl">📆</div>
+                            <div class="flex justify-center">
+                                <i data-lucide="calendar" class="w-10 h-10 text-blue-400"></i>
+                            </div>
                             <div>
                                 <h3 class="text-lg font-bold text-red-400 mb-2">Forgetting Automatic Payments</h3>
                                 <p class="text-gray-400 text-sm">Gym, Netflix, Spotify—these charge automatically. Write them down or they'll surprise you when your balance is low.</p>
@@ -613,7 +672,9 @@
 
                     <div class="warning-card rounded-3xl p-6">
                         <div class="flex items-start gap-4">
-                            <div class="text-4xl">🤷</div>
+                            <div class="flex justify-center">
+                                <i data-lucide="help-circle" class="w-10 h-10 text-gray-400"></i>
+                            </div>
                             <div>
                                 <h3 class="text-lg font-bold text-red-400 mb-2">Not Checking Balance Daily</h3>
                                 <p class="text-gray-400 text-sm">30 seconds every morning could save you $35+ in fees. Make it a habit like checking your phone.</p>
@@ -623,7 +684,9 @@
 
                     <div class="warning-card rounded-3xl p-6">
                         <div class="flex items-start gap-4">
-                            <div class="text-4xl">💸</div>
+                            <div class="flex justify-center">
+                                <i data-lucide="coins" class="w-10 h-10 text-green-400"></i>
+                            </div>
                             <div>
                                 <h3 class="text-lg font-bold text-red-400 mb-2">Spending Your Last Dollar</h3>
                                 <p class="text-gray-400 text-sm">If you have $20, don't spend $20. Keep a buffer ($50-100) for unexpected charges or you'll overdraft.</p>
@@ -633,7 +696,9 @@
 
                     <div class="warning-card rounded-3xl p-6">
                         <div class="flex items-start gap-4">
-                            <div class="text-4xl">🏧</div>
+                            <div class="flex justify-center">
+                                <i data-lucide="landmark" class="w-10 h-10 text-blue-400"></i>
+                            </div>
                             <div>
                                 <h3 class="text-lg font-bold text-red-400 mb-2">Using Any ATM</h3>
                                 <p class="text-gray-400 text-sm">Out-of-network ATMs charge $3-5 per withdrawal. Find your bank's ATMs or get cash back at stores for free.</p>
@@ -643,7 +708,9 @@
 
                     <div class="warning-card rounded-3xl p-6">
                         <div class="flex items-start gap-4">
-                            <div class="text-4xl">😴</div>
+                            <div class="flex justify-center">
+                                <i data-lucide="moon" class="w-10 h-10 text-gray-400"></i>
+                            </div>
                             <div>
                                 <h3 class="text-lg font-bold text-red-400 mb-2">Assuming It's Fine</h3>
                                 <p class="text-gray-400 text-sm">Banks don't warn you before charging fees. It's YOUR job to track your money and avoid these situations.</p>
@@ -666,31 +733,41 @@
 
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
                     <div class="success-card rounded-3xl p-6 text-center">
-                        <div class="text-4xl mb-4">☀️</div>
+                        <div class="mb-4 flex justify-center">
+                            <i data-lucide="sun" class="w-10 h-10 text-yellow-400"></i>
+                        </div>
                         <h3 class="text-lg font-bold text-green-400 mb-2">Check Daily</h3>
                         <p class="text-gray-300 text-sm">30 seconds every morning prevents $35+ fees</p>
                     </div>
 
                     <div class="success-card rounded-3xl p-6 text-center">
-                        <div class="text-4xl mb-4">💰</div>
+                        <div class="mb-4 flex justify-center">
+                            <i data-lucide="dollar-sign" class="w-10 h-10 text-green-400"></i>
+                        </div>
                         <h3 class="text-lg font-bold text-green-400 mb-2">Keep Buffer</h3>
                         <p class="text-gray-300 text-sm">$50-100 cushion saves you from overdrafts</p>
                     </div>
 
                     <div class="success-card rounded-3xl p-6 text-center">
-                        <div class="text-4xl mb-4">🔔</div>
+                        <div class="mb-4 flex justify-center">
+                            <i data-lucide="bell" class="w-10 h-10 text-blue-400"></i>
+                        </div>
                         <h3 class="text-lg font-bold text-green-400 mb-2">Set Alerts</h3>
                         <p class="text-gray-300 text-sm">Get notified before problems happen</p>
                     </div>
 
                     <div class="success-card rounded-3xl p-6 text-center">
-                        <div class="text-4xl mb-4">📋</div>
+                        <div class="mb-4 flex justify-center">
+                            <i data-lucide="clipboard-list" class="w-10 h-10 text-gray-300"></i>
+                        </div>
                         <h3 class="text-lg font-bold text-green-400 mb-2">Track Subscriptions</h3>
                         <p class="text-gray-300 text-sm">List all recurring charges so nothing surprises you</p>
                     </div>
 
                     <div class="success-card rounded-3xl p-6 text-center">
-                        <div class="text-4xl mb-4">👀</div>
+                        <div class="mb-4 flex justify-center">
+                            <i data-lucide="eye" class="w-10 h-10 text-blue-400"></i>
+                        </div>
                         <h3 class="text-lg font-bold text-green-400 mb-2">Check Pending</h3>
                         <p class="text-gray-300 text-sm">Don't just trust the "available" number</p>
                     </div>
@@ -730,8 +807,9 @@
                 <div id="quizResult" class="hidden mt-12"></div>
 
                 <div id="finishSection" class="text-center mt-12 hidden">
-                    <button onclick="finishLesson()" class="btn-3d px-10 py-5 bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 rounded-xl font-bold text-white text-xl glow-green pulse-animation">
-                        Finish Lesson ✓
+                    <button onclick="finishLesson()" class="btn-3d px-10 py-5 bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 rounded-xl font-bold text-white text-xl glow-green pulse-animation flex items-center justify-center gap-2" style="margin: 0 auto;">
+                        Finish Lesson
+                        <i data-lucide="check" class="w-6 h-6"></i>
                     </button>
                 </div>
             </div>
@@ -858,7 +936,8 @@
             const quizPassedStatus = localStorage.getItem(`lesson5_quiz_passed_${userId}`);
             if (quizPassedStatus === 'true') {
                 quizPassed = true;
-                document.getElementById('quizContainer').innerHTML = '<div class="content-card rounded-3xl p-8 text-center"><p class="text-green-400 text-xl font-bold">✓ Quiz Already Completed</p></div>';
+                document.getElementById('quizContainer').innerHTML = '<div class="content-card rounded-3xl p-8 text-center"><p class="text-green-400 text-xl font-bold flex items-center justify-center gap-2"><i data-lucide="check-circle" class="w-6 h-6"></i> Quiz Already Completed</p></div>';
+                lucide.createIcons();
                 document.getElementById('submitQuizBtn').classList.add('hidden');
                 document.getElementById('finishSection').classList.remove('hidden');
                 return;
@@ -940,17 +1019,22 @@
 
                 resultDiv.innerHTML = `
                     <div class="content-card rounded-3xl p-10 text-center glow-green">
-                        <div class="text-6xl mb-4">🎉</div>
+                        <div class="mb-4 flex justify-center">
+                            <i data-lucide="party-popper" class="w-16 h-16 text-green-400"></i>
+                        </div>
                         <h3 class="text-3xl font-bold text-green-400 mb-4">Perfect Score!</h3>
                         <p class="text-gray-300 text-lg mb-2">You scored ${correct} out of ${quizQuestions.length} (100%)</p>
                         <p class="text-gray-400">You now know how to keep your money safe and avoid costly fees!</p>
                     </div>
                 `;
+                lucide.createIcons();
                 document.getElementById('finishSection').classList.remove('hidden');
             } else {
                 resultDiv.innerHTML = `
                     <div class="content-card rounded-3xl p-10 text-center" style="border-color: rgba(239, 68, 68, 0.6);">
-                        <div class="text-6xl mb-4">📚</div>
+                        <div class="mb-4 flex justify-center">
+                            <i data-lucide="book-open" class="w-16 h-16 text-blue-400"></i>
+                        </div>
                         <h3 class="text-3xl font-bold text-red-400 mb-4">Not quite there yet</h3>
                         <p class="text-gray-300 text-lg mb-2">You scored ${correct} out of ${quizQuestions.length}</p>
                         <p class="text-gray-400 mb-6">You need 100% to pass. Review and try again!</p>
@@ -959,6 +1043,7 @@
                         </button>
                     </div>
                 `;
+                lucide.createIcons();
             }
 
             resultDiv.classList.remove('hidden');
