@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,381 +8,510 @@
     <link rel="icon" type="image/svg+xml" sizes="16x16" href="assets/favicon-16x16.svg">
     <link rel="icon" type="image/svg+xml" sizes="32x32" href="assets/favicon-32x32.svg">
     <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.svg">
-    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        .help-hero {
-            background: linear-gradient(135deg, #0A1A2F 0%, #1a3a5c 100%);
-            padding: 80px 20px 60px;
-            text-align: center;
-            color: white;
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+        * {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
         }
-        .help-hero h1 {
-            font-size: 48px;
-            margin-bottom: 20px;
+
+        body {
+            background: #0f0f0f;
+            overflow-x: hidden;
         }
-        .help-hero p {
-            font-size: 20px;
-            opacity: 0.9;
+
+        /* Gradient text */
+        .gradient-text {
+            background: linear-gradient(135deg, #e5e7eb 0%, #9ca3af 50%, #e5e7eb 100%);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradientShift 5s ease infinite;
         }
-        .help-search {
-            max-width: 600px;
-            margin: 40px auto 0;
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
         }
+
+        /* Glowing effects */
+        .glow-grey {
+            box-shadow: 0 0 20px rgba(156, 163, 175, 0.4), 0 0 40px rgba(156, 163, 175, 0.2);
+        }
+
+        /* Navigation backdrop blur */
+        .nav-blur {
+            backdrop-filter: blur(12px);
+            background: rgba(15, 15, 15, 0.9);
+            border-bottom: 1px solid rgba(156, 163, 175, 0.15);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        /* 3D Button Effect */
+        .btn-3d {
+            transform-style: preserve-3d;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3), 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-3d:hover {
+            transform: translateY(-4px) translateZ(10px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4), 0 16px 32px rgba(0, 0, 0, 0.3), 0 0 40px rgba(209, 213, 219, 0.2);
+        }
+
+        /* Help search */
         .help-search input {
-            width: 100%;
-            padding: 16px 24px;
-            border-radius: 50px;
-            border: none;
-            font-size: 16px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            background: rgba(40, 40, 40, 0.6);
+            border: 2px solid rgba(255, 255, 255, 0.15);
+            color: #e5e7eb;
+            transition: all 0.3s ease;
         }
-        .help-content {
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 60px 20px;
+
+        .help-search input:focus {
+            outline: none;
+            border-color: #9ca3af;
+            background: rgba(40, 40, 40, 0.8);
+            box-shadow: 0 0 20px rgba(156, 163, 175, 0.3);
         }
-        .help-categories {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
-            margin-bottom: 60px;
+
+        .help-search input::placeholder {
+            color: #9ca3af;
         }
+
+        /* Category cards */
         .category-card {
-            background: white;
-            padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            transition: transform 0.2s, box-shadow 0.2s;
+            background: linear-gradient(135deg, rgba(30, 30, 30, 0.8) 0%, rgba(20, 20, 20, 0.6) 100%);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
+
         .category-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            transform: translateY(-8px);
+            border-color: rgba(156, 163, 175, 0.4);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), 0 0 30px rgba(156, 163, 175, 0.2);
         }
-        .category-icon {
-            font-size: 40px;
-            margin-bottom: 15px;
-        }
-        .category-card h3 {
-            font-size: 22px;
-            margin-bottom: 15px;
-            color: var(--text-primary);
-        }
-        .category-card ul {
-            list-style: none;
-            padding: 0;
-        }
-        .category-card li {
-            padding: 8px 0;
-        }
-        .category-card a {
-            color: var(--text-secondary);
-            text-decoration: none;
-            transition: color 0.2s;
-        }
-        .category-card a:hover {
-            color: var(--primary);
-        }
-        .faq-section {
-            margin-top: 60px;
-        }
-        .faq-section h2 {
-            font-size: 36px;
-            margin-bottom: 40px;
-            text-align: center;
-        }
+
+        /* FAQ accordion */
         .faq-item {
-            background: white;
-            padding: 25px;
-            border-radius: 12px;
-            margin-bottom: 20px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            background: linear-gradient(135deg, rgba(30, 30, 30, 0.8) 0%, rgba(20, 20, 20, 0.6) 100%);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            cursor: pointer;
+            transition: all 0.3s ease;
         }
-        .faq-question {
-            font-size: 20px;
-            font-weight: 600;
-            color: var(--text-primary);
-            margin-bottom: 15px;
-            display: flex;
-            align-items: flex-start;
-            gap: 12px;
+
+        .faq-item:hover {
+            border-color: rgba(156, 163, 175, 0.3);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
         }
+
         .faq-answer {
-            color: var(--text-secondary);
-            line-height: 1.6;
-            padding-left: 32px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
         }
-        .contact-cta {
-            text-align: center;
-            margin-top: 60px;
-            padding: 40px;
-            background: #f7fafc;
-            border-radius: 12px;
+
+        .faq-item.active .faq-answer {
+            max-height: 500px;
         }
-        .contact-cta h3 {
-            font-size: 28px;
-            margin-bottom: 15px;
+
+        .faq-item.active .faq-icon {
+            transform: rotate(45deg);
         }
-        .contact-cta p {
-            color: var(--text-secondary);
-            margin-bottom: 25px;
+
+        .faq-icon {
+            transition: transform 0.3s ease;
         }
     </style>
 </head>
-<body class="homepage-dark">
+<body class="relative min-h-screen text-gray-300">
     <!-- Navigation -->
-    <nav class="navbar">
-        <div class="container">
-            <div class="nav-wrapper">
-                <div class="logo"><a href="/" style="color: inherit; text-decoration: none;">Finance<span class="logo-accent">U</span></a></div>
-                <ul class="nav-links">
-                    <li><a href="/curriculum">Learning Paths</a></li>
-                    <li><a href="/#features">Features</a></li>
-                    <li><a href="/#pricing">Pricing</a></li>
-                    <li><a href="/about">About</a></li>
-                    <li id="authButtons" style="opacity: 0;">
-                    </li>
-                    </li>
-                </ul>
+    <nav class="fixed top-0 left-0 right-0 z-50 nav-blur">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <a href="/" class="flex items-center space-x-2">
+                    <div class="w-10 h-10 rounded-full bg-gradient-to-br from-gray-200 to-gray-400 glow-grey flex items-center justify-center font-bold text-xl" style="color: #1f2937;">
+                        F
+                    </div>
+                    <span class="text-2xl font-bold gradient-text">FinanceU</span>
+                </a>
+
+                <div class="hidden md:flex items-center space-x-6">
+                    <a href="/" class="text-gray-400 hover:text-gray-200 transition-colors font-medium">Home</a>
+                    <a href="/dashboard" class="text-gray-400 hover:text-gray-200 transition-colors font-medium">Dashboard</a>
+                </div>
+
+                <div class="flex items-center space-x-4" id="authButtons">
+                    <a href="/login" class="hidden md:inline-block px-6 py-2 text-gray-400 hover:text-gray-200 transition-colors font-medium">Login</a>
+                    <a href="/signup" class="btn-3d px-6 py-2.5 bg-gradient-to-r from-gray-200 to-gray-300 hover:from-gray-300 hover:to-gray-200 rounded-lg font-semibold glow-grey transition-all" style="color: #1f2937;">Sign Up</a>
+                </div>
             </div>
         </div>
     </nav>
 
-    <!-- Help Hero -->
-    <section class="help-hero">
-        <h1>How Can We Help You?</h1>
-        <p>Search our help center or browse categories below</p>
-        <div class="help-search">
-            <input type="text" placeholder="Search for help..." id="helpSearch">
+    <!-- Hero Section -->
+    <section class="pt-32 pb-20 px-6">
+        <div class="container mx-auto max-w-4xl text-center">
+            <h1 class="text-5xl md:text-6xl font-black mb-6 text-gray-200">How Can We <span class="gradient-text">Help You?</span></h1>
+            <p class="text-xl text-gray-400 mb-12">Search our help center or browse categories below</p>
+
+            <div class="help-search max-w-2xl mx-auto">
+                <input type="text" placeholder="Search for help..." id="helpSearch" class="w-full px-6 py-4 rounded-2xl text-lg">
+            </div>
         </div>
     </section>
 
-    <!-- Help Content -->
-    <div class="help-content">
-        <!-- Categories -->
-        <div class="help-categories">
-            <div class="category-card">
-                <h3>Getting Started</h3>
-                <ul>
-                    <li><a href="#signup">How do I sign up?</a></li>
-                    <li><a href="#first-lesson">Taking your first lesson</a></li>
-                    <li><a href="#navigation">Navigating the platform</a></li>
-                    <li><a href="#profile">Setting up your profile</a></li>
-                </ul>
-            </div>
+    <!-- Help Categories -->
+    <section class="py-12 px-6">
+        <div class="container mx-auto max-w-6xl">
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Getting Started -->
+                <div class="category-card rounded-2xl p-8">
+                    <div class="text-4xl mb-4">🚀</div>
+                    <h3 class="text-2xl font-bold text-gray-200 mb-4">Getting Started</h3>
+                    <ul class="space-y-3">
+                        <li><a href="#signup" class="text-gray-400 hover:text-gray-200 transition-colors">How do I sign up?</a></li>
+                        <li><a href="#first-lesson" class="text-gray-400 hover:text-gray-200 transition-colors">Taking your first lesson</a></li>
+                        <li><a href="#navigation" class="text-gray-400 hover:text-gray-200 transition-colors">Navigating the platform</a></li>
+                        <li><a href="#profile" class="text-gray-400 hover:text-gray-200 transition-colors">Setting up your profile</a></li>
+                    </ul>
+                </div>
 
-            <div class="category-card">
-                <h3>Billing & Subscriptions</h3>
-                <ul>
-                    <li><a href="#pricing">What are the pricing plans?</a></li>
-                    <li><a href="#upgrade">How to upgrade my account</a></li>
-                    <li><a href="#cancel">Canceling my subscription</a></li>
-                    <li><a href="#refund">Refund policy</a></li>
-                </ul>
-            </div>
+                <!-- Billing & Subscriptions -->
+                <div class="category-card rounded-2xl p-8">
+                    <div class="text-4xl mb-4">💳</div>
+                    <h3 class="text-2xl font-bold text-gray-200 mb-4">Billing & Subscriptions</h3>
+                    <ul class="space-y-3">
+                        <li><a href="#pricing" class="text-gray-400 hover:text-gray-200 transition-colors">What are the pricing plans?</a></li>
+                        <li><a href="#upgrade" class="text-gray-400 hover:text-gray-200 transition-colors">How to upgrade my account</a></li>
+                        <li><a href="#cancel" class="text-gray-400 hover:text-gray-200 transition-colors">Canceling my subscription</a></li>
+                        <li><a href="#refund" class="text-gray-400 hover:text-gray-200 transition-colors">Refund policy</a></li>
+                    </ul>
+                </div>
 
-            <div class="category-card">
-                <h3>Courses & Learning</h3>
-                <ul>
-                    <li><a href="#progress">Tracking your progress</a></li>
-                    <li><a href="#lessons">Accessing lessons</a></li>
-                    <li><a href="#resources">Using course resources</a></li>
-                </ul>
-            </div>
+                <!-- Courses & Learning -->
+                <div class="category-card rounded-2xl p-8">
+                    <div class="text-4xl mb-4">📚</div>
+                    <h3 class="text-2xl font-bold text-gray-200 mb-4">Courses & Learning</h3>
+                    <ul class="space-y-3">
+                        <li><a href="#progress" class="text-gray-400 hover:text-gray-200 transition-colors">Tracking your progress</a></li>
+                        <li><a href="#lessons" class="text-gray-400 hover:text-gray-200 transition-colors">Accessing lessons</a></li>
+                        <li><a href="#resources" class="text-gray-400 hover:text-gray-200 transition-colors">Using course resources</a></li>
+                        <li><a href="#certificates" class="text-gray-400 hover:text-gray-200 transition-colors">Completion certificates</a></li>
+                    </ul>
+                </div>
 
-            <div class="category-card">
-                <h3>Technical Support</h3>
-                <ul>
-                    <li><a href="#login-issues">Login problems</a></li>
-                    <li><a href="#password">Reset your password</a></li>
-                    <li><a href="#browser">Browser compatibility</a></li>
-                </ul>
+                <!-- Technical Support -->
+                <div class="category-card rounded-2xl p-8">
+                    <div class="text-4xl mb-4">⚙️</div>
+                    <h3 class="text-2xl font-bold text-gray-200 mb-4">Technical Support</h3>
+                    <ul class="space-y-3">
+                        <li><a href="#login-issues" class="text-gray-400 hover:text-gray-200 transition-colors">Login problems</a></li>
+                        <li><a href="#password" class="text-gray-400 hover:text-gray-200 transition-colors">Reset your password</a></li>
+                        <li><a href="#browser" class="text-gray-400 hover:text-gray-200 transition-colors">Browser compatibility</a></li>
+                        <li><a href="#mobile" class="text-gray-400 hover:text-gray-200 transition-colors">Mobile access</a></li>
+                    </ul>
+                </div>
+
+                <!-- Account Management -->
+                <div class="category-card rounded-2xl p-8">
+                    <div class="text-4xl mb-4">👤</div>
+                    <h3 class="text-2xl font-bold text-gray-200 mb-4">Account Management</h3>
+                    <ul class="space-y-3">
+                        <li><a href="#profile-edit" class="text-gray-400 hover:text-gray-200 transition-colors">Edit your profile</a></li>
+                        <li><a href="#email-change" class="text-gray-400 hover:text-gray-200 transition-colors">Change email address</a></li>
+                        <li><a href="#password-change" class="text-gray-400 hover:text-gray-200 transition-colors">Change password</a></li>
+                        <li><a href="#delete-account" class="text-gray-400 hover:text-gray-200 transition-colors">Delete account</a></li>
+                    </ul>
+                </div>
+
+                <!-- Privacy & Security -->
+                <div class="category-card rounded-2xl p-8">
+                    <div class="text-4xl mb-4">🔒</div>
+                    <h3 class="text-2xl font-bold text-gray-200 mb-4">Privacy & Security</h3>
+                    <ul class="space-y-3">
+                        <li><a href="#data-privacy" class="text-gray-400 hover:text-gray-200 transition-colors">Data privacy</a></li>
+                        <li><a href="#security" class="text-gray-400 hover:text-gray-200 transition-colors">Security features</a></li>
+                        <li><a href="/privacy" class="text-gray-400 hover:text-gray-200 transition-colors">Privacy Policy</a></li>
+                        <li><a href="/terms" class="text-gray-400 hover:text-gray-200 transition-colors">Terms of Service</a></li>
+                    </ul>
+                </div>
             </div>
         </div>
+    </section>
 
-        <!-- FAQs -->
-        <section class="faq-section">
-            <h2>Frequently Asked Questions</h2>
+    <!-- FAQ Section -->
+    <section class="py-20 px-6">
+        <div class="container mx-auto max-w-4xl">
+            <h2 class="text-4xl font-black text-center mb-12 text-gray-200">Frequently Asked <span class="gradient-text">Questions</span></h2>
 
-            <div class="faq-item">
-                <div class="faq-question">
-                    <span>❓</span>
-                    <span>Is FinanceU really free?</span>
+            <div class="space-y-4">
+                <div class="faq-item rounded-2xl p-6" onclick="toggleFAQ(this)">
+                    <div class="flex items-start justify-between">
+                        <div class="faq-question flex items-start gap-4 flex-1">
+                            <span class="text-2xl">❓</span>
+                            <span class="text-xl font-semibold text-gray-200">Is FinanceU really free?</span>
+                        </div>
+                        <div class="faq-icon text-gray-400 text-2xl font-light ml-4">+</div>
+                    </div>
+                    <div class="faq-answer ml-14 mt-4 text-gray-400 leading-relaxed">
+                        Yes! Our Free plan is completely free forever. You get access to Path 1 (Banking Basics) with 5 comprehensive lessons. No credit card required to sign up.
+                    </div>
                 </div>
-                <div class="faq-answer">
-                    Yes! Our Starter plan is completely free forever. You get access to 3 core financial paths with 24 lesson plans and actionable steps you can take now. No credit card required to sign up.
+
+                <div class="faq-item rounded-2xl p-6" onclick="toggleFAQ(this)">
+                    <div class="flex items-start justify-between">
+                        <div class="faq-question flex items-start gap-4 flex-1">
+                            <span class="text-2xl">❓</span>
+                            <span class="text-xl font-semibold text-gray-200">Can I cancel my subscription anytime?</span>
+                        </div>
+                        <div class="faq-icon text-gray-400 text-2xl font-light ml-4">+</div>
+                    </div>
+                    <div class="faq-answer ml-14 mt-4 text-gray-400 leading-relaxed">
+                        Absolutely. You can cancel your Pro or Expert subscription at any time from your account settings. There are no cancellation fees, and you'll retain access until the end of your billing period.
+                    </div>
+                </div>
+
+                <div class="faq-item rounded-2xl p-6" onclick="toggleFAQ(this)">
+                    <div class="flex items-start justify-between">
+                        <div class="faq-question flex items-start gap-4 flex-1">
+                            <span class="text-2xl">❓</span>
+                            <span class="text-xl font-semibold text-gray-200">Do I need any prior financial knowledge?</span>
+                        </div>
+                        <div class="faq-icon text-gray-400 text-2xl font-light ml-4">+</div>
+                    </div>
+                    <div class="faq-answer ml-14 mt-4 text-gray-400 leading-relaxed">
+                        Not at all! FinanceU is designed for complete beginners. Our courses start with the absolute basics and build up gradually. If you can read this, you're qualified to start learning.
+                    </div>
+                </div>
+
+                <div class="faq-item rounded-2xl p-6" onclick="toggleFAQ(this)">
+                    <div class="flex items-start justify-between">
+                        <div class="faq-question flex items-start gap-4 flex-1">
+                            <span class="text-2xl">❓</span>
+                            <span class="text-xl font-semibold text-gray-200">How long does it take to complete a lesson?</span>
+                        </div>
+                        <div class="faq-icon text-gray-400 text-2xl font-light ml-4">+</div>
+                    </div>
+                    <div class="faq-answer ml-14 mt-4 text-gray-400 leading-relaxed">
+                        Each lesson is designed to be completed in 10-20 minutes, but you can go at your own pace. Learn on your schedule - during breaks, between classes, or whenever works best for you.
+                    </div>
+                </div>
+
+                <div class="faq-item rounded-2xl p-6" onclick="toggleFAQ(this)">
+                    <div class="flex items-start justify-between">
+                        <div class="faq-question flex items-start gap-4 flex-1">
+                            <span class="text-2xl">❓</span>
+                            <span class="text-xl font-semibold text-gray-200">What payment methods do you accept?</span>
+                        </div>
+                        <div class="faq-icon text-gray-400 text-2xl font-light ml-4">+</div>
+                    </div>
+                    <div class="faq-answer ml-14 mt-4 text-gray-400 leading-relaxed">
+                        We accept all major credit and debit cards through Stripe, our secure payment processor. We also support digital wallets like Apple Pay and Google Pay for quick checkout.
+                    </div>
+                </div>
+
+                <div class="faq-item rounded-2xl p-6" onclick="toggleFAQ(this)">
+                    <div class="flex items-start justify-between">
+                        <div class="faq-question flex items-start gap-4 flex-1">
+                            <span class="text-2xl">❓</span>
+                            <span class="text-xl font-semibold text-gray-200">Can I access FinanceU on mobile?</span>
+                        </div>
+                        <div class="faq-icon text-gray-400 text-2xl font-light ml-4">+</div>
+                    </div>
+                    <div class="faq-answer ml-14 mt-4 text-gray-400 leading-relaxed">
+                        Yes! FinanceU is fully responsive and works great on all devices - desktop, tablet, and mobile. Learn anywhere, anytime from any device with an internet connection.
+                    </div>
+                </div>
+
+                <div class="faq-item rounded-2xl p-6" onclick="toggleFAQ(this)">
+                    <div class="flex items-start justify-between">
+                        <div class="faq-question flex items-start gap-4 flex-1">
+                            <span class="text-2xl">❓</span>
+                            <span class="text-xl font-semibold text-gray-200">Do you offer refunds?</span>
+                        </div>
+                        <div class="faq-icon text-gray-400 text-2xl font-light ml-4">+</div>
+                    </div>
+                    <div class="faq-answer ml-14 mt-4 text-gray-400 leading-relaxed">
+                        We offer a 14-day money-back guarantee for first-time subscribers. If you're not satisfied within the first 14 days, contact us for a full refund. After 14 days, no refunds are provided for partial subscription periods.
+                    </div>
+                </div>
+
+                <div class="faq-item rounded-2xl p-6" onclick="toggleFAQ(this)">
+                    <div class="flex items-start justify-between">
+                        <div class="faq-question flex items-start gap-4 flex-1">
+                            <span class="text-2xl">❓</span>
+                            <span class="text-xl font-semibold text-gray-200">Is my personal information secure?</span>
+                        </div>
+                        <div class="faq-icon text-gray-400 text-2xl font-light ml-4">+</div>
+                    </div>
+                    <div class="faq-answer ml-14 mt-4 text-gray-400 leading-relaxed">
+                        Absolutely. We take your privacy and security seriously. All data is encrypted in transit and at rest, and we never sell your personal information. Read our <a href="/privacy" class="text-gray-300 underline hover:text-gray-200">Privacy Policy</a> for details.
+                    </div>
                 </div>
             </div>
-
-            <div class="faq-item">
-                <div class="faq-question">
-                    <span>❓</span>
-                    <span>Can I cancel my subscription anytime?</span>
-                </div>
-                <div class="faq-answer">
-                    Absolutely. You can cancel your Pro or Premium subscription at any time from your account settings. There are no cancellation fees, and you'll retain access until the end of your billing period.
-                </div>
-            </div>
-
-            <div class="faq-item">
-                <div class="faq-question">
-                    <span>❓</span>
-                    <span>Do I need any prior financial knowledge?</span>
-                </div>
-                <div class="faq-answer">
-                    Not at all! FinanceU is designed for complete beginners. Our courses start with the absolute basics and build up gradually. If you can read this, you're qualified to start learning.
-                </div>
-            </div>
-
-            <div class="faq-item">
-                <div class="faq-question">
-                    <span>❓</span>
-                    <span>How long does it take to complete a lesson?</span>
-                </div>
-                <div class="faq-answer">
-                    Each lesson is designed to be completed in 10-20 minutes, but you can go at your own pace. Learn on your schedule - during breaks, between classes, or whenever works best for you.
-                </div>
-            </div>
-
-            <div class="faq-item">
-                <div class="faq-question">
-                    <span>❓</span>
-                    <span>What payment methods do you accept?</span>
-                </div>
-                <div class="faq-answer">
-                    We accept all major credit cards (Visa, Mastercard, American Express, Discover) and PayPal. All payments are processed securely through Stripe.
-                </div>
-            </div>
-
-            <div class="faq-item">
-                <div class="faq-question">
-                    <span>❓</span>
-                    <span>Is my personal information secure?</span>
-                </div>
-                <div class="faq-answer">
-                    Yes. We take your privacy seriously and use industry-standard encryption to protect your data. We never sell your information to third parties. Read our <a href="/privacy" style="color: var(--primary);">Privacy Policy</a> for more details.
-                </div>
-            </div>
-
-            <div class="faq-item">
-                <div class="faq-question">
-                    <span>❓</span>
-                    <span>Can I access FinanceU on my phone?</span>
-                </div>
-                <div class="faq-answer">
-                    Yes! Our website is fully mobile-responsive and works great on phones and tablets. Access your lessons anytime, anywhere from any device with a web browser.
-                </div>
-            </div>
-
-            <div class="faq-item">
-                <div class="faq-question">
-                    <span>❓</span>
-                    <span>Do you offer student discounts?</span>
-                </div>
-                <div class="faq-answer">
-                    Our pricing is already student-friendly! However, if you're facing financial hardship, reach out to us at support@financeu.org. We're committed to making financial education accessible to everyone.
-                </div>
-            </div>
-        </section>
-
-        <!-- Contact CTA -->
-        <div class="contact-cta">
-            <h3>Still Have Questions?</h3>
-            <p>Can't find what you're looking for? Our support team is here to help.</p>
-            <a href="/contact" class="btn-primary btn-large">Contact Support</a>
         </div>
-    </div>
+    </section>
+
+    <!-- Contact CTA -->
+    <section class="py-20 px-6">
+        <div class="container mx-auto max-w-3xl">
+            <div class="bg-gradient-to-br from-gray-900/60 to-black/80 rounded-3xl p-12 border border-gray-500/30 glow-grey backdrop-blur-xl text-center">
+                <h3 class="text-3xl font-bold text-gray-200 mb-4">Still have questions?</h3>
+                <p class="text-gray-400 mb-8 text-lg">Can't find what you're looking for? We're here to help!</p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <a href="/feedback" class="btn-3d px-8 py-4 bg-gradient-to-r from-gray-200 to-gray-300 hover:from-gray-300 hover:to-gray-200 rounded-xl font-bold glow-grey transition-all" style="color: #1f2937;">Send Feedback</a>
+                    <a href="/contact" class="btn-3d px-8 py-4 bg-gradient-to-r from-gray-600 to-gray-700 hover:from-gray-700 hover:to-gray-800 rounded-xl font-bold text-white transition-all">Contact Support</a>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h4>FinanceU</h4>
-                    <p>Making financial literacy accessible for everyone.</p>
+    <footer class="py-10 border-t border-gray-800">
+        <div class="container mx-auto px-6">
+            <div class="grid md:grid-cols-4 gap-6 mb-6">
+                <div>
+                    <div class="flex items-center space-x-2 mb-3">
+                        <div class="w-7 h-7 rounded-full bg-gradient-to-br from-gray-300 to-gray-400 glow-grey flex items-center justify-center font-bold text-sm" style="color: #1f2937;">
+                            F
+                        </div>
+                        <span class="text-lg font-bold gradient-text">FinanceU</span>
+                    </div>
+                    <p class="text-gray-500 text-xs leading-relaxed">
+                        Empowering students with practical financial education for a confident future.
+                    </p>
                 </div>
-                <div class="footer-section">
-                    <h4>Company</h4>
-                    <ul>
-                        <li><a href="/about">About Us</a></li>
-                        <li><a href="/careers">Careers</a></li>
-                        <li><a href="/contact">Contact</a></li>
+
+                <div>
+                    <h4 class="font-semibold mb-3 text-gray-300 text-sm">Learn</h4>
+                    <ul class="space-y-2 text-gray-500 text-xs">
+                        <li><a href="/courses" class="hover:text-gray-300 transition-colors">Courses</a></li>
+                        <li><a href="/dashboard" class="hover:text-gray-300 transition-colors">Dashboard</a></li>
+                        <li><a href="/help" class="hover:text-gray-300 transition-colors">Resources</a></li>
                     </ul>
                 </div>
-                <div class="footer-section">
-                    <h4>Support</h4>
-                    <ul>
-                        <li><a href="/help">Help Center</a></li>
-                        <li><a href="/feedback">Give Feedback</a></li>
-                        <li><a href="/privacy">Privacy Policy</a></li>
-                        <li><a href="/terms">Terms of Service</a></li>
+
+                <div>
+                    <h4 class="font-semibold mb-3 text-gray-300 text-sm">Company</h4>
+                    <ul class="space-y-2 text-gray-500 text-xs">
+                        <li><a href="/about" class="hover:text-gray-300 transition-colors">About</a></li>
+                        <li><a href="/contact" class="hover:text-gray-300 transition-colors">Contact</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-semibold mb-3 text-gray-300 text-sm">Legal</h4>
+                    <ul class="space-y-2 text-gray-500 text-xs">
+                        <li><a href="/privacy" class="hover:text-gray-300 transition-colors">Privacy</a></li>
+                        <li><a href="/terms" class="hover:text-gray-300 transition-colors">Terms</a></li>
+                        <li><a href="/feedback" class="hover:text-gray-300 transition-colors">Feedback</a></li>
                     </ul>
                 </div>
             </div>
-            <div class="footer-bottom">
-                <p style="font-size: 0.85rem; opacity: 0.8; margin-bottom: 10px;">Disclaimer: FinanceU provides educational content only and does not offer financial, legal, or investment advice. Always consult with a qualified professional before making financial decisions.</p>
-                <p>&copy; 2025 FinanceU. All rights reserved.</p>
+
+            <div class="border-t border-gray-800 pt-6 text-center text-gray-400 text-xs">
+                <p>&copy; 2025 FinanceU. Built with care for students, by students.</p>
             </div>
         </div>
     </footer>
 
     <script src="config.js"></script>
-    <script src="animations.js"></script>
     <script>
-                // Check authentication status and update nav
+        // Authentication check
         async function updateNav() {
             const authButtons = document.getElementById('authButtons');
 
-            // Check localStorage for cached auth state and render immediately
-            const cachedAuth = localStorage.getItem('authState');
-            if (cachedAuth) {
-                const authState = JSON.parse(cachedAuth);
-                authButtons.innerHTML = authState.isLoggedIn
-                    ? `<a href="dashboard" class="btn-primary">Dashboard</a>`
-                    : `<a href="login" class="btn-primary">Login</a>`;
-                authButtons.style.opacity = '1';
-            }
-
-            // Then verify with server in background
             try {
-                const response = await fetch(`${API_URL}/auth/me`, {
-                    credentials: 'include'
-                });
+                const response = await fetch(`${API_URL}/auth/me`, { credentials: 'include' });
 
                 if (response.ok) {
                     localStorage.setItem('authState', JSON.stringify({ isLoggedIn: true }));
-                    authButtons.innerHTML = `
-                        <a href="dashboard" class="btn-primary">Dashboard</a>
-                    `;
+                    authButtons.innerHTML = `<button onclick="logout()" class="btn-3d px-6 py-2.5 bg-gradient-to-r from-gray-200 to-gray-300 hover:from-gray-300 hover:to-gray-200 rounded-lg font-semibold glow-grey transition-all" style="color: #1f2937;">Logout</button>`;
                 } else {
-                    localStorage.setItem('authState', JSON.stringify({ isLoggedIn: false }));
                     authButtons.innerHTML = `
-                        <a href="login" class="btn-primary">Login</a>
+                        <a href="/login" class="hidden md:inline-block px-6 py-2 text-gray-400 hover:text-gray-200 transition-colors font-medium">Login</a>
+                        <a href="/signup" class="btn-3d px-6 py-2.5 bg-gradient-to-r from-gray-200 to-gray-300 hover:from-gray-300 hover:to-gray-200 rounded-lg font-semibold glow-grey transition-all" style="color: #1f2937;">Sign Up</a>
                     `;
                 }
-                authButtons.style.opacity = '1';
             } catch (error) {
-                console.log('Not logged in');
-                localStorage.setItem('authState', JSON.stringify({ isLoggedIn: false }));
                 authButtons.innerHTML = `
-                    <a href="login" class="btn-primary">Login</a>
+                    <a href="/login" class="hidden md:inline-block px-6 py-2 text-gray-400 hover:text-gray-200 transition-colors font-medium">Login</a>
+                    <a href="/signup" class="btn-3d px-6 py-2.5 bg-gradient-to-r from-gray-200 to-gray-300 hover:from-gray-300 hover:to-gray-200 rounded-lg font-semibold glow-grey transition-all" style="color: #1f2937;">Sign Up</a>
                 `;
-                authButtons.style.opacity = '1';
+            }
+        }
+
+        async function logout() {
+            localStorage.removeItem('authState');
+            localStorage.removeItem('token');
+            localStorage.removeItem('userId');
+
+            try {
+                await fetch(`${API_URL}/auth/logout`, {
+                    method: 'POST',
+                    credentials: 'include'
+                });
+                window.location.href = '/index.html';
+            } catch (error) {
+                window.location.href = '/index.html';
             }
         }
 
         updateNav();
 
+        // FAQ toggle functionality
+        function toggleFAQ(element) {
+            const isActive = element.classList.contains('active');
+
+            // Close all FAQs
+            document.querySelectorAll('.faq-item').forEach(item => {
+                item.classList.remove('active');
+            });
+
+            // Open clicked FAQ if it wasn't active
+            if (!isActive) {
+                element.classList.add('active');
+            }
+        }
+
         // Search functionality
-        document.getElementById('helpSearch').addEventListener('input', function(e) {
-            const searchTerm = e.target.value.toLowerCase();
+        const searchInput = document.getElementById('helpSearch');
+        searchInput.addEventListener('input', (e) => {
+            const query = e.target.value.toLowerCase();
+            const categoryCards = document.querySelectorAll('.category-card');
             const faqItems = document.querySelectorAll('.faq-item');
 
+            // Filter category links
+            categoryCards.forEach(card => {
+                const links = card.querySelectorAll('a');
+                let hasMatch = false;
+
+                links.forEach(link => {
+                    const text = link.textContent.toLowerCase();
+                    if (text.includes(query)) {
+                        link.style.display = 'block';
+                        hasMatch = true;
+                    } else {
+                        link.style.display = query ? 'none' : 'block';
+                    }
+                });
+
+                card.style.opacity = (query && !hasMatch) ? '0.3' : '1';
+            });
+
+            // Filter FAQs
             faqItems.forEach(item => {
-                const text = item.textContent.toLowerCase();
-                if (text.includes(searchTerm)) {
+                const question = item.querySelector('.faq-question').textContent.toLowerCase();
+                const answer = item.querySelector('.faq-answer').textContent.toLowerCase();
+
+                if (question.includes(query) || answer.includes(query)) {
                     item.style.display = 'block';
                 } else {
-                    item.style.display = 'none';
+                    item.style.display = query ? 'none' : 'block';
                 }
             });
         });
