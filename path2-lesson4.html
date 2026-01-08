@@ -9,6 +9,7 @@
     <link rel="icon" type="image/svg+xml" sizes="32x32" href="assets/favicon-32x32.svg">
     <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.svg">
     <link rel="stylesheet" href="styles.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
     <style>
         /* SVG Icon Alignment Fixes */
         svg {
@@ -823,7 +824,9 @@
                         <div class="strategy-amount">Most effective!</div>
                     </div>
                     <div class="strategy-card">
-                        <div class="strategy-icon">🪙</div>
+                        <div class="strategy-icon">
+                            <i data-lucide="coins" class="w-5 h-5"></i>
+                        </div>
                         <div class="strategy-title">Round-Up Savings</div>
                         <div class="strategy-desc">Apps round purchases up & save the change</div>
                         <div class="strategy-amount">Painless saving</div>
@@ -1591,6 +1594,8 @@
 
         document.addEventListener('DOMContentLoaded', function() {
             showScreen(1);
+            // Initialize Lucide icons
+            lucide.createIcons();
         });
     </script>
 </body>
