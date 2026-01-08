@@ -104,6 +104,61 @@
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.9), 0 0 40px rgba(59, 130, 246, 0.2);
         }
 
+        /* Interactive card - clickable */
+        .interactive-card {
+            background: linear-gradient(135deg, rgba(31, 41, 55, 0.9) 0%, rgba(17, 24, 39, 0.95) 100%);
+            backdrop-filter: blur(20px);
+            border: 2px solid rgba(75, 85, 99, 0.4);
+            transition: all 0.4s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .interactive-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(59, 130, 246, 0.6);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.9), 0 0 40px rgba(59, 130, 246, 0.2);
+        }
+
+        .interactive-card.revealed {
+            border-color: rgba(16, 185, 129, 0.8);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.9), 0 0 40px rgba(16, 185, 129, 0.3);
+        }
+
+        .card-front, .card-back {
+            transition: opacity 0.3s ease;
+        }
+
+        .card-back {
+            display: none;
+            opacity: 0;
+        }
+
+        .interactive-card.revealed .card-front {
+            display: none;
+        }
+
+        .interactive-card.revealed .card-back {
+            display: block;
+            opacity: 1;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .click-indicator {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(59, 130, 246, 0.3);
+            color: #60a5fa;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
         /* Stat card */
         .stat-card {
             background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(17, 24, 39, 0.95) 100%);
@@ -503,7 +558,67 @@
                     </div>
                 </div>
 
-                <div class="text-center">
+                <h3 class="text-2xl font-bold text-gray-200 mb-6 text-center mt-16">Test Your Knowledge: Click Each Scenario</h3>
+                <p class="text-center text-gray-400 mb-8">See what happens in real-world situations</p>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+                    <div class="interactive-card rounded-3xl p-6 text-center" onclick="revealCard(this)">
+                        <span class="click-indicator">Click Me</span>
+                        <div class="card-front">
+                            <div class="w-16 h-16 mx-auto mb-4 rounded-2xl bg-blue-500/20 border-2 border-blue-500/40 flex items-center justify-center">
+                                <span class="text-3xl">☕</span>
+                            </div>
+                            <h3 class="text-lg font-bold text-gray-200 mb-2">Scenario 1</h3>
+                            <p class="text-gray-400 text-sm">Your balance: $10<br>You buy a $5 coffee</p>
+                        </div>
+                        <div class="card-back">
+                            <div class="text-4xl mb-3">✅</div>
+                            <p class="text-green-400 font-bold mb-2">Safe!</p>
+                            <p class="text-gray-300 text-sm mb-2">New balance: $5</p>
+                            <p class="text-gray-400 text-xs">You had enough money. Transaction approved!</p>
+                        </div>
+                    </div>
+
+                    <div class="interactive-card rounded-3xl p-6 text-center" onclick="revealCard(this)">
+                        <span class="click-indicator">Click Me</span>
+                        <div class="card-front">
+                            <div class="w-16 h-16 mx-auto mb-4 rounded-2xl bg-yellow-500/20 border-2 border-yellow-500/40 flex items-center justify-center">
+                                <span class="text-3xl">🍕</span>
+                            </div>
+                            <h3 class="text-lg font-bold text-gray-200 mb-2">Scenario 2</h3>
+                            <p class="text-gray-400 text-sm">Your balance: $3<br>You order $20 pizza</p>
+                        </div>
+                        <div class="card-back">
+                            <div class="text-4xl mb-3">⚠️</div>
+                            <p class="text-red-400 font-bold mb-2">Overdraft!</p>
+                            <p class="text-gray-300 text-sm mb-2">Cost: $20 + $35 fee = $55</p>
+                            <p class="text-gray-400 text-xs">That pizza just cost you nearly 3x more!</p>
+                        </div>
+                    </div>
+
+                    <div class="interactive-card rounded-3xl p-6 text-center" onclick="revealCard(this)">
+                        <span class="click-indicator">Click Me</span>
+                        <div class="card-front">
+                            <div class="w-16 h-16 mx-auto mb-4 rounded-2xl bg-purple-500/20 border-2 border-purple-500/40 flex items-center justify-center">
+                                <span class="text-3xl">📱</span>
+                            </div>
+                            <h3 class="text-lg font-bold text-gray-200 mb-2">Scenario 3</h3>
+                            <p class="text-gray-400 text-sm">Your balance: $150<br>Netflix charges $15</p>
+                        </div>
+                        <div class="card-back">
+                            <div class="text-4xl mb-3">✅</div>
+                            <p class="text-green-400 font-bold mb-2">No Problem!</p>
+                            <p class="text-gray-300 text-sm mb-2">New balance: $135</p>
+                            <p class="text-gray-400 text-xs">Automatic payments are fine when you have buffer money!</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="content-card rounded-3xl p-6 text-center">
+                    <p class="text-gray-300"><span class="text-blue-400 font-bold">💡 Key takeaway:</span> Always know your balance BEFORE you spend. That $5 coffee can become a $40 mistake.</p>
+                </div>
+
+                <div class="text-center mt-12">
                     <button onclick="nextSection()" class="btn-3d px-8 py-4 bg-gradient-to-r from-gray-200 to-gray-300 hover:from-gray-300 hover:to-gray-200 rounded-xl font-bold text-lg" style="color: #1f2937;">
                         Continue →
                     </button>
@@ -621,6 +736,15 @@
         }
 
         createParticles();
+
+        // Card reveal interaction
+        function revealCard(card) {
+            card.classList.add('revealed');
+            const indicator = card.querySelector('.click-indicator');
+            if (indicator) {
+                indicator.style.display = 'none';
+            }
+        }
 
         // Navigation
         let currentSection = 1;
