@@ -1,1286 +1,798 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Avoiding Fees & Overdrafts - FinanceU</title>
+    <title>Lesson 5 - Avoiding Fees - FinanceU</title>
     <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
-    <link rel="icon" type="image/svg+xml" sizes="16x16" href="assets/favicon-16x16.svg">
-    <link rel="icon" type="image/svg+xml" sizes="32x32" href="assets/favicon-32x32.svg">
-    <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.svg">
-    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
         * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            background: #FFFFFF;
-            min-height: 100vh;
+            background: #0f0f0f;
             overflow-x: hidden;
         }
 
-        /* Main Container */
-        .lesson-wrapper {
-            min-height: 100vh;
-            padding-top: 80px;
+        /* Gradient text */
+        .gradient-text {
+            background: linear-gradient(135deg, #e5e7eb 0%, #9ca3af 50%, #e5e7eb 100%);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradientShift 5s ease infinite;
         }
 
-        .back-link {
-            position: fixed;
-            top: 90px;
-            left: 30px;
-            color: #2563eb;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 15px;
-            z-index: 100;
-            padding: 10px 20px;
-            background: white;
-            border-radius: 20px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            transition: all 0.3s ease;
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
         }
 
-        .back-link:hover {
-            transform: translateX(-3px);
-            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+        /* Navigation */
+        .nav-blur {
+            backdrop-filter: blur(12px);
+            background: rgba(15, 15, 15, 0.9);
+            border-bottom: 1px solid rgba(156, 163, 175, 0.15);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
         }
 
-        /* Progress Bar */
+        /* Progress bar */
         .progress-container {
             position: fixed;
-            bottom: 0;
+            top: 70px;
             left: 0;
             right: 0;
-            height: 8px;
-            background: rgba(255,255,255,0.5);
-            backdrop-filter: blur(10px);
-            z-index: 100;
-            box-shadow: 0 -2px 10px rgba(0,0,0,0.05);
+            height: 4px;
+            background: rgba(31, 41, 55, 0.8);
+            z-index: 40;
         }
 
         .progress-bar {
             height: 100%;
-            background: linear-gradient(90deg, #2563eb 0%, #10b981 100%);
-            transition: width 0.3s ease;
-            border-radius: 0 4px 4px 0;
-            box-shadow: 0 0 20px rgba(37, 99, 235, 0.5);
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6, #3b82f6);
+            background-size: 200% 100%;
+            transition: width 0.5s ease;
+            animation: shimmer 2s ease-in-out infinite;
         }
 
-        /* Split Screen Layout */
-        .lesson-screen {
-            display: none;
-            min-height: calc(100vh - 80px);
-            padding: 40px;
-            animation: fadeIn 0.6s ease;
+        @keyframes shimmer {
+            0%, 100% { background-position: 0% 0%; }
+            50% { background-position: 100% 0%; }
         }
 
-        .lesson-screen.active {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 60px;
-            align-items: center;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: scale(0.95); }
-            to { opacity: 1; transform: scale(1); }
-        }
-
-        /* Content Side */
-        .content-side {
-            max-width: 600px;
-            margin-left: auto;
-        }
-
-        .section-number {
-            display: inline-block;
-            padding: 8px 20px;
-            background: #2563eb;
-            color: white;
-            border-radius: 20px;
-            font-size: 14px;
-            font-weight: 700;
-            margin-bottom: 24px;
-            box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);
-        }
-
-        .content-title {
-            font-size: clamp(36px, 5vw, 56px);
-            font-weight: 800;
-            color: #0f172a;
-            margin-bottom: 24px;
-            line-height: 1.1;
-        }
-
-        .content-text {
-            font-size: 18px;
-            line-height: 1.8;
-            color: #475569;
-            margin-bottom: 20px;
-        }
-
-        .content-text strong {
-            color: #0f172a;
-            font-weight: 700;
-        }
-
-        .highlight-box {
-            background: white;
-            border-left: 4px solid #2563eb;
-            padding: 24px;
-            border-radius: 12px;
-            margin: 24px 0;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-        }
-
-        .highlight-box p {
-            margin: 0;
-            color: #1e293b;
-            font-size: 17px;
-            line-height: 1.7;
-        }
-
-        .feature-list {
-            list-style: none;
-            margin: 24px 0;
-        }
-
-        .feature-list li {
-            padding: 16px 0;
-            border-bottom: 1px solid rgba(0,0,0,0.05);
-            display: flex;
-            align-items: start;
-            gap: 12px;
-            color: #475569;
-            font-size: 16px;
-            line-height: 1.6;
-        }
-
-        .feature-list li::before {
-            content: '→';
-            color: #2563eb;
-            font-weight: bold;
-            font-size: 20px;
-            flex-shrink: 0;
-        }
-
-        /* Visual Side */
-        .visual-side {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-        }
-
-        /* Hero Visual */
-        .hero-visual {
-            text-align: center;
-            padding: 60px;
-            background: white;
-            border-radius: 32px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero-icon {
-            font-size: 120px;
-            margin-bottom: 24px;
-            position: relative;
-            z-index: 1;
-        }
-
-        .hero-stat {
-            font-size: 48px;
-            font-weight: 800;
-            color: #ef4444;
-            margin-bottom: 12px;
-            position: relative;
-            z-index: 1;
-        }
-
-        .hero-label {
-            font-size: 18px;
-            color: #64748b;
-            font-weight: 600;
-            position: relative;
-            z-index: 1;
-        }
-
-        /* Fee Cards */
-        .fee-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-        }
-
-        .fee-card {
-            background: white;
-            padding: 30px;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-            text-align: center;
-            transition: all 0.3s ease;
-            border-top: 4px solid #ef4444;
-        }
-
-        .fee-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 40px rgba(0,0,0,0.12);
-        }
-
-        .fee-icon {
-            font-size: 48px;
-            margin-bottom: 16px;
-        }
-
-        .fee-title {
-            font-size: 20px;
-            font-weight: 700;
-            margin-bottom: 12px;
-            color: #0f172a;
-        }
-
-        .fee-amount {
-            font-size: 32px;
-            font-weight: 800;
-            color: #ef4444;
-            margin-bottom: 12px;
-        }
-
-        .fee-text {
-            font-size: 15px;
-            color: #64748b;
-            line-height: 1.6;
-        }
-
-        /* Overdraft Visual */
-        .overdraft-demo {
-            background: white;
-            padding: 40px;
-            border-radius: 24px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
-            width: 100%;
-            max-width: 500px;
-        }
-
-        .balance-display {
-            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
-            padding: 30px;
-            border-radius: 16px;
-            margin-bottom: 30px;
-            text-align: center;
-        }
-
-        .balance-label {
-            font-size: 14px;
-            color: #64748b;
-            margin-bottom: 8px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .balance-amount {
-            font-size: 48px;
-            font-weight: 800;
-            color: #2563eb;
-            margin-bottom: 8px;
-        }
-
-        .balance-amount.negative {
-            color: #ef4444;
-        }
-
-        .transaction {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 16px;
-            background: #f8fafc;
-            border-radius: 12px;
-            margin-bottom: 12px;
-        }
-
-        .transaction-info {
-            flex: 1;
-        }
-
-        .transaction-name {
-            font-size: 16px;
-            font-weight: 600;
-            color: #0f172a;
-            margin-bottom: 4px;
-        }
-
-        .transaction-date {
-            font-size: 13px;
-            color: #64748b;
-        }
-
-        .transaction-amount {
-            font-size: 20px;
-            font-weight: 700;
-            color: #ef4444;
-        }
-
-        /* Scenario Cards */
-        .scenario-grid {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-
-        .scenario-card {
-            background: white;
-            padding: 30px;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-            cursor: pointer;
-            transition: all 0.3s ease;
-            border: 2px solid transparent;
-            position: relative;
-        }
-
-        .scenario-card:hover {
-            transform: translateX(10px);
-            border-color: #2563eb;
-            box-shadow: 0 15px 40px rgba(37, 99, 235, 0.15);
-        }
-
-        .scenario-card.revealed {
-            border-color: #ef4444;
-            background: linear-gradient(135deg, #fff 0%, #fee2e2 100%);
-        }
-
-        .scenario-title {
-            font-size: 20px;
-            font-weight: 700;
-            color: #0f172a;
-            margin-bottom: 12px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .scenario-story {
-            font-size: 16px;
-            color: #475569;
-            line-height: 1.7;
-            margin-bottom: 16px;
-        }
-
-        .scenario-reveal {
-            display: none;
-            margin-top: 20px;
-            padding-top: 20px;
-            border-top: 2px solid #fecaca;
-        }
-
-        .scenario-reveal.show {
-            display: block;
-            animation: slideDown 0.4s ease;
-        }
-
-        @keyframes slideDown {
-            from { opacity: 0; transform: translateY(-10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .reveal-label {
-            font-size: 14px;
-            font-weight: 700;
-            color: #ef4444;
-            margin-bottom: 8px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .reveal-text {
-            font-size: 16px;
-            color: #0f172a;
-            font-weight: 600;
-            line-height: 1.6;
-        }
-
-        .click-hint {
-            display: inline-block;
-            font-size: 13px;
-            color: #2563eb;
-            font-weight: 600;
-            padding: 6px 12px;
-            background: #dbeafe;
-            border-radius: 12px;
-        }
-
-        /* Mistake Cards */
-        .mistake-grid {
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-        }
-
-        .mistake-card {
-            background: white;
-            padding: 24px;
-            border-radius: 16px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-            border-left: 4px solid #ef4444;
-        }
-
-        .mistake-header {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 12px;
-        }
-
-        .mistake-icon {
-            font-size: 32px;
-        }
-
-        .mistake-title {
-            font-size: 18px;
-            font-weight: 700;
-            color: #0f172a;
-        }
-
-        .mistake-text {
-            font-size: 15px;
-            color: #475569;
-            line-height: 1.7;
-        }
-
-        /* Habit Cards */
-        .habit-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-        }
-
-        .habit-card {
-            background: white;
-            padding: 30px;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-            text-align: center;
-            transition: all 0.3s ease;
-            border-top: 4px solid #10b981;
-        }
-
-        .habit-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 40px rgba(16, 185, 129, 0.15);
-        }
-
-        .habit-icon {
-            font-size: 48px;
-            margin-bottom: 16px;
-        }
-
-        .habit-title {
-            font-size: 20px;
-            font-weight: 700;
-            margin-bottom: 12px;
-            color: #0f172a;
-        }
-
-        .habit-text {
-            font-size: 15px;
-            color: #64748b;
-            line-height: 1.6;
-        }
-
-        /* Interactive Quiz */
-        .quiz-container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 40px 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .quiz-card {
-            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
-            padding: 40px;
-            border-radius: 24px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.08);
-            border: 1px solid rgba(0,0,0,0.05);
-            animation: slideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-            position: relative;
-            overflow: hidden;
-            margin-bottom: 24px;
-            width: 100%;
-        }
-
-        .quiz-card::before {
-            content: '';
+        /* Floating particles */
+        .particle {
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: linear-gradient(90deg, #2563eb 0%, #10b981 100%);
-        }
-
-        @keyframes slideUp {
-            from { opacity: 0; transform: translateY(40px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .quiz-question {
-            font-size: 22px;
-            font-weight: 700;
-            color: #0f172a;
-            margin-bottom: 28px;
-            line-height: 1.4;
-            letter-spacing: -0.01em;
-        }
-
-        .quiz-options-grid {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            margin-bottom: 32px;
-        }
-
-        .quiz-option {
-            position: relative;
-            background: white;
-            border: 2px solid #e2e8f0;
-            padding: 18px 22px;
-            border-radius: 12px;
-            cursor: pointer;
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-            font-size: 16px;
-            color: #1e293b;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-        }
-
-        .quiz-option::before {
-            content: '';
-            width: 24px;
-            height: 24px;
-            border: 3px solid #cbd5e1;
             border-radius: 50%;
-            flex-shrink: 0;
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-            background: white;
+            pointer-events: none;
+            opacity: 0.2;
         }
 
-        .quiz-option:hover:not(.correct):not(.incorrect) {
-            border-color: #2563eb;
-            transform: translateY(-4px) scale(1.01);
-            box-shadow: 0 12px 32px rgba(37, 99, 235, 0.15);
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-30px) rotate(180deg); }
         }
 
-        .quiz-option:hover:not(.correct):not(.incorrect)::before {
-            border-color: #2563eb;
-            transform: scale(1.1);
+        /* 3D Button Effect */
+        .btn-3d {
+            transform-style: preserve-3d;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3), 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-3d:hover {
+            transform: translateY(-4px) translateZ(10px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4), 0 16px 32px rgba(0, 0, 0, 0.3), 0 0 40px rgba(209, 213, 219, 0.2);
+        }
+
+        /* Content cards */
+        .content-card {
+            background: linear-gradient(135deg, rgba(31, 41, 55, 0.9) 0%, rgba(17, 24, 39, 0.95) 100%);
+            backdrop-filter: blur(20px);
+            border: 2px solid rgba(75, 85, 99, 0.4);
+            transition: all 0.4s ease;
+        }
+
+        .content-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(59, 130, 246, 0.6);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.9), 0 0 40px rgba(59, 130, 246, 0.2);
+        }
+
+        /* Interactive card - clickable */
+        .interactive-card {
+            background: linear-gradient(135deg, rgba(31, 41, 55, 0.9) 0%, rgba(17, 24, 39, 0.95) 100%);
+            backdrop-filter: blur(20px);
+            border: 2px solid rgba(75, 85, 99, 0.4);
+            transition: all 0.4s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .interactive-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(59, 130, 246, 0.6);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.9), 0 0 40px rgba(59, 130, 246, 0.2);
+        }
+
+        .interactive-card.revealed {
+            border-color: rgba(239, 68, 68, 0.8);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.9), 0 0 40px rgba(239, 68, 68, 0.3);
+        }
+
+        .card-front, .card-back {
+            transition: opacity 0.3s ease;
+        }
+
+        .card-back {
+            display: none;
+            opacity: 0;
+        }
+
+        .interactive-card.revealed .card-front {
+            display: none;
+        }
+
+        .interactive-card.revealed .card-back {
+            display: block;
+            opacity: 1;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .click-indicator {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(59, 130, 246, 0.3);
+            color: #60a5fa;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Warning card */
+        .warning-card {
+            background: linear-gradient(135deg, rgba(239, 68, 68, 0.1) 0%, rgba(17, 24, 39, 0.95) 100%);
+            backdrop-filter: blur(20px);
+            border: 2px solid rgba(239, 68, 68, 0.3);
+            transition: all 0.4s ease;
+        }
+
+        .warning-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(239, 68, 68, 0.6);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.9), 0 0 40px rgba(239, 68, 68, 0.2);
+        }
+
+        /* Success card */
+        .success-card {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(17, 24, 39, 0.95) 100%);
+            backdrop-filter: blur(20px);
+            border: 2px solid rgba(16, 185, 129, 0.3);
+            transition: all 0.4s ease;
+        }
+
+        .success-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(16, 185, 129, 0.6);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.9), 0 0 40px rgba(16, 185, 129, 0.2);
+        }
+
+        /* Quiz option */
+        .quiz-option {
+            background: linear-gradient(135deg, rgba(31, 41, 55, 0.8) 0%, rgba(17, 24, 39, 0.9) 100%);
+            border: 2px solid rgba(75, 85, 99, 0.4);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .quiz-option:hover {
+            border-color: rgba(59, 130, 246, 0.6);
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(17, 24, 39, 0.9) 100%);
         }
 
         .quiz-option.selected {
-            background: linear-gradient(135deg, #dbeafe 0%, #e0f2fe 100%);
-            border-color: #2563eb;
-            font-weight: 600;
-            box-shadow: 0 8px 24px rgba(37, 99, 235, 0.2);
-        }
-
-        .quiz-option.selected::before {
-            background: #2563eb;
-            border-color: #2563eb;
-            box-shadow: inset 0 0 0 5px white, 0 0 0 2px #2563eb;
-            animation: pulse 0.6s ease;
-        }
-
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.15); }
+            border-color: rgba(59, 130, 246, 0.8);
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.15) 0%, rgba(17, 24, 39, 0.9) 100%);
         }
 
         .quiz-option.correct {
-            background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
-            border-color: #10b981;
-            animation: correctAnswer 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-            box-shadow: 0 12px 32px rgba(16, 185, 129, 0.3);
-        }
-
-        @keyframes correctAnswer {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); box-shadow: 0 16px 48px rgba(16, 185, 129, 0.4); }
-            100% { transform: scale(1); }
-        }
-
-        .quiz-option.correct::before {
-            background: #10b981;
-            border-color: #10b981;
-            content: '✓';
-            color: white;
-            font-size: 16px;
-            font-weight: bold;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            animation: checkmark 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        @keyframes checkmark {
-            0% { transform: scale(0) rotate(-45deg); opacity: 0; }
-            50% { transform: scale(1.3) rotate(5deg); }
-            100% { transform: scale(1) rotate(0deg); opacity: 1; }
+            border-color: rgba(16, 185, 129, 0.8);
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.15) 0%, rgba(17, 24, 39, 0.9) 100%);
         }
 
         .quiz-option.incorrect {
-            background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
-            border-color: #ef4444;
-            animation: shake 0.5s ease;
-            box-shadow: 0 8px 24px rgba(239, 68, 68, 0.2);
+            border-color: rgba(239, 68, 68, 0.8);
+            background: linear-gradient(135deg, rgba(239, 68, 68, 0.15) 0%, rgba(17, 24, 39, 0.9) 100%);
+            animation: shake 0.5s;
         }
 
         @keyframes shake {
             0%, 100% { transform: translateX(0); }
-            25% { transform: translateX(-8px); }
-            75% { transform: translateX(8px); }
+            25% { transform: translateX(-10px); }
+            75% { transform: translateX(10px); }
         }
 
-        .quiz-option.incorrect::before {
-            background: #ef4444;
-            border-color: #ef4444;
-            content: '×';
-            color: white;
-            font-size: 20px;
-            font-weight: bold;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .quiz-submit {
-            width: 100%;
-            max-width: 500px;
-            padding: 20px;
-            background: #2563eb;
-            color: white;
-            border: none;
-            border-radius: 16px;
-            font-size: 18px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: block;
-            box-shadow: 0 8px 30px rgba(37, 99, 235, 0.4);
-            margin: 32px auto;
-        }
-
-        .quiz-submit:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(37, 99, 235, 0.3);
-        }
-
-        .quiz-submit:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-        }
-
-        .quiz-result {
-            background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
-            border: 2px solid #10b981;
-            padding: 40px;
-            border-radius: 24px;
-            text-align: center;
-            margin: 0 auto;
-            max-width: 800px;
-            width: 100%;
-        }
-
-        .result-icon {
-            font-size: 48px;
-            margin-bottom: 12px;
-        }
-
-        .result-title {
-            font-size: 24px;
-            font-weight: 700;
-            color: #0f172a;
-            margin-bottom: 8px;
-        }
-
-        .result-text {
-            color: #475569;
-            font-size: 16px;
-        }
-
-        /* Navigation */
-        .nav-controls {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            display: flex;
-            gap: 12px;
-            z-index: 50;
-        }
-
-        .nav-btn {
-            width: 56px;
-            height: 56px;
-            background: white;
-            border: 2px solid #e2e8f0;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            font-size: 24px;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-        }
-
-        .nav-btn:hover {
-            background: #2563eb;
-            border-color: #2563eb;
-            color: white;
-            transform: scale(1.1);
-            box-shadow: 0 8px 25px rgba(37, 99, 235, 0.3);
-        }
-
-        .nav-btn:disabled {
-            opacity: 0.3;
-            cursor: not-allowed;
-            transform: none;
-        }
-
-        .finish-btn {
-            width: 100%;
-            max-width: 500px;
-            padding: 20px;
-            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
-            color: white;
-            border: none;
-            border-radius: 16px;
-            font-size: 18px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 8px 25px rgba(16, 185, 129, 0.3);
-            margin: 20px auto;
-            display: block;
-        }
-
-        .finish-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 12px 35px rgba(16, 185, 129, 0.4);
-        }
-
-        .finish-btn:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-        }
-
-        /* Quiz Full Width */
-        #screen-7.active {
-            grid-template-columns: 1fr;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        #screen-7 .content-side {
-            max-width: 100%;
-            text-align: center;
-            margin: 0 auto 40px auto;
-        }
-
-        #screen-7 .visual-side {
-            width: 100%;
-            flex-direction: column;
-            align-items: stretch;
-        }
-
-        /* Mobile Responsive */
-        @media (max-width: 1024px) {
-            .lesson-screen.active {
-                grid-template-columns: 1fr;
-                gap: 40px;
-                padding: 20px;
+        /* Fade in animation */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
             }
-
-            .content-side {
-                max-width: 100%;
-                margin: 0;
+            to {
+                opacity: 1;
+                transform: translateY(0);
             }
+        }
 
-            .visual-side {
-                order: -1;
-            }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
 
-            .back-link {
-                left: 20px;
-            }
+        .fade-in {
+            animation: fadeInUp 0.6s ease-out;
+        }
 
-            .nav-controls {
-                bottom: 20px;
-                right: 20px;
-            }
+        /* Glow effects */
+        .glow-blue {
+            box-shadow: 0 0 20px rgba(59, 130, 246, 0.4), 0 0 40px rgba(59, 130, 246, 0.2);
+        }
 
-            .fee-grid, .habit-grid {
-                grid-template-columns: 1fr;
-            }
+        .glow-green {
+            box-shadow: 0 0 20px rgba(16, 185, 129, 0.4), 0 0 40px rgba(16, 185, 129, 0.2);
+        }
+
+        .glow-red {
+            box-shadow: 0 0 20px rgba(239, 68, 68, 0.4), 0 0 40px rgba(239, 68, 68, 0.2);
+        }
+
+        /* Pulse animation */
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .pulse-animation {
+            animation: pulse 2s ease-in-out infinite;
         }
     </style>
 </head>
-<body class="homepage-dark">
+<body class="min-h-screen relative" style="color: #d1d5db;">
+    <!-- Floating Particles -->
+    <div id="particles-container" style="position: fixed; width: 100%; height: 100%; top: 0; left: 0; pointer-events: none; z-index: 1;"></div>
+
     <!-- Navigation -->
-    <nav class="navbar">
-        <div class="container">
-            <div class="nav-wrapper">
-                <div class="logo"><a href="/" style="color: inherit; text-decoration: none;">Finance<span class="logo-accent">U</span></a></div>
-                <ul class="nav-links">
-                    <li><a href="/">Home</a></li>
-                    <li><a href="dashboard">Dashboard</a></li>
-                    <li id="authButtons" style="opacity: 0;"></li>
-                </ul>
+    <nav class="fixed top-0 left-0 right-0 z-50 nav-blur">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <a href="/" class="flex items-center space-x-2">
+                    <div class="w-10 h-10 rounded-full bg-gradient-to-br from-gray-200 to-gray-400 glow-blue flex items-center justify-center font-bold text-xl" style="color: #1f2937;">
+                        F
+                    </div>
+                    <span class="text-2xl font-bold gradient-text">FinanceU</span>
+                </a>
+
+                <div class="hidden md:flex items-center space-x-6">
+                    <a href="/" class="text-gray-400 hover:text-gray-200 transition-colors font-medium">Home</a>
+                    <a href="/dashboard" class="text-gray-400 hover:text-gray-200 transition-colors font-medium">Dashboard</a>
+                </div>
+
+                <div class="flex items-center space-x-4" id="authButtons">
+                    <button onclick="logout()" class="btn-3d px-6 py-2.5 bg-gradient-to-r from-gray-200 to-gray-300 hover:from-gray-300 hover:to-gray-200 rounded-lg font-semibold glow-blue transition-all" style="color: #1f2937;">
+                        Logout
+                    </button>
+                </div>
             </div>
         </div>
     </nav>
 
     <!-- Progress Bar -->
     <div class="progress-container">
-        <div class="progress-bar" id="progressBar" style="width: 14.28%;"></div>
+        <div class="progress-bar" id="progressBar" style="width: 0%;"></div>
     </div>
 
-    <!-- Back Link -->
-    <a href="/path1-lessons" class="back-link">← Back to Lessons</a>
+    <!-- Main Content -->
+    <section class="min-h-screen pt-32 pb-20 relative z-10">
+        <div class="container mx-auto px-6 max-w-6xl">
+            <!-- Back Button -->
+            <a href="/path1-lessons" class="inline-flex items-center text-gray-400 hover:text-gray-200 transition-colors mb-8 font-medium">
+                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+                </svg>
+                Back to Path 1 Lessons
+            </a>
 
-    <div class="lesson-wrapper">
-        <!-- Screen 1: Hero Intro -->
-        <div class="lesson-screen active" id="screen-1">
-            <div class="content-side">
-                <div class="section-number">Section 1 of 7</div>
-                <h1 class="content-title">Keeping Your Money Safe</h1>
-                <p class="content-text">Banks are great for storing money—until you get hit with a surprise fee. The good news? <strong>Almost every fee is avoidable</strong> once you know what to watch for.</p>
-                <p class="content-text">This lesson will show you the most common ways people lose money with their bank accounts, and how to make sure it never happens to you.</p>
-                <div class="highlight-box">
-                    <p><strong>Real talk:</strong> Americans pay over $15 billion in overdraft fees every year. Most of these could be avoided with simple habits you'll learn today.</p>
+            <!-- Lesson Header -->
+            <div class="text-center mb-16 fade-in">
+                <div class="inline-block px-4 py-2 rounded-full bg-red-500/20 border border-red-500/40 text-red-400 font-bold text-sm mb-4">
+                    LESSON 5
+                </div>
+                <h1 class="text-5xl md:text-6xl font-black mb-4 text-gray-200">
+                    <span class="gradient-text">Avoiding Fees & Overdrafts</span>
+                </h1>
+                <p class="text-xl text-gray-400 max-w-2xl mx-auto">
+                    Learn how to keep your money safe and avoid costly mistakes
+                </p>
+            </div>
+
+            <!-- Section 1: The Problem (Interactive) -->
+            <div id="section1" class="mb-24 fade-in">
+                <h2 class="text-3xl font-bold text-gray-200 mb-4 text-center">The $15 Billion Problem</h2>
+                <p class="text-center text-gray-400 mb-12">Americans pay this much in overdraft fees every year. Don't be one of them.</p>
+
+                <div class="content-card rounded-3xl p-8 text-center mb-12 pulse-animation glow-red">
+                    <div class="text-6xl mb-4">💸</div>
+                    <div class="text-7xl font-black text-red-400 mb-3">$15B+</div>
+                    <p class="text-gray-300 text-lg mb-2">Paid in overdraft fees annually</p>
+                    <p class="text-gray-400">Most could be avoided with simple habits you'll learn today</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="content-card rounded-3xl p-6 text-center">
+                        <div class="text-4xl mb-4">⚠️</div>
+                        <h3 class="text-xl font-bold text-gray-200 mb-2">The Reality</h3>
+                        <p class="text-gray-400 text-sm">One mistake can cost you $35 or more</p>
+                    </div>
+
+                    <div class="content-card rounded-3xl p-6 text-center">
+                        <div class="text-4xl mb-4">🎯</div>
+                        <h3 class="text-xl font-bold text-gray-200 mb-2">The Goal</h3>
+                        <p class="text-gray-400 text-sm">Learn to avoid ALL avoidable fees</p>
+                    </div>
+
+                    <div class="content-card rounded-3xl p-6 text-center">
+                        <div class="text-4xl mb-4">✅</div>
+                        <h3 class="text-xl font-bold text-gray-200 mb-2">The Solution</h3>
+                        <p class="text-gray-400 text-sm">Simple daily habits = $0 in fees</p>
+                    </div>
+                </div>
+
+                <div class="text-center mt-12">
+                    <button onclick="nextSection()" class="btn-3d px-8 py-4 bg-gradient-to-r from-gray-200 to-gray-300 hover:from-gray-300 hover:to-gray-200 rounded-xl font-bold text-lg" style="color: #1f2937;">
+                        See Common Fees →
+                    </button>
                 </div>
             </div>
-            <div class="visual-side">
-                <div class="hero-visual">
-                    <div class="hero-icon">💸</div>
-                    <div class="hero-stat">$15B+</div>
-                    <div class="hero-label">Paid in overdraft fees annually</div>
+
+            <!-- Section 2: Common Fees (Click-to-Reveal) -->
+            <div id="section2" class="mb-24 hidden">
+                <h2 class="text-3xl font-bold text-gray-200 mb-4 text-center">Bank Fees Explained</h2>
+                <p class="text-center text-gray-400 mb-12">Click each fee to see how it works and how to avoid it</p>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+                    <div class="interactive-card rounded-3xl p-8 text-center" onclick="revealCard(this)">
+                        <span class="click-indicator">Click Me</span>
+                        <div class="card-front">
+                            <div class="text-6xl mb-4">⚠️</div>
+                            <h3 class="text-2xl font-bold text-gray-200 mb-2">Overdraft Fee</h3>
+                            <div class="text-5xl font-black text-red-400 my-4">$35</div>
+                            <p class="text-gray-400">What is this?</p>
+                        </div>
+                        <div class="card-back">
+                            <div class="text-4xl mb-3">💔</div>
+                            <p class="text-red-400 font-bold mb-3">When you spend more than you have</p>
+                            <p class="text-gray-300 text-sm mb-2">Example: $5 in account, buy $10 coffee = $35 fee</p>
+                            <p class="text-green-400 text-sm font-bold">Avoid: Check balance daily, keep $50-100 buffer</p>
+                        </div>
+                    </div>
+
+                    <div class="interactive-card rounded-3xl p-8 text-center" onclick="revealCard(this)">
+                        <span class="click-indicator">Click Me</span>
+                        <div class="card-front">
+                            <div class="text-6xl mb-4">📅</div>
+                            <h3 class="text-2xl font-bold text-gray-200 mb-2">Monthly Fee</h3>
+                            <div class="text-5xl font-black text-red-400 my-4">$12</div>
+                            <p class="text-gray-400">What is this?</p>
+                        </div>
+                        <div class="card-back">
+                            <div class="text-4xl mb-3">💰</div>
+                            <p class="text-red-400 font-bold mb-3">Charged monthly unless you meet requirements</p>
+                            <p class="text-gray-300 text-sm mb-2">Example: Minimum $500 balance or direct deposit</p>
+                            <p class="text-green-400 text-sm font-bold">Avoid: Choose banks with no monthly fees</p>
+                        </div>
+                    </div>
+
+                    <div class="interactive-card rounded-3xl p-8 text-center" onclick="revealCard(this)">
+                        <span class="click-indicator">Click Me</span>
+                        <div class="card-front">
+                            <div class="text-6xl mb-4">🏧</div>
+                            <h3 class="text-2xl font-bold text-gray-200 mb-2">Out-of-Network ATM</h3>
+                            <div class="text-5xl font-black text-red-400 my-4">$3-5</div>
+                            <p class="text-gray-400">What is this?</p>
+                        </div>
+                        <div class="card-back">
+                            <div class="text-4xl mb-3">🚫</div>
+                            <p class="text-red-400 font-bold mb-3">Using an ATM not owned by your bank</p>
+                            <p class="text-gray-300 text-sm mb-2">You pay BOTH your bank's fee AND the ATM owner's fee</p>
+                            <p class="text-green-400 text-sm font-bold">Avoid: Use your bank's ATMs or get cash back at stores</p>
+                        </div>
+                    </div>
+
+                    <div class="interactive-card rounded-3xl p-8 text-center" onclick="revealCard(this)">
+                        <span class="click-indicator">Click Me</span>
+                        <div class="card-front">
+                            <div class="text-6xl mb-4">💳</div>
+                            <h3 class="text-2xl font-bold text-gray-200 mb-2">Insufficient Funds</h3>
+                            <div class="text-5xl font-black text-red-400 my-4">$35</div>
+                            <p class="text-gray-400">What is this?</p>
+                        </div>
+                        <div class="card-back">
+                            <div class="text-4xl mb-3">❌</div>
+                            <p class="text-red-400 font-bold mb-3">When a payment is declined for low balance</p>
+                            <p class="text-gray-300 text-sm mb-2">Similar to overdraft, but payment doesn't go through</p>
+                            <p class="text-green-400 text-sm font-bold">Avoid: Same as overdraft - check balance daily!</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="content-card rounded-3xl p-6 text-center">
+                    <p class="text-gray-300"><span class="text-blue-400 font-bold">💡 Good news:</span> Many banks now offer accounts with NO monthly fees and NO overdraft fees. You just need to know what to look for.</p>
+                </div>
+
+                <div class="text-center mt-12">
+                    <button onclick="nextSection()" class="btn-3d px-8 py-4 bg-gradient-to-r from-gray-200 to-gray-300 hover:from-gray-300 hover:to-gray-200 rounded-xl font-bold text-lg" style="color: #1f2937;">
+                        Learn About Overdrafts →
+                    </button>
+                </div>
+            </div>
+
+            <!-- Section 3: What is Overdraft (Visual Example) -->
+            <div id="section3" class="mb-24 hidden">
+                <h2 class="text-3xl font-bold text-gray-200 mb-8 text-center">What is an Overdraft?</h2>
+
+                <div class="content-card rounded-3xl p-8 mb-8">
+                    <p class="text-gray-300 text-lg mb-6 text-center">
+                        An <span class="text-red-400 font-bold">overdraft</span> happens when you spend more money than you have in your account. Your balance goes negative, and the bank charges you a fee.
+                    </p>
+
+                    <h3 class="text-xl font-bold text-gray-200 mb-6 text-center">Here's a Real Example:</h3>
+
+                    <div class="space-y-4">
+                        <div class="content-card rounded-3xl p-6 bg-blue-500/10 border-blue-500/40">
+                            <div class="flex justify-between items-center">
+                                <span class="text-gray-300">Starting Balance</span>
+                                <span class="text-3xl font-bold text-blue-400">$50.00</span>
+                            </div>
+                        </div>
+
+                        <div class="text-center text-gray-400">↓</div>
+
+                        <div class="content-card rounded-3xl p-6">
+                            <div class="flex justify-between items-center">
+                                <div>
+                                    <p class="text-gray-200 font-semibold">Grocery Store</p>
+                                    <p class="text-gray-400 text-sm">Today</p>
+                                </div>
+                                <span class="text-2xl font-bold text-red-400">-$60.00</span>
+                            </div>
+                        </div>
+
+                        <div class="content-card rounded-3xl p-6 bg-red-500/10 border-red-500/40">
+                            <div class="flex justify-between items-center">
+                                <div>
+                                    <p class="text-red-400 font-semibold">Overdraft Fee</p>
+                                    <p class="text-gray-400 text-sm">Automatic</p>
+                                </div>
+                                <span class="text-2xl font-bold text-red-400">-$35.00</span>
+                            </div>
+                        </div>
+
+                        <div class="text-center text-gray-400">↓</div>
+
+                        <div class="warning-card rounded-3xl p-6 text-center glow-red">
+                            <div class="flex justify-between items-center">
+                                <span class="text-gray-300">New Balance</span>
+                                <span class="text-4xl font-black text-red-400">-$45.00</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-8 p-6 rounded-xl bg-red-500/10 border border-red-500/30">
+                        <p class="text-gray-300 text-center">
+                            <span class="text-red-400 font-bold">The trap:</span> That $60 purchase just cost you $95 total. And if you don't fix it quickly, you might get charged another fee tomorrow.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="text-center">
+                    <button onclick="nextSection()" class="btn-3d px-8 py-4 bg-gradient-to-r from-gray-200 to-gray-300 hover:from-gray-300 hover:to-gray-200 rounded-xl font-bold text-lg" style="color: #1f2937;">
+                        See Real Scenarios →
+                    </button>
+                </div>
+            </div>
+
+            <!-- Section 4: Real Scenarios (Interactive Stories) -->
+            <div id="section4" class="mb-24 hidden">
+                <h2 class="text-3xl font-bold text-gray-200 mb-4 text-center">What Went Wrong?</h2>
+                <p class="text-center text-gray-400 mb-12">Click each scenario to discover the mistake</p>
+
+                <div class="space-y-6">
+                    <div class="interactive-card rounded-3xl p-8" onclick="revealCard(this)">
+                        <span class="click-indicator">Click Me</span>
+                        <div class="card-front">
+                            <div class="flex items-start gap-4">
+                                <div class="text-5xl">📱</div>
+                                <div>
+                                    <h3 class="text-xl font-bold text-gray-200 mb-3">Alex's Coffee Run</h3>
+                                    <p class="text-gray-400">Alex checked their bank app in the morning: $52 available. They bought coffee ($5), lunch ($12), and gas ($30). Later that day, their card was declined at dinner.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-back">
+                            <div class="text-4xl mb-4 text-center">😱</div>
+                            <p class="text-red-400 font-bold mb-3 text-center">THE MISTAKE:</p>
+                            <p class="text-gray-300 text-center">Alex forgot about a pending Netflix charge ($15) that hadn't shown up yet. Their real available balance was only $37, not $52.</p>
+                            <p class="text-green-400 font-bold text-center mt-4">✓ Always account for pending charges!</p>
+                        </div>
+                    </div>
+
+                    <div class="interactive-card rounded-3xl p-8" onclick="revealCard(this)">
+                        <span class="click-indicator">Click Me</span>
+                        <div class="card-front">
+                            <div class="flex items-start gap-4">
+                                <div class="text-5xl">🏦</div>
+                                <div>
+                                    <h3 class="text-xl font-bold text-gray-200 mb-3">Jordan's ATM Trip</h3>
+                                    <p class="text-gray-400">Jordan needed $40 cash fast and used the nearest ATM. They withdrew the money and checked their balance later—$43.50 was taken out instead of $40.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-back">
+                            <div class="text-4xl mb-4 text-center">💸</div>
+                            <p class="text-red-400 font-bold mb-3 text-center">THE MISTAKE:</p>
+                            <p class="text-gray-300 text-center">Jordan used an out-of-network ATM. Their bank charged $2.50, and the ATM owner charged $1.</p>
+                            <p class="text-green-400 font-bold text-center mt-4">✓ Use your bank's ATMs or get cash back at stores for free!</p>
+                        </div>
+                    </div>
+
+                    <div class="interactive-card rounded-3xl p-8" onclick="revealCard(this)">
+                        <span class="click-indicator">Click Me</span>
+                        <div class="card-front">
+                            <div class="flex items-start gap-4">
+                                <div class="text-5xl">💳</div>
+                                <div>
+                                    <h3 class="text-xl font-bold text-gray-200 mb-3">Sam's Subscription Surprise</h3>
+                                    <p class="text-gray-400">Sam had $15 in their account and forgot about an old Spotify subscription. The $10.99 charge went through, followed by a $35 overdraft fee when another charge tried to process.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-back">
+                            <div class="text-4xl mb-4 text-center">🎵</div>
+                            <p class="text-red-400 font-bold mb-3 text-center">THE MISTAKE:</p>
+                            <p class="text-gray-300 text-center">Sam didn't track their recurring subscriptions and didn't have enough buffer money.</p>
+                            <p class="text-green-400 font-bold text-center mt-4">✓ Review statements monthly to catch forgotten subscriptions!</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="content-card rounded-3xl p-6 text-center mt-8">
+                    <p class="text-gray-300"><span class="text-yellow-400 font-bold">Learn from others:</span> These are common mistakes that happen every day. Once you know what to avoid, you'll never fall for these traps.</p>
+                </div>
+
+                <div class="text-center mt-12">
+                    <button onclick="nextSection()" class="btn-3d px-8 py-4 bg-gradient-to-r from-gray-200 to-gray-300 hover:from-gray-300 hover:to-gray-200 rounded-xl font-bold text-lg" style="color: #1f2937;">
+                        See Common Mistakes →
+                    </button>
+                </div>
+            </div>
+
+            <!-- Section 5: Top Mistakes -->
+            <div id="section5" class="mb-24 hidden">
+                <h2 class="text-3xl font-bold text-gray-200 mb-8 text-center">Top Beginner Mistakes</h2>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+                    <div class="warning-card rounded-3xl p-6">
+                        <div class="flex items-start gap-4">
+                            <div class="text-4xl">🔄</div>
+                            <div>
+                                <h3 class="text-lg font-bold text-red-400 mb-2">Ignoring Pending Charges</h3>
+                                <p class="text-gray-400 text-sm">Your app shows $100, but you have $30 pending. Your real balance is $70. Always check "pending" before spending.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="warning-card rounded-3xl p-6">
+                        <div class="flex items-start gap-4">
+                            <div class="text-4xl">📆</div>
+                            <div>
+                                <h3 class="text-lg font-bold text-red-400 mb-2">Forgetting Automatic Payments</h3>
+                                <p class="text-gray-400 text-sm">Gym, Netflix, Spotify—these charge automatically. Write them down or they'll surprise you when your balance is low.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="warning-card rounded-3xl p-6">
+                        <div class="flex items-start gap-4">
+                            <div class="text-4xl">🤷</div>
+                            <div>
+                                <h3 class="text-lg font-bold text-red-400 mb-2">Not Checking Balance Daily</h3>
+                                <p class="text-gray-400 text-sm">30 seconds every morning could save you $35+ in fees. Make it a habit like checking your phone.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="warning-card rounded-3xl p-6">
+                        <div class="flex items-start gap-4">
+                            <div class="text-4xl">💸</div>
+                            <div>
+                                <h3 class="text-lg font-bold text-red-400 mb-2">Spending Your Last Dollar</h3>
+                                <p class="text-gray-400 text-sm">If you have $20, don't spend $20. Keep a buffer ($50-100) for unexpected charges or you'll overdraft.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="warning-card rounded-3xl p-6">
+                        <div class="flex items-start gap-4">
+                            <div class="text-4xl">🏧</div>
+                            <div>
+                                <h3 class="text-lg font-bold text-red-400 mb-2">Using Any ATM</h3>
+                                <p class="text-gray-400 text-sm">Out-of-network ATMs charge $3-5 per withdrawal. Find your bank's ATMs or get cash back at stores for free.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="warning-card rounded-3xl p-6">
+                        <div class="flex items-start gap-4">
+                            <div class="text-4xl">😴</div>
+                            <div>
+                                <h3 class="text-lg font-bold text-red-400 mb-2">Assuming It's Fine</h3>
+                                <p class="text-gray-400 text-sm">Banks don't warn you before charging fees. It's YOUR job to track your money and avoid these situations.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="text-center">
+                    <button onclick="nextSection()" class="btn-3d px-8 py-4 bg-gradient-to-r from-gray-200 to-gray-300 hover:from-gray-300 hover:to-gray-200 rounded-xl font-bold text-lg" style="color: #1f2937;">
+                        Learn Good Habits →
+                    </button>
+                </div>
+            </div>
+
+            <!-- Section 6: Good Habits -->
+            <div id="section6" class="mb-24 hidden">
+                <h2 class="text-3xl font-bold text-gray-200 mb-4 text-center">Simple Habits to Stay Safe</h2>
+                <p class="text-center text-gray-400 mb-12">These simple habits will protect your money and keep you in control</p>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+                    <div class="success-card rounded-3xl p-6 text-center">
+                        <div class="text-4xl mb-4">☀️</div>
+                        <h3 class="text-lg font-bold text-green-400 mb-2">Check Daily</h3>
+                        <p class="text-gray-300 text-sm">30 seconds every morning prevents $35+ fees</p>
+                    </div>
+
+                    <div class="success-card rounded-3xl p-6 text-center">
+                        <div class="text-4xl mb-4">💰</div>
+                        <h3 class="text-lg font-bold text-green-400 mb-2">Keep Buffer</h3>
+                        <p class="text-gray-300 text-sm">$50-100 cushion saves you from overdrafts</p>
+                    </div>
+
+                    <div class="success-card rounded-3xl p-6 text-center">
+                        <div class="text-4xl mb-4">🔔</div>
+                        <h3 class="text-lg font-bold text-green-400 mb-2">Set Alerts</h3>
+                        <p class="text-gray-300 text-sm">Get notified before problems happen</p>
+                    </div>
+
+                    <div class="success-card rounded-3xl p-6 text-center">
+                        <div class="text-4xl mb-4">📋</div>
+                        <h3 class="text-lg font-bold text-green-400 mb-2">Track Subscriptions</h3>
+                        <p class="text-gray-300 text-sm">List all recurring charges so nothing surprises you</p>
+                    </div>
+
+                    <div class="success-card rounded-3xl p-6 text-center">
+                        <div class="text-4xl mb-4">👀</div>
+                        <h3 class="text-lg font-bold text-green-400 mb-2">Check Pending</h3>
+                        <p class="text-gray-300 text-sm">Don't just trust the "available" number</p>
+                    </div>
+
+                    <div class="success-card rounded-3xl p-6 text-center">
+                        <div class="text-4xl mb-4">🏧</div>
+                        <h3 class="text-lg font-bold text-green-400 mb-2">Use Your Bank's ATMs</h3>
+                        <p class="text-gray-300 text-sm">Or get cash back at stores (no fee)</p>
+                    </div>
+                </div>
+
+                <div class="content-card rounded-3xl p-8 text-center glow-green">
+                    <h3 class="text-2xl font-bold text-green-400 mb-4">The Bottom Line</h3>
+                    <p class="text-gray-300 text-lg">Avoiding fees isn't complicated. Follow these habits and you'll NEVER pay an overdraft fee. It's that simple.</p>
+                </div>
+
+                <div class="text-center mt-12">
+                    <button onclick="nextSection()" class="btn-3d px-8 py-4 bg-gradient-to-r from-gray-200 to-gray-300 hover:from-gray-300 hover:to-gray-200 rounded-xl font-bold text-lg" style="color: #1f2937;">
+                        Take the Quiz →
+                    </button>
+                </div>
+            </div>
+
+            <!-- Section 7: Quiz -->
+            <div id="section7" class="mb-24 hidden">
+                <h2 class="text-3xl font-bold text-gray-200 mb-4 text-center">Lesson Quiz</h2>
+                <p class="text-center text-gray-400 mb-12">Answer all questions correctly to complete the lesson (You need 100%)</p>
+
+                <div id="quizContainer" class="space-y-6 mb-12"></div>
+
+                <div class="text-center">
+                    <button id="submitQuizBtn" onclick="submitQuiz()" class="btn-3d px-8 py-4 bg-gradient-to-r from-gray-200 to-gray-300 hover:from-gray-300 hover:to-gray-200 rounded-xl font-bold text-lg" style="color: #1f2937;">
+                        Submit Quiz
+                    </button>
+                </div>
+
+                <div id="quizResult" class="hidden mt-12"></div>
+
+                <div id="finishSection" class="text-center mt-12 hidden">
+                    <button onclick="finishLesson()" class="btn-3d px-10 py-5 bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 rounded-xl font-bold text-white text-xl glow-green pulse-animation">
+                        Finish Lesson ✓
+                    </button>
                 </div>
             </div>
         </div>
-
-        <!-- Screen 2: Common Fees -->
-        <div class="lesson-screen" id="screen-2">
-            <div class="content-side">
-                <div class="section-number">Section 2 of 7</div>
-                <h1 class="content-title">Bank Fees Explained</h1>
-                <p class="content-text">Banks charge fees for certain actions or when you don't meet requirements. Think of fees as penalties for breaking the bank's rules.</p>
-                <p class="content-text">Here are the most common ones you'll see:</p>
-                <div class="highlight-box">
-                    <p><strong>Good news:</strong> Many banks now offer accounts with no monthly fees and no overdraft fees. You just need to know what to look for.</p>
-                </div>
-            </div>
-            <div class="visual-side">
-                <div class="fee-grid">
-                    <div class="fee-card">
-                        <div class="fee-icon">⚠️</div>
-                        <div class="fee-title">Overdraft Fee</div>
-                        <div class="fee-amount">$35</div>
-                        <div class="fee-text">Charged when you spend more than you have</div>
-                    </div>
-                    <div class="fee-card">
-                        <div class="fee-icon">📅</div>
-                        <div class="fee-title">Monthly Fee</div>
-                        <div class="fee-amount">$12</div>
-                        <div class="fee-text">Charged monthly unless you meet requirements</div>
-                    </div>
-                    <div class="fee-card">
-                        <div class="fee-icon">🏧</div>
-                        <div class="fee-title">Out-of-Network ATM</div>
-                        <div class="fee-amount">$3-5</div>
-                        <div class="fee-text">Using an ATM not owned by your bank</div>
-                    </div>
-                    <div class="fee-card">
-                        <div class="fee-icon">💳</div>
-                        <div class="fee-title">Insufficient Funds</div>
-                        <div class="fee-amount">$35</div>
-                        <div class="fee-text">When a payment is declined for low balance</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Screen 3: What is an Overdraft -->
-        <div class="lesson-screen" id="screen-3">
-            <div class="content-side">
-                <div class="section-number">Section 3 of 7</div>
-                <h1 class="content-title">What is an Overdraft?</h1>
-                <p class="content-text">An <strong>overdraft</strong> happens when you spend more money than you have in your account. Your balance goes negative, and the bank charges you a fee.</p>
-                <p class="content-text">Here's a real example:</p>
-                <ul class="feature-list">
-                    <li>You have $50 in your checking account</li>
-                    <li>You buy groceries for $60</li>
-                    <li>The bank lets the purchase go through</li>
-                    <li>Your balance is now -$10</li>
-                    <li>The bank charges a $35 overdraft fee</li>
-                    <li>Your new balance: -$45</li>
-                </ul>
-                <div class="highlight-box">
-                    <p><strong>The trap:</strong> That $60 purchase just cost you $95 total. And if you don't fix it quickly, you might get charged another fee tomorrow.</p>
-                </div>
-            </div>
-            <div class="visual-side">
-                <div class="overdraft-demo">
-                    <div class="balance-display">
-                        <div class="balance-label">Starting Balance</div>
-                        <div class="balance-amount">$50.00</div>
-                    </div>
-                    <div class="transaction">
-                        <div class="transaction-info">
-                            <div class="transaction-name">Grocery Store</div>
-                            <div class="transaction-date">Today</div>
-                        </div>
-                        <div class="transaction-amount">-$60.00</div>
-                    </div>
-                    <div class="transaction">
-                        <div class="transaction-info">
-                            <div class="transaction-name">Overdraft Fee</div>
-                            <div class="transaction-date">Automatic</div>
-                        </div>
-                        <div class="transaction-amount">-$35.00</div>
-                    </div>
-                    <div class="balance-display" style="background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);">
-                        <div class="balance-label">New Balance</div>
-                        <div class="balance-amount negative">-$45.00</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Screen 4: Interactive Scenarios -->
-        <div class="lesson-screen" id="screen-4">
-            <div class="content-side">
-                <div class="section-number">Section 4 of 7</div>
-                <h1 class="content-title">What Went Wrong?</h1>
-                <p class="content-text">Let's look at real situations where people got hit with fees. <strong>Click each scenario</strong> to see what mistake was made.</p>
-                <div class="highlight-box">
-                    <p><strong>Learn from others:</strong> These are common mistakes that happen to real people every day. Once you know what to avoid, you'll never fall for these traps.</p>
-                </div>
-            </div>
-            <div class="visual-side">
-                <div class="scenario-grid">
-                    <div class="scenario-card" onclick="revealScenario(1)">
-                        <div class="scenario-title">
-                            <span>📱</span>
-                            <span>Alex's Coffee Run</span>
-                            <span class="click-hint">Click to reveal</span>
-                        </div>
-                        <div class="scenario-story">
-                            Alex checked their bank app in the morning: $52 available. They bought coffee ($5), lunch ($12), and gas ($30). Later that day, their card was declined at dinner.
-                        </div>
-                        <div class="scenario-reveal" id="reveal-1">
-                            <div class="reveal-label">The Mistake:</div>
-                            <div class="reveal-text">Alex forgot about a pending Netflix charge ($15) that hadn't shown up yet. Their real available balance was only $37, not $52. Always account for pending charges!</div>
-                        </div>
-                    </div>
-
-                    <div class="scenario-card" onclick="revealScenario(2)">
-                        <div class="scenario-title">
-                            <span>🏦</span>
-                            <span>Jordan's ATM Trip</span>
-                            <span class="click-hint">Click to reveal</span>
-                        </div>
-                        <div class="scenario-story">
-                            Jordan needed $40 cash fast and used the nearest ATM. They withdrew the money and checked their balance later—$43.50 was taken out instead of $40.
-                        </div>
-                        <div class="scenario-reveal" id="reveal-2">
-                            <div class="reveal-label">The Mistake:</div>
-                            <div class="reveal-text">Jordan used an out-of-network ATM. Their bank charged $2.50, and the ATM owner charged $1. Always use your bank's ATMs or get cash back at stores for free.</div>
-                        </div>
-                    </div>
-
-                    <div class="scenario-card" onclick="revealScenario(3)">
-                        <div class="scenario-title">
-                            <span>💳</span>
-                            <span>Sam's Subscription Surprise</span>
-                            <span class="click-hint">Click to reveal</span>
-                        </div>
-                        <div class="scenario-story">
-                            Sam had $15 in their account and forgot about an old Spotify subscription. The $10.99 charge went through, followed by a $35 overdraft fee when another charge tried to process.
-                        </div>
-                        <div class="scenario-reveal" id="reveal-3">
-                            <div class="reveal-label">The Mistake:</div>
-                            <div class="reveal-text">Sam didn't track their recurring subscriptions. Review your statements monthly to catch forgotten subscriptions. Cancel ones you don't use!</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Screen 5: Common Mistakes -->
-        <div class="lesson-screen" id="screen-5">
-            <div class="content-side">
-                <div class="section-number">Section 5 of 7</div>
-                <h1 class="content-title">Top Beginner Mistakes</h1>
-                <p class="content-text">If you're new to banking, these are the mistakes that catch people off guard. Learn them now so they never happen to you:</p>
-                <div class="highlight-box">
-                    <p><strong>Remember:</strong> Banks don't warn you before charging fees. It's your job to track your money and avoid these situations.</p>
-                </div>
-            </div>
-            <div class="visual-side">
-                <div class="mistake-grid">
-                    <div class="mistake-card">
-                        <div class="mistake-header">
-                            <div class="mistake-icon">🔄</div>
-                            <div class="mistake-title">Ignoring Pending Charges</div>
-                        </div>
-                        <div class="mistake-text">Your app shows $100, but you have $30 pending. Your real balance is $70. Always check "pending" before spending.</div>
-                    </div>
-
-                    <div class="mistake-card">
-                        <div class="mistake-header">
-                            <div class="mistake-icon">📆</div>
-                            <div class="mistake-title">Forgetting Automatic Payments</div>
-                        </div>
-                        <div class="mistake-text">Gym memberships, Netflix, Spotify—these charge automatically. Write them down or they'll surprise you when your balance is low.</div>
-                    </div>
-
-                    <div class="mistake-card">
-                        <div class="mistake-header">
-                            <div class="mistake-icon">🤷</div>
-                            <div class="mistake-title">Not Checking Balance Daily</div>
-                        </div>
-                        <div class="mistake-text">30 seconds every morning could save you $35+ in fees. Make it a habit like checking your phone.</div>
-                    </div>
-
-                    <div class="mistake-card">
-                        <div class="mistake-header">
-                            <div class="mistake-icon">💸</div>
-                            <div class="mistake-title">Spending Your Last Dollar</div>
-                        </div>
-                        <div class="mistake-text">If you have $20, don't spend $20. Keep a buffer ($50-100) for unexpected charges or you'll overdraft.</div>
-                    </div>
-
-                    <div class="mistake-card">
-                        <div class="mistake-header">
-                            <div class="mistake-icon">🏧</div>
-                            <div class="mistake-title">Using Any ATM</div>
-                        </div>
-                        <div class="mistake-text">Out-of-network ATMs charge $3-5 per withdrawal. Find your bank's ATMs or get cash back at stores for free.</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Screen 6: Good Habits -->
-        <div class="lesson-screen" id="screen-6">
-            <div class="content-side">
-                <div class="section-number">Section 6 of 7</div>
-                <h1 class="content-title">Simple Habits to Stay Safe</h1>
-                <p class="content-text">Avoiding fees isn't complicated. These simple habits will protect your money and keep you in control:</p>
-                <ul class="feature-list">
-                    <li><strong>Check your balance every morning:</strong> Open your bank app before you start your day</li>
-                    <li><strong>Look at pending transactions:</strong> Don't just trust the "available" number</li>
-                    <li><strong>Keep a buffer:</strong> Always have $50-100 extra sitting in your account</li>
-                    <li><strong>Set up low-balance alerts:</strong> Get a text when you're running low</li>
-                    <li><strong>Review statements monthly:</strong> Catch forgotten subscriptions and weird charges</li>
-                    <li><strong>Use your bank's ATMs only:</strong> Or get cash back at stores (no fee)</li>
-                </ul>
-            </div>
-            <div class="visual-side">
-                <div class="habit-grid">
-                    <div class="habit-card">
-                        <div class="habit-icon">☀️</div>
-                        <div class="habit-title">Check Daily</div>
-                        <div class="habit-text">30 seconds every morning prevents $35+ fees</div>
-                    </div>
-                    <div class="habit-card">
-                        <div class="habit-icon">💰</div>
-                        <div class="habit-title">Keep Buffer</div>
-                        <div class="habit-text">$50-100 cushion saves you from overdrafts</div>
-                    </div>
-                    <div class="habit-card">
-                        <div class="habit-icon">🔔</div>
-                        <div class="habit-title">Set Alerts</div>
-                        <div class="habit-text">Get notified before problems happen</div>
-                    </div>
-                    <div class="habit-card">
-                        <div class="habit-icon">📋</div>
-                        <div class="habit-title">Track Subscriptions</div>
-                        <div class="habit-text">List all recurring charges so nothing surprises you</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Screen 7: Quiz -->
-        <div class="lesson-screen" id="screen-7">
-            <div class="content-side">
-                <div class="section-number">Section 7 of 7</div>
-                <h1 class="content-title">Test Your Knowledge</h1>
-                <p class="content-text">Let's make sure you can avoid fees and overdrafts. Answer all questions correctly to complete the lesson.</p>
-            </div>
-            <div class="visual-side">
-                <div class="quiz-container" id="quizContainer">
-                    <!-- Questions will be inserted here by JavaScript -->
-                </div>
-                <div style="max-width: 800px; margin: 0 auto; width: 100%;">
-                    <button class="quiz-submit" id="submitQuiz" onclick="submitQuiz()">Submit Quiz</button>
-                    <div id="quizResult"></div>
-                    <button class="finish-btn" id="finishBtn" onclick="finishLesson()" disabled style="display: none;">Complete Lesson →</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Navigation Controls -->
-    <div class="nav-controls">
-        <button class="nav-btn" id="prevBtn" onclick="previousScreen()">←</button>
-        <button class="nav-btn" id="nextBtn" onclick="nextScreen()">→</button>
-    </div>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h4>FinanceU</h4>
-                    <p>Making financial literacy accessible for everyone.</p>
-                </div>
-                <div class="footer-section">
-                    <h4>Company</h4>
-                    <ul>
-                        <li><a href="/about">About Us</a></li>
-                        <li><a href="/careers">Careers</a></li>
-                        <li><a href="/contact">Contact</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h4>Support</h4>
-                    <ul>
-                        <li><a href="/help">Help Center</a></li>
-                        <li><a href="/privacy">Privacy Policy</a></li>
-                        <li><a href="/terms">Terms of Service</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p style="font-size: 0.85rem; opacity: 0.8; margin-bottom: 10px;">Disclaimer: FinanceU provides educational content only and does not offer financial, legal, or investment advice. Always consult with a qualified professional before making financial decisions.</p>
-                <p>&copy; 2025 FinanceU. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
+    </section>
 
     <script src="config.js"></script>
     <script src="lesson-completion.js"></script>
     <script>
-        // Authentication
-        async function updateNav() {
-            const authButtons = document.getElementById('authButtons');
-            const cachedAuth = localStorage.getItem('authState');
-            if (cachedAuth) {
-                const authState = JSON.parse(cachedAuth);
-                authButtons.innerHTML = authState.isLoggedIn
-                    ? `<a href="#" onclick="logout(); return false;" class="btn-primary">Logout</a>`
-                    : `<a href="login" class="btn-primary">Login</a>`;
-                authButtons.style.opacity = '1';
-            }
+        // Floating particles
+        function createParticles() {
+            const container = document.getElementById('particles-container');
+            const particleCount = 30;
 
-            try {
-                const response = await fetch(`${API_URL}/auth/me`, { credentials: 'include' });
-                if (response.ok) {
-                    localStorage.setItem('authState', JSON.stringify({ isLoggedIn: true }));
-                    authButtons.innerHTML = `<a href="#" onclick="logout(); return false;" class="btn-primary">Logout</a>`;
-                } else {
-                    localStorage.setItem('authState', JSON.stringify({ isLoggedIn: false }));
-                    authButtons.innerHTML = `<a href="login" class="btn-primary">Login</a>`;
-                }
-                authButtons.style.opacity = '1';
-            } catch (error) {
-                localStorage.setItem('authState', JSON.stringify({ isLoggedIn: false }));
-                authButtons.innerHTML = `<a href="login" class="btn-primary">Login</a>`;
-                authButtons.style.opacity = '1';
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+
+                const size = Math.random() * 4 + 2;
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                particle.style.left = `${Math.random() * 100}%`;
+                particle.style.top = `${Math.random() * 100}%`;
+                particle.style.background = `rgba(156, 163, 175, ${Math.random() * 0.5 + 0.2})`;
+                particle.style.animation = `float ${Math.random() * 10 + 10}s ease-in-out infinite`;
+                particle.style.animationDelay = `${Math.random() * 5}s`;
+
+                container.appendChild(particle);
             }
         }
 
-        async function logout() {
-            localStorage.removeItem('authState');
-            localStorage.removeItem('token');
-            localStorage.removeItem('userId');
-            try {
-                await fetch(`${API_URL}/auth/logout`, {
-                    method: 'POST',
-                    credentials: 'include'
-                });
-                window.location.href = '/index.html';
-            } catch (error) {
-                window.location.href = '/index.html';
+        createParticles();
+
+        // Card reveal interaction
+        function revealCard(card) {
+            card.classList.add('revealed');
+            const indicator = card.querySelector('.click-indicator');
+            if (indicator) {
+                indicator.style.display = 'none';
             }
         }
 
-        // Screen Navigation
-        let currentScreen = 1;
-        const totalScreens = 7;
+        // Navigation
+        let currentSection = 1;
+        const totalSections = 7;
 
-        function showScreen(screenNum) {
-            document.querySelectorAll('.lesson-screen').forEach(screen => {
-                screen.classList.remove('active');
-            });
-            document.getElementById(`screen-${screenNum}`).classList.add('active');
-            currentScreen = screenNum;
+        function updateProgress() {
+            const progress = (currentSection / totalSections) * 100;
+            document.getElementById('progressBar').style.width = `${progress}%`;
+        }
+
+        function nextSection() {
+            document.getElementById(`section${currentSection}`).classList.add('hidden');
+            currentSection++;
+            document.getElementById(`section${currentSection}`).classList.remove('hidden');
+            document.getElementById(`section${currentSection}`).classList.add('fade-in');
             updateProgress();
-            updateNavButtons();
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        function nextScreen() {
-            if (currentScreen < totalScreens) {
-                showScreen(currentScreen + 1);
-            }
-        }
-
-        function previousScreen() {
-            if (currentScreen > 1) {
-                showScreen(currentScreen - 1);
-            }
-        }
-
-        function updateNavButtons() {
-            document.getElementById('prevBtn').disabled = currentScreen === 1;
-            document.getElementById('nextBtn').disabled = currentScreen === totalScreens;
-        }
-
-        function updateProgress() {
-            const progress = (currentScreen / totalScreens) * 100;
-            document.getElementById('progressBar').style.width = progress + '%';
-        }
-
-        // Interactive Scenarios
-        function revealScenario(num) {
-            const card = event.currentTarget;
-            const reveal = document.getElementById(`reveal-${num}`);
-
-            if (!card.classList.contains('revealed')) {
-                card.classList.add('revealed');
-                reveal.classList.add('show');
-
-                // Hide click hint
-                const hint = card.querySelector('.click-hint');
-                if (hint) hint.style.display = 'none';
-            }
-        }
-
-        // Quiz
+        // Quiz data
         const quizQuestions = [
             {
                 question: "You have $80 in your account. You have a $15 subscription charging tomorrow and $20 in pending transactions. What's the MAXIMUM you should spend today?",
@@ -1340,17 +852,15 @@
         function initQuiz() {
             const userId = localStorage.getItem('userId');
             if (!userId || userId === 'null' || userId === 'undefined') {
-                document.getElementById('finishBtn').disabled = true;
                 return;
             }
 
             const quizPassedStatus = localStorage.getItem(`lesson5_quiz_passed_${userId}`);
             if (quizPassedStatus === 'true') {
                 quizPassed = true;
-                document.getElementById('finishBtn').disabled = false;
-                document.getElementById('finishBtn').style.display = 'block';
-                document.getElementById('quizContainer').style.display = 'none';
-                document.getElementById('submitQuiz').style.display = 'none';
+                document.getElementById('quizContainer').innerHTML = '<div class="content-card rounded-3xl p-8 text-center"><p class="text-green-400 text-xl font-bold">✓ Quiz Already Completed</p></div>';
+                document.getElementById('submitQuizBtn').classList.add('hidden');
+                document.getElementById('finishSection').classList.remove('hidden');
                 return;
             }
 
@@ -1362,99 +872,105 @@
             container.innerHTML = '';
 
             quizQuestions.forEach((q, qIndex) => {
-                const card = document.createElement('div');
-                card.className = 'quiz-card';
-                card.innerHTML = `
-                    <div class="quiz-question">${qIndex + 1}. ${q.question}</div>
-                    <div class="quiz-options-grid">
+                const questionDiv = document.createElement('div');
+                questionDiv.className = 'content-card quiz-question-card rounded-3xl p-8';
+                questionDiv.setAttribute('data-question', qIndex);
+                questionDiv.innerHTML = `
+                    <h3 class="text-xl font-bold text-gray-200 mb-6">Question ${qIndex + 1}: ${q.question}</h3>
+                    <div class="space-y-3">
                         ${q.options.map((option, oIndex) => `
-                            <div class="quiz-option" onclick="selectAnswer(${qIndex}, ${oIndex})" data-q="${qIndex}" data-o="${oIndex}">
-                                ${option}
+                            <div class="quiz-option rounded-xl p-4" onclick="selectAnswer(${qIndex}, ${oIndex})">
+                                <input type="radio" name="question${qIndex}" value="${oIndex}" class="mr-3">
+                                <span class="text-gray-300">${option}</span>
                             </div>
                         `).join('')}
                     </div>
                 `;
-                container.appendChild(card);
+                container.appendChild(questionDiv);
             });
-
-            checkQuizComplete();
         }
 
         function selectAnswer(questionIndex, optionIndex) {
             userAnswers[questionIndex] = optionIndex;
 
-            // Update visual selection
-            const options = document.querySelectorAll(`[data-q="${questionIndex}"]`);
+            const questionCard = document.querySelector(`.quiz-question-card[data-question="${questionIndex}"]`);
+            const options = questionCard.querySelectorAll('.quiz-option');
             options.forEach((opt, idx) => {
                 opt.classList.remove('selected');
                 if (idx === optionIndex) {
                     opt.classList.add('selected');
+                    opt.querySelector('input').checked = true;
                 }
             });
-
-            checkQuizComplete();
-        }
-
-        function checkQuizComplete() {
-            const allAnswered = !userAnswers.includes(null);
-            document.getElementById('submitQuiz').disabled = !allAnswered;
         }
 
         function submitQuiz() {
+            if (userAnswers.includes(null)) {
+                alert('Please answer all questions before submitting.');
+                return;
+            }
+
             let correct = 0;
             quizQuestions.forEach((q, index) => {
-                const options = document.querySelectorAll(`[data-q="${index}"]`);
-                options.forEach((opt, oIndex) => {
-                    opt.style.pointerEvents = 'none';
-                    if (oIndex === q.correct) {
-                        opt.classList.add('correct');
-                    } else if (oIndex === userAnswers[index] && oIndex !== q.correct) {
-                        opt.classList.add('incorrect');
-                    }
-                });
-
                 if (userAnswers[index] === q.correct) {
                     correct++;
                 }
             });
 
             const passed = correct === quizQuestions.length;
-            const resultDiv = document.getElementById('quizResult');
 
+            // Show correct/incorrect
+            document.querySelectorAll('.quiz-question-card').forEach((card, qIndex) => {
+                const options = card.querySelectorAll('.quiz-option');
+                options.forEach((opt, oIndex) => {
+                    opt.style.pointerEvents = 'none';
+                    if (oIndex === quizQuestions[qIndex].correct) {
+                        opt.classList.add('correct');
+                    } else if (oIndex === userAnswers[qIndex] && oIndex !== quizQuestions[qIndex].correct) {
+                        opt.classList.add('incorrect');
+                    }
+                });
+            });
+
+            const resultDiv = document.getElementById('quizResult');
             if (passed) {
                 quizPassed = true;
                 const userId = localStorage.getItem('userId');
                 localStorage.setItem(`lesson5_quiz_passed_${userId}`, 'true');
 
                 resultDiv.innerHTML = `
-                    <div class="quiz-result">
-                        <div class="result-icon">🎉</div>
-                        <div class="result-title">Perfect Score!</div>
-                        <div class="result-text">You got all ${correct} out of ${quizQuestions.length} questions correct. You now know how to keep your money safe and avoid costly fees!</div>
+                    <div class="content-card rounded-3xl p-10 text-center glow-green">
+                        <div class="text-6xl mb-4">🎉</div>
+                        <h3 class="text-3xl font-bold text-green-400 mb-4">Perfect Score!</h3>
+                        <p class="text-gray-300 text-lg mb-2">You scored ${correct} out of ${quizQuestions.length} (100%)</p>
+                        <p class="text-gray-400">You now know how to keep your money safe and avoid costly fees!</p>
                     </div>
                 `;
-
-                document.getElementById('finishBtn').disabled = false;
-                document.getElementById('finishBtn').style.display = 'block';
+                document.getElementById('finishSection').classList.remove('hidden');
             } else {
                 resultDiv.innerHTML = `
-                    <div class="quiz-result" style="background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%); border-color: #ef4444;">
-                        <div class="result-icon">📚</div>
-                        <div class="result-title">Not Quite There</div>
-                        <div class="result-text">You got ${correct} out of ${quizQuestions.length}. Review the lesson and try again—you need 100% to pass.</div>
-                        <button class="quiz-submit" onclick="retryQuiz()" style="margin-top: 20px; background: #ef4444;">Try Again</button>
+                    <div class="content-card rounded-3xl p-10 text-center" style="border-color: rgba(239, 68, 68, 0.6);">
+                        <div class="text-6xl mb-4">📚</div>
+                        <h3 class="text-3xl font-bold text-red-400 mb-4">Not quite there yet</h3>
+                        <p class="text-gray-300 text-lg mb-2">You scored ${correct} out of ${quizQuestions.length}</p>
+                        <p class="text-gray-400 mb-6">You need 100% to pass. Review and try again!</p>
+                        <button onclick="retryQuiz()" class="btn-3d px-8 py-4 bg-gradient-to-r from-yellow-500 to-orange-600 hover:from-yellow-600 hover:to-orange-700 rounded-xl font-bold text-white text-lg">
+                            Retry Quiz
+                        </button>
                     </div>
                 `;
             }
 
-            document.getElementById('submitQuiz').style.display = 'none';
+            resultDiv.classList.remove('hidden');
+            document.getElementById('submitQuizBtn').classList.add('hidden');
         }
 
         function retryQuiz() {
             userAnswers = new Array(quizQuestions.length).fill(null);
-            document.getElementById('quizResult').innerHTML = '';
             renderQuiz();
-            document.getElementById('submitQuiz').style.display = 'block';
+            document.getElementById('quizResult').classList.add('hidden');
+            document.getElementById('submitQuizBtn').classList.remove('hidden');
+            window.scrollTo({ top: document.getElementById('quizContainer').offsetTop - 100, behavior: 'smooth' });
         }
 
         async function finishLesson() {
@@ -1469,11 +985,26 @@
             }
         }
 
+        // Logout
+        async function logout() {
+            localStorage.removeItem('authState');
+            localStorage.removeItem('token');
+            localStorage.removeItem('userId');
+            try {
+                await fetch(`${API_URL}/auth/logout`, {
+                    method: 'POST',
+                    credentials: 'include'
+                });
+                window.location.href = '/index.html';
+            } catch (error) {
+                console.error('Logout error:', error);
+                window.location.href = '/index.html';
+            }
+        }
+
         // Initialize
-        updateNav();
-        initQuiz();
-        updateNavButtons();
         updateProgress();
+        initQuiz();
     </script>
 </body>
 </html>
