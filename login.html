@@ -1,211 +1,249 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login - FinanceU</title>
     <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
-    <link rel="icon" type="image/svg+xml" sizes="16x16" href="assets/favicon-16x16.svg">
-    <link rel="icon" type="image/svg+xml" sizes="32x32" href="assets/favicon-32x32.svg">
-    <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.svg">
-    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        .auth-container {
-            min-height: 80vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 2rem 0;
-            background: linear-gradient(135deg, #0A1A2F 0%, #1a3a5c 100%);
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+        * {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
         }
 
+        body {
+            background: #0f0f0f;
+            overflow-x: hidden;
+        }
+
+        /* Gradient text */
+        .gradient-text {
+            background: linear-gradient(135deg, #e5e7eb 0%, #9ca3af 50%, #e5e7eb 100%);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradientShift 5s ease infinite;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        /* Glowing effects */
+        .glow-grey {
+            box-shadow: 0 0 20px rgba(156, 163, 175, 0.4), 0 0 40px rgba(156, 163, 175, 0.2);
+        }
+
+        /* Navigation */
+        .nav-blur {
+            backdrop-filter: blur(12px);
+            background: rgba(15, 15, 15, 0.9);
+            border-bottom: 1px solid rgba(156, 163, 175, 0.15);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        /* 3D Button Effect */
+        .btn-3d {
+            transform-style: preserve-3d;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3), 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-3d:hover {
+            transform: translateY(-4px) translateZ(10px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4), 0 16px 32px rgba(0, 0, 0, 0.3), 0 0 40px rgba(209, 213, 219, 0.2);
+        }
+
+        /* Auth card glassmorphism */
         .auth-card {
-            background-color: white;
-            padding: 3rem;
-            border-radius: 16px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-            max-width: 450px;
-            width: 100%;
+            background: linear-gradient(135deg, rgba(31, 41, 55, 0.9) 0%, rgba(17, 24, 39, 0.95) 100%);
+            backdrop-filter: blur(20px);
+            border: 2px solid rgba(75, 85, 99, 0.4);
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.9), 0 0 50px rgba(156, 163, 175, 0.2);
         }
 
-        .auth-header {
-            text-align: center;
-            margin-bottom: 2rem;
-        }
-
-        .auth-header h1 {
-            color: var(--text-dark);
-            font-size: 2rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .auth-header p {
-            color: var(--text-light);
-        }
-
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-
-        .form-group label {
-            display: block;
-            color: var(--text-dark);
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-        }
-
-        .form-group input {
-            width: 100%;
-            padding: 0.875rem;
-            border: 2px solid var(--border-color);
-            border-radius: 8px;
-            font-size: 1rem;
-            transition: border-color 0.3s;
-        }
-
-        .form-group input:focus {
+        /* Input focus effect */
+        input:focus {
             outline: none;
-            border-color: var(--primary-color);
+            border-color: rgba(156, 163, 175, 0.6);
+            box-shadow: 0 0 0 3px rgba(156, 163, 175, 0.1);
         }
 
-        .error-message {
-            background-color: #fee2e2;
-            color: #dc2626;
-            padding: 1rem;
-            border-radius: 8px;
-            margin-bottom: 1.5rem;
-            display: none;
+        /* Floating particles */
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            pointer-events: none;
+            opacity: 0.3;
         }
 
-        .success-message {
-            background-color: #d1fae5;
-            color: var(--secondary-color);
-            padding: 1rem;
-            border-radius: 8px;
-            margin-bottom: 1.5rem;
-            display: none;
-        }
-
-        .btn-submit {
-            width: 100%;
-            padding: 1rem;
-            background-color: var(--primary-color);
-            color: white;
-            border: none;
-            border-radius: 8px;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .btn-submit:hover {
-            background-color: var(--primary-dark);
-        }
-
-        .btn-submit:disabled {
-            background-color: #d1d5db;
-            cursor: not-allowed;
-        }
-
-        .auth-footer {
-            text-align: center;
-            margin-top: 1.5rem;
-            color: var(--text-light);
-        }
-
-        .auth-footer a {
-            color: var(--primary-color);
-            text-decoration: none;
-            font-weight: 600;
-        }
-
-        .auth-footer a:hover {
-            text-decoration: underline;
-        }
-
-        .back-home {
-            text-align: center;
-            margin-top: 1rem;
-        }
-
-        .back-home a {
-            color: white;
-            text-decoration: none;
-            font-weight: 600;
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-30px) rotate(180deg); }
         }
     </style>
 </head>
-<body class="homepage-dark">
-    <section class="auth-container">
-        <div class="container">
-            <div class="auth-card">
-                <div class="auth-header">
-                    <h1>Welcome Back!</h1>
-                    <p>Log in to continue your financial education</p>
+<body class="min-h-screen relative" style="color: #d1d5db;">
+    <!-- Floating Particles -->
+    <div id="particles-container" style="position: fixed; width: 100%; height: 100%; top: 0; left: 0; pointer-events: none; z-index: 1;"></div>
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 nav-blur">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-2">
+                    <div class="w-10 h-10 rounded-full bg-gradient-to-br from-gray-200 to-gray-400 glow-grey flex items-center justify-center font-bold text-xl" style="color: #1f2937;">
+                        F
+                    </div>
+                    <span class="text-2xl font-bold gradient-text">FinanceU</span>
                 </div>
 
-                <div id="errorMessage" class="error-message"></div>
-                <div id="successMessage" class="success-message"></div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="/" class="text-gray-400 hover:text-gray-200 transition-colors font-medium">Home</a>
+                    <a href="/courses" class="text-gray-400 hover:text-gray-200 transition-colors font-medium">Courses</a>
+                    <a href="/about" class="text-gray-400 hover:text-gray-200 transition-colors font-medium">About</a>
+                    <a href="/help" class="text-gray-400 hover:text-gray-200 transition-colors font-medium">Resources</a>
+                </div>
 
-                <form id="loginForm">
-                    <div class="form-group">
-                        <label for="email">Email Address</label>
-                        <input type="email" id="email" name="email" required placeholder="you@example.com">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="password">Password</label>
-                        <input type="password" id="password" name="password" required placeholder="Enter your password">
-                    </div>
-
-                    <button type="submit" class="btn-submit" id="submitBtn">
-                        Log In
-                    </button>
-                </form>
-
-                <div class="auth-footer">
-                    <p>Don't have an account? <a href="/signup">Sign up</a></p>
-                    <p style="margin-top: 10px;"><a href="#" id="resetPasswordLink">Forgot your password?</a></p>
+                <div class="flex items-center space-x-4">
+                    <a href="/signup" class="btn-3d px-6 py-2.5 bg-gradient-to-r from-gray-200 to-gray-300 hover:from-gray-300 hover:to-gray-200 rounded-lg font-semibold glow-grey transition-all" style="color: #1f2937;">
+                        Sign Up
+                    </a>
                 </div>
             </div>
+        </div>
+    </nav>
 
-            <div class="back-home">
-                <a href="/">← Back to Home</a>
+    <!-- Main Content -->
+    <section class="min-h-screen flex items-center justify-center pt-32 pb-20 relative z-10">
+        <div class="container mx-auto px-6">
+            <div class="max-w-md mx-auto">
+                <!-- Auth Card -->
+                <div class="auth-card rounded-3xl p-8 md:p-10">
+                    <div class="text-center mb-8">
+                        <h1 class="text-3xl md:text-4xl font-black mb-3 text-gray-200">
+                            Welcome Back!
+                        </h1>
+                        <p class="text-gray-400">
+                            Log in to continue your financial education
+                        </p>
+                    </div>
+
+                    <div id="errorMessage" class="bg-red-500/10 border border-red-500/30 text-red-400 px-4 py-3 rounded-xl mb-6 hidden"></div>
+                    <div id="successMessage" class="bg-green-500/10 border border-green-500/30 text-green-400 px-4 py-3 rounded-xl mb-6 hidden"></div>
+
+                    <form id="loginForm" class="space-y-6">
+                        <div>
+                            <label for="email" class="block text-gray-300 font-semibold mb-2">Email Address</label>
+                            <input
+                                type="email"
+                                id="email"
+                                name="email"
+                                required
+                                placeholder="you@example.com"
+                                class="w-full px-4 py-3 bg-gray-800/50 border-2 border-gray-700 rounded-xl text-gray-200 placeholder-gray-500 transition-all"
+                            >
+                        </div>
+
+                        <div>
+                            <label for="password" class="block text-gray-300 font-semibold mb-2">Password</label>
+                            <input
+                                type="password"
+                                id="password"
+                                name="password"
+                                required
+                                placeholder="Enter your password"
+                                class="w-full px-4 py-3 bg-gray-800/50 border-2 border-gray-700 rounded-xl text-gray-200 placeholder-gray-500 transition-all"
+                            >
+                        </div>
+
+                        <button
+                            type="submit"
+                            class="btn-3d w-full px-8 py-4 bg-gradient-to-r from-gray-200 to-gray-300 hover:from-gray-300 hover:to-gray-200 rounded-xl font-bold text-base glow-grey transition-all"
+                            style="color: #1f2937;"
+                            id="submitBtn"
+                        >
+                            Log In
+                        </button>
+                    </form>
+
+                    <div class="mt-8 text-center space-y-3">
+                        <p class="text-gray-400">
+                            Don't have an account?
+                            <a href="/signup" class="text-gray-200 font-semibold hover:underline">Sign up</a>
+                        </p>
+                        <p>
+                            <a href="/forgot-password" id="resetPasswordLink" class="text-gray-400 hover:text-gray-200 transition-colors text-sm">
+                                Forgot your password?
+                            </a>
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Back to Home -->
+                <div class="text-center mt-6">
+                    <a href="/" class="text-gray-400 hover:text-gray-200 transition-colors font-medium">
+                        ← Back to Home
+                    </a>
+                </div>
             </div>
         </div>
     </section>
 
-    <script src="config.js"></script>
-    <script src="animations.js"></script>
     <script>
-        // API_URL is now loaded from config.js
+        // Create floating particles
+        function createParticles() {
+            const container = document.getElementById('particles-container');
+            const particleCount = 20;
+
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+
+                const size = Math.random() * 4 + 2;
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                particle.style.left = `${Math.random() * 100}%`;
+                particle.style.top = `${Math.random() * 100}%`;
+                particle.style.background = `rgba(156, 163, 175, ${Math.random() * 0.5 + 0.2})`;
+                particle.style.animation = `float ${Math.random() * 10 + 10}s ease-in-out infinite`;
+                particle.style.animationDelay = `${Math.random() * 5}s`;
+
+                container.appendChild(particle);
+            }
+        }
+
+        createParticles();
+    </script>
+
+    <script src="config.js"></script>
+    <script>
         const form = document.getElementById('loginForm');
         const submitBtn = document.getElementById('submitBtn');
         const errorMessage = document.getElementById('errorMessage');
         const successMessage = document.getElementById('successMessage');
 
-        // Hide messages
         function hideMessages() {
             errorMessage.style.display = 'none';
             successMessage.style.display = 'none';
         }
 
-        // Show error
         function showError(message) {
             hideMessages();
             errorMessage.textContent = message;
-            errorMessage.style.display = 'block';
+            errorMessage.classList.remove('hidden');
         }
 
-        // Show success
         function showSuccess(message) {
             hideMessages();
             successMessage.textContent = message;
-            successMessage.style.display = 'block';
+            successMessage.classList.remove('hidden');
         }
 
-        // Handle form submission
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
             hideMessages();
@@ -213,7 +251,6 @@
             const email = document.getElementById('email').value;
             const password = document.getElementById('password').value;
 
-            // Disable submit button
             submitBtn.disabled = true;
             submitBtn.textContent = 'Logging in...';
 
@@ -233,14 +270,11 @@
                     throw new Error(data.error || 'Login failed');
                 }
 
-                // Success!
                 showSuccess('Login successful! Redirecting...');
 
-                // Check if this is a different user than before
                 const previousUserId = localStorage.getItem('userId');
                 const newUserId = data.user.id;
 
-                // If different user, clear ALL progress data from previous account
                 if (previousUserId && previousUserId !== newUserId) {
                     const keysToRemove = [];
                     for (let i = 0; i < localStorage.length; i++) {
@@ -252,11 +286,9 @@
                     keysToRemove.forEach(key => localStorage.removeItem(key));
                 }
 
-                // Store token and userId in localStorage
                 localStorage.setItem('token', data.token);
                 localStorage.setItem('userId', newUserId);
 
-                // Redirect to dashboard
                 setTimeout(() => {
                     window.location.href = '/dashboard.html';
                 }, 1000);
@@ -269,7 +301,6 @@
             }
         });
 
-        // Check if already logged in
         async function checkIfLoggedIn() {
             try {
                 const response = await fetch(`${API_URL}/auth/me`, {
@@ -286,7 +317,6 @@
 
         checkIfLoggedIn();
 
-        // Handle reset password link
         document.getElementById('resetPasswordLink').addEventListener('click', (e) => {
             e.preventDefault();
             window.location.href = '/forgot-password.html';
