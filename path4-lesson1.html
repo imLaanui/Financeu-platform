@@ -9,6 +9,7 @@
     <link rel="icon" type="image/svg+xml" sizes="32x32" href="assets/favicon-32x32.svg">
     <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.svg">
     <link rel="stylesheet" href="styles.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
     <style>
         /* SVG Icon Alignment Fixes */
         svg {
@@ -1504,7 +1505,9 @@
                     </div>
 
                     <div class="key-insight">
-                        <div class="key-insight-icon">💡</div>
+                        <div class="key-insight-icon">
+                            <i data-lucide="lightbulb" class="w-6 h-6"></i>
+                        </div>
                         <div class="key-insight-text" id="comparison-insight">
                             Saver A invested <strong>$55,200 LESS</strong> but ended up with <strong>$10,000 MORE</strong>. That's the power of starting early!
                         </div>
@@ -2613,6 +2616,8 @@
         document.addEventListener('DOMContentLoaded', function() {
             showScreen(1);
             initCalculator();
+            // Initialize Lucide icons
+            lucide.createIcons();
         });
 
         function toggleChecklistItem(item) {
