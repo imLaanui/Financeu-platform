@@ -161,60 +161,23 @@
             box-shadow: 0 30px 80px rgba(0, 0, 0, 0.9), 0 0 60px rgba(139, 92, 246, 0.3);
         }
 
-        /* Creative bento-box style grid */
+        /* Consistent uniform grid layout */
         .lessons-grid {
             display: grid;
-            grid-template-columns: repeat(12, 1fr);
+            grid-template-columns: repeat(2, 1fr);
             gap: 2rem;
             position: relative;
         }
 
-        /* Lesson 1 - Large featured card (spans 7 columns) */
-        .lesson-1 {
-            grid-column: span 7;
-            grid-row: span 1;
-        }
-
-        /* Lesson 2 - Medium card (spans 5 columns) */
-        .lesson-2 {
-            grid-column: span 5;
-            grid-row: span 1;
-        }
-
-        /* Lesson 3 - Medium card (spans 5 columns) */
-        .lesson-3 {
-            grid-column: span 5;
-            grid-row: span 1;
-        }
-
-        /* Lesson 4 - Large card (spans 7 columns) */
-        .lesson-4 {
-            grid-column: span 7;
-            grid-row: span 1;
-        }
-
-        /* Lesson 5 - Full width dramatic finish */
-        .lesson-5 {
-            grid-column: span 12;
-            grid-row: span 1;
+        /* All lessons have equal size */
+        .lesson-1, .lesson-2, .lesson-3, .lesson-4, .lesson-5 {
+            grid-column: span 1;
         }
 
         /* Responsive adjustments */
-        @media (max-width: 1024px) {
-            .lessons-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            .lesson-1, .lesson-2, .lesson-3, .lesson-4, .lesson-5 {
-                grid-column: span 2;
-            }
-        }
-
-        @media (max-width: 640px) {
+        @media (max-width: 768px) {
             .lessons-grid {
                 grid-template-columns: 1fr;
-            }
-            .lesson-1, .lesson-2, .lesson-3, .lesson-4, .lesson-5 {
-                grid-column: span 1;
             }
         }
 
@@ -320,106 +283,104 @@
                 </div>
             </div>
 
-            <!-- Lessons Grid - Bento Box Style -->
+            <!-- Lessons Grid - Consistent Uniform Layout -->
             <div class="lessons-grid mb-16">
-                <!-- Lesson 1 - Large Featured -->
+                <!-- Lesson 1 -->
                 <div class="lesson-1 lesson-card rounded-3xl p-8 relative overflow-hidden">
                     <div class="lesson-number">1</div>
-                    <div class="flex flex-col md:flex-row gap-6 items-start">
-                        <div class="lesson-icon bg-blue-500/20 border-2 border-blue-500/40">
+                    <div class="flex flex-col h-full">
+                        <div class="lesson-icon bg-blue-500/20 border-2 border-blue-500/40 mb-6">
                             <svg class="w-8 h-8 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
                             </svg>
                         </div>
-                        <div class="flex-1">
-                            <h3 class="text-2xl font-bold text-gray-200 mb-3">Types of Banks</h3>
-                            <p class="text-gray-400 mb-4">Learn about online and traditional banks, their differences, and how to navigate them</p>
-                            <div class="flex items-center gap-4 flex-wrap">
-                                <a href="/path1-lesson1" class="btn-3d px-6 py-2.5 bg-blue-500/80 hover:bg-blue-600 rounded-lg font-bold text-white transition-all text-sm">
-                                    Start Lesson
-                                </a>
-                                <div class="lesson-status"></div>
-                            </div>
+                        <h3 class="text-2xl font-bold text-gray-200 mb-3">Types of Banks</h3>
+                        <p class="text-gray-400 mb-6 flex-1">Learn about online and traditional banks, their differences, and how to navigate them</p>
+                        <div class="flex items-center gap-4 flex-wrap">
+                            <a href="/path1-lesson1" class="btn-3d px-6 py-2.5 bg-blue-500/80 hover:bg-blue-600 rounded-lg font-bold text-white transition-all text-sm">
+                                Start Lesson
+                            </a>
+                            <div class="lesson-status"></div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Lesson 2 - Medium -->
+                <!-- Lesson 2 -->
                 <div class="lesson-2 lesson-card rounded-3xl p-8 relative overflow-hidden locked">
                     <div class="lesson-number">2</div>
-                    <div class="lesson-icon bg-blue-500/20 border-2 border-blue-500/40 mb-4">
-                        <svg class="w-8 h-8 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"></path>
-                        </svg>
-                    </div>
-                    <h3 class="text-xl font-bold text-gray-200 mb-3">Checking Accounts</h3>
-                    <p class="text-gray-400 mb-4 text-sm">Learn what checking accounts are and how to use debit cards</p>
-                    <div class="flex items-center gap-4 flex-wrap">
-                        <a href="/path1-lesson2" class="btn-3d px-6 py-2.5 bg-blue-500/80 hover:bg-blue-600 rounded-lg font-bold text-white transition-all text-sm">
-                            Start Lesson
-                        </a>
-                        <div class="lesson-status"></div>
+                    <div class="flex flex-col h-full">
+                        <div class="lesson-icon bg-blue-500/20 border-2 border-blue-500/40 mb-6">
+                            <svg class="w-8 h-8 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-200 mb-3">Checking Accounts</h3>
+                        <p class="text-gray-400 mb-6 flex-1">Learn what checking accounts are and how to use debit cards</p>
+                        <div class="flex items-center gap-4 flex-wrap">
+                            <a href="/path1-lesson2" class="btn-3d px-6 py-2.5 bg-blue-500/80 hover:bg-blue-600 rounded-lg font-bold text-white transition-all text-sm">
+                                Start Lesson
+                            </a>
+                            <div class="lesson-status"></div>
+                        </div>
                     </div>
                 </div>
 
-                <!-- Lesson 3 - Medium -->
+                <!-- Lesson 3 -->
                 <div class="lesson-3 lesson-card rounded-3xl p-8 relative overflow-hidden locked">
                     <div class="lesson-number">3</div>
-                    <div class="lesson-icon bg-blue-500/20 border-2 border-blue-500/40 mb-4">
-                        <svg class="w-8 h-8 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"></path>
-                        </svg>
-                    </div>
-                    <h3 class="text-xl font-bold text-gray-200 mb-3">Savings Accounts</h3>
-                    <p class="text-gray-400 mb-4 text-sm">Learn about savings accounts, interest, and managing savings</p>
-                    <div class="flex items-center gap-4 flex-wrap">
-                        <a href="/path1-lesson3" class="btn-3d px-6 py-2.5 bg-blue-500/80 hover:bg-blue-600 rounded-lg font-bold text-white transition-all text-sm">
-                            Start Lesson
-                        </a>
-                        <div class="lesson-status"></div>
+                    <div class="flex flex-col h-full">
+                        <div class="lesson-icon bg-blue-500/20 border-2 border-blue-500/40 mb-6">
+                            <svg class="w-8 h-8 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-200 mb-3">Savings Accounts</h3>
+                        <p class="text-gray-400 mb-6 flex-1">Learn about savings accounts, interest, and managing savings</p>
+                        <div class="flex items-center gap-4 flex-wrap">
+                            <a href="/path1-lesson3" class="btn-3d px-6 py-2.5 bg-blue-500/80 hover:bg-blue-600 rounded-lg font-bold text-white transition-all text-sm">
+                                Start Lesson
+                            </a>
+                            <div class="lesson-status"></div>
+                        </div>
                     </div>
                 </div>
 
-                <!-- Lesson 4 - Large -->
+                <!-- Lesson 4 -->
                 <div class="lesson-4 lesson-card rounded-3xl p-8 relative overflow-hidden locked">
                     <div class="lesson-number">4</div>
-                    <div class="flex flex-col md:flex-row gap-6 items-start">
-                        <div class="lesson-icon bg-blue-500/20 border-2 border-blue-500/40">
+                    <div class="flex flex-col h-full">
+                        <div class="lesson-icon bg-blue-500/20 border-2 border-blue-500/40 mb-6">
                             <svg class="w-8 h-8 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
                             </svg>
                         </div>
-                        <div class="flex-1">
-                            <h3 class="text-2xl font-bold text-gray-200 mb-3">High-Yield Savings</h3>
-                            <p class="text-gray-400 mb-4">Make your savings work harder with high-yield accounts</p>
-                            <div class="flex items-center gap-4 flex-wrap">
-                                <a href="/path1-lesson4" class="btn-3d px-6 py-2.5 bg-blue-500/80 hover:bg-blue-600 rounded-lg font-bold text-white transition-all text-sm">
-                                    Start Lesson
-                                </a>
-                                <div class="lesson-status"></div>
-                            </div>
+                        <h3 class="text-2xl font-bold text-gray-200 mb-3">High-Yield Savings</h3>
+                        <p class="text-gray-400 mb-6 flex-1">Make your savings work harder with high-yield accounts</p>
+                        <div class="flex items-center gap-4 flex-wrap">
+                            <a href="/path1-lesson4" class="btn-3d px-6 py-2.5 bg-blue-500/80 hover:bg-blue-600 rounded-lg font-bold text-white transition-all text-sm">
+                                Start Lesson
+                            </a>
+                            <div class="lesson-status"></div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Lesson 5 - Full Width Dramatic -->
-                <div class="lesson-5 lesson-card rounded-3xl p-10 relative overflow-hidden locked">
+                <!-- Lesson 5 -->
+                <div class="lesson-5 lesson-card rounded-3xl p-8 relative overflow-hidden locked">
                     <div class="lesson-number">5</div>
-                    <div class="flex flex-col md:flex-row gap-8 items-center text-center md:text-left">
-                        <div class="lesson-icon bg-red-500/20 border-2 border-red-500/40 w-20 h-20">
-                            <svg class="w-10 h-10 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <div class="flex flex-col h-full">
+                        <div class="lesson-icon bg-red-500/20 border-2 border-red-500/40 mb-6">
+                            <svg class="w-8 h-8 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
                             </svg>
                         </div>
-                        <div class="flex-1">
-                            <h3 class="text-3xl font-bold text-gray-200 mb-3">Avoiding Fees, Overdrafts, and Common Mistakes</h3>
-                            <p class="text-gray-400 mb-6 text-lg">Learn how to keep your money safe and avoid costly banking mistakes that catch beginners off guard</p>
-                            <div class="flex items-center gap-4 justify-center md:justify-start flex-wrap">
-                                <a href="/path1-lesson5" class="btn-3d px-8 py-3 bg-blue-500/80 hover:bg-blue-600 rounded-lg font-bold text-white transition-all">
-                                    Start Lesson
-                                </a>
-                                <div class="lesson-status"></div>
-                            </div>
+                        <h3 class="text-2xl font-bold text-gray-200 mb-3">Avoiding Fees and Overdrafts</h3>
+                        <p class="text-gray-400 mb-6 flex-1">Learn how to keep your money safe and avoid costly banking mistakes that catch beginners off guard</p>
+                        <div class="flex items-center gap-4 flex-wrap">
+                            <a href="/path1-lesson5" class="btn-3d px-6 py-2.5 bg-blue-500/80 hover:bg-blue-600 rounded-lg font-bold text-white transition-all text-sm">
+                                Start Lesson
+                            </a>
+                            <div class="lesson-status"></div>
                         </div>
                     </div>
                 </div>
