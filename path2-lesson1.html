@@ -6,6 +6,7 @@
     <title>Where Your Money Is Actually Going - FinanceU</title>
     <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
     <link rel="stylesheet" href="styles.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
     <style>
         body.lesson-page {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
@@ -612,7 +613,7 @@
     <div class="lesson-container">
         <!-- Hero Section -->
         <div class="hero">
-            <h1>💸 Where Your Money Is Actually Going</h1>
+            <h1 class="flex items-center justify-center gap-3"><i data-lucide="banknote" class="w-10 h-10 inline-block"></i> Where Your Money Is Actually Going</h1>
             <p class="hero-subtitle">Let's find out together — no judgment, just awareness</p>
             <p class="hero-tagline">Most people are completely wrong about this. Let's discover the truth.</p>
         </div>
@@ -628,7 +629,7 @@
 
             <!-- Step 1: Income -->
             <div class="step-content active" data-step="1">
-                <h2 class="step-title">💰 First, how much money comes in?</h2>
+                <h2 class="step-title flex items-center gap-2"><i data-lucide="coins" class="w-6 h-6 inline-block"></i> First, how much money comes in?</h2>
                 <p class="step-description">Enter your total monthly income (after taxes). Include everything — your job, side hustles, allowance, whatever you get.</p>
 
                 <div class="income-input-group">
@@ -646,12 +647,14 @@
 
             <!-- Step 2: Expenses -->
             <div class="step-content" data-step="2">
-                <h2 class="step-title">🛒 Now, where does it actually go?</h2>
+                <h2 class="step-title flex items-center gap-2"><i data-lucide="shopping-cart" class="w-6 h-6 inline-block"></i> Now, where does it actually go?</h2>
                 <p class="step-description">Estimate your monthly spending in each category. Be honest — this is just for you. No judgment.</p>
 
                 <div class="expense-categories" id="expenseCategories">
                     <div class="expense-item">
-                        <div class="expense-icon">🏠</div>
+                        <div class="expense-icon">
+                            <i data-lucide="home" class="w-8 h-8"></i>
+                        </div>
                         <div class="expense-details">
                             <div class="expense-name">Rent/Housing</div>
                             <div class="expense-hint">Rent, mortgage, utilities</div>
@@ -662,7 +665,9 @@
                     </div>
 
                     <div class="expense-item">
-                        <div class="expense-icon">🍕</div>
+                        <div class="expense-icon">
+                            <i data-lucide="utensils" class="w-8 h-8"></i>
+                        </div>
                         <div class="expense-details">
                             <div class="expense-name">Food & Dining</div>
                             <div class="expense-hint">Groceries, restaurants, coffee</div>
@@ -673,7 +678,9 @@
                     </div>
 
                     <div class="expense-item">
-                        <div class="expense-icon">🚗</div>
+                        <div class="expense-icon">
+                            <i data-lucide="car" class="w-8 h-8"></i>
+                        </div>
                         <div class="expense-details">
                             <div class="expense-name">Transportation</div>
                             <div class="expense-hint">Car, gas, insurance, Uber</div>
@@ -684,7 +691,9 @@
                     </div>
 
                     <div class="expense-item">
-                        <div class="expense-icon">📱</div>
+                        <div class="expense-icon">
+                            <i data-lucide="smartphone" class="w-8 h-8"></i>
+                        </div>
                         <div class="expense-details">
                             <div class="expense-name">Phone & Internet</div>
                             <div class="expense-hint">Phone bill, internet, streaming</div>
@@ -695,7 +704,9 @@
                     </div>
 
                     <div class="expense-item">
-                        <div class="expense-icon">🎮</div>
+                        <div class="expense-icon">
+                            <i data-lucide="gamepad-2" class="w-8 h-8"></i>
+                        </div>
                         <div class="expense-details">
                             <div class="expense-name">Entertainment</div>
                             <div class="expense-hint">Movies, games, hobbies, fun</div>
@@ -706,7 +717,9 @@
                     </div>
 
                     <div class="expense-item">
-                        <div class="expense-icon">👕</div>
+                        <div class="expense-icon">
+                            <i data-lucide="shopping-bag" class="w-8 h-8"></i>
+                        </div>
                         <div class="expense-details">
                             <div class="expense-name">Shopping</div>
                             <div class="expense-hint">Clothes, Amazon, random stuff</div>
@@ -717,7 +730,9 @@
                     </div>
 
                     <div class="expense-item">
-                        <div class="expense-icon">💪</div>
+                        <div class="expense-icon">
+                            <i data-lucide="heart-pulse" class="w-8 h-8"></i>
+                        </div>
                         <div class="expense-details">
                             <div class="expense-name">Health & Fitness</div>
                             <div class="expense-hint">Gym, doctors, medications</div>
@@ -728,7 +743,9 @@
                     </div>
 
                     <div class="expense-item">
-                        <div class="expense-icon">✨</div>
+                        <div class="expense-icon">
+                            <i data-lucide="circle-dot" class="w-8 h-8"></i>
+                        </div>
                         <div class="expense-details">
                             <div class="expense-name">Other Expenses</div>
                             <div class="expense-hint">Everything else you spend on</div>
@@ -747,7 +764,7 @@
 
             <!-- Step 3: Results -->
             <div class="step-content" data-step="3">
-                <h2 class="step-title">📊 Here's Your Money Reality</h2>
+                <h2 class="step-title flex items-center gap-2"><i data-lucide="bar-chart-3" class="w-6 h-6 inline-block"></i> Here's Your Money Reality</h2>
                 <p class="step-description">This is where your money is actually going. Time to face the truth.</p>
 
                 <div class="results-dashboard">
@@ -943,28 +960,28 @@
             if (leftover < 0) {
                 insights.push({
                     type: 'danger',
-                    icon: '🚨',
+                    icon: '<i data-lucide="alert-triangle" class="w-6 h-6"></i>',
                     title: 'You\'re Spending More Than You Earn',
                     text: `You're spending $${Math.abs(leftover).toFixed(0)} more than you make each month. This is unsustainable and will lead to debt.`
                 });
             } else if (leftover === 0) {
                 insights.push({
                     type: 'warning',
-                    icon: '⚠️',
+                    icon: '<i data-lucide="alert-circle" class="w-6 h-6"></i>',
                     title: 'Living Paycheck to Paycheck',
                     text: 'You\'re spending everything you earn. One unexpected expense could throw you off balance.'
                 });
             } else if (leftover > 0 && leftover < monthlyIncome * 0.1) {
                 insights.push({
                     type: 'warning',
-                    icon: '💛',
+                    icon: '<i data-lucide="heart" class="w-6 h-6"></i>',
                     title: 'Small Safety Margin',
                     text: `You have $${leftover.toFixed(0)} left over (${((leftover/monthlyIncome)*100).toFixed(0)}%). That's something, but try to increase it to 10-20%.`
                 });
             } else {
                 insights.push({
                     type: 'positive',
-                    icon: '🎉',
+                    icon: '<i data-lucide="party-popper" class="w-6 h-6"></i>',
                     title: 'Great Job!',
                     text: `You have $${leftover.toFixed(0)} left over each month (${((leftover/monthlyIncome)*100).toFixed(0)}%). This is what saving looks like!`
                 });
@@ -989,7 +1006,7 @@
 
                 insights.push({
                     type: 'warning',
-                    icon: '🔍',
+                    icon: '<i data-lucide="search" class="w-6 h-6"></i>',
                     title: `Your Biggest Expense: ${biggestCategory}`,
                     text: `You spend $${biggestAmount.toFixed(0)}/month here (${biggestPercent}% of income). Is there room to optimize?`
                 });
@@ -998,7 +1015,7 @@
             // Awareness insight
             insights.push({
                 type: 'positive',
-                icon: '💡',
+                icon: '<i data-lucide="lightbulb" class="w-6 h-6"></i>',
                 title: 'Awareness is the First Step',
                 text: 'Most people never track their spending. By doing this exercise, you\'re already ahead of 80% of people. Now you know the truth.'
             });
@@ -1017,6 +1034,9 @@
                 `;
                 grid.appendChild(card);
             });
+
+            // Initialize Lucide icons for dynamically added content
+            lucide.createIcons();
         }
 
         function showQuiz() {
@@ -1030,10 +1050,11 @@
                 const quizResult = document.getElementById('quizResult');
                 quizResult.className = 'quiz-result visible passed';
                 quizResult.innerHTML = `
-                    <div class="insight-icon">✅</div>
+                    <div class="insight-icon"><i data-lucide="check-circle" class="w-6 h-6"></i></div>
                     <div class="insight-title">Quiz Already Completed</div>
                     <div class="insight-text">You've already passed this quiz! You can retake it below or finish the lesson.</div>
                 `;
+                lucide.createIcons();
 
                 // Show finish button
                 document.getElementById('finishBtn').classList.add('visible');
@@ -1271,20 +1292,22 @@
                 localStorage.setItem(`path2_lesson1_quiz_passed_${userId}`, 'true');
 
                 resultDiv.innerHTML = `
-                    <div class="insight-icon">🎉</div>
+                    <div class="insight-icon"><i data-lucide="party-popper" class="w-6 h-6"></i></div>
                     <div class="insight-title">Perfect Score!</div>
                     <div class="insight-text">You got all ${correct} out of ${currentQuestions.length} questions correct! You're ready to move forward.</div>
                 `;
+                lucide.createIcons();
 
                 document.getElementById('finishBtn').classList.add('visible');
                 launchConfetti();
             } else {
                 resultDiv.innerHTML = `
-                    <div class="insight-icon">📚</div>
+                    <div class="insight-icon"><i data-lucide="book-open" class="w-6 h-6"></i></div>
                     <div class="insight-title">Not Quite There</div>
                     <div class="insight-text">You got ${correct} out of ${currentQuestions.length} correct. You need 100% to pass. Review the lesson and try again!</div>
                     <button class="btn btn-primary" onclick="retakeQuiz()" style="margin-top: 24px;">Try Again</button>
                 `;
+                lucide.createIcons();
             }
 
             resultDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
@@ -1385,6 +1408,9 @@
         // Initialize
         updateNav();
         initLesson();
+
+        // Initialize Lucide icons
+        lucide.createIcons();
     </script>
 </body>
 </html>
