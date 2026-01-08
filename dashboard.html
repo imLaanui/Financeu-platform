@@ -6,6 +6,7 @@
     <title>Dashboard - FinanceU</title>
     <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
 
@@ -312,8 +313,9 @@
             <div id="dashboardContent" style="display: none;">
                 <!-- Welcome Section -->
                 <div class="mb-12">
-                    <h1 class="text-4xl md:text-5xl font-black mb-3 text-gray-200">
-                        Welcome back, <span id="userName" class="gradient-text">Student</span>! 👋
+                    <h1 class="text-4xl md:text-5xl font-black mb-3 text-gray-200 flex items-center flex-wrap gap-3">
+                        <span>Welcome back, <span id="userName" class="gradient-text">Student</span>!</span>
+                        <i data-lucide="hand-wave" class="w-10 h-10 text-gray-300 inline-block"></i>
                     </h1>
                     <p class="text-lg text-gray-400">Continue your journey to financial mastery</p>
                 </div>
@@ -351,7 +353,9 @@
                     <!-- Streak Counter -->
                     <div class="stat-card rounded-2xl p-6 relative">
                         <div class="flex flex-col items-center">
-                            <div class="flame text-6xl mb-2">🔥</div>
+                            <div class="flame mb-2">
+                                <i data-lucide="flame" class="w-16 h-16 text-orange-400"></i>
+                            </div>
                             <div class="text-4xl font-black text-orange-400 count-up" id="streakDays">0</div>
                             <div class="text-sm text-gray-400 font-medium mt-1">Day Streak</div>
                         </div>
@@ -372,7 +376,9 @@
                 <!-- Daily Tip Card -->
                 <div class="tip-card stat-card rounded-2xl p-6 mb-12 relative overflow-hidden">
                     <div class="flex items-start gap-4">
-                        <div class="text-4xl">💡</div>
+                        <div>
+                            <i data-lucide="lightbulb" class="w-10 h-10 text-yellow-400"></i>
+                        </div>
                         <div class="flex-1">
                             <h3 class="text-xl font-bold text-gray-200 mb-2">Today's Financial Tip</h3>
                             <p class="text-gray-400 leading-relaxed" id="dailyTip">Track every dollar you spend for a week. You'll be surprised where your money actually goes!</p>
@@ -596,7 +602,7 @@
 
         // Show coming soon message
         function showComingSoon(feature) {
-            alert(`🚀 ${feature} is coming soon!\n\nWe're working hard to bring you this feature. Stay tuned for updates!`);
+            alert(`${feature} is coming soon!\n\nWe're working hard to bring you this feature. Stay tuned for updates!`);
         }
     </script>
 
@@ -691,7 +697,8 @@
                     path1Button.textContent = 'Review';
                     path1Item.style.borderColor = '#10b981';
                     path1AvailabilityBadge.style.color = '#10b981';
-                    path1AvailabilityBadge.textContent = '✓ Complete';
+                    path1AvailabilityBadge.innerHTML = '<i data-lucide="check-circle" class="w-4 h-4 inline-block mr-1"></i> Complete';
+                    lucide.createIcons();
                 } else if (path1Completed.length > 0) {
                     path1Button.textContent = 'Continue';
                 } else {
@@ -757,6 +764,9 @@
         }
 
         loadDashboard();
+
+        // Initialize Lucide icons
+        lucide.createIcons();
     </script>
 </body>
 </html>

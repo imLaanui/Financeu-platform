@@ -9,6 +9,7 @@
     <link rel="icon" type="image/svg+xml" sizes="32x32" href="assets/favicon-32x32.svg">
     <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.svg">
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
 
@@ -170,7 +171,9 @@
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                 <!-- Getting Started -->
                 <div class="category-card rounded-2xl p-8">
-                    <div class="text-4xl mb-4">🚀</div>
+                    <div class="mb-4 flex justify-start">
+                        <i data-lucide="rocket" class="w-10 h-10 text-gray-300"></i>
+                    </div>
                     <h3 class="text-2xl font-bold text-gray-200 mb-4">Getting Started</h3>
                     <ul class="space-y-3">
                         <li><a href="#signup" class="text-gray-400 hover:text-gray-200 transition-colors">How do I sign up?</a></li>
@@ -182,7 +185,9 @@
 
                 <!-- Billing & Subscriptions -->
                 <div class="category-card rounded-2xl p-8">
-                    <div class="text-4xl mb-4">💳</div>
+                    <div class="mb-4 flex justify-start">
+                        <i data-lucide="credit-card" class="w-10 h-10 text-gray-300"></i>
+                    </div>
                     <h3 class="text-2xl font-bold text-gray-200 mb-4">Billing & Subscriptions</h3>
                     <ul class="space-y-3">
                         <li><a href="#pricing" class="text-gray-400 hover:text-gray-200 transition-colors">What are the pricing plans?</a></li>
@@ -194,7 +199,9 @@
 
                 <!-- Courses & Learning -->
                 <div class="category-card rounded-2xl p-8">
-                    <div class="text-4xl mb-4">📚</div>
+                    <div class="mb-4 flex justify-start">
+                        <i data-lucide="book-open" class="w-10 h-10 text-gray-300"></i>
+                    </div>
                     <h3 class="text-2xl font-bold text-gray-200 mb-4">Courses & Learning</h3>
                     <ul class="space-y-3">
                         <li><a href="#progress" class="text-gray-400 hover:text-gray-200 transition-colors">Tracking your progress</a></li>
@@ -206,7 +213,9 @@
 
                 <!-- Technical Support -->
                 <div class="category-card rounded-2xl p-8">
-                    <div class="text-4xl mb-4">⚙️</div>
+                    <div class="mb-4 flex justify-start">
+                        <i data-lucide="settings" class="w-10 h-10 text-gray-300"></i>
+                    </div>
                     <h3 class="text-2xl font-bold text-gray-200 mb-4">Technical Support</h3>
                     <ul class="space-y-3">
                         <li><a href="#login-issues" class="text-gray-400 hover:text-gray-200 transition-colors">Login problems</a></li>
@@ -218,7 +227,9 @@
 
                 <!-- Account Management -->
                 <div class="category-card rounded-2xl p-8">
-                    <div class="text-4xl mb-4">👤</div>
+                    <div class="mb-4 flex justify-start">
+                        <i data-lucide="user" class="w-10 h-10 text-gray-300"></i>
+                    </div>
                     <h3 class="text-2xl font-bold text-gray-200 mb-4">Account Management</h3>
                     <ul class="space-y-3">
                         <li><a href="#profile-edit" class="text-gray-400 hover:text-gray-200 transition-colors">Edit your profile</a></li>
@@ -230,7 +241,9 @@
 
                 <!-- Privacy & Security -->
                 <div class="category-card rounded-2xl p-8">
-                    <div class="text-4xl mb-4">🔒</div>
+                    <div class="mb-4 flex justify-start">
+                        <i data-lucide="lock" class="w-10 h-10 text-gray-300"></i>
+                    </div>
                     <h3 class="text-2xl font-bold text-gray-200 mb-4">Privacy & Security</h3>
                     <ul class="space-y-3">
                         <li><a href="#data-privacy" class="text-gray-400 hover:text-gray-200 transition-colors">Data privacy</a></li>
@@ -515,6 +528,9 @@
                 }
             });
         });
+
+        // Initialize Lucide icons
+        lucide.createIcons();
     </script>
 </body>
 </html>
