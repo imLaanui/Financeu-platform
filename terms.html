@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,272 +8,294 @@
     <link rel="icon" type="image/svg+xml" sizes="16x16" href="assets/favicon-16x16.svg">
     <link rel="icon" type="image/svg+xml" sizes="32x32" href="assets/favicon-32x32.svg">
     <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.svg">
-    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+        * {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        body {
+            background: #0f0f0f;
+            overflow-x: hidden;
+        }
+
+        /* Gradient text */
+        .gradient-text {
+            background: linear-gradient(135deg, #e5e7eb 0%, #9ca3af 50%, #e5e7eb 100%);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradientShift 5s ease infinite;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        /* Glowing effects */
+        .glow-grey {
+            box-shadow: 0 0 20px rgba(156, 163, 175, 0.4), 0 0 40px rgba(156, 163, 175, 0.2);
+        }
+
+        /* Navigation backdrop blur */
+        .nav-blur {
+            backdrop-filter: blur(12px);
+            background: rgba(15, 15, 15, 0.9);
+            border-bottom: 1px solid rgba(156, 163, 175, 0.15);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        /* 3D Button Effect */
+        .btn-3d {
+            transform-style: preserve-3d;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3), 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-3d:hover {
+            transform: translateY(-4px) translateZ(10px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4), 0 16px 32px rgba(0, 0, 0, 0.3), 0 0 40px rgba(209, 213, 219, 0.2);
+        }
+
         .legal-content {
             max-width: 900px;
             margin: 0 auto;
-            padding: 80px 20px;
-        }
-        .legal-content h1 {
-            font-size: 42px;
-            margin-bottom: 20px;
-            color: var(--text-primary);
-        }
-        .last-updated {
-            color: var(--text-secondary);
-            font-size: 14px;
-            margin-bottom: 40px;
-        }
-        .legal-content h2 {
-            font-size: 28px;
-            margin-top: 40px;
-            margin-bottom: 20px;
-            color: var(--text-primary);
-        }
-        .legal-content h3 {
-            font-size: 20px;
-            margin-top: 30px;
-            margin-bottom: 15px;
-            color: var(--text-primary);
-        }
-        .legal-content p {
-            line-height: 1.8;
-            color: var(--text-secondary);
-            margin-bottom: 20px;
-        }
-        .legal-content ul {
-            line-height: 1.8;
-            color: var(--text-secondary);
-            margin-bottom: 20px;
-            padding-left: 30px;
-        }
-        .legal-content li {
-            margin-bottom: 10px;
+            padding: 120px 40px 80px 40px;
         }
     </style>
 </head>
-<body class="homepage-dark">
+<body class="relative min-h-screen text-gray-300">
     <!-- Navigation -->
-    <nav class="navbar">
-        <div class="container">
-            <div class="nav-wrapper">
-                <div class="logo"><a href="/" style="color: inherit; text-decoration: none;">Finance<span class="logo-accent">U</span></a></div>
-                <ul class="nav-links">
-                    <li><a href="/curriculum">Learning Paths</a></li>
-                    <li><a href="/#features">Features</a></li>
-                    <li><a href="/#pricing">Pricing</a></li>
-                    <li><a href="/about">About</a></li>
-                    <li id="authButtons" style="opacity: 0;">
-                    </li>
-                    </li>
-                </ul>
+    <nav class="fixed top-0 left-0 right-0 z-50 nav-blur">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <a href="/" class="flex items-center space-x-2">
+                    <div class="w-10 h-10 rounded-full bg-gradient-to-br from-gray-200 to-gray-400 glow-grey flex items-center justify-center font-bold text-xl" style="color: #1f2937;">
+                        F
+                    </div>
+                    <span class="text-2xl font-bold gradient-text">FinanceU</span>
+                </a>
+
+                <div class="hidden md:flex items-center space-x-6">
+                    <a href="/" class="text-gray-400 hover:text-gray-200 transition-colors font-medium">Home</a>
+                    <a href="/dashboard" class="text-gray-400 hover:text-gray-200 transition-colors font-medium">Dashboard</a>
+                </div>
+
+                <div class="flex items-center space-x-4" id="authButtons">
+                    <a href="/login" class="hidden md:inline-block px-6 py-2 text-gray-400 hover:text-gray-200 transition-colors font-medium">Login</a>
+                    <a href="/signup" class="btn-3d px-6 py-2.5 bg-gradient-to-r from-gray-200 to-gray-300 hover:from-gray-300 hover:to-gray-200 rounded-lg font-semibold glow-grey transition-all" style="color: #1f2937;">Sign Up</a>
+                </div>
             </div>
         </div>
     </nav>
 
     <!-- Terms of Service Content -->
     <div class="legal-content">
-        <h1>Terms of Service</h1>
-        <p class="last-updated">Last Updated: December 2025</p>
+        <h1 class="text-5xl font-black mb-4 text-gray-200">Terms of Service</h1>
+        <p class="text-gray-500 text-sm mb-12">Last Updated: December 2025</p>
 
-        <p>Welcome to FinanceU. By accessing or using our website and services, you agree to be bound by these Terms of Service. Please read them carefully.</p>
+        <p class="text-gray-400 leading-relaxed mb-6">Welcome to FinanceU. By accessing or using our website and services, you agree to be bound by these Terms of Service. Please read them carefully.</p>
 
-        <h2>1. Acceptance of Terms</h2>
-        <p>By creating an account, accessing, or using FinanceU's services, you agree to comply with and be bound by these Terms of Service and our Privacy Policy. If you do not agree to these terms, please do not use our services.</p>
+        <h2 class="text-3xl font-bold text-gray-200 mt-12 mb-6">1. Acceptance of Terms</h2>
+        <p class="text-gray-400 leading-relaxed mb-6">By creating an account, accessing, or using FinanceU's services, you agree to comply with and be bound by these Terms of Service and our Privacy Policy. If you do not agree to these terms, please do not use our services.</p>
 
-        <h2>2. Description of Service</h2>
-        <p>FinanceU provides online financial education courses and resources designed for beginners in personal finance. Our service includes:</p>
-        <ul>
+        <h2 class="text-3xl font-bold text-gray-200 mt-12 mb-6">2. Description of Service</h2>
+        <p class="text-gray-400 leading-relaxed mb-4">FinanceU provides online financial education courses and resources designed for beginners in personal finance. Our service includes:</p>
+        <ul class="list-disc pl-8 text-gray-400 leading-relaxed mb-6 space-y-2">
             <li>Educational courses and lessons organized into 5 financial paths</li>
             <li>25 comprehensive lesson plans across different subscription tiers</li>
             <li>Actionable steps and guidance for implementing financial knowledge</li>
             <li>Progress tracking and completion certificates</li>
         </ul>
 
-        <h2>3. User Accounts</h2>
+        <h2 class="text-3xl font-bold text-gray-200 mt-12 mb-6">3. User Accounts</h2>
 
-        <h3>Account Creation</h3>
-        <p>To access certain features, you must create an account. You agree to:</p>
-        <ul>
+        <h3 class="text-xl font-semibold text-gray-300 mt-8 mb-4">Account Creation</h3>
+        <p class="text-gray-400 leading-relaxed mb-4">To access certain features, you must create an account. You agree to:</p>
+        <ul class="list-disc pl-8 text-gray-400 leading-relaxed mb-6 space-y-2">
             <li>Provide accurate, current, and complete information</li>
             <li>Maintain and update your information to keep it accurate</li>
-            <li>Maintain the security of your password</li>
+            <li>Keep your password secure and confidential</li>
             <li>Accept responsibility for all activities under your account</li>
-            <li>Notify us immediately of any unauthorized use</li>
         </ul>
 
-        <h3>Eligibility</h3>
-        <p>You must be at least 13 years old to use our service. If you are under 18, you represent that you have your parent's or guardian's permission to use the service.</p>
+        <h3 class="text-xl font-semibold text-gray-300 mt-8 mb-4">Account Security</h3>
+        <p class="text-gray-400 leading-relaxed mb-6">You are responsible for maintaining the confidentiality of your account credentials. Notify us immediately of any unauthorized access or security breach.</p>
 
-        <h2>4. Subscription and Payment</h2>
+        <h2 class="text-3xl font-bold text-gray-200 mt-12 mb-6">4. Subscription Plans & Billing</h2>
 
-        <h3>Free and Paid Plans</h3>
-        <p>FinanceU offers both free and paid subscription plans. By subscribing to a paid plan, you agree to pay all applicable fees.</p>
+        <h3 class="text-xl font-semibold text-gray-300 mt-8 mb-4">Pricing</h3>
+        <p class="text-gray-400 leading-relaxed mb-4">FinanceU offers three subscription tiers:</p>
+        <ul class="list-disc pl-8 text-gray-400 leading-relaxed mb-6 space-y-2">
+            <li><strong class="text-gray-300">Free Plan:</strong> Access to 5 lessons (Path 1: Banking Basics)</li>
+            <li><strong class="text-gray-300">Pro Plan ($9.99/month):</strong> Access to 15 lessons (Paths 1-3)</li>
+            <li><strong class="text-gray-300">Expert Plan ($19.99/month):</strong> Access to all 25 lessons (Paths 1-5)</li>
+        </ul>
 
-        <h3>Billing</h3>
-        <ul>
-            <li>Subscriptions are billed on a recurring basis (monthly or annually)</li>
-            <li>You authorize us to charge your payment method automatically</li>
+        <h3 class="text-xl font-semibold text-gray-300 mt-8 mb-4">Payment Terms</h3>
+        <ul class="list-disc pl-8 text-gray-400 leading-relaxed mb-6 space-y-2">
+            <li>Subscriptions are billed monthly in advance</li>
+            <li>All payments are processed securely through Stripe</li>
             <li>Prices are subject to change with 30 days notice</li>
-            <li>All fees are non-refundable except as required by law or stated in our refund policy</li>
+            <li>You can cancel your subscription at any time</li>
         </ul>
 
-        <h3>Cancellation</h3>
-        <p>You may cancel your subscription at any time from your account settings. Cancellation will take effect at the end of your current billing period.</p>
+        <h3 class="text-xl font-semibold text-gray-300 mt-8 mb-4">Refund Policy</h3>
+        <p class="text-gray-400 leading-relaxed mb-6">We offer a 14-day money-back guarantee for first-time subscribers. After 14 days, no refunds will be provided for partial subscription periods.</p>
 
-        <h3>Refund Policy</h3>
-        <p>We offer a 30-day money-back guarantee for new paid subscriptions. To request a refund, contact us at support@financeu.org within 30 days of your initial purchase.</p>
+        <h2 class="text-3xl font-bold text-gray-200 mt-12 mb-6">5. Educational Disclaimer</h2>
+        <p class="text-gray-400 leading-relaxed mb-6"><strong class="text-gray-300">IMPORTANT:</strong> FinanceU provides educational content only and does not offer financial advice. We are not financial advisors, and our content should not be considered as personalized financial, investment, or legal advice.</p>
+        <p class="text-gray-400 leading-relaxed mb-6">You should:</p>
+        <ul class="list-disc pl-8 text-gray-400 leading-relaxed mb-6 space-y-2">
+            <li>Always consult with qualified professionals before making financial decisions</li>
+            <li>Verify information with certified financial advisors, accountants, or attorneys</li>
+            <li>Understand that financial situations vary and what works for one person may not work for another</li>
+            <li>Do your own research and due diligence</li>
+        </ul>
 
-        <h2>5. User Conduct</h2>
-        <p>You agree not to:</p>
-        <ul>
-            <li>Use the service for any illegal purpose or in violation of any laws</li>
+        <h2 class="text-3xl font-bold text-gray-200 mt-12 mb-6">6. Intellectual Property</h2>
+        <p class="text-gray-400 leading-relaxed mb-6">All content on FinanceU, including text, graphics, logos, videos, and software, is owned by FinanceU or its licensors and protected by copyright, trademark, and other intellectual property laws.</p>
+
+        <h3 class="text-xl font-semibold text-gray-300 mt-8 mb-4">Limited License</h3>
+        <p class="text-gray-400 leading-relaxed mb-4">We grant you a limited, non-exclusive, non-transferable license to:</p>
+        <ul class="list-disc pl-8 text-gray-400 leading-relaxed mb-6 space-y-2">
+            <li>Access and use the content for personal, non-commercial educational purposes</li>
+            <li>Download course materials for offline study</li>
+        </ul>
+
+        <h3 class="text-xl font-semibold text-gray-300 mt-8 mb-4">Prohibited Uses</h3>
+        <p class="text-gray-400 leading-relaxed mb-4">You may NOT:</p>
+        <ul class="list-disc pl-8 text-gray-400 leading-relaxed mb-6 space-y-2">
+            <li>Reproduce, distribute, or sell FinanceU content</li>
             <li>Share your account credentials with others</li>
-            <li>Copy, distribute, or modify any part of the service without permission</li>
+            <li>Use automated tools to scrape or download content</li>
+            <li>Modify, reverse engineer, or create derivative works</li>
+        </ul>
+
+        <h2 class="text-3xl font-bold text-gray-200 mt-12 mb-6">7. User Conduct</h2>
+        <p class="text-gray-400 leading-relaxed mb-4">You agree not to:</p>
+        <ul class="list-disc pl-8 text-gray-400 leading-relaxed mb-6 space-y-2">
+            <li>Violate any applicable laws or regulations</li>
+            <li>Infringe on intellectual property rights</li>
+            <li>Upload malicious code or viruses</li>
+            <li>Harass, abuse, or harm other users</li>
             <li>Attempt to gain unauthorized access to our systems</li>
-            <li>Transmit viruses or malicious code</li>
-            <li>Use automated systems to access the service without permission</li>
+            <li>Use the service for any illegal or unauthorized purpose</li>
         </ul>
 
-        <h2>6. Intellectual Property</h2>
+        <h2 class="text-3xl font-bold text-gray-200 mt-12 mb-6">8. Termination</h2>
+        <p class="text-gray-400 leading-relaxed mb-6">We reserve the right to suspend or terminate your account at our discretion if you violate these Terms or engage in conduct we deem harmful to FinanceU or other users.</p>
 
-        <h3>Our Content</h3>
-        <p>All content on FinanceU, including text, graphics, logos, courses, and software, is owned by FinanceU and protected by copyright, trademark, and other intellectual property laws.</p>
+        <h3 class="text-xl font-semibold text-gray-300 mt-8 mb-4">Account Cancellation</h3>
+        <p class="text-gray-400 leading-relaxed mb-6">You may cancel your subscription at any time through your account settings. Upon cancellation, you'll retain access until the end of your current billing period.</p>
 
-        <h3>Limited License</h3>
-        <p>We grant you a limited, non-exclusive, non-transferable license to access and use our service for personal, non-commercial purposes. You may not:</p>
-        <ul>
-            <li>Reproduce, distribute, or create derivative works from our content</li>
-            <li>Download courses or materials for distribution to others</li>
-            <li>Remove any copyright or proprietary notices</li>
-        </ul>
+        <h2 class="text-3xl font-bold text-gray-200 mt-12 mb-6">9. Limitation of Liability</h2>
+        <p class="text-gray-400 leading-relaxed mb-6">TO THE MAXIMUM EXTENT PERMITTED BY LAW, FINANCEU SHALL NOT BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, OR PUNITIVE DAMAGES, OR ANY LOSS OF PROFITS OR REVENUES, WHETHER INCURRED DIRECTLY OR INDIRECTLY, OR ANY LOSS OF DATA, USE, GOODWILL, OR OTHER INTANGIBLE LOSSES.</p>
 
+        <h2 class="text-3xl font-bold text-gray-200 mt-12 mb-6">10. Changes to Terms</h2>
+        <p class="text-gray-400 leading-relaxed mb-6">We may update these Terms from time to time. We will notify you of significant changes by email or through a prominent notice on our website. Your continued use of FinanceU after changes constitute acceptance of the updated Terms.</p>
 
-        <h2>7. Disclaimers</h2>
+        <h2 class="text-3xl font-bold text-gray-200 mt-12 mb-6">11. Governing Law</h2>
+        <p class="text-gray-400 leading-relaxed mb-6">These Terms shall be governed by and construed in accordance with the laws of the United States, without regard to its conflict of law provisions.</p>
 
-        <h3>Educational Purposes Only</h3>
-        <p>The information provided on FinanceU is for educational purposes only and should not be considered professional financial advice. We are not financial advisors, and you should consult with qualified professionals before making financial decisions.</p>
-
-        <h3>No Guarantees</h3>
-        <p>We do not guarantee specific financial outcomes from using our service. Your financial success depends on many factors outside our control.</p>
-
-        <h3>Service Availability</h3>
-        <p>We strive to maintain uninterrupted service but do not guarantee that our service will always be available, error-free, or free from viruses or other harmful components.</p>
-
-        <h2>8. Limitation of Liability</h2>
-        <p>To the maximum extent permitted by law, FinanceU and its affiliates shall not be liable for any indirect, incidental, special, consequential, or punitive damages, or any loss of profits or revenues, whether incurred directly or indirectly, or any loss of data, use, goodwill, or other intangible losses resulting from:</p>
-        <ul>
-            <li>Your use or inability to use the service</li>
-            <li>Any unauthorized access to or use of our servers</li>
-            <li>Any bugs, viruses, or other harmful code</li>
-            <li>Any errors or omissions in content</li>
-            <li>Financial decisions made based on our content</li>
-        </ul>
-
-        <h2>9. Indemnification</h2>
-        <p>You agree to indemnify and hold harmless FinanceU and its affiliates from any claims, damages, losses, liabilities, and expenses (including legal fees) arising from your use of the service or violation of these terms.</p>
-
-        <h2>10. Modifications to Service and Terms</h2>
-        <p>We reserve the right to modify or discontinue the service at any time, with or without notice. We may also update these Terms of Service from time to time. Continued use of the service after changes constitutes acceptance of the new terms.</p>
-
-        <h2>11. Termination</h2>
-        <p>We may terminate or suspend your account and access to the service immediately, without prior notice, for any reason, including if you breach these Terms of Service. Upon termination, your right to use the service will immediately cease.</p>
-
-        <h2>12. Governing Law</h2>
-        <p>These Terms shall be governed by and construed in accordance with the laws of the United States, without regard to its conflict of law provisions.</p>
-
-        <h2>13. Dispute Resolution</h2>
-        <p>Any disputes arising from these terms or your use of the service shall be resolved through binding arbitration, except where prohibited by law.</p>
-
-        <h2>14. Severability</h2>
-        <p>If any provision of these Terms is found to be unenforceable or invalid, that provision will be limited or eliminated to the minimum extent necessary, and the remaining provisions will remain in full force and effect.</p>
-
-        <h2>15. Contact Information</h2>
-        <p>If you have any questions about these Terms of Service, please contact us:</p>
-        <ul>
-            <li>Email: legal@financeu.org</li>
-            <li>Contact Form: <a href="/contact" style="color: var(--primary);">Contact Us</a></li>
-        </ul>
-
-        <p style="margin-top: 40px; padding-top: 40px; border-top: 1px solid #e2e8f0;">
-            By using FinanceU, you acknowledge that you have read, understood, and agree to be bound by these Terms of Service.
-        </p>
+        <h2 class="text-3xl font-bold text-gray-200 mt-12 mb-6">12. Contact Information</h2>
+        <p class="text-gray-400 leading-relaxed mb-2">If you have questions about these Terms, please contact us at:</p>
+        <p class="text-gray-400 leading-relaxed mb-2"><strong class="text-gray-300">Email:</strong> <a href="mailto:support@financeu.com" class="text-gray-400 hover:text-gray-200 underline">support@financeu.com</a></p>
+        <p class="text-gray-400 leading-relaxed mb-12"><strong class="text-gray-300">Website:</strong> <a href="/contact" class="text-gray-400 hover:text-gray-200 underline">www.financeu.com/contact</a></p>
     </div>
 
     <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h4>FinanceU</h4>
-                    <p>Making financial literacy accessible for everyone.</p>
+    <footer class="py-10 border-t border-gray-800">
+        <div class="container mx-auto px-6">
+            <div class="grid md:grid-cols-4 gap-6 mb-6">
+                <div>
+                    <div class="flex items-center space-x-2 mb-3">
+                        <div class="w-7 h-7 rounded-full bg-gradient-to-br from-gray-300 to-gray-400 glow-grey flex items-center justify-center font-bold text-sm" style="color: #1f2937;">
+                            F
+                        </div>
+                        <span class="text-lg font-bold gradient-text">FinanceU</span>
+                    </div>
+                    <p class="text-gray-500 text-xs leading-relaxed">
+                        Empowering students with practical financial education for a confident future.
+                    </p>
                 </div>
-                <div class="footer-section">
-                    <h4>Company</h4>
-                    <ul>
-                        <li><a href="/about">About Us</a></li>
-                        <li><a href="/careers">Careers</a></li>
-                        <li><a href="/contact">Contact</a></li>
+
+                <div>
+                    <h4 class="font-semibold mb-3 text-gray-300 text-sm">Learn</h4>
+                    <ul class="space-y-2 text-gray-500 text-xs">
+                        <li><a href="/courses" class="hover:text-gray-300 transition-colors">Courses</a></li>
+                        <li><a href="/dashboard" class="hover:text-gray-300 transition-colors">Dashboard</a></li>
+                        <li><a href="/help" class="hover:text-gray-300 transition-colors">Resources</a></li>
                     </ul>
                 </div>
-                <div class="footer-section">
-                    <h4>Support</h4>
-                    <ul>
-                        <li><a href="/help">Help Center</a></li>
-                        <li><a href="/privacy">Privacy Policy</a></li>
-                        <li><a href="/terms">Terms of Service</a></li>
+
+                <div>
+                    <h4 class="font-semibold mb-3 text-gray-300 text-sm">Company</h4>
+                    <ul class="space-y-2 text-gray-500 text-xs">
+                        <li><a href="/about" class="hover:text-gray-300 transition-colors">About</a></li>
+                        <li><a href="/contact" class="hover:text-gray-300 transition-colors">Contact</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-semibold mb-3 text-gray-300 text-sm">Legal</h4>
+                    <ul class="space-y-2 text-gray-500 text-xs">
+                        <li><a href="/privacy" class="hover:text-gray-300 transition-colors">Privacy</a></li>
+                        <li><a href="/terms" class="hover:text-gray-300 transition-colors">Terms</a></li>
+                        <li><a href="/feedback" class="hover:text-gray-300 transition-colors">Feedback</a></li>
                     </ul>
                 </div>
             </div>
-            <div class="footer-bottom">
-                <p style="font-size: 0.85rem; opacity: 0.8; margin-bottom: 10px;">Disclaimer: FinanceU provides educational content only and does not offer financial, legal, or investment advice. Always consult with a qualified professional before making financial decisions.</p>
-                <p>&copy; 2025 FinanceU. All rights reserved.</p>
+
+            <div class="border-t border-gray-800 pt-6 text-center text-gray-400 text-xs">
+                <p>&copy; 2025 FinanceU. Built with care for students, by students.</p>
             </div>
         </div>
     </footer>
 
     <script src="config.js"></script>
     <script>
-                // Check authentication status and update nav
+        // Authentication check
         async function updateNav() {
             const authButtons = document.getElementById('authButtons');
 
-            // Check localStorage for cached auth state and render immediately
-            const cachedAuth = localStorage.getItem('authState');
-            if (cachedAuth) {
-                const authState = JSON.parse(cachedAuth);
-                authButtons.innerHTML = authState.isLoggedIn
-                    ? `<a href="dashboard" class="btn-primary">Dashboard</a>`
-                    : `<a href="login" class="btn-primary">Login</a>`;
-                authButtons.style.opacity = '1';
-            }
-
-            // Then verify with server in background
             try {
-                const response = await fetch(`${API_URL}/auth/me`, {
-                    credentials: 'include'
-                });
+                const response = await fetch(`${API_URL}/auth/me`, { credentials: 'include' });
 
                 if (response.ok) {
                     localStorage.setItem('authState', JSON.stringify({ isLoggedIn: true }));
-                    authButtons.innerHTML = `
-                        <a href="dashboard" class="btn-primary">Dashboard</a>
-                    `;
+                    authButtons.innerHTML = `<button onclick="logout()" class="btn-3d px-6 py-2.5 bg-gradient-to-r from-gray-200 to-gray-300 hover:from-gray-300 hover:to-gray-200 rounded-lg font-semibold glow-grey transition-all" style="color: #1f2937;">Logout</button>`;
                 } else {
-                    localStorage.setItem('authState', JSON.stringify({ isLoggedIn: false }));
                     authButtons.innerHTML = `
-                        <a href="login" class="btn-primary">Login</a>
+                        <a href="/login" class="hidden md:inline-block px-6 py-2 text-gray-400 hover:text-gray-200 transition-colors font-medium">Login</a>
+                        <a href="/signup" class="btn-3d px-6 py-2.5 bg-gradient-to-r from-gray-200 to-gray-300 hover:from-gray-300 hover:to-gray-200 rounded-lg font-semibold glow-grey transition-all" style="color: #1f2937;">Sign Up</a>
                     `;
                 }
-                authButtons.style.opacity = '1';
             } catch (error) {
-                console.log('Not logged in');
-                localStorage.setItem('authState', JSON.stringify({ isLoggedIn: false }));
                 authButtons.innerHTML = `
-                    <a href="login" class="btn-primary">Login</a>
+                    <a href="/login" class="hidden md:inline-block px-6 py-2 text-gray-400 hover:text-gray-200 transition-colors font-medium">Login</a>
+                    <a href="/signup" class="btn-3d px-6 py-2.5 bg-gradient-to-r from-gray-200 to-gray-300 hover:from-gray-300 hover:to-gray-200 rounded-lg font-semibold glow-grey transition-all" style="color: #1f2937;">Sign Up</a>
                 `;
-                authButtons.style.opacity = '1';
+            }
+        }
+
+        async function logout() {
+            localStorage.removeItem('authState');
+            localStorage.removeItem('token');
+            localStorage.removeItem('userId');
+
+            try {
+                await fetch(`${API_URL}/auth/logout`, {
+                    method: 'POST',
+                    credentials: 'include'
+                });
+                window.location.href = '/index.html';
+            } catch (error) {
+                window.location.href = '/index.html';
             }
         }
 
