@@ -351,6 +351,12 @@
             background: rgba(15, 15, 15, 0.9);
             border-bottom: 1px solid rgba(156, 163, 175, 0.15);
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+            transition: transform 0.3s ease-in-out;
+        }
+
+        /* Hide navigation on scroll down */
+        .nav-hidden {
+            transform: translateY(-100%);
         }
 
         /* 3D Button Effect */
@@ -810,6 +816,31 @@
                     console.log('Hero video loaded successfully:', heroVideo.currentSrc);
                 });
             }
+        });
+
+        // Hide/show navigation on scroll
+        let lastScrollTop = 0;
+        const nav = document.querySelector('nav');
+        const scrollThreshold = 100; // Start hiding after scrolling 100px
+
+        window.addEventListener('scroll', function() {
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+            // Only apply hide/show behavior after scrolling past threshold
+            if (scrollTop > scrollThreshold) {
+                if (scrollTop > lastScrollTop) {
+                    // Scrolling down - hide nav
+                    nav.classList.add('nav-hidden');
+                } else {
+                    // Scrolling up - show nav
+                    nav.classList.remove('nav-hidden');
+                }
+            } else {
+                // At top of page - always show nav
+                nav.classList.remove('nav-hidden');
+            }
+
+            lastScrollTop = scrollTop;
         });
     </script>
 </body>
