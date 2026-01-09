@@ -71,6 +71,7 @@
 
         /* Section styling */
         .lesson-section {
+            display: none;
             margin-bottom: 80px;
             opacity: 0;
             transform: translateY(30px);
@@ -78,6 +79,7 @@
         }
 
         .lesson-section.visible {
+            display: block;
             opacity: 1;
             transform: translateY(0);
         }
@@ -1017,10 +1019,12 @@
             document.getElementById('prevBtn').style.visibility = currentSection === 1 ? 'hidden' : 'visible';
             document.getElementById('nextBtn').style.display = currentSection === totalSections ? 'none' : 'block';
 
-            // Update section visibility
+            // Update section visibility - ONLY show current section
             document.querySelectorAll('.lesson-section').forEach((section, index) => {
-                if (index + 1 <= currentSection) {
+                if (index + 1 === currentSection) {
                     section.classList.add('visible');
+                } else {
+                    section.classList.remove('visible');
                 }
             });
         }
