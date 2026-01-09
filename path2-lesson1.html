@@ -1303,6 +1303,7 @@
 
     </div>
 
+    <script src="config.js"></script>
     <script src="/lesson-completion.js"></script>
     <script>
         // State
@@ -1651,14 +1652,12 @@
             localStorage.setItem(`path2_lesson1_completed_${userId}`, 'true');
 
             // Call backend completion handler
-            try {
-                await completeLesson(2, 1, userId);
-            } catch (error) {
-                console.error('Error saving completion:', error);
-            }
+            const success = await completeLesson('path2_lesson1', 2, 1);
 
-            // Redirect to path 2 lessons page
-            window.location.href = '/path2-lessons';
+            if (success) {
+                // Redirect to path 2 lessons page
+                window.location.href = '/path2-lessons';
+            }
         }
 
         // Initialize
