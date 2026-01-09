@@ -1,14 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Path 2 Lessons - FinanceU</title>
+    <title>Path 2: Budgeting & Saving - FinanceU</title>
     <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
-    <link rel="icon" type="image/svg+xml" sizes="16x16" href="assets/favicon-16x16.svg">
-    <link rel="icon" type="image/svg+xml" sizes="32x32" href="assets/favicon-32x32.svg">
-    <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.svg">
-    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
 
@@ -18,453 +15,353 @@
 
         body {
             background: #0f0f0f;
-            color: #d1d5db;
+            overflow-x: hidden;
         }
 
-        /* SVG Icon Alignment Fixes */
-        svg {
-            display: inline-block;
-            vertical-align: middle;
-        }
-
-        .intro-card-icon svg,
-        .mistake-icon svg,
-        .reflection-icon svg,
-        .result-icon svg {
-            display: block;
-            margin: 0 auto;
-        }
-
-        .budget-method-emoji svg,
-        .budget-item-label svg {
-            display: inline-block;
-            vertical-align: middle;
-            margin-right: 8px;
-        }
-
-        p svg, li svg, span svg {
-            display: inline-block;
-            vertical-align: middle;
-            margin: 0 2px;
-        }
-
-        .path-header {
-            background: linear-gradient(135deg, rgba(31, 41, 55, 0.9) 0%, rgba(17, 24, 39, 0.95) 100%);
-            backdrop-filter: blur(20px);
-            border: 2px solid rgba(156, 163, 175, 0.2);
-            border-radius: 20px;
-            color: #e5e7eb;
-            padding: 60px 20px 40px;
-            text-align: center;
-            margin: 100px auto 40px;
-            max-width: 900px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
-        }
-        .path-header h1 {
-            font-size: 42px;
-            margin-bottom: 15px;
+        /* Gradient text */
+        .gradient-text {
             background: linear-gradient(135deg, #e5e7eb 0%, #9ca3af 50%, #e5e7eb 100%);
+            background-size: 200% 200%;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            font-weight: 900;
+            animation: gradientShift 5s ease infinite;
         }
-        .path-header p {
-            font-size: 18px;
-            color: #9ca3af;
-            max-width: 700px;
-            margin: 0 auto;
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
         }
-        .lessons-container {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 0 20px 60px;
+
+        /* Glowing effects */
+        .glow-grey {
+            box-shadow: 0 0 20px rgba(156, 163, 175, 0.4), 0 0 40px rgba(156, 163, 175, 0.2);
         }
-        .lesson-card {
-            background: linear-gradient(135deg, rgba(31, 41, 55, 0.9) 0%, rgba(17, 24, 39, 0.95) 100%);
-            backdrop-filter: blur(20px);
-            border: 2px solid rgba(75, 85, 99, 0.4);
-            border-radius: 16px;
-            padding: 25px;
-            margin-bottom: 20px;
+
+        /* Navigation */
+        .nav-blur {
+            backdrop-filter: blur(12px);
+            background: rgba(15, 15, 15, 0.9);
+            border-bottom: 1px solid rgba(156, 163, 175, 0.15);
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            transition: all 0.3s ease;
-            position: relative;
-            border-left: 4px solid transparent;
         }
-        .lesson-card::before {
-            content: attr(data-lesson);
+
+        /* 3D Button Effect */
+        .btn-3d {
+            transform-style: preserve-3d;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3), 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-3d:hover {
+            transform: translateY(-4px) translateZ(10px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4), 0 16px 32px rgba(0, 0, 0, 0.3), 0 0 40px rgba(209, 213, 219, 0.2);
+        }
+
+        /* Lesson card with 3D effect - Green theme for Path 2 */
+        .lesson-card {
+            background: linear-gradient(135deg, rgba(34, 197, 94, 0.1) 0%, rgba(17, 24, 39, 0.95) 100%);
+            backdrop-filter: blur(20px);
+            border: 2px solid rgba(34, 197, 94, 0.3);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transform-style: preserve-3d;
+            position: relative;
+        }
+
+        .lesson-card:hover {
+            transform: translateY(-12px) scale(1.02);
+            border-color: rgba(34, 197, 94, 0.6);
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.9), 0 0 60px rgba(34, 197, 94, 0.3);
+            z-index: 10;
+        }
+
+        .lesson-card.completed {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(17, 24, 39, 0.95) 100%);
+            border-color: rgba(16, 185, 129, 0.4);
+        }
+
+        .lesson-card.completed:hover {
+            border-color: rgba(16, 185, 129, 0.7);
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.9), 0 0 60px rgba(16, 185, 129, 0.3);
+        }
+
+        .lesson-card.locked {
+            background: linear-gradient(135deg, rgba(75, 85, 99, 0.1) 0%, rgba(17, 24, 39, 0.95) 100%);
+            border-color: rgba(75, 85, 99, 0.3);
+            opacity: 0.6;
+        }
+
+        /* Lesson number badge - positioned at top corner */
+        .lesson-number {
             position: absolute;
-            left: 25px;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 40px;
-            height: 40px;
-            background: linear-gradient(135deg, #6b7280 0%, #4b5563 100%);
+            top: 20px;
+            left: 20px;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: white;
-            font-weight: 700;
-            font-size: 16px;
-            box-shadow: 0 2px 8px rgba(156, 163, 175, 0.3);
-        }
-        .lesson-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.7);
-            border-color: rgba(156, 163, 175, 0.6);
-            border-left-color: #9ca3af;
-        }
-        .lesson-card.completed {
-            background: linear-gradient(135deg, rgba(16, 185, 129, 0.15) 0%, rgba(5, 150, 105, 0.1) 100%);
-            border: 2px solid #10b981;
-            border-left: 4px solid #10b981;
-        }
-        .lesson-card.completed::before {
-            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
-            box-shadow: 0 2px 8px rgba(16, 185, 129, 0.4);
-        }
-        .lesson-info {
-            margin-left: 60px;
-        }
-        .lesson-info h3 {
             font-size: 22px;
-            margin-bottom: 8px;
-            color: #e5e7eb;
-            font-weight: 700;
+            font-weight: 800;
+            color: white;
+            box-shadow: 0 8px 20px rgba(34, 197, 94, 0.5);
+            z-index: 2;
+            border: 3px solid #0f0f0f;
         }
-        .lesson-info p {
-            color: #9ca3af;
-            font-size: 15px;
-            margin: 0;
-        }
-        .lesson-status {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-        .completed-badge {
+
+        .lesson-card.completed .lesson-number {
             background: linear-gradient(135deg, #10b981 0%, #059669 100%);
-            color: white;
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-size: 14px;
-            font-weight: 600;
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            box-shadow: 0 2px 8px rgba(16, 185, 129, 0.4);
+            box-shadow: 0 8px 20px rgba(16, 185, 129, 0.5);
         }
-        .btn-start-lesson {
-            padding: 12px 24px;
+
+        .lesson-card.locked .lesson-number {
             background: linear-gradient(135deg, #6b7280 0%, #4b5563 100%);
-            color: white;
-            text-decoration: none;
-            border-radius: 8px;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            border: none;
-            cursor: pointer;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 8px 20px rgba(107, 114, 128, 0.5);
         }
-        .btn-start-lesson:hover {
-            background: linear-gradient(135deg, #9ca3af 0%, #6b7280 100%);
-            transform: translateY(-2px);
-            box-shadow: 0 6px 16px rgba(156, 163, 175, 0.4);
-        }
-        .back-link {
-            display: inline-block;
-            margin-bottom: 20px;
-            color: #9ca3af;
-            text-decoration: none;
-            font-weight: 600;
-            transition: color 0.2s ease;
-        }
-        .back-link:hover {
-            color: #e5e7eb;
-        }
-        .quiz-card {
-            background: linear-gradient(135deg, rgba(251, 191, 36, 0.9) 0%, rgba(245, 158, 11, 0.95) 100%);
-            border: 2px solid rgba(251, 191, 36, 0.5);
-            border-radius: 16px;
-            padding: 30px;
-            margin-top: 40px;
-            margin-bottom: 20px;
-            box-shadow: 0 8px 24px rgba(251, 191, 36, 0.3);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-        .quiz-card::before {
-            content: '';
+
+        /* Floating particles */
+        .particle {
             position: absolute;
-            top: -50%;
-            right: -50%;
-            width: 200px;
-            height: 200px;
-            background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, transparent 70%);
-            animation: pulse 3s ease-in-out infinite;
+            border-radius: 50%;
+            pointer-events: none;
+            opacity: 0.3;
         }
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); opacity: 0.5; }
-            50% { transform: scale(1.2); opacity: 0.8; }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-30px) rotate(180deg); }
         }
+
+        /* Quiz card special styling */
+        .quiz-card {
+            background: linear-gradient(135deg, rgba(251, 191, 36, 0.15) 0%, rgba(17, 24, 39, 0.95) 100%);
+            border: 3px solid rgba(251, 191, 36, 0.5);
+        }
+
         .quiz-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 12px 32px rgba(251, 191, 36, 0.4);
+            border-color: rgba(251, 191, 36, 0.8);
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.9), 0 0 60px rgba(251, 191, 36, 0.4);
         }
-        .quiz-card .lesson-info {
-            margin-left: 0;
-            position: relative;
-            z-index: 1;
+
+        .quiz-card.completed {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.15) 0%, rgba(17, 24, 39, 0.95) 100%);
+            border-color: rgba(16, 185, 129, 0.5);
         }
-        .quiz-card .lesson-info h3 {
-            color: white;
-            font-size: 26px;
-        }
-        .quiz-card .lesson-info p {
-            color: rgba(255, 255, 255, 0.9);
-            font-size: 15px;
-        }
-        .btn-start-quiz {
-            padding: 14px 28px;
-            background: white;
-            color: #f59e0b;
-            text-decoration: none;
-            border-radius: 8px;
-            font-weight: 700;
-            transition: all 0.3s ease;
-            border: none;
-            cursor: pointer;
-            font-size: 16px;
-        }
-        .btn-start-quiz:hover {
-            background: #fffbeb;
-            transform: scale(1.05);
-        }
-        .quiz-completed-badge {
-            background: #10b981;
-            color: white;
-            padding: 10px 20px;
-            border-radius: 20px;
-            font-size: 15px;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 8px;
+
+        .quiz-card.completed:hover {
+            border-color: rgba(16, 185, 129, 0.8);
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.9), 0 0 60px rgba(16, 185, 129, 0.4);
         }
     </style>
 </head>
-<body class="homepage-dark">
+<body class="min-h-screen relative" style="color: #d1d5db;">
+    <!-- Floating Particles -->
+    <div id="particles-container" style="position: fixed; width: 100%; height: 100%; top: 0; left: 0; pointer-events: none; z-index: 1;"></div>
+
     <!-- Navigation -->
-    <nav class="navbar">
-        <div class="container">
-            <div class="nav-wrapper">
-                <div class="logo"><a href="/" style="color: inherit; text-decoration: none;">Finance<span class="logo-accent">U</span></a></div>
-                <ul class="nav-links">
-                    <li><a href="/">Home</a></li>
-                    <li><a href="dashboard">Dashboard</a></li>
-                    <li id="authButtons" style=" opacity: 0;">
-                    </li>
-                    </li>
-                    </li>
-                </ul>
+    <nav class="fixed top-0 left-0 right-0 z-50 nav-blur">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <a href="/" class="flex items-center space-x-2">
+                    <div class="w-10 h-10 rounded-full bg-gradient-to-br from-gray-200 to-gray-400 glow-grey flex items-center justify-center font-bold text-xl" style="color: #1f2937;">
+                        F
+                    </div>
+                    <span class="text-2xl font-bold gradient-text">FinanceU</span>
+                </a>
+
+                <div class="hidden md:flex items-center space-x-6">
+                    <a href="/dashboard" class="text-gray-400 hover:text-gray-200 transition-colors font-medium">Dashboard</a>
+                </div>
+
+                <div class="flex items-center space-x-4">
+                    <button onclick="logout()" class="btn-3d px-6 py-2.5 bg-gradient-to-r from-gray-200 to-gray-300 hover:from-gray-300 hover:to-gray-200 rounded-lg font-semibold glow-grey transition-all" style="color: #1f2937;">
+                        Logout
+                    </button>
+                </div>
             </div>
         </div>
     </nav>
 
-    <!-- Path Header -->
-    <section class="path-header">
-        <h1>Path 2: Budgeting & Saving</h1>
-        <p>Master the art of managing your money and building financial security</p>
+    <!-- Main Content -->
+    <section class="min-h-screen pt-32 pb-20 relative z-10">
+        <div class="container mx-auto px-6 max-w-5xl">
+            <!-- Header -->
+            <div class="text-center mb-16">
+                <a href="/dashboard" class="inline-block mb-6 text-gray-400 hover:text-gray-200 transition-colors font-medium">
+                    ← Back to Dashboard
+                </a>
+                <h1 class="text-5xl md:text-6xl font-black mb-4 gradient-text">
+                    Path 2: Budgeting & Saving
+                </h1>
+                <p class="text-xl text-gray-400 max-w-2xl mx-auto">
+                    Master the art of managing your money and building financial security
+                </p>
+            </div>
+
+            <!-- Lessons Grid -->
+            <div class="space-y-6" id="lessonsList">
+                <!-- Lesson 1 -->
+                <div class="lesson-card rounded-2xl p-8 relative overflow-hidden" data-lesson="1">
+                    <div class="lesson-number">1</div>
+                    <div class="ml-20">
+                        <h3 class="text-2xl font-bold text-gray-200 mb-2">Creating Your First Budget</h3>
+                        <p class="text-gray-400 mb-6">Learn the fundamentals of building a budget that works for you</p>
+                        <a href="/path2-lesson1" class="btn-3d inline-block px-8 py-3 bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 rounded-xl font-bold text-white transition-all">
+                            Start Lesson
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Lesson 2 -->
+                <div class="lesson-card locked rounded-2xl p-8 relative overflow-hidden" data-lesson="2">
+                    <div class="lesson-number">2</div>
+                    <div class="ml-20">
+                        <h3 class="text-2xl font-bold text-gray-200 mb-2">The 50/30/20 Rule</h3>
+                        <p class="text-gray-400 mb-6">Discover a simple framework for dividing your income</p>
+                        <div class="flex items-center gap-3">
+                            <svg class="w-5 h-5 text-gray-500" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"/>
+                            </svg>
+                            <span class="text-gray-500 font-semibold">Complete Previous Lesson</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Lesson 3 -->
+                <div class="lesson-card locked rounded-2xl p-8 relative overflow-hidden" data-lesson="3">
+                    <div class="lesson-number">3</div>
+                    <div class="ml-20">
+                        <h3 class="text-2xl font-bold text-gray-200 mb-2">Building an Emergency Fund</h3>
+                        <p class="text-gray-400 mb-6">Create a financial safety net for unexpected expenses</p>
+                        <div class="flex items-center gap-3">
+                            <svg class="w-5 h-5 text-gray-500" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"/>
+                            </svg>
+                            <span class="text-gray-500 font-semibold">Complete Previous Lesson</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Lesson 4 -->
+                <div class="lesson-card locked rounded-2xl p-8 relative overflow-hidden" data-lesson="4">
+                    <div class="lesson-number">4</div>
+                    <div class="ml-20">
+                        <h3 class="text-2xl font-bold text-gray-200 mb-2">Saving Strategies That Work</h3>
+                        <p class="text-gray-400 mb-6">Explore proven methods to grow your savings consistently</p>
+                        <div class="flex items-center gap-3">
+                            <svg class="w-5 h-5 text-gray-500" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"/>
+                            </svg>
+                            <span class="text-gray-500 font-semibold">Complete Previous Lesson</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Lesson 5 -->
+                <div class="lesson-card locked rounded-2xl p-8 relative overflow-hidden" data-lesson="5">
+                    <div class="lesson-number">5</div>
+                    <div class="ml-20">
+                        <h3 class="text-2xl font-bold text-gray-200 mb-2">Cutting Expenses Without Sacrifice</h3>
+                        <p class="text-gray-400 mb-6">Reduce spending while maintaining your quality of life</p>
+                        <div class="flex items-center gap-3">
+                            <svg class="w-5 h-5 text-gray-500" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"/>
+                            </svg>
+                            <span class="text-gray-500 font-semibold">Complete Previous Lesson</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Lesson 6 -->
+                <div class="lesson-card locked rounded-2xl p-8 relative overflow-hidden" data-lesson="6">
+                    <div class="lesson-number">6</div>
+                    <div class="ml-20">
+                        <h3 class="text-2xl font-bold text-gray-200 mb-2">Automating Your Savings</h3>
+                        <p class="text-gray-400 mb-6">Set up systems that save money without thinking about it</p>
+                        <div class="flex items-center gap-3">
+                            <svg class="w-5 h-5 text-gray-500" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"/>
+                            </svg>
+                            <span class="text-gray-500 font-semibold">Complete Previous Lesson</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Lesson 7 -->
+                <div class="lesson-card locked rounded-2xl p-8 relative overflow-hidden" data-lesson="7">
+                    <div class="lesson-number">7</div>
+                    <div class="ml-20">
+                        <h3 class="text-2xl font-bold text-gray-200 mb-2">Short-term vs. Long-term Savings</h3>
+                        <p class="text-gray-400 mb-6">Understand how to save for different time horizons</p>
+                        <div class="flex items-center gap-3">
+                            <svg class="w-5 h-5 text-gray-500" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"/>
+                            </svg>
+                            <span class="text-gray-500 font-semibold">Complete Previous Lesson</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Lesson 8 -->
+                <div class="lesson-card locked rounded-2xl p-8 relative overflow-hidden" data-lesson="8">
+                    <div class="lesson-number">8</div>
+                    <div class="ml-20">
+                        <h3 class="text-2xl font-bold text-gray-200 mb-2">Avoiding Budget Pitfalls</h3>
+                        <p class="text-gray-400 mb-6">Learn common budgeting mistakes and how to prevent them</p>
+                        <div class="flex items-center gap-3">
+                            <svg class="w-5 h-5 text-gray-500" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"/>
+                            </svg>
+                            <span class="text-gray-500 font-semibold">Complete Previous Lesson</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Final Quiz -->
+                <div class="quiz-card lesson-card rounded-2xl p-8 relative overflow-hidden" id="quizCard" style="display: none;">
+                    <div class="absolute top-6 right-6 w-16 h-16 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full flex items-center justify-center text-3xl animate-bounce">
+                        🎯
+                    </div>
+                    <div>
+                        <h3 class="text-3xl font-black text-gray-200 mb-3">Final Quiz</h3>
+                        <p class="text-gray-400 mb-6 text-lg">Test your knowledge of all 8 lessons • 16 questions • 80% to pass</p>
+                        <a href="/path2-quiz" class="btn-3d inline-block px-10 py-4 bg-gradient-to-r from-yellow-400 to-orange-500 hover:from-yellow-500 hover:to-orange-600 rounded-xl font-bold text-gray-900 text-lg transition-all">
+                            Take Final Quiz
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </section>
-
-    <!-- Lessons List -->
-    <div class="lessons-container">
-        <a href="dashboard" class="back-link">← Back to Dashboard</a>
-
-        <div id="lessonsList">
-            <!-- Lesson 1 -->
-            <div class="lesson-card" data-lesson="1">
-                <div class="lesson-info">
-                    <h3>Lesson 1 - Creating Your First Budget</h3>
-                    <p>Learn the fundamentals of building a budget that works for you</p>
-                </div>
-                <div class="lesson-status">
-                    <a href="/path2-lesson1" class="btn-start-lesson">Start Lesson</a>
-                </div>
-            </div>
-
-            <!-- Lesson 2 -->
-            <div class="lesson-card" data-lesson="2">
-                <div class="lesson-info">
-                    <h3>Lesson 2 - The 50/30/20 Rule</h3>
-                    <p>Discover a simple framework for dividing your income</p>
-                </div>
-                <div class="lesson-status">
-                    <a href="/path2-lesson2" class="btn-start-lesson">Start Lesson</a>
-                </div>
-            </div>
-
-            <!-- Lesson 3 -->
-            <div class="lesson-card" data-lesson="3">
-                <div class="lesson-info">
-                    <h3>Lesson 3 - Building an Emergency Fund</h3>
-                    <p>Create a financial safety net for unexpected expenses</p>
-                </div>
-                <div class="lesson-status">
-                    <a href="/path2-lesson3" class="btn-start-lesson">Start Lesson</a>
-                </div>
-            </div>
-
-            <!-- Lesson 4 -->
-            <div class="lesson-card" data-lesson="4">
-                <div class="lesson-info">
-                    <h3>Lesson 4 - Saving Strategies That Work</h3>
-                    <p>Explore proven methods to grow your savings consistently</p>
-                </div>
-                <div class="lesson-status">
-                    <a href="/path2-lesson4" class="btn-start-lesson">Start Lesson</a>
-                </div>
-            </div>
-
-            <!-- Lesson 5 -->
-            <div class="lesson-card" data-lesson="5">
-                <div class="lesson-info">
-                    <h3>Lesson 5 - Cutting Expenses Without Sacrifice</h3>
-                    <p>Reduce spending while maintaining your quality of life</p>
-                </div>
-                <div class="lesson-status">
-                    <a href="/path2-lesson5" class="btn-start-lesson">Start Lesson</a>
-                </div>
-            </div>
-
-            <!-- Lesson 6 -->
-            <div class="lesson-card" data-lesson="6">
-                <div class="lesson-info">
-                    <h3>Lesson 6 - Automating Your Savings</h3>
-                    <p>Set up systems that save money without thinking about it</p>
-                </div>
-                <div class="lesson-status">
-                    <a href="/path2-lesson6" class="btn-start-lesson">Start Lesson</a>
-                </div>
-            </div>
-
-            <!-- Lesson 7 -->
-            <div class="lesson-card" data-lesson="7">
-                <div class="lesson-info">
-                    <h3>Lesson 7 - Short-term vs. Long-term Savings</h3>
-                    <p>Understand how to save for different time horizons</p>
-                </div>
-                <div class="lesson-status">
-                    <a href="/path2-lesson7" class="btn-start-lesson">Start Lesson</a>
-                </div>
-            </div>
-
-            <!-- Lesson 8 -->
-            <div class="lesson-card" data-lesson="8">
-                <div class="lesson-info">
-                    <h3>Lesson 8 - Avoiding Budget Pitfalls</h3>
-                    <p>Learn common budgeting mistakes and how to prevent them</p>
-                </div>
-                <div class="lesson-status">
-                    <a href="/path2-lesson8" class="btn-start-lesson">Start Lesson</a>
-                </div>
-            </div>
-        </div>
-
-            <!-- Final Quiz -->
-            <div class="quiz-card" id="quizCard" style="display: none;">
-                <div class="lesson-info">
-                    <h3><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><polygon points="10,5 2,9 10,13 18,9" fill="#3B82F6"/><polygon points="10,13 6,11 6,14 10,16 14,14 14,11" fill="#60A5FA"/></svg> Final Quiz</h3>
-                    <p>Test your knowledge of all 8 lessons • 16 questions • 80% to pass</p>
-                </div>
-                <div class="lesson-status">
-                    <a href="/path2-quiz" class="btn-start-quiz">Take Quiz</a>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h4>FinanceU</h4>
-                    <p>Making financial literacy accessible for everyone.</p>
-                </div>
-                <div class="footer-section">
-                    <h4>Company</h4>
-                    <ul>
-                        <li><a href="/about">About Us</a></li>
-                        <li><a href="/careers">Careers</a></li>
-                        <li><a href="/contact">Contact</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h4>Support</h4>
-                    <ul>
-                        <li><a href="/help">Help Center</a></li>
-                        <li><a href="/privacy">Privacy Policy</a></li>
-                        <li><a href="/terms">Terms of Service</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p style=" font-size: 0.85rem; opacity: 0.8; margin-bottom: 10px;">Disclaimer: FinanceU provides educational content only and does not offer financial, legal, or investment advice. Always consult with a qualified professional before making financial decisions.</p>
-                <p>&copy; 2025 FinanceU. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
 
     <script src="config.js"></script>
     <script src="lesson-sync.js"></script>
-    <script src="animations.js"></script>
     <script>
-        // Check authentication status and update nav
-                        async function updateNav() {
-            const authButtons = document.getElementById('authButtons');
+        // Create floating particles
+        function createParticles() {
+            const container = document.getElementById('particles-container');
+            const particleCount = 30;
 
-            // Check localStorage for cached auth state and render immediately
-            const cachedAuth = localStorage.getItem('authState');
-            if (cachedAuth) {
-                const authState = JSON.parse(cachedAuth);
-                authButtons.innerHTML = authState.isLoggedIn
-                    ? `<a href="#" onclick="logout(); return false;" class="btn-primary">Logout</a>`
-                    : `<a href="login" class="btn-primary">Login</a>`;
-                authButtons.style.opacity = '1';
-            }
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
 
-            // Then verify with server in background
-            try {
-                const response = await fetch(`${API_URL}/auth/me`, { credentials: 'include' });
+                const size = Math.random() * 4 + 2;
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                particle.style.left = `${Math.random() * 100}%`;
+                particle.style.top = `${Math.random() * 100}%`;
+                particle.style.background = `rgba(34, 197, 94, ${Math.random() * 0.5 + 0.2})`;
+                particle.style.animation = `float ${Math.random() * 10 + 10}s ease-in-out infinite`;
+                particle.style.animationDelay = `${Math.random() * 5}s`;
 
-                if (response.ok) {
-                    localStorage.setItem('authState', JSON.stringify({ isLoggedIn: true }));
-                    authButtons.innerHTML = `<a href="#" onclick="logout(); return false;" class="btn-primary">Logout</a>`;
-                } else {
-                    localStorage.setItem('authState', JSON.stringify({ isLoggedIn: false }));
-                    authButtons.innerHTML = `<a href="login" class="btn-primary">Login</a>`;
-                }
-                authButtons.style.opacity = '1';
-            } catch (error) {
-                console.log('Not logged in');
-                localStorage.setItem('authState', JSON.stringify({ isLoggedIn: false }));
-                authButtons.innerHTML = `<a href="login" class="btn-primary">Login</a>`;
-                authButtons.style.opacity = '1';
+                container.appendChild(particle);
             }
         }
-        // Logout function
+
         async function logout() {
-            // Clear auth data only - keep user-specific progress data
             localStorage.removeItem('authState');
             localStorage.removeItem('token');
             localStorage.removeItem('userId');
@@ -485,18 +382,7 @@
         function loadCompletedLessons() {
             const userId = localStorage.getItem('userId');
 
-            // If no userId, don't load any progress (user not logged in)
             if (!userId || userId === 'null' || userId === 'undefined') {
-                // Lock all lessons except lesson 1
-                for (let lessonNum = 2; lessonNum <= 8; lessonNum++) {
-                    const lessonCard = document.querySelector(`[data-lesson="${lessonNum}"]`);
-                    if (lessonCard) {
-                        lessonCard.style.opacity = '0.6';
-                        lessonCard.style.pointerEvents = 'none';
-                        const statusDiv = lessonCard.querySelector('.lesson-status');
-                        statusDiv.innerHTML = `<span style="color: #9ca3af; font-weight: 600;"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="5" y="9" width="10" height="8" rx="1" fill="#6B7280"/><path d="M7 9 L7 6 C7 4.3 8.3 3 10 3 C11.7 3 13 4.3 13 6 L13 9" stroke="#6B7280" stroke-width="2" fill="none"/></svg> Complete Previous Lesson</span>`;
-                    }
-                }
                 return;
             }
 
@@ -507,36 +393,16 @@
                 const lessonCard = document.querySelector(`[data-lesson="${lessonNum}"]`);
                 if (!lessonCard) continue;
 
-                const statusDiv = lessonCard.querySelector('.lesson-status');
-                const previousQuizPassed = lessonNum === 1 || localStorage.getItem(`lesson${lessonNum - 1 + 8}_quiz_passed_${userId}`) === 'true';
+                if (completed.includes(lessonNum)) {
+                    lessonCard.classList.remove('locked');
+                    lessonCard.classList.add('completed');
 
-                if (lessonNum === 1) {
-                    // Lesson 1 is always unlocked
-                    if (completed.includes(1)) {
-                        lessonCard.classList.add('completed');
-                        statusDiv.innerHTML = `
-                            <span class="completed-badge">Completed</span>
-                            <a href="/path2-lesson1" class="btn-start-lesson">Review</a>
-                        `;
+                    // Update button to Review
+                    const link = lessonCard.querySelector('a');
+                    if (link) {
+                        link.textContent = 'Review Lesson';
+                        link.classList.add('bg-gradient-to-r', 'from-emerald-500', 'to-green-500');
                     }
-                } else {
-                    // Other lessons require previous quiz completion
-                    if (!previousQuizPassed) {
-                        // Lock the lesson
-                        lessonCard.style.opacity = '0.6';
-                        lessonCard.style.pointerEvents = 'none';
-                        statusDiv.innerHTML = `
-                            <span style="color: #9ca3af; font-weight: 600;"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="5" y="9" width="10" height="8" rx="1" fill="#6B7280"/><path d="M7 9 L7 6 C7 4.3 8.3 3 10 3 C11.7 3 13 4.3 13 6 L13 9" stroke="#6B7280" stroke-width="2" fill="none"/></svg> Complete Previous Lesson</span>
-                        `;
-                    } else if (completed.includes(lessonNum)) {
-                        // Lesson completed
-                        lessonCard.classList.add('completed');
-                        statusDiv.innerHTML = `
-                            <span class="completed-badge">Completed</span>
-                            <a href="path2-lesson${lessonNum}" class="btn-start-lesson">Review</a>
-                        `;
-                    }
-                    // If previous quiz passed but not completed, button already shows "Start Lesson"
                 }
             }
         }
@@ -546,7 +412,6 @@
             const userId = localStorage.getItem('userId');
             const quizCard = document.getElementById('quizCard');
 
-            // If no userId, hide quiz
             if (!userId || userId === 'null' || userId === 'undefined') {
                 quizCard.style.display = 'none';
                 return;
@@ -554,9 +419,8 @@
 
             const completed = JSON.parse(localStorage.getItem(`path2_completed_${userId}`) || '[]');
             const quizCompleted = localStorage.getItem(`path2_quiz_completed_${userId}`);
-            const quizScore = localStorage.getItem(`path2_quiz_score_${userId}`);
 
-            // Check if all 8 lessons are completed AND all 8 lesson quizzes are passed
+            // Check if all 8 lessons are completed
             let allQuizzesPassed = true;
             for (let i = 9; i <= 16; i++) {
                 if (localStorage.getItem(`lesson${i}_quiz_passed_${userId}`) !== 'true') {
@@ -566,28 +430,27 @@
             }
 
             if (completed.length === 8 && allQuizzesPassed) {
-                quizCard.style.display = 'flex';
+                quizCard.style.display = 'block';
 
                 if (quizCompleted === 'true') {
-                    const statusDiv = quizCard.querySelector('.lesson-status');
-                    statusDiv.innerHTML = `
-                        <span class="quiz-completed-badge">Passed (${quizScore}%)</span>
-                        <a href="/path2-quiz" class="btn-start-quiz">Retake Quiz</a>
-                    `;
+                    quizCard.classList.add('completed');
+                    const link = quizCard.querySelector('a');
+                    if (link) {
+                        link.textContent = 'Retake Quiz';
+                    }
                 }
             } else {
-                // Keep quiz hidden if not all lessons completed
                 quizCard.style.display = 'none';
             }
         }
 
-        // Initialize page with progress sync
+        // Initialize page
         async function initializePage() {
-            await updateNav();
             const syncResult = await syncLessonProgress();
             console.log('Sync result:', syncResult);
             loadCompletedLessons();
             checkQuizAvailability();
+            createParticles();
         }
 
         initializePage();
