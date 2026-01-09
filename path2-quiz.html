@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Path 2 Final Quiz - FinanceU</title>
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+        * {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        /* Floating particles */
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            25% { transform: translate(10px, -10px) rotate(90deg); }
+            50% { transform: translate(0, -20px) rotate(180deg); }
+            75% { transform: translate(-10px, -10px) rotate(270deg); }
+        }
+
+        /* Gradient text */
+        .gradient-text {
+            background: linear-gradient(135deg, #22c55e 0%, #16a34a 50%, #15803d 100%);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradientShift 5s ease infinite;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        /* Glowing effects */
+        .glow-green {
+            box-shadow: 0 0 20px rgba(34, 197, 94, 0.4), 0 0 40px rgba(34, 197, 94, 0.2);
+        }
+
+        /* Navigation backdrop blur */
+        .nav-blur {
+            backdrop-filter: blur(12px);
+            background: rgba(15, 15, 15, 0.9);
+            border-bottom: 1px solid rgba(34, 197, 94, 0.15);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        /* 3D Button Effect */
+        .btn-3d {
+            transform-style: preserve-3d;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3), 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-3d:hover {
+            transform: translateY(-4px) translateZ(10px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4), 0 16px 32px rgba(0, 0, 0, 0.3), 0 0 40px rgba(34, 197, 94, 0.2);
+        }
+
+        body {
+            background: #0f0f0f;
+            min-height: 100vh;
+            color: #d1d5db;
+            overflow-x: hidden;
+        }
+
+        .quiz-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 120px 40px 80px 40px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 30px;
+            color: #9ca3af;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 15px;
+            transition: color 0.3s ease;
+        }
+
+        .back-link:hover {
+            color: #22c55e;
+            text-decoration: underline;
+        }
+
+        .quiz-header {
+            text-align: center;
+            margin-bottom: 64px;
+        }
+
+        .quiz-title {
+            font-size: 48px;
+            font-weight: 800;
+            margin-bottom: 16px;
+            line-height: 1.2;
+        }
+
+        .quiz-subtitle {
+            color: #9ca3af;
+            font-size: 18px;
+            line-height: 1.6;
+        }
+
+        .question-card {
+            background: linear-gradient(135deg, rgba(34, 197, 94, 0.1) 0%, rgba(17, 24, 39, 0.95) 100%);
+            border: 2px solid rgba(34, 197, 94, 0.3);
+            border-radius: 24px;
+            padding: 40px;
+            margin-bottom: 48px;
+            backdrop-filter: blur(10px);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .question-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(34, 197, 94, 0.5);
+            box-shadow: 0 20px 60px rgba(34, 197, 94, 0.3);
+        }
+
+        .question-number {
+            display: inline-block;
+            background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+            color: white;
+            font-size: 14px;
+            font-weight: 700;
+            padding: 6px 14px;
+            border-radius: 20px;
+            margin-bottom: 16px;
+        }
+
+        .question-text {
+            font-size: 22px;
+            font-weight: 700;
+            color: #f9fafb;
+            margin-bottom: 28px;
+            line-height: 1.5;
+        }
+
+        .options-container {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .option {
+            background: linear-gradient(135deg, rgba(31, 41, 55, 0.8) 0%, rgba(17, 24, 39, 0.9) 100%);
+            border: 2px solid rgba(75, 85, 99, 0.4);
+            border-radius: 16px;
+            padding: 20px 24px;
+            font-size: 16px;
+            color: #d1d5db;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            padding-left: 56px;
+        }
+
+        .option::before {
+            content: '';
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 24px;
+            height: 24px;
+            border: 2px solid rgba(34, 197, 94, 0.4);
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        .option:hover {
+            border-color: rgba(34, 197, 94, 0.6);
+            background: linear-gradient(135deg, rgba(34, 197, 94, 0.15) 0%, rgba(17, 24, 39, 0.95) 100%);
+            transform: translateX(8px);
+        }
+
+        .option.selected {
+            border-color: #22c55e;
+            background: linear-gradient(135deg, rgba(34, 197, 94, 0.2) 0%, rgba(17, 24, 39, 0.95) 100%);
+            box-shadow: 0 8px 24px rgba(34, 197, 94, 0.3);
+        }
+
+        .option.selected::before {
+            background: #22c55e;
+            border-color: #22c55e;
+            animation: pulse 0.6s ease;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: translateY(-50%) scale(1); }
+            50% { transform: translateY(-50%) scale(1.15); }
+        }
+
+        .option.correct {
+            background: linear-gradient(135deg, rgba(34, 197, 94, 0.25) 0%, rgba(34, 197, 94, 0.2) 100%);
+            border-color: #22c55e;
+            animation: correctAnswer 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 12px 32px rgba(34, 197, 94, 0.4);
+        }
+
+        @keyframes correctAnswer {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); box-shadow: 0 16px 48px rgba(34, 197, 94, 0.4); }
+            100% { transform: scale(1); }
+        }
+
+        .option.correct::before {
+            background: #22c55e;
+            border-color: #22c55e;
+            content: '✓';
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: checkmark 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        @keyframes checkmark {
+            0% { transform: translateY(-50%) scale(0) rotate(-45deg); opacity: 0; }
+            50% { transform: translateY(-50%) scale(1.3) rotate(5deg); }
+            100% { transform: translateY(-50%) scale(1) rotate(0deg); opacity: 1; }
+        }
+
+        .option.incorrect {
+            background: linear-gradient(135deg, rgba(239, 68, 68, 0.25) 0%, rgba(239, 68, 68, 0.2) 100%);
+            border-color: #ef4444;
+            animation: shake 0.5s ease;
+            box-shadow: 0 8px 24px rgba(239, 68, 68, 0.4);
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-8px); }
+            75% { transform: translateX(8px); }
+        }
+
+        .option.incorrect::before {
+            background: #ef4444;
+            border-color: #ef4444;
+            content: '×';
+            color: white;
+            font-size: 20px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .submit-btn {
+            width: 100%;
+            max-width: 500px;
+            padding: 20px;
+            background: linear-gradient(to right, #22c55e 0%, #16a34a 100%);
+            color: white;
+            border: none;
+            border-radius: 16px;
+            font-size: 18px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: block;
+            margin: 32px auto;
+            box-shadow: 0 0 20px rgba(34, 197, 94, 0.4), 0 0 40px rgba(34, 197, 94, 0.2);
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-4px);
+            background: linear-gradient(to right, #16a34a 0%, #15803d 100%);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4), 0 16px 32px rgba(0, 0, 0, 0.3), 0 0 40px rgba(34, 197, 94, 0.2);
+        }
+
+        .submit-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .result-container {
+            background: linear-gradient(135deg, rgba(34, 197, 94, 0.15) 0%, rgba(34, 197, 94, 0.1) 100%);
+            border: 2px solid #22c55e;
+            padding: 40px;
+            border-radius: 24px;
+            text-align: center;
+            margin: 0 auto;
+            max-width: 800px;
+            animation: slideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            backdrop-filter: blur(10px);
+        }
+
+        .result-container.failed {
+            background: linear-gradient(135deg, rgba(239, 68, 68, 0.15) 0%, rgba(239, 68, 68, 0.1) 100%);
+            border-color: #ef4444;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .result-icon {
+            font-size: 64px;
+            margin-bottom: 16px;
+        }
+
+        .result-title {
+            font-size: 32px;
+            font-weight: 800;
+            color: #f9fafb;
+            margin-bottom: 12px;
+        }
+
+        .result-text {
+            color: #d1d5db;
+            font-size: 18px;
+            margin-bottom: 24px;
+            line-height: 1.7;
+        }
+
+        .result-score {
+            font-size: 48px;
+            font-weight: 800;
+            color: #22c55e;
+            margin: 20px 0;
+        }
+
+        .result-score.failed {
+            color: #ef4444;
+        }
+
+        .finish-btn {
+            padding: 20px 40px;
+            background: linear-gradient(to right, #22c55e 0%, #16a34a 100%);
+            color: white;
+            border: none;
+            border-radius: 16px;
+            font-size: 18px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-block;
+            margin: 12px 8px;
+            text-decoration: none;
+            box-shadow: 0 0 20px rgba(34, 197, 94, 0.4);
+        }
+
+        .finish-btn:hover {
+            transform: translateY(-4px);
+            background: linear-gradient(to right, #16a34a 0%, #15803d 100%);
+            box-shadow: 0 12px 24px rgba(34, 197, 94, 0.4);
+        }
+
+        .retry-btn {
+            padding: 20px 40px;
+            background: rgba(75, 85, 99, 0.3);
+            color: #d1d5db;
+            border: 2px solid rgba(75, 85, 99, 0.5);
+            border-radius: 16px;
+            font-size: 18px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-block;
+            margin: 12px 8px;
+        }
+
+        .retry-btn:hover {
+            border-color: rgba(34, 197, 94, 0.4);
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating Particles Background -->
+    <div id="particles-container" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none;"></div>
+
+    <!-- Navigation -->
+    <nav class="nav-blur fixed top-0 left-0 right-0 z-50 px-8 py-4">
+        <div class="max-w-7xl mx-auto flex items-center justify-between">
+            <a href="/" class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-green-500 to-green-600 flex items-center justify-center font-bold text-white text-xl">F</div>
+                <span class="text-xl font-bold text-gray-200">FinanceU</span>
+            </a>
+            <div id="authButtons" class="flex gap-4">
+                <a href="login" class="btn-3d px-6 py-2.5 bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 rounded-lg font-semibold glow-green transition-all text-white">Login</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Quiz Container -->
+    <div class="quiz-container">
+        <a href="/path2-lessons" class="back-link">← Back to Path 2 Lessons</a>
+
+        <!-- Quiz Header -->
+        <div class="quiz-header">
+            <h1 class="quiz-title">
+                Path 2 <span class="gradient-text">Final Quiz</span>
+            </h1>
+            <p class="quiz-subtitle">
+                Test your knowledge across all 5 lessons: Income, Paychecks, Job Choices, Side Income, and Income Changes.<br>
+                <strong>You need 100% to pass and complete Path 2!</strong>
+            </p>
+        </div>
+
+        <!-- Questions Container -->
+        <div id="questions-container"></div>
+
+        <!-- Submit Button -->
+        <button id="submit-btn" class="submit-btn" onclick="submitQuiz()">Submit Quiz</button>
+
+        <!-- Results Container (hidden initially) -->
+        <div id="results-container" style="display: none;"></div>
+    </div>
+
+    <!-- Footer -->
+    <footer style="background: #111827; padding: 48px 0; margin-top: 80px;">
+        <div class="max-w-7xl mx-auto px-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mb-8">
+                <div>
+                    <h3 class="text-xl font-bold text-gray-200 mb-4">FinanceU</h3>
+                    <p class="text-gray-400 text-sm">Financial education made simple for students and young adults.</p>
+                </div>
+                <div>
+                    <h4 class="font-semibold text-gray-200 mb-3">Quick Links</h4>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><a href="/dashboard" class="hover:text-gray-300 transition-colors">Dashboard</a></li>
+                        <li><a href="/path1-lessons" class="hover:text-gray-300 transition-colors">Path 1: Money Basics</a></li>
+                        <li><a href="/path2-lessons" class="hover:text-gray-300 transition-colors">Path 2: Income & Work</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold text-gray-200 mb-3">Support</h4>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><a href="/help" class="hover:text-gray-300 transition-colors">Help Center</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="border-t border-gray-800 pt-6 text-center text-gray-400 text-xs">
+                <p>&copy; 2025 FinanceU. Built with care for students, by students.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="config.js"></script>
+    <script src="lesson-completion.js"></script>
+    <script>
+        // Create floating particles
+        function createParticles() {
+            const container = document.getElementById('particles-container');
+            const particleCount = 25;
+
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+
+                const size = Math.random() * 4 + 2;
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                particle.style.left = `${Math.random() * 100}%`;
+                particle.style.top = `${Math.random() * 100}%`;
+                particle.style.background = `rgba(34, 197, 94, ${Math.random() * 0.5 + 0.2})`;
+                particle.style.animation = `float ${Math.random() * 10 + 10}s ease-in-out infinite`;
+                particle.style.animationDelay = `${Math.random() * 5}s`;
+
+                container.appendChild(particle);
+            }
+        }
+
+        createParticles();
+
+        // Authentication
+        async function updateNav() {
+            const authButtons = document.getElementById('authButtons');
+            const cachedAuth = localStorage.getItem('authState');
+            if (cachedAuth) {
+                const authState = JSON.parse(cachedAuth);
+                authButtons.innerHTML = authState.isLoggedIn
+                    ? `<button onclick="logout()" class="btn-3d px-6 py-2.5 bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 rounded-lg font-semibold glow-green transition-all text-white">Logout</button>`
+                    : `<a href="login" class="btn-3d px-6 py-2.5 bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 rounded-lg font-semibold glow-green transition-all text-white">Login</a>`;
+            }
+
+            try {
+                const response = await fetch(`${API_URL}/auth/me`, { credentials: 'include' });
+                if (response.ok) {
+                    localStorage.setItem('authState', JSON.stringify({ isLoggedIn: true }));
+                    authButtons.innerHTML = `<button onclick="logout()" class="btn-3d px-6 py-2.5 bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 rounded-lg font-semibold glow-green transition-all text-white">Logout</button>`;
+                } else {
+                    localStorage.setItem('authState', JSON.stringify({ isLoggedIn: false }));
+                    authButtons.innerHTML = `<a href="login" class="btn-3d px-6 py-2.5 bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 rounded-lg font-semibold glow-green transition-all text-white">Login</a>`;
+                }
+            } catch (error) {
+                localStorage.setItem('authState', JSON.stringify({ isLoggedIn: false }));
+                authButtons.innerHTML = `<a href="login" class="btn-3d px-6 py-2.5 bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 rounded-lg font-semibold glow-green transition-all text-white">Login</a>`;
+            }
+        }
+
+        async function logout() {
+            localStorage.removeItem('authState');
+            localStorage.removeItem('token');
+            localStorage.removeItem('userId');
+            try {
+                await fetch(`${API_URL}/auth/logout`, {
+                    method: 'POST',
+                    credentials: 'include'
+                });
+                window.location.href = '/index.html';
+            } catch (error) {
+                window.location.href = '/index.html';
+            }
+        }
+
+        // Quiz Questions - 15 questions covering all 5 lessons
+        const quizQuestions = [
+            // Lesson 1: How Pay Actually Works (3 questions)
+            {
+                question: "You work 42 hours in a week at $15/hour. With overtime at 1.5x, what's your weekly gross pay?",
+                options: [
+                    "$630 (42 hours × $15)",
+                    "$645 (40 hrs regular + 2 hrs overtime)",
+                    "$600 (40 hours × $15)",
+                    "$675 (all hours at overtime rate)"
+                ],
+                correct: 1
+            },
+            {
+                question: "Your paycheck shows gross pay of $2,000 but you only get $1,400. What happened?",
+                options: [
+                    "The company stole your money",
+                    "Taxes and deductions were taken out (FICA, federal, state, benefits)",
+                    "It's a mistake, paychecks always match gross pay",
+                    "You only worked part of the month"
+                ],
+                correct: 1
+            },
+            {
+                question: "What's the main difference between hourly and salary pay?",
+                options: [
+                    "Salary is always better than hourly",
+                    "Hourly workers get overtime (1.5x after 40 hrs), salary typically doesn't",
+                    "Salary workers never get benefits",
+                    "Hourly workers can't get full-time jobs"
+                ],
+                correct: 1
+            },
+            // Lesson 2: Reading a Paycheck (3 questions)
+            {
+                question: "What is 'gross pay' on a paystub?",
+                options: [
+                    "The amount you take home after taxes",
+                    "Total earnings BEFORE any deductions or taxes",
+                    "Only your overtime pay",
+                    "Your annual salary"
+                ],
+                correct: 1
+            },
+            {
+                question: "You see 'YTD' next to $15,600 on your paystub in June. What does this mean?",
+                options: [
+                    "You owe $15,600 in taxes",
+                    "Year-to-Date: total earned from January to now",
+                    "You'll earn $15,600 by end of year",
+                    "You have $15,600 in savings"
+                ],
+                correct: 1
+            },
+            {
+                question: "Which deduction is a RED FLAG that requires immediate action?",
+                options: [
+                    "FICA (Social Security + Medicare) at 7.65%",
+                    "401k retirement contribution you signed up for",
+                    "Federal tax withholding",
+                    "Mystery deduction with no label that you didn't authorize"
+                ],
+                correct: 3
+            },
+            // Lesson 3: Choosing Jobs and Pay Smartly (3 questions)
+            {
+                question: "Job A pays $20/hr but hours vary (25-35/week). Job B pays $18/hr with guaranteed 40hrs + health insurance. Which is likely higher total value?",
+                options: [
+                    "Job A because higher hourly rate",
+                    "Job B because guaranteed hours + benefits worth $6,000+/year",
+                    "They're exactly equal",
+                    "Can't compare hourly and guaranteed hours"
+                ],
+                correct: 1
+            },
+            {
+                question: "You're offered a promotion: $52k salary vs your current $20/hr with 5hrs overtime weekly. Which pays more?",
+                options: [
+                    "$52k salary is always more",
+                    "Current job: $20×40 + $30×5 = $950/week = $49,400/year, so salary pays more",
+                    "Current job: $20×45 = $900/week = $46,800/year, so salary pays more",
+                    "They're equal"
+                ],
+                correct: 1
+            },
+            {
+                question: "What matters MOST when comparing job offers?",
+                options: [
+                    "Only the hourly rate or salary number",
+                    "Which job has the coolest title",
+                    "Total compensation: pay + benefits + hours + commute costs + stability",
+                    "Whichever pays the most regardless of hours or benefits"
+                ],
+                correct: 2
+            },
+            // Lesson 4: Side Income Reality (3 questions)
+            {
+                question: "A side hustle advertises $25/hour. After gas ($4), car wear ($3), and 1099 taxes (30%), what's your real take-home?",
+                options: [
+                    "$25/hour",
+                    "$11-14/hour after all costs",
+                    "$18/hour after just taxes",
+                    "$22/hour after gas"
+                ],
+                correct: 1
+            },
+            {
+                question: "What's the #1 rule before starting any side hustle?",
+                options: [
+                    "Believe every promise about easy money",
+                    "Calculate your REAL hourly rate after ALL costs and ALL time",
+                    "Start immediately without planning",
+                    "Only focus on the advertised income"
+                ],
+                correct: 1
+            },
+            {
+                question: "Why do most people underestimate side hustle costs?",
+                options: [
+                    "They forget about unpaid time (finding clients, admin work, travel) and self-employment taxes",
+                    "Side hustles have no costs",
+                    "Everyone calculates costs correctly",
+                    "Taxes don't apply to side income"
+                ],
+                correct: 0
+            },
+            // Lesson 5: Income Changes (3 questions)
+            {
+                question: "Your hours get cut by 25%. What should you do in the first 72 hours?",
+                options: [
+                    "Wait and see what happens",
+                    'Calculate exact loss, pause non-essentials, contact bill companies BEFORE due dates',
+                    "Use credit cards to maintain lifestyle",
+                    "Panic and quit your job"
+                ],
+                correct: 1
+            },
+            {
+                question: "You get a $300/month raise. What's the smartest allocation?",
+                options: [
+                    "Spend all $300 on fun—you earned it!",
+                    "Wait 3 months to prove stable, then split: 50% savings, 30% goals, 20% lifestyle",
+                    "Immediately upgrade to expensive apartment",
+                    "Save 100% forever with no enjoyment"
+                ],
+                correct: 1
+            },
+            {
+                question: "How long does it typically take to fully adjust to a major income change?",
+                options: [
+                    "24 hours",
+                    "1 week",
+                    "3-6 months",
+                    "5+ years"
+                ],
+                correct: 2
+            }
+        ];
+
+        let selectedAnswers = {};
+        let quizSubmitted = false;
+
+        // Render questions
+        function renderQuestions() {
+            const container = document.getElementById('questions-container');
+            container.innerHTML = '';
+
+            quizQuestions.forEach((q, index) => {
+                const questionCard = document.createElement('div');
+                questionCard.className = 'question-card';
+                questionCard.innerHTML = `
+                    <span class="question-number">Question ${index + 1} of ${quizQuestions.length}</span>
+                    <div class="question-text">${q.question}</div>
+                    <div class="options-container">
+                        ${q.options.map((option, optIndex) => `
+                            <div class="option" data-question="${index}" data-option="${optIndex}" onclick="selectAnswer(${index}, ${optIndex})">
+                                ${option}
+                            </div>
+                        `).join('')}
+                    </div>
+                `;
+                container.appendChild(questionCard);
+            });
+        }
+
+        // Select answer
+        function selectAnswer(questionIndex, optionIndex) {
+            if (quizSubmitted) return;
+
+            // Remove selected class from all options for this question
+            const options = document.querySelectorAll(`[data-question="${questionIndex}"]`);
+            options.forEach(opt => opt.classList.remove('selected'));
+
+            // Add selected class to clicked option
+            const selectedOption = document.querySelector(`[data-question="${questionIndex}"][data-option="${optionIndex}"]`);
+            selectedOption.classList.add('selected');
+
+            // Store the answer
+            selectedAnswers[questionIndex] = optionIndex;
+
+            // Enable submit button if all questions answered
+            if (Object.keys(selectedAnswers).length === quizQuestions.length) {
+                document.getElementById('submit-btn').disabled = false;
+            }
+        }
+
+        // Submit quiz
+        async function submitQuiz() {
+            if (Object.keys(selectedAnswers).length < quizQuestions.length) {
+                alert('Please answer all questions before submitting.');
+                return;
+            }
+
+            quizSubmitted = true;
+            document.getElementById('submit-btn').style.display = 'none';
+
+            // Grade the quiz
+            let correctCount = 0;
+            quizQuestions.forEach((q, index) => {
+                const isCorrect = selectedAnswers[index] === q.correct;
+                if (isCorrect) correctCount++;
+
+                // Highlight correct/incorrect
+                const options = document.querySelectorAll(`[data-question="${index}"]`);
+                options.forEach((opt, optIndex) => {
+                    if (optIndex === q.correct) {
+                        opt.classList.add('correct');
+                    } else if (optIndex === selectedAnswers[index] && !isCorrect) {
+                        opt.classList.add('incorrect');
+                    }
+                    opt.style.pointerEvents = 'none';
+                });
+            });
+
+            const score = Math.round((correctCount / quizQuestions.length) * 100);
+            const passed = score === 100;
+
+            // Show results
+            const resultsContainer = document.getElementById('results-container');
+            resultsContainer.style.display = 'block';
+            resultsContainer.className = passed ? 'result-container' : 'result-container failed';
+
+            if (passed) {
+                resultsContainer.innerHTML = `
+                    <div class="result-icon">🎉</div>
+                    <h2 class="result-title">Congratulations!</h2>
+                    <div class="result-score">${correctCount}/${quizQuestions.length} (${score}%)</div>
+                    <p class="result-text">You've mastered Path 2! You now understand how income works, how to read paychecks, how to choose jobs wisely, the reality of side income, and how to handle income changes. You're ready for real-world financial decisions!</p>
+                    <a href="/dashboard" class="finish-btn">Go to Dashboard</a>
+                    <a href="/path2-lessons" class="finish-btn">Back to Lessons</a>
+                `;
+
+                // Mark path as completed
+                try {
+                    const userId = localStorage.getItem('userId') || 'demo';
+                    localStorage.setItem(`path2_quiz_passed_${userId}`, 'true');
+
+                    // Call completion API
+                    await fetch(`${API_URL}/progress/complete-path`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        credentials: 'include',
+                        body: JSON.stringify({ pillarNum: 2 })
+                    });
+                } catch (error) {
+                    console.log('Error saving path completion:', error);
+                }
+            } else {
+                resultsContainer.innerHTML = `
+                    <div class="result-icon">😔</div>
+                    <h2 class="result-title">Not Quite There...</h2>
+                    <div class="result-score failed">${correctCount}/${quizQuestions.length} (${score}%)</div>
+                    <p class="result-text">You need 100% to pass. Review the incorrect answers above, go back to the lessons if needed, and try again when you're ready!</p>
+                    <button onclick="retryQuiz()" class="retry-btn">Retry Quiz</button>
+                    <a href="/path2-lessons" class="finish-btn">Review Lessons</a>
+                `;
+            }
+
+            // Scroll to results
+            resultsContainer.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+
+        // Retry quiz
+        function retryQuiz() {
+            selectedAnswers = {};
+            quizSubmitted = false;
+            document.getElementById('submit-btn').style.display = 'block';
+            document.getElementById('submit-btn').disabled = false;
+            document.getElementById('results-container').style.display = 'none';
+            renderQuestions();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Initialize
+        updateNav();
+        renderQuestions();
+        document.getElementById('submit-btn').disabled = true;
+    </script>
+</body>
+</html>
