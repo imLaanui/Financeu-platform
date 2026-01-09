@@ -525,7 +525,7 @@
             const allLessonsCompleted = [1, 2, 3, 4, 5].every(num => completed.includes(num));
 
             const allQuizzesPassed = [1, 2, 3, 4, 5].every(num =>
-                localStorage.getItem(`path2_lesson${num}_quiz_passed_${userId}`) === 'true'
+                localStorage.getItem(`lesson${num}_quiz_passed_${userId}`) === 'true'
             );
 
             if (allLessonsCompleted && allQuizzesPassed) {
