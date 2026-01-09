@@ -5,7 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Path 2 Final Quiz - FinanceU</title>
     <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+    <link rel="icon" type="image/svg+xml" sizes="16x16" href="assets/favicon-16x16.svg">
+    <link rel="icon" type="image/svg+xml" sizes="32x32" href="assets/favicon-32x32.svg">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.svg">
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
 
@@ -64,7 +68,7 @@
 
         .btn-3d:hover {
             transform: translateY(-4px) translateZ(10px);
-            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4), 0 16px 32px rgba(0, 0, 0, 0.3), 0 0 40px rgba(156, 163, 175, 0.2);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4), 0 16px 32px rgba(0, 0, 0, 0.3), 0 0 40px rgba(209, 213, 219, 0.2);
         }
 
         body {
@@ -99,47 +103,85 @@
 
         .quiz-header {
             text-align: center;
-            margin-bottom: 64px;
+            margin-bottom: 50px;
+        }
+
+        .quiz-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #e5e7eb 0%, #d1d5db 100%);
+            color: #1f2937;
+            padding: 10px 24px;
+            border-radius: 25px;
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            box-shadow: 0 0 20px rgba(156, 163, 175, 0.4), 0 0 40px rgba(156, 163, 175, 0.2);
         }
 
         .quiz-title {
-            font-size: 48px;
+            font-size: clamp(32px, 5vw, 48px);
             font-weight: 800;
+            color: #f9fafb;
             margin-bottom: 16px;
             line-height: 1.2;
         }
 
-        .quiz-subtitle {
-            color: #9ca3af;
+        .quiz-description {
             font-size: 18px;
-            line-height: 1.6;
+            color: #9ca3af;
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+
+        .progress-bar-container {
+            position: fixed;
+            top: 80px;
+            left: 0;
+            right: 0;
+            height: 8px;
+            background: rgba(255,255,255,0.05);
+            z-index: 100;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #9ca3af 0%, #d1d5db 100%);
+            transition: width 0.3s ease;
+            border-radius: 0 4px 4px 0;
+            box-shadow: 0 0 20px rgba(156, 163, 175, 0.5);
         }
 
         .question-card {
-            background: linear-gradient(135deg, rgba(156, 163, 175, 0.1) 0%, rgba(17, 24, 39, 0.95) 100%);
-            border: 2px solid rgba(156, 163, 175, 0.3);
-            border-radius: 24px;
+            background: linear-gradient(135deg, rgba(30, 30, 30, 0.8) 0%, rgba(20, 20, 20, 0.6) 100%);
             padding: 40px;
-            margin-bottom: 48px;
+            border-radius: 24px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            border: 1px solid rgba(255,255,255,0.1);
+            margin-bottom: 24px;
+            animation: slideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1);
             backdrop-filter: blur(10px);
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        .question-card:hover {
-            transform: translateY(-8px);
-            border-color: rgba(156, 163, 175, 0.5);
-            box-shadow: 0 20px 60px rgba(156, 163, 175, 0.3);
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .question-number {
             display: inline-block;
-            background: linear-gradient(135deg, #9ca3af 0%, #9ca3af 100%);
+            background: linear-gradient(135deg, #9ca3af 0%, #6b7280 100%);
             color: white;
-            font-size: 14px;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             font-weight: 700;
-            padding: 6px 14px;
-            border-radius: 20px;
+            font-size: 16px;
             margin-bottom: 16px;
+            box-shadow: 0 0 15px rgba(156, 163, 175, 0.3);
         }
 
         .question-text {
@@ -147,80 +189,89 @@
             font-weight: 700;
             color: #f9fafb;
             margin-bottom: 28px;
-            line-height: 1.5;
+            line-height: 1.4;
+            letter-spacing: -0.01em;
         }
 
-        .options-container {
+        .options-grid {
             display: flex;
             flex-direction: column;
-            gap: 14px;
+            gap: 12px;
         }
 
         .option {
-            background: linear-gradient(135deg, rgba(31, 41, 55, 0.8) 0%, rgba(17, 24, 39, 0.9) 100%);
-            border: 2px solid rgba(75, 85, 99, 0.4);
-            border-radius: 16px;
-            padding: 20px 24px;
-            font-size: 16px;
-            color: #d1d5db;
-            cursor: pointer;
-            transition: all 0.3s ease;
             position: relative;
-            padding-left: 56px;
+            background: rgba(40, 40, 40, 0.6);
+            border: 2px solid rgba(255, 255, 255, 0.15);
+            padding: 18px 22px;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            font-size: 16px;
+            color: #e5e7eb;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
         }
 
         .option::before {
             content: '';
-            position: absolute;
-            left: 20px;
-            top: 50%;
-            transform: translateY(-50%);
             width: 24px;
             height: 24px;
-            border: 2px solid rgba(156, 163, 175, 0.4);
+            border: 3px solid rgba(203, 213, 225, 0.5);
             border-radius: 50%;
-            transition: all 0.3s ease;
+            flex-shrink: 0;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            background: rgba(15, 15, 15, 0.8);
         }
 
-        .option:hover {
-            border-color: rgba(156, 163, 175, 0.6);
-            background: linear-gradient(135deg, rgba(156, 163, 175, 0.15) 0%, rgba(17, 24, 39, 0.95) 100%);
-            transform: translateX(8px);
+        .option:hover:not(.correct):not(.incorrect) {
+            border-color: #9ca3af;
+            transform: translateY(-4px) scale(1.01);
+            box-shadow: 0 12px 32px rgba(156, 163, 175, 0.3);
+        }
+
+        .option:hover:not(.correct):not(.incorrect)::before {
+            border-color: #9ca3af;
+            transform: scale(1.1);
         }
 
         .option.selected {
+            background: linear-gradient(135deg, rgba(156, 163, 175, 0.25) 0%, rgba(156, 163, 175, 0.15) 100%);
             border-color: #9ca3af;
-            background: linear-gradient(135deg, rgba(156, 163, 175, 0.2) 0%, rgba(17, 24, 39, 0.95) 100%);
-            box-shadow: 0 8px 24px rgba(156, 163, 175, 0.3);
+            font-weight: 600;
+            box-shadow: 0 8px 24px rgba(156, 163, 175, 0.4);
         }
 
         .option.selected::before {
             background: #9ca3af;
             border-color: #9ca3af;
+            box-shadow: inset 0 0 0 5px rgba(15, 15, 15, 0.8), 0 0 0 2px #9ca3af;
             animation: pulse 0.6s ease;
         }
 
         @keyframes pulse {
-            0%, 100% { transform: translateY(-50%) scale(1); }
-            50% { transform: translateY(-50%) scale(1.15); }
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.15); }
         }
 
         .option.correct {
-            background: linear-gradient(135deg, rgba(156, 163, 175, 0.25) 0%, rgba(156, 163, 175, 0.2) 100%);
-            border-color: #9ca3af;
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.25) 0%, rgba(16, 185, 129, 0.2) 100%);
+            border-color: #10b981;
             animation: correctAnswer 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-            box-shadow: 0 12px 32px rgba(156, 163, 175, 0.4);
+            box-shadow: 0 12px 32px rgba(16, 185, 129, 0.4);
         }
 
         @keyframes correctAnswer {
             0% { transform: scale(1); }
-            50% { transform: scale(1.05); box-shadow: 0 16px 48px rgba(156, 163, 175, 0.4); }
+            50% { transform: scale(1.05); box-shadow: 0 16px 48px rgba(16, 185, 129, 0.4); }
             100% { transform: scale(1); }
         }
 
         .option.correct::before {
-            background: #9ca3af;
-            border-color: #9ca3af;
+            background: #10b981;
+            border-color: #10b981;
             content: '✓';
             color: white;
             font-size: 16px;
@@ -232,9 +283,9 @@
         }
 
         @keyframes checkmark {
-            0% { transform: translateY(-50%) scale(0) rotate(-45deg); opacity: 0; }
-            50% { transform: translateY(-50%) scale(1.3) rotate(5deg); }
-            100% { transform: translateY(-50%) scale(1) rotate(0deg); opacity: 1; }
+            0% { transform: scale(0) rotate(-45deg); opacity: 0; }
+            50% { transform: scale(1.3) rotate(5deg); }
+            100% { transform: scale(1) rotate(0deg); opacity: 1; }
         }
 
         .option.incorrect {
@@ -266,8 +317,8 @@
             width: 100%;
             max-width: 500px;
             padding: 20px;
-            background: linear-gradient(to right, #9ca3af 0%, #9ca3af 100%);
-            color: white;
+            background: linear-gradient(to right, #e5e7eb 0%, #d1d5db 100%);
+            color: #1f2937;
             border: none;
             border-radius: 16px;
             font-size: 18px;
@@ -281,8 +332,8 @@
 
         .submit-btn:hover {
             transform: translateY(-4px);
-            background: linear-gradient(to right, #9ca3af 0%, #15803d 100%);
-            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4), 0 16px 32px rgba(0, 0, 0, 0.3), 0 0 40px rgba(156, 163, 175, 0.2);
+            background: linear-gradient(to right, #d1d5db 0%, #9ca3af 100%);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4), 0 16px 32px rgba(0, 0, 0, 0.3), 0 0 40px rgba(209, 213, 219, 0.2);
         }
 
         .submit-btn:disabled {
@@ -291,8 +342,8 @@
         }
 
         .result-container {
-            background: linear-gradient(135deg, rgba(156, 163, 175, 0.15) 0%, rgba(156, 163, 175, 0.1) 100%);
-            border: 2px solid #9ca3af;
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.15) 0%, rgba(16, 185, 129, 0.1) 100%);
+            border: 2px solid #10b981;
             padding: 40px;
             border-radius: 24px;
             text-align: center;
@@ -305,17 +356,6 @@
         .result-container.failed {
             background: linear-gradient(135deg, rgba(239, 68, 68, 0.15) 0%, rgba(239, 68, 68, 0.1) 100%);
             border-color: #ef4444;
-        }
-
-        @keyframes slideUp {
-            from {
-                opacity: 0;
-                transform: translateY(40px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
         }
 
         .result-icon {
@@ -340,7 +380,7 @@
         .result-score {
             font-size: 48px;
             font-weight: 800;
-            color: #9ca3af;
+            color: #10b981;
             margin: 20px 0;
         }
 
@@ -350,8 +390,8 @@
 
         .finish-btn {
             padding: 20px 40px;
-            background: linear-gradient(to right, #9ca3af 0%, #9ca3af 100%);
-            color: white;
+            background: linear-gradient(to right, #e5e7eb 0%, #d1d5db 100%);
+            color: #1f2937;
             border: none;
             border-radius: 16px;
             font-size: 18px;
@@ -366,7 +406,7 @@
 
         .finish-btn:hover {
             transform: translateY(-4px);
-            background: linear-gradient(to right, #9ca3af 0%, #15803d 100%);
+            background: linear-gradient(to right, #d1d5db 0%, #9ca3af 100%);
             box-shadow: 0 12px 24px rgba(156, 163, 175, 0.4);
         }
 
@@ -388,11 +428,30 @@
             border-color: rgba(156, 163, 175, 0.4);
             transform: translateY(-2px);
         }
+
+        @media (max-width: 768px) {
+            .quiz-container {
+                padding: 100px 20px 60px 20px;
+            }
+
+            .question-card {
+                padding: 24px;
+            }
+
+            .quiz-title {
+                font-size: 28px;
+            }
+
+            .option {
+                padding: 14px 16px;
+                font-size: 15px;
+            }
+        }
     </style>
 </head>
-<body>
-    <!-- Floating Particles Background -->
-    <div id="particles-container" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none;"></div>
+<body class="relative min-h-screen" style="color: #d1d5db;">
+    <!-- Floating Particles -->
+    <div id="particles-container" style="position: fixed; width: 100%; height: 100%; top: 0; left: 0; pointer-events: none; z-index: 1;"></div>
 
     <!-- Navigation -->
     <nav class="fixed top-0 left-0 right-0 z-50 nav-blur">
@@ -424,57 +483,73 @@
         <div class="progress-bar" id="progressBar" style="width: 0%;"></div>
     </div>
 
-    <!-- Quiz Container -->
     <div class="quiz-container">
-        <a href="/path2-lessons" class="back-link">← Back to Path 2 Lessons</a>
+        <a href="/path2-lessons" class="back-link">← Back to Lessons</a>
 
-        <!-- Quiz Header -->
         <div class="quiz-header">
-            <h1 class="quiz-title">
-                Path 2 <span class="gradient-text">Final Quiz</span>
-            </h1>
-            <p class="quiz-subtitle">
-                Test your knowledge across all 5 lessons: Income, Paychecks, Job Choices, Side Income, and Income Changes.<br>
-                <strong>You need 100% to pass and complete Path 2!</strong>
-            </p>
+            <div class="quiz-badge" style="display: flex; align-items: center; justify-content: center; gap: 8px;">
+                <i data-lucide="trophy" style="width: 18px; height: 18px;"></i>
+                FINAL QUIZ
+            </div>
+            <h1 class="quiz-title">Income & Work Money Mastery Test</h1>
+            <p class="quiz-description">Test your knowledge across all 5 lessons. <strong>You must score 100% to pass and complete Path 2.</strong> Take your time and choose carefully!</p>
         </div>
 
-        <!-- Questions Container -->
-        <div id="questions-container"></div>
+        <div id="questionsContainer">
+            <!-- Questions will be inserted here by JavaScript -->
+        </div>
 
-        <!-- Submit Button -->
-        <button id="submit-btn" class="submit-btn" onclick="submitQuiz()">Submit Quiz</button>
+        <button class="submit-btn" id="submitBtn" onclick="submitQuiz()">Submit Quiz</button>
 
-        <!-- Results Container (hidden initially) -->
-        <div id="results-container" style="display: none;"></div>
+        <div id="resultContainer" style="display: none;">
+            <!-- Results will be shown here -->
+        </div>
     </div>
 
     <!-- Footer -->
-    <footer style="background: #111827; padding: 48px 0; margin-top: 80px;">
-        <div class="max-w-7xl mx-auto px-8">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mb-8">
+    <footer class="py-10 border-t border-gray-800 relative z-10">
+        <div class="container mx-auto px-6">
+            <div class="grid md:grid-cols-4 gap-6 mb-6">
                 <div>
-                    <h3 class="text-xl font-bold text-gray-200 mb-4">FinanceU</h3>
-                    <p class="text-gray-400 text-sm">Financial education made simple for students and young adults.</p>
+                    <div class="flex items-center space-x-2 mb-3">
+                        <div class="w-7 h-7 rounded-full bg-gradient-to-br from-gray-300 to-gray-400 glow-grey flex items-center justify-center font-bold text-sm" style="color: #1f2937;">
+                            F
+                        </div>
+                        <span class="text-lg font-bold gradient-text">FinanceU</span>
+                    </div>
+                    <p class="text-gray-500 text-xs leading-relaxed">
+                        Empowering students with practical financial education for a confident future.
+                    </p>
                 </div>
+
                 <div>
-                    <h4 class="font-semibold text-gray-200 mb-3">Quick Links</h4>
-                    <ul class="space-y-2 text-sm text-gray-400">
+                    <h4 class="font-semibold mb-3 text-gray-300 text-sm">Learn</h4>
+                    <ul class="space-y-2 text-gray-500 text-xs">
+                        <li><a href="/courses" class="hover:text-gray-300 transition-colors">Courses</a></li>
                         <li><a href="/dashboard" class="hover:text-gray-300 transition-colors">Dashboard</a></li>
-                        <li><a href="/path1-lessons" class="hover:text-gray-300 transition-colors">Path 1: Money Basics</a></li>
-                        <li><a href="/path2-lessons" class="hover:text-gray-300 transition-colors">Path 2: Income & Work</a></li>
+                        <li><a href="/help" class="hover:text-gray-300 transition-colors">Resources</a></li>
                     </ul>
                 </div>
+
                 <div>
-                    <h4 class="font-semibold text-gray-200 mb-3">Support</h4>
-                    <ul class="space-y-2 text-sm text-gray-400">
-                        <li><a href="/help" class="hover:text-gray-300 transition-colors">Help Center</a></li>
+                    <h4 class="font-semibold mb-3 text-gray-300 text-sm">Company</h4>
+                    <ul class="space-y-2 text-gray-500 text-xs">
+                        <li><a href="/about" class="hover:text-gray-300 transition-colors">About</a></li>
+                        <li><a href="/contact" class="hover:text-gray-300 transition-colors">Contact</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-semibold mb-3 text-gray-300 text-sm">Legal</h4>
+                    <ul class="space-y-2 text-gray-500 text-xs">
+                        <li><a href="/privacy" class="hover:text-gray-300 transition-colors">Privacy</a></li>
+                        <li><a href="/terms" class="hover:text-gray-300 transition-colors">Terms</a></li>
                     </ul>
                 </div>
             </div>
 
-            <div class="border-t border-gray-800 pt-6 text-center text-gray-400 text-xs">
-                <p>&copy; 2025 FinanceU. Built with care for students, by students.</p>
+            <div class="text-center pt-6 border-t border-gray-800">
+                <p class="text-gray-500 text-xs">&copy; 2025 FinanceU. All rights reserved.</p>
             </div>
         </div>
     </footer>
@@ -482,19 +557,8 @@
     <script src="config.js"></script>
     <script src="lesson-completion.js"></script>
     <script>
-        // Logout function
-        async function logout() {
-            try {
-                await fetch(`${API_URL}/auth/logout`, {
-                    method: 'POST',
-                    credentials: 'include'
-                });
-                window.location.href = '/index.html';
-            } catch (error) {
-                console.error('Logout error:', error);
-                window.location.href = '/index.html';
-            }
-        }
+        // Initialize Lucide icons
+        lucide.createIcons();
 
         // Create floating particles
         function createParticles() {
@@ -520,36 +584,8 @@
 
         createParticles();
 
-        // Authentication
-        async function updateNav() {
-            const authButtons = document.getElementById('authButtons');
-            const cachedAuth = localStorage.getItem('authState');
-            if (cachedAuth) {
-                const authState = JSON.parse(cachedAuth);
-                authButtons.innerHTML = authState.isLoggedIn
-                    ? `<button onclick="logout()" class="btn-3d px-6 py-2.5 bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 rounded-lg font-semibold glow-green transition-all text-white">Logout</button>`
-                    : `<a href="login" class="btn-3d px-6 py-2.5 bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 rounded-lg font-semibold glow-green transition-all text-white">Login</a>`;
-            }
-
-            try {
-                const response = await fetch(`${API_URL}/auth/me`, { credentials: 'include' });
-                if (response.ok) {
-                    localStorage.setItem('authState', JSON.stringify({ isLoggedIn: true }));
-                    authButtons.innerHTML = `<button onclick="logout()" class="btn-3d px-6 py-2.5 bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 rounded-lg font-semibold glow-green transition-all text-white">Logout</button>`;
-                } else {
-                    localStorage.setItem('authState', JSON.stringify({ isLoggedIn: false }));
-                    authButtons.innerHTML = `<a href="login" class="btn-3d px-6 py-2.5 bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 rounded-lg font-semibold glow-green transition-all text-white">Login</a>`;
-                }
-            } catch (error) {
-                localStorage.setItem('authState', JSON.stringify({ isLoggedIn: false }));
-                authButtons.innerHTML = `<a href="login" class="btn-3d px-6 py-2.5 bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 rounded-lg font-semibold glow-green transition-all text-white">Login</a>`;
-            }
-        }
-
+        // Logout function
         async function logout() {
-            localStorage.removeItem('authState');
-            localStorage.removeItem('token');
-            localStorage.removeItem('userId');
             try {
                 await fetch(`${API_URL}/auth/logout`, {
                     method: 'POST',
@@ -557,11 +593,12 @@
                 });
                 window.location.href = '/index.html';
             } catch (error) {
+                console.error('Logout error:', error);
                 window.location.href = '/index.html';
             }
         }
 
-        // Quiz Questions - 15 questions covering all 5 lessons
+        // Quiz Questions - 15 questions covering all 5 Path 2 lessons
         const quizQuestions = [
             // Lesson 1: How Pay Actually Works (3 questions)
             {
@@ -723,27 +760,43 @@
         let selectedAnswers = {};
         let quizSubmitted = false;
 
-        // Render questions
+        // Render all questions at once
         function renderQuestions() {
-            const container = document.getElementById('questions-container');
+            const container = document.getElementById('questionsContainer');
             container.innerHTML = '';
 
             quizQuestions.forEach((q, index) => {
                 const questionCard = document.createElement('div');
                 questionCard.className = 'question-card';
-                questionCard.innerHTML = `
-                    <span class="question-number">Question ${index + 1} of ${quizQuestions.length}</span>
-                    <div class="question-text">${q.question}</div>
-                    <div class="options-container">
-                        ${q.options.map((option, optIndex) => `
-                            <div class="option" data-question="${index}" data-option="${optIndex}" onclick="selectAnswer(${index}, ${optIndex})">
-                                ${option}
-                            </div>
-                        `).join('')}
-                    </div>
-                `;
+
+                const questionNumber = document.createElement('div');
+                questionNumber.className = 'question-number';
+                questionNumber.textContent = index + 1;
+
+                const questionText = document.createElement('div');
+                questionText.className = 'question-text';
+                questionText.textContent = q.question;
+
+                const optionsGrid = document.createElement('div');
+                optionsGrid.className = 'options-grid';
+
+                q.options.forEach((option, optIndex) => {
+                    const optionDiv = document.createElement('div');
+                    optionDiv.className = 'option';
+                    optionDiv.dataset.question = index;
+                    optionDiv.dataset.option = optIndex;
+                    optionDiv.textContent = option;
+                    optionDiv.onclick = () => selectAnswer(index, optIndex);
+                    optionsGrid.appendChild(optionDiv);
+                });
+
+                questionCard.appendChild(questionNumber);
+                questionCard.appendChild(questionText);
+                questionCard.appendChild(optionsGrid);
                 container.appendChild(questionCard);
             });
+
+            updateProgressBar();
         }
 
         // Select answer
@@ -761,103 +814,118 @@
             // Store the answer
             selectedAnswers[questionIndex] = optionIndex;
 
+            // Update progress bar
+            updateProgressBar();
+
             // Enable submit button if all questions answered
             if (Object.keys(selectedAnswers).length === quizQuestions.length) {
-                document.getElementById('submit-btn').disabled = false;
+                document.getElementById('submitBtn').disabled = false;
             }
+        }
+
+        // Update progress bar
+        function updateProgressBar() {
+            const answeredCount = Object.keys(selectedAnswers).length;
+            const progress = (answeredCount / quizQuestions.length) * 100;
+            document.getElementById('progressBar').style.width = `${progress}%`;
         }
 
         // Submit quiz
         async function submitQuiz() {
-            if (Object.keys(selectedAnswers).length < quizQuestions.length) {
+            if (Object.keys(selectedAnswers).length !== quizQuestions.length) {
                 alert('Please answer all questions before submitting.');
                 return;
             }
 
             quizSubmitted = true;
-            document.getElementById('submit-btn').style.display = 'none';
+            document.getElementById('submitBtn').disabled = true;
 
-            // Grade the quiz
+            // Calculate score
             let correctCount = 0;
             quizQuestions.forEach((q, index) => {
-                const isCorrect = selectedAnswers[index] === q.correct;
+                const selectedOption = selectedAnswers[index];
+                const isCorrect = selectedOption === q.correct;
                 if (isCorrect) correctCount++;
 
-                // Highlight correct/incorrect
+                // Mark options as correct or incorrect
                 const options = document.querySelectorAll(`[data-question="${index}"]`);
                 options.forEach((opt, optIndex) => {
                     if (optIndex === q.correct) {
                         opt.classList.add('correct');
-                    } else if (optIndex === selectedAnswers[index] && !isCorrect) {
+                    } else if (optIndex === selectedOption && !isCorrect) {
                         opt.classList.add('incorrect');
                     }
                     opt.style.pointerEvents = 'none';
                 });
             });
 
-            const score = Math.round((correctCount / quizQuestions.length) * 100);
+            const score = (correctCount / quizQuestions.length) * 100;
             const passed = score === 100;
 
             // Show results
-            const resultsContainer = document.getElementById('results-container');
-            resultsContainer.style.display = 'block';
-            resultsContainer.className = passed ? 'result-container' : 'result-container failed';
-
-            if (passed) {
-                resultsContainer.innerHTML = `
-                    <div class="result-icon">🎉</div>
-                    <h2 class="result-title">Congratulations!</h2>
-                    <div class="result-score">${correctCount}/${quizQuestions.length} (${score}%)</div>
-                    <p class="result-text">You've mastered Path 2! You now understand how income works, how to read paychecks, how to choose jobs wisely, the reality of side income, and how to handle income changes. You're ready for real-world financial decisions!</p>
-                    <a href="/dashboard" class="finish-btn">Go to Dashboard</a>
-                    <a href="/path2-lessons" class="finish-btn">Back to Lessons</a>
-                `;
-
-                // Mark path as completed
-                try {
-                    const userId = localStorage.getItem('userId') || 'demo';
-                    localStorage.setItem(`path2_quiz_passed_${userId}`, 'true');
-
-                    // Call completion API
-                    await fetch(`${API_URL}/progress/complete-path`, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        credentials: 'include',
-                        body: JSON.stringify({ pillarNum: 2 })
-                    });
-                } catch (error) {
-                    console.log('Error saving path completion:', error);
+            setTimeout(() => {
+                showResults(score, passed);
+                if (passed) {
+                    saveQuizCompletion();
                 }
-            } else {
-                resultsContainer.innerHTML = `
-                    <div class="result-icon">😔</div>
-                    <h2 class="result-title">Not Quite There...</h2>
-                    <div class="result-score failed">${correctCount}/${quizQuestions.length} (${score}%)</div>
-                    <p class="result-text">You need 100% to pass. Review the incorrect answers above, go back to the lessons if needed, and try again when you're ready!</p>
-                    <button onclick="retryQuiz()" class="retry-btn">Retry Quiz</button>
-                    <a href="/path2-lessons" class="finish-btn">Review Lessons</a>
-                `;
+            }, 1000);
+        }
+
+        // Show results
+        function showResults(score, passed) {
+            const resultContainer = document.getElementById('resultContainer');
+            resultContainer.style.display = 'block';
+            resultContainer.className = 'result-container';
+            if (!passed) resultContainer.classList.add('failed');
+
+            const resultIcon = passed ? '🎉' : '😔';
+            const resultTitle = passed ? 'Perfect Score!' : 'Not Quite There Yet';
+            const resultText = passed
+                ? 'Congratulations! You\'ve mastered Path 2: Income & Work Money. You\'ve proven your understanding of paychecks, job choices, side income, and income changes!'
+                : `You scored ${score.toFixed(0)}%, but Path 2 requires 100% to pass. Review the lessons and try again—you've got this!`;
+
+            resultContainer.innerHTML = `
+                <div class="result-icon">${resultIcon}</div>
+                <h2 class="result-title">${resultTitle}</h2>
+                <div class="result-score ${!passed ? 'failed' : ''}">${score.toFixed(0)}%</div>
+                <p class="result-text">${resultText}</p>
+                <div style="margin-top: 32px;">
+                    ${passed
+                        ? '<a href="/path2-lessons" class="finish-btn">Back to Path 2</a>'
+                        : '<button onclick="location.reload()" class="retry-btn">Try Again</button><a href="/path2-lessons" class="finish-btn">Back to Lessons</a>'
+                    }
+                </div>
+            `;
+
+            resultContainer.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+
+        // Save quiz completion
+        async function saveQuizCompletion() {
+            const userId = localStorage.getItem('userId');
+            if (!userId || userId === 'null' || userId === 'undefined') return;
+
+            localStorage.setItem(`path2_quiz_completed_${userId}`, 'true');
+
+            try {
+                await fetch(`${API_URL}/progress/path2-quiz`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    credentials: 'include',
+                    body: JSON.stringify({
+                        userId,
+                        completed: true,
+                        score: 100
+                    })
+                });
+            } catch (error) {
+                console.error('Error saving quiz completion:', error);
             }
-
-            // Scroll to results
-            resultsContainer.scrollIntoView({ behavior: 'smooth', block: 'center' });
         }
 
-        // Retry quiz
-        function retryQuiz() {
-            selectedAnswers = {};
-            quizSubmitted = false;
-            document.getElementById('submit-btn').style.display = 'block';
-            document.getElementById('submit-btn').disabled = false;
-            document.getElementById('results-container').style.display = 'none';
-            renderQuestions();
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-
-        // Initialize
-        updateNav();
+        // Initialize quiz
         renderQuestions();
-        document.getElementById('submit-btn').disabled = true;
+        document.getElementById('submitBtn').disabled = true;
     </script>
 </body>
 </html>
