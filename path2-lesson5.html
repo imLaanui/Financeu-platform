@@ -1,0 +1,1558 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson 5: What to Do When Your Income Changes - Path 2</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: #0f0f0f;
+            color: #d1d5db;
+            overflow-x: hidden;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-10px); }
+            75% { transform: translateX(10px); }
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        /* Progress bar */
+        .progress-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: rgba(17, 24, 39, 0.8);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #22c55e, #16a34a);
+            transition: width 0.3s ease;
+            box-shadow: 0 0 10px rgba(34, 197, 94, 0.5);
+        }
+
+        /* Navigation */
+        .nav-container {
+            position: fixed;
+            top: 1rem;
+            left: 1rem;
+            z-index: 999;
+            background: rgba(17, 24, 39, 0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(34, 197, 94, 0.2);
+            border-radius: 12px;
+            padding: 0.75rem 1.25rem;
+        }
+
+        /* Gradient text */
+        .gradient-text {
+            background: linear-gradient(135deg, #22c55e 0%, #16a34a 50%, #15803d 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Cards */
+        .glass-card {
+            background: rgba(34, 197, 94, 0.1);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(34, 197, 94, 0.2);
+            border-radius: 16px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .glass-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(34, 197, 94, 0.4);
+            box-shadow: 0 20px 60px rgba(34, 197, 94, 0.3);
+        }
+
+        .info-card {
+            background: rgba(17, 24, 39, 0.8);
+            border: 2px solid rgba(34, 197, 94, 0.3);
+            border-radius: 16px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        /* Icon circles */
+        .icon-circle {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+        }
+
+        .icon-circle.green {
+            background: rgba(34, 197, 94, 0.2);
+            border: 2px solid rgba(34, 197, 94, 0.4);
+        }
+
+        .icon-circle.red {
+            background: rgba(239, 68, 68, 0.2);
+            border: 2px solid rgba(239, 68, 68, 0.4);
+        }
+
+        .icon-circle.blue {
+            background: rgba(59, 130, 246, 0.2);
+            border: 2px solid rgba(59, 130, 246, 0.4);
+        }
+
+        .icon-circle.yellow {
+            background: rgba(251, 191, 36, 0.2);
+            border: 2px solid rgba(251, 191, 36, 0.4);
+        }
+
+        .icon-circle.purple {
+            background: rgba(139, 92, 246, 0.2);
+            border: 2px solid rgba(139, 92, 246, 0.4);
+        }
+
+        /* Change type cards */
+        .change-card {
+            background: rgba(17, 24, 39, 0.9);
+            border: 2px solid rgba(75, 85, 99, 0.3);
+            border-radius: 16px;
+            padding: 2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            min-height: 250px;
+        }
+
+        .change-card:hover {
+            border-color: rgba(34, 197, 94, 0.4);
+            transform: translateY(-4px);
+        }
+
+        .change-card.revealed {
+            border-color: rgba(34, 197, 94, 0.6);
+            background: rgba(34, 197, 94, 0.05);
+        }
+
+        .change-details {
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 2px solid rgba(34, 197, 94, 0.3);
+            animation: slideIn 0.5s ease-out;
+        }
+
+        /* Impact calculator */
+        .calculator-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .budget-column {
+            background: rgba(17, 24, 39, 0.9);
+            border: 2px solid rgba(34, 197, 94, 0.3);
+            border-radius: 12px;
+            padding: 1.5rem;
+        }
+
+        .budget-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid rgba(75, 85, 99, 0.3);
+        }
+
+        .budget-item:last-child {
+            border-bottom: none;
+            font-weight: 700;
+            font-size: 1.25rem;
+            padding-top: 1rem;
+            margin-top: 0.5rem;
+            border-top: 2px solid rgba(34, 197, 94, 0.4);
+        }
+
+        .budget-bar {
+            width: 100%;
+            height: 8px;
+            background: rgba(75, 85, 99, 0.3);
+            border-radius: 4px;
+            overflow: hidden;
+            margin-top: 0.5rem;
+        }
+
+        .budget-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #22c55e, #16a34a);
+            transition: width 0.5s ease;
+        }
+
+        .budget-fill.warning {
+            background: linear-gradient(90deg, #fbbf24, #f59e0b);
+        }
+
+        .budget-fill.danger {
+            background: linear-gradient(90deg, #ef4444, #dc2626);
+        }
+
+        /* Scenario simulator */
+        .scenario-container {
+            background: rgba(17, 24, 39, 0.9);
+            border: 2px solid rgba(34, 197, 94, 0.3);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .decision-btn {
+            background: rgba(34, 197, 94, 0.1);
+            border: 2px solid rgba(34, 197, 94, 0.4);
+            border-radius: 12px;
+            padding: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 1rem;
+            text-align: left;
+        }
+
+        .decision-btn:hover {
+            background: rgba(34, 197, 94, 0.2);
+            border-color: rgba(34, 197, 94, 0.6);
+            transform: translateX(10px);
+        }
+
+        .decision-btn.selected {
+            background: rgba(34, 197, 94, 0.2);
+            border-color: rgba(34, 197, 94, 0.8);
+        }
+
+        .outcome-panel {
+            margin-top: 1.5rem;
+            padding: 1.5rem;
+            border-radius: 12px;
+            animation: slideIn 0.5s ease-out;
+        }
+
+        .outcome-panel.good {
+            background: rgba(34, 197, 94, 0.2);
+            border: 2px solid rgba(34, 197, 94, 0.6);
+        }
+
+        .outcome-panel.bad {
+            background: rgba(239, 68, 68, 0.2);
+            border: 2px solid rgba(239, 68, 68, 0.6);
+        }
+
+        .outcome-panel.neutral {
+            background: rgba(59, 130, 246, 0.2);
+            border: 2px solid rgba(59, 130, 246, 0.6);
+        }
+
+        /* Action plan */
+        .checklist-item {
+            background: rgba(17, 24, 39, 0.9);
+            border: 2px solid rgba(75, 85, 99, 0.3);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .checklist-item:hover {
+            border-color: rgba(34, 197, 94, 0.4);
+        }
+
+        .checklist-item.checked {
+            background: rgba(34, 197, 94, 0.1);
+            border-color: rgba(34, 197, 94, 0.6);
+            opacity: 0.8;
+        }
+
+        .checkbox {
+            width: 24px;
+            height: 24px;
+            border: 2px solid rgba(34, 197, 94, 0.4);
+            border-radius: 6px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .checkbox.checked {
+            background: linear-gradient(135deg, #22c55e, #16a34a);
+            border-color: #22c55e;
+        }
+
+        /* Timeline */
+        .timeline {
+            position: relative;
+            padding: 2rem 0;
+        }
+
+        .timeline-line {
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(180deg, #22c55e, #16a34a);
+            transform: translateX(-50%);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 3rem;
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .timeline-item:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+
+        .timeline-content {
+            flex: 1;
+            background: rgba(17, 24, 39, 0.9);
+            border: 2px solid rgba(34, 197, 94, 0.3);
+            border-radius: 12px;
+            padding: 1.5rem;
+        }
+
+        .timeline-dot {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #22c55e, #16a34a);
+            border: 4px solid #0f0f0f;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            z-index: 2;
+        }
+
+        /* Quiz */
+        .quiz-option {
+            background: rgba(17, 24, 39, 0.8);
+            border: 2px solid rgba(75, 85, 99, 0.3);
+            border-radius: 12px;
+            padding: 1rem 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 0.75rem;
+        }
+
+        .quiz-option:hover {
+            border-color: rgba(34, 197, 94, 0.4);
+        }
+
+        .quiz-option.selected {
+            border-color: rgba(34, 197, 94, 0.6);
+            background: rgba(34, 197, 94, 0.1);
+        }
+
+        .quiz-option.correct {
+            border-color: rgba(34, 197, 94, 0.8);
+            background: rgba(34, 197, 94, 0.2);
+        }
+
+        .quiz-option.incorrect {
+            border-color: rgba(239, 68, 68, 0.8);
+            background: rgba(239, 68, 68, 0.2);
+            animation: shake 0.5s;
+        }
+
+        /* Buttons */
+        .btn {
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #22c55e, #16a34a);
+            color: white;
+            box-shadow: 0 8px 24px rgba(34, 197, 94, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 32px rgba(34, 197, 94, 0.5);
+        }
+
+        .btn-secondary {
+            background: rgba(75, 85, 99, 0.3);
+            color: #d1d5db;
+            border: 2px solid rgba(75, 85, 99, 0.5);
+        }
+
+        .btn-secondary:hover {
+            border-color: rgba(34, 197, 94, 0.4);
+        }
+
+        /* Input styling */
+        input[type="range"] {
+            width: 100%;
+            height: 8px;
+            border-radius: 5px;
+            background: rgba(75, 85, 99, 0.3);
+            outline: none;
+            -webkit-appearance: none;
+        }
+
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #22c55e, #16a34a);
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(34, 197, 94, 0.4);
+        }
+
+        input[type="range"]::-moz-range-thumb {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #22c55e, #16a34a);
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(34, 197, 94, 0.4);
+            border: none;
+        }
+
+        /* Particles */
+        .particle {
+            position: fixed;
+            width: 4px;
+            height: 4px;
+            background: #22c55e;
+            border-radius: 50%;
+            pointer-events: none;
+            opacity: 0.6;
+            z-index: 1;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-container {
+                font-size: 0.875rem;
+                padding: 0.5rem 1rem;
+            }
+            .calculator-grid {
+                grid-template-columns: 1fr;
+            }
+            .timeline-item,
+            .timeline-item:nth-child(even) {
+                flex-direction: column;
+            }
+            .timeline-line {
+                left: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Progress Bar -->
+    <div class="progress-container">
+        <div class="progress-bar" id="progressBar" style="width: 14%"></div>
+    </div>
+
+    <!-- Navigation -->
+    <div class="nav-container">
+        <a href="/path2-lessons" style="color: #22c55e; text-decoration: none;">← Back to Path 2</a>
+    </div>
+
+    <!-- Particles -->
+    <div id="particles"></div>
+
+    <!-- Main Content -->
+    <div class="relative z-10 max-w-6xl mx-auto px-4 py-20">
+
+        <!-- Section 1: Introduction -->
+        <section id="section1" class="min-h-screen flex flex-col justify-center">
+            <div class="text-center mb-12 fade-in-up">
+                <div class="inline-block mb-4 px-4 py-2 rounded-full" style="background: rgba(34, 197, 94, 0.2); border: 1px solid rgba(34, 197, 94, 0.4);">
+                    <span class="text-green-400 font-semibold">Lesson 5 of 5</span>
+                </div>
+                <h1 class="text-5xl md:text-6xl font-bold mb-6 gradient-text">
+                    What to Do When<br>Your Income Changes
+                </h1>
+                <p class="text-xl text-gray-300 max-w-3xl mx-auto">
+                    Your income will change—raises, new jobs, lost hours, bonuses. Most people panic or splurge. Learn how to adapt fast and stay in control when your money changes.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+                <div class="glass-card">
+                    <div class="icon-circle green">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="12" y1="5" x2="12" y2="19"/>
+                            <polyline points="19 12 12 19 5 12"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-green-400 mb-2 text-center">Handle Income Drops</h3>
+                    <p class="text-gray-400 text-center">Cut hours, job loss, pay cuts—what to do first</p>
+                </div>
+
+                <div class="glass-card">
+                    <div class="icon-circle blue">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="12" y1="19" x2="12" y2="5"/>
+                            <polyline points="5 12 12 5 19 12"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-blue-400 mb-2 text-center">Handle Income Increases</h3>
+                    <p class="text-gray-400 text-center">Raises, bonuses, new jobs—avoid lifestyle inflation</p>
+                </div>
+
+                <div class="glass-card">
+                    <div class="icon-circle purple">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#8b5cf6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-purple-400 mb-2 text-center">The 72-Hour Plan</h3>
+                    <p class="text-gray-400 text-center">Immediate actions to take in the first 3 days</p>
+                </div>
+            </div>
+
+            <div class="text-center">
+                <button onclick="nextSection()" class="btn btn-primary">
+                    Explore Income Changes
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: inline-block; margin-left: 8px; vertical-align: middle;">
+                        <polyline points="9 18 15 12 9 6"/>
+                    </svg>
+                </button>
+            </div>
+        </section>
+
+        <!-- Section 2: Types of Income Changes -->
+        <section id="section2" class="hidden min-h-screen flex flex-col justify-center py-20">
+            <h2 class="text-4xl md:text-5xl font-bold text-center mb-4 gradient-text">Types of Income Changes</h2>
+            <p class="text-center text-gray-400 text-lg mb-12">Click each to learn what happens and what to do</p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto">
+                <div class="change-card" onclick="revealChange(1)" id="change1">
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="icon-circle green">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="12" y1="19" x2="12" y2="5"/>
+                                <polyline points="5 12 12 5 19 12"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold text-white">You Got a Raise</h3>
+                    </div>
+                    <p class="text-gray-400 text-sm">Click to see what to do</p>
+                    <div class="change-details hidden">
+                        <div class="text-green-400 font-bold mb-2">WHAT TO DO:</div>
+                        <ul class="space-y-2 text-sm text-gray-300">
+                            <li class="flex items-start gap-2">
+                                <span class="text-green-400">1.</span>
+                                <span><strong>Calculate your new take-home</strong> - Remember taxes will eat 20-30% of the raise</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-green-400">2.</span>
+                                <span><strong>Wait 3 months before lifestyle upgrades</strong> - Prove the income is stable first</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-green-400">3.</span>
+                                <span><strong>Split it: 50% savings, 30% goals, 20% lifestyle</strong> - Don't blow it all</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-green-400">4.</span>
+                                <span><strong>Automate the savings</strong> - Set up automatic transfers so you don't see it</span>
+                            </li>
+                        </ul>
+                        <p class="text-yellow-400 mt-3 text-sm font-semibold">WARNING: Most people increase spending to match their raise within 6 months. Don't be most people.</p>
+                    </div>
+                </div>
+
+                <div class="change-card" onclick="revealChange(2)" id="change2">
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="icon-circle red">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="12" y1="5" x2="12" y2="19"/>
+                                <polyline points="19 12 12 19 5 12"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold text-white">Your Hours Got Cut</h3>
+                    </div>
+                    <p class="text-gray-400 text-sm">Click to see what to do</p>
+                    <div class="change-details hidden">
+                        <div class="text-red-400 font-bold mb-2">WHAT TO DO IMMEDIATELY:</div>
+                        <ul class="space-y-2 text-sm text-gray-300">
+                            <li class="flex items-start gap-2">
+                                <span class="text-red-400">1.</span>
+                                <span><strong>Calculate the damage</strong> - Figure out exactly how much less you're making per month</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-red-400">2.</span>
+                                <span><strong>Pause ALL non-essentials for 2 weeks</strong> - No eating out, subscriptions, or extras until you adjust</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-red-400">3.</span>
+                                <span><strong>Contact bill companies BEFORE you're late</strong> - Ask for payment plans or extensions</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-red-400">4.</span>
+                                <span><strong>Look for extra hours ASAP</strong> - Ask manager, cover shifts, or find second job</span>
+                            </li>
+                        </ul>
+                        <p class="text-yellow-400 mt-3 text-sm font-semibold">TIME SENSITIVE: The first 72 hours matter. Acting fast prevents late fees and debt.</p>
+                    </div>
+                </div>
+
+                <div class="change-card" onclick="revealChange(3)" id="change3">
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="icon-circle blue">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+                                <polyline points="3.27 6.96 12 12.01 20.73 6.96"/>
+                                <line x1="12" y1="22.08" x2="12" y2="12"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold text-white">You Got a Bonus</h3>
+                    </div>
+                    <p class="text-gray-400 text-sm">Click to see what to do</p>
+                    <div class="change-details hidden">
+                        <div class="text-blue-400 font-bold mb-2">SMART MOVES:</div>
+                        <ul class="space-y-2 text-sm text-gray-300">
+                            <li class="flex items-start gap-2">
+                                <span class="text-blue-400">1.</span>
+                                <span><strong>Remember it's taxed heavily</strong> - Bonuses are taxed 22-37%, so expect to keep 60-70%</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-blue-400">2.</span>
+                                <span><strong>Don't count on it next year</strong> - Bonuses aren't guaranteed, never budget for them</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-blue-400">3.</span>
+                                <span><strong>The 50/30/20 rule</strong> - 50% to debt or savings, 30% to goals, 20% fun money</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-blue-400">4.</span>
+                                <span><strong>Act immediately</strong> - Transfer money to savings BEFORE you see it sitting there</span>
+                            </li>
+                        </ul>
+                        <p class="text-green-400 mt-3 text-sm font-semibold">OPPORTUNITY: A bonus is a chance to jump ahead financially. Use it wisely.</p>
+                    </div>
+                </div>
+
+                <div class="change-card" onclick="revealChange(4)" id="change4">
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="icon-circle yellow">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fbbf24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="2" y="7" width="20" height="14" rx="2" ry="2"/>
+                                <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold text-white">You Changed Jobs</h3>
+                    </div>
+                    <p class="text-gray-400 text-sm">Click to see what to do</p>
+                    <div class="change-details hidden">
+                        <div class="text-yellow-400 font-bold mb-2">TRANSITION CHECKLIST:</div>
+                        <ul class="space-y-2 text-sm text-gray-300">
+                            <li class="flex items-start gap-2">
+                                <span class="text-yellow-400">1.</span>
+                                <span><strong>Expect a gap in paychecks</strong> - Most jobs pay 2 weeks behind, plan for 3-4 weeks with no income</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-yellow-400">2.</span>
+                                <span><strong>Get your final check details</strong> - Unused PTO, final paycheck date, benefits end date</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-yellow-400">3.</span>
+                                <span><strong>Compare benefit costs</strong> - New health insurance might cost more/less, plan accordingly</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-yellow-400">4.</span>
+                                <span><strong>Update your budget with new pay schedule</strong> - Weekly vs bi-weekly vs monthly changes everything</span>
+                            </li>
+                        </ul>
+                        <p class="text-blue-400 mt-3 text-sm font-semibold">PRO TIP: If getting a raise, live on your OLD income for 3 months to build savings first.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center mt-12">
+                <button onclick="nextSection()" class="btn btn-primary">
+                    See Budget Impact
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: inline-block; margin-left: 8px; vertical-align: middle;">
+                        <polyline points="9 18 15 12 9 6"/>
+                    </svg>
+                </button>
+            </div>
+        </section>
+
+        <!-- Section 3: Income Change Impact Calculator -->
+        <section id="section3" class="hidden min-h-screen flex flex-col justify-center py-20">
+            <h2 class="text-4xl md:text-5xl font-bold text-center mb-4 gradient-text">Income Change Impact Calculator</h2>
+            <p class="text-center text-gray-400 text-lg mb-12">See how income changes ripple through your budget</p>
+
+            <div class="max-w-5xl mx-auto">
+                <div class="info-card mb-8">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-300 mb-2">Current Monthly Income (after tax)</label>
+                            <input type="number" id="currentIncome" value="2400" oninput="calculateImpact()" class="w-full px-4 py-2 bg-gray-800 border-2 border-gray-600 rounded-lg text-white">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-300 mb-2">New Monthly Income (after tax)</label>
+                            <input type="number" id="newIncome" value="2100" oninput="calculateImpact()" class="w-full px-4 py-2 bg-gray-800 border-2 border-gray-600 rounded-lg text-white">
+                        </div>
+                    </div>
+
+                    <div class="mt-6">
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="text-gray-400">Income Change:</span>
+                            <span id="incomeChange" class="text-2xl font-bold text-red-400">-$300 (-12.5%)</span>
+                        </div>
+                        <div class="budget-bar">
+                            <div id="changeBar" class="budget-fill danger" style="width: 87.5%"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="calculator-grid">
+                    <div class="budget-column">
+                        <h3 class="text-xl font-bold text-white mb-4">Before (Current Budget)</h3>
+                        <div class="space-y-2">
+                            <div class="budget-item">
+                                <span class="text-gray-400">Rent/Housing:</span>
+                                <span class="text-white">$900</span>
+                            </div>
+                            <div class="budget-item">
+                                <span class="text-gray-400">Utilities:</span>
+                                <span class="text-white">$150</span>
+                            </div>
+                            <div class="budget-item">
+                                <span class="text-gray-400">Groceries:</span>
+                                <span class="text-white">$400</span>
+                            </div>
+                            <div class="budget-item">
+                                <span class="text-gray-400">Transportation:</span>
+                                <span class="text-white">$250</span>
+                            </div>
+                            <div class="budget-item">
+                                <span class="text-gray-400">Phone/Internet:</span>
+                                <span class="text-white">$120</span>
+                            </div>
+                            <div class="budget-item">
+                                <span class="text-gray-400">Other/Fun:</span>
+                                <span class="text-white">$280</span>
+                            </div>
+                            <div class="budget-item">
+                                <span class="text-gray-400">Savings:</span>
+                                <span class="text-white">$300</span>
+                            </div>
+                            <div class="budget-item">
+                                <span class="text-green-400">Money Left:</span>
+                                <span class="text-green-400" id="beforeLeft">$0</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="budget-column">
+                        <h3 class="text-xl font-bold text-white mb-4">After (Adjusted Budget)</h3>
+                        <div class="space-y-2">
+                            <div class="budget-item">
+                                <span class="text-gray-400">Rent/Housing:</span>
+                                <span class="text-white" id="afterRent">$900</span>
+                            </div>
+                            <div class="budget-item">
+                                <span class="text-gray-400">Utilities:</span>
+                                <span class="text-white" id="afterUtilities">$150</span>
+                            </div>
+                            <div class="budget-item">
+                                <span class="text-gray-400">Groceries:</span>
+                                <span class="text-white" id="afterGroceries">$350</span>
+                            </div>
+                            <div class="budget-item">
+                                <span class="text-gray-400">Transportation:</span>
+                                <span class="text-white" id="afterTransport">$200</span>
+                            </div>
+                            <div class="budget-item">
+                                <span class="text-gray-400">Phone/Internet:</span>
+                                <span class="text-white" id="afterPhone">$100</span>
+                            </div>
+                            <div class="budget-item">
+                                <span class="text-gray-400">Other/Fun:</span>
+                                <span class="text-white" id="afterOther">$150</span>
+                            </div>
+                            <div class="budget-item">
+                                <span class="text-gray-400">Savings:</span>
+                                <span class="text-white" id="afterSavings">$250</span>
+                            </div>
+                            <div class="budget-item">
+                                <span id="afterLeftLabel" class="text-green-400">Money Left:</span>
+                                <span id="afterLeft" class="text-green-400">$0</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-card mt-8" style="background: rgba(139, 92, 246, 0.1); border-color: rgba(139, 92, 246, 0.4);">
+                    <div class="flex items-center gap-2 mb-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#8b5cf6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"/>
+                            <path d="M12 16v-4"/>
+                            <path d="M12 8h.01"/>
+                        </svg>
+                        <h4 class="text-lg font-bold text-purple-400">What This Shows</h4>
+                    </div>
+                    <p class="text-gray-300 text-sm" id="impactMessage">This calculator shows where you'd need to cut spending if your income drops. Try different scenarios!</p>
+                </div>
+            </div>
+
+            <div class="text-center mt-12">
+                <button onclick="nextSection()" class="btn btn-primary">
+                    Try Real Scenarios
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: inline-block; margin-left: 8px; vertical-align: middle;">
+                        <polyline points="9 18 15 12 9 6"/>
+                    </svg>
+                </button>
+            </div>
+        </section>
+
+        <!-- Section 4: Interactive Scenarios -->
+        <section id="section4" class="hidden min-h-screen flex flex-col justify-center py-20">
+            <h2 class="text-4xl md:text-5xl font-bold text-center mb-4 gradient-text">Real-Life Scenarios</h2>
+            <p class="text-center text-gray-400 text-lg mb-12">Make decisions and see the outcomes</p>
+
+            <div class="max-w-4xl mx-auto space-y-8" id="scenariosContainer">
+                <!-- Scenarios will be rendered here -->
+            </div>
+
+            <div class="text-center mt-12">
+                <button onclick="nextSection()" class="btn btn-primary" id="scenarioNextBtn" style="display: none;">
+                    Get Your Action Plan
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: inline-block; margin-left: 8px; vertical-align: middle;">
+                        <polyline points="9 18 15 12 9 6"/>
+                    </svg>
+                </button>
+            </div>
+        </section>
+
+        <!-- Section 5: 72-Hour Action Plan -->
+        <section id="section5" class="hidden min-h-screen flex flex-col justify-center py-20">
+            <h2 class="text-4xl md:text-5xl font-bold text-center mb-4 gradient-text">The 72-Hour Action Plan</h2>
+            <p class="text-center text-gray-400 text-lg mb-12">What to do in the first 3 days when income changes</p>
+
+            <div class="max-w-4xl mx-auto">
+                <div class="info-card mb-8" style="background: rgba(239, 68, 68, 0.1); border-color: rgba(239, 68, 68, 0.4);">
+                    <div class="flex items-center gap-2 mb-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"/>
+                            <polyline points="12 6 12 12 16 14"/>
+                        </svg>
+                        <h4 class="text-lg font-bold text-red-400">Why 72 Hours Matters</h4>
+                    </div>
+                    <p class="text-gray-300 text-sm">The first 72 hours after an income change are critical. Acting fast prevents panic decisions, late fees, and debt spirals. Check off each action as you complete it.</p>
+                </div>
+
+                <div class="space-y-3" id="actionChecklist">
+                    <!-- Checklist items will be rendered here -->
+                </div>
+
+                <div class="info-card mt-8" style="background: rgba(34, 197, 94, 0.1); border-color: rgba(34, 197, 94, 0.4);">
+                    <div class="flex items-center gap-2 mb-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="20 6 9 17 4 12"/>
+                        </svg>
+                        <h4 class="text-lg font-bold text-green-400">Progress: <span id="checklistProgress">0/10</span></h4>
+                    </div>
+                    <p class="text-gray-300 text-sm">Complete all 10 actions within 72 hours of any income change to stay in control.</p>
+                </div>
+            </div>
+
+            <div class="text-center mt-12">
+                <button onclick="nextSection()" class="btn btn-primary">
+                    Learn Long-Term Strategies
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: inline-block; margin-left: 8px; vertical-align: middle;">
+                        <polyline points="9 18 15 12 9 6"/>
+                    </svg>
+                </button>
+            </div>
+        </section>
+
+        <!-- Section 6: Long-Term Adjustment Timeline -->
+        <section id="section6" class="hidden min-h-screen flex flex-col justify-center py-20">
+            <h2 class="text-4xl md:text-5xl font-bold text-center mb-4 gradient-text">Your Adjustment Timeline</h2>
+            <p class="text-center text-gray-400 text-lg mb-12">What to focus on over the next 6 months</p>
+
+            <div class="max-w-4xl mx-auto">
+                <div class="timeline">
+                    <div class="timeline-line"></div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <h3 class="text-xl font-bold text-white mb-2">Week 1: Stabilize</h3>
+                            <ul class="space-y-1 text-sm text-gray-300">
+                                <li>• Complete your 72-hour action plan</li>
+                                <li>• Cut all non-essential spending</li>
+                                <li>• Contact bill companies if needed</li>
+                                <li>• Set up new budget tracking</li>
+                            </ul>
+                        </div>
+                        <div class="timeline-dot">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="10"/>
+                                <polyline points="12 6 12 12 16 14"/>
+                            </svg>
+                        </div>
+                        <div style="flex: 1;"></div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div style="flex: 1;"></div>
+                        <div class="timeline-dot">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="3" y="3" width="18" height="18" rx="2"/>
+                                <path d="M3 9h18"/>
+                                <path d="M9 21V9"/>
+                            </svg>
+                        </div>
+                        <div class="timeline-content">
+                            <h3 class="text-xl font-bold text-white mb-2">Month 1: Adjust</h3>
+                            <ul class="space-y-1 text-sm text-gray-300">
+                                <li>• Live on your new budget strictly</li>
+                                <li>• Track every dollar</li>
+                                <li>• Find small ways to earn or save more</li>
+                                <li>• Build $500 mini emergency fund if you don't have one</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <h3 class="text-xl font-bold text-white mb-2">Month 3: Optimize</h3>
+                            <ul class="space-y-1 text-sm text-gray-300">
+                                <li>• Review what's working and what's not</li>
+                                <li>• Look for better deals (phone, insurance, etc.)</li>
+                                <li>• If income increased: automate extra savings</li>
+                                <li>• If income decreased: evaluate side income options</li>
+                            </ul>
+                        </div>
+                        <div class="timeline-dot">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+                            </svg>
+                        </div>
+                        <div style="flex: 1;"></div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div style="flex: 1;"></div>
+                        <div class="timeline-dot">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="20 6 9 17 4 12"/>
+                            </svg>
+                        </div>
+                        <div class="timeline-content">
+                            <h3 class="text-xl font-bold text-white mb-2">Month 6: Secure</h3>
+                            <ul class="space-y-1 text-sm text-gray-300">
+                                <li>• Your new budget should feel normal now</li>
+                                <li>• Build 1-month emergency fund</li>
+                                <li>• If income increased: consider one lifestyle upgrade (small)</li>
+                                <li>• Plan for next potential income change</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-card mt-12">
+                    <div class="flex items-center gap-2 mb-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+                        </svg>
+                        <h4 class="text-lg font-bold text-green-400">The Key Insight</h4>
+                    </div>
+                    <p class="text-gray-300">Most people underestimate how long it takes to adjust to income changes. Give yourself 3-6 months to fully adapt. Don't make major financial decisions in the first month.</p>
+                </div>
+            </div>
+
+            <div class="text-center mt-12">
+                <button onclick="nextSection()" class="btn btn-primary">
+                    Take the Quiz
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: inline-block; margin-left: 8px; vertical-align: middle;">
+                        <polyline points="9 18 15 12 9 6"/>
+                    </svg>
+                </button>
+            </div>
+        </section>
+
+        <!-- Section 7: Quiz -->
+        <section id="section7" class="hidden min-h-screen flex flex-col justify-center py-20">
+            <h2 class="text-4xl md:text-5xl font-bold text-center mb-4 gradient-text">Knowledge Check</h2>
+            <p class="text-center text-gray-400 text-lg mb-12">Test what you've learned—you need 100% to complete</p>
+
+            <div class="max-w-3xl mx-auto" id="quizContainer">
+                <!-- Quiz will be rendered here -->
+            </div>
+
+            <div id="quizResults" class="hidden text-center mt-8">
+                <div id="quizScore" class="text-3xl font-bold mb-4"></div>
+                <div id="quizFeedback" class="text-xl text-gray-300 mb-6"></div>
+                <button onclick="retryQuiz()" id="retryButton" class="btn btn-secondary hidden mr-4">
+                    Retry Quiz
+                </button>
+                <button onclick="finishLesson()" id="finishButton" class="btn btn-primary hidden">
+                    Finish Lesson
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: inline-block; margin-left: 8px; vertical-align: middle;">
+                        <polyline points="20 6 9 17 4 12"/>
+                    </svg>
+                </button>
+            </div>
+        </section>
+
+    </div>
+
+    <script src="config.js"></script>
+    <script src="/lesson-completion.js"></script>
+    <script>
+        // State
+        let currentSection = 1;
+        const totalSections = 7;
+        let quizAnswers = {};
+        let quizSubmitted = false;
+        let checkedItems = 0;
+        let scenariosCompleted = 0;
+
+        // Quiz questions
+        const quizQuestions = [
+            {
+                id: 1,
+                question: 'Your hours get cut by 25%. What should you do FIRST in the next 72 hours?',
+                options: [
+                    'Apply for new jobs and wait',
+                    'Calculate exact income loss, pause non-essentials, contact bill companies',
+                    'Use credit cards to maintain lifestyle',
+                    'Dip into emergency fund immediately'
+                ],
+                correct: 1
+            },
+            {
+                id: 2,
+                question: 'You get a $5,000 raise ($400/month after tax). What\'s the smartest move?',
+                options: [
+                    'Upgrade apartment immediately—you can afford it now',
+                    'Spend it all—you earned it',
+                    'Wait 3 months to prove it\'s stable, then split: 50% savings, 30% goals, 20% lifestyle',
+                    'Save all of it forever'
+                ],
+                correct: 2
+            },
+            {
+                id: 3,
+                question: 'You\'re changing jobs. Your old job pays bi-weekly, new job pays monthly. What should you plan for?',
+                options: [
+                    'No issues—income is income',
+                    '3-4 week gap with no paycheck, need savings to cover',
+                    'Just use credit cards during transition',
+                    'Ask family for money'
+                ],
+                correct: 1
+            },
+            {
+                id: 4,
+                question: 'You get a $2,000 bonus. After taxes, you keep $1,400. What should you NOT do?',
+                options: [
+                    'Pay down high-interest debt',
+                    'Put 50% in savings, 50% fun money',
+                    'Count on getting the same bonus next year and upgrade monthly expenses',
+                    'Use it as a starter emergency fund'
+                ],
+                correct: 2
+            },
+            {
+                id: 5,
+                question: 'Income drops are scary. What\'s the MOST important thing to remember?',
+                options: [
+                    'Panic and make quick decisions',
+                    'The first 72 hours of action prevent months of problems',
+                    'Hide from bill companies',
+                    'Income drops always last years'
+                ],
+                correct: 1
+            },
+            {
+                id: 6,
+                question: 'How long does it typically take to fully adjust to a major income change?',
+                options: [
+                    '1 week',
+                    '1 month',
+                    '3-6 months',
+                    '1 year+'
+                ],
+                correct: 2
+            }
+        ];
+
+        // Scenarios
+        const scenarios = [
+            {
+                id: 1,
+                title: 'Scenario 1: Lost 10 Hours Per Week',
+                situation: 'You work retail. Your manager just told you that starting next week, you\'re dropping from 35 hours to 25 hours per week. That\'s $160 less per paycheck ($320/month).',
+                question: 'What do you do THIS WEEK?',
+                options: [
+                    {
+                        text: 'Ask manager for shifts back or transfer stores',
+                        outcome: 'good',
+                        result: 'SMART MOVE! You immediately ask about picking up shifts in other departments, covering call-outs, or transferring to a busier location. Manager says they\'ll try to give you first dibs on extra hours. You also start looking for a weekend side job. You act before you miss money.'
+                    },
+                    {
+                        text: 'Apply to 20 new jobs online and wait',
+                        outcome: 'neutral',
+                        result: 'DECENT MOVE, but not fast enough. Applying takes time, and you might not hear back for weeks. In the meantime, that $320/month shortage starts causing problems. Better to BOTH ask for more hours AND apply to new jobs.'
+                    },
+                    {
+                        text: 'Cut all fun spending and hope it works out',
+                        outcome: 'neutral',
+                        result: 'PARTIALLY RIGHT. Cutting fun spending helps, but you haven\'t actually solved the income problem. You need to either increase hours or find new income ASAP. Waiting = debt piling up.'
+                    },
+                    {
+                        text: 'Keep spending the same and use credit card',
+                        outcome: 'bad',
+                        result: 'BAD MOVE. You just lost $320/month permanently. Using a credit card means you\'re going into debt every month. In 3 months, you\'ll be $960 in debt plus interest. You needed to cut spending AND find more income immediately.'
+                    }
+                ]
+            },
+            {
+                id: 2,
+                title: 'Scenario 2: Got a $3/Hour Raise',
+                situation: 'You got a raise from $16/hour to $19/hour! That\'s $480 more per month after taxes. You\'re excited and thinking about moving to a nicer apartment.',
+                question: 'What should you do?',
+                options: [
+                    {
+                        text: 'Move to the nicer apartment now—$480 covers it',
+                        outcome: 'bad',
+                        result: 'RISKY MOVE. Apartments are 12-month commitments. What if your hours get cut later or you lose this job? Plus, moving costs money (deposits, moving truck, furniture). Wait 3 months to make sure this income is stable before locking into higher rent.'
+                    },
+                    {
+                        text: 'Wait 3 months, save the extra money, THEN decide',
+                        outcome: 'good',
+                        result: 'EXCELLENT DECISION! You wait 3 months while living on your old budget. In 3 months, you\'ll have saved $1,440. Now you can afford moving costs if you want that apartment, OR you\'ve built a solid emergency fund. You proved the raise is stable first.'
+                    },
+                    {
+                        text: 'Immediately increase spending on everything',
+                        outcome: 'bad',
+                        result: 'LIFESTYLE INFLATION TRAP! You instantly upgrade: nicer groceries, more eating out, new subscriptions, better car. Within 2 months, you\'re spending all $480 extra and have nothing to show for it. The raise didn\'t improve your financial position at all.'
+                    },
+                    {
+                        text: 'Save 100% of it forever',
+                        outcome: 'neutral',
+                        result: 'TOO STRICT. While saving is great, you also earned this raise. A better balance: save 50% ($240), put 30% toward a goal ($144), and enjoy 20% ($96). That way you\'re building wealth AND improving your life.'
+                    }
+                ]
+            }
+        ];
+
+        // Action checklist items
+        const checklistItems = [
+            'Calculate EXACTLY how much your income changed ($ amount and %)',
+            'Write down your new take-home pay per month',
+            'List all your fixed bills (rent, utilities, phone, insurance)',
+            'Identify what you can cut immediately if income dropped',
+            'Contact bill companies BEFORE due dates if you\'ll be late',
+            'Check your bank account balance and upcoming auto-payments',
+            'Tell someone you trust about the change (accountability)',
+            'Update your budget to reflect new income within 48 hours',
+            'If income increased: set up automatic transfer to savings',
+            'If income decreased: find one way to earn/save extra money this week'
+        ];
+
+        // Create particles
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 30;
+
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.top = Math.random() * 100 + '%';
+                particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
+                particle.style.animationDelay = (Math.random() * 5) + 's';
+                particle.style.animation = 'float ' + particle.style.animationDuration + ' ease-in-out infinite';
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        // Navigation
+        function nextSection() {
+            document.getElementById('section' + currentSection).classList.add('hidden');
+            currentSection++;
+            document.getElementById('section' + currentSection).classList.remove('hidden');
+            updateProgress();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+
+            if (currentSection === 4) {
+                renderScenarios();
+            } else if (currentSection === 5) {
+                renderChecklist();
+            } else if (currentSection === 7) {
+                renderQuiz();
+            }
+        }
+
+        function updateProgress() {
+            const progress = (currentSection / totalSections) * 100;
+            document.getElementById('progressBar').style.width = progress + '%';
+        }
+
+        // Section 2: Reveal changes
+        function revealChange(changeNum) {
+            const card = document.getElementById('change' + changeNum);
+            const details = card.querySelector('.change-details');
+
+            if (details.classList.contains('hidden')) {
+                details.classList.remove('hidden');
+                card.classList.add('revealed');
+            }
+        }
+
+        // Section 3: Impact calculator
+        function calculateImpact() {
+            const current = parseFloat(document.getElementById('currentIncome').value) || 2400;
+            const newIncome = parseFloat(document.getElementById('newIncome').value) || 2100;
+
+            const change = newIncome - current;
+            const changePercent = (change / current * 100).toFixed(1);
+
+            // Update change display
+            const changeEl = document.getElementById('incomeChange');
+            const changeSign = change >= 0 ? '+' : '';
+            changeEl.textContent = `${changeSign}$${Math.abs(change)} (${changeSign}${changePercent}%)`;
+            changeEl.style.color = change >= 0 ? '#22c55e' : '#ef4444';
+
+            // Update bar
+            const bar = document.getElementById('changeBar');
+            const barPercent = (newIncome / current * 100);
+            bar.style.width = Math.min(barPercent, 100) + '%';
+            bar.className = 'budget-fill';
+            if (changePercent < -10) bar.classList.add('danger');
+            else if (changePercent < 0) bar.classList.add('warning');
+
+            // Adjust budget items
+            if (change < 0) {
+                // Income decreased
+                const cutAmount = Math.abs(change);
+                document.getElementById('afterGroceries').textContent = '$' + (400 - Math.min(cutAmount * 0.15, 50)).toFixed(0);
+                document.getElementById('afterTransport').textContent = '$' + (250 - Math.min(cutAmount * 0.15, 50)).toFixed(0);
+                document.getElementById('afterPhone').textContent = '$' + (120 - Math.min(cutAmount * 0.10, 20)).toFixed(0);
+                document.getElementById('afterOther').textContent = '$' + (280 - Math.min(cutAmount * 0.30, 130)).toFixed(0);
+                document.getElementById('afterSavings').textContent = '$' + Math.max(300 - Math.min(cutAmount * 0.20, 50), 50).toFixed(0);
+
+                const afterTotal = parseFloat(document.getElementById('afterGroceries').textContent.slice(1)) +
+                                 parseFloat(document.getElementById('afterTransport').textContent.slice(1)) +
+                                 parseFloat(document.getElementById('afterPhone').textContent.slice(1)) +
+                                 parseFloat(document.getElementById('afterOther').textContent.slice(1)) +
+                                 parseFloat(document.getElementById('afterSavings').textContent.slice(1)) +
+                                 900 + 150;
+
+                const leftOver = newIncome - afterTotal;
+                document.getElementById('afterLeft').textContent = '$' + leftOver.toFixed(0);
+
+                if (leftOver < 0) {
+                    document.getElementById('afterLeft').style.color = '#ef4444';
+                    document.getElementById('afterLeftLabel').textContent = 'SHORT BY:';
+                    document.getElementById('impactMessage').textContent = `You're ${Math.abs(leftOver).toFixed(0)} short even after cuts. You need to find more income or cut deeper.`;
+                } else {
+                    document.getElementById('afterLeft').style.color = '#22c55e';
+                    document.getElementById('afterLeftLabel').textContent = 'Money Left:';
+                    document.getElementById('impactMessage').textContent = 'These cuts would balance your budget. The key is acting fast before you overspend.';
+                }
+            } else if (change > 0) {
+                // Income increased
+                document.getElementById('afterGroceries').textContent = '$400';
+                document.getElementById('afterTransport').textContent = '$250';
+                document.getElementById('afterPhone').textContent = '$120';
+                document.getElementById('afterOther').textContent = '$280';
+                document.getElementById('afterSavings').textContent = '$' + (300 + change * 0.5).toFixed(0);
+
+                const leftOver = change * 0.5;
+                document.getElementById('afterLeft').textContent = '$' + leftOver.toFixed(0);
+                document.getElementById('afterLeft').style.color = '#22c55e';
+                document.getElementById('afterLeftLabel').textContent = 'Extra for Goals:';
+                document.getElementById('impactMessage').textContent = `Smart move: save 50% of the increase (${(change * 0.5).toFixed(0)}) automatically, use the other 50% for goals or small lifestyle upgrades.`;
+            }
+        }
+
+        // Section 4: Scenarios
+        function renderScenarios() {
+            const container = document.getElementById('scenariosContainer');
+            container.innerHTML = '';
+
+            scenarios.forEach(scenario => {
+                const scenarioDiv = document.createElement('div');
+                scenarioDiv.className = 'scenario-container';
+                scenarioDiv.id = 'scenario' + scenario.id;
+                scenarioDiv.innerHTML = `
+                    <h3 class="text-2xl font-bold text-white mb-3">${scenario.title}</h3>
+                    <p class="text-gray-300 mb-4">${scenario.situation}</p>
+                    <div class="text-lg font-semibold text-green-400 mb-3">${scenario.question}</div>
+                    <div class="space-y-2">
+                        ${scenario.options.map((opt, i) => `
+                            <div class="decision-btn" onclick="selectDecision(${scenario.id}, ${i})">
+                                <div class="font-semibold text-white mb-1">${String.fromCharCode(65 + i)}. ${opt.text}</div>
+                            </div>
+                        `).join('')}
+                    </div>
+                    <div id="outcome${scenario.id}" class="outcome-panel hidden"></div>
+                `;
+                container.appendChild(scenarioDiv);
+            });
+        }
+
+        function selectDecision(scenarioId, optionIndex) {
+            const scenario = scenarios.find(s => s.id === scenarioId);
+            const option = scenario.options[optionIndex];
+            const outcomeEl = document.getElementById('outcome' + scenarioId);
+
+            // Mark selected
+            const buttons = document.querySelectorAll(`#scenario${scenarioId} .decision-btn`);
+            buttons.forEach((btn, i) => {
+                btn.classList.toggle('selected', i === optionIndex);
+            });
+
+            // Show outcome
+            outcomeEl.className = 'outcome-panel ' + option.outcome;
+            outcomeEl.innerHTML = `
+                <div class="font-bold text-lg mb-2" style="color: ${option.outcome === 'good' ? '#22c55e' : option.outcome === 'bad' ? '#ef4444' : '#3b82f6'}">
+                    ${option.outcome === 'good' ? 'GOOD CHOICE' : option.outcome === 'bad' ? 'POOR CHOICE' : 'OK CHOICE'}
+                </div>
+                <p class="text-sm">${option.result}</p>
+            `;
+
+            // Track completion
+            if (!outcomeEl.classList.contains('hidden')) {
+                scenariosCompleted++;
+                if (scenariosCompleted >= scenarios.length) {
+                    document.getElementById('scenarioNextBtn').style.display = 'inline-block';
+                }
+            }
+            outcomeEl.classList.remove('hidden');
+        }
+
+        // Section 5: Checklist
+        function renderChecklist() {
+            const container = document.getElementById('actionChecklist');
+            container.innerHTML = '';
+
+            checklistItems.forEach((item, index) => {
+                const itemDiv = document.createElement('div');
+                itemDiv.className = 'checklist-item';
+                itemDiv.onclick = () => toggleCheckbox(index);
+                itemDiv.innerHTML = `
+                    <div class="flex items-center gap-3">
+                        <div class="checkbox" id="checkbox${index}">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="display: none;" id="check${index}">
+                                <polyline points="20 6 9 17 4 12"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <div class="text-white">${index + 1}. ${item}</div>
+                        </div>
+                    </div>
+                `;
+                container.appendChild(itemDiv);
+            });
+        }
+
+        function toggleCheckbox(index) {
+            const checkbox = document.getElementById('checkbox' + index);
+            const check = document.getElementById('check' + index);
+            const item = checkbox.closest('.checklist-item');
+
+            if (checkbox.classList.contains('checked')) {
+                checkbox.classList.remove('checked');
+                check.style.display = 'none';
+                item.classList.remove('checked');
+                checkedItems--;
+            } else {
+                checkbox.classList.add('checked');
+                check.style.display = 'block';
+                item.classList.add('checked');
+                checkedItems++;
+            }
+
+            document.getElementById('checklistProgress').textContent = checkedItems + '/10';
+        }
+
+        // Section 7: Quiz
+        function renderQuiz() {
+            const container = document.getElementById('quizContainer');
+            container.innerHTML = '';
+
+            quizQuestions.forEach((q, index) => {
+                const questionDiv = document.createElement('div');
+                questionDiv.className = 'mb-8';
+                questionDiv.innerHTML = `
+                    <h3 class="text-xl font-bold text-white mb-4">${index + 1}. ${q.question}</h3>
+                    <div class="space-y-2">
+                        ${q.options.map((opt, i) => `
+                            <div class="quiz-option" onclick="selectAnswer(${q.id}, ${i})" data-question="${q.id}" data-option="${i}">
+                                ${opt}
+                            </div>
+                        `).join('')}
+                    </div>
+                `;
+                container.appendChild(questionDiv);
+            });
+
+            const submitDiv = document.createElement('div');
+            submitDiv.className = 'text-center mt-12';
+            submitDiv.innerHTML = '<button onclick="submitQuiz()" class="btn btn-primary">Submit Quiz</button>';
+            container.appendChild(submitDiv);
+        }
+
+        function selectAnswer(questionId, optionIndex) {
+            if (quizSubmitted) return;
+
+            document.querySelectorAll(`[data-question="${questionId}"]`).forEach(opt => {
+                opt.classList.remove('selected');
+            });
+
+            event.currentTarget.classList.add('selected');
+            quizAnswers[questionId] = optionIndex;
+        }
+
+        function submitQuiz() {
+            if (Object.keys(quizAnswers).length < quizQuestions.length) {
+                alert('Please answer all questions before submitting.');
+                return;
+            }
+
+            quizSubmitted = true;
+            let correct = 0;
+
+            quizQuestions.forEach(q => {
+                const selectedOption = document.querySelector(`[data-question="${q.id}"][data-option="${quizAnswers[q.id]}"]`);
+                const correctOption = document.querySelector(`[data-question="${q.id}"][data-option="${q.correct}"]`);
+
+                if (quizAnswers[q.id] === q.correct) {
+                    correct++;
+                    selectedOption.classList.add('correct');
+                } else {
+                    selectedOption.classList.add('incorrect');
+                    correctOption.classList.add('correct');
+                }
+            });
+
+            const score = (correct / quizQuestions.length) * 100;
+            const passed = score === 100;
+
+            document.getElementById('quizResults').classList.remove('hidden');
+            document.getElementById('quizScore').textContent = `Score: ${correct}/${quizQuestions.length} (${score}%)`;
+            document.getElementById('quizScore').style.color = passed ? '#22c55e' : '#ef4444';
+
+            if (passed) {
+                document.getElementById('quizFeedback').textContent = 'Perfect! You\'re ready to handle any income change!';
+                document.getElementById('finishButton').classList.remove('hidden');
+
+                const userId = localStorage.getItem('userId') || 'demo';
+                localStorage.setItem(`lesson5_quiz_passed_${userId}`, 'true');
+            } else {
+                document.getElementById('quizFeedback').textContent = 'Not quite—review the incorrect answers and try again!';
+                document.getElementById('retryButton').classList.remove('hidden');
+            }
+
+            window.scrollTo({ top: document.getElementById('quizResults').offsetTop - 100, behavior: 'smooth' });
+        }
+
+        function retryQuiz() {
+            quizAnswers = {};
+            quizSubmitted = false;
+            document.getElementById('quizResults').classList.add('hidden');
+            document.getElementById('retryButton').classList.add('hidden');
+            renderQuiz();
+            window.scrollTo({ top: document.getElementById('quizContainer').offsetTop - 100, behavior: 'smooth' });
+        }
+
+        async function finishLesson() {
+            const userId = localStorage.getItem('userId') || 'demo';
+
+            localStorage.setItem(`path2_lesson5_completed_${userId}`, 'true');
+
+            const success = await completeLesson('path2_lesson5', 2, 5);
+
+            if (success) {
+                window.location.href = '/path2-lessons';
+            }
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            createParticles();
+            calculateImpact();
+        });
+    </script>
+</body>
+</html>
