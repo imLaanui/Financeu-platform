@@ -1,0 +1,1671 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson 1: How Pay Actually Works - Path 2</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: #0f0f0f;
+            color: #d1d5db;
+            overflow-x: hidden;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        @keyframes shimmer {
+            0% {
+                background-position: -1000px 0;
+            }
+            100% {
+                background-position: 1000px 0;
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                max-height: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                max-height: 500px;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes countUp {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes barGrow {
+            from {
+                width: 0;
+            }
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-10px); }
+            75% { transform: translateX(10px); }
+        }
+
+        /* Progress bar */
+        .progress-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: rgba(17, 24, 39, 0.8);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #22c55e, #16a34a);
+            transition: width 0.3s ease;
+            box-shadow: 0 0 10px rgba(34, 197, 94, 0.5);
+        }
+
+        /* Navigation */
+        .nav-container {
+            position: fixed;
+            top: 1rem;
+            left: 1rem;
+            z-index: 999;
+            background: rgba(17, 24, 39, 0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(34, 197, 94, 0.2);
+            border-radius: 12px;
+            padding: 0.75rem 1.25rem;
+        }
+
+        /* Gradient text */
+        .gradient-text {
+            background: linear-gradient(135deg, #22c55e 0%, #16a34a 50%, #15803d 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Cards */
+        .glass-card {
+            background: rgba(34, 197, 94, 0.1);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(34, 197, 94, 0.2);
+            border-radius: 16px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .glass-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(34, 197, 94, 0.4);
+            box-shadow: 0 20px 60px rgba(34, 197, 94, 0.3);
+        }
+
+        .info-card {
+            background: rgba(17, 24, 39, 0.8);
+            border: 2px solid rgba(34, 197, 94, 0.3);
+            border-radius: 16px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        /* Icon circles */
+        .icon-circle {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+        }
+
+        .icon-circle.green {
+            background: rgba(34, 197, 94, 0.2);
+            border: 2px solid rgba(34, 197, 94, 0.4);
+        }
+
+        .icon-circle.blue {
+            background: rgba(59, 130, 246, 0.2);
+            border: 2px solid rgba(59, 130, 246, 0.4);
+        }
+
+        .icon-circle.yellow {
+            background: rgba(251, 191, 36, 0.2);
+            border: 2px solid rgba(251, 191, 36, 0.4);
+        }
+
+        .icon-circle.red {
+            background: rgba(239, 68, 68, 0.2);
+            border: 2px solid rgba(239, 68, 68, 0.4);
+        }
+
+        /* Comparison cards */
+        .comparison-card {
+            background: rgba(17, 24, 39, 0.8);
+            border: 2px solid rgba(75, 85, 99, 0.3);
+            border-radius: 16px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .comparison-card.selected {
+            border-color: rgba(34, 197, 94, 0.6);
+            background: rgba(34, 197, 94, 0.1);
+        }
+
+        .comparison-card:hover {
+            border-color: rgba(34, 197, 94, 0.4);
+        }
+
+        /* Paycheck Simulator */
+        .simulator-container {
+            background: linear-gradient(135deg, rgba(34, 197, 94, 0.15), rgba(17, 24, 39, 0.8));
+            border: 2px solid rgba(34, 197, 94, 0.3);
+            border-radius: 20px;
+            padding: 2rem;
+        }
+
+        .paycheck-display {
+            background: rgba(17, 24, 39, 0.95);
+            border: 2px solid rgba(34, 197, 94, 0.4);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-top: 2rem;
+        }
+
+        .pay-amount {
+            font-size: 3rem;
+            font-weight: 800;
+            color: #22c55e;
+            text-align: center;
+            margin: 1rem 0;
+        }
+
+        .deduction-bar {
+            background: rgba(75, 85, 99, 0.2);
+            border-radius: 8px;
+            height: 40px;
+            margin: 1rem 0;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .deduction-fill {
+            height: 100%;
+            display: flex;
+            align-items: center;
+            padding: 0 1rem;
+            font-weight: 600;
+            transition: width 0.5s ease;
+            position: relative;
+        }
+
+        .deduction-fill.federal {
+            background: linear-gradient(90deg, rgba(239, 68, 68, 0.6), rgba(239, 68, 68, 0.4));
+        }
+
+        .deduction-fill.state {
+            background: linear-gradient(90deg, rgba(251, 146, 60, 0.6), rgba(251, 146, 60, 0.4));
+        }
+
+        .deduction-fill.social-security {
+            background: linear-gradient(90deg, rgba(59, 130, 246, 0.6), rgba(59, 130, 246, 0.4));
+        }
+
+        .deduction-fill.medicare {
+            background: linear-gradient(90deg, rgba(139, 92, 246, 0.6), rgba(139, 92, 246, 0.4));
+        }
+
+        .deduction-fill.health {
+            background: linear-gradient(90deg, rgba(236, 72, 153, 0.6), rgba(236, 72, 153, 0.4));
+        }
+
+        .deduction-fill.retirement {
+            background: linear-gradient(90deg, rgba(34, 197, 94, 0.6), rgba(34, 197, 94, 0.4));
+        }
+
+        /* Toggle switch */
+        .toggle-container {
+            display: inline-flex;
+            background: rgba(17, 24, 39, 0.8);
+            border-radius: 12px;
+            padding: 0.5rem;
+            gap: 0.5rem;
+        }
+
+        .toggle-option {
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            border: 2px solid transparent;
+        }
+
+        .toggle-option.active {
+            background: linear-gradient(135deg, #22c55e, #16a34a);
+            color: white;
+            border-color: rgba(34, 197, 94, 0.6);
+        }
+
+        /* Sliders */
+        input[type="range"] {
+            width: 100%;
+            height: 8px;
+            border-radius: 5px;
+            background: rgba(75, 85, 99, 0.3);
+            outline: none;
+            -webkit-appearance: none;
+        }
+
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #22c55e, #16a34a);
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(34, 197, 94, 0.4);
+        }
+
+        input[type="range"]::-moz-range-thumb {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #22c55e, #16a34a);
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(34, 197, 94, 0.4);
+            border: none;
+        }
+
+        /* Checkboxes */
+        .custom-checkbox {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1rem;
+            background: rgba(17, 24, 39, 0.6);
+            border: 2px solid rgba(75, 85, 99, 0.3);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .custom-checkbox:hover {
+            border-color: rgba(34, 197, 94, 0.4);
+        }
+
+        .custom-checkbox.checked {
+            border-color: rgba(34, 197, 94, 0.6);
+            background: rgba(34, 197, 94, 0.1);
+        }
+
+        .checkbox-box {
+            width: 24px;
+            height: 24px;
+            border: 2px solid rgba(75, 85, 99, 0.5);
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .custom-checkbox.checked .checkbox-box {
+            background: linear-gradient(135deg, #22c55e, #16a34a);
+            border-color: #22c55e;
+        }
+
+        /* Reveal cards */
+        .reveal-card {
+            background: rgba(17, 24, 39, 0.8);
+            border: 2px solid rgba(75, 85, 99, 0.3);
+            border-radius: 16px;
+            padding: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .reveal-card:hover {
+            border-color: rgba(34, 197, 94, 0.4);
+        }
+
+        .reveal-card.revealed {
+            border-color: rgba(34, 197, 94, 0.6);
+            background: rgba(34, 197, 94, 0.1);
+        }
+
+        .reveal-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease;
+        }
+
+        .reveal-card.revealed .reveal-content {
+            max-height: 500px;
+        }
+
+        /* Paystub */
+        .paystub-container {
+            background: white;
+            color: #1f2937;
+            border-radius: 12px;
+            padding: 2rem;
+            max-width: 600px;
+            margin: 2rem auto;
+            font-family: 'Courier New', monospace;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .hotspot {
+            position: relative;
+            padding: 0.5rem;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .hotspot:hover {
+            background: rgba(34, 197, 94, 0.2);
+        }
+
+        .hotspot.active {
+            background: rgba(34, 197, 94, 0.3);
+            outline: 2px solid #22c55e;
+        }
+
+        .hotspot-tooltip {
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #1f2937;
+            color: white;
+            padding: 1rem;
+            border-radius: 8px;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto;
+            font-size: 0.875rem;
+            width: 250px;
+            margin-bottom: 0.5rem;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+            z-index: 100;
+        }
+
+        .hotspot.active .hotspot-tooltip {
+            opacity: 1;
+        }
+
+        /* Tip cards */
+        .tip-card {
+            background: rgba(17, 24, 39, 0.8);
+            border: 2px solid rgba(34, 197, 94, 0.3);
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .tip-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(34, 197, 94, 0.5);
+            box-shadow: 0 10px 30px rgba(34, 197, 94, 0.2);
+        }
+
+        /* Quiz */
+        .quiz-option {
+            background: rgba(17, 24, 39, 0.8);
+            border: 2px solid rgba(75, 85, 99, 0.3);
+            border-radius: 12px;
+            padding: 1rem 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 0.75rem;
+        }
+
+        .quiz-option:hover {
+            border-color: rgba(34, 197, 94, 0.4);
+        }
+
+        .quiz-option.selected {
+            border-color: rgba(34, 197, 94, 0.6);
+            background: rgba(34, 197, 94, 0.1);
+        }
+
+        .quiz-option.correct {
+            border-color: rgba(34, 197, 94, 0.8);
+            background: rgba(34, 197, 94, 0.2);
+        }
+
+        .quiz-option.incorrect {
+            border-color: rgba(239, 68, 68, 0.8);
+            background: rgba(239, 68, 68, 0.2);
+            animation: shake 0.5s;
+        }
+
+        /* Buttons */
+        .btn {
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #22c55e, #16a34a);
+            color: white;
+            box-shadow: 0 8px 24px rgba(34, 197, 94, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 32px rgba(34, 197, 94, 0.5);
+        }
+
+        .btn-secondary {
+            background: rgba(75, 85, 99, 0.3);
+            color: #d1d5db;
+            border: 2px solid rgba(75, 85, 99, 0.5);
+        }
+
+        .btn-secondary:hover {
+            border-color: rgba(34, 197, 94, 0.4);
+        }
+
+        /* Particles */
+        .particle {
+            position: fixed;
+            width: 4px;
+            height: 4px;
+            background: #22c55e;
+            border-radius: 50%;
+            pointer-events: none;
+            opacity: 0.6;
+            z-index: 1;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .pay-amount {
+                font-size: 2rem;
+            }
+            .simulator-container {
+                padding: 1rem;
+            }
+            .nav-container {
+                font-size: 0.875rem;
+                padding: 0.5rem 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Progress Bar -->
+    <div class="progress-container">
+        <div class="progress-bar" id="progressBar" style="width: 14%"></div>
+    </div>
+
+    <!-- Navigation -->
+    <div class="nav-container">
+        <a href="/path2-lessons" style="color: #22c55e; text-decoration: none;">← Back to Path 2</a>
+    </div>
+
+    <!-- Particles -->
+    <div id="particles"></div>
+
+    <!-- Main Content -->
+    <div class="relative z-10 max-w-6xl mx-auto px-4 py-20">
+
+        <!-- Section 1: Introduction -->
+        <section id="section1" class="min-h-screen flex flex-col justify-center">
+            <div class="text-center mb-12 fade-in-up">
+                <div class="inline-block mb-4 px-4 py-2 rounded-full" style="background: rgba(34, 197, 94, 0.2); border: 1px solid rgba(34, 197, 94, 0.4);">
+                    <span class="text-green-400 font-semibold">Lesson 1 of 5</span>
+                </div>
+                <h1 class="text-5xl md:text-6xl font-bold mb-6 gradient-text">
+                    How Pay Actually Works
+                </h1>
+                <p class="text-xl text-gray-300 max-w-3xl mx-auto">
+                    Your first paycheck is always a shock. Let's decode exactly where your money goes and why you keep less than you expect.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+                <div class="glass-card">
+                    <div class="icon-circle green">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"/>
+                            <polyline points="12 6 12 12 16 14"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-green-400 mb-2 text-center">Hourly vs Salary</h3>
+                    <p class="text-gray-400 text-center">Learn the real differences and which might be better for your situation</p>
+                </div>
+
+                <div class="glass-card">
+                    <div class="icon-circle blue">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="2" y="6" width="20" height="12" rx="2"/>
+                            <path d="M12 12h.01"/>
+                            <path d="M17 12h.01"/>
+                            <path d="M7 12h.01"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-blue-400 mb-2 text-center">Build Your Paycheck</h3>
+                    <p class="text-gray-400 text-center">Use our interactive simulator to see deductions happen in real-time</p>
+                </div>
+
+                <div class="glass-card">
+                    <div class="icon-circle yellow">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#fbbf24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-yellow-400 mb-2 text-center">Understand Taxes</h3>
+                    <p class="text-gray-400 text-center">See exactly why your paycheck is smaller than your pay rate suggests</p>
+                </div>
+            </div>
+
+            <div class="text-center">
+                <button onclick="nextSection()" class="btn btn-primary">
+                    Let's Get Started
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: inline-block; margin-left: 8px; vertical-align: middle;">
+                        <polyline points="9 18 15 12 9 6"/>
+                    </svg>
+                </button>
+            </div>
+        </section>
+
+        <!-- Section 2: Hourly vs Salary -->
+        <section id="section2" class="hidden min-h-screen flex flex-col justify-center py-20">
+            <h2 class="text-4xl md:text-5xl font-bold text-center mb-4 gradient-text">Hourly vs Salary</h2>
+            <p class="text-center text-gray-400 text-lg mb-12">Two ways to get paid—each with very different rules</p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+                <div class="comparison-card" onclick="selectComparison('hourly')">
+                    <div class="icon-circle blue">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"/>
+                            <polyline points="12 6 12 12 16 14"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-bold text-blue-400 mb-4 text-center">Hourly Pay</h3>
+                    <div class="text-center mb-6">
+                        <div class="text-4xl font-bold text-white mb-2">$15/hour</div>
+                        <div class="text-gray-400">40 hours = $600/week</div>
+                        <div class="text-gray-400">+ Overtime at 1.5x rate</div>
+                    </div>
+                    <div class="space-y-3">
+                        <div class="flex items-start gap-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0">
+                                <polyline points="20 6 9 17 4 12"/>
+                            </svg>
+                            <span class="text-gray-300">Get paid for every hour worked</span>
+                        </div>
+                        <div class="flex items-start gap-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0">
+                                <polyline points="20 6 9 17 4 12"/>
+                            </svg>
+                            <span class="text-gray-300">Overtime pay (1.5x after 40 hrs)</span>
+                        </div>
+                        <div class="flex items-start gap-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0">
+                                <polyline points="20 6 9 17 4 12"/>
+                            </svg>
+                            <span class="text-gray-300">Flexibility to work more or less</span>
+                        </div>
+                        <div class="flex items-start gap-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0">
+                                <line x1="18" y1="6" x2="6" y2="18"/>
+                                <line x1="6" y1="6" x2="18" y2="18"/>
+                            </svg>
+                            <span class="text-gray-300">Income varies if hours change</span>
+                        </div>
+                        <div class="flex items-start gap-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0">
+                                <line x1="18" y1="6" x2="6" y2="18"/>
+                                <line x1="6" y1="6" x2="18" y2="18"/>
+                            </svg>
+                            <span class="text-gray-300">No pay for missed work</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="comparison-card" onclick="selectComparison('salary')">
+                    <div class="icon-circle green">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/>
+                            <polyline points="14 2 14 8 20 8"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-bold text-green-400 mb-4 text-center">Salary Pay</h3>
+                    <div class="text-center mb-6">
+                        <div class="text-4xl font-bold text-white mb-2">$52,000/year</div>
+                        <div class="text-gray-400">$1,000/week (every week)</div>
+                        <div class="text-gray-400">Same amount regardless</div>
+                    </div>
+                    <div class="space-y-3">
+                        <div class="flex items-start gap-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0">
+                                <polyline points="20 6 9 17 4 12"/>
+                            </svg>
+                            <span class="text-gray-300">Predictable, steady income</span>
+                        </div>
+                        <div class="flex items-start gap-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0">
+                                <polyline points="20 6 9 17 4 12"/>
+                            </svg>
+                            <span class="text-gray-300">Often better benefits</span>
+                        </div>
+                        <div class="flex items-start gap-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0">
+                                <polyline points="20 6 9 17 4 12"/>
+                            </svg>
+                            <span class="text-gray-300">Paid for time off (usually)</span>
+                        </div>
+                        <div class="flex items-start gap-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0">
+                                <line x1="18" y1="6" x2="6" y2="18"/>
+                                <line x1="6" y1="6" x2="18" y2="18"/>
+                            </svg>
+                            <span class="text-gray-300">Usually no overtime pay</span>
+                        </div>
+                        <div class="flex items-start gap-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0">
+                                <line x1="18" y1="6" x2="6" y2="18"/>
+                                <line x1="6" y1="6" x2="18" y2="18"/>
+                            </svg>
+                            <span class="text-gray-300">May work extra without extra pay</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="info-card max-w-3xl mx-auto mb-8">
+                <div class="flex items-center gap-2 mb-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+                    </svg>
+                    <h4 class="text-xl font-bold text-green-400">The Reality</h4>
+                </div>
+                <p class="text-gray-300 mb-3">Neither is automatically "better"—it depends on your situation:</p>
+                <ul class="space-y-2 text-gray-300">
+                    <li><strong class="text-white">Hourly is better if:</strong> You want flexibility, can get overtime, or work varies seasonally</li>
+                    <li><strong class="text-white">Salary is better if:</strong> You want stable income, better benefits, or career advancement</li>
+                </ul>
+            </div>
+
+            <div class="text-center">
+                <button onclick="nextSection()" class="btn btn-primary">
+                    Build My Own Paycheck
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: inline-block; margin-left: 8px; vertical-align: middle;">
+                        <polyline points="9 18 15 12 9 6"/>
+                    </svg>
+                </button>
+            </div>
+        </section>
+
+        <!-- Section 3: Interactive Paycheck Simulator -->
+        <section id="section3" class="hidden min-h-screen flex flex-col justify-center py-20">
+            <h2 class="text-4xl md:text-5xl font-bold text-center mb-4 gradient-text">Build Your Own Paycheck</h2>
+            <p class="text-center text-gray-400 text-lg mb-12">See exactly where your money goes in real-time</p>
+
+            <div class="simulator-container max-w-4xl mx-auto">
+                <!-- Pay Type Toggle -->
+                <div class="mb-8 text-center">
+                    <label class="block text-lg font-semibold mb-3 text-gray-300">I get paid:</label>
+                    <div class="toggle-container">
+                        <div class="toggle-option active" id="hourlyToggle" onclick="setPayType('hourly')">
+                            Hourly
+                        </div>
+                        <div class="toggle-option" id="salaryToggle" onclick="setPayType('salary')">
+                            Salary
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Hourly Controls -->
+                <div id="hourlyControls">
+                    <div class="mb-6">
+                        <label class="block text-lg font-semibold mb-2 text-gray-300">Hourly Pay Rate: <span class="text-green-400" id="hourlyRateDisplay">$15</span>/hour</label>
+                        <input type="range" id="hourlyRate" min="7.25" max="50" step="0.25" value="15" oninput="updateSimulator()">
+                        <div class="flex justify-between text-sm text-gray-500 mt-1">
+                            <span>$7.25</span>
+                            <span>$50</span>
+                        </div>
+                    </div>
+
+                    <div class="mb-6">
+                        <label class="block text-lg font-semibold mb-2 text-gray-300">Hours Per Week: <span class="text-green-400" id="hoursDisplay">40</span> hours</label>
+                        <input type="range" id="hoursWorked" min="10" max="60" step="1" value="40" oninput="updateSimulator()">
+                        <div class="flex justify-between text-sm text-gray-500 mt-1">
+                            <span>10 hrs</span>
+                            <span>60 hrs</span>
+                        </div>
+                    </div>
+
+                    <div class="mb-6">
+                        <label class="block text-lg font-semibold mb-2 text-gray-300">Overtime Hours (above 40): <span class="text-green-400" id="overtimeDisplay">0</span> hours</label>
+                        <input type="range" id="overtimeHours" min="0" max="20" step="1" value="0" oninput="updateSimulator()">
+                        <div class="flex justify-between text-sm text-gray-500 mt-1">
+                            <span>0 hrs</span>
+                            <span>20 hrs</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Salary Controls -->
+                <div id="salaryControls" class="hidden">
+                    <div class="mb-6">
+                        <label class="block text-lg font-semibold mb-2 text-gray-300">Annual Salary: <span class="text-green-400" id="salaryDisplay">$52,000</span>/year</label>
+                        <input type="range" id="annualSalary" min="25000" max="150000" step="1000" value="52000" oninput="updateSimulator()">
+                        <div class="flex justify-between text-sm text-gray-500 mt-1">
+                            <span>$25k</span>
+                            <span>$150k</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Benefits -->
+                <div class="mb-8">
+                    <label class="block text-lg font-semibold mb-3 text-gray-300">Benefits (deducted from paycheck):</label>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="custom-checkbox" id="healthCheckbox" onclick="toggleBenefit('health')">
+                            <div class="checkbox-box">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="display: none;" id="healthCheck">
+                                    <polyline points="20 6 9 17 4 12"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <div class="font-semibold">Health Insurance</div>
+                                <div class="text-sm text-gray-400">~$50/week</div>
+                            </div>
+                        </div>
+
+                        <div class="custom-checkbox" id="retirementCheckbox" onclick="toggleBenefit('retirement')">
+                            <div class="checkbox-box">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="display: none;" id="retirementCheck">
+                                    <polyline points="20 6 9 17 4 12"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <div class="font-semibold">401k Retirement (5%)</div>
+                                <div class="text-sm text-gray-400">Saves for future</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Paycheck Display -->
+                <div class="paycheck-display">
+                    <h3 class="text-2xl font-bold text-center text-green-400 mb-4">Your Weekly Paycheck</h3>
+
+                    <div class="mb-6">
+                        <div class="text-center text-gray-400 mb-2">Gross Pay (before deductions)</div>
+                        <div class="pay-amount" id="grossPay">$600.00</div>
+                    </div>
+
+                    <div class="mb-6">
+                        <h4 class="font-semibold text-gray-300 mb-3">Deductions:</h4>
+
+                        <div class="mb-4">
+                            <div class="flex justify-between text-sm mb-1">
+                                <span class="text-gray-400">Federal Tax (12%)</span>
+                                <span class="text-red-400" id="federalAmount">$72.00</span>
+                            </div>
+                            <div class="deduction-bar">
+                                <div class="deduction-fill federal" id="federalBar" style="width: 12%">
+                                    <span class="text-white text-sm">12%</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mb-4">
+                            <div class="flex justify-between text-sm mb-1">
+                                <span class="text-gray-400">State Tax (5%)</span>
+                                <span class="text-orange-400" id="stateAmount">$30.00</span>
+                            </div>
+                            <div class="deduction-bar">
+                                <div class="deduction-fill state" id="stateBar" style="width: 5%">
+                                    <span class="text-white text-sm">5%</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mb-4">
+                            <div class="flex justify-between text-sm mb-1">
+                                <span class="text-gray-400">Social Security (6.2%)</span>
+                                <span class="text-blue-400" id="ssAmount">$37.20</span>
+                            </div>
+                            <div class="deduction-bar">
+                                <div class="deduction-fill social-security" id="ssBar" style="width: 6.2%">
+                                    <span class="text-white text-sm">6.2%</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mb-4">
+                            <div class="flex justify-between text-sm mb-1">
+                                <span class="text-gray-400">Medicare (1.45%)</span>
+                                <span class="text-purple-400" id="medicareAmount">$8.70</span>
+                            </div>
+                            <div class="deduction-bar">
+                                <div class="deduction-fill medicare" id="medicareBar" style="width: 1.45%">
+                                    <span class="text-white text-sm">1.45%</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="healthDeduction" class="mb-4 hidden">
+                            <div class="flex justify-between text-sm mb-1">
+                                <span class="text-gray-400">Health Insurance</span>
+                                <span class="text-pink-400" id="healthAmount">$50.00</span>
+                            </div>
+                            <div class="deduction-bar">
+                                <div class="deduction-fill health" id="healthBar">
+                                    <span class="text-white text-sm">$50</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="retirementDeduction" class="mb-4 hidden">
+                            <div class="flex justify-between text-sm mb-1">
+                                <span class="text-gray-400">401k (5%)</span>
+                                <span class="text-green-400" id="retirementAmount">$30.00</span>
+                            </div>
+                            <div class="deduction-bar">
+                                <div class="deduction-fill retirement" id="retirementBar">
+                                    <span class="text-white text-sm">5%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="border-t-2 border-gray-700 pt-4">
+                        <div class="text-center text-gray-400 mb-2">Net Pay (take-home)</div>
+                        <div class="pay-amount" style="color: #22c55e; font-size: 3.5rem;" id="netPay">$452.10</div>
+                        <div class="text-center text-gray-300 text-lg">
+                            You keep <span class="text-green-400 font-bold" id="percentKept">75.4%</span> of your gross pay
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-card mt-6">
+                    <div class="flex items-center gap-2 mb-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+                    </svg>
+                    <h4 class="text-lg font-bold text-green-400">Understanding the Numbers</h4>
+                </div>
+                    <p class="text-gray-300 text-sm">
+                        Your "gross pay" is what you earn before anything is taken out. Your "net pay" (take-home) is what actually hits your bank account. The difference? Taxes, Social Security, Medicare, and any benefits you choose. This is why your paycheck always feels smaller than expected!
+                    </p>
+                </div>
+            </div>
+
+            <div class="text-center mt-12">
+                <button onclick="nextSection()" class="btn btn-primary">
+                    Continue Learning
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: inline-block; margin-left: 8px; vertical-align: middle;">
+                        <polyline points="9 18 15 12 9 6"/>
+                    </svg>
+                </button>
+            </div>
+        </section>
+
+        <!-- Section 4: Common Paycheck Surprises -->
+        <section id="section4" class="hidden min-h-screen flex flex-col justify-center py-20">
+            <h2 class="text-4xl md:text-5xl font-bold text-center mb-4 gradient-text">Common Paycheck Surprises</h2>
+            <p class="text-center text-gray-400 text-lg mb-12">Click each card to reveal why this happens (and what to do about it)</p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+                <div class="reveal-card" onclick="revealCard('surprise1')">
+                    <div class="flex items-start gap-3 mb-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#fbbf24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0">
+                            <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+                            <line x1="12" y1="9" x2="12" y2="13"/>
+                            <line x1="12" y1="17" x2="12.01" y2="17"/>
+                        </svg>
+                        <h3 class="text-xl font-bold text-white">My First Check Was Way Smaller</h3>
+                    </div>
+                    <p class="text-gray-400 mb-3">You started mid-pay period and only got paid for days worked</p>
+                    <div class="reveal-content" id="surprise1">
+                        <div class="mt-4 p-4 rounded-lg" style="background: rgba(34, 197, 94, 0.1); border-left: 3px solid #22c55e;">
+                            <p class="text-gray-300 mb-2"><strong class="text-green-400">Why:</strong> Most jobs pay every 2 weeks for work you already did. If you started on Week 2, you only get paid for that week.</p>
+                            <p class="text-gray-300"><strong class="text-green-400">Fix:</strong> Your second paycheck will be full! Just budget carefully for that first short check.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="reveal-card" onclick="revealCard('surprise2')">
+                    <div class="flex items-start gap-3 mb-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0">
+                            <circle cx="12" cy="12" r="10"/>
+                            <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/>
+                            <line x1="12" y1="17" x2="12.01" y2="17"/>
+                        </svg>
+                        <h3 class="text-xl font-bold text-white">I Got Less Than I Calculated</h3>
+                    </div>
+                    <p class="text-gray-400 mb-3">You multiplied hours × pay rate but forgot about taxes</p>
+                    <div class="reveal-content" id="surprise2">
+                        <div class="mt-4 p-4 rounded-lg" style="background: rgba(34, 197, 94, 0.1); border-left: 3px solid #22c55e;">
+                            <p class="text-gray-300 mb-2"><strong class="text-green-400">Why:</strong> Taxes take about 20-30% depending on your income. Plus Social Security and Medicare add another 7.65%.</p>
+                            <p class="text-gray-300"><strong class="text-green-400">Fix:</strong> Multiply your gross pay by 0.7 to 0.75 for a realistic take-home estimate.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="reveal-card" onclick="revealCard('surprise3')">
+                    <div class="flex items-start gap-3 mb-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0">
+                            <circle cx="12" cy="12" r="10"/>
+                            <path d="M16 16s-1.5-2-4-2-4 2-4 2"/>
+                            <line x1="9" y1="9" x2="9.01" y2="9"/>
+                            <line x1="15" y1="9" x2="15.01" y2="9"/>
+                        </svg>
+                        <h3 class="text-xl font-bold text-white">My Raise Barely Showed Up</h3>
+                    </div>
+                    <p class="text-gray-400 mb-3">Higher income means higher tax bracket—you keep less of the raise</p>
+                    <div class="reveal-content" id="surprise3">
+                        <div class="mt-4 p-4 rounded-lg" style="background: rgba(34, 197, 94, 0.1); border-left: 3px solid #22c55e;">
+                            <p class="text-gray-300 mb-2"><strong class="text-green-400">Why:</strong> Tax brackets are progressive. If you move from 12% to 22% bracket, you keep less of each extra dollar.</p>
+                            <p class="text-gray-300"><strong class="text-green-400">Reality:</strong> A $2/hr raise ($80/week gross) might only be $56/week take-home. Still worth it!</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="reveal-card" onclick="revealCard('surprise4')">
+                    <div class="flex items-start gap-3 mb-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#8b5cf6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0">
+                            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+                        </svg>
+                        <h3 class="text-xl font-bold text-white">My Paychecks Keep Changing</h3>
+                    </div>
+                    <p class="text-gray-400 mb-3">Your hours, tips, or commissions vary week to week</p>
+                    <div class="reveal-content" id="surprise4">
+                        <div class="mt-4 p-4 rounded-lg" style="background: rgba(34, 197, 94, 0.1); border-left: 3px solid #22c55e;">
+                            <p class="text-gray-300 mb-2"><strong class="text-green-400">Why:</strong> Variable income (hourly, tips, commission) means paychecks fluctuate based on what you worked.</p>
+                            <p class="text-gray-300"><strong class="text-green-400">Fix:</strong> Budget based on your lowest typical paycheck, and save extra from bigger ones.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center mt-12">
+                <button onclick="nextSection()" class="btn btn-primary">
+                    Learn to Read a Paystub
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: inline-block; margin-left: 8px; vertical-align: middle;">
+                        <polyline points="9 18 15 12 9 6"/>
+                    </svg>
+                </button>
+            </div>
+        </section>
+
+        <!-- Section 5: Reading a Real Paystub -->
+        <section id="section5" class="hidden min-h-screen flex flex-col justify-center py-20">
+            <h2 class="text-4xl md:text-5xl font-bold text-center mb-4 gradient-text">Reading a Real Paystub</h2>
+            <p class="text-center text-gray-400 text-lg mb-8">Click each section to understand what it means</p>
+
+            <div class="paystub-container">
+                <div style="text-align: center; border-bottom: 2px solid #000; padding-bottom: 1rem; margin-bottom: 1rem;">
+                    <h3 style="font-size: 1.5rem; font-weight: bold;">ACME COMPANY</h3>
+                    <p style="font-size: 0.875rem;">Pay Period: 01/01/2026 - 01/15/2026</p>
+                </div>
+
+                <div style="margin-bottom: 1.5rem;">
+                    <div style="font-weight: bold; margin-bottom: 0.5rem;">EMPLOYEE: Sarah Johnson</div>
+                    <div style="font-size: 0.875rem;">Employee ID: 12345</div>
+                </div>
+
+                <div class="hotspot" onclick="toggleHotspot('grossPay')" id="grossPayHotspot">
+                    <div class="hotspot-tooltip">
+                        <strong>Gross Pay</strong> is the total you earned before any deductions. This is hours × pay rate (or salary amount). Always start here!
+                    </div>
+                    <div style="display: flex; justify-content: space-between; padding: 0.5rem; background: rgba(34, 197, 94, 0.1); border-radius: 4px;">
+                        <span style="font-weight: bold;">GROSS PAY:</span>
+                        <span style="font-weight: bold;">$1,200.00</span>
+                    </div>
+                </div>
+
+                <div style="margin-top: 1rem; border-top: 1px solid #ccc; padding-top: 1rem;">
+                    <div style="font-weight: bold; margin-bottom: 0.5rem;">DEDUCTIONS:</div>
+
+                    <div class="hotspot" onclick="toggleHotspot('federal')" id="federalHotspot">
+                        <div class="hotspot-tooltip">
+                            <strong>Federal Tax</strong> goes to the IRS (federal government). Rate depends on your income level. This funds national programs.
+                        </div>
+                        <div style="display: flex; justify-content: space-between; padding: 0.25rem 0;">
+                            <span>Federal Tax</span>
+                            <span>-$144.00</span>
+                        </div>
+                    </div>
+
+                    <div class="hotspot" onclick="toggleHotspot('state')" id="stateHotspot">
+                        <div class="hotspot-tooltip">
+                            <strong>State Tax</strong> goes to your state government. Not all states have this (e.g., Texas, Florida have no state income tax).
+                        </div>
+                        <div style="display: flex; justify-content: space-between; padding: 0.25rem 0;">
+                            <span>State Tax</span>
+                            <span>-$60.00</span>
+                        </div>
+                    </div>
+
+                    <div class="hotspot" onclick="toggleHotspot('fica')" id="ficaHotspot">
+                        <div class="hotspot-tooltip">
+                            <strong>FICA</strong> = Social Security + Medicare. Everyone pays this. It funds retirement benefits and healthcare for seniors.
+                        </div>
+                        <div style="display: flex; justify-content: space-between; padding: 0.25rem 0;">
+                            <span>FICA (Soc Sec + Medicare)</span>
+                            <span>-$91.80</span>
+                        </div>
+                    </div>
+
+                    <div class="hotspot" onclick="toggleHotspot('health')" id="healthInsHotspot">
+                        <div class="hotspot-tooltip">
+                            <strong>Health Insurance</strong> is optional but recommended. Your portion of the premium. Employer usually pays part too.
+                        </div>
+                        <div style="display: flex; justify-content: space-between; padding: 0.25rem 0;">
+                            <span>Health Insurance</span>
+                            <span>-$100.00</span>
+                        </div>
+                    </div>
+
+                    <div class="hotspot" onclick="toggleHotspot('401k')" id="retirement401kHotspot">
+                        <div class="hotspot-tooltip">
+                            <strong>401k</strong> is retirement savings. You choose the %. This money is YOURS, just locked until retirement. Often employer matches!
+                        </div>
+                        <div style="display: flex; justify-content: space-between; padding: 0.25rem 0;">
+                            <span>401k Contribution (5%)</span>
+                            <span>-$60.00</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="hotspot" onclick="toggleHotspot('netPay')" id="netPayHotspot" style="margin-top: 1rem; border-top: 2px solid #000; padding-top: 1rem;">
+                    <div class="hotspot-tooltip">
+                        <strong>Net Pay</strong> is your take-home—what actually goes to your bank account. This is the real number you can spend!
+                    </div>
+                    <div style="display: flex; justify-content: space-between; padding: 0.5rem; background: rgba(34, 197, 94, 0.2); border-radius: 4px;">
+                        <span style="font-weight: bold; font-size: 1.125rem;">NET PAY:</span>
+                        <span style="font-weight: bold; font-size: 1.125rem; color: #16a34a;">$744.20</span>
+                    </div>
+                </div>
+
+                <div class="hotspot" onclick="toggleHotspot('ytd')" id="ytdHotspot" style="margin-top: 1rem; border-top: 1px solid #ccc; padding-top: 1rem;">
+                    <div class="hotspot-tooltip">
+                        <strong>YTD (Year-To-Date)</strong> shows totals from Jan 1 until now. Useful for tracking annual income and taxes paid.
+                    </div>
+                    <div style="font-size: 0.875rem;">
+                        <div style="font-weight: bold; margin-bottom: 0.25rem;">YEAR-TO-DATE (YTD):</div>
+                        <div style="display: flex; justify-content: space-between;">
+                            <span>Gross Pay YTD:</span>
+                            <span>$3,600.00</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between;">
+                            <span>Federal Tax YTD:</span>
+                            <span>$432.00</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="info-card max-w-3xl mx-auto mt-8">
+                <div class="flex items-center gap-2 mb-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"/>
+                        <circle cx="12" cy="12" r="6"/>
+                        <circle cx="12" cy="12" r="2"/>
+                    </svg>
+                    <h4 class="text-lg font-bold text-green-400">Quick Check</h4>
+                </div>
+                <p class="text-gray-300">A healthy paystub should show: Gross pay at top, all deductions listed clearly, net pay at bottom, and YTD totals. If anything looks weird (like negative net pay, or deductions you didn't sign up for), ask your HR!</p>
+            </div>
+
+            <div class="text-center mt-12">
+                <button onclick="nextSection()" class="btn btn-primary">
+                    Get Action Tips
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: inline-block; margin-left: 8px; vertical-align: middle;">
+                        <polyline points="9 18 15 12 9 6"/>
+                    </svg>
+                </button>
+            </div>
+        </section>
+
+        <!-- Section 6: Making It Work for You -->
+        <section id="section6" class="hidden min-h-screen flex flex-col justify-center py-20">
+            <h2 class="text-4xl md:text-5xl font-bold text-center mb-4 gradient-text">Making It Work for You</h2>
+            <p class="text-center text-gray-400 text-lg mb-12">Practical tips you can use right now</p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+                <div class="tip-card">
+                    <div class="icon-circle green">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21.21 15.89A10 10 0 1 1 8 2.83"/>
+                            <path d="M22 12A10 10 0 0 0 12 2v10z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-bold text-green-400 mb-2 text-center">Calculate Real Take-Home</h3>
+                    <p class="text-gray-300 text-sm">Multiply gross pay by 0.7-0.75 for quick estimate. Or use the simulator from Section 3!</p>
+                </div>
+
+                <div class="tip-card">
+                    <div class="icon-circle blue">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/>
+                            <polyline points="14 2 14 8 20 8"/>
+                            <line x1="16" y1="13" x2="8" y2="13"/>
+                            <line x1="16" y1="17" x2="8" y2="17"/>
+                            <line x1="10" y1="9" x2="8" y2="9"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-bold text-blue-400 mb-2 text-center">Adjust W-4 If Needed</h3>
+                    <p class="text-gray-300 text-sm">Getting huge refund? You're overpaying taxes each check. Adjust W-4 to keep more now.</p>
+                </div>
+
+                <div class="tip-card">
+                    <div class="icon-circle yellow">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fbbf24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-bold text-yellow-400 mb-2 text-center">Benefits Worth the Cost</h3>
+                    <p class="text-gray-300 text-sm">Health insurance and 401k (especially with match) are almost always worth the deduction.</p>
+                </div>
+
+                <div class="tip-card">
+                    <div class="icon-circle green">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                            <polyline points="9 22 9 12 15 12 15 22"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-bold text-green-400 mb-2 text-center">Think About Raises</h3>
+                    <p class="text-gray-300 text-sm">$1/hr raise = ~$35-40/week take-home. $5k salary raise = ~$70-80/week. Plan accordingly.</p>
+                </div>
+
+                <div class="tip-card">
+                    <div class="icon-circle red">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"/>
+                            <line x1="12" y1="8" x2="12" y2="12"/>
+                            <line x1="12" y1="16" x2="12.01" y2="16"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-bold text-red-400 mb-2 text-center">Side Income = Taxes</h3>
+                    <p class="text-gray-300 text-sm">Freelance/gig work has NO taxes taken out. Set aside 25-30% yourself for tax time.</p>
+                </div>
+
+                <div class="tip-card">
+                    <div class="icon-circle blue">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                            <line x1="16" y1="2" x2="16" y2="6"/>
+                            <line x1="8" y1="2" x2="8" y2="6"/>
+                            <line x1="3" y1="10" x2="21" y2="10"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-bold text-blue-400 mb-2 text-center">Build Paycheck Buffer</h3>
+                    <p class="text-gray-300 text-sm">Save one full paycheck as buffer. Helps when checks vary or you switch jobs.</p>
+                </div>
+            </div>
+
+            <div class="text-center mt-12">
+                <button onclick="nextSection()" class="btn btn-primary">
+                    Take the Quiz
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: inline-block; margin-left: 8px; vertical-align: middle;">
+                        <polyline points="9 18 15 12 9 6"/>
+                    </svg>
+                </button>
+            </div>
+        </section>
+
+        <!-- Section 7: Quiz -->
+        <section id="section7" class="hidden min-h-screen flex flex-col justify-center py-20">
+            <h2 class="text-4xl md:text-5xl font-bold text-center mb-4 gradient-text">Knowledge Check</h2>
+            <p class="text-center text-gray-400 text-lg mb-12">Test what you've learned—you need 100% to complete</p>
+
+            <div class="max-w-3xl mx-auto" id="quizContainer">
+                <!-- Quiz will be rendered here -->
+            </div>
+
+            <div id="quizResults" class="hidden text-center mt-8">
+                <div id="quizScore" class="text-3xl font-bold mb-4"></div>
+                <div id="quizFeedback" class="text-xl text-gray-300 mb-6"></div>
+                <button onclick="retryQuiz()" id="retryButton" class="btn btn-secondary hidden mr-4">
+                    Retry Quiz
+                </button>
+                <button onclick="finishLesson()" id="finishButton" class="btn btn-primary hidden">
+                    Finish Lesson
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: inline-block; margin-left: 8px; vertical-align: middle;">
+                        <polyline points="20 6 9 17 4 12"/>
+                    </svg>
+                </button>
+            </div>
+        </section>
+
+    </div>
+
+    <script src="/lesson-completion.js"></script>
+    <script>
+        // State
+        let currentSection = 1;
+        const totalSections = 7;
+        let quizAnswers = {};
+        let quizSubmitted = false;
+
+        // Simulator state
+        let simulatorState = {
+            payType: 'hourly',
+            hourlyRate: 15,
+            hoursWorked: 40,
+            overtimeHours: 0,
+            annualSalary: 52000,
+            benefits: {
+                health: false,
+                retirement: false
+            }
+        };
+
+        // Quiz questions
+        const quizQuestions = [
+            {
+                id: 1,
+                question: "If you make $20/hour and work 40 hours with 5 hours of overtime (1.5x pay), what's your gross pay for the week?",
+                options: [
+                    "$800 (40 hours × $20)",
+                    "$900 (45 hours × $20)",
+                    "$950 (40×$20 + 5×$30)",
+                    "$1,000 (50 hours × $20)"
+                ],
+                correct: 2
+            },
+            {
+                id: 2,
+                question: "What's the difference between gross pay and net pay?",
+                options: [
+                    "Gross pay is monthly, net pay is weekly",
+                    "Gross pay is before deductions, net pay is after (take-home)",
+                    "Gross pay includes tips, net pay doesn't",
+                    "They're the same thing"
+                ],
+                correct: 1
+            },
+            {
+                id: 3,
+                question: "Which deduction do ALL employees pay, regardless of choices?",
+                options: [
+                    "Health insurance",
+                    "401k retirement",
+                    "FICA (Social Security + Medicare)",
+                    "State tax"
+                ],
+                correct: 2
+            },
+            {
+                id: 4,
+                question: "You get a $2/hour raise at 40 hours/week. About how much extra take-home pay per week?",
+                options: [
+                    "$80 (because $2 × 40 hours)",
+                    "$56-60 (after taxes take 25-30%)",
+                    "$40 (taxes take half)",
+                    "$100 (raises aren't taxed)"
+                ],
+                correct: 1
+            },
+            {
+                id: 5,
+                question: "On a paystub, YTD stands for:",
+                options: [
+                    "Your Total Deductions",
+                    "Year-To-Date (totals since Jan 1)",
+                    "Yearly Tax Discount",
+                    "Yesterday's Total Deposits"
+                ],
+                correct: 1
+            },
+            {
+                id: 6,
+                question: "Which is TRUE about hourly vs salary pay?",
+                options: [
+                    "Hourly workers always make less money overall",
+                    "Salary workers always get better benefits",
+                    "Hourly workers typically get overtime pay, salary workers usually don't",
+                    "Salary workers can't be fired"
+                ],
+                correct: 2
+            }
+        ];
+
+        // Create particles
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 30;
+
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.top = Math.random() * 100 + '%';
+                particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
+                particle.style.animationDelay = (Math.random() * 5) + 's';
+                particle.style.animation = 'float ' + particle.style.animationDuration + ' ease-in-out infinite';
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        // Navigation
+        function nextSection() {
+            document.getElementById('section' + currentSection).classList.add('hidden');
+            currentSection++;
+            document.getElementById('section' + currentSection).classList.remove('hidden');
+            updateProgress();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+
+            if (currentSection === 7) {
+                renderQuiz();
+            }
+        }
+
+        function updateProgress() {
+            const progress = (currentSection / totalSections) * 100;
+            document.getElementById('progressBar').style.width = progress + '%';
+        }
+
+        // Section 2: Comparison
+        function selectComparison(type) {
+            // Visual feedback only
+            document.querySelectorAll('.comparison-card').forEach(card => {
+                card.classList.remove('selected');
+            });
+            event.currentTarget.classList.add('selected');
+        }
+
+        // Section 3: Paycheck Simulator
+        function setPayType(type) {
+            simulatorState.payType = type;
+
+            document.getElementById('hourlyToggle').classList.toggle('active', type === 'hourly');
+            document.getElementById('salaryToggle').classList.toggle('active', type === 'salary');
+
+            document.getElementById('hourlyControls').classList.toggle('hidden', type !== 'hourly');
+            document.getElementById('salaryControls').classList.toggle('hidden', type !== 'salary');
+
+            updateSimulator();
+        }
+
+        function toggleBenefit(type) {
+            simulatorState.benefits[type] = !simulatorState.benefits[type];
+
+            const checkbox = document.getElementById(type + 'Checkbox');
+            const checkmark = document.getElementById(type + 'Check');
+
+            checkbox.classList.toggle('checked');
+            checkmark.style.display = simulatorState.benefits[type] ? 'block' : 'none';
+
+            updateSimulator();
+        }
+
+        function updateSimulator() {
+            // Update display values
+            if (simulatorState.payType === 'hourly') {
+                simulatorState.hourlyRate = parseFloat(document.getElementById('hourlyRate').value);
+                simulatorState.hoursWorked = parseInt(document.getElementById('hoursWorked').value);
+                simulatorState.overtimeHours = parseInt(document.getElementById('overtimeHours').value);
+
+                document.getElementById('hourlyRateDisplay').textContent = '$' + simulatorState.hourlyRate.toFixed(2);
+                document.getElementById('hoursDisplay').textContent = simulatorState.hoursWorked;
+                document.getElementById('overtimeDisplay').textContent = simulatorState.overtimeHours;
+            } else {
+                simulatorState.annualSalary = parseInt(document.getElementById('annualSalary').value);
+                document.getElementById('salaryDisplay').textContent = '$' + simulatorState.annualSalary.toLocaleString();
+            }
+
+            // Calculate gross pay
+            let weeklyGross;
+            if (simulatorState.payType === 'hourly') {
+                const regularHours = Math.min(simulatorState.hoursWorked, 40);
+                const overtimeHours = Math.max(0, simulatorState.hoursWorked - 40) + simulatorState.overtimeHours;
+                weeklyGross = (regularHours * simulatorState.hourlyRate) + (overtimeHours * simulatorState.hourlyRate * 1.5);
+            } else {
+                weeklyGross = simulatorState.annualSalary / 52;
+            }
+
+            // Calculate deductions
+            const federalTax = weeklyGross * 0.12;
+            const stateTax = weeklyGross * 0.05;
+            const socialSecurity = weeklyGross * 0.062;
+            const medicare = weeklyGross * 0.0145;
+            const healthCost = simulatorState.benefits.health ? 50 : 0;
+            const retirementCost = simulatorState.benefits.retirement ? weeklyGross * 0.05 : 0;
+
+            const totalDeductions = federalTax + stateTax + socialSecurity + medicare + healthCost + retirementCost;
+            const netPay = weeklyGross - totalDeductions;
+            const percentKept = (netPay / weeklyGross) * 100;
+
+            // Update display
+            document.getElementById('grossPay').textContent = '$' + weeklyGross.toFixed(2);
+            document.getElementById('federalAmount').textContent = '$' + federalTax.toFixed(2);
+            document.getElementById('stateAmount').textContent = '$' + stateTax.toFixed(2);
+            document.getElementById('ssAmount').textContent = '$' + socialSecurity.toFixed(2);
+            document.getElementById('medicareAmount').textContent = '$' + medicare.toFixed(2);
+            document.getElementById('netPay').textContent = '$' + netPay.toFixed(2);
+            document.getElementById('percentKept').textContent = percentKept.toFixed(1) + '%';
+
+            // Update bars
+            document.getElementById('federalBar').style.width = '12%';
+            document.getElementById('stateBar').style.width = '5%';
+            document.getElementById('ssBar').style.width = '6.2%';
+            document.getElementById('medicareBar').style.width = '1.45%';
+
+            // Show/hide benefit deductions
+            document.getElementById('healthDeduction').classList.toggle('hidden', !simulatorState.benefits.health);
+            document.getElementById('retirementDeduction').classList.toggle('hidden', !simulatorState.benefits.retirement);
+
+            if (simulatorState.benefits.health) {
+                document.getElementById('healthAmount').textContent = '$' + healthCost.toFixed(2);
+                const healthPercent = (healthCost / weeklyGross) * 100;
+                document.getElementById('healthBar').style.width = healthPercent + '%';
+            }
+
+            if (simulatorState.benefits.retirement) {
+                document.getElementById('retirementAmount').textContent = '$' + retirementCost.toFixed(2);
+                document.getElementById('retirementBar').style.width = '5%';
+            }
+        }
+
+        // Section 4: Reveal cards
+        function revealCard(cardId) {
+            const card = document.getElementById(cardId).parentElement;
+            card.classList.toggle('revealed');
+        }
+
+        // Section 5: Paystub hotspots
+        let activeHotspot = null;
+
+        function toggleHotspot(hotspotId) {
+            const newHotspot = document.getElementById(hotspotId + 'Hotspot');
+
+            if (activeHotspot && activeHotspot !== newHotspot) {
+                activeHotspot.classList.remove('active');
+            }
+
+            newHotspot.classList.toggle('active');
+            activeHotspot = newHotspot.classList.contains('active') ? newHotspot : null;
+        }
+
+        // Section 7: Quiz
+        function renderQuiz() {
+            const container = document.getElementById('quizContainer');
+            container.innerHTML = '';
+
+            quizQuestions.forEach((q, index) => {
+                const questionDiv = document.createElement('div');
+                questionDiv.className = 'mb-8';
+                questionDiv.innerHTML = `
+                    <h3 class="text-xl font-bold text-white mb-4">${index + 1}. ${q.question}</h3>
+                    <div class="space-y-2">
+                        ${q.options.map((opt, i) => `
+                            <div class="quiz-option" onclick="selectAnswer(${q.id}, ${i})" data-question="${q.id}" data-option="${i}">
+                                ${opt}
+                            </div>
+                        `).join('')}
+                    </div>
+                `;
+                container.appendChild(questionDiv);
+            });
+
+            const submitDiv = document.createElement('div');
+            submitDiv.className = 'text-center mt-12';
+            submitDiv.innerHTML = '<button onclick="submitQuiz()" class="btn btn-primary">Submit Quiz</button>';
+            container.appendChild(submitDiv);
+        }
+
+        function selectAnswer(questionId, optionIndex) {
+            if (quizSubmitted) return;
+
+            // Clear previous selection for this question
+            document.querySelectorAll(`[data-question="${questionId}"]`).forEach(opt => {
+                opt.classList.remove('selected');
+            });
+
+            // Select this option
+            event.currentTarget.classList.add('selected');
+            quizAnswers[questionId] = optionIndex;
+        }
+
+        function submitQuiz() {
+            if (Object.keys(quizAnswers).length < quizQuestions.length) {
+                alert('Please answer all questions before submitting.');
+                return;
+            }
+
+            quizSubmitted = true;
+            let correct = 0;
+
+            quizQuestions.forEach(q => {
+                const selectedOption = document.querySelector(`[data-question="${q.id}"][data-option="${quizAnswers[q.id]}"]`);
+                const correctOption = document.querySelector(`[data-question="${q.id}"][data-option="${q.correct}"]`);
+
+                if (quizAnswers[q.id] === q.correct) {
+                    correct++;
+                    selectedOption.classList.add('correct');
+                } else {
+                    selectedOption.classList.add('incorrect');
+                    correctOption.classList.add('correct');
+                }
+            });
+
+            const score = (correct / quizQuestions.length) * 100;
+            const passed = score === 100;
+
+            document.getElementById('quizResults').classList.remove('hidden');
+            document.getElementById('quizScore').textContent = `Score: ${correct}/${quizQuestions.length} (${score}%)`;
+            document.getElementById('quizScore').style.color = passed ? '#22c55e' : '#ef4444';
+
+            if (passed) {
+                document.getElementById('quizFeedback').textContent = 'Perfect! You really understand how pay works!';
+                document.getElementById('finishButton').classList.remove('hidden');
+
+                // Save quiz completion
+                const userId = localStorage.getItem('userId') || 'demo';
+                localStorage.setItem(`lesson1_quiz_passed_${userId}`, 'true');
+            } else {
+                document.getElementById('quizFeedback').textContent = 'Not quite—review the incorrect answers and try again!';
+                document.getElementById('retryButton').classList.remove('hidden');
+            }
+
+            window.scrollTo({ top: document.getElementById('quizResults').offsetTop - 100, behavior: 'smooth' });
+        }
+
+        function retryQuiz() {
+            quizAnswers = {};
+            quizSubmitted = false;
+            document.getElementById('quizResults').classList.add('hidden');
+            document.getElementById('retryButton').classList.add('hidden');
+            renderQuiz();
+            window.scrollTo({ top: document.getElementById('quizContainer').offsetTop - 100, behavior: 'smooth' });
+        }
+
+        async function finishLesson() {
+            const userId = localStorage.getItem('userId') || 'demo';
+
+            // Mark as completed locally
+            localStorage.setItem(`path2_lesson1_completed_${userId}`, 'true');
+
+            // Call backend completion handler
+            try {
+                await completeLesson(2, 1, userId);
+            } catch (error) {
+                console.error('Error saving completion:', error);
+            }
+
+            // Redirect to path 2 lessons page
+            window.location.href = '/path2-lessons';
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            createParticles();
+            updateSimulator();
+        });
+    </script>
+</body>
+</html>
