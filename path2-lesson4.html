@@ -1,0 +1,1511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson 4: Side Income & Extra Money Reality - Path 2</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: #0f0f0f;
+            color: #d1d5db;
+            overflow-x: hidden;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-10px); }
+            75% { transform: translateX(10px); }
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                max-height: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                max-height: 1000px;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        /* Progress bar */
+        .progress-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: rgba(17, 24, 39, 0.8);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #22c55e, #16a34a);
+            transition: width 0.3s ease;
+            box-shadow: 0 0 10px rgba(34, 197, 94, 0.5);
+        }
+
+        /* Navigation */
+        .nav-container {
+            position: fixed;
+            top: 1rem;
+            left: 1rem;
+            z-index: 999;
+            background: rgba(17, 24, 39, 0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(34, 197, 94, 0.2);
+            border-radius: 12px;
+            padding: 0.75rem 1.25rem;
+        }
+
+        /* Gradient text */
+        .gradient-text {
+            background: linear-gradient(135deg, #22c55e 0%, #16a34a 50%, #15803d 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Cards */
+        .glass-card {
+            background: rgba(34, 197, 94, 0.1);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(34, 197, 94, 0.2);
+            border-radius: 16px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .glass-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(34, 197, 94, 0.4);
+            box-shadow: 0 20px 60px rgba(34, 197, 94, 0.3);
+        }
+
+        .info-card {
+            background: rgba(17, 24, 39, 0.8);
+            border: 2px solid rgba(34, 197, 94, 0.3);
+            border-radius: 16px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        /* Icon circles */
+        .icon-circle {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+        }
+
+        .icon-circle.green {
+            background: rgba(34, 197, 94, 0.2);
+            border: 2px solid rgba(34, 197, 94, 0.4);
+        }
+
+        .icon-circle.red {
+            background: rgba(239, 68, 68, 0.2);
+            border: 2px solid rgba(239, 68, 68, 0.4);
+        }
+
+        .icon-circle.yellow {
+            background: rgba(251, 191, 36, 0.2);
+            border: 2px solid rgba(251, 191, 36, 0.4);
+        }
+
+        .icon-circle.blue {
+            background: rgba(59, 130, 246, 0.2);
+            border: 2px solid rgba(59, 130, 246, 0.4);
+        }
+
+        /* Myth cards */
+        .myth-card {
+            background: rgba(17, 24, 39, 0.9);
+            border: 2px solid rgba(75, 85, 99, 0.3);
+            border-radius: 16px;
+            padding: 2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            min-height: 200px;
+        }
+
+        .myth-card:hover {
+            border-color: rgba(34, 197, 94, 0.4);
+            transform: translateY(-4px);
+        }
+
+        .myth-card.revealed {
+            border-color: rgba(239, 68, 68, 0.6);
+            background: rgba(239, 68, 68, 0.1);
+        }
+
+        .myth-claim {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #fbbf24;
+            margin-bottom: 1rem;
+        }
+
+        .myth-reality {
+            animation: slideDown 0.5s ease-out;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 2px solid rgba(239, 68, 68, 0.3);
+        }
+
+        /* Calculator */
+        .calculator-container {
+            background: rgba(17, 24, 39, 0.9);
+            border: 2px solid rgba(34, 197, 94, 0.3);
+            border-radius: 16px;
+            padding: 2rem;
+        }
+
+        .input-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .input-group label {
+            display: block;
+            font-weight: 600;
+            color: #d1d5db;
+            margin-bottom: 0.5rem;
+        }
+
+        .input-group input, .input-group select {
+            width: 100%;
+            padding: 0.75rem;
+            background: rgba(31, 41, 55, 0.8);
+            border: 2px solid rgba(75, 85, 99, 0.3);
+            border-radius: 8px;
+            color: white;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .input-group input:focus, .input-group select:focus {
+            outline: none;
+            border-color: rgba(34, 197, 94, 0.6);
+        }
+
+        .results-panel {
+            background: rgba(34, 197, 94, 0.1);
+            border: 2px solid rgba(34, 197, 94, 0.4);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-top: 2rem;
+        }
+
+        .result-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid rgba(75, 85, 99, 0.3);
+        }
+
+        .result-row:last-child {
+            border-bottom: none;
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: #22c55e;
+        }
+
+        .result-row.negative {
+            color: #ef4444;
+        }
+
+        /* Matrix */
+        .matrix-container {
+            background: rgba(17, 24, 39, 0.9);
+            border: 2px solid rgba(34, 197, 94, 0.3);
+            border-radius: 16px;
+            padding: 2rem;
+            position: relative;
+            height: 600px;
+        }
+
+        .matrix-grid {
+            position: relative;
+            width: 100%;
+            height: 500px;
+            border-left: 3px solid rgba(34, 197, 94, 0.6);
+            border-bottom: 3px solid rgba(34, 197, 94, 0.6);
+        }
+
+        .matrix-dot {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #22c55e, #16a34a);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(34, 197, 94, 0.4);
+        }
+
+        .matrix-dot:hover {
+            transform: scale(1.5);
+            box-shadow: 0 6px 20px rgba(34, 197, 94, 0.8);
+        }
+
+        .matrix-tooltip {
+            position: absolute;
+            background: rgba(17, 24, 39, 0.95);
+            border: 2px solid rgba(34, 197, 94, 0.6);
+            border-radius: 8px;
+            padding: 1rem;
+            min-width: 250px;
+            z-index: 100;
+            pointer-events: none;
+            display: none;
+        }
+
+        .matrix-tooltip.show {
+            display: block;
+        }
+
+        /* Hidden costs */
+        .cost-card {
+            background: rgba(17, 24, 39, 0.9);
+            border: 2px solid rgba(75, 85, 99, 0.3);
+            border-radius: 12px;
+            padding: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .cost-card:hover {
+            border-color: rgba(34, 197, 94, 0.4);
+        }
+
+        .cost-card.revealed {
+            border-color: rgba(239, 68, 68, 0.6);
+            background: rgba(239, 68, 68, 0.1);
+        }
+
+        .costs-list {
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 2px solid rgba(239, 68, 68, 0.3);
+            animation: slideDown 0.5s ease-out;
+        }
+
+        /* Quiz */
+        .quiz-option {
+            background: rgba(17, 24, 39, 0.8);
+            border: 2px solid rgba(75, 85, 99, 0.3);
+            border-radius: 12px;
+            padding: 1rem 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 0.75rem;
+        }
+
+        .quiz-option:hover {
+            border-color: rgba(34, 197, 94, 0.4);
+        }
+
+        .quiz-option.selected {
+            border-color: rgba(34, 197, 94, 0.6);
+            background: rgba(34, 197, 94, 0.1);
+        }
+
+        .quiz-option.correct {
+            border-color: rgba(34, 197, 94, 0.8);
+            background: rgba(34, 197, 94, 0.2);
+        }
+
+        .quiz-option.incorrect {
+            border-color: rgba(239, 68, 68, 0.8);
+            background: rgba(239, 68, 68, 0.2);
+            animation: shake 0.5s;
+        }
+
+        /* Buttons */
+        .btn {
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #22c55e, #16a34a);
+            color: white;
+            box-shadow: 0 8px 24px rgba(34, 197, 94, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 32px rgba(34, 197, 94, 0.5);
+        }
+
+        .btn-secondary {
+            background: rgba(75, 85, 99, 0.3);
+            color: #d1d5db;
+            border: 2px solid rgba(75, 85, 99, 0.5);
+        }
+
+        .btn-secondary:hover {
+            border-color: rgba(34, 197, 94, 0.4);
+        }
+
+        /* Particles */
+        .particle {
+            position: fixed;
+            width: 4px;
+            height: 4px;
+            background: #22c55e;
+            border-radius: 50%;
+            pointer-events: none;
+            opacity: 0.6;
+            z-index: 1;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-container {
+                font-size: 0.875rem;
+                padding: 0.5rem 1rem;
+            }
+            .matrix-container {
+                height: 500px;
+            }
+            .matrix-grid {
+                height: 400px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Progress Bar -->
+    <div class="progress-container">
+        <div class="progress-bar" id="progressBar" style="width: 12.5%"></div>
+    </div>
+
+    <!-- Navigation -->
+    <div class="nav-container">
+        <a href="/path2-lessons" style="color: #22c55e; text-decoration: none;">← Back to Path 2</a>
+    </div>
+
+    <!-- Particles -->
+    <div id="particles"></div>
+
+    <!-- Main Content -->
+    <div class="relative z-10 max-w-6xl mx-auto px-4 py-20">
+
+        <!-- Section 1: Introduction -->
+        <section id="section1" class="min-h-screen flex flex-col justify-center">
+            <div class="text-center mb-12 fade-in-up">
+                <div class="inline-block mb-4 px-4 py-2 rounded-full" style="background: rgba(34, 197, 94, 0.2); border: 1px solid rgba(34, 197, 94, 0.4);">
+                    <span class="text-green-400 font-semibold">Lesson 4 of 5</span>
+                </div>
+                <h1 class="text-5xl md:text-6xl font-bold mb-6 gradient-text">
+                    Side Income &<br>Extra Money Reality
+                </h1>
+                <p class="text-xl text-gray-300 max-w-3xl mx-auto">
+                    The internet makes side hustles sound like easy money. This lesson shows you the real numbers, hidden costs, and actual time investment—so you can make smart choices about extra income.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+                <div class="glass-card">
+                    <div class="icon-circle red">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+                            <line x1="12" y1="9" x2="12" y2="13"/>
+                            <line x1="12" y1="17" x2="12.01" y2="17"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-red-400 mb-2 text-center">Bust the Myths</h3>
+                    <p class="text-gray-400 text-center">See what's hype vs what's real with actual numbers</p>
+                </div>
+
+                <div class="glass-card">
+                    <div class="icon-circle green">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="3" y="3" width="18" height="18" rx="2"/>
+                            <path d="M3 9h18"/>
+                            <path d="M9 21V9"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-green-400 mb-2 text-center">Calculate True Profit</h3>
+                    <p class="text-gray-400 text-center">Learn what you ACTUALLY take home after all costs</p>
+                </div>
+
+                <div class="glass-card">
+                    <div class="icon-circle blue">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"/>
+                            <polyline points="12 6 12 12 16 14"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-blue-400 mb-2 text-center">Time vs Money</h3>
+                    <p class="text-gray-400 text-center">See which side hustles are actually worth your time</p>
+                </div>
+            </div>
+
+            <div class="text-center">
+                <button onclick="nextSection()" class="btn btn-primary">
+                    Bust the Myths
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: inline-block; margin-left: 8px; vertical-align: middle;">
+                        <polyline points="9 18 15 12 9 6"/>
+                    </svg>
+                </button>
+            </div>
+        </section>
+
+        <!-- Section 2: Hype vs Reality Myth Buster -->
+        <section id="section2" class="hidden min-h-screen flex flex-col justify-center py-20">
+            <h2 class="text-4xl md:text-5xl font-bold text-center mb-4 gradient-text">Hype vs Reality Check</h2>
+            <p class="text-center text-gray-400 text-lg mb-12">Click each claim to reveal the actual numbers</p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto">
+                <div class="myth-card" onclick="revealMyth(1)" id="myth1">
+                    <div class="myth-claim">"Make $5,000/month dropshipping from home!"</div>
+                    <p class="text-gray-400 text-sm">Click to see the reality</p>
+                    <div class="myth-reality hidden">
+                        <div class="flex items-center gap-2 mb-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="10"/>
+                                <line x1="15" y1="9" x2="9" y2="15"/>
+                                <line x1="9" y1="9" x2="15" y2="15"/>
+                            </svg>
+                            <h4 class="font-bold text-red-400">THE REALITY</h4>
+                        </div>
+                        <p class="text-gray-300 text-sm">Most dropshippers make $0-200/month. After product costs (60%), ads ($500-2000/month), Shopify ($29-299/month), apps, refunds, and returns—you're often losing money. The 0.1% who make $5k/month spend 60+ hours/week and already have marketing expertise.</p>
+                    </div>
+                </div>
+
+                <div class="myth-card" onclick="revealMyth(2)" id="myth2">
+                    <div class="myth-claim">"Drive for Uber, make $25/hour whenever you want!"</div>
+                    <p class="text-gray-400 text-sm">Click to see the reality</p>
+                    <div class="myth-reality hidden">
+                        <div class="flex items-center gap-2 mb-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="10"/>
+                                <line x1="15" y1="9" x2="9" y2="15"/>
+                                <line x1="9" y1="9" x2="15" y2="15"/>
+                            </svg>
+                            <h4 class="font-bold text-red-400">THE REALITY</h4>
+                        </div>
+                        <p class="text-gray-300 text-sm">$25/hour is BEFORE expenses. After gas ($4-6/hr), car maintenance ($2-3/hr), insurance increase, and ALL taxes (30% = ~$7/hr), you're making $11-14/hour actual take-home. Plus you're destroying your car's value. And no, you can't "work whenever"—you make money only during surge pricing.</p>
+                    </div>
+                </div>
+
+                <div class="myth-card" onclick="revealMyth(3)" id="myth3">
+                    <div class="myth-claim">"Sell stuff online for passive income!"</div>
+                    <p class="text-gray-400 text-sm">Click to see the reality</p>
+                    <div class="myth-reality hidden">
+                        <div class="flex items-center gap-2 mb-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="10"/>
+                                <line x1="15" y1="9" x2="9" y2="15"/>
+                                <line x1="9" y1="9" x2="15" y2="15"/>
+                            </svg>
+                            <h4 class="font-bold text-red-400">THE REALITY</h4>
+                        </div>
+                        <p class="text-gray-300 text-sm">Nothing about reselling is passive. You're: sourcing products (hours), taking photos, writing descriptions, managing listings, answering questions, dealing with low-ballers, packing, shipping, handling returns. Platform fees eat 10-15%. If you make $200/month, you probably spent 30+ hours = $6.67/hour.</p>
+                    </div>
+                </div>
+
+                <div class="myth-card" onclick="revealMyth(4)" id="myth4">
+                    <div class="myth-claim">"Start a YouTube channel, earn while you sleep!"</div>
+                    <p class="text-gray-400 text-sm">Click to see the reality</p>
+                    <div class="myth-reality hidden">
+                        <div class="flex items-center gap-2 mb-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="10"/>
+                                <line x1="15" y1="9" x2="9" y2="15"/>
+                                <line x1="9" y1="9" x2="15" y2="15"/>
+                            </svg>
+                            <h4 class="font-bold text-red-400">THE REALITY</h4>
+                        </div>
+                        <p class="text-gray-300 text-sm">You need 1,000 subscribers + 4,000 watch hours just to monetize (takes most people 1-2 YEARS). After that, you earn $3-5 per 1,000 views. A video with 10,000 views = $30-50. Each video takes 8-20 hours to research, film, edit. That's $2-6/hour if it even gets views. 95% of channels make under $100/month.</p>
+                    </div>
+                </div>
+
+                <div class="myth-card" onclick="revealMyth(5)" id="myth5">
+                    <div class="myth-claim">"My course will teach you to make $10k/month!"</div>
+                    <p class="text-gray-400 text-sm">Click to see the reality</p>
+                    <div class="myth-reality hidden">
+                        <div class="flex items-center gap-2 mb-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="10"/>
+                                <line x1="15" y1="9" x2="9" y2="15"/>
+                                <line x1="9" y1="9" x2="15" y2="15"/>
+                            </svg>
+                            <h4 class="font-bold text-red-400">THE REALITY</h4>
+                        </div>
+                        <p class="text-gray-300 text-sm">If their method worked, they'd be doing it—not selling courses. They make $10k/month by selling you a $997 course, not from the method they're teaching. Less than 1% of course buyers actually succeed. You're more likely to lose $1,000 than make $10,000. Real skills take years, not a 6-week course.</p>
+                    </div>
+                </div>
+
+                <div class="myth-card" onclick="revealMyth(6)" id="myth6">
+                    <div class="myth-claim">"Get paid to scroll social media!"</div>
+                    <p class="text-gray-400 text-sm">Click to see the reality</p>
+                    <div class="myth-reality hidden">
+                        <div class="flex items-center gap-2 mb-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="10"/>
+                                <line x1="15" y1="9" x2="9" y2="15"/>
+                                <line x1="9" y1="9" x2="15" y2="15"/>
+                            </svg>
+                            <h4 class="font-bold text-red-400">THE REALITY</h4>
+                        </div>
+                        <p class="text-gray-300 text-sm">Survey sites pay $0.50-3.00 per survey that takes 15-30 minutes. That's $2-6/hour. Most surveys disqualify you halfway through (no payment). "User testing" sites pay $10 per 20-minute test—but you'll get 1-2 tests per month max. You'd literally make more picking up cans for recycling.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="info-card max-w-3xl mx-auto mt-12">
+                <div class="flex items-center gap-2 mb-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fbbf24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+                        <line x1="12" y1="9" x2="12" y2="13"/>
+                        <line x1="12" y1="17" x2="12.01" y2="17"/>
+                    </svg>
+                    <h4 class="text-lg font-bold text-yellow-400">The Pattern</h4>
+                </div>
+                <p class="text-gray-300">Notice the pattern? Claims focus on GROSS income (before costs). Reality includes expenses, time, taxes, and failure rate. Always calculate the REAL hourly rate after everything.</p>
+            </div>
+
+            <div class="text-center mt-12">
+                <button onclick="nextSection()" class="btn btn-primary">
+                    Calculate Real Profit
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: inline-block; margin-left: 8px; vertical-align: middle;">
+                        <polyline points="9 18 15 12 9 6"/>
+                    </svg>
+                </button>
+            </div>
+        </section>
+
+        <!-- Section 3: Side Hustle Reality Calculator -->
+        <section id="section3" class="hidden min-h-screen flex flex-col justify-center py-20">
+            <h2 class="text-4xl md:text-5xl font-bold text-center mb-4 gradient-text">The Reality Calculator</h2>
+            <p class="text-center text-gray-400 text-lg mb-12">Calculate what you ACTUALLY make after all costs</p>
+
+            <div class="max-w-4xl mx-auto">
+                <div class="calculator-container">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <h3 class="text-xl font-bold text-white mb-4">Your Side Hustle Details</h3>
+
+                            <div class="input-group">
+                                <label>Hours per week you can work</label>
+                                <input type="number" id="hoursPerWeek" value="10" oninput="calculateReality()">
+                            </div>
+
+                            <div class="input-group">
+                                <label>Advertised hourly rate</label>
+                                <div class="flex items-center gap-2">
+                                    <span class="text-white">$</span>
+                                    <input type="number" id="hourlyRate" value="20" oninput="calculateReality()">
+                                </div>
+                            </div>
+
+                            <div class="input-group">
+                                <label>Startup costs (equipment, fees, etc.)</label>
+                                <div class="flex items-center gap-2">
+                                    <span class="text-white">$</span>
+                                    <input type="number" id="startupCosts" value="0" oninput="calculateReality()">
+                                </div>
+                            </div>
+
+                            <div class="input-group">
+                                <label>Monthly expenses (gas, supplies, fees)</label>
+                                <div class="flex items-center gap-2">
+                                    <span class="text-white">$</span>
+                                    <input type="number" id="monthlyExpenses" value="100" oninput="calculateReality()">
+                                </div>
+                            </div>
+
+                            <div class="input-group">
+                                <label>Employment type</label>
+                                <select id="employmentType" onchange="calculateReality()">
+                                    <option value="1099">1099 Contractor (you pay all taxes)</option>
+                                    <option value="w2">W-2 Employee (taxes withheld)</option>
+                                </select>
+                            </div>
+
+                            <div class="input-group">
+                                <label>Unpaid time (admin, travel, etc.) per week</label>
+                                <input type="number" id="unpaidHours" value="2" oninput="calculateReality()">
+                            </div>
+                        </div>
+
+                        <div>
+                            <h3 class="text-xl font-bold text-white mb-4">The Reality</h3>
+                            <div class="results-panel">
+                                <div class="result-row">
+                                    <span class="text-gray-400">Gross monthly income:</span>
+                                    <span class="text-white" id="grossIncome">$800</span>
+                                </div>
+                                <div class="result-row">
+                                    <span class="text-gray-400">Monthly expenses:</span>
+                                    <span class="text-red-400" id="expensesAmount">-$100</span>
+                                </div>
+                                <div class="result-row">
+                                    <span class="text-gray-400">Taxes (if 1099):</span>
+                                    <span class="text-red-400" id="taxesAmount">-$240</span>
+                                </div>
+                                <div class="result-row">
+                                    <span class="text-gray-400">After expenses & taxes:</span>
+                                    <span id="netIncome">$460</span>
+                                </div>
+                                <div class="result-row">
+                                    <span class="text-gray-400">Total hours (paid + unpaid):</span>
+                                    <span class="text-white" id="totalHours">48 hrs</span>
+                                </div>
+                                <div class="result-row">
+                                    <span>Real hourly rate:</span>
+                                    <span id="realRate">$9.58/hr</span>
+                                </div>
+                            </div>
+
+                            <div id="breakevenSection" class="mt-4 p-4 rounded-lg" style="background: rgba(239, 68, 68, 0.1); border: 2px solid rgba(239, 68, 68, 0.4); display: none;">
+                                <div class="font-bold text-red-400 mb-2">Breakeven Timeline</div>
+                                <p class="text-gray-300 text-sm">With <span id="startupAmount">$0</span> in startup costs, you'll break even after <span id="breakevenMonths">0</span> months of work.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-card mt-8">
+                    <div class="flex items-center gap-2 mb-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+                        </svg>
+                        <h4 class="text-lg font-bold text-green-400">What This Tells You</h4>
+                    </div>
+                    <p class="text-gray-300">If your REAL hourly rate is below $15/hr, you'd literally make more working a regular job at Target or McDonald's (which also gives you benefits). Always compare side hustles to what you could earn in a traditional job.</p>
+                </div>
+            </div>
+
+            <div class="text-center mt-12">
+                <button onclick="nextSection()" class="btn btn-primary">
+                    See Time vs Money Matrix
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: inline-block; margin-left: 8px; vertical-align: middle;">
+                        <polyline points="9 18 15 12 9 6"/>
+                    </svg>
+                </button>
+            </div>
+        </section>
+
+        <!-- Section 4: Time vs Money Matrix -->
+        <section id="section4" class="hidden min-h-screen flex flex-col justify-center py-20">
+            <h2 class="text-4xl md:text-5xl font-bold text-center mb-4 gradient-text">Time vs Money Matrix</h2>
+            <p class="text-center text-gray-400 text-lg mb-12">Hover over each dot to see side hustle details</p>
+
+            <div class="max-w-5xl mx-auto">
+                <div class="matrix-container">
+                    <div class="text-sm text-gray-400 mb-2 flex justify-between items-center">
+                        <span>← Less Time Investment</span>
+                        <span>More Time Investment →</span>
+                    </div>
+                    <div class="text-sm text-gray-400 mb-2 flex items-center gap-2">
+                        <span class="transform rotate-180" style="writing-mode: vertical-lr;">← Lower Income Potential</span>
+                        <span class="flex-1"></span>
+                        <span class="transform rotate-180" style="writing-mode: vertical-lr;">Higher Income Potential →</span>
+                    </div>
+                    <div class="matrix-grid" id="matrixGrid">
+                        <!-- Dots will be positioned here -->
+                    </div>
+                    <div class="matrix-tooltip" id="matrixTooltip"></div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-8">
+                    <div class="info-card" style="background: rgba(34, 197, 94, 0.1); border-color: rgba(34, 197, 94, 0.4);">
+                        <div class="text-center">
+                            <div class="text-green-400 font-bold mb-1">SWEET SPOT</div>
+                            <div class="text-xs text-gray-400">High income, reasonable time</div>
+                        </div>
+                    </div>
+                    <div class="info-card" style="background: rgba(251, 191, 36, 0.1); border-color: rgba(251, 191, 36, 0.4);">
+                        <div class="text-center">
+                            <div class="text-yellow-400 font-bold mb-1">TIME SINK</div>
+                            <div class="text-xs text-gray-400">Lots of time, low pay</div>
+                        </div>
+                    </div>
+                    <div class="info-card" style="background: rgba(239, 68, 68, 0.1); border-color: rgba(239, 68, 68, 0.4);">
+                        <div class="text-center">
+                            <div class="text-red-400 font-bold mb-1">AVOID</div>
+                            <div class="text-xs text-gray-400">High time, low income</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center mt-12">
+                <button onclick="nextSection()" class="btn btn-primary">
+                    Reveal Hidden Costs
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: inline-block; margin-left: 8px; vertical-align: middle;">
+                        <polyline points="9 18 15 12 9 6"/>
+                    </svg>
+                </button>
+            </div>
+        </section>
+
+        <!-- Section 5: Hidden Costs -->
+        <section id="section5" class="hidden min-h-screen flex flex-col justify-center py-20">
+            <h2 class="text-4xl md:text-5xl font-bold text-center mb-4 gradient-text">The Hidden Costs Nobody Mentions</h2>
+            <p class="text-center text-gray-400 text-lg mb-12">Click each side hustle to reveal ALL the costs</p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto">
+                <div class="cost-card" onclick="revealCosts(1)" id="cost1">
+                    <div class="flex items-center gap-3 mb-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fbbf24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"/>
+                            <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/>
+                            <line x1="12" y1="17" x2="12.01" y2="17"/>
+                        </svg>
+                        <h3 class="text-lg font-bold text-white">Food Delivery (DoorDash, Uber Eats)</h3>
+                    </div>
+                    <p class="text-gray-400 text-sm mb-2">Advertised: $18-25/hour</p>
+                    <div class="costs-list hidden">
+                        <div class="text-red-400 font-bold mb-2">ACTUAL COSTS PER HOUR:</div>
+                        <ul class="space-y-1 text-sm text-gray-300">
+                            <li>• Gas: $3-5/hour (depending on car MPG)</li>
+                            <li>• Car maintenance: $2-3/hour (oil, brakes, tires wear faster)</li>
+                            <li>• Car depreciation: $2-4/hour (more miles = less resale value)</li>
+                            <li>• Insurance increase: ~$50/month = $0.50/hour</li>
+                            <li>• Self-employment tax: 30% of earnings</li>
+                            <li>• Phone data & mounts: $10/month</li>
+                            <li>• Hot bags, drink carriers: $50 upfront</li>
+                        </ul>
+                        <p class="text-red-400 mt-3 font-bold">$25/hr becomes ~$11-14/hr actual take-home</p>
+                    </div>
+                </div>
+
+                <div class="cost-card" onclick="revealCosts(2)" id="cost2">
+                    <div class="flex items-center gap-3 mb-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fbbf24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"/>
+                            <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/>
+                            <line x1="12" y1="17" x2="12.01" y2="17"/>
+                        </svg>
+                        <h3 class="text-lg font-bold text-white">Freelance Design/Writing</h3>
+                    </div>
+                    <p class="text-gray-400 text-sm mb-2">Advertised: $30-50/hour</p>
+                    <div class="costs-list hidden">
+                        <div class="text-red-400 font-bold mb-2">ACTUAL COSTS & TIME:</div>
+                        <ul class="space-y-1 text-sm text-gray-300">
+                            <li>• Finding clients: 5-10 hours/week unpaid</li>
+                            <li>• Proposals & quotes: 1-2 hours per potential job</li>
+                            <li>• Revisions (usually "unlimited"): 2-5 hours unpaid</li>
+                            <li>• Client communication (emails, calls): 3-5 hours/week</li>
+                            <li>• Platform fees (Upwork, Fiverr): 20% of earnings</li>
+                            <li>• Software subscriptions: $50-200/month</li>
+                            <li>• Self-employment tax: 30% of earnings</li>
+                            <li>• Chasing late payments: 2-4 hours/month</li>
+                        </ul>
+                        <p class="text-red-400 mt-3 font-bold">$40/hr billable becomes ~$18-25/hr when you count ALL time</p>
+                    </div>
+                </div>
+
+                <div class="cost-card" onclick="revealCosts(3)" id="cost3">
+                    <div class="flex items-center gap-3 mb-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fbbf24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"/>
+                            <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/>
+                            <line x1="12" y1="17" x2="12.01" y2="17"/>
+                        </svg>
+                        <h3 class="text-lg font-bold text-white">Amazon FBA (Selling Products)</h3>
+                    </div>
+                    <p class="text-gray-400 text-sm mb-2">Advertised: "Passive income!"</p>
+                    <div class="costs-list hidden">
+                        <div class="text-red-400 font-bold mb-2">ACTUAL COSTS:</div>
+                        <ul class="space-y-1 text-sm text-gray-300">
+                            <li>• Product cost: 40-60% of sale price</li>
+                            <li>• Amazon FBA fees: 15% + $3-5 per unit</li>
+                            <li>• Shipping to Amazon: $0.50-2 per unit</li>
+                            <li>• Inventory storage: $0.75-2.40 per cubic foot/month</li>
+                            <li>• Returns & damaged units: 5-10% loss</li>
+                            <li>• Product research tools: $50-200/month</li>
+                            <li>• UPC codes: $250+ upfront</li>
+                            <li>• Initial inventory investment: $1,000-5,000</li>
+                            <li>• Taxes on all profit: 30% if sole proprietor</li>
+                        </ul>
+                        <p class="text-red-400 mt-3 font-bold">Most sellers LOSE money first 6-12 months. "Passive" = 20+ hrs/week managing</p>
+                    </div>
+                </div>
+
+                <div class="cost-card" onclick="revealCosts(4)" id="cost4">
+                    <div class="flex items-center gap-3 mb-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fbbf24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"/>
+                            <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/>
+                            <line x1="12" y1="17" x2="12.01" y2="17"/>
+                        </svg>
+                        <h3 class="text-lg font-bold text-white">Social Media Influencer</h3>
+                    </div>
+                    <p class="text-gray-400 text-sm mb-2">Advertised: "Get paid for posts!"</p>
+                    <div class="costs-list hidden">
+                        <div class="text-red-400 font-bold mb-2">ACTUAL COSTS & REALITY:</div>
+                        <ul class="space-y-1 text-sm text-gray-300">
+                            <li>• Need 10k+ engaged followers for any sponsorships</li>
+                            <li>• Takes 1-3 YEARS to build that audience</li>
+                            <li>• Content creation: 10-30 hours/week</li>
+                            <li>• Camera/lighting equipment: $500-2,000</li>
+                            <li>• Editing software: $20-50/month</li>
+                            <li>• Props, outfits, locations: $100-500/month</li>
+                            <li>• Sponsorship rate: $100-500 per 10k followers per post</li>
+                            <li>• Most earn $0-200/month for 1-2 years</li>
+                        </ul>
+                        <p class="text-red-400 mt-3 font-bold">Less than 1% of creators make a living. Most work 2-3 years for $0-50/month</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="info-card max-w-3xl mx-auto mt-12">
+                <div class="flex items-center gap-2 mb-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+                    </svg>
+                    <h4 class="text-lg font-bold text-green-400">The Takeaway</h4>
+                </div>
+                <p class="text-gray-300">Every side hustle has hidden costs—time, money, or both. Before starting, calculate ALL costs and ALL time. Compare your real hourly rate to just working more hours at a regular job or asking for a raise.</p>
+            </div>
+
+            <div class="text-center mt-12">
+                <button onclick="nextSection()" class="btn btn-primary">
+                    What Actually Works
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: inline-block; margin-left: 8px; vertical-align: middle;">
+                        <polyline points="9 18 15 12 9 6"/>
+                    </svg>
+                </button>
+            </div>
+        </section>
+
+        <!-- Section 6: What Actually Works -->
+        <section id="section6" class="hidden min-h-screen flex flex-col justify-center py-20">
+            <h2 class="text-4xl md:text-5xl font-bold text-center mb-4 gradient-text">What Actually Works</h2>
+            <p class="text-center text-gray-400 text-lg mb-12">Realistic side income options with real numbers</p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto">
+                <div class="info-card" style="background: rgba(34, 197, 94, 0.1); border-color: rgba(34, 197, 94, 0.4);">
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="icon-circle green">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                                <circle cx="12" cy="7" r="4"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold text-green-400">Tutoring (In-Person or Online)</h3>
+                    </div>
+                    <div class="space-y-2 text-sm text-gray-300 mb-3">
+                        <div class="flex justify-between">
+                            <span>Realistic rate:</span>
+                            <span class="text-white font-semibold">$20-40/hour</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span>Time to start earning:</span>
+                            <span class="text-white font-semibold">1-2 weeks</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span>Startup costs:</span>
+                            <span class="text-white font-semibold">$0-50</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span>Monthly expenses:</span>
+                            <span class="text-white font-semibold">$0-20</span>
+                        </div>
+                    </div>
+                    <div class="p-3 rounded-lg" style="background: rgba(34, 197, 94, 0.2);">
+                        <div class="font-bold text-green-400 mb-1">Why It Works:</div>
+                        <p class="text-xs text-gray-300">No inventory, low overhead, high hourly rate. You're paid for actual hours worked. Best for: students, teachers, anyone skilled in a subject.</p>
+                    </div>
+                </div>
+
+                <div class="info-card" style="background: rgba(34, 197, 94, 0.1); border-color: rgba(34, 197, 94, 0.4);">
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="icon-circle green">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="2" y="7" width="20" height="14" rx="2" ry="2"/>
+                                <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold text-green-400">Part-Time W-2 Job</h3>
+                    </div>
+                    <div class="space-y-2 text-sm text-gray-300 mb-3">
+                        <div class="flex justify-between">
+                            <span>Realistic rate:</span>
+                            <span class="text-white font-semibold">$15-22/hour</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span>Time to start earning:</span>
+                            <span class="text-white font-semibold">1-2 weeks</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span>Hidden costs:</span>
+                            <span class="text-white font-semibold">$0 (commute only)</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span>Benefits:</span>
+                            <span class="text-white font-semibold">Sometimes included</span>
+                        </div>
+                    </div>
+                    <div class="p-3 rounded-lg" style="background: rgba(34, 197, 94, 0.2);">
+                        <div class="font-bold text-green-400 mb-1">Why It Works:</div>
+                        <p class="text-xs text-gray-300">Guaranteed hours, no startup costs, taxes handled for you. Reliable income beats unpredictable side hustle. Best for: anyone who needs consistent extra income.</p>
+                    </div>
+                </div>
+
+                <div class="info-card" style="background: rgba(34, 197, 94, 0.1); border-color: rgba(34, 197, 94, 0.4);">
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="icon-circle green">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                                <polyline points="9 22 9 12 15 12 15 22"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold text-green-400">House/Pet Sitting (Rover, Care.com)</h3>
+                    </div>
+                    <div class="space-y-2 text-sm text-gray-300 mb-3">
+                        <div class="flex justify-between">
+                            <span>Realistic rate:</span>
+                            <span class="text-white font-semibold">$25-50/day</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span>Time to start earning:</span>
+                            <span class="text-white font-semibold">2-4 weeks</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span>Startup costs:</span>
+                            <span class="text-white font-semibold">$0 (background check $30)</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span>Platform fee:</span>
+                            <span class="text-white font-semibold">15-20%</span>
+                        </div>
+                    </div>
+                    <div class="p-3 rounded-lg" style="background: rgba(34, 197, 94, 0.2);">
+                        <div class="font-bold text-green-400 mb-1">Why It Works:</div>
+                        <p class="text-xs text-gray-300">Low effort for decent pay. You're getting paid to hang out with pets or stay at someone's house. Best for: animal lovers, flexible schedules, students on break.</p>
+                    </div>
+                </div>
+
+                <div class="info-card" style="background: rgba(34, 197, 94, 0.1); border-color: rgba(34, 197, 94, 0.4);">
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="icon-circle green">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="16 18 22 12 16 6"/>
+                                <polyline points="8 6 2 12 8 18"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold text-green-400">Overtime at Current Job</h3>
+                    </div>
+                    <div class="space-y-2 text-sm text-gray-300 mb-3">
+                        <div class="flex justify-between">
+                            <span>Realistic rate:</span>
+                            <span class="text-white font-semibold">1.5x your current pay</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span>Time to start earning:</span>
+                            <span class="text-white font-semibold">Immediately</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span>Hidden costs:</span>
+                            <span class="text-white font-semibold">$0</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span>Benefits:</span>
+                            <span class="text-white font-semibold">Already have them</span>
+                        </div>
+                    </div>
+                    <div class="p-3 rounded-lg" style="background: rgba(34, 197, 94, 0.2);">
+                        <div class="font-bold text-green-400 mb-1">Why It Works:</div>
+                        <p class="text-xs text-gray-300">If you're hourly, OT pays 1.5x AND has no extra costs, commute, or taxes surprise. Often better than any side hustle. Best for: hourly workers who can pick up extra shifts.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="info-card max-w-3xl mx-auto mt-12" style="background: rgba(139, 92, 246, 0.1); border-color: rgba(139, 92, 246, 0.4);">
+                <div class="flex items-center gap-2 mb-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#8b5cf6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"/>
+                        <path d="M12 16v-4"/>
+                        <path d="M12 8h.01"/>
+                    </svg>
+                    <h4 class="text-lg font-bold text-purple-400">Before You Start ANY Side Hustle</h4>
+                </div>
+                <ul class="space-y-2 text-gray-300 text-sm">
+                    <li class="flex items-start gap-2">
+                        <span class="text-purple-400 font-bold">1.</span>
+                        <span>Calculate your REAL hourly rate after all costs and all time</span>
+                    </li>
+                    <li class="flex items-start gap-2">
+                        <span class="text-purple-400 font-bold">2.</span>
+                        <span>Compare it to working more hours at your current job or getting a second W-2 job</span>
+                    </li>
+                    <li class="flex items-start gap-2">
+                        <span class="text-purple-400 font-bold">3.</span>
+                        <span>Remember: if you're paid 1099, you owe 30% in taxes at the end of the year</span>
+                    </li>
+                    <li class="flex items-start gap-2">
+                        <span class="text-purple-400 font-bold">4.</span>
+                        <span>Ask yourself: "Would I rather have this $400 or 20 hours of my free time?"</span>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="text-center mt-12">
+                <button onclick="nextSection()" class="btn btn-primary">
+                    Take the Quiz
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: inline-block; margin-left: 8px; vertical-align: middle;">
+                        <polyline points="9 18 15 12 9 6"/>
+                    </svg>
+                </button>
+            </div>
+        </section>
+
+        <!-- Section 7: Quiz -->
+        <section id="section7" class="hidden min-h-screen flex flex-col justify-center py-20">
+            <h2 class="text-4xl md:text-5xl font-bold text-center mb-4 gradient-text">Knowledge Check</h2>
+            <p class="text-center text-gray-400 text-lg mb-12">Test what you've learned—you need 100% to complete</p>
+
+            <div class="max-w-3xl mx-auto" id="quizContainer">
+                <!-- Quiz will be rendered here -->
+            </div>
+
+            <div id="quizResults" class="hidden text-center mt-8">
+                <div id="quizScore" class="text-3xl font-bold mb-4"></div>
+                <div id="quizFeedback" class="text-xl text-gray-300 mb-6"></div>
+                <button onclick="retryQuiz()" id="retryButton" class="btn btn-secondary hidden mr-4">
+                    Retry Quiz
+                </button>
+                <button onclick="finishLesson()" id="finishButton" class="btn btn-primary hidden">
+                    Finish Lesson
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: inline-block; margin-left: 8px; vertical-align: middle;">
+                        <polyline points="20 6 9 17 4 12"/>
+                    </svg>
+                </button>
+            </div>
+        </section>
+
+    </div>
+
+    <script src="config.js"></script>
+    <script src="/lesson-completion.js"></script>
+    <script>
+        // State
+        let currentSection = 1;
+        const totalSections = 7;
+        let quizAnswers = {};
+        let quizSubmitted = false;
+
+        // Quiz questions
+        const quizQuestions = [
+            {
+                id: 1,
+                question: 'A side hustle advertises $25/hour. After gas ($4/hr), maintenance ($3/hr), and 1099 taxes (30%), what\'s your real hourly rate?',
+                options: [
+                    '$25/hour - that\'s what they advertised',
+                    '~$11/hour after all costs',
+                    '$17.50/hour after taxes only',
+                    '$20/hour - just minus gas'
+                ],
+                correct: 1
+            },
+            {
+                id: 2,
+                question: 'What\'s the biggest red flag when evaluating a side hustle opportunity?',
+                options: [
+                    'They clearly list startup costs upfront',
+                    'They only show gross income, never mention costs or time',
+                    'They explain it takes time to build',
+                    'They compare it to traditional job pay'
+                ],
+                correct: 1
+            },
+            {
+                id: 3,
+                question: 'You can make $400/month on a side hustle, but it takes 25 hours. Your current job offers overtime at $18/hr. What should you do?',
+                options: [
+                    'Do the side hustle ($400 sounds good)',
+                    'Take the overtime ($18 × 25hrs = $450, plus 1.5x rate)',
+                    'Do both to maximize income',
+                    'Neither, just save more money'
+                ],
+                correct: 1
+            },
+            {
+                id: 4,
+                question: 'Which side hustle typically has the MOST hidden costs?',
+                options: [
+                    'Tutoring (just your time and knowledge)',
+                    'Amazon FBA (inventory, fees, shipping, storage, returns)',
+                    'Overtime at your current job',
+                    'Pet sitting (mostly your time)'
+                ],
+                correct: 1
+            },
+            {
+                id: 5,
+                question: 'A course promises "Learn to make $10k/month!" for $997. What\'s the reality?',
+                options: [
+                    'Great deal if it teaches valuable skills',
+                    'They make $10k/month by selling the course, not from the method',
+                    'Worth it if just one person succeeds',
+                    'Courses always pay for themselves'
+                ],
+                correct: 1
+            },
+            {
+                id: 6,
+                question: 'Before starting a side hustle, what\'s the MOST important calculation?',
+                options: [
+                    'How much you can make in a best-case scenario',
+                    'Your real hourly rate after ALL costs and ALL time',
+                    'How much you\'d save on taxes',
+                    'How impressive it sounds on social media'
+                ],
+                correct: 1
+            }
+        ];
+
+        // Side hustles for matrix
+        const sideHustles = [
+            { name: 'Tutoring', time: 25, income: 75, rate: '$25-40/hr', details: 'Low overhead, immediate pay, your expertise = income' },
+            { name: 'OT at Current Job', time: 15, income: 70, rate: '1.5x your rate', details: 'Instant start, guaranteed pay, taxes handled, no extra costs' },
+            { name: 'Part-Time W-2', time: 30, income: 65, rate: '$15-22/hr', details: 'Stable hours, predictable income, benefits possible' },
+            { name: 'Pet Sitting', time: 35, income: 60, rate: '$25-50/day', details: 'Low effort, flexible, minimal costs' },
+            { name: 'Food Delivery', time: 45, income: 45, rate: '$11-14/hr real', details: 'After gas, taxes, car wear—barely worth it' },
+            { name: 'Freelance Writing', time: 55, income: 70, rate: '$18-25/hr real', details: 'Lots of unpaid time finding clients, revisions' },
+            { name: 'Reselling Items', time: 65, income: 35, rate: '$6-10/hr', details: 'Time sink: sourcing, photos, listings, shipping, dealing with buyers' },
+            { name: 'Dropshipping', time: 75, income: 20, rate: '$0-5/hr', details: 'Most lose money on ads. Success rate < 5%' },
+            { name: 'YouTube', time: 85, income: 15, rate: '$2-6/hr', details: '1-2 years to monetize, 8-20 hrs per video, tiny CPM' },
+            { name: 'Survey Sites', time: 20, income: 10, rate: '$2-6/hr', details: 'Mind-numbing, disqualifications, terrible rate' },
+            { name: 'MLM/Crypto', time: 90, income: 5, rate: 'Usually lose $', details: '99% lose money. It\'s a scam. Run.' },
+            { name: 'Amazon FBA', time: 70, income: 50, rate: 'Negative first year', details: 'High upfront costs, steep learning curve, 6-12mo to profit' }
+        ];
+
+        // Create particles
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 30;
+
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.top = Math.random() * 100 + '%';
+                particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
+                particle.style.animationDelay = (Math.random() * 5) + 's';
+                particle.style.animation = 'float ' + particle.style.animationDuration + ' ease-in-out infinite';
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        // Navigation
+        function nextSection() {
+            document.getElementById('section' + currentSection).classList.add('hidden');
+            currentSection++;
+            document.getElementById('section' + currentSection).classList.remove('hidden');
+            updateProgress();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+
+            if (currentSection === 4) {
+                initMatrix();
+            } else if (currentSection === 7) {
+                renderQuiz();
+            }
+        }
+
+        function updateProgress() {
+            const progress = (currentSection / totalSections) * 100;
+            document.getElementById('progressBar').style.width = progress + '%';
+        }
+
+        // Section 2: Myth buster
+        function revealMyth(mythNum) {
+            const card = document.getElementById('myth' + mythNum);
+            const reality = card.querySelector('.myth-reality');
+
+            if (reality.classList.contains('hidden')) {
+                reality.classList.remove('hidden');
+                card.classList.add('revealed');
+            }
+        }
+
+        // Section 3: Calculator
+        function calculateReality() {
+            const hoursPerWeek = parseFloat(document.getElementById('hoursPerWeek').value) || 0;
+            const hourlyRate = parseFloat(document.getElementById('hourlyRate').value) || 0;
+            const startupCosts = parseFloat(document.getElementById('startupCosts').value) || 0;
+            const monthlyExpenses = parseFloat(document.getElementById('monthlyExpenses').value) || 0;
+            const employmentType = document.getElementById('employmentType').value;
+            const unpaidHours = parseFloat(document.getElementById('unpaidHours').value) || 0;
+
+            // Calculate gross monthly income (4.33 weeks per month average)
+            const grossMonthly = hoursPerWeek * hourlyRate * 4.33;
+
+            // Calculate taxes
+            let taxes = 0;
+            if (employmentType === '1099') {
+                taxes = (grossMonthly - monthlyExpenses) * 0.30; // 30% self-employment tax
+            } else {
+                taxes = (grossMonthly - monthlyExpenses) * 0.15; // ~15% for W-2
+            }
+
+            // Calculate net
+            const netMonthly = grossMonthly - monthlyExpenses - taxes;
+
+            // Calculate total hours (paid + unpaid)
+            const totalHoursMonthly = (hoursPerWeek + unpaidHours) * 4.33;
+
+            // Calculate real hourly rate
+            const realRate = netMonthly / totalHoursMonthly;
+
+            // Update display
+            document.getElementById('grossIncome').textContent = '$' + grossMonthly.toFixed(0);
+            document.getElementById('expensesAmount').textContent = '-$' + monthlyExpenses.toFixed(0);
+            document.getElementById('taxesAmount').textContent = '-$' + taxes.toFixed(0);
+            document.getElementById('netIncome').textContent = '$' + netMonthly.toFixed(0);
+            document.getElementById('totalHours').textContent = totalHoursMonthly.toFixed(0) + ' hrs';
+            document.getElementById('realRate').textContent = '$' + realRate.toFixed(2) + '/hr';
+
+            // Color code the real rate
+            const rateElement = document.getElementById('realRate').parentElement;
+            if (realRate < 12) {
+                rateElement.classList.add('negative');
+                rateElement.style.color = '#ef4444';
+            } else {
+                rateElement.classList.remove('negative');
+                rateElement.style.color = '#22c55e';
+            }
+
+            // Show breakeven if startup costs exist
+            if (startupCosts > 0) {
+                const breakevenMonths = Math.ceil(startupCosts / netMonthly);
+                document.getElementById('breakevenSection').style.display = 'block';
+                document.getElementById('startupAmount').textContent = '$' + startupCosts.toFixed(0);
+                document.getElementById('breakevenMonths').textContent = breakevenMonths;
+            } else {
+                document.getElementById('breakevenSection').style.display = 'none';
+            }
+        }
+
+        // Section 4: Matrix
+        function initMatrix() {
+            const grid = document.getElementById('matrixGrid');
+            const tooltip = document.getElementById('matrixTooltip');
+
+            sideHustles.forEach(hustle => {
+                const dot = document.createElement('div');
+                dot.className = 'matrix-dot';
+
+                // Position: time (x), income (y)
+                // Convert 0-100 scale to pixel positions
+                const left = (hustle.time / 100) * 95; // Leave 5% margin
+                const bottom = (hustle.income / 100) * 95;
+
+                dot.style.left = left + '%';
+                dot.style.bottom = bottom + '%';
+
+                // Color code based on zone
+                if (hustle.income > 60 && hustle.time < 50) {
+                    dot.style.background = 'linear-gradient(135deg, #22c55e, #16a34a)'; // Green - sweet spot
+                } else if (hustle.income < 40 && hustle.time > 60) {
+                    dot.style.background = 'linear-gradient(135deg, #ef4444, #dc2626)'; // Red - avoid
+                } else {
+                    dot.style.background = 'linear-gradient(135deg, #fbbf24, #f59e0b)'; // Yellow - okay
+                }
+
+                // Tooltip on hover
+                dot.addEventListener('mouseenter', (e) => {
+                    tooltip.innerHTML = `
+                        <div class="font-bold text-white mb-2">${hustle.name}</div>
+                        <div class="text-sm text-gray-300 mb-1">Real hourly rate: <span class="text-green-400">${hustle.rate}</span></div>
+                        <div class="text-xs text-gray-400">${hustle.details}</div>
+                    `;
+                    tooltip.classList.add('show');
+
+                    // Position tooltip
+                    const rect = dot.getBoundingClientRect();
+                    tooltip.style.left = rect.left + 'px';
+                    tooltip.style.top = (rect.top - tooltip.offsetHeight - 10) + 'px';
+                });
+
+                dot.addEventListener('mouseleave', () => {
+                    tooltip.classList.remove('show');
+                });
+
+                grid.appendChild(dot);
+            });
+        }
+
+        // Section 5: Hidden costs
+        function revealCosts(costNum) {
+            const card = document.getElementById('cost' + costNum);
+            const costsList = card.querySelector('.costs-list');
+
+            if (costsList.classList.contains('hidden')) {
+                costsList.classList.remove('hidden');
+                card.classList.add('revealed');
+            }
+        }
+
+        // Section 7: Quiz
+        function renderQuiz() {
+            const container = document.getElementById('quizContainer');
+            container.innerHTML = '';
+
+            quizQuestions.forEach((q, index) => {
+                const questionDiv = document.createElement('div');
+                questionDiv.className = 'mb-8';
+                questionDiv.innerHTML = `
+                    <h3 class="text-xl font-bold text-white mb-4">${index + 1}. ${q.question}</h3>
+                    <div class="space-y-2">
+                        ${q.options.map((opt, i) => `
+                            <div class="quiz-option" onclick="selectAnswer(${q.id}, ${i})" data-question="${q.id}" data-option="${i}">
+                                ${opt}
+                            </div>
+                        `).join('')}
+                    </div>
+                `;
+                container.appendChild(questionDiv);
+            });
+
+            const submitDiv = document.createElement('div');
+            submitDiv.className = 'text-center mt-12';
+            submitDiv.innerHTML = '<button onclick="submitQuiz()" class="btn btn-primary">Submit Quiz</button>';
+            container.appendChild(submitDiv);
+        }
+
+        function selectAnswer(questionId, optionIndex) {
+            if (quizSubmitted) return;
+
+            document.querySelectorAll(`[data-question="${questionId}"]`).forEach(opt => {
+                opt.classList.remove('selected');
+            });
+
+            event.currentTarget.classList.add('selected');
+            quizAnswers[questionId] = optionIndex;
+        }
+
+        function submitQuiz() {
+            if (Object.keys(quizAnswers).length < quizQuestions.length) {
+                alert('Please answer all questions before submitting.');
+                return;
+            }
+
+            quizSubmitted = true;
+            let correct = 0;
+
+            quizQuestions.forEach(q => {
+                const selectedOption = document.querySelector(`[data-question="${q.id}"][data-option="${quizAnswers[q.id]}"]`);
+                const correctOption = document.querySelector(`[data-question="${q.id}"][data-option="${q.correct}"]`);
+
+                if (quizAnswers[q.id] === q.correct) {
+                    correct++;
+                    selectedOption.classList.add('correct');
+                } else {
+                    selectedOption.classList.add('incorrect');
+                    correctOption.classList.add('correct');
+                }
+            });
+
+            const score = (correct / quizQuestions.length) * 100;
+            const passed = score === 100;
+
+            document.getElementById('quizResults').classList.remove('hidden');
+            document.getElementById('quizScore').textContent = `Score: ${correct}/${quizQuestions.length} (${score}%)`;
+            document.getElementById('quizScore').style.color = passed ? '#22c55e' : '#ef4444';
+
+            if (passed) {
+                document.getElementById('quizFeedback').textContent = 'Perfect! You now understand the reality of side income!';
+                document.getElementById('finishButton').classList.remove('hidden');
+
+                const userId = localStorage.getItem('userId') || 'demo';
+                localStorage.setItem(`lesson4_quiz_passed_${userId}`, 'true');
+            } else {
+                document.getElementById('quizFeedback').textContent = 'Not quite—review the incorrect answers and try again!';
+                document.getElementById('retryButton').classList.remove('hidden');
+            }
+
+            window.scrollTo({ top: document.getElementById('quizResults').offsetTop - 100, behavior: 'smooth' });
+        }
+
+        function retryQuiz() {
+            quizAnswers = {};
+            quizSubmitted = false;
+            document.getElementById('quizResults').classList.add('hidden');
+            document.getElementById('retryButton').classList.add('hidden');
+            renderQuiz();
+            window.scrollTo({ top: document.getElementById('quizContainer').offsetTop - 100, behavior: 'smooth' });
+        }
+
+        async function finishLesson() {
+            const userId = localStorage.getItem('userId') || 'demo';
+
+            localStorage.setItem(`path2_lesson4_completed_${userId}`, 'true');
+
+            const success = await completeLesson('path2_lesson4', 2, 4);
+
+            if (success) {
+                window.location.href = '/path2-lessons';
+            }
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            createParticles();
+            calculateReality();
+        });
+    </script>
+</body>
+</html>
