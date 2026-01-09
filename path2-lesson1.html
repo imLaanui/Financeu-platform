@@ -3,428 +3,85 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Where Your Money Is Actually Going - FinanceU</title>
+    <title>Your Money Story - Path 2 Lesson 1 - FinanceU</title>
     <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
     <link rel="stylesheet" href="styles.css">
-    <script src="https://unpkg.com/lucide@latest"></script>
     <style>
-        body.lesson-page {
+        body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
-            min-height: 100vh;
-            color: #1a202c;
-        }
-
-        body.lesson-page * {
-            box-sizing: border-box;
-        }
-
-        /* Fix logo accent color to match site branding */
-        body.lesson-page .logo-accent {
-            color: #2563eb;
+            background: #F9FAFB;
         }
 
         .lesson-container {
-            max-width: 1200px;
+            max-width: 900px;
             margin: 0 auto;
-            padding: 120px 20px 80px;
+            padding: 30px 20px 80px;
         }
 
-        /* Hero Section */
-        .hero {
+        /* Hero Header with Animation */
+        .lesson-header {
             text-align: center;
+            margin-bottom: 40px;
+            padding: 40px 25px;
+            background: linear-gradient(135deg, #0A1A2F 0%, #1a3a5c 100%);
+            border-radius: 20px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(10, 26, 47, 0.3);
+        }
+
+        .lesson-header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(0, 166, 118, 0.15) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .lesson-header h1 {
+            font-size: clamp(28px, 5vw, 42px);
             color: white;
-            margin-bottom: 60px;
-            animation: fadeInDown 0.8s ease;
-        }
-
-        .hero h1 {
-            font-size: clamp(36px, 6vw, 64px);
+            margin-bottom: 12px;
+            position: relative;
+            z-index: 1;
             font-weight: 900;
-            margin-bottom: 20px;
-            text-shadow: 0 4px 20px rgba(0,0,0,0.3);
         }
 
-        .hero-subtitle {
-            font-size: clamp(18px, 3vw, 24px);
-            opacity: 0.95;
-            margin-bottom: 10px;
+        .lesson-number {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 13px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            position: relative;
+            z-index: 1;
+            text-transform: uppercase;
+            letter-spacing: 2px;
         }
 
-        .hero-tagline {
-            font-size: 16px;
-            opacity: 0.8;
+        .lesson-tagline {
+            color: rgba(255, 255, 255, 0.85);
+            font-size: 18px;
+            position: relative;
+            z-index: 1;
             font-style: italic;
         }
 
-        /* Interactive Tracker Card */
-        .tracker-card {
-            background: white;
-            border-radius: 24px;
-            padding: 40px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-            margin-bottom: 40px;
-            animation: fadeInUp 0.8s ease 0.2s both;
-        }
-
-        .step-indicator {
-            display: flex;
-            justify-content: center;
-            gap: 12px;
-            margin-bottom: 40px;
-        }
-
-        .step-dot {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background: #e2e8f0;
-            transition: all 0.3s ease;
-        }
-
-        .step-dot.active {
-            background: #2563eb;
-            width: 40px;
-            border-radius: 6px;
-        }
-
-        .step-dot.completed {
-            background: #10b981;
-        }
-
-        /* Step Content */
-        .step-content {
+        /* Screen System */
+        .lesson-screen {
             display: none;
         }
 
-        .step-content.active {
+        .lesson-screen.active {
             display: block;
-            animation: slideIn 0.5s ease;
-        }
-
-        .step-title {
-            font-size: 28px;
-            font-weight: 800;
-            margin-bottom: 16px;
-            color: #1a202c;
-        }
-
-        .step-description {
-            font-size: 16px;
-            color: #64748b;
-            margin-bottom: 32px;
-            line-height: 1.6;
-        }
-
-        /* Income Input */
-        .income-input-group {
-            background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
-            padding: 30px;
-            border-radius: 16px;
-            margin-bottom: 24px;
-        }
-
-        .income-label {
-            font-size: 18px;
-            font-weight: 700;
-            color: #065f46;
-            margin-bottom: 12px;
-            display: block;
-        }
-
-        .currency-input-wrapper {
-            position: relative;
-            display: inline-block;
-            width: 100%;
-        }
-
-        .currency-symbol {
-            position: absolute;
-            left: 20px;
-            top: 50%;
-            transform: translateY(-50%);
-            font-size: 32px;
-            font-weight: 700;
-            color: #059669;
-        }
-
-        .income-input {
-            width: 100%;
-            font-size: 48px;
-            font-weight: 800;
-            padding: 20px 20px 20px 60px;
-            border: 3px solid #10b981;
-            border-radius: 12px;
-            background: white;
-            color: #065f46;
-            transition: all 0.3s ease;
-        }
-
-        .income-input:focus {
-            outline: none;
-            border-color: #059669;
-            box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.1);
-        }
-
-        /* Expense Categories */
-        .expense-categories {
-            display: grid;
-            gap: 16px;
-            margin-bottom: 32px;
-        }
-
-        .expense-item {
-            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
-            padding: 20px;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            border: 2px solid transparent;
-        }
-
-        .expense-item:hover {
-            transform: translateX(8px);
-            border-color: #f59e0b;
-            box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
-        }
-
-        .expense-icon {
-            font-size: 32px;
-            min-width: 50px;
-            text-align: center;
-        }
-
-        .expense-details {
-            flex: 1;
-        }
-
-        .expense-name {
-            font-size: 16px;
-            font-weight: 700;
-            color: #92400e;
-            margin-bottom: 4px;
-        }
-
-        .expense-hint {
-            font-size: 13px;
-            color: #78350f;
-            opacity: 0.8;
-        }
-
-        .expense-input {
-            width: 120px;
-            font-size: 20px;
-            font-weight: 700;
-            padding: 12px 16px 12px 32px;
-            border: 2px solid #f59e0b;
-            border-radius: 8px;
-            background: white;
-            color: #92400e;
-            text-align: right;
-        }
-
-        .expense-input-wrapper {
-            position: relative;
-        }
-
-        .expense-input-wrapper::before {
-            content: '$';
-            position: absolute;
-            left: 16px;
-            top: 50%;
-            transform: translateY(-50%);
-            font-size: 20px;
-            font-weight: 700;
-            color: #f59e0b;
-        }
-
-        /* Results Dashboard */
-        .results-dashboard {
-            display: none;
-            animation: fadeIn 0.8s ease;
-        }
-
-        .results-dashboard.visible {
-            display: block;
-        }
-
-        .money-flow-viz {
-            background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
-            padding: 40px;
-            border-radius: 16px;
-            margin-bottom: 32px;
-            color: white;
-        }
-
-        .flow-header {
-            text-align: center;
-            margin-bottom: 32px;
-        }
-
-        .flow-title {
-            font-size: 24px;
-            font-weight: 800;
-            margin-bottom: 8px;
-        }
-
-        .flow-bars {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-
-        .flow-bar-item {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-        }
-
-        .flow-label {
-            min-width: 120px;
-            font-weight: 600;
-            font-size: 14px;
-        }
-
-        .flow-bar-track {
-            flex: 1;
-            height: 40px;
-            background: rgba(255,255,255,0.1);
-            border-radius: 20px;
-            overflow: hidden;
-            position: relative;
-        }
-
-        .flow-bar-fill {
-            height: 100%;
-            background: linear-gradient(90deg, #10b981 0%, #059669 100%);
-            border-radius: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: flex-end;
-            padding-right: 16px;
-            font-weight: 700;
-            transition: width 1s cubic-bezier(0.4, 0, 0.2, 1);
-            width: 0;
-        }
-
-        .flow-bar-fill.spending {
-            background: linear-gradient(90deg, #ef4444 0%, #dc2626 100%);
-        }
-
-        .flow-amount {
-            min-width: 100px;
-            text-align: right;
-            font-weight: 700;
-            font-size: 18px;
-        }
-
-        /* Insights Cards */
-        .insights-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
-            margin-bottom: 32px;
-        }
-
-        .insight-card {
-            padding: 24px;
-            border-radius: 16px;
-            border: 2px solid;
-            animation: popIn 0.5s ease both;
-        }
-
-        .insight-card.positive {
-            background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
-            border-color: #10b981;
-        }
-
-        .insight-card.warning {
-            background: linear-gradient(135deg, #fed7aa 0%, #fdba74 100%);
-            border-color: #f97316;
-        }
-
-        .insight-card.danger {
-            background: linear-gradient(135deg, #fecaca 0%, #fca5a5 100%);
-            border-color: #ef4444;
-        }
-
-        .insight-icon {
-            font-size: 36px;
-            margin-bottom: 12px;
-        }
-
-        .insight-title {
-            font-size: 18px;
-            font-weight: 800;
-            margin-bottom: 8px;
-        }
-
-        .insight-text {
-            font-size: 14px;
-            line-height: 1.6;
-            opacity: 0.9;
-        }
-
-        /* Buttons */
-        .btn {
-            padding: 16px 32px;
-            font-size: 18px;
-            font-weight: 700;
-            border: none;
-            border-radius: 12px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: inline-block;
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
-            color: white;
-            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.4);
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(37, 99, 235, 0.5);
-        }
-
-        .btn-primary:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-            transform: none;
-        }
-
-        .btn-secondary {
-            background: white;
-            color: #2563eb;
-            border: 2px solid #2563eb;
-        }
-
-        .btn-secondary:hover {
-            background: #2563eb;
-            color: white;
-        }
-
-        .button-group {
-            display: flex;
-            gap: 16px;
-            justify-content: center;
-            margin-top: 32px;
-        }
-
-        /* Animations */
-        @keyframes fadeInDown {
-            from {
-                opacity: 0;
-                transform: translateY(-30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            animation: fadeInUp 0.6s ease;
         }
 
         @keyframes fadeInUp {
@@ -438,20 +95,278 @@
             }
         }
 
-        @keyframes slideIn {
-            from {
-                opacity: 0;
-                transform: translateX(-20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
+        .screen-progress {
+            text-align: center;
+            margin-bottom: 25px;
+            padding: 12px 20px;
+            background: linear-gradient(135deg, #E0F2FE 0%, #BAE6FD 100%);
+            border-radius: 12px;
+            font-weight: 700;
+            color: #0284C7;
+            font-size: 14px;
+            letter-spacing: 0.5px;
+        }
+
+        /* Content Cards */
+        .content-card {
+            background: white;
+            padding: 35px;
+            border-radius: 16px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+        }
+
+        .content-card:hover {
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+            transform: translateY(-2px);
+        }
+
+        .content-card h2 {
+            color: #0A1A2F;
+            font-size: 28px;
+            margin-bottom: 20px;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .content-card p {
+            line-height: 1.8;
+            color: #4B5563;
+            font-size: 16px;
+            margin-bottom: 15px;
+        }
+
+        /* Story Cards - Interactive Journey */
+        .story-choice-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .story-choice {
+            background: linear-gradient(135deg, #F0F9FF 0%, #E0F2FE 100%);
+            border: 3px solid #BAE6FD;
+            border-radius: 16px;
+            padding: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .story-choice:hover {
+            transform: translateY(-5px) scale(1.02);
+            border-color: #00A676;
+            box-shadow: 0 10px 30px rgba(0, 166, 118, 0.2);
+        }
+
+        .story-choice.selected {
+            background: linear-gradient(135deg, #D1FAE5 0%, #A7F3D0 100%);
+            border-color: #00A676;
+            box-shadow: 0 10px 30px rgba(0, 166, 118, 0.3);
+        }
+
+        .story-icon {
+            font-size: 56px;
+            margin-bottom: 15px;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .story-choice h3 {
+            font-size: 20px;
+            font-weight: 700;
+            color: #0A1A2F;
+            margin-bottom: 10px;
+        }
+
+        .story-choice p {
+            font-size: 14px;
+            color: #6B7280;
+            margin: 0;
+        }
+
+        /* Interactive Budget Builder */
+        .budget-builder {
+            background: linear-gradient(135deg, #FEF3C7 0%, #FDE68A 100%);
+            border-radius: 16px;
+            padding: 30px;
+            margin: 25px 0;
+            border: 3px solid #F59E0B;
+        }
+
+        .budget-builder h3 {
+            color: #92400E;
+            font-size: 24px;
+            margin-bottom: 20px;
+            font-weight: 800;
+            text-align: center;
+        }
+
+        .budget-input-row {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .budget-input-row:hover {
+            transform: translateX(5px);
+            box-shadow: 0 4px 12px rgba(245, 158, 11, 0.2);
+        }
+
+        .budget-emoji {
+            font-size: 36px;
+            min-width: 50px;
+            text-align: center;
+        }
+
+        .budget-label {
+            flex: 1;
+        }
+
+        .budget-label-title {
+            font-weight: 700;
+            color: #1F2937;
+            font-size: 16px;
+            margin-bottom: 4px;
+        }
+
+        .budget-label-hint {
+            font-size: 13px;
+            color: #9CA3AF;
+        }
+
+        .budget-input-wrapper {
+            position: relative;
+            width: 140px;
+        }
+
+        .budget-input-wrapper::before {
+            content: '$';
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 18px;
+            font-weight: 700;
+            color: #F59E0B;
+        }
+
+        .budget-input {
+            width: 100%;
+            padding: 12px 15px 12px 35px;
+            border: 2px solid #FCD34D;
+            border-radius: 10px;
+            font-size: 18px;
+            font-weight: 700;
+            text-align: right;
+            background: #FFFBEB;
+            color: #92400E;
+            transition: all 0.2s ease;
+        }
+
+        .budget-input:focus {
+            outline: none;
+            border-color: #F59E0B;
+            box-shadow: 0 0 0 4px rgba(245, 158, 11, 0.1);
+        }
+
+        /* Results Visualization */
+        .results-container {
+            display: none;
+            animation: fadeIn 0.8s ease;
+        }
+
+        .results-container.visible {
+            display: block;
         }
 
         @keyframes fadeIn {
             from { opacity: 0; }
             to { opacity: 1; }
+        }
+
+        .money-meter {
+            background: linear-gradient(135deg, #1E293B 0%, #334155 100%);
+            border-radius: 16px;
+            padding: 35px;
+            margin: 25px 0;
+            color: white;
+        }
+
+        .meter-title {
+            text-align: center;
+            font-size: 24px;
+            font-weight: 800;
+            margin-bottom: 30px;
+        }
+
+        .meter-bar-container {
+            margin-bottom: 20px;
+        }
+
+        .meter-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .meter-bar {
+            height: 45px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 25px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .meter-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #10B981 0%, #059669 100%);
+            border-radius: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding-right: 20px;
+            font-weight: 700;
+            font-size: 16px;
+            transition: width 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+            width: 0;
+        }
+
+        .meter-fill.expense {
+            background: linear-gradient(90deg, #EF4444 0%, #DC2626 100%);
+        }
+
+        /* Insight Cards */
+        .insights-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .insight-card {
+            padding: 25px;
+            border-radius: 16px;
+            border: 3px solid;
+            animation: popIn 0.6s ease both;
+            position: relative;
+            overflow: hidden;
         }
 
         @keyframes popIn {
@@ -465,108 +380,192 @@
             }
         }
 
-        /* Celebration Effect */
-        .celebration {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 1000;
+        .insight-card.positive {
+            background: linear-gradient(135deg, #D1FAE5 0%, #A7F3D0 100%);
+            border-color: #10B981;
         }
 
-        /* Responsive */
-        @media (max-width: 768px) {
-            .lesson-container {
-                padding: 100px 16px 60px;
-            }
-
-            .tracker-card {
-                padding: 24px;
-            }
-
-            .income-input {
-                font-size: 36px;
-            }
-
-            .button-group {
-                flex-direction: column;
-            }
-
-            .btn {
-                width: 100%;
-            }
+        .insight-card.warning {
+            background: linear-gradient(135deg, #FED7AA 0%, #FDBA74 100%);
+            border-color: #F97316;
         }
 
-        /* Quiz Section */
-        .quiz-section {
-            background: white;
-            padding: 40px;
-            border-radius: 24px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        .insight-card.danger {
+            background: linear-gradient(135deg, #FECACA 0%, #FCA5A5 100%);
+            border-color: #EF4444;
+        }
+
+        .insight-icon {
+            font-size: 40px;
+            margin-bottom: 12px;
+        }
+
+        .insight-title {
+            font-size: 18px;
+            font-weight: 800;
+            margin-bottom: 10px;
+            color: #1F2937;
+        }
+
+        .insight-text {
+            font-size: 14px;
+            line-height: 1.6;
+            color: #4B5563;
+        }
+
+        /* Navigation Buttons */
+        .screen-navigation {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
             margin-top: 40px;
-            display: none;
+            padding-top: 25px;
+            border-top: 2px solid #E5E7EB;
         }
 
-        .quiz-section.visible {
-            display: block;
-            animation: fadeInUp 0.8s ease;
+        .btn-nav {
+            padding: 14px 28px;
+            background: #0A1A2F;
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-nav:hover {
+            background: #00A676;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 166, 118, 0.3);
+        }
+
+        .btn-nav:disabled {
+            background: #D1D5DB;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .btn-nav.btn-prev {
+            background: #6B7280;
+        }
+
+        .btn-nav.btn-prev:hover {
+            background: #4B5563;
+        }
+
+        .nav-spacer {
+            width: 140px;
+        }
+
+        /* Quiz Styles */
+        .quiz-container {
+            background: linear-gradient(135deg, #EDE9FE 0%, #DDD6FE 100%);
+            border: 3px solid #A78BFA;
+            border-radius: 16px;
+            padding: 35px;
+            margin: 30px 0;
+        }
+
+        .quiz-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .quiz-header h2 {
+            color: #5B21B6;
+            font-size: 32px;
+            margin-bottom: 12px;
+            font-weight: 900;
+        }
+
+        .quiz-header p {
+            color: #6B7280;
+            font-size: 16px;
         }
 
         .question-card {
-            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
-            padding: 24px;
-            border-radius: 16px;
-            margin-bottom: 24px;
-            border: 2px solid #e2e8f0;
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
         }
 
         .question-text {
             font-size: 18px;
             font-weight: 700;
-            color: #1e293b;
-            margin-bottom: 20px;
+            color: #1F2937;
+            margin-bottom: 18px;
         }
 
         .answer-option {
-            background: white;
+            background: #F9FAFB;
             padding: 16px 20px;
-            border-radius: 12px;
+            border: 2px solid #E5E7EB;
+            border-radius: 10px;
             margin-bottom: 12px;
             cursor: pointer;
-            transition: all 0.3s ease;
-            border: 2px solid #e2e8f0;
+            transition: all 0.2s ease;
             display: flex;
             align-items: center;
             gap: 12px;
         }
 
         .answer-option:hover {
-            border-color: #2563eb;
-            transform: translateX(4px);
+            border-color: #A78BFA;
+            background: #F5F3FF;
+            transform: translateX(5px);
         }
 
         .answer-option.selected {
-            border-color: #2563eb;
-            background: linear-gradient(135deg, #dbeafe 0%, #e0f2fe 100%);
+            border-color: #8B5CF6;
+            background: #EDE9FE;
         }
 
         .answer-option.correct {
-            border-color: #10b981;
-            background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
+            border-color: #10B981;
+            background: #D1FAE5;
         }
 
         .answer-option.incorrect {
-            border-color: #ef4444;
-            background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
+            border-color: #EF4444;
+            background: #FEE2E2;
+        }
+
+        .btn-submit-quiz {
+            display: block;
+            width: 100%;
+            max-width: 350px;
+            margin: 25px auto;
+            padding: 16px;
+            background: #8B5CF6;
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 18px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-submit-quiz:hover {
+            background: #7C3AED;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(139, 92, 246, 0.4);
         }
 
         .quiz-result {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
             text-align: center;
-            padding: 32px;
-            border-radius: 16px;
-            margin-top: 24px;
+            margin-top: 25px;
             display: none;
         }
 
@@ -575,27 +574,119 @@
             animation: popIn 0.5s ease;
         }
 
-        .quiz-result.passed {
-            background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
-            border: 2px solid #10b981;
+        .quiz-result.pass {
+            border: 3px solid #10B981;
         }
 
-        .quiz-result.failed {
-            background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
-            border: 2px solid #ef4444;
+        .quiz-result.fail {
+            border: 3px solid #EF4444;
         }
 
-        .finish-btn {
-            display: none;
-            margin: 32px auto 0;
+        .result-icon {
+            font-size: 64px;
+            margin-bottom: 15px;
         }
 
-        .finish-btn.visible {
+        .result-text {
+            font-size: 28px;
+            font-weight: 800;
+            margin-bottom: 10px;
+        }
+
+        .result-score {
+            font-size: 18px;
+            color: #6B7280;
+            margin-bottom: 20px;
+        }
+
+        .btn-finish {
+            display: block;
+            width: 100%;
+            max-width: 400px;
+            margin: 35px auto;
+            padding: 18px;
+            background: linear-gradient(135deg, #00A676 0%, #10B981 100%);
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 12px;
+            font-size: 20px;
+            font-weight: 700;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 166, 118, 0.3);
+        }
+
+        .btn-finish:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 166, 118, 0.4);
+        }
+
+        .btn-finish:disabled {
+            background: #9CA3AF;
+            cursor: not-allowed;
+            opacity: 0.6;
+            transform: none;
+        }
+
+        .back-link {
             display: inline-block;
+            margin-bottom: 20px;
+            color: #0A1A2F;
+            text-decoration: none;
+            font-weight: 700;
+            transition: all 0.2s ease;
+        }
+
+        .back-link:hover {
+            color: #00A676;
+            transform: translateX(-3px);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .lesson-container {
+                padding: 20px 16px 60px;
+            }
+
+            .content-card {
+                padding: 25px 20px;
+            }
+
+            .story-choice-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .insights-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .budget-input-row {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .budget-input-wrapper {
+                width: 100%;
+            }
+
+            .screen-navigation {
+                flex-direction: column;
+            }
+
+            .nav-spacer {
+                display: none;
+            }
+
+            .btn-nav {
+                width: 100%;
+                justify-content: center;
+            }
         }
     </style>
 </head>
-<body class="lesson-page">
+<body class="homepage-dark">
     <!-- Navigation -->
     <nav class="navbar">
         <div class="container">
@@ -611,225 +702,405 @@
     </nav>
 
     <div class="lesson-container">
-        <!-- Hero Section -->
-        <div class="hero">
-            <h1 class="flex items-center justify-center gap-3"><i data-lucide="banknote" class="w-10 h-10 inline-block"></i> Where Your Money Is Actually Going</h1>
-            <p class="hero-subtitle">Let's find out together — no judgment, just awareness</p>
-            <p class="hero-tagline">Most people are completely wrong about this. Let's discover the truth.</p>
+        <a href="/path2-lessons" class="back-link">← Back to Path 2 Lessons</a>
+
+        <!-- Lesson Header -->
+        <div class="lesson-header">
+            <div class="lesson-number">PATH 2: BUDGETING & SAVING • LESSON 1</div>
+            <h1>📖 Your Money Story</h1>
+            <p class="lesson-tagline">Discover where your money goes and write a better ending</p>
         </div>
 
-        <!-- Interactive Tracker -->
-        <div class="tracker-card">
-            <!-- Step Indicator -->
-            <div class="step-indicator">
-                <div class="step-dot active" data-step="1"></div>
-                <div class="step-dot" data-step="2"></div>
-                <div class="step-dot" data-step="3"></div>
+        <!-- Screen 1: The Wake Up Call -->
+        <div class="lesson-screen active" data-screen="1">
+            <div class="screen-progress">Chapter 1 of 7 • The Wake Up Call</div>
+
+            <div class="content-card">
+                <h2>💭 Let's Start With a Question</h2>
+                <p>You're at the coffee shop. The barista says "$5.25" and you tap your card without thinking. It's just coffee, right?</p>
+                <p>But here's the thing: if you do this every workday, that's <strong>$1,365 per year</strong>. Almost enough for a vacation. Or two months of groceries. Or...</p>
+                <p style="font-size: 20px; font-weight: 700; color: #0A1A2F; margin-top: 25px;">When was the last time you knew EXACTLY where your money went?</p>
             </div>
 
-            <!-- Step 1: Income -->
-            <div class="step-content active" data-step="1">
-                <h2 class="step-title flex items-center gap-2"><i data-lucide="coins" class="w-6 h-6 inline-block"></i> First, how much money comes in?</h2>
-                <p class="step-description">Enter your total monthly income (after taxes). Include everything — your job, side hustles, allowance, whatever you get.</p>
-
-                <div class="income-input-group">
-                    <label class="income-label">Monthly Income</label>
-                    <div class="currency-input-wrapper">
-                        <span class="currency-symbol">$</span>
-                        <input type="number" class="income-input" id="monthlyIncome" placeholder="0" min="0" step="100">
+            <div class="content-card">
+                <h2>🎯 What You'll Learn Today</h2>
+                <div class="story-choice-grid">
+                    <div class="story-choice" style="pointer-events: none;">
+                        <div class="story-icon">🔍</div>
+                        <h3>Track Reality</h3>
+                        <p>See where every dollar actually goes</p>
                     </div>
-                </div>
-
-                <div class="button-group">
-                    <button class="btn btn-primary" onclick="goToStep(2)" id="incomeNextBtn" disabled>Next: Track Your Spending →</button>
-                </div>
-            </div>
-
-            <!-- Step 2: Expenses -->
-            <div class="step-content" data-step="2">
-                <h2 class="step-title flex items-center gap-2"><i data-lucide="shopping-cart" class="w-6 h-6 inline-block"></i> Now, where does it actually go?</h2>
-                <p class="step-description">Estimate your monthly spending in each category. Be honest — this is just for you. No judgment.</p>
-
-                <div class="expense-categories" id="expenseCategories">
-                    <div class="expense-item">
-                        <div class="expense-icon">
-                            <i data-lucide="home" class="w-8 h-8"></i>
-                        </div>
-                        <div class="expense-details">
-                            <div class="expense-name">Rent/Housing</div>
-                            <div class="expense-hint">Rent, mortgage, utilities</div>
-                        </div>
-                        <div class="expense-input-wrapper">
-                            <input type="number" class="expense-input" data-category="housing" placeholder="0" min="0">
-                        </div>
+                    <div class="story-choice" style="pointer-events: none;">
+                        <div class="story-icon">💡</div>
+                        <h3>Find Patterns</h3>
+                        <p>Discover your money habits</p>
                     </div>
-
-                    <div class="expense-item">
-                        <div class="expense-icon">
-                            <i data-lucide="utensils" class="w-8 h-8"></i>
-                        </div>
-                        <div class="expense-details">
-                            <div class="expense-name">Food & Dining</div>
-                            <div class="expense-hint">Groceries, restaurants, coffee</div>
-                        </div>
-                        <div class="expense-input-wrapper">
-                            <input type="number" class="expense-input" data-category="food" placeholder="0" min="0">
-                        </div>
+                    <div class="story-choice" style="pointer-events: none;">
+                        <div class="story-icon">🎨</div>
+                        <h3>Design Change</h3>
+                        <p>Build your first simple budget</p>
                     </div>
-
-                    <div class="expense-item">
-                        <div class="expense-icon">
-                            <i data-lucide="car" class="w-8 h-8"></i>
-                        </div>
-                        <div class="expense-details">
-                            <div class="expense-name">Transportation</div>
-                            <div class="expense-hint">Car, gas, insurance, Uber</div>
-                        </div>
-                        <div class="expense-input-wrapper">
-                            <input type="number" class="expense-input" data-category="transport" placeholder="0" min="0">
-                        </div>
-                    </div>
-
-                    <div class="expense-item">
-                        <div class="expense-icon">
-                            <i data-lucide="smartphone" class="w-8 h-8"></i>
-                        </div>
-                        <div class="expense-details">
-                            <div class="expense-name">Phone & Internet</div>
-                            <div class="expense-hint">Phone bill, internet, streaming</div>
-                        </div>
-                        <div class="expense-input-wrapper">
-                            <input type="number" class="expense-input" data-category="tech" placeholder="0" min="0">
-                        </div>
-                    </div>
-
-                    <div class="expense-item">
-                        <div class="expense-icon">
-                            <i data-lucide="gamepad-2" class="w-8 h-8"></i>
-                        </div>
-                        <div class="expense-details">
-                            <div class="expense-name">Entertainment</div>
-                            <div class="expense-hint">Movies, games, hobbies, fun</div>
-                        </div>
-                        <div class="expense-input-wrapper">
-                            <input type="number" class="expense-input" data-category="entertainment" placeholder="0" min="0">
-                        </div>
-                    </div>
-
-                    <div class="expense-item">
-                        <div class="expense-icon">
-                            <i data-lucide="shopping-bag" class="w-8 h-8"></i>
-                        </div>
-                        <div class="expense-details">
-                            <div class="expense-name">Shopping</div>
-                            <div class="expense-hint">Clothes, Amazon, random stuff</div>
-                        </div>
-                        <div class="expense-input-wrapper">
-                            <input type="number" class="expense-input" data-category="shopping" placeholder="0" min="0">
-                        </div>
-                    </div>
-
-                    <div class="expense-item">
-                        <div class="expense-icon">
-                            <i data-lucide="heart-pulse" class="w-8 h-8"></i>
-                        </div>
-                        <div class="expense-details">
-                            <div class="expense-name">Health & Fitness</div>
-                            <div class="expense-hint">Gym, doctors, medications</div>
-                        </div>
-                        <div class="expense-input-wrapper">
-                            <input type="number" class="expense-input" data-category="health" placeholder="0" min="0">
-                        </div>
-                    </div>
-
-                    <div class="expense-item">
-                        <div class="expense-icon">
-                            <i data-lucide="circle-dot" class="w-8 h-8"></i>
-                        </div>
-                        <div class="expense-details">
-                            <div class="expense-name">Other Expenses</div>
-                            <div class="expense-hint">Everything else you spend on</div>
-                        </div>
-                        <div class="expense-input-wrapper">
-                            <input type="number" class="expense-input" data-category="other" placeholder="0" min="0">
-                        </div>
-                    </div>
-                </div>
-
-                <div class="button-group">
-                    <button class="btn btn-secondary" onclick="goToStep(1)">← Back</button>
-                    <button class="btn btn-primary" onclick="calculateResults()">See Where It All Goes →</button>
                 </div>
             </div>
 
-            <!-- Step 3: Results -->
-            <div class="step-content" data-step="3">
-                <h2 class="step-title flex items-center gap-2"><i data-lucide="bar-chart-3" class="w-6 h-6 inline-block"></i> Here's Your Money Reality</h2>
-                <p class="step-description">This is where your money is actually going. Time to face the truth.</p>
-
-                <div class="results-dashboard">
-                    <div class="money-flow-viz">
-                        <div class="flow-header">
-                            <div class="flow-title">Your Monthly Money Flow</div>
-                        </div>
-                        <div class="flow-bars">
-                            <div class="flow-bar-item">
-                                <div class="flow-label">Money In</div>
-                                <div class="flow-bar-track">
-                                    <div class="flow-bar-fill" id="incomeBar"></div>
-                                </div>
-                                <div class="flow-amount" id="incomeAmount">$0</div>
-                            </div>
-                            <div class="flow-bar-item">
-                                <div class="flow-label">Money Out</div>
-                                <div class="flow-bar-track">
-                                    <div class="flow-bar-fill spending" id="expenseBar"></div>
-                                </div>
-                                <div class="flow-amount" id="expenseAmount">$0</div>
-                            </div>
-                            <div class="flow-bar-item">
-                                <div class="flow-label">Left Over</div>
-                                <div class="flow-bar-track">
-                                    <div class="flow-bar-fill" id="leftoverBar"></div>
-                                </div>
-                                <div class="flow-amount" id="leftoverAmount">$0</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="insights-grid" id="insightsGrid">
-                        <!-- Dynamic insights will be inserted here -->
-                    </div>
-
-                    <div class="button-group">
-                        <button class="btn btn-secondary" onclick="goToStep(2)">← Adjust Numbers</button>
-                        <button class="btn btn-primary" onclick="showQuiz()">Continue to Quiz →</button>
-                    </div>
-                </div>
+            <div class="screen-navigation">
+                <div class="nav-spacer"></div>
+                <button class="btn-nav" onclick="nextScreen()">Begin Your Story →</button>
             </div>
         </div>
 
-        <!-- Quiz Section -->
-        <div class="quiz-section" id="quizSection">
-            <h2 class="step-title">✅ Quick Knowledge Check</h2>
-            <p class="step-description">Answer these questions to complete the lesson. You need 100% to pass!</p>
+        <!-- Screen 2: Choose Your Character -->
+        <div class="lesson-screen" data-screen="2">
+            <div class="screen-progress">Chapter 2 of 7 • Your Money Personality</div>
 
-            <div id="quizQuestions">
-                <!-- Quiz questions will be rendered here -->
+            <div class="content-card">
+                <h2>🤔 Which One Are You?</h2>
+                <p>Everyone has a money story. Which character sounds most like you?</p>
+
+                <div class="story-choice-grid">
+                    <div class="story-choice" onclick="selectCharacter(this, 'spender')">
+                        <div class="story-icon">🛍️</div>
+                        <h3>The Spender</h3>
+                        <p>"I work hard, I deserve to enjoy it! Money is for spending, not hoarding."</p>
+                    </div>
+                    <div class="story-choice" onclick="selectCharacter(this, 'saver')">
+                        <div class="story-icon">🏦</div>
+                        <h3>The Saver</h3>
+                        <p>"Every penny counts! I track everything and hate wasting money."</p>
+                    </div>
+                    <div class="story-choice" onclick="selectCharacter(this, 'avoider')">
+                        <div class="story-icon">🙈</div>
+                        <h3>The Avoider</h3>
+                        <p>"I don't want to know. Checking my account gives me anxiety."</p>
+                    </div>
+                    <div class="story-choice" onclick="selectCharacter(this, 'confused')">
+                        <div class="story-icon">❓</div>
+                        <h3>The Confused</h3>
+                        <p>"Where did it all go? I had money last week, I swear!"</p>
+                    </div>
+                </div>
+
+                <div id="characterFeedback" style="margin-top: 25px; padding: 20px; background: #F0F9FF; border-radius: 12px; display: none;">
+                    <p style="font-weight: 700; color: #0284C7; margin-bottom: 10px;">Great choice! Here's the truth:</p>
+                    <p id="characterMessage" style="color: #4B5563;"></p>
+                </div>
             </div>
 
-            <button class="btn btn-primary" id="submitQuiz" style="display: none;">Submit Answers</button>
+            <div class="screen-navigation">
+                <button class="btn-nav btn-prev" onclick="previousScreen()">← Previous</button>
+                <button class="btn-nav" id="continueBtn2" onclick="nextScreen()" disabled>Continue →</button>
+            </div>
+        </div>
 
-            <div class="quiz-result" id="quizResult">
-                <!-- Result will be shown here -->
+        <!-- Screen 3: The Reality Check -->
+        <div class="lesson-screen" data-screen="3">
+            <div class="screen-progress">Chapter 3 of 7 • The Numbers Don't Lie</div>
+
+            <div class="content-card">
+                <h2>📊 Here's What Most People Think</h2>
+                <p>Studies show people are terrible at estimating their own spending:</p>
+                <div style="background: linear-gradient(135deg, #FEE2E2 0%, #FECACA 100%); padding: 20px; border-radius: 12px; margin: 20px 0; border-left: 4px solid #EF4444;">
+                    <p style="font-size: 18px; font-weight: 700; color: #991B1B; margin-bottom: 10px;">The Average Person:</p>
+                    <p style="color: #7F1D1D;">• Underestimates dining out by <strong>40%</strong></p>
+                    <p style="color: #7F1D1D;">• Forgets about subscriptions worth <strong>$200/month</strong></p>
+                    <p style="color: #7F1D1D;">• Has <strong>$300-500</strong> in "mystery spending" they can't explain</p>
+                </div>
             </div>
 
-            <button class="btn btn-primary finish-btn" id="finishBtn" onclick="finishLesson()">Complete Lesson →</button>
+            <div class="content-card">
+                <h2>🎯 Let's Find YOUR Reality</h2>
+                <p>Don't worry - this is just for you. No judgment, no shame. Just truth.</p>
+                <p style="font-weight: 700; color: #00A676; font-size: 18px;">Ready to build your first budget tracker?</p>
+            </div>
+
+            <div class="screen-navigation">
+                <button class="btn-nav btn-prev" onclick="previousScreen()">← Previous</button>
+                <button class="btn-nav" onclick="nextScreen()">I'm Ready →</button>
+            </div>
+        </div>
+
+        <!-- Screen 4: Build Your Budget -->
+        <div class="lesson-screen" data-screen="4">
+            <div class="screen-progress">Chapter 4 of 7 • Track Your Money</div>
+
+            <div class="content-card">
+                <h2>💰 Step 1: How Much Comes In?</h2>
+                <p>Start with your monthly take-home pay (after taxes). Include everything - job, side gigs, allowance.</p>
+
+                <div style="background: linear-gradient(135deg, #D1FAE5 0%, #A7F3D0 100%); padding: 25px; border-radius: 12px; margin: 20px 0;">
+                    <label style="display: block; font-weight: 700; color: #065F46; margin-bottom: 12px; font-size: 18px;">Your Monthly Income</label>
+                    <div style="position: relative;">
+                        <span style="position: absolute; left: 20px; top: 50%; transform: translateY(-50%); font-size: 32px; font-weight: 700; color: #059669;">$</span>
+                        <input type="number" id="monthlyIncome" placeholder="0" min="0" step="100"
+                            style="width: 100%; padding: 20px 20px 20px 60px; border: 3px solid #10B981; border-radius: 12px; font-size: 36px; font-weight: 800; color: #065F46; background: white;"
+                            oninput="enableNext()">
+                    </div>
+                </div>
+            </div>
+
+            <div class="content-card">
+                <h2>💸 Step 2: Where Does It Go?</h2>
+                <p>Now the fun part. Enter your <strong>monthly</strong> spending in each category. Be honest!</p>
+
+                <div class="budget-builder">
+                    <h3>Your Monthly Expenses</h3>
+
+                    <div class="budget-input-row">
+                        <div class="budget-emoji">🏠</div>
+                        <div class="budget-label">
+                            <div class="budget-label-title">Housing</div>
+                            <div class="budget-label-hint">Rent, mortgage, utilities</div>
+                        </div>
+                        <div class="budget-input-wrapper">
+                            <input type="number" class="budget-input expense-input" data-category="housing" placeholder="0" min="0" oninput="calculateTotal()">
+                        </div>
+                    </div>
+
+                    <div class="budget-input-row">
+                        <div class="budget-emoji">🍕</div>
+                        <div class="budget-label">
+                            <div class="budget-label-title">Food & Dining</div>
+                            <div class="budget-label-hint">Groceries, restaurants, takeout</div>
+                        </div>
+                        <div class="budget-input-wrapper">
+                            <input type="number" class="budget-input expense-input" data-category="food" placeholder="0" min="0" oninput="calculateTotal()">
+                        </div>
+                    </div>
+
+                    <div class="budget-input-row">
+                        <div class="budget-emoji">🚗</div>
+                        <div class="budget-label">
+                            <div class="budget-label-title">Transportation</div>
+                            <div class="budget-label-hint">Car, gas, insurance, Uber</div>
+                        </div>
+                        <div class="budget-input-wrapper">
+                            <input type="number" class="budget-input expense-input" data-category="transport" placeholder="0" min="0" oninput="calculateTotal()">
+                        </div>
+                    </div>
+
+                    <div class="budget-input-row">
+                        <div class="budget-emoji">📱</div>
+                        <div class="budget-label">
+                            <div class="budget-label-title">Phone & Internet</div>
+                            <div class="budget-label-hint">Phone bill, internet, streaming</div>
+                        </div>
+                        <div class="budget-input-wrapper">
+                            <input type="number" class="budget-input expense-input" data-category="tech" placeholder="0" min="0" oninput="calculateTotal()">
+                        </div>
+                    </div>
+
+                    <div class="budget-input-row">
+                        <div class="budget-emoji">🎮</div>
+                        <div class="budget-label">
+                            <div class="budget-label-title">Entertainment</div>
+                            <div class="budget-label-hint">Netflix, games, hobbies</div>
+                        </div>
+                        <div class="budget-input-wrapper">
+                            <input type="number" class="budget-input expense-input" data-category="entertainment" placeholder="0" min="0" oninput="calculateTotal()">
+                        </div>
+                    </div>
+
+                    <div class="budget-input-row">
+                        <div class="budget-emoji">🛒</div>
+                        <div class="budget-label">
+                            <div class="budget-label-title">Shopping</div>
+                            <div class="budget-label-hint">Clothes, Amazon, random stuff</div>
+                        </div>
+                        <div class="budget-input-wrapper">
+                            <input type="number" class="budget-input expense-input" data-category="shopping" placeholder="0" min="0" oninput="calculateTotal()">
+                        </div>
+                    </div>
+
+                    <div class="budget-input-row">
+                        <div class="budget-emoji">💊</div>
+                        <div class="budget-label">
+                            <div class="budget-label-title">Health & Fitness</div>
+                            <div class="budget-label-hint">Gym, doctors, medications</div>
+                        </div>
+                        <div class="budget-input-wrapper">
+                            <input type="number" class="budget-input expense-input" data-category="health" placeholder="0" min="0" oninput="calculateTotal()">
+                        </div>
+                    </div>
+
+                    <div class="budget-input-row">
+                        <div class="budget-emoji">⚡</div>
+                        <div class="budget-label">
+                            <div class="budget-label-title">Other Expenses</div>
+                            <div class="budget-label-hint">Everything else</div>
+                        </div>
+                        <div class="budget-input-wrapper">
+                            <input type="number" class="budget-input expense-input" data-category="other" placeholder="0" min="0" oninput="calculateTotal()">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="screen-navigation">
+                <button class="btn-nav btn-prev" onclick="previousScreen()">← Previous</button>
+                <button class="btn-nav" id="continueBtn4" onclick="showResults()">See My Results →</button>
+            </div>
+        </div>
+
+        <!-- Screen 5: The Truth Revealed -->
+        <div class="lesson-screen" data-screen="5">
+            <div class="screen-progress">Chapter 5 of 7 • Your Money Reality</div>
+
+            <div class="content-card">
+                <h2>📈 Here's Your Money Story</h2>
+                <p>Time to face the music. But remember: awareness is the first step to control.</p>
+
+                <div class="results-container" id="resultsContainer">
+                    <div class="money-meter">
+                        <div class="meter-title">Your Monthly Money Flow</div>
+
+                        <div class="meter-bar-container">
+                            <div class="meter-label">
+                                <span>💰 Money In</span>
+                                <span id="incomeDisplay">$0</span>
+                            </div>
+                            <div class="meter-bar">
+                                <div class="meter-fill" id="incomeMeter"></div>
+                            </div>
+                        </div>
+
+                        <div class="meter-bar-container">
+                            <div class="meter-label">
+                                <span>💸 Money Out</span>
+                                <span id="expenseDisplay">$0</span>
+                            </div>
+                            <div class="meter-bar">
+                                <div class="meter-fill expense" id="expenseMeter"></div>
+                            </div>
+                        </div>
+
+                        <div class="meter-bar-container">
+                            <div class="meter-label">
+                                <span>✨ Left Over</span>
+                                <span id="leftoverDisplay">$0</span>
+                            </div>
+                            <div class="meter-bar">
+                                <div class="meter-fill" id="leftoverMeter"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="insights-grid" id="insightsContainer">
+                        <!-- Dynamic insights will appear here -->
+                    </div>
+                </div>
+            </div>
+
+            <div class="screen-navigation">
+                <button class="btn-nav btn-prev" onclick="previousScreen()">← Adjust Numbers</button>
+                <button class="btn-nav" onclick="nextScreen()">What Now? →</button>
+            </div>
+        </div>
+
+        <!-- Screen 6: The Transformation -->
+        <div class="lesson-screen" data-screen="6">
+            <div class="screen-progress">Chapter 6 of 7 • Your Action Plan</div>
+
+            <div class="content-card">
+                <h2>🎯 What You Just Learned</h2>
+                <div style="background: linear-gradient(135deg, #D1FAE5 0%, #A7F3D0 100%); padding: 25px; border-radius: 12px; margin: 20px 0; border-left: 4px solid #10B981;">
+                    <p style="font-size: 18px; font-weight: 700; color: #065F46; margin-bottom: 15px;">Congratulations! You just did something 80% of people never do:</p>
+                    <p style="color: #047857;">✅ You faced your numbers honestly</p>
+                    <p style="color: #047857;">✅ You identified where your money goes</p>
+                    <p style="color: #047857;">✅ You saw your spending patterns</p>
+                    <p style="color: #047857;">✅ You took control of your financial story</p>
+                </div>
+            </div>
+
+            <div class="content-card">
+                <h2>🚀 Your Next Steps</h2>
+                <p>Here's what happens now:</p>
+                <div class="story-choice-grid">
+                    <div class="story-choice" style="pointer-events: none;">
+                        <div class="story-icon">📝</div>
+                        <h3>Track Weekly</h3>
+                        <p>Review your spending once a week for a month</p>
+                    </div>
+                    <div class="story-choice" style="pointer-events: none;">
+                        <div class="story-icon">🔍</div>
+                        <h3>Find Leaks</h3>
+                        <p>Spot the expenses you can easily reduce</p>
+                    </div>
+                    <div class="story-choice" style="pointer-events: none;">
+                        <div class="story-icon">💪</div>
+                        <h3>Build Better</h3>
+                        <p>Create a realistic budget that actually works</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content-card">
+                <h2>💡 Pro Tip</h2>
+                <p style="font-size: 18px; font-weight: 600; color: #0A1A2F;">Small changes compound. Cutting just $10/day saves $3,650/year. That's a decent vacation, an emergency fund, or a massive head start on your goals.</p>
+            </div>
+
+            <div class="screen-navigation">
+                <button class="btn-nav btn-prev" onclick="previousScreen()">← Previous</button>
+                <button class="btn-nav" onclick="nextScreen()">Take the Quiz →</button>
+            </div>
+        </div>
+
+        <!-- Screen 7: Quiz Time -->
+        <div class="lesson-screen" data-screen="7">
+            <div class="screen-progress">Chapter 7 of 7 • Test Your Knowledge</div>
+
+            <div class="quiz-container">
+                <div class="quiz-header">
+                    <h2>✅ Knowledge Check</h2>
+                    <p>Answer these questions to complete the lesson. You need 100% to unlock the next lesson!</p>
+                </div>
+
+                <div id="quizQuestions"></div>
+
+                <button class="btn-submit-quiz" id="submitQuiz" onclick="submitQuiz()">Submit Answers</button>
+
+                <div class="quiz-result" id="quizResult"></div>
+            </div>
+
+            <button class="btn-finish" id="finishBtn" onclick="finishLesson()" disabled>Complete Lesson & Continue →</button>
+
+            <div class="screen-navigation">
+                <button class="btn-nav btn-prev" onclick="previousScreen()">← Previous</button>
+                <div class="nav-spacer"></div>
+            </div>
         </div>
     </div>
 
-    <!-- Celebration Canvas -->
-    <canvas class="celebration" id="celebration"></canvas>
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>FinanceU</h4>
+                    <p>Making financial literacy accessible for everyone.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="/about">About Us</a></li>
+                        <li><a href="/careers">Careers</a></li>
+                        <li><a href="/contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="/help">Help Center</a></li>
+                        <li><a href="/privacy">Privacy Policy</a></li>
+                        <li><a href="/terms">Terms of Service</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p style="font-size: 0.85rem; opacity: 0.8; margin-bottom: 10px;">Disclaimer: FinanceU provides educational content only and does not offer financial, legal, or investment advice. Always consult with a qualified professional before making financial decisions.</p>
+                <p>&copy; 2025 FinanceU. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
 
     <script src="config.js"></script>
     <script src="lesson-completion.js"></script>
@@ -878,116 +1149,152 @@
             }
         }
 
-        // Interactive Tracker Logic
-        let currentStep = 1;
+        // Screen Navigation
+        let currentScreen = 1;
+        const totalScreens = 7;
+
+        function showScreen(screenNumber) {
+            document.querySelectorAll('.lesson-screen').forEach(screen => {
+                screen.classList.remove('active');
+            });
+
+            const targetScreen = document.querySelector(`.lesson-screen[data-screen="${screenNumber}"]`);
+            if (targetScreen) {
+                targetScreen.classList.add('active');
+                currentScreen = screenNumber;
+
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            }
+        }
+
+        function nextScreen() {
+            if (currentScreen < totalScreens) {
+                showScreen(currentScreen + 1);
+            }
+        }
+
+        function previousScreen() {
+            if (currentScreen > 1) {
+                showScreen(currentScreen - 1);
+            }
+        }
+
+        // Character Selection
+        let selectedCharacter = null;
+        const characterMessages = {
+            spender: "Every personality can build wealth. The key is being aware of your tendencies. As a spender, you'll learn to enjoy AND save.",
+            saver: "Being careful is great! But remember: life is meant to be lived. You'll learn to balance saving with enjoying the journey.",
+            avoider: "You're not alone. Money anxiety is real. This lesson will make facing your finances feel safe and empowering.",
+            confused: "That feeling ends today. You're about to gain crystal-clear clarity on exactly where your money goes."
+        };
+
+        function selectCharacter(element, character) {
+            document.querySelectorAll('.story-choice').forEach(choice => {
+                choice.classList.remove('selected');
+            });
+            element.classList.add('selected');
+            selectedCharacter = character;
+
+            const feedback = document.getElementById('characterFeedback');
+            const message = document.getElementById('characterMessage');
+            message.textContent = characterMessages[character];
+            feedback.style.display = 'block';
+
+            document.getElementById('continueBtn2').disabled = false;
+        }
+
+        // Budget Tracking
         let monthlyIncome = 0;
         let expenses = {};
-        let totalExpenses = 0;
 
-        // Enable next button when income is entered
-        document.getElementById('monthlyIncome').addEventListener('input', function() {
-            const value = parseFloat(this.value) || 0;
-            monthlyIncome = value;
-            document.getElementById('incomeNextBtn').disabled = value <= 0;
-        });
+        function enableNext() {
+            monthlyIncome = parseFloat(document.getElementById('monthlyIncome').value) || 0;
+        }
 
-        // Track expense inputs
-        document.querySelectorAll('.expense-input').forEach(input => {
-            input.addEventListener('input', function() {
-                const category = this.dataset.category;
-                const value = parseFloat(this.value) || 0;
+        function calculateTotal() {
+            const inputs = document.querySelectorAll('.expense-input');
+            expenses = {};
+            inputs.forEach(input => {
+                const category = input.dataset.category;
+                const value = parseFloat(input.value) || 0;
                 expenses[category] = value;
             });
-        });
-
-        function goToStep(step) {
-            // Hide all steps
-            document.querySelectorAll('.step-content').forEach(el => {
-                el.classList.remove('active');
-            });
-
-            // Show target step
-            document.querySelector(`.step-content[data-step="${step}"]`).classList.add('active');
-
-            // Update step indicators
-            document.querySelectorAll('.step-dot').forEach((dot, index) => {
-                if (index + 1 < step) {
-                    dot.classList.add('completed');
-                    dot.classList.remove('active');
-                } else if (index + 1 === step) {
-                    dot.classList.add('active');
-                    dot.classList.remove('completed');
-                } else {
-                    dot.classList.remove('active', 'completed');
-                }
-            });
-
-            currentStep = step;
         }
 
-        function calculateResults() {
-            // Calculate total expenses
-            totalExpenses = Object.values(expenses).reduce((sum, val) => sum + val, 0);
-            const leftover = monthlyIncome - totalExpenses;
-            const percentSpent = monthlyIncome > 0 ? (totalExpenses / monthlyIncome) * 100 : 0;
+        function showResults() {
+            calculateTotal();
+            const income = parseFloat(document.getElementById('monthlyIncome').value) || 0;
 
-            // Go to results step
-            goToStep(3);
+            if (income === 0) {
+                alert('Please enter your monthly income first!');
+                showScreen(4);
+                return;
+            }
 
-            // Animate bars
+            nextScreen();
+
+            const totalExpenses = Object.values(expenses).reduce((sum, val) => sum + val, 0);
+            const leftover = income - totalExpenses;
+            const percentSpent = income > 0 ? (totalExpenses / income) * 100 : 0;
+
+            // Animate meters
             setTimeout(() => {
-                document.getElementById('incomeBar').style.width = '100%';
-                document.getElementById('incomeAmount').textContent = `$${monthlyIncome.toFixed(0)}`;
+                document.getElementById('resultsContainer').classList.add('visible');
 
-                const expensePercent = monthlyIncome > 0 ? (totalExpenses / monthlyIncome) * 100 : 0;
-                document.getElementById('expenseBar').style.width = `${Math.min(expensePercent, 100)}%`;
-                document.getElementById('expenseAmount').textContent = `$${totalExpenses.toFixed(0)}`;
+                document.getElementById('incomeDisplay').textContent = `$${income.toFixed(0)}`;
+                document.getElementById('incomeMeter').style.width = '100%';
+                document.getElementById('incomeMeter').textContent = '100%';
 
-                const leftoverPercent = monthlyIncome > 0 ? Math.max((leftover / monthlyIncome) * 100, 0) : 0;
-                document.getElementById('leftoverBar').style.width = `${leftoverPercent}%`;
-                document.getElementById('leftoverAmount').textContent = `$${Math.max(leftover, 0).toFixed(0)}`;
+                const expensePercent = Math.min((totalExpenses / income) * 100, 100);
+                document.getElementById('expenseDisplay').textContent = `$${totalExpenses.toFixed(0)}`;
+                document.getElementById('expenseMeter').style.width = expensePercent + '%';
+                document.getElementById('expenseMeter').textContent = expensePercent.toFixed(0) + '%';
 
-                // Show insights
-                generateInsights(leftover, percentSpent);
-            }, 100);
+                const leftoverPercent = Math.max(0, (leftover / income) * 100);
+                document.getElementById('leftoverDisplay').textContent = `$${Math.max(0, leftover).toFixed(0)}`;
+                document.getElementById('leftoverMeter').style.width = leftoverPercent + '%';
+                document.getElementById('leftoverMeter').textContent = leftoverPercent.toFixed(0) + '%';
 
-            document.querySelector('.results-dashboard').classList.add('visible');
+                generateInsights(income, totalExpenses, leftover, percentSpent);
+            }, 300);
         }
 
-        function generateInsights(leftover, percentSpent) {
+        function generateInsights(income, totalExpenses, leftover, percentSpent) {
             const insights = [];
 
             if (leftover < 0) {
                 insights.push({
                     type: 'danger',
-                    icon: '<i data-lucide="alert-triangle" class="w-6 h-6"></i>',
-                    title: 'You\'re Spending More Than You Earn',
-                    text: `You're spending $${Math.abs(leftover).toFixed(0)} more than you make each month. This is unsustainable and will lead to debt.`
+                    icon: '🚨',
+                    title: 'Critical: Spending More Than You Earn',
+                    text: `You're overspending by $${Math.abs(leftover).toFixed(0)} per month. This leads to debt. We need to fix this.`
                 });
             } else if (leftover === 0) {
                 insights.push({
                     type: 'warning',
-                    icon: '<i data-lucide="alert-circle" class="w-6 h-6"></i>',
+                    icon: '⚠️',
                     title: 'Living Paycheck to Paycheck',
-                    text: 'You\'re spending everything you earn. One unexpected expense could throw you off balance.'
+                    text: 'You have zero buffer. One emergency and you\'re in trouble. Let\'s build that safety net.'
                 });
-            } else if (leftover > 0 && leftover < monthlyIncome * 0.1) {
+            } else if (leftover < income * 0.1) {
                 insights.push({
                     type: 'warning',
-                    icon: '<i data-lucide="heart" class="w-6 h-6"></i>',
-                    title: 'Small Safety Margin',
-                    text: `You have $${leftover.toFixed(0)} left over (${((leftover/monthlyIncome)*100).toFixed(0)}%). That's something, but try to increase it to 10-20%.`
+                    icon: '😰',
+                    title: 'Tight Budget',
+                    text: `Only $${leftover.toFixed(0)} left (${((leftover/income)*100).toFixed(0)}%). You need a bigger cushion. Aim for 10-20%.`
                 });
             } else {
                 insights.push({
                     type: 'positive',
-                    icon: '<i data-lucide="party-popper" class="w-6 h-6"></i>',
+                    icon: '🎉',
                     title: 'Great Job!',
-                    text: `You have $${leftover.toFixed(0)} left over each month (${((leftover/monthlyIncome)*100).toFixed(0)}%). This is what saving looks like!`
+                    text: `You have $${leftover.toFixed(0)} left over (${((leftover/income)*100).toFixed(0)}%). You're doing better than most people!`
                 });
             }
 
-            // Find biggest expense
             const sortedExpenses = Object.entries(expenses).sort((a, b) => b[1] - a[1]);
             if (sortedExpenses.length > 0 && sortedExpenses[0][1] > 0) {
                 const categoryNames = {
@@ -1002,130 +1309,59 @@
                 };
                 const biggestCategory = categoryNames[sortedExpenses[0][0]];
                 const biggestAmount = sortedExpenses[0][1];
-                const biggestPercent = monthlyIncome > 0 ? (biggestAmount / monthlyIncome * 100).toFixed(0) : 0;
+                const biggestPercent = (biggestAmount / income * 100).toFixed(0);
 
                 insights.push({
                     type: 'warning',
-                    icon: '<i data-lucide="search" class="w-6 h-6"></i>',
-                    title: `Your Biggest Expense: ${biggestCategory}`,
+                    icon: '🔍',
+                    title: `Biggest Expense: ${biggestCategory}`,
                     text: `You spend $${biggestAmount.toFixed(0)}/month here (${biggestPercent}% of income). Is there room to optimize?`
                 });
             }
 
-            // Awareness insight
             insights.push({
                 type: 'positive',
-                icon: '<i data-lucide="lightbulb" class="w-6 h-6"></i>',
-                title: 'Awareness is the First Step',
-                text: 'Most people never track their spending. By doing this exercise, you\'re already ahead of 80% of people. Now you know the truth.'
+                icon: '💡',
+                title: 'You\'re Ahead of the Game',
+                text: 'Most people never track their spending. By doing this, you\'re already in the top 20%. Knowledge is power.'
             });
 
-            // Render insights
-            const grid = document.getElementById('insightsGrid');
-            grid.innerHTML = '';
+            const container = document.getElementById('insightsContainer');
+            container.innerHTML = '';
             insights.forEach((insight, index) => {
                 const card = document.createElement('div');
                 card.className = `insight-card ${insight.type}`;
-                card.style.animationDelay = `${index * 0.1}s`;
+                card.style.animationDelay = `${index * 0.15}s`;
                 card.innerHTML = `
                     <div class="insight-icon">${insight.icon}</div>
                     <div class="insight-title">${insight.title}</div>
                     <div class="insight-text">${insight.text}</div>
                 `;
-                grid.appendChild(card);
+                container.appendChild(card);
             });
-
-            // Initialize Lucide icons for dynamically added content
-            lucide.createIcons();
         }
 
-        function showQuiz() {
-            const quizSection = document.getElementById('quizSection');
-            quizSection.classList.add('visible');
-            quizSection.scrollIntoView({ behavior: 'smooth' });
-
-            // If quiz was already passed, show completion state
-            if (quizPassed) {
-                // Show the quiz with completion message
-                const quizResult = document.getElementById('quizResult');
-                quizResult.className = 'quiz-result visible passed';
-                quizResult.innerHTML = `
-                    <div class="insight-icon"><i data-lucide="check-circle" class="w-6 h-6"></i></div>
-                    <div class="insight-title">Quiz Already Completed</div>
-                    <div class="insight-text">You've already passed this quiz! You can retake it below or finish the lesson.</div>
-                `;
-                lucide.createIcons();
-
-                // Show finish button
-                document.getElementById('finishBtn').classList.add('visible');
-
-                // Show retake button
-                document.getElementById('submitQuiz').style.display = 'block';
-                document.getElementById('submitQuiz').textContent = 'Retake Quiz';
-                document.getElementById('submitQuiz').onclick = function() {
-                    retakeQuiz();
-                };
-            } else {
-                // Fresh quiz
-                renderQuiz();
-            }
-        }
-
-        function retakeQuiz() {
-            // Clear the result
-            document.getElementById('quizResult').className = 'quiz-result';
-            document.getElementById('quizResult').innerHTML = '';
-            document.getElementById('finishBtn').classList.remove('visible');
-
-            // Render fresh quiz
-            renderQuiz();
-        }
-
-        // Quiz Data
+        // Quiz
         const quizData = [
             {
                 versions: [
                     {
-                        question: "What is the main purpose of a budget?",
+                        question: "What is the main purpose of tracking your expenses?",
                         options: [
-                            "To restrict your spending",
-                            "To plan and control where your money goes",
-                            "To impress your bank",
-                            "To avoid having fun"
+                            "To feel guilty about spending",
+                            "To understand where your money goes",
+                            "To impress your friends",
+                            "To avoid paying taxes"
                         ],
                         correct: 1
                     },
                     {
-                        question: "A budget helps you:",
+                        question: "Why do most people underestimate their spending?",
                         options: [
-                            "Track income and expenses to ensure you spend less than you earn",
-                            "Hide money from your family",
-                            "Make all purchases with cash",
-                            "Avoid paying taxes"
-                        ],
-                        correct: 0
-                    }
-                ]
-            },
-            {
-                versions: [
-                    {
-                        question: "If your income is $2,500 and your expenses are $2,800, what should you do?",
-                        options: [
-                            "Ignore it",
-                            "Find ways to reduce expenses or increase income",
-                            "Stop tracking",
-                            "Give up on budgeting"
-                        ],
-                        correct: 1
-                    },
-                    {
-                        question: "What does it mean if your expenses exceed your income?",
-                        options: [
-                            "You're doing great",
-                            "You need to adjust your budget by cutting expenses or earning more",
-                            "You should stop budgeting",
-                            "It's normal and nothing to worry about"
+                            "They intentionally lie",
+                            "Small purchases add up without being noticed",
+                            "They don't care about money",
+                            "Banks hide transactions"
                         ],
                         correct: 1
                     }
@@ -1134,22 +1370,22 @@
             {
                 versions: [
                     {
-                        question: "Which is a common budgeting mistake?",
+                        question: "If your expenses exceed your income, what should you do?",
                         options: [
-                            "Being flexible with your budget",
-                            "Tracking all your expenses",
-                            "Forgetting irregular expenses like car maintenance",
-                            "Adjusting your budget when life changes"
+                            "Ignore it and hope it gets better",
+                            "Cut expenses or increase income",
+                            "Take out more loans",
+                            "Stop tracking altogether"
                         ],
-                        correct: 2
+                        correct: 1
                     },
                     {
-                        question: "Why is it important to track small purchases?",
+                        question: "What does it mean to 'live paycheck to paycheck'?",
                         options: [
-                            "They don't matter",
-                            "They add up over time",
-                            "It's not important",
-                            "To make you feel guilty"
+                            "You save most of your income",
+                            "You have no money left over after expenses",
+                            "You invest regularly",
+                            "You have multiple income sources"
                         ],
                         correct: 1
                     }
@@ -1158,22 +1394,22 @@
             {
                 versions: [
                     {
-                        question: "What is the 50/30/20 rule?",
+                        question: "Which is a 'need' vs a 'want'?",
                         options: [
-                            "50% savings, 30% needs, 20% wants",
-                            "50% needs, 30% wants, 20% savings",
-                            "50% wants, 30% savings, 20% needs",
-                            "50% taxes, 30% bills, 20% fun"
+                            "Netflix is a need",
+                            "Basic groceries are a need",
+                            "Designer clothes are a need",
+                            "Video games are a need"
                         ],
                         correct: 1
                     },
                     {
-                        question: "In zero-based budgeting, what happens to every dollar?",
+                        question: "What's the best way to categorize expenses?",
                         options: [
-                            "It disappears",
-                            "It's assigned a specific job or purpose",
-                            "It goes into savings automatically",
-                            "It's spent on wants"
+                            "Don't categorize, just spend freely",
+                            "Group similar expenses together",
+                            "Put everything in 'miscellaneous'",
+                            "Only track big purchases"
                         ],
                         correct: 1
                     }
@@ -1182,22 +1418,46 @@
             {
                 versions: [
                     {
-                        question: "Why should you review your budget regularly?",
+                        question: "What percentage of people regularly track their spending?",
                         options: [
-                            "It's not necessary once it's set",
-                            "To adjust for changes in income, expenses, or goals",
-                            "To make it more complicated",
-                            "Only if you overspend"
+                            "Around 80%",
+                            "Around 20%",
+                            "Almost everyone",
+                            "Nobody does"
                         ],
                         correct: 1
                     },
                     {
-                        question: "What's the first step in creating a budget?",
+                        question: "How often should you review your budget?",
                         options: [
-                            "Start spending less money",
-                            "Calculate your total monthly income",
-                            "Buy a budgeting app",
-                            "Close your bank account"
+                            "Once a year",
+                            "Weekly or monthly",
+                            "Never, set it and forget it",
+                            "Only when you overspend"
+                        ],
+                        correct: 1
+                    }
+                ]
+            },
+            {
+                versions: [
+                    {
+                        question: "What's a realistic first step after tracking expenses?",
+                        options: [
+                            "Cut all spending immediately",
+                            "Find one small expense to reduce",
+                            "Quit your job to save money",
+                            "Ignore the results"
+                        ],
+                        correct: 1
+                    },
+                    {
+                        question: "Saving $10 per day equals how much per year?",
+                        options: [
+                            "$365",
+                            "$3,650",
+                            "$1,000",
+                            "$10,000"
                         ],
                         correct: 1
                     }
@@ -1209,25 +1469,52 @@
         let userAnswers = [];
         let quizPassed = false;
 
-        function renderQuiz() {
-            // Select one version from each question
+        function initQuiz() {
+            const userId = localStorage.getItem('userId');
+
+            if (!userId || userId === 'null' || userId === 'undefined') {
+                document.getElementById('finishBtn').disabled = true;
+                return;
+            }
+
+            const quizPassedStatus = localStorage.getItem(`path2_lesson1_quiz_passed_${userId}`);
+
+            if (quizPassedStatus === 'true') {
+                quizPassed = true;
+                document.getElementById('finishBtn').disabled = false;
+                document.getElementById('submitQuiz').style.display = 'none';
+                document.getElementById('quizResult').innerHTML = `
+                    <div class="quiz-result pass visible">
+                        <div class="result-icon">✅</div>
+                        <div class="result-text" style="color: #10B981;">Already Completed!</div>
+                        <div class="result-score">You've already passed this quiz. Click below to finish the lesson.</div>
+                    </div>
+                `;
+                document.getElementById('quizResult').style.display = 'block';
+                return;
+            }
+
             currentQuestions = quizData.map(q => {
                 const randomVersion = q.versions[Math.floor(Math.random() * q.versions.length)];
                 return randomVersion;
             });
 
-            userAnswers = new Array(currentQuestions.length).fill(null);
+            renderQuiz();
+        }
 
+        function renderQuiz() {
             const container = document.getElementById('quizQuestions');
             container.innerHTML = '';
+            userAnswers = new Array(currentQuestions.length).fill(null);
 
             currentQuestions.forEach((q, qIndex) => {
                 const card = document.createElement('div');
                 card.className = 'question-card';
                 card.innerHTML = `
-                    <div class="question-text">${qIndex + 1}. ${q.question}</div>
+                    <div class="question-text">Question ${qIndex + 1}: ${q.question}</div>
                     ${q.options.map((option, oIndex) => `
                         <div class="answer-option" onclick="selectAnswer(${qIndex}, ${oIndex})">
+                            <input type="radio" name="question${qIndex}" value="${oIndex}">
                             ${option}
                         </div>
                     `).join('')}
@@ -1235,10 +1522,8 @@
                 container.appendChild(card);
             });
 
-            const submitBtn = document.getElementById('submitQuiz');
-            submitBtn.style.display = 'block';
-            submitBtn.textContent = 'Submit Answers';
-            submitBtn.onclick = submitQuiz;
+            document.getElementById('submitQuiz').style.display = 'block';
+            document.getElementById('quizResult').innerHTML = '';
         }
 
         function selectAnswer(questionIndex, optionIndex) {
@@ -1251,6 +1536,7 @@
                 opt.classList.remove('selected');
                 if (idx === optionIndex) {
                     opt.classList.add('selected');
+                    opt.querySelector('input').checked = true;
                 }
             });
         }
@@ -1284,7 +1570,7 @@
             document.getElementById('submitQuiz').style.display = 'none';
 
             const resultDiv = document.getElementById('quizResult');
-            resultDiv.className = `quiz-result visible ${passed ? 'passed' : 'failed'}`;
+            resultDiv.className = `quiz-result visible ${passed ? 'pass' : 'fail'}`;
 
             if (passed) {
                 quizPassed = true;
@@ -1292,25 +1578,30 @@
                 localStorage.setItem(`path2_lesson1_quiz_passed_${userId}`, 'true');
 
                 resultDiv.innerHTML = `
-                    <div class="insight-icon"><i data-lucide="party-popper" class="w-6 h-6"></i></div>
-                    <div class="insight-title">Perfect Score!</div>
-                    <div class="insight-text">You got all ${correct} out of ${currentQuestions.length} questions correct! You're ready to move forward.</div>
+                    <div class="result-icon">🎉</div>
+                    <div class="result-text" style="color: #10B981;">Perfect Score!</div>
+                    <div class="result-score">You got ${correct} out of ${currentQuestions.length} correct!</div>
+                    <p style="color: #6B7280;">Amazing work! You're ready to move forward.</p>
                 `;
-                lucide.createIcons();
 
-                document.getElementById('finishBtn').classList.add('visible');
-                launchConfetti();
+                document.getElementById('finishBtn').disabled = false;
             } else {
                 resultDiv.innerHTML = `
-                    <div class="insight-icon"><i data-lucide="book-open" class="w-6 h-6"></i></div>
-                    <div class="insight-title">Not Quite There</div>
-                    <div class="insight-text">You got ${correct} out of ${currentQuestions.length} correct. You need 100% to pass. Review the lesson and try again!</div>
-                    <button class="btn btn-primary" onclick="retakeQuiz()" style="margin-top: 24px;">Try Again</button>
+                    <div class="result-icon">📚</div>
+                    <div class="result-text" style="color: #EF4444;">Not Quite There</div>
+                    <div class="result-score">You got ${correct} out of ${currentQuestions.length} correct</div>
+                    <p style="color: #6B7280; margin-bottom: 15px;">You need 100% to pass. Review the lesson and try again!</p>
+                    <button class="btn-nav" onclick="retryQuiz()" style="margin: 0 auto;">Try Again</button>
                 `;
-                lucide.createIcons();
             }
+        }
 
-            resultDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        function retryQuiz() {
+            currentQuestions = quizData.map(q => {
+                const randomVersion = q.versions[Math.floor(Math.random() * q.versions.length)];
+                return randomVersion;
+            });
+            renderQuiz();
         }
 
         async function finishLesson() {
@@ -1326,7 +1617,6 @@
                 return;
             }
 
-            // Mark lesson as completed using the correct API
             const success = await completeLesson('path2_lesson1', 2, 1);
 
             if (success) {
@@ -1334,83 +1624,9 @@
             }
         }
 
-        // Confetti animation
-        function launchConfetti() {
-            const canvas = document.getElementById('celebration');
-            const ctx = canvas.getContext('2d');
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-
-            const confetti = [];
-            for (let i = 0; i < 100; i++) {
-                confetti.push({
-                    x: Math.random() * canvas.width,
-                    y: Math.random() * canvas.height - canvas.height,
-                    r: Math.random() * 6 + 4,
-                    d: Math.random() * 10 + 5,
-                    color: `hsl(${Math.random() * 360}, 70%, 60%)`,
-                    tilt: Math.random() * 10 - 10,
-                    tiltAngleIncremental: Math.random() * 0.07 + 0.05,
-                    tiltAngle: 0
-                });
-            }
-
-            function draw() {
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-                confetti.forEach((c, i) => {
-                    ctx.beginPath();
-                    ctx.lineWidth = c.r / 2;
-                    ctx.strokeStyle = c.color;
-                    ctx.moveTo(c.x + c.tilt + c.r, c.y);
-                    ctx.lineTo(c.x + c.tilt, c.y + c.tilt + c.r);
-                    ctx.stroke();
-
-                    c.tiltAngle += c.tiltAngleIncremental;
-                    c.y += (Math.cos(c.d) + 3 + c.r / 2) / 2;
-                    c.x += Math.sin(c.d);
-                    c.tilt = Math.sin(c.tiltAngle - i / 3) * 15;
-
-                    if (c.y > canvas.height) {
-                        confetti[i] = {
-                            x: Math.random() * canvas.width,
-                            y: -10,
-                            r: c.r,
-                            d: c.d,
-                            color: c.color,
-                            tilt: c.tilt,
-                            tiltAngleIncremental: c.tiltAngleIncremental,
-                            tiltAngle: c.tiltAngle
-                        };
-                    }
-                });
-
-                requestAnimationFrame(draw);
-            }
-
-            draw();
-            setTimeout(() => {
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
-            }, 5000);
-        }
-
-        // Check if quiz was already passed
-        function initLesson() {
-            const userId = localStorage.getItem('userId');
-            if (userId) {
-                const quizPassedStatus = localStorage.getItem(`path2_lesson1_quiz_passed_${userId}`);
-                if (quizPassedStatus === 'true') {
-                    quizPassed = true;
-                }
-            }
-        }
-
         // Initialize
         updateNav();
-        initLesson();
-
-        // Initialize Lucide icons
-        lucide.createIcons();
+        initQuiz();
     </script>
 </body>
 </html>
