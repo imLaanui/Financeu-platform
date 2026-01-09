@@ -58,7 +58,7 @@
             box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4), 0 16px 32px rgba(0, 0, 0, 0.3), 0 0 40px rgba(209, 213, 219, 0.2);
         }
 
-        /* Lesson card with 3D effect - Green theme for Path 2 */
+        /* Lesson card with 3D effect - Green theme */
         .lesson-card {
             background: linear-gradient(135deg, rgba(34, 197, 94, 0.1) 0%, rgba(17, 24, 39, 0.95) 100%);
             backdrop-filter: blur(20px);
@@ -91,7 +91,7 @@
             opacity: 0.6;
         }
 
-        /* Lesson number badge - positioned at top corner */
+        /* Lesson number badge */
         .lesson-number {
             position: absolute;
             top: 20px;
@@ -121,19 +121,6 @@
             box-shadow: 0 8px 20px rgba(107, 114, 128, 0.5);
         }
 
-        /* Floating particles */
-        .particle {
-            position: absolute;
-            border-radius: 50%;
-            pointer-events: none;
-            opacity: 0.3;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0) rotate(0deg); }
-            50% { transform: translateY(-30px) rotate(180deg); }
-        }
-
         /* Quiz card special styling */
         .quiz-card {
             background: linear-gradient(135deg, rgba(251, 191, 36, 0.15) 0%, rgba(17, 24, 39, 0.95) 100%);
@@ -150,9 +137,84 @@
             border-color: rgba(16, 185, 129, 0.5);
         }
 
-        .quiz-card.completed:hover {
-            border-color: rgba(16, 185, 129, 0.8);
-            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.9), 0 0 60px rgba(16, 185, 129, 0.4);
+        /* Intro card special styling */
+        .intro-card {
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.1) 0%, rgba(17, 24, 39, 0.95) 100%);
+            border: 2px solid rgba(139, 92, 246, 0.3);
+        }
+
+        .intro-card:hover {
+            border-color: rgba(139, 92, 246, 0.6);
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.9), 0 0 60px rgba(139, 92, 246, 0.3);
+        }
+
+        /* Consistent uniform grid layout */
+        .lessons-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            position: relative;
+        }
+
+        /* All lessons have equal size */
+        .lesson-1, .lesson-2, .lesson-3, .lesson-4, .lesson-5, .lesson-6, .lesson-7, .lesson-8 {
+            grid-column: span 1;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .lessons-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Icon container */
+        .lesson-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        /* Staggered animation */
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .lesson-card {
+            animation: slideInUp 0.6s ease-out backwards;
+        }
+
+        .lesson-1 { animation-delay: 0.1s; }
+        .lesson-2 { animation-delay: 0.2s; }
+        .lesson-3 { animation-delay: 0.3s; }
+        .lesson-4 { animation-delay: 0.4s; }
+        .lesson-5 { animation-delay: 0.5s; }
+        .lesson-6 { animation-delay: 0.6s; }
+        .lesson-7 { animation-delay: 0.7s; }
+        .lesson-8 { animation-delay: 0.8s; }
+
+        /* Floating particles */
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            pointer-events: none;
+            opacity: 0.3;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-30px) rotate(180deg); }
         }
     </style>
 </head>
@@ -172,10 +234,11 @@
                 </a>
 
                 <div class="hidden md:flex items-center space-x-6">
+                    <a href="/" class="text-gray-400 hover:text-gray-200 transition-colors font-medium">Home</a>
                     <a href="/dashboard" class="text-gray-400 hover:text-gray-200 transition-colors font-medium">Dashboard</a>
                 </div>
 
-                <div class="flex items-center space-x-4">
+                <div class="flex items-center space-x-4" id="authButtons">
                     <button onclick="logout()" class="btn-3d px-6 py-2.5 bg-gradient-to-r from-gray-200 to-gray-300 hover:from-gray-300 hover:to-gray-200 rounded-lg font-semibold glow-grey transition-all" style="color: #1f2937;">
                         Logout
                     </button>
@@ -186,151 +249,235 @@
 
     <!-- Main Content -->
     <section class="min-h-screen pt-32 pb-20 relative z-10">
-        <div class="container mx-auto px-6 max-w-5xl">
-            <!-- Header -->
-            <div class="text-center mb-16">
-                <a href="/dashboard" class="inline-block mb-6 text-gray-400 hover:text-gray-200 transition-colors font-medium">
-                    ← Back to Dashboard
-                </a>
-                <h1 class="text-5xl md:text-6xl font-black mb-4 gradient-text">
-                    Path 2: Budgeting & Saving
+        <div class="container mx-auto px-6 max-w-7xl">
+            <!-- Back Button -->
+            <a href="/dashboard" class="inline-flex items-center text-gray-400 hover:text-gray-200 transition-colors mb-8 font-medium">
+                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+                </svg>
+                Back to Dashboard
+            </a>
+
+            <!-- Path Header -->
+            <div class="mb-16 text-center">
+                <h1 class="text-5xl md:text-6xl font-black mb-4 text-gray-200">
+                    Path 2: <span class="gradient-text">Budgeting & Saving</span>
                 </h1>
                 <p class="text-xl text-gray-400 max-w-2xl mx-auto">
                     Master the art of managing your money and building financial security
                 </p>
             </div>
 
+            <!-- Intro Card -->
+            <div class="intro-card rounded-3xl p-8 mb-16 relative overflow-hidden">
+                <div class="flex flex-col md:flex-row items-center gap-8">
+                    <div class="w-20 h-20 rounded-2xl bg-purple-500/20 border-2 border-purple-500/40 flex items-center justify-center flex-shrink-0">
+                        <svg class="w-10 h-10 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                        </svg>
+                    </div>
+                    <div class="flex-1 text-center md:text-left">
+                        <h2 class="text-2xl font-bold text-gray-200 mb-2">Start Here: Budgeting Fundamentals</h2>
+                        <p class="text-gray-400">New to budgeting? We'll guide you step by step through creating your first budget</p>
+                    </div>
+                    <a href="/path2-intro" class="btn-3d px-8 py-3 bg-gradient-to-r from-purple-500 to-purple-600 hover:from-purple-600 hover:to-purple-700 rounded-xl font-bold text-white whitespace-nowrap">
+                        Read Intro
+                    </a>
+                </div>
+            </div>
+
             <!-- Lessons Grid -->
-            <div class="space-y-6" id="lessonsList">
+            <div class="lessons-grid mb-16">
                 <!-- Lesson 1 -->
-                <div class="lesson-card rounded-2xl p-8 relative overflow-hidden" data-lesson="1">
+                <div class="lesson-1 lesson-card rounded-3xl p-8 pt-20 relative overflow-hidden">
                     <div class="lesson-number">1</div>
-                    <div class="ml-20">
-                        <h3 class="text-2xl font-bold text-gray-200 mb-2">Creating Your First Budget</h3>
-                        <p class="text-gray-400 mb-6">Learn the fundamentals of building a budget that works for you</p>
-                        <a href="/path2-lesson1" class="btn-3d inline-block px-8 py-3 bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 rounded-xl font-bold text-white transition-all">
-                            Start Lesson
-                        </a>
+                    <div class="flex flex-col h-full">
+                        <div class="lesson-icon bg-green-500/20 border-2 border-green-500/40 mb-6">
+                            <svg class="w-8 h-8 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-200 mb-3">Creating Your First Budget</h3>
+                        <p class="text-gray-400 mb-6 flex-1">Learn the fundamentals of building a budget that works for you</p>
+                        <div class="flex items-center gap-4 flex-wrap">
+                            <a href="/path2-lesson1" class="btn-3d px-6 py-2.5 bg-green-500/80 hover:bg-green-600 rounded-lg font-bold text-white transition-all text-sm">
+                                Start Lesson
+                            </a>
+                            <div class="lesson-status"></div>
+                        </div>
                     </div>
                 </div>
 
                 <!-- Lesson 2 -->
-                <div class="lesson-card locked rounded-2xl p-8 relative overflow-hidden" data-lesson="2">
+                <div class="lesson-2 lesson-card rounded-3xl p-8 pt-20 relative overflow-hidden locked">
                     <div class="lesson-number">2</div>
-                    <div class="ml-20">
-                        <h3 class="text-2xl font-bold text-gray-200 mb-2">The 50/30/20 Rule</h3>
-                        <p class="text-gray-400 mb-6">Discover a simple framework for dividing your income</p>
-                        <div class="flex items-center gap-3">
-                            <svg class="w-5 h-5 text-gray-500" fill="currentColor" viewBox="0 0 20 20">
-                                <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"/>
+                    <div class="flex flex-col h-full">
+                        <div class="lesson-icon bg-green-500/20 border-2 border-green-500/40 mb-6">
+                            <svg class="w-8 h-8 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
                             </svg>
-                            <span class="text-gray-500 font-semibold">Complete Previous Lesson</span>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-200 mb-3">The 50/30/20 Rule</h3>
+                        <p class="text-gray-400 mb-6 flex-1">Discover a simple framework for dividing your income</p>
+                        <div class="flex items-center gap-4 flex-wrap">
+                            <span class="text-gray-500 text-sm font-semibold flex items-center gap-2">
+                                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"/>
+                                </svg>
+                                Complete Previous
+                            </span>
                         </div>
                     </div>
                 </div>
 
                 <!-- Lesson 3 -->
-                <div class="lesson-card locked rounded-2xl p-8 relative overflow-hidden" data-lesson="3">
+                <div class="lesson-3 lesson-card rounded-3xl p-8 pt-20 relative overflow-hidden locked">
                     <div class="lesson-number">3</div>
-                    <div class="ml-20">
-                        <h3 class="text-2xl font-bold text-gray-200 mb-2">Building an Emergency Fund</h3>
-                        <p class="text-gray-400 mb-6">Create a financial safety net for unexpected expenses</p>
-                        <div class="flex items-center gap-3">
-                            <svg class="w-5 h-5 text-gray-500" fill="currentColor" viewBox="0 0 20 20">
-                                <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"/>
+                    <div class="flex flex-col h-full">
+                        <div class="lesson-icon bg-green-500/20 border-2 border-green-500/40 mb-6">
+                            <svg class="w-8 h-8 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
                             </svg>
-                            <span class="text-gray-500 font-semibold">Complete Previous Lesson</span>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-200 mb-3">Building an Emergency Fund</h3>
+                        <p class="text-gray-400 mb-6 flex-1">Create a financial safety net for unexpected expenses</p>
+                        <div class="flex items-center gap-4 flex-wrap">
+                            <span class="text-gray-500 text-sm font-semibold flex items-center gap-2">
+                                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"/>
+                                </svg>
+                                Complete Previous
+                            </span>
                         </div>
                     </div>
                 </div>
 
                 <!-- Lesson 4 -->
-                <div class="lesson-card locked rounded-2xl p-8 relative overflow-hidden" data-lesson="4">
+                <div class="lesson-4 lesson-card rounded-3xl p-8 pt-20 relative overflow-hidden locked">
                     <div class="lesson-number">4</div>
-                    <div class="ml-20">
-                        <h3 class="text-2xl font-bold text-gray-200 mb-2">Saving Strategies That Work</h3>
-                        <p class="text-gray-400 mb-6">Explore proven methods to grow your savings consistently</p>
-                        <div class="flex items-center gap-3">
-                            <svg class="w-5 h-5 text-gray-500" fill="currentColor" viewBox="0 0 20 20">
-                                <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"/>
+                    <div class="flex flex-col h-full">
+                        <div class="lesson-icon bg-green-500/20 border-2 border-green-500/40 mb-6">
+                            <svg class="w-8 h-8 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
                             </svg>
-                            <span class="text-gray-500 font-semibold">Complete Previous Lesson</span>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-200 mb-3">Saving Strategies That Work</h3>
+                        <p class="text-gray-400 mb-6 flex-1">Explore proven methods to grow your savings consistently</p>
+                        <div class="flex items-center gap-4 flex-wrap">
+                            <span class="text-gray-500 text-sm font-semibold flex items-center gap-2">
+                                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"/>
+                                </svg>
+                                Complete Previous
+                            </span>
                         </div>
                     </div>
                 </div>
 
                 <!-- Lesson 5 -->
-                <div class="lesson-card locked rounded-2xl p-8 relative overflow-hidden" data-lesson="5">
+                <div class="lesson-5 lesson-card rounded-3xl p-8 pt-20 relative overflow-hidden locked">
                     <div class="lesson-number">5</div>
-                    <div class="ml-20">
-                        <h3 class="text-2xl font-bold text-gray-200 mb-2">Cutting Expenses Without Sacrifice</h3>
-                        <p class="text-gray-400 mb-6">Reduce spending while maintaining your quality of life</p>
-                        <div class="flex items-center gap-3">
-                            <svg class="w-5 h-5 text-gray-500" fill="currentColor" viewBox="0 0 20 20">
-                                <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"/>
+                    <div class="flex flex-col h-full">
+                        <div class="lesson-icon bg-green-500/20 border-2 border-green-500/40 mb-6">
+                            <svg class="w-8 h-8 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                             </svg>
-                            <span class="text-gray-500 font-semibold">Complete Previous Lesson</span>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-200 mb-3">Cutting Expenses Without Sacrifice</h3>
+                        <p class="text-gray-400 mb-6 flex-1">Reduce spending while maintaining your quality of life</p>
+                        <div class="flex items-center gap-4 flex-wrap">
+                            <span class="text-gray-500 text-sm font-semibold flex items-center gap-2">
+                                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"/>
+                                </svg>
+                                Complete Previous
+                            </span>
                         </div>
                     </div>
                 </div>
 
                 <!-- Lesson 6 -->
-                <div class="lesson-card locked rounded-2xl p-8 relative overflow-hidden" data-lesson="6">
+                <div class="lesson-6 lesson-card rounded-3xl p-8 pt-20 relative overflow-hidden locked">
                     <div class="lesson-number">6</div>
-                    <div class="ml-20">
-                        <h3 class="text-2xl font-bold text-gray-200 mb-2">Automating Your Savings</h3>
-                        <p class="text-gray-400 mb-6">Set up systems that save money without thinking about it</p>
-                        <div class="flex items-center gap-3">
-                            <svg class="w-5 h-5 text-gray-500" fill="currentColor" viewBox="0 0 20 20">
-                                <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"/>
+                    <div class="flex flex-col h-full">
+                        <div class="lesson-icon bg-green-500/20 border-2 border-green-500/40 mb-6">
+                            <svg class="w-8 h-8 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                             </svg>
-                            <span class="text-gray-500 font-semibold">Complete Previous Lesson</span>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-200 mb-3">Automating Your Savings</h3>
+                        <p class="text-gray-400 mb-6 flex-1">Set up systems that save money without thinking about it</p>
+                        <div class="flex items-center gap-4 flex-wrap">
+                            <span class="text-gray-500 text-sm font-semibold flex items-center gap-2">
+                                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"/>
+                                </svg>
+                                Complete Previous
+                            </span>
                         </div>
                     </div>
                 </div>
 
                 <!-- Lesson 7 -->
-                <div class="lesson-card locked rounded-2xl p-8 relative overflow-hidden" data-lesson="7">
+                <div class="lesson-7 lesson-card rounded-3xl p-8 pt-20 relative overflow-hidden locked">
                     <div class="lesson-number">7</div>
-                    <div class="ml-20">
-                        <h3 class="text-2xl font-bold text-gray-200 mb-2">Short-term vs. Long-term Savings</h3>
-                        <p class="text-gray-400 mb-6">Understand how to save for different time horizons</p>
-                        <div class="flex items-center gap-3">
-                            <svg class="w-5 h-5 text-gray-500" fill="currentColor" viewBox="0 0 20 20">
-                                <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"/>
+                    <div class="flex flex-col h-full">
+                        <div class="lesson-icon bg-green-500/20 border-2 border-green-500/40 mb-6">
+                            <svg class="w-8 h-8 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
                             </svg>
-                            <span class="text-gray-500 font-semibold">Complete Previous Lesson</span>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-200 mb-3">Short-term vs. Long-term Savings</h3>
+                        <p class="text-gray-400 mb-6 flex-1">Understand how to save for different time horizons</p>
+                        <div class="flex items-center gap-4 flex-wrap">
+                            <span class="text-gray-500 text-sm font-semibold flex items-center gap-2">
+                                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"/>
+                                </svg>
+                                Complete Previous
+                            </span>
                         </div>
                     </div>
                 </div>
 
                 <!-- Lesson 8 -->
-                <div class="lesson-card locked rounded-2xl p-8 relative overflow-hidden" data-lesson="8">
+                <div class="lesson-8 lesson-card rounded-3xl p-8 pt-20 relative overflow-hidden locked">
                     <div class="lesson-number">8</div>
-                    <div class="ml-20">
-                        <h3 class="text-2xl font-bold text-gray-200 mb-2">Avoiding Budget Pitfalls</h3>
-                        <p class="text-gray-400 mb-6">Learn common budgeting mistakes and how to prevent them</p>
-                        <div class="flex items-center gap-3">
-                            <svg class="w-5 h-5 text-gray-500" fill="currentColor" viewBox="0 0 20 20">
-                                <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"/>
+                    <div class="flex flex-col h-full">
+                        <div class="lesson-icon bg-red-500/20 border-2 border-red-500/40 mb-6">
+                            <svg class="w-8 h-8 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
                             </svg>
-                            <span class="text-gray-500 font-semibold">Complete Previous Lesson</span>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-200 mb-3">Avoiding Budget Pitfalls</h3>
+                        <p class="text-gray-400 mb-6 flex-1">Learn common budgeting mistakes and how to prevent them</p>
+                        <div class="flex items-center gap-4 flex-wrap">
+                            <span class="text-gray-500 text-sm font-semibold flex items-center gap-2">
+                                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"/>
+                                </svg>
+                                Complete Previous
+                            </span>
                         </div>
                     </div>
                 </div>
+            </div>
 
-                <!-- Final Quiz -->
-                <div class="quiz-card lesson-card rounded-2xl p-8 relative overflow-hidden" id="quizCard" style="display: none;">
-                    <div class="absolute top-6 right-6 w-16 h-16 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full flex items-center justify-center text-3xl animate-bounce">
-                        🎯
+            <!-- Final Quiz -->
+            <div id="quizCard" class="quiz-card rounded-3xl p-10 relative overflow-hidden text-center" style="display: none;">
+                <div class="mb-6">
+                    <div class="mb-4 flex justify-center">
+                        <div class="w-24 h-24 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full flex items-center justify-center text-5xl animate-bounce">
+                            🎯
+                        </div>
                     </div>
-                    <div>
-                        <h3 class="text-3xl font-black text-gray-200 mb-3">Final Quiz</h3>
-                        <p class="text-gray-400 mb-6 text-lg">Test your knowledge of all 8 lessons • 16 questions • 80% to pass</p>
-                        <a href="/path2-quiz" class="btn-3d inline-block px-10 py-4 bg-gradient-to-r from-yellow-400 to-orange-500 hover:from-yellow-500 hover:to-orange-600 rounded-xl font-bold text-gray-900 text-lg transition-all">
-                            Take Final Quiz
-                        </a>
-                    </div>
+                    <h2 class="text-4xl font-black text-gray-200 mb-4">Final Path Quiz</h2>
+                    <p class="text-xl text-gray-400 max-w-2xl mx-auto mb-8">
+                        Test your knowledge of all 8 lessons • 16 questions • 80% to pass
+                    </p>
+                    <a href="/path2-quiz" class="btn-3d inline-block px-12 py-4 bg-gradient-to-r from-yellow-400 to-orange-500 hover:from-yellow-500 hover:to-orange-600 rounded-xl font-bold text-gray-900 text-lg">
+                        Take Final Quiz
+                    </a>
                 </div>
             </div>
         </div>
@@ -378,7 +525,7 @@
             }
         }
 
-        // Load completed lessons and handle locking logic
+        // Load completed lessons
         function loadCompletedLessons() {
             const userId = localStorage.getItem('userId');
 
@@ -388,48 +535,40 @@
 
             const completed = JSON.parse(localStorage.getItem(`path2_completed_${userId}`) || '[]');
 
-            // Handle each lesson
             for (let lessonNum = 1; lessonNum <= 8; lessonNum++) {
-                const lessonCard = document.querySelector(`[data-lesson="${lessonNum}"]`);
+                const lessonCard = document.querySelector(`.lesson-${lessonNum}`);
                 if (!lessonCard) continue;
 
                 if (completed.includes(lessonNum)) {
                     lessonCard.classList.remove('locked');
                     lessonCard.classList.add('completed');
 
-                    // Update button to Review
                     const link = lessonCard.querySelector('a');
                     if (link) {
                         link.textContent = 'Review Lesson';
-                        link.classList.add('bg-gradient-to-r', 'from-emerald-500', 'to-green-500');
+                    }
+
+                    const statusDiv = lessonCard.querySelector('.lesson-status');
+                    if (statusDiv) {
+                        statusDiv.innerHTML = '<span class="text-green-400 text-sm font-semibold flex items-center gap-2"><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg> Completed</span>';
                     }
                 }
             }
         }
 
-        // Check if all lessons completed and show quiz
+        // Check quiz availability
         function checkQuizAvailability() {
             const userId = localStorage.getItem('userId');
             const quizCard = document.getElementById('quizCard');
 
             if (!userId || userId === 'null' || userId === 'undefined') {
-                quizCard.style.display = 'none';
                 return;
             }
 
             const completed = JSON.parse(localStorage.getItem(`path2_completed_${userId}`) || '[]');
             const quizCompleted = localStorage.getItem(`path2_quiz_completed_${userId}`);
 
-            // Check if all 8 lessons are completed
-            let allQuizzesPassed = true;
-            for (let i = 9; i <= 16; i++) {
-                if (localStorage.getItem(`lesson${i}_quiz_passed_${userId}`) !== 'true') {
-                    allQuizzesPassed = false;
-                    break;
-                }
-            }
-
-            if (completed.length === 8 && allQuizzesPassed) {
+            if (completed.length === 8) {
                 quizCard.style.display = 'block';
 
                 if (quizCompleted === 'true') {
@@ -439,15 +578,12 @@
                         link.textContent = 'Retake Quiz';
                     }
                 }
-            } else {
-                quizCard.style.display = 'none';
             }
         }
 
-        // Initialize page
+        // Initialize
         async function initializePage() {
             const syncResult = await syncLessonProgress();
-            console.log('Sync result:', syncResult);
             loadCompletedLessons();
             checkQuizAvailability();
             createParticles();
