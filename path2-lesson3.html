@@ -1,0 +1,1455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson 3: Choosing Jobs and Pay Smartly - Path 2</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: #0f0f0f;
+            color: #d1d5db;
+            overflow-x: hidden;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        @keyframes shimmer {
+            0% {
+                background-position: -1000px 0;
+            }
+            100% {
+                background-position: 1000px 0;
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-10px); }
+            75% { transform: translateX(10px); }
+        }
+
+        @keyframes glow {
+            0%, 100% {
+                box-shadow: 0 0 20px rgba(34, 197, 94, 0.4);
+            }
+            50% {
+                box-shadow: 0 0 40px rgba(34, 197, 94, 0.8);
+            }
+        }
+
+        /* Progress bar */
+        .progress-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: rgba(17, 24, 39, 0.8);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #22c55e, #16a34a);
+            transition: width 0.3s ease;
+            box-shadow: 0 0 10px rgba(34, 197, 94, 0.5);
+        }
+
+        /* Navigation */
+        .nav-container {
+            position: fixed;
+            top: 1rem;
+            left: 1rem;
+            z-index: 999;
+            background: rgba(17, 24, 39, 0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(34, 197, 94, 0.2);
+            border-radius: 12px;
+            padding: 0.75rem 1.25rem;
+        }
+
+        /* Gradient text */
+        .gradient-text {
+            background: linear-gradient(135deg, #22c55e 0%, #16a34a 50%, #15803d 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Cards */
+        .glass-card {
+            background: rgba(34, 197, 94, 0.1);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(34, 197, 94, 0.2);
+            border-radius: 16px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .glass-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(34, 197, 94, 0.4);
+            box-shadow: 0 20px 60px rgba(34, 197, 94, 0.3);
+        }
+
+        .info-card {
+            background: rgba(17, 24, 39, 0.8);
+            border: 2px solid rgba(34, 197, 94, 0.3);
+            border-radius: 16px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        /* Icon circles */
+        .icon-circle {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+        }
+
+        .icon-circle.green {
+            background: rgba(34, 197, 94, 0.2);
+            border: 2px solid rgba(34, 197, 94, 0.4);
+        }
+
+        .icon-circle.blue {
+            background: rgba(59, 130, 246, 0.2);
+            border: 2px solid rgba(59, 130, 246, 0.4);
+        }
+
+        .icon-circle.yellow {
+            background: rgba(251, 191, 36, 0.2);
+            border: 2px solid rgba(251, 191, 36, 0.4);
+        }
+
+        .icon-circle.red {
+            background: rgba(239, 68, 68, 0.2);
+            border: 2px solid rgba(239, 68, 68, 0.4);
+        }
+
+        .icon-circle.purple {
+            background: rgba(139, 92, 246, 0.2);
+            border: 2px solid rgba(139, 92, 246, 0.4);
+        }
+
+        /* Job comparison cards */
+        .job-card {
+            background: rgba(17, 24, 39, 0.9);
+            border: 2px solid rgba(75, 85, 99, 0.3);
+            border-radius: 16px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .job-card.winner {
+            border-color: rgba(34, 197, 94, 0.6);
+            background: rgba(34, 197, 94, 0.1);
+        }
+
+        .job-card.loser {
+            opacity: 0.6;
+        }
+
+        .winner-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: linear-gradient(135deg, #22c55e, #16a34a);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 0.875rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* Value calculator */
+        .value-breakdown {
+            background: rgba(17, 24, 39, 0.8);
+            border: 2px solid rgba(34, 197, 94, 0.3);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+        }
+
+        .value-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid rgba(75, 85, 99, 0.3);
+        }
+
+        .value-item:last-child {
+            border-bottom: none;
+            font-weight: 700;
+            font-size: 1.25rem;
+            color: #22c55e;
+        }
+
+        /* Trade-off sliders */
+        .trade-off-container {
+            background: rgba(17, 24, 39, 0.9);
+            border: 2px solid rgba(34, 197, 94, 0.3);
+            border-radius: 16px;
+            padding: 2rem;
+        }
+
+        .slider-group {
+            margin: 1.5rem 0;
+        }
+
+        input[type="range"] {
+            width: 100%;
+            height: 8px;
+            border-radius: 5px;
+            background: rgba(75, 85, 99, 0.3);
+            outline: none;
+            -webkit-appearance: none;
+        }
+
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #22c55e, #16a34a);
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(34, 197, 94, 0.4);
+        }
+
+        input[type="range"]::-moz-range-thumb {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #22c55e, #16a34a);
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(34, 197, 94, 0.4);
+            border: none;
+        }
+
+        .quality-meter {
+            margin-top: 2rem;
+            text-align: center;
+        }
+
+        .quality-score {
+            font-size: 4rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #22c55e, #16a34a);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Decision scenarios */
+        .scenario-card {
+            background: rgba(17, 24, 39, 0.9);
+            border: 2px solid rgba(75, 85, 99, 0.3);
+            border-radius: 16px;
+            padding: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .scenario-card:hover {
+            border-color: rgba(34, 197, 94, 0.4);
+            transform: translateY(-4px);
+        }
+
+        .scenario-card.selected {
+            border-color: rgba(34, 197, 94, 0.8);
+            background: rgba(34, 197, 94, 0.1);
+        }
+
+        .scenario-result {
+            margin-top: 1rem;
+            padding: 1rem;
+            border-radius: 8px;
+            display: none;
+        }
+
+        .scenario-result.good {
+            background: rgba(34, 197, 94, 0.2);
+            border: 2px solid rgba(34, 197, 94, 0.4);
+        }
+
+        .scenario-result.bad {
+            background: rgba(239, 68, 68, 0.2);
+            border: 2px solid rgba(239, 68, 68, 0.4);
+        }
+
+        /* Red flags */
+        .flag-card {
+            background: rgba(17, 24, 39, 0.9);
+            border: 2px solid rgba(75, 85, 99, 0.3);
+            border-radius: 12px;
+            padding: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .flag-card:hover {
+            border-color: rgba(34, 197, 94, 0.4);
+        }
+
+        .flag-card.revealed.safe {
+            border-color: rgba(34, 197, 94, 0.6);
+            background: rgba(34, 197, 94, 0.1);
+        }
+
+        .flag-card.revealed.warning {
+            border-color: rgba(239, 68, 68, 0.6);
+            background: rgba(239, 68, 68, 0.1);
+        }
+
+        .flag-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            font-weight: 600;
+            margin-top: 1rem;
+        }
+
+        .flag-badge.safe {
+            background: rgba(34, 197, 94, 0.2);
+            border: 2px solid rgba(34, 197, 94, 0.4);
+            color: #22c55e;
+        }
+
+        .flag-badge.warning {
+            background: rgba(239, 68, 68, 0.2);
+            border: 2px solid rgba(239, 68, 68, 0.4);
+            color: #ef4444;
+        }
+
+        /* Quiz */
+        .quiz-option {
+            background: rgba(17, 24, 39, 0.8);
+            border: 2px solid rgba(75, 85, 99, 0.3);
+            border-radius: 12px;
+            padding: 1rem 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 0.75rem;
+        }
+
+        .quiz-option:hover {
+            border-color: rgba(34, 197, 94, 0.4);
+        }
+
+        .quiz-option.selected {
+            border-color: rgba(34, 197, 94, 0.6);
+            background: rgba(34, 197, 94, 0.1);
+        }
+
+        .quiz-option.correct {
+            border-color: rgba(34, 197, 94, 0.8);
+            background: rgba(34, 197, 94, 0.2);
+        }
+
+        .quiz-option.incorrect {
+            border-color: rgba(239, 68, 68, 0.8);
+            background: rgba(239, 68, 68, 0.2);
+            animation: shake 0.5s;
+        }
+
+        /* Buttons */
+        .btn {
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #22c55e, #16a34a);
+            color: white;
+            box-shadow: 0 8px 24px rgba(34, 197, 94, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 32px rgba(34, 197, 94, 0.5);
+        }
+
+        .btn-secondary {
+            background: rgba(75, 85, 99, 0.3);
+            color: #d1d5db;
+            border: 2px solid rgba(75, 85, 99, 0.5);
+        }
+
+        .btn-secondary:hover {
+            border-color: rgba(34, 197, 94, 0.4);
+        }
+
+        /* Particles */
+        .particle {
+            position: fixed;
+            width: 4px;
+            height: 4px;
+            background: #22c55e;
+            border-radius: 50%;
+            pointer-events: none;
+            opacity: 0.6;
+            z-index: 1;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-container {
+                font-size: 0.875rem;
+                padding: 0.5rem 1rem;
+            }
+            .quality-score {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Progress Bar -->
+    <div class="progress-container">
+        <div class="progress-bar" id="progressBar" style="width: 14%"></div>
+    </div>
+
+    <!-- Navigation -->
+    <div class="nav-container">
+        <a href="/path2-lessons" style="color: #22c55e; text-decoration: none;">← Back to Path 2</a>
+    </div>
+
+    <!-- Particles -->
+    <div id="particles"></div>
+
+    <!-- Main Content -->
+    <div class="relative z-10 max-w-6xl mx-auto px-4 py-20">
+
+        <!-- Section 1: Introduction -->
+        <section id="section1" class="min-h-screen flex flex-col justify-center">
+            <div class="text-center mb-12 fade-in-up">
+                <div class="inline-block mb-4 px-4 py-2 rounded-full" style="background: rgba(34, 197, 94, 0.2); border: 1px solid rgba(34, 197, 94, 0.4);">
+                    <span class="text-green-400 font-semibold">Lesson 3 of 5</span>
+                </div>
+                <h1 class="text-5xl md:text-6xl font-bold mb-6 gradient-text">
+                    Choosing Jobs<br>and Pay Smartly
+                </h1>
+                <p class="text-xl text-gray-300 max-w-3xl mx-auto">
+                    The highest pay rate isn't always the best choice. Learn to compare job offers, calculate total compensation, and make decisions that improve your quality of life.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+                <div class="glass-card">
+                    <div class="icon-circle blue">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M3 3h18v18H3zM21 9H3M21 15H3M12 3v18"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-blue-400 mb-2 text-center">Compare Offers</h3>
+                    <p class="text-gray-400 text-center">Learn to evaluate job offers beyond just the hourly rate</p>
+                </div>
+
+                <div class="glass-card">
+                    <div class="icon-circle green">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="12" y1="1" x2="12" y2="23"/>
+                            <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-green-400 mb-2 text-center">Calculate True Value</h3>
+                    <p class="text-gray-400 text-center">See how benefits add thousands to your total compensation</p>
+                </div>
+
+                <div class="glass-card">
+                    <div class="icon-circle purple">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#8b5cf6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-purple-400 mb-2 text-center">Understand Trade-Offs</h3>
+                    <p class="text-gray-400 text-center">Balance pay, time, stability, and benefits for your life</p>
+                </div>
+            </div>
+
+            <div class="text-center">
+                <button onclick="nextSection()" class="btn btn-primary">
+                    Compare Job Offers
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: inline-block; margin-left: 8px; vertical-align: middle;">
+                        <polyline points="9 18 15 12 9 6"/>
+                    </svg>
+                </button>
+            </div>
+        </section>
+
+        <!-- Section 2: The Comparison -->
+        <section id="section2" class="hidden min-h-screen flex flex-col justify-center py-20">
+            <h2 class="text-4xl md:text-5xl font-bold text-center mb-4 gradient-text">Which Job Would You Choose?</h2>
+            <p class="text-center text-gray-400 text-lg mb-12">Click to reveal which one is actually better</p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto mb-8" id="jobComparison">
+                <div class="job-card" id="jobA">
+                    <h3 class="text-2xl font-bold text-white mb-4">Job A: Retail Store</h3>
+                    <div class="space-y-3">
+                        <div class="flex justify-between">
+                            <span class="text-gray-400">Pay Rate:</span>
+                            <span class="text-white font-bold">$18/hour</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-400">Hours/Week:</span>
+                            <span class="text-white">25-30 (varies)</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-400">Annual Income:</span>
+                            <span class="text-white">~$27,000</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-400">Benefits:</span>
+                            <span class="text-red-400">None</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-400">Schedule:</span>
+                            <span class="text-white">Varies weekly</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-400">Commute:</span>
+                            <span class="text-white">10 minutes</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="job-card" id="jobB">
+                    <h3 class="text-2xl font-bold text-white mb-4">Job B: Office Admin</h3>
+                    <div class="space-y-3">
+                        <div class="flex justify-between">
+                            <span class="text-gray-400">Pay Rate:</span>
+                            <span class="text-white font-bold">$16/hour</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-400">Hours/Week:</span>
+                            <span class="text-white">40 (guaranteed)</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-400">Annual Income:</span>
+                            <span class="text-white">$33,280</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-400">Benefits:</span>
+                            <span class="text-green-400">Health insurance, PTO</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-400">Schedule:</span>
+                            <span class="text-white">M-F, 9-5</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-400">Commute:</span>
+                            <span class="text-white">25 minutes</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center mb-8">
+                <button onclick="revealWinner()" class="btn btn-primary" id="revealBtn">
+                    Reveal the Better Choice
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: inline-block; margin-left: 8px; vertical-align: middle;">
+                        <circle cx="12" cy="12" r="10"/>
+                        <path d="M12 16v-4"/>
+                        <path d="M12 8h.01"/>
+                    </svg>
+                </button>
+            </div>
+
+            <div id="comparisonExplanation" class="hidden info-card max-w-3xl mx-auto">
+                <div class="flex items-center gap-2 mb-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+                    </svg>
+                    <h4 class="text-xl font-bold text-green-400">Why Job B is Better</h4>
+                </div>
+                <p class="text-gray-300 mb-4">Even though Job A pays $2/hour MORE, Job B is the smarter choice:</p>
+                <ul class="space-y-2 text-gray-300">
+                    <li class="flex items-start gap-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0 mt-1">
+                            <polyline points="20 6 9 17 4 12"/>
+                        </svg>
+                        <span><strong>$6,280 more per year</strong> thanks to guaranteed 40 hours</span>
+                    </li>
+                    <li class="flex items-start gap-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0 mt-1">
+                            <polyline points="20 6 9 17 4 12"/>
+                        </svg>
+                        <span><strong>Health insurance worth $6,000+/year</strong> (you'd pay $500/month without it)</span>
+                    </li>
+                    <li class="flex items-start gap-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0 mt-1">
+                            <polyline points="20 6 9 17 4 12"/>
+                        </svg>
+                        <span><strong>Predictable schedule</strong> - easier to budget and plan your life</span>
+                    </li>
+                    <li class="flex items-start gap-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0 mt-1">
+                            <polyline points="20 6 9 17 4 12"/>
+                        </svg>
+                        <span><strong>Paid time off</strong> - get paid even when you're sick or on vacation</span>
+                    </li>
+                </ul>
+                <p class="text-gray-300 mt-4"><strong class="text-green-400">Total value difference: ~$12,000+/year!</strong> Never choose based on hourly rate alone.</p>
+            </div>
+
+            <div class="text-center mt-12">
+                <button onclick="nextSection()" class="btn btn-primary" id="nextBtn2" style="display: none;">
+                    Calculate Total Value
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: inline-block; margin-left: 8px; vertical-align: middle;">
+                        <polyline points="9 18 15 12 9 6"/>
+                    </svg>
+                </button>
+            </div>
+        </section>
+
+        <!-- Section 3: Hidden Value Calculator -->
+        <section id="section3" class="hidden min-h-screen flex flex-col justify-center py-20">
+            <h2 class="text-4xl md:text-5xl font-bold text-center mb-4 gradient-text">The Hidden Value Calculator</h2>
+            <p class="text-center text-gray-400 text-lg mb-12">Benefits add thousands to your real compensation</p>
+
+            <div class="max-w-4xl mx-auto">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+                    <div>
+                        <h3 class="text-2xl font-bold text-white mb-4 text-center">Base Salary Only</h3>
+                        <div class="value-breakdown">
+                            <div class="value-item">
+                                <span class="text-gray-400">Annual Salary:</span>
+                                <span class="text-white">$45,000</span>
+                            </div>
+                            <div class="value-item">
+                                <span class="text-gray-400">Benefits:</span>
+                                <span class="text-red-400">$0</span>
+                            </div>
+                            <div class="value-item">
+                                <span>Total Value:</span>
+                                <span>$45,000</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h3 class="text-2xl font-bold text-white mb-4 text-center">With Full Benefits</h3>
+                        <div class="value-breakdown">
+                            <div class="value-item">
+                                <span class="text-gray-400">Annual Salary:</span>
+                                <span class="text-white">$45,000</span>
+                            </div>
+                            <div class="value-item">
+                                <span class="text-gray-400">Health Insurance:</span>
+                                <span class="text-green-400">+$7,200</span>
+                            </div>
+                            <div class="value-item">
+                                <span class="text-gray-400">401k Match (3%):</span>
+                                <span class="text-green-400">+$1,350</span>
+                            </div>
+                            <div class="value-item">
+                                <span class="text-gray-400">PTO (10 days):</span>
+                                <span class="text-green-400">+$1,730</span>
+                            </div>
+                            <div class="value-item">
+                                <span class="text-gray-400">Dental/Vision:</span>
+                                <span class="text-green-400">+$600</span>
+                            </div>
+                            <div class="value-item">
+                                <span>Total Value:</span>
+                                <span>$55,880</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-card text-center" style="background: rgba(34, 197, 94, 0.2); border-color: rgba(34, 197, 94, 0.6);">
+                    <div class="text-5xl font-bold text-green-400 mb-4">+$10,880</div>
+                    <p class="text-xl text-gray-300">That's 24% more value than just the salary!</p>
+                    <p class="text-gray-400 mt-2">A $45k job with benefits = a $56k job without benefits</p>
+                </div>
+
+                <div class="info-card mt-8">
+                    <div class="flex items-center gap-2 mb-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+                        </svg>
+                        <h4 class="text-lg font-bold text-green-400">Common Benefit Values</h4>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+                        <div>
+                            <strong class="text-white">Health Insurance:</strong>
+                            <span class="text-gray-400"> $500-700/month ($6,000-8,400/year)</span>
+                        </div>
+                        <div>
+                            <strong class="text-white">401k Match:</strong>
+                            <span class="text-gray-400"> 3-6% of salary (free money!)</span>
+                        </div>
+                        <div>
+                            <strong class="text-white">PTO (Paid Time Off):</strong>
+                            <span class="text-gray-400"> $173/day based on $45k salary</span>
+                        </div>
+                        <div>
+                            <strong class="text-white">Dental + Vision:</strong>
+                            <span class="text-gray-400"> $600-1,000/year combined</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center mt-12">
+                <button onclick="nextSection()" class="btn btn-primary">
+                    Explore Trade-Offs
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: inline-block; margin-left: 8px; vertical-align: middle;">
+                        <polyline points="9 18 15 12 9 6"/>
+                    </svg>
+                </button>
+            </div>
+        </section>
+
+        <!-- Section 4: Trade-Off Explorer -->
+        <section id="section4" class="hidden min-h-screen flex flex-col justify-center py-20">
+            <h2 class="text-4xl md:text-5xl font-bold text-center mb-4 gradient-text">The Trade-Off Explorer</h2>
+            <p class="text-center text-gray-400 text-lg mb-12">Adjust the sliders to see how different factors impact quality of life</p>
+
+            <div class="max-w-4xl mx-auto">
+                <div class="trade-off-container">
+                    <div class="slider-group">
+                        <label class="block text-lg font-semibold mb-2 flex justify-between">
+                            <span class="text-gray-300">Pay Level:</span>
+                            <span class="text-green-400" id="payDisplay">Good ($50k)</span>
+                        </label>
+                        <input type="range" id="paySlider" min="1" max="5" step="1" value="3" oninput="updateTradeOffs()">
+                        <div class="flex justify-between text-xs text-gray-500 mt-1">
+                            <span>Low</span>
+                            <span>Medium</span>
+                            <span>High</span>
+                        </div>
+                    </div>
+
+                    <div class="slider-group">
+                        <label class="block text-lg font-semibold mb-2 flex justify-between">
+                            <span class="text-gray-300">Hours Per Week:</span>
+                            <span class="text-blue-400" id="hoursDisplay">40 hours</span>
+                        </label>
+                        <input type="range" id="hoursSlider" min="1" max="5" step="1" value="3" oninput="updateTradeOffs()">
+                        <div class="flex justify-between text-xs text-gray-500 mt-1">
+                            <span>20-30</span>
+                            <span>40</span>
+                            <span>50-60</span>
+                        </div>
+                    </div>
+
+                    <div class="slider-group">
+                        <label class="block text-lg font-semibold mb-2 flex justify-between">
+                            <span class="text-gray-300">Benefits Quality:</span>
+                            <span class="text-purple-400" id="benefitsDisplay">Good</span>
+                        </label>
+                        <input type="range" id="benefitsSlider" min="1" max="5" step="1" value="3" oninput="updateTradeOffs()">
+                        <div class="flex justify-between text-xs text-gray-500 mt-1">
+                            <span>None</span>
+                            <span>Basic</span>
+                            <span>Excellent</span>
+                        </div>
+                    </div>
+
+                    <div class="slider-group">
+                        <label class="block text-lg font-semibold mb-2 flex justify-between">
+                            <span class="text-gray-300">Job Stability:</span>
+                            <span class="text-yellow-400" id="stabilityDisplay">Stable</span>
+                        </label>
+                        <input type="range" id="stabilitySlider" min="1" max="5" step="1" value="3" oninput="updateTradeOffs()">
+                        <div class="flex justify-between text-xs text-gray-500 mt-1">
+                            <span>Uncertain</span>
+                            <span>Stable</span>
+                            <span>Very Stable</span>
+                        </div>
+                    </div>
+
+                    <div class="quality-meter">
+                        <div class="text-gray-400 mb-2">Overall Quality of Life Score</div>
+                        <div class="quality-score" id="qualityScore">75</div>
+                        <div class="text-gray-400 mt-2" id="qualityDescription">Good balance</div>
+                    </div>
+                </div>
+
+                <div class="info-card mt-8">
+                    <div class="flex items-center gap-2 mb-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+                        </svg>
+                        <h4 class="text-lg font-bold text-green-400">What This Means</h4>
+                    </div>
+                    <p class="text-gray-300">There's no "perfect" combination—it depends on your life stage. A student might value flexibility over pay. A parent might value stability and benefits. Experiment to see what matters most to YOU.</p>
+                </div>
+            </div>
+
+            <div class="text-center mt-12">
+                <button onclick="nextSection()" class="btn btn-primary">
+                    See Real Decisions
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: inline-block; margin-left: 8px; vertical-align: middle;">
+                        <polyline points="9 18 15 12 9 6"/>
+                    </svg>
+                </button>
+            </div>
+        </section>
+
+        <!-- Section 5: Decision Scenarios -->
+        <section id="section5" class="hidden min-h-screen flex flex-col justify-center py-20">
+            <h2 class="text-4xl md:text-5xl font-bold text-center mb-4 gradient-text">Real Decision Scenarios</h2>
+            <p class="text-center text-gray-400 text-lg mb-12">Choose what you'd do in each situation</p>
+
+            <div class="max-w-4xl mx-auto space-y-8">
+                <!-- Scenario 1 -->
+                <div class="info-card">
+                    <h3 class="text-xl font-bold text-white mb-4">Scenario 1: The Commute Question</h3>
+                    <p class="text-gray-300 mb-4">You have two offers at $18/hour. Job A is 10 minutes away. Job B is 45 minutes away but offers full benefits. Which do you take?</p>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="scenario-card" onclick="selectScenario(1, 'A')">
+                            <div class="font-semibold text-white mb-2">Job A: Close to Home</div>
+                            <div class="text-sm text-gray-400">10-minute commute, no benefits</div>
+                            <div class="scenario-result" id="scenario1A">
+                                <div class="flag-badge bad">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <line x1="18" y1="6" x2="6" y2="18"/>
+                                        <line x1="6" y1="6" x2="18" y2="18"/>
+                                    </svg>
+                                    NOT IDEAL
+                                </div>
+                                <p class="text-sm text-gray-300 mt-2">You save 70 minutes/day commuting (~$12/day in gas), but you're missing $6,000+ in health benefits. Unless you have other insurance, Job B is smarter.</p>
+                            </div>
+                        </div>
+
+                        <div class="scenario-card" onclick="selectScenario(1, 'B')">
+                            <div class="font-semibold text-white mb-2">Job B: Longer Commute</div>
+                            <div class="text-sm text-gray-400">45-minute commute, full benefits</div>
+                            <div class="scenario-result" id="scenario1B">
+                                <div class="flag-badge good">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <polyline points="20 6 9 17 4 12"/>
+                                    </svg>
+                                    SMARTER CHOICE
+                                </div>
+                                <p class="text-sm text-gray-300 mt-2">The commute costs ~$3,000/year (gas + time), but benefits are worth $6,000+. You net $3,000+ more per year, plus health security.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Scenario 2 -->
+                <div class="info-card">
+                    <h3 class="text-xl font-bold text-white mb-4">Scenario 2: The Gig vs Stable Job</h3>
+                    <p class="text-gray-300 mb-4">You can deliver food for $25/hour (flexible hours, no benefits) or work retail for $16/hour (40 hours guaranteed, benefits). What do you choose?</p>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="scenario-card" onclick="selectScenario(2, 'gig')">
+                            <div class="font-semibold text-white mb-2">Gig Work ($25/hr)</div>
+                            <div class="text-sm text-gray-400">Flexible, variable hours, no benefits</div>
+                            <div class="scenario-result" id="scenario2gig">
+                                <div class="flag-badge bad">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+                                        <line x1="12" y1="9" x2="12" y2="13"/>
+                                        <line x1="12" y1="17" x2="12.01" y2="17"/>
+                                    </svg>
+                                    RISKY
+                                </div>
+                                <p class="text-sm text-gray-300 mt-2">Looks high, but you pay gas, car wear, and ALL taxes yourself (30%). $25/hr becomes ~$15/hr after expenses. Plus no health insurance or stability.</p>
+                            </div>
+                        </div>
+
+                        <div class="scenario-card" onclick="selectScenario(2, 'retail')">
+                            <div class="font-semibold text-white mb-2">Retail Job ($16/hr)</div>
+                            <div class="text-sm text-gray-400">40 hours guaranteed, full benefits</div>
+                            <div class="scenario-result" id="scenario2retail">
+                                <div class="flag-badge good">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <polyline points="20 6 9 17 4 12"/>
+                                    </svg>
+                                    BETTER VALUE
+                                </div>
+                                <p class="text-sm text-gray-300 mt-2">$33k/year guaranteed + $6k in benefits = $39k total value. More stable income, health coverage, and no car expenses. Better for most people.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Scenario 3 -->
+                <div class="info-card">
+                    <h3 class="text-xl font-bold text-white mb-4">Scenario 3: The Raise vs Promotion</h3>
+                    <p class="text-gray-300 mb-4">You're offered either: (A) $3/hour raise staying hourly, or (B) promotion to salary ($52k/year) with no overtime pay but better title. You currently make $20/hour × 45 hours/week with overtime. Which is better?</p>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="scenario-card" onclick="selectScenario(3, 'raise')">
+                            <div class="font-semibold text-white mb-2">Option A: Stay Hourly</div>
+                            <div class="text-sm text-gray-400">$23/hr, 45 hrs/week with OT</div>
+                            <div class="scenario-result" id="scenario3raise">
+                                <div class="flag-badge good">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <polyline points="20 6 9 17 4 12"/>
+                                    </svg>
+                                    MORE MONEY
+                                </div>
+                                <p class="text-sm text-gray-300 mt-2">$23 × 40 + $34.50 × 5 = $1,092.50/week = $56,810/year. You earn $4,810 MORE than the salaried option!</p>
+                            </div>
+                        </div>
+
+                        <div class="scenario-card" onclick="selectScenario(3, 'promotion')">
+                            <div class="font-semibold text-white mb-2">Option B: Salary Promotion</div>
+                            <div class="text-sm text-gray-400">$52k/year, no OT, better title</div>
+                            <div class="scenario-result" id="scenario3promotion">
+                                <div class="flag-badge bad">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+                                        <line x1="12" y1="9" x2="12" y2="13"/>
+                                        <line x1="12" y1="17" x2="12.01" y2="17"/>
+                                    </svg>
+                                    PAY CUT
+                                </div>
+                                <p class="text-sm text-gray-300 mt-2">$52k/year is less than you make now with OT. The title sounds good, but you're taking a $4,810/year pay cut. Negotiate higher or keep hourly!</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center mt-12">
+                <button onclick="nextSection()" class="btn btn-primary">
+                    Spot Red Flags
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: inline-block; margin-left: 8px; vertical-align: middle;">
+                        <polyline points="9 18 15 12 9 6"/>
+                    </svg>
+                </button>
+            </div>
+        </section>
+
+        <!-- Section 6: Red Flags in Job Offers -->
+        <section id="section6" class="hidden min-h-screen flex flex-col justify-center py-20">
+            <h2 class="text-4xl md:text-5xl font-bold text-center mb-4 gradient-text">Red Flags in Job Offers</h2>
+            <p class="text-center text-gray-400 text-lg mb-12">Click each to see if it's a warning sign</p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto">
+                <div class="flag-card" onclick="revealJobFlag('flag1')" id="jobflag1">
+                    <h3 class="text-lg font-bold text-white mb-2">"We're like a family here"</h3>
+                    <p class="text-sm text-gray-400">Emphasis on "family" culture</p>
+                    <div class="flag-result hidden">
+                        <div class="flag-badge warning">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+                                <line x1="12" y1="9" x2="12" y2="13"/>
+                                <line x1="12" y1="17" x2="12.01" y2="17"/>
+                            </svg>
+                            WARNING SIGN
+                        </div>
+                        <p class="text-sm text-gray-300 mt-2">Often means: unpaid overtime, guilt trips about boundaries, and using "loyalty" to avoid paying market rates. Families don't pay each other—employers should!</p>
+                    </div>
+                </div>
+
+                <div class="flag-card" onclick="revealJobFlag('flag2')" id="jobflag2">
+                    <h3 class="text-lg font-bold text-white mb-2">"Salary range: Competitive"</h3>
+                    <p class="text-sm text-gray-400">Won't state actual pay in posting</p>
+                    <div class="flag-result hidden">
+                        <div class="flag-badge warning">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+                                <line x1="12" y1="9" x2="12" y2="13"/>
+                                <line x1="12" y1="17" x2="12.01" y2="17"/>
+                            </svg>
+                            RED FLAG
+                        </div>
+                        <p class="text-sm text-gray-300 mt-2">They want YOU to name a number first so they can lowball you. Always ask for the range upfront. If they won't tell you, that's sketchy. Many states now REQUIRE salary ranges in postings.</p>
+                    </div>
+                </div>
+
+                <div class="flag-card" onclick="revealJobFlag('flag3')" id="jobflag3">
+                    <h3 class="text-lg font-bold text-white mb-2">"Up to $X per hour"</h3>
+                    <p class="text-sm text-gray-400">Pay listed as "up to" maximum</p>
+                    <div class="flag-result hidden">
+                        <div class="flag-badge warning">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+                                <line x1="12" y1="9" x2="12" y2="13"/>
+                                <line x1="12" y1="17" x2="12.01" y2="17"/>
+                            </svg>
+                            MISLEADING
+                        </div>
+                        <p class="text-sm text-gray-300 mt-2">"Up to $20/hr" usually means most people get $14-16. The maximum is for perfect conditions you'll never meet. Ask what the STARTING rate actually is.</p>
+                    </div>
+                </div>
+
+                <div class="flag-card" onclick="revealJobFlag('flag4')" id="jobflag4">
+                    <h3 class="text-lg font-bold text-white mb-2">"Must be available 24/7"</h3>
+                    <p class="text-sm text-gray-400">Extreme availability requirements</p>
+                    <div class="flag-result hidden">
+                        <div class="flag-badge warning">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+                                <line x1="12" y1="9" x2="12" y2="13"/>
+                                <line x1="12" y1="17" x2="12.01" y2="17"/>
+                            </svg>
+                            RED FLAG
+                        </div>
+                        <p class="text-sm text-gray-300 mt-2">Means unpredictable schedule, last-minute changes, and poor work-life balance. Unless you're paid very well or it's emergency services, run.</p>
+                    </div>
+                </div>
+
+                <div class="flag-card" onclick="revealJobFlag('flag5')" id="jobflag5">
+                    <h3 class="text-lg font-bold text-white mb-2">"Commission-based pay"</h3>
+                    <p class="text-sm text-gray-400">100% commission, no base salary</p>
+                    <div class="flag-result hidden">
+                        <div class="flag-badge safe">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M12 16v-4"/>
+                                <path d="M12 8h.01"/>
+                            </svg>
+                            DEPENDS
+                        </div>
+                        <p class="text-sm text-gray-300 mt-2">Not always bad, but HIGH RISK. Good if: you're experienced in sales + there's a base salary + commission rates are clear. Bad if: no base pay and you have bills to pay immediately.</p>
+                    </div>
+                </div>
+
+                <div class="flag-card" onclick="revealJobFlag('flag6')" id="jobflag6">
+                    <h3 class="text-lg font-bold text-white mb-2">"1099 Contractor" (not W-2)</h3>
+                    <p class="text-sm text-gray-400">Classified as independent contractor</p>
+                    <div class="flag-result hidden">
+                        <div class="flag-badge warning">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+                                <line x1="12" y1="9" x2="12" y2="13"/>
+                                <line x1="12" y1="17" x2="12.01" y2="17"/>
+                            </svg>
+                            BE CAREFUL
+                        </div>
+                        <p class="text-sm text-gray-300 mt-2">You pay ALL taxes yourself (30%), get zero benefits, and no unemployment if fired. Rate should be 30-50% higher than W-2 to be worth it. Many companies misclassify workers illegally—check if you actually qualify as 1099.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="info-card max-w-3xl mx-auto mt-12">
+                <div class="flex items-center gap-2 mb-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+                    </svg>
+                    <h4 class="text-lg font-bold text-green-400">Green Flags to Look For</h4>
+                </div>
+                <ul class="space-y-2 text-gray-300">
+                    <li class="flex items-start gap-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0 mt-1">
+                            <polyline points="20 6 9 17 4 12"/>
+                        </svg>
+                        <span>Clear salary range stated upfront</span>
+                    </li>
+                    <li class="flex items-start gap-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0 mt-1">
+                            <polyline points="20 6 9 17 4 12"/>
+                        </svg>
+                        <span>Benefits clearly listed (health, PTO, 401k)</span>
+                    </li>
+                    <li class="flex items-start gap-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0 mt-1">
+                            <polyline points="20 6 9 17 4 12"/>
+                        </svg>
+                        <span>Specific schedule or hours mentioned</span>
+                    </li>
+                    <li class="flex items-start gap-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0 mt-1">
+                            <polyline points="20 6 9 17 4 12"/>
+                        </svg>
+                        <span>Realistic job description (not 10 jobs in one)</span>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="text-center mt-12">
+                <button onclick="nextSection()" class="btn btn-primary">
+                    Take the Quiz
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: inline-block; margin-left: 8px; vertical-align: middle;">
+                        <polyline points="9 18 15 12 9 6"/>
+                    </svg>
+                </button>
+            </div>
+        </section>
+
+        <!-- Section 7: Quiz -->
+        <section id="section7" class="hidden min-h-screen flex flex-col justify-center py-20">
+            <h2 class="text-4xl md:text-5xl font-bold text-center mb-4 gradient-text">Knowledge Check</h2>
+            <p class="text-center text-gray-400 text-lg mb-12">Test what you've learned—you need 100% to complete</p>
+
+            <div class="max-w-3xl mx-auto" id="quizContainer">
+                <!-- Quiz will be rendered here -->
+            </div>
+
+            <div id="quizResults" class="hidden text-center mt-8">
+                <div id="quizScore" class="text-3xl font-bold mb-4"></div>
+                <div id="quizFeedback" class="text-xl text-gray-300 mb-6"></div>
+                <button onclick="retryQuiz()" id="retryButton" class="btn btn-secondary hidden mr-4">
+                    Retry Quiz
+                </button>
+                <button onclick="finishLesson()" id="finishButton" class="btn btn-primary hidden">
+                    Finish Lesson
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: inline-block; margin-left: 8px; vertical-align: middle;">
+                        <polyline points="20 6 9 17 4 12"/>
+                    </svg>
+                </button>
+            </div>
+        </section>
+
+    </div>
+
+    <script src="config.js"></script>
+    <script src="/lesson-completion.js"></script>
+    <script>
+        // State
+        let currentSection = 1;
+        const totalSections = 7;
+        let quizAnswers = {};
+        let quizSubmitted = false;
+
+        // Quiz questions
+        const quizQuestions = [
+            {
+                id: 1,
+                question: 'Job A pays $20/hr with no benefits. Job B pays $16/hr with health insurance ($600/month value). Which is better financially?',
+                options: [
+                    'Job A - the higher hourly rate wins',
+                    'Job B - the health insurance adds $7,200/year value',
+                    'They\'re about the same',
+                    'Can\'t tell without more info'
+                ],
+                correct: 1
+            },
+            {
+                id: 2,
+                question: 'What should you be most suspicious of in a job posting?',
+                options: [
+                    'Salary range clearly stated',
+                    '"Salary: Competitive" with no actual number',
+                    'Benefits listed in detail',
+                    'Specific schedule mentioned'
+                ],
+                correct: 1
+            },
+            {
+                id: 3,
+                question: 'You work 50 hours at $18/hr. If paid correctly with overtime, what should you earn?',
+                options: [
+                    '$900 (50 × $18)',
+                    '$855 (they can pay less for overtime)',
+                    '$855 (40 × $18 + 10 × $18)',
+                    '$990 (40 × $18 + 10 × $27)'
+                ],
+                correct: 3
+            },
+            {
+                id: 4,
+                question: 'A job offers "$25/hour as a 1099 contractor." What\'s the real value after you pay all taxes yourself?',
+                options: [
+                    '$25/hr - contractors don\'t pay taxes',
+                    '~$17.50/hr after 30% tax burden',
+                    '$20/hr - only 20% tax',
+                    '$25/hr plus extra for being a contractor'
+                ],
+                correct: 1
+            },
+            {
+                id: 5,
+                question: 'Which factor typically adds the MOST value to your total compensation?',
+                options: [
+                    'Free coffee in the break room',
+                    'Health insurance coverage',
+                    'A fancy job title',
+                    'Company t-shirts'
+                ],
+                correct: 1
+            },
+            {
+                id: 6,
+                question: 'What does "we\'re like a family here" often actually mean?',
+                options: [
+                    'Great team culture and support',
+                    'Unpaid overtime and guilt trips about boundaries',
+                    'They have family leave policies',
+                    'Annual family picnics'
+                ],
+                correct: 1
+            }
+        ];
+
+        // Create particles
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 30;
+
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.top = Math.random() * 100 + '%';
+                particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
+                particle.style.animationDelay = (Math.random() * 5) + 's';
+                particle.style.animation = 'float ' + particle.style.animationDuration + ' ease-in-out infinite';
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        // Navigation
+        function nextSection() {
+            document.getElementById('section' + currentSection).classList.add('hidden');
+            currentSection++;
+            document.getElementById('section' + currentSection).classList.remove('hidden');
+            updateProgress();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+
+            if (currentSection === 7) {
+                renderQuiz();
+            }
+        }
+
+        function updateProgress() {
+            const progress = (currentSection / totalSections) * 100;
+            document.getElementById('progressBar').style.width = progress + '%';
+        }
+
+        // Section 2: Job comparison
+        function revealWinner() {
+            const jobB = document.getElementById('jobB');
+            const jobA = document.getElementById('jobA');
+
+            jobB.classList.add('winner');
+            jobA.classList.add('loser');
+
+            jobB.innerHTML += '<div class="winner-badge"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg> BETTER CHOICE</div>';
+
+            document.getElementById('comparisonExplanation').classList.remove('hidden');
+            document.getElementById('revealBtn').style.display = 'none';
+            document.getElementById('nextBtn2').style.display = 'inline-block';
+        }
+
+        // Section 4: Trade-off sliders
+        function updateTradeOffs() {
+            const pay = parseInt(document.getElementById('paySlider').value);
+            const hours = parseInt(document.getElementById('hoursSlider').value);
+            const benefits = parseInt(document.getElementById('benefitsSlider').value);
+            const stability = parseInt(document.getElementById('stabilitySlider').value);
+
+            // Update displays
+            const payLevels = ['Very Low ($25k)', 'Low ($35k)', 'Good ($50k)', 'High ($70k)', 'Very High ($100k+)'];
+            const hoursLevels = ['20-25 hours', '30-35 hours', '40 hours', '45-50 hours', '55-60 hours'];
+            const benefitsLevels = ['None', 'Minimal', 'Good', 'Great', 'Excellent'];
+            const stabilityLevels = ['Unstable', 'Somewhat Stable', 'Stable', 'Very Stable', 'Guaranteed'];
+
+            document.getElementById('payDisplay').textContent = payLevels[pay - 1];
+            document.getElementById('hoursDisplay').textContent = hoursLevels[hours - 1];
+            document.getElementById('benefitsDisplay').textContent = benefitsLevels[benefits - 1];
+            document.getElementById('stabilityDisplay').textContent = stabilityLevels[stability - 1];
+
+            // Calculate quality score
+            const score = (pay * 25) + ((6 - hours) * 15) + (benefits * 15) + (stability * 20);
+            document.getElementById('qualityScore').textContent = Math.round(score);
+
+            // Update description
+            let description = '';
+            if (score < 200) description = 'High stress, unsustainable';
+            else if (score < 300) description = 'Challenging but manageable';
+            else if (score < 400) description = 'Good balance';
+            else if (score < 500) description = 'Great situation';
+            else description = 'Excellent quality of life';
+
+            document.getElementById('qualityDescription').textContent = description;
+        }
+
+        // Section 5: Decision scenarios
+        function selectScenario(scenarioNum, choice) {
+            const card = event.currentTarget;
+            const result = document.getElementById(`scenario${scenarioNum}${choice}`);
+
+            // Remove other selections in same scenario
+            card.parentElement.querySelectorAll('.scenario-card').forEach(c => {
+                c.classList.remove('selected');
+                c.querySelectorAll('.scenario-result').forEach(r => r.style.display = 'none');
+            });
+
+            card.classList.add('selected');
+            result.style.display = 'block';
+        }
+
+        // Section 6: Job red flags
+        function revealJobFlag(flagId) {
+            const card = document.getElementById(flagId);
+            const result = card.querySelector('.flag-result');
+
+            if (result.classList.contains('hidden')) {
+                result.classList.remove('hidden');
+
+                if (flagId === 'jobflag5') {
+                    card.classList.add('revealed', 'safe');
+                } else {
+                    card.classList.add('revealed', 'warning');
+                }
+            }
+        }
+
+        // Section 7: Quiz
+        function renderQuiz() {
+            const container = document.getElementById('quizContainer');
+            container.innerHTML = '';
+
+            quizQuestions.forEach((q, index) => {
+                const questionDiv = document.createElement('div');
+                questionDiv.className = 'mb-8';
+                questionDiv.innerHTML = `
+                    <h3 class="text-xl font-bold text-white mb-4">${index + 1}. ${q.question}</h3>
+                    <div class="space-y-2">
+                        ${q.options.map((opt, i) => `
+                            <div class="quiz-option" onclick="selectAnswer(${q.id}, ${i})" data-question="${q.id}" data-option="${i}">
+                                ${opt}
+                            </div>
+                        `).join('')}
+                    </div>
+                `;
+                container.appendChild(questionDiv);
+            });
+
+            const submitDiv = document.createElement('div');
+            submitDiv.className = 'text-center mt-12';
+            submitDiv.innerHTML = '<button onclick="submitQuiz()" class="btn btn-primary">Submit Quiz</button>';
+            container.appendChild(submitDiv);
+        }
+
+        function selectAnswer(questionId, optionIndex) {
+            if (quizSubmitted) return;
+
+            document.querySelectorAll(`[data-question="${questionId}"]`).forEach(opt => {
+                opt.classList.remove('selected');
+            });
+
+            event.currentTarget.classList.add('selected');
+            quizAnswers[questionId] = optionIndex;
+        }
+
+        function submitQuiz() {
+            if (Object.keys(quizAnswers).length < quizQuestions.length) {
+                alert('Please answer all questions before submitting.');
+                return;
+            }
+
+            quizSubmitted = true;
+            let correct = 0;
+
+            quizQuestions.forEach(q => {
+                const selectedOption = document.querySelector(`[data-question="${q.id}"][data-option="${quizAnswers[q.id]}"]`);
+                const correctOption = document.querySelector(`[data-question="${q.id}"][data-option="${q.correct}"]`);
+
+                if (quizAnswers[q.id] === q.correct) {
+                    correct++;
+                    selectedOption.classList.add('correct');
+                } else {
+                    selectedOption.classList.add('incorrect');
+                    correctOption.classList.add('correct');
+                }
+            });
+
+            const score = (correct / quizQuestions.length) * 100;
+            const passed = score === 100;
+
+            document.getElementById('quizResults').classList.remove('hidden');
+            document.getElementById('quizScore').textContent = `Score: ${correct}/${quizQuestions.length} (${score}%)`;
+            document.getElementById('quizScore').style.color = passed ? '#22c55e' : '#ef4444';
+
+            if (passed) {
+                document.getElementById('quizFeedback').textContent = 'Perfect! You now know how to choose jobs smartly!';
+                document.getElementById('finishButton').classList.remove('hidden');
+
+                const userId = localStorage.getItem('userId') || 'demo';
+                localStorage.setItem(`lesson3_quiz_passed_${userId}`, 'true');
+            } else {
+                document.getElementById('quizFeedback').textContent = 'Not quite—review the incorrect answers and try again!';
+                document.getElementById('retryButton').classList.remove('hidden');
+            }
+
+            window.scrollTo({ top: document.getElementById('quizResults').offsetTop - 100, behavior: 'smooth' });
+        }
+
+        function retryQuiz() {
+            quizAnswers = {};
+            quizSubmitted = false;
+            document.getElementById('quizResults').classList.add('hidden');
+            document.getElementById('retryButton').classList.add('hidden');
+            renderQuiz();
+            window.scrollTo({ top: document.getElementById('quizContainer').offsetTop - 100, behavior: 'smooth' });
+        }
+
+        async function finishLesson() {
+            const userId = localStorage.getItem('userId') || 'demo';
+
+            localStorage.setItem(`path2_lesson3_completed_${userId}`, 'true');
+
+            const success = await completeLesson('path2_lesson3', 2, 3);
+
+            if (success) {
+                window.location.href = '/path2-lessons';
+            }
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            createParticles();
+            updateTradeOffs();
+        });
+    </script>
+</body>
+</html>
