@@ -1,434 +1,425 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Path 3: Credit & Debt Mastery - FinanceU</title>
+    <title>Path 3: Credit Building - FinanceU</title>
     <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
-    <link rel="icon" type="image/svg+xml" sizes="16x16" href="assets/favicon-16x16.svg">
-    <link rel="icon" type="image/svg+xml" sizes="32x32" href="assets/favicon-32x32.svg">
-    <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.svg">
-    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        /* SVG Icon Alignment Fixes */
-        svg {
-            display: inline-block;
-            vertical-align: middle;
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+        * {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
         }
 
-        .intro-card-icon svg,
-        .mistake-icon svg,
-        .reflection-icon svg,
-        .result-icon svg {
-            display: block;
-            margin: 0 auto;
+        body {
+            background: #0f0f0f;
+            overflow-x: hidden;
         }
 
-        .budget-method-emoji svg,
-        .budget-item-label svg {
-            display: inline-block;
-            vertical-align: middle;
-            margin-right: 8px;
+        /* Gradient text */
+        .gradient-text {
+            background: linear-gradient(135deg, #e5e7eb 0%, #9ca3af 50%, #e5e7eb 100%);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradientShift 5s ease infinite;
         }
 
-        p svg, li svg, span svg {
-            display: inline-block;
-            vertical-align: middle;
-            margin: 0 2px;
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
         }
 
-        .path-header {
-            background: #FFFFFF;
-            color: #000000;
-            padding: 60px 20px 40px;
-            text-align: center;
-            border-bottom: 1px solid #e5e5e5;
+        /* Glowing effects */
+        .glow-grey {
+            box-shadow: 0 0 20px rgba(156, 163, 175, 0.4), 0 0 40px rgba(156, 163, 175, 0.2);
         }
-        .path-header h1 {
-            font-size: 42px;
-            margin-bottom: 15px;
+
+        /* Navigation */
+        .nav-blur {
+            backdrop-filter: blur(12px);
+            background: rgba(15, 15, 15, 0.9);
+            border-bottom: 1px solid rgba(156, 163, 175, 0.15);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
         }
-        .path-header p {
-            font-size: 18px;
-            color: #4a4a4a;
-            max-width: 700px;
-            margin: 0 auto;
+
+        /* 3D Button Effect */
+        .btn-3d {
+            transform-style: preserve-3d;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3), 0 8px 16px rgba(0, 0, 0, 0.2);
         }
-        .lessons-container {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 60px 20px;
+
+        .btn-3d:hover {
+            transform: translateY(-4px) translateZ(10px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4), 0 16px 32px rgba(0, 0, 0, 0.3), 0 0 40px rgba(209, 213, 219, 0.2);
         }
+
+        /* Lesson card with 3D effect */
         .lesson-card {
-            background: white;
-            border-radius: 12px;
-            padding: 25px;
-            margin-bottom: 20px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            transition: transform 0.2s, box-shadow 0.2s;
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(17, 24, 39, 0.95) 100%);
+            backdrop-filter: blur(20px);
+            border: 2px solid rgba(59, 130, 246, 0.3);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transform-style: preserve-3d;
             position: relative;
-            border-left: 4px solid transparent;
         }
-        .lesson-card::before {
-            content: attr(data-lesson);
+
+        .lesson-card:hover {
+            transform: translateY(-12px) scale(1.02);
+            border-color: rgba(59, 130, 246, 0.6);
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.9), 0 0 60px rgba(59, 130, 246, 0.3);
+            z-index: 10;
+        }
+
+        .lesson-card.completed {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(17, 24, 39, 0.95) 100%);
+            border-color: rgba(16, 185, 129, 0.4);
+        }
+
+        .lesson-card.completed:hover {
+            border-color: rgba(16, 185, 129, 0.7);
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.9), 0 0 60px rgba(16, 185, 129, 0.3);
+        }
+
+        .lesson-card.locked {
+            background: linear-gradient(135deg, rgba(75, 85, 99, 0.1) 0%, rgba(17, 24, 39, 0.95) 100%);
+            border-color: rgba(75, 85, 99, 0.3);
+            opacity: 0.6;
+        }
+
+        /* Lesson number badge - positioned at top corner */
+        .lesson-number {
             position: absolute;
-            left: 25px;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 40px;
-            height: 40px;
-            background: #2563eb;
+            top: 20px;
+            left: 20px;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: white;
-            font-weight: 700;
-            font-size: 16px;
-            box-shadow: 0 2px 8px rgba(37, 99, 235, 0.3);
-        }
-        .lesson-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-            border-left-color: #2563eb;
-        }
-        .lesson-card.completed {
-            background: linear-gradient(135deg, #f0fdf4 0%, #d1fae5 100%);
-            border: 2px solid #00A676;
-            border-left: 4px solid #00A676;
-        }
-        .lesson-card.completed::before {
-            background: linear-gradient(135deg, #00A676 0%, #10b981 100%);
-            box-shadow: 0 2px 8px rgba(0, 166, 118, 0.3);
-        }
-        .lesson-info {
-            margin-left: 60px;
-        }
-        .lesson-info h3 {
             font-size: 22px;
-            margin-bottom: 8px;
-            color: var(--text-primary);
-        }
-        .lesson-info p {
-            color: var(--text-secondary);
-            font-size: 15px;
-            margin: 0;
-        }
-        .lesson-status {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-        .completed-badge {
-            background: linear-gradient(135deg, #00A676 0%, #10b981 100%);
+            font-weight: 800;
             color: white;
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-size: 14px;
-            font-weight: 600;
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            box-shadow: 0 2px 8px rgba(0, 166, 118, 0.3);
+            box-shadow: 0 8px 20px rgba(59, 130, 246, 0.5);
+            z-index: 2;
+            border: 3px solid #0f0f0f;
         }
-        .btn-start-lesson {
-            padding: 12px 24px;
-            background: #2563eb;
-            color: white;
-            text-decoration: none;
-            border-radius: 8px;
-            font-weight: 600;
-            transition: background 0.2s;
-            border: none;
-            cursor: pointer;
+
+        .lesson-card.completed .lesson-number {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            box-shadow: 0 8px 20px rgba(16, 185, 129, 0.5);
         }
-        .btn-start-lesson:hover {
-            background: #1d4ed8;
+
+        .lesson-card.locked .lesson-number {
+            background: linear-gradient(135deg, #6b7280 0%, #4b5563 100%);
+            box-shadow: 0 8px 20px rgba(107, 114, 128, 0.5);
         }
-        .back-link {
-            display: inline-block;
-            margin-bottom: 20px;
-            color: #2563eb;
-            text-decoration: none;
-            font-weight: 600;
-        }
-        .back-link:hover {
-            text-decoration: underline;
-        }
-        .quiz-card {
-            background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
-            border-radius: 12px;
-            padding: 30px;
-            margin-top: 40px;
-            margin-bottom: 20px;
-            box-shadow: 0 4px 12px rgba(251, 191, 36, 0.3);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            transition: transform 0.2s, box-shadow 0.2s;
-            position: relative;
-            overflow: hidden;
-        }
-        .quiz-card::before {
-            content: '';
+
+        /* Floating particles */
+        .particle {
             position: absolute;
-            top: -50%;
-            right: -50%;
-            width: 200px;
-            height: 200px;
-            background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, transparent 70%);
-            animation: pulse 3s ease-in-out infinite;
+            border-radius: 50%;
+            pointer-events: none;
+            opacity: 0.3;
         }
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); opacity: 0.5; }
-            50% { transform: scale(1.2); opacity: 0.8; }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-30px) rotate(180deg); }
         }
+
+        /* Quiz card special styling */
+        .quiz-card {
+            background: linear-gradient(135deg, rgba(251, 191, 36, 0.15) 0%, rgba(17, 24, 39, 0.95) 100%);
+            border: 3px solid rgba(251, 191, 36, 0.5);
+        }
+
         .quiz-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 16px rgba(251, 191, 36, 0.4);
+            border-color: rgba(251, 191, 36, 0.8);
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.9), 0 0 60px rgba(251, 191, 36, 0.4);
         }
-        .quiz-card .lesson-info {
-            margin-left: 0;
+
+        .quiz-card.completed {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.15) 0%, rgba(17, 24, 39, 0.95) 100%);
+            border-color: rgba(16, 185, 129, 0.5);
+        }
+
+        /* Intro card special styling */
+        .intro-card {
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.1) 0%, rgba(17, 24, 39, 0.95) 100%);
+            border: 2px solid rgba(139, 92, 246, 0.3);
+        }
+
+        .intro-card:hover {
+            border-color: rgba(139, 92, 246, 0.6);
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.9), 0 0 60px rgba(139, 92, 246, 0.3);
+        }
+
+        /* Coming Soon card styling */
+        .coming-soon-card {
+            background: linear-gradient(135deg, rgba(75, 85, 99, 0.1) 0%, rgba(17, 24, 39, 0.95) 100%);
+            border: 2px solid rgba(75, 85, 99, 0.3);
+            opacity: 0.7;
+        }
+
+        /* Consistent uniform grid layout */
+        .lessons-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
             position: relative;
-            z-index: 1;
         }
-        .quiz-card .lesson-info h3 {
-            color: white;
-            font-size: 26px;
+
+        /* All lessons have equal size */
+        .lesson-1, .lesson-2, .lesson-3, .lesson-4, .lesson-5 {
+            grid-column: span 1;
         }
-        .quiz-card .lesson-info p {
-            color: rgba(255, 255, 255, 0.9);
-            font-size: 15px;
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .lessons-grid {
+                grid-template-columns: 1fr;
+            }
         }
-        .btn-start-quiz {
-            padding: 14px 28px;
-            background: white;
-            color: #f59e0b;
-            text-decoration: none;
-            border-radius: 8px;
-            font-weight: 700;
-            transition: all 0.2s;
-            border: none;
-            cursor: pointer;
-            font-size: 16px;
-        }
-        .btn-start-quiz:hover {
-            background: #fffbeb;
-            transform: scale(1.05);
-        }
-        .quiz-completed-badge {
-            background: #00A676;
-            color: white;
-            padding: 10px 20px;
-            border-radius: 20px;
-            font-size: 15px;
-            font-weight: 600;
+
+        /* Icon container for visual interest */
+        .lesson-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 12px;
             display: flex;
             align-items: center;
-            gap: 8px;
+            justify-content: center;
+            flex-shrink: 0;
         }
+
+        /* Staggered animation on page load */
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .lesson-card {
+            animation: slideInUp 0.6s ease-out backwards;
+        }
+
+        .lesson-1 { animation-delay: 0.1s; }
+        .lesson-2 { animation-delay: 0.2s; }
+        .lesson-3 { animation-delay: 0.3s; }
+        .lesson-4 { animation-delay: 0.4s; }
+        .lesson-5 { animation-delay: 0.5s; }
     </style>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            lucide.createIcons();
+        });
+    </script>
 </head>
-<body class="homepage-dark">
-    <nav class="navbar">
-        <div class="container">
-            <div class="nav-wrapper">
-                <div class="logo"><a href="/" style="color: inherit; text-decoration: none;">Finance<span class="logo-accent">U</span></a></div>
-                <ul class="nav-links">
-                    <li><a href="/">Home</a></li>
-                    <li><a href="dashboard">Dashboard</a></li>
-                    <li id="authButtons" style=" opacity: 0;"></li>
-                </ul>
+<body class="min-h-screen relative" style="color: #d1d5db;">
+    <!-- Floating Particles -->
+    <div id="particles-container" style="position: fixed; width: 100%; height: 100%; top: 0; left: 0; pointer-events: none; z-index: 1;"></div>
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 nav-blur">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <a href="/" class="flex items-center space-x-2">
+                    <div class="w-10 h-10 rounded-full bg-gradient-to-br from-gray-200 to-gray-400 glow-grey flex items-center justify-center font-bold text-xl" style="color: #1f2937;">
+                        F
+                    </div>
+                    <span class="text-2xl font-bold gradient-text">FinanceU</span>
+                </a>
+
+                <div class="hidden md:flex items-center space-x-6">
+                    <a href="/" class="text-gray-400 hover:text-gray-200 transition-colors font-medium">Home</a>
+                    <a href="/dashboard" class="text-gray-400 hover:text-gray-200 transition-colors font-medium">Dashboard</a>
+                </div>
+
+                <div class="flex items-center space-x-4" id="authButtons">
+                    <button onclick="logout()" class="btn-3d px-6 py-2.5 bg-gradient-to-r from-gray-200 to-gray-300 hover:from-gray-300 hover:to-gray-200 rounded-lg font-semibold glow-grey transition-all" style="color: #1f2937;">
+                        Logout
+                    </button>
+                </div>
             </div>
         </div>
     </nav>
 
-    <!-- Path Header -->
-    <section class="path-header">
-        <h1>Path 3: Credit & Debt Mastery</h1>
-        <p>Master credit scores, credit cards, and debt management strategies</p>
+    <!-- Main Content -->
+    <section class="min-h-screen pt-32 pb-20 relative z-10">
+        <div class="container mx-auto px-6 max-w-7xl">
+            <!-- Back Button -->
+            <a href="/dashboard" class="inline-flex items-center text-gray-400 hover:text-gray-200 transition-colors mb-8 font-medium">
+                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+                </svg>
+                Back to Dashboard
+            </a>
+
+            <!-- Path Header -->
+            <div class="mb-16 text-center">
+                <h1 class="text-5xl md:text-6xl font-black mb-4 text-gray-200">
+                    Path 3: <span class="gradient-text">Credit Building</span>
+                </h1>
+                <p class="text-xl text-gray-400 max-w-2xl mx-auto">
+                    Master credit scores, building credit from scratch, and managing debt responsibly
+                </p>
+            </div>
+
+            <!-- Coming Soon Message -->
+            <div class="coming-soon-card rounded-3xl p-10 mb-16 relative overflow-hidden text-center">
+                <div class="mb-6">
+                    <div class="mb-4 flex justify-center">
+                        <i data-lucide="clock" class="w-16 h-16 text-gray-400"></i>
+                    </div>
+                    <h3 class="text-3xl font-bold text-gray-200 mb-3">Coming Soon</h3>
+                    <p class="text-gray-400 text-lg">Path 3 lessons are currently being developed. Check back soon to start learning about credit building!</p>
+                </div>
+            </div>
+
+            <!-- Lessons Grid - Consistent Uniform Layout -->
+            <div class="lessons-grid mb-16">
+                <!-- Lesson 1 -->
+                <div class="lesson-1 lesson-card coming-soon-card rounded-3xl p-8 pt-20 relative overflow-hidden locked" style="pointer-events: none;">
+                    <div class="lesson-number">1</div>
+                    <div class="flex flex-col h-full">
+                        <div class="lesson-icon bg-blue-500/20 border-2 border-blue-500/40 mb-6">
+                            <svg class="w-8 h-8 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-200 mb-3">Lesson 1</h3>
+                        <p class="text-gray-400 mb-6 flex-1">Coming Soon</p>
+                        <div class="flex items-center gap-4 flex-wrap">
+                            <span class="text-gray-500 text-sm font-semibold flex items-center gap-2">
+                                <i data-lucide="clock" class="w-4 h-4"></i> Coming Soon
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Lesson 2 -->
+                <div class="lesson-2 lesson-card coming-soon-card rounded-3xl p-8 pt-20 relative overflow-hidden locked" style="pointer-events: none;">
+                    <div class="lesson-number">2</div>
+                    <div class="flex flex-col h-full">
+                        <div class="lesson-icon bg-blue-500/20 border-2 border-blue-500/40 mb-6">
+                            <svg class="w-8 h-8 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-200 mb-3">Lesson 2</h3>
+                        <p class="text-gray-400 mb-6 flex-1">Coming Soon</p>
+                        <div class="flex items-center gap-4 flex-wrap">
+                            <span class="text-gray-500 text-sm font-semibold flex items-center gap-2">
+                                <i data-lucide="clock" class="w-4 h-4"></i> Coming Soon
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Lesson 3 -->
+                <div class="lesson-3 lesson-card coming-soon-card rounded-3xl p-8 pt-20 relative overflow-hidden locked" style="pointer-events: none;">
+                    <div class="lesson-number">3</div>
+                    <div class="flex flex-col h-full">
+                        <div class="lesson-icon bg-blue-500/20 border-2 border-blue-500/40 mb-6">
+                            <svg class="w-8 h-8 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-200 mb-3">Lesson 3</h3>
+                        <p class="text-gray-400 mb-6 flex-1">Coming Soon</p>
+                        <div class="flex items-center gap-4 flex-wrap">
+                            <span class="text-gray-500 text-sm font-semibold flex items-center gap-2">
+                                <i data-lucide="clock" class="w-4 h-4"></i> Coming Soon
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Lesson 4 -->
+                <div class="lesson-4 lesson-card coming-soon-card rounded-3xl p-8 pt-20 relative overflow-hidden locked" style="pointer-events: none;">
+                    <div class="lesson-number">4</div>
+                    <div class="flex flex-col h-full">
+                        <div class="lesson-icon bg-blue-500/20 border-2 border-blue-500/40 mb-6">
+                            <svg class="w-8 h-8 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-200 mb-3">Lesson 4</h3>
+                        <p class="text-gray-400 mb-6 flex-1">Coming Soon</p>
+                        <div class="flex items-center gap-4 flex-wrap">
+                            <span class="text-gray-500 text-sm font-semibold flex items-center gap-2">
+                                <i data-lucide="clock" class="w-4 h-4"></i> Coming Soon
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Lesson 5 -->
+                <div class="lesson-5 lesson-card coming-soon-card rounded-3xl p-8 pt-20 relative overflow-hidden locked" style="pointer-events: none;">
+                    <div class="lesson-number">5</div>
+                    <div class="flex flex-col h-full">
+                        <div class="lesson-icon bg-blue-500/20 border-2 border-blue-500/40 mb-6">
+                            <svg class="w-8 h-8 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-200 mb-3">Lesson 5</h3>
+                        <p class="text-gray-400 mb-6 flex-1">Coming Soon</p>
+                        <div class="flex items-center gap-4 flex-wrap">
+                            <span class="text-gray-500 text-sm font-semibold flex items-center gap-2">
+                                <i data-lucide="clock" class="w-4 h-4"></i> Coming Soon
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </section>
 
-    <!-- Lessons List -->
-    <div class="lessons-container">
-        <a href="dashboard" class="back-link">← Back to Dashboard</a>
-
-        <div id="lessonsList">
-            <!-- Lesson 1 -->
-            <div class="lesson-card" data-lesson="1">
-                <div class="lesson-info">
-                    <h3>Lesson 1 - Understanding Credit Scores</h3>
-                    <p>Master the fundamentals of credit scores and why they matter for your financial future</p>
-                </div>
-                <div class="lesson-status">
-                    <a href="/path3-lesson1" class="btn-start-lesson">Start Lesson</a>
-                </div>
-            </div>
-
-            <!-- Lesson 2 -->
-            <div class="lesson-card" data-lesson="2">
-                <div class="lesson-info">
-                    <h3>Lesson 2 - Building Credit from Scratch</h3>
-                    <p>Learn how to start building your credit history even with no prior experience</p>
-                </div>
-                <div class="lesson-status">
-                    <a href="/path3-lesson2" class="btn-start-lesson">Start Lesson</a>
-                </div>
-            </div>
-
-            <!-- Lesson 3 -->
-            <div class="lesson-card" data-lesson="3">
-                <div class="lesson-info">
-                    <h3>Lesson 3 - Choosing Your First Credit Card</h3>
-                    <p>Navigate the world of credit cards and find the perfect match for your needs</p>
-                </div>
-                <div class="lesson-status">
-                    <a href="/path3-lesson3" class="btn-start-lesson">Start Lesson</a>
-                </div>
-            </div>
-
-            <!-- Lesson 4 -->
-            <div class="lesson-card" data-lesson="4">
-                <div class="lesson-info">
-                    <h3>Lesson 4 - Credit Card Best Practices</h3>
-                    <p>Develop smart habits to use credit cards responsibly and build excellent credit</p>
-                </div>
-                <div class="lesson-status">
-                    <a href="/path3-lesson4" class="btn-start-lesson">Start Lesson</a>
-                </div>
-            </div>
-
-            <!-- Lesson 5 -->
-            <div class="lesson-card" data-lesson="5">
-                <div class="lesson-info">
-                    <h3>Lesson 5 - Debt Traps and How to Avoid Them</h3>
-                    <p>Recognize and avoid common debt traps that can derail your financial progress</p>
-                </div>
-                <div class="lesson-status">
-                    <a href="/path3-lesson5" class="btn-start-lesson">Start Lesson</a>
-                </div>
-            </div>
-
-            <!-- Lesson 6 -->
-            <div class="lesson-card" data-lesson="6">
-                <div class="lesson-info">
-                    <h3>Lesson 6 - Student Loans: The Smart Way</h3>
-                    <p>Navigate student loans wisely and minimize your debt burden after graduation</p>
-                </div>
-                <div class="lesson-status">
-                    <a href="/path3-lesson6" class="btn-start-lesson">Start Lesson</a>
-                </div>
-            </div>
-
-            <!-- Lesson 7 -->
-            <div class="lesson-card" data-lesson="7">
-                <div class="lesson-info">
-                    <h3>Lesson 7 - Good Debt vs Bad Debt</h3>
-                    <p>Learn to distinguish between debt that builds wealth and debt that destroys it</p>
-                </div>
-                <div class="lesson-status">
-                    <a href="/path3-lesson7" class="btn-start-lesson">Start Lesson</a>
-                </div>
-            </div>
-
-            <!-- Lesson 8 -->
-            <div class="lesson-card" data-lesson="8">
-                <div class="lesson-info">
-                    <h3>Lesson 8 - Credit Monitoring and Protection</h3>
-                    <p>Protect your credit and catch errors before they damage your financial health</p>
-                </div>
-                <div class="lesson-status">
-                    <a href="/path3-lesson8" class="btn-start-lesson">Start Lesson</a>
-                </div>
-            </div>
-        </div>
-
-        <!-- Final Quiz -->
-        <div class="quiz-card" id="quizCard" style="display: none;">
-            <div class="lesson-info">
-                <h3><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><polygon points="10,5 2,9 10,13 18,9" fill="#3B82F6"/><polygon points="10,13 6,11 6,14 10,16 14,14 14,11" fill="#60A5FA"/></svg> Final Quiz</h3>
-                <p>Test your knowledge of all 8 lessons • 16 questions • 80% to pass</p>
-            </div>
-            <div class="lesson-status">
-                <a href="/path3-quiz" class="btn-start-quiz">Take Quiz</a>
-            </div>
-        </div>
-    </div>
-
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h4>FinanceU</h4>
-                    <p>Making financial literacy accessible for everyone.</p>
-                </div>
-                <div class="footer-section">
-                    <h4>Company</h4>
-                    <ul>
-                        <li><a href="/about">About Us</a></li>
-                        <li><a href="/careers">Careers</a></li>
-                        <li><a href="/contact">Contact</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h4>Support</h4>
-                    <ul>
-                        <li><a href="/help">Help Center</a></li>
-                        <li><a href="/privacy">Privacy Policy</a></li>
-                        <li><a href="/terms">Terms of Service</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p style=" font-size: 0.85rem; opacity: 0.8; margin-bottom: 10px;">Disclaimer: FinanceU provides educational content only and does not offer financial, legal, or investment advice. Always consult with a qualified professional before making financial decisions.</p>
-                <p>&copy; 2025 FinanceU. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
-
-    <script src="config.js"></script>
-    <script src="lesson-sync.js"></script>
-    <script src="animations.js"></script>
     <script>
-        // Check authentication status and update nav
-        async function updateNav() {
-            const authButtons = document.getElementById('authButtons');
+        // Create floating particles
+        function createParticles() {
+            const container = document.getElementById('particles-container');
+            const particleCount = 25;
 
-            // Check localStorage for cached auth state and render immediately
-            const cachedAuth = localStorage.getItem('authState');
-            if (cachedAuth) {
-                const authState = JSON.parse(cachedAuth);
-                authButtons.innerHTML = authState.isLoggedIn
-                    ? `<a href="#" onclick="logout(); return false;" class="btn-primary">Logout</a>`
-                    : `<a href="login" class="btn-primary">Login</a>`;
-                authButtons.style.opacity = '1';
-            }
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
 
-            // Then verify with server in background
-            try {
-                const response = await fetch(`${API_URL}/auth/me`, { credentials: 'include' });
+                const size = Math.random() * 4 + 2;
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                particle.style.left = `${Math.random() * 100}%`;
+                particle.style.top = `${Math.random() * 100}%`;
+                particle.style.background = `rgba(156, 163, 175, ${Math.random() * 0.5 + 0.2})`;
+                particle.style.animation = `float ${Math.random() * 10 + 10}s ease-in-out infinite`;
+                particle.style.animationDelay = `${Math.random() * 5}s`;
 
-                if (response.ok) {
-                    localStorage.setItem('authState', JSON.stringify({ isLoggedIn: true }));
-                    authButtons.innerHTML = `<a href="#" onclick="logout(); return false;" class="btn-primary">Logout</a>`;
-                } else {
-                    localStorage.setItem('authState', JSON.stringify({ isLoggedIn: false }));
-                    authButtons.innerHTML = `<a href="login" class="btn-primary">Login</a>`;
-                }
-                authButtons.style.opacity = '1';
-            } catch (error) {
-                console.log('Not logged in');
-                localStorage.setItem('authState', JSON.stringify({ isLoggedIn: false }));
-                authButtons.innerHTML = `<a href="login" class="btn-primary">Login</a>`;
-                authButtons.style.opacity = '1';
+                container.appendChild(particle);
             }
         }
+
+        createParticles();
+    </script>
+
+    <script src="config.js"></script>
+    <script>
         // Logout function
         async function logout() {
-            // Clear auth data only - keep user-specific progress data
             localStorage.removeItem('authState');
             localStorage.removeItem('token');
             localStorage.removeItem('userId');
@@ -445,113 +436,26 @@
             }
         }
 
-        // Load completed lessons and handle locking logic
-        function loadCompletedLessons() {
-            const userId = localStorage.getItem('userId');
+        // Update auth button
+        async function updateNav() {
+            const authButtons = document.getElementById('authButtons');
 
-            // If no userId, don't load any progress (user not logged in)
-            if (!userId || userId === 'null' || userId === 'undefined') {
-                // Lock all lessons except lesson 1
-                for (let lessonNum = 2; lessonNum <= 8; lessonNum++) {
-                    const lessonCard = document.querySelector(`[data-lesson="${lessonNum}"]`);
-                    if (lessonCard) {
-                        lessonCard.style.opacity = '0.6';
-                        lessonCard.style.pointerEvents = 'none';
-                        const statusDiv = lessonCard.querySelector('.lesson-status');
-                        statusDiv.innerHTML = `<span style="color: #9ca3af; font-weight: 600;"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="5" y="9" width="10" height="8" rx="1" fill="#6B7280"/><path d="M7 9 L7 6 C7 4.3 8.3 3 10 3 C11.7 3 13 4.3 13 6 L13 9" stroke="#6B7280" stroke-width="2" fill="none"/></svg> Complete Previous Lesson</span>`;
-                    }
-                }
-                return;
-            }
+            try {
+                const response = await fetch(`${API_URL}/auth/me`, { credentials: 'include' });
 
-            const completed = JSON.parse(localStorage.getItem(`path3_completed_${userId}`) || '[]');
-
-            // Handle each lesson
-            for (let lessonNum = 1; lessonNum <= 8; lessonNum++) {
-                const lessonCard = document.querySelector(`[data-lesson="${lessonNum}"]`);
-                if (!lessonCard) continue;
-
-                const statusDiv = lessonCard.querySelector('.lesson-status');
-                const previousQuizPassed = lessonNum === 1 || localStorage.getItem(`lesson${lessonNum - 1 + 16}_quiz_passed_${userId}`) === 'true';
-
-                if (lessonNum === 1) {
-                    // Lesson 1 is always unlocked
-                    if (completed.includes(1)) {
-                        lessonCard.classList.add('completed');
-                        statusDiv.innerHTML = `
-                            <span class="completed-badge">Completed</span>
-                            <a href="/path3-lesson1" class="btn-start-lesson">Review</a>
-                        `;
-                    }
+                if (response.ok) {
+                    localStorage.setItem('authState', JSON.stringify({ isLoggedIn: true }));
                 } else {
-                    // Other lessons require previous quiz completion
-                    if (!previousQuizPassed) {
-                        // Lock the lesson
-                        lessonCard.style.opacity = '0.6';
-                        lessonCard.style.pointerEvents = 'none';
-                        statusDiv.innerHTML = `
-                            <span style="color: #9ca3af; font-weight: 600; white-space: nowrap;"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="5" y="9" width="10" height="8" rx="1" fill="#6B7280"/><path d="M7 9 L7 6 C7 4.3 8.3 3 10 3 C11.7 3 13 4.3 13 6 L13 9" stroke="#6B7280" stroke-width="2" fill="none"/></svg> Complete Previous Lesson</span>
-                        `;
-                    } else if (completed.includes(lessonNum)) {
-                        // Lesson completed
-                        lessonCard.classList.add('completed');
-                        statusDiv.innerHTML = `
-                            <span class="completed-badge">Completed</span>
-                            <a href="path3-lesson${lessonNum}" class="btn-start-lesson">Review</a>
-                        `;
-                    }
-                    // If previous quiz passed but not completed, button already shows "Start Lesson"
+                    window.location.href = '/login.html';
                 }
+            } catch (error) {
+                window.location.href = '/login.html';
             }
         }
 
-        // Check if all lessons completed and show quiz
-        function checkQuizAvailability() {
-            const userId = localStorage.getItem('userId');
-            const quizCard = document.getElementById('quizCard');
-
-            // If no userId, hide quiz
-            if (!userId || userId === 'null' || userId === 'undefined') {
-                quizCard.style.display = 'none';
-                return;
-            }
-
-            const completed = JSON.parse(localStorage.getItem(`path3_completed_${userId}`) || '[]');
-            const quizCompleted = localStorage.getItem(`path3_quiz_completed_${userId}`);
-            const quizScore = localStorage.getItem(`path3_quiz_score_${userId}`);
-
-            // Check if all 8 lessons are completed AND all 8 lesson quizzes are passed
-            let allQuizzesPassed = true;
-            for (let i = 17; i <= 24; i++) {
-                if (localStorage.getItem(`lesson${i}_quiz_passed_${userId}`) !== 'true') {
-                    allQuizzesPassed = false;
-                    break;
-                }
-            }
-
-            if (completed.length === 8 && allQuizzesPassed) {
-                quizCard.style.display = 'flex';
-
-                if (quizCompleted === 'true') {
-                    const statusDiv = quizCard.querySelector('.lesson-status');
-                    statusDiv.innerHTML = `
-                        <span class="quiz-completed-badge">Passed (${quizScore}%)</span>
-                        <a href="/path3-quiz" class="btn-start-quiz">Retake Quiz</a>
-                    `;
-                }
-            } else {
-                // Keep quiz hidden if not all lessons completed
-                quizCard.style.display = 'none';
-            }
-        }
-
-        // Initialize page with progress sync
+        // Initialize page
         async function initializePage() {
             await updateNav();
-            const syncResult = await syncLessonProgress();
-            console.log('Sync result:', syncResult);
-            loadCompletedLessons();
-            checkQuizAvailability();
         }
 
         initializePage();
