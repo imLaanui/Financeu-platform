@@ -271,15 +271,61 @@
             border-radius: 16px;
             padding: 2rem;
             position: relative;
-            height: 600px;
+        }
+
+        .matrix-wrapper {
+            display: flex;
+            gap: 1rem;
+            align-items: stretch;
+        }
+
+        .matrix-y-axis {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding-right: 0.5rem;
+            min-width: 80px;
+        }
+
+        .matrix-y-label {
+            writing-mode: vertical-lr;
+            transform: rotate(180deg);
+            text-align: center;
+            font-size: 0.75rem;
+            color: #9ca3af;
+            white-space: nowrap;
+        }
+
+        .matrix-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .matrix-grid-wrapper {
+            flex: 1;
+            position: relative;
         }
 
         .matrix-grid {
             position: relative;
             width: 100%;
-            height: 500px;
+            height: 450px;
             border-left: 3px solid rgba(34, 197, 94, 0.6);
             border-bottom: 3px solid rgba(34, 197, 94, 0.6);
+        }
+
+        .matrix-x-axis {
+            display: flex;
+            justify-content: space-between;
+            padding-top: 0.5rem;
+            padding-left: 3px;
+        }
+
+        .matrix-x-label {
+            font-size: 0.75rem;
+            color: #9ca3af;
+            white-space: nowrap;
         }
 
         .matrix-dot {
@@ -299,15 +345,16 @@
         }
 
         .matrix-tooltip {
-            position: absolute;
-            background: rgba(17, 24, 39, 0.95);
+            position: fixed;
+            background: rgba(17, 24, 39, 0.98);
             border: 2px solid rgba(34, 197, 94, 0.6);
             border-radius: 8px;
             padding: 1rem;
-            min-width: 250px;
-            z-index: 100;
+            max-width: 280px;
+            z-index: 1000;
             pointer-events: none;
             display: none;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);
         }
 
         .matrix-tooltip.show {
@@ -421,11 +468,14 @@
                 font-size: 0.875rem;
                 padding: 0.5rem 1rem;
             }
-            .matrix-container {
-                height: 500px;
-            }
             .matrix-grid {
-                height: 400px;
+                height: 350px;
+            }
+            .matrix-y-axis {
+                min-width: 60px;
+            }
+            .matrix-x-label, .matrix-y-label {
+                font-size: 0.65rem;
             }
         }
     </style>
@@ -752,17 +802,22 @@
 
             <div class="max-w-5xl mx-auto">
                 <div class="matrix-container">
-                    <div class="text-sm text-gray-400 mb-2 flex justify-between items-center">
-                        <span>← Less Time Investment</span>
-                        <span>More Time Investment →</span>
-                    </div>
-                    <div class="text-sm text-gray-400 mb-2 flex items-center gap-2">
-                        <span class="transform rotate-180" style="writing-mode: vertical-lr;">← Lower Income Potential</span>
-                        <span class="flex-1"></span>
-                        <span class="transform rotate-180" style="writing-mode: vertical-lr;">Higher Income Potential →</span>
-                    </div>
-                    <div class="matrix-grid" id="matrixGrid">
-                        <!-- Dots will be positioned here -->
+                    <div class="matrix-wrapper">
+                        <div class="matrix-y-axis">
+                            <div class="matrix-y-label">Higher Income →</div>
+                            <div class="matrix-y-label">← Lower Income</div>
+                        </div>
+                        <div class="matrix-content">
+                            <div class="matrix-grid-wrapper">
+                                <div class="matrix-grid" id="matrixGrid">
+                                    <!-- Dots will be positioned here -->
+                                </div>
+                            </div>
+                            <div class="matrix-x-axis">
+                                <div class="matrix-x-label">← Less Time</div>
+                                <div class="matrix-x-label">More Time →</div>
+                            </div>
+                        </div>
                     </div>
                     <div class="matrix-tooltip" id="matrixTooltip"></div>
                 </div>
@@ -1374,10 +1429,42 @@
                     `;
                     tooltip.classList.add('show');
 
-                    // Position tooltip
+                    // Position tooltip with smart placement
                     const rect = dot.getBoundingClientRect();
-                    tooltip.style.left = rect.left + 'px';
-                    tooltip.style.top = (rect.top - tooltip.offsetHeight - 10) + 'px';
+                    const tooltipWidth = 280; // max-width from CSS
+                    const tooltipHeight = tooltip.offsetHeight || 120; // estimated height
+                    const padding = 15;
+
+                    // Get viewport dimensions
+                    const viewportWidth = window.innerWidth;
+                    const viewportHeight = window.innerHeight;
+
+                    // Default: center tooltip above the dot
+                    let left = rect.left + (rect.width / 2) - (tooltipWidth / 2);
+                    let top = rect.top - tooltipHeight - padding;
+
+                    // Adjust if tooltip goes off-screen to the right
+                    if (left + tooltipWidth > viewportWidth - padding) {
+                        left = viewportWidth - tooltipWidth - padding;
+                    }
+
+                    // Adjust if tooltip goes off-screen to the left
+                    if (left < padding) {
+                        left = padding;
+                    }
+
+                    // If tooltip goes off-screen at top, show it below the dot instead
+                    if (top < padding) {
+                        top = rect.bottom + padding;
+                    }
+
+                    // If tooltip goes off-screen at bottom, force it on screen
+                    if (top + tooltipHeight > viewportHeight - padding) {
+                        top = viewportHeight - tooltipHeight - padding;
+                    }
+
+                    tooltip.style.left = left + 'px';
+                    tooltip.style.top = top + 'px';
                 });
 
                 dot.addEventListener('mouseleave', () => {
