@@ -1,870 +1,1257 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lesson 2 - Building Credit from Scratch - FinanceU</title>
+    <title>Lesson 2: How Credit Cards Actually Work - Path 3 - FinanceU</title>
     <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
-    <link rel="icon" type="image/svg+xml" sizes="16x16" href="assets/favicon-16x16.svg">
-    <link rel="icon" type="image/svg+xml" sizes="32x32" href="assets/favicon-32x32.svg">
-    <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.svg">
-    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        /* SVG Icon Alignment Fixes */
-        svg {
-            display: inline-block;
-            vertical-align: middle;
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+        * {
+            font-family: 'Inter', -apple-system, BlinkMacSystem Font, sans-serif;
         }
 
-        .intro-card-icon svg,
-        .mistake-icon svg,
-        .reflection-icon svg,
-        .result-icon svg {
+        body {
+            background: #0f0f0f;
+            min-height: 100vh;
+            color: #d1d5db;
+            overflow-x: hidden;
+        }
+
+        /* Gradient text */
+        .gradient-text {
+            background: linear-gradient(135deg, #e5e7eb 0%, #9ca3af 50%, #e5e7eb 100%);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradientShift 5s ease infinite;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        /* Purple accent for Path 3 */
+        .purple-accent {
+            color: #a855f7;
+        }
+
+        .glow-purple {
+            box-shadow: 0 0 20px rgba(168, 85, 247, 0.4), 0 0 40px rgba(168, 85, 247, 0.2);
+        }
+
+        /* Navigation */
+        .nav-blur {
+            backdrop-filter: blur(12px);
+            background: rgba(15, 15, 15, 0.9);
+            border-bottom: 1px solid rgba(156, 163, 175, 0.15);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        /* 3D Button Effect */
+        .btn-3d {
+            transform-style: preserve-3d;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3), 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-3d:hover {
+            transform: translateY(-4px) translateZ(10px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4), 0 16px 32px rgba(0, 0, 0, 0.3), 0 0 40px rgba(209, 213, 219, 0.2);
+        }
+
+        /* Section styling */
+        .lesson-section {
+            display: none;
+            margin-bottom: 80px;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .lesson-section.visible {
             display: block;
-            margin: 0 auto;
+            opacity: 1;
+            transform: translateY(0);
         }
 
-        .budget-method-emoji svg,
-        .budget-item-label svg {
-            display: inline-block;
-            vertical-align: middle;
-            margin-right: 8px;
+        /* Glass card */
+        .glass-card {
+            background: linear-gradient(135deg, rgba(31, 41, 55, 0.8) 0%, rgba(17, 24, 39, 0.9) 100%);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(168, 85, 247, 0.2);
+            border-radius: 24px;
+            padding: 32px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.4);
         }
 
-        p svg, li svg, span svg {
-            display: inline-block;
-            vertical-align: middle;
-            margin: 0 2px;
+        /* Progress bar */
+        .progress-bar-container {
+            position: fixed;
+            top: 70px;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: rgba(255,255,255,0.05);
+            z-index: 100;
         }
 
-        .lesson-container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 30px 20px;
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #a855f7 0%, #ec4899 100%);
+            transition: width 0.3s ease;
+            box-shadow: 0 0 20px rgba(168, 85, 247, 0.6);
         }
-        .lesson-header {
-            text-align: center;
-            margin-bottom: 30px;
-            padding: 25px;
-            background: linear-gradient(135deg, #0A1A2F 0%, #1a3a5c 100%);
-            border-radius: 16px;
+
+        /* Interactive Credit Card */
+        .credit-card {
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #a855f7 100%);
+            border-radius: 20px;
+            padding: 30px;
+            color: white;
             position: relative;
             overflow: hidden;
+            box-shadow: 0 20px 60px rgba(168, 85, 247, 0.5);
+            transition: all 0.3s ease;
+            cursor: pointer;
         }
-        .lesson-header::before {
+
+        .credit-card:hover {
+            transform: rotateY(10deg) rotateX(5deg);
+            box-shadow: 0 30px 80px rgba(168, 85, 247, 0.7);
+        }
+
+        .credit-card::before {
             content: '';
             position: absolute;
             top: -50%;
             left: -50%;
             width: 200%;
             height: 200%;
-            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
             animation: rotate 20s linear infinite;
         }
+
         @keyframes rotate {
             from { transform: rotate(0deg); }
             to { transform: rotate(360deg); }
         }
-        .lesson-header h1 {
-            font-size: 32px;
-            color: white;
-            margin-bottom: 8px;
+
+        /* Timeline */
+        .timeline {
             position: relative;
-            z-index: 1;
+            padding: 40px 0;
         }
-        .lesson-header .lesson-number {
-            color: rgba(255, 255, 255, 0.9);
-            font-size: 14px;
+
+        .timeline-item {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 40px;
+            align-items: flex-start;
+        }
+
+        .timeline-dot {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #a855f7 0%, #ec4899 100%);
+            border-radius: 50%;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             font-weight: 700;
-            margin-bottom: 5px;
+            color: white;
+            box-shadow: 0 0 20px rgba(168, 85, 247, 0.6);
             position: relative;
-            z-index: 1;
-            text-transform: uppercase;
-            letter-spacing: 2px;
+            z-index: 2;
         }
-        .lesson-section {
-            background: white;
-            padding: 25px;
+
+        .timeline-line {
+            position: absolute;
+            left: 25px;
+            top: 50px;
+            bottom: 50px;
+            width: 2px;
+            background: linear-gradient(180deg, #a855f7 0%, rgba(168, 85, 247, 0.2) 100%);
+        }
+
+        .timeline-content {
+            flex: 1;
+            background: rgba(31, 41, 55, 0.6);
+            border: 2px solid rgba(168, 85, 247, 0.3);
+            border-radius: 16px;
+            padding: 20px;
+        }
+
+        /* Interactive Statement */
+        .statement-item {
+            background: rgba(31, 41, 55, 0.6);
+            border: 2px solid rgba(168, 85, 247, 0.2);
             border-radius: 12px;
-            margin-bottom: 20px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-            position: relative;
+            padding: 16px;
+            margin-bottom: 12px;
+            cursor: pointer;
             transition: all 0.3s ease;
         }
-        .lesson-section:hover {
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
-            transform: translateY(-2px);
-        }
-        .lesson-section h2 {
-            color: var(--primary-color);
-            font-size: 24px;
-            margin-bottom: 15px;
-        }
-        .lesson-section p {
-            line-height: 1.6;
-            color: var(--text-secondary);
-            margin-bottom: 12px;
-            font-size: 16px;
-        }
-        .lesson-section ul {
-            line-height: 1.6;
-            color: var(--text-secondary);
-            margin-left: 20px;
-            margin-bottom: 12px;
-        }
-        .lesson-section ul li {
-            margin-bottom: 8px;
-        }
-        .btn-finish {
-            display: block;
-            width: 100%;
-            max-width: 400px;
-            margin: 30px auto;
-            padding: 18px;
-            background: var(--primary-color);
-            color: white;
-            text-align: center;
-            text-decoration: none;
-            border-radius: 8px;
-            font-size: 18px;
-            font-weight: 600;
-            transition: all 0.3s;
-            border: none;
-            cursor: pointer;
-        }
-        .btn-finish:hover {
-            background: #2563eb;
-            transform: scale(1.02);
-        }
-        .back-link {
-            display: inline-block;
-            margin-bottom: 20px;
-            color: var(--primary-color);
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.2s;
-        }
-        .back-link:hover {
-            transform: translateX(-5px);
-        }
-        .quiz-container {
-            background: linear-gradient(135deg, #0A1A2F15 0%, #00A67615 100%);
-            border: 2px solid var(--primary-color);
-            border-radius: 12px;
-            padding: 30px;
-            margin: 30px 0;
-        }
-        .quiz-header {
-            text-align: center;
-            margin-bottom: 25px;
-        }
-        .quiz-header h2 {
-            color: var(--primary-color);
-            font-size: 26px;
-            margin-bottom: 10px;
-        }
-        .quiz-header p {
-            color: var(--text-secondary);
-            font-size: 15px;
-        }
-        .question-card {
-            background: white;
-            padding: 20px;
-            border-radius: 8px;
-            margin-bottom: 15px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-        .question-text {
-            font-size: 17px;
-            font-weight: 600;
-            color: var(--text-primary);
-            margin-bottom: 15px;
-        }
-        .answer-option {
-            background: #f9fafb;
-            padding: 12px;
-            border: 2px solid #e5e7eb;
-            border-radius: 8px;
-            margin-bottom: 10px;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-        .answer-option:hover {
-            border-color: var(--primary-color);
-            background: #eff6ff;
-            transform: translateX(5px);
-        }
-        .answer-option.selected {
-            border-color: var(--primary-color);
-            background: #dbeafe;
-        }
-        .answer-option.correct {
-            border-color: #10b981;
-            background: #d1fae5;
-        }
-        .answer-option.incorrect {
-            border-color: #dc2626;
-            background: #fee2e2;
-        }
-        .btn-submit-quiz {
-            display: block;
-            width: 100%;
-            max-width: 300px;
-            margin: 20px auto;
-            padding: 15px;
-            background: var(--primary-color);
-            color: white;
-            text-align: center;
-            border-radius: 8px;
-            font-size: 16px;
-            font-weight: 600;
-            border: none;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-        .btn-submit-quiz:hover {
-            background: #2563eb;
-            transform: scale(1.05);
-        }
-        .btn-submit-quiz:disabled {
-            background: #9ca3af;
-            cursor: not-allowed;
-            transform: scale(1);
-        }
-        .quiz-result {
-            background: white;
-            padding: 25px;
-            border-radius: 8px;
-            text-align: center;
-            margin-top: 20px;
-        }
-        .quiz-result.pass {
-            border: 3px solid #10b981;
-        }
-        .quiz-result.fail {
-            border: 3px solid #dc2626;
-        }
-        .result-icon {
-            font-size: 48px;
-            margin-bottom: 15px;
-            animation: bounce 0.6s ease;
-        }
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-20px); }
-        }
-        .result-text {
-            font-size: 24px;
-            font-weight: 700;
-            margin-bottom: 10px;
-        }
-        .result-score {
-            font-size: 18px;
-            color: var(--text-secondary);
-            margin-bottom: 20px;
-        }
-        .btn-retry {
-            padding: 12px 24px;
-            background: #f59e0b;
-            color: white;
-            border: none;
-            border-radius: 8px;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-        .btn-retry:hover {
-            background: #d97706;
-            transform: scale(1.05);
-        }
-        .btn-finish:disabled {
-            background: #9ca3af;
-            cursor: not-allowed;
-            opacity: 0.6;
+
+        .statement-item:hover {
+            border-color: rgba(168, 85, 247, 0.6);
+            transform: translateX(8px);
+            background: rgba(168, 85, 247, 0.1);
         }
 
-        /* Multi-screen styles */
-        .lesson-screen {
+        .statement-item.expanded {
+            border-color: #a855f7;
+            background: rgba(168, 85, 247, 0.15);
+        }
+
+        .statement-details {
             display: none;
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px solid rgba(168, 85, 247, 0.3);
         }
-        .lesson-screen.active {
+
+        .statement-item.expanded .statement-details {
             display: block;
-            animation: fadeIn 0.4s ease-in;
+            animation: slideDown 0.3s ease;
         }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(15px); }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-10px); }
             to { opacity: 1; transform: translateY(0); }
         }
-        .screen-progress {
-            text-align: center;
-            margin-bottom: 20px;
-            padding: 10px 20px;
-            background: linear-gradient(135deg, #0A1A2F15 0%, #00A67615 100%);
-            border-radius: 8px;
-            font-weight: 600;
-            color: var(--primary-color);
-            font-size: 14px;
-        }
-        .screen-navigation {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 15px;
-            margin-top: 25px;
-            padding-top: 20px;
-            border-top: 2px solid #e5e7eb;
-        }
-        .btn-nav {
-            padding: 12px 24px;
-            background: var(--primary-color);
-            color: white;
-            border: none;
-            border-radius: 8px;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        .btn-nav:hover {
-            background: #2563eb;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
-        }
-        .btn-nav:disabled {
-            background: #d1d5db;
-            cursor: not-allowed;
-            transform: none;
-            box-shadow: none;
-        }
-        .btn-nav.btn-prev {
-            background: #6b7280;
-        }
-        .btn-nav.btn-prev:hover {
-            background: #4b5563;
-        }
-        .nav-spacer {
-            width: 120px;
+
+        /* Interest Calculator */
+        .calculator {
+            background: linear-gradient(135deg, rgba(239, 68, 68, 0.1) 0%, rgba(185, 28, 28, 0.05) 100%);
+            border: 2px solid rgba(239, 68, 68, 0.3);
+            border-radius: 16px;
+            padding: 24px;
         }
 
-        /* Checkpoint styles */
-        .checkpoint-container {
-            background: linear-gradient(135deg, #E0F2FE 0%, #BAE6FD 100%);
-            border: 2px solid #7DD3FC;
-            border-radius: 12px;
-            padding: 25px;
+        .slider-container {
             margin: 20px 0;
         }
-        .checkpoint-header {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-        .checkpoint-header h3 {
-            color: #0284C7;
-            font-size: 24px;
-            margin-bottom: 8px;
-        }
-        .checkpoint-header p {
-            color: var(--text-secondary);
-            font-size: 14px;
-        }
-        .checkpoint-question {
-            background: white;
-            padding: 20px;
-            border-radius: 8px;
-            margin-bottom: 15px;
-        }
-        .checkpoint-question-text {
-            font-size: 17px;
-            font-weight: 600;
-            color: var(--text-primary);
-            margin-bottom: 15px;
-        }
-        .checkpoint-option {
-            background: #f9fafb;
-            padding: 12px;
-            border: 2px solid #e5e7eb;
-            border-radius: 8px;
-            margin-bottom: 10px;
-            cursor: pointer;
-            transition: all 0.2s;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        .checkpoint-option:hover {
-            border-color: #0284C7;
-            background: #F0F9FF;
-            transform: translateX(5px);
-        }
-        .checkpoint-option.selected {
-            border-color: #0284C7;
-            background: #E0F2FE;
-        }
-        .checkpoint-option.correct {
-            border-color: #10b981;
-            background: #d1fae5;
-            cursor: default;
-        }
-        .checkpoint-option.incorrect {
-            border-color: #dc2626;
-            background: #fee2e2;
-            cursor: default;
-        }
-        .checkpoint-option input[type="radio"] {
-            cursor: pointer;
-        }
-        .checkpoint-feedback {
-            background: white;
-            padding: 20px;
-            border-radius: 8px;
-            margin-top: 20px;
-            display: none;
-        }
-        .checkpoint-feedback.show {
-            display: block;
-            animation: fadeIn 0.3s ease-in;
-        }
-        .checkpoint-feedback.correct {
-            border-left: 4px solid #10b981;
-        }
-        .checkpoint-feedback.incorrect {
-            border-left: 4px solid #f59e0b;
-        }
-        .checkpoint-feedback-icon {
-            font-size: 32px;
-            margin-bottom: 10px;
-        }
-        .checkpoint-feedback-title {
-            font-size: 18px;
-            font-weight: 700;
-            margin-bottom: 10px;
-        }
-        .checkpoint-feedback.correct .checkpoint-feedback-title {
-            color: #10b981;
-        }
-        .checkpoint-feedback.incorrect .checkpoint-feedback-title {
-            color: #f59e0b;
-        }
-        .checkpoint-explanation {
-            color: var(--text-secondary);
-            line-height: 1.6;
-            margin-top: 10px;
-            font-size: 14px;
-        }
-        .btn-continue {
-            display: none;
+
+        .slider {
+            -webkit-appearance: none;
             width: 100%;
-            max-width: 300px;
-            margin: 20px auto;
-            padding: 15px;
-            background: var(--primary-color);
-            color: white;
-            text-align: center;
-            border-radius: 8px;
-            font-size: 16px;
-            font-weight: 600;
-            border: none;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-        .btn-continue.show {
-            display: block;
-        }
-        .btn-continue:hover {
-            background: #2563eb;
-            transform: scale(1.05);
+            height: 8px;
+            border-radius: 5px;
+            background: rgba(75, 85, 99, 0.3);
+            outline: none;
         }
 
-        /* SCREEN 1: Animated Icons */
-        .intro-cards {
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #a855f7 0%, #ec4899 100%);
+            cursor: pointer;
+            box-shadow: 0 0 20px rgba(168, 85, 247, 0.6);
+        }
+
+        .slider::-moz-range-thumb {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #a855f7 0%, #ec4899 100%);
+            cursor: pointer;
+            box-shadow: 0 0 20px rgba(168, 85, 247, 0.6);
+            border: none;
+        }
+
+        /* Comparison Cards */
+        .comparison-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: 1fr 1fr;
             gap: 20px;
+            margin: 30px 0;
+        }
+
+        .comparison-card {
+            background: rgba(31, 41, 55, 0.6);
+            border: 2px solid rgba(168, 85, 247, 0.2);
+            border-radius: 16px;
+            padding: 24px;
+            transition: all 0.3s ease;
+        }
+
+        .comparison-card.bad {
+            border-color: rgba(239, 68, 68, 0.3);
+        }
+
+        .comparison-card.good {
+            border-color: rgba(16, 185, 129, 0.3);
+        }
+
+        /* Quiz styling */
+        .quiz-option {
+            background: rgba(31, 41, 55, 0.6);
+            border: 2px solid rgba(156, 163, 175, 0.2);
+            border-radius: 12px;
+            padding: 16px 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .quiz-option:hover {
+            border-color: rgba(168, 85, 247, 0.5);
+            transform: translateX(4px);
+        }
+
+        .quiz-option.selected {
+            border-color: #a855f7;
+            background: rgba(168, 85, 247, 0.15);
+        }
+
+        .quiz-option.correct {
+            border-color: #10b981;
+            background: rgba(16, 185, 129, 0.15);
+        }
+
+        .quiz-option.incorrect {
+            border-color: #ef4444;
+            background: rgba(239, 68, 68, 0.15);
+        }
+
+        /* Autopay Toggle */
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 34px;
+        }
+
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .toggle-slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #4b5563;
+            transition: .4s;
+            border-radius: 34px;
+        }
+
+        .toggle-slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked + .toggle-slider {
+            background: linear-gradient(135deg, #a855f7 0%, #ec4899 100%);
+        }
+
+        input:checked + .toggle-slider:before {
+            transform: translateX(26px);
+        }
+
+        /* Calendar */
+        .calendar {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 8px;
             margin-top: 20px;
         }
-        .intro-card {
-            background: linear-gradient(135deg, #0A1A2F15 0%, #00A67615 100%);
-            border-radius: 12px;
-            padding: 20px;
-            text-align: center;
-            transition: all 0.3s;
-            border: 2px solid transparent;
+
+        .calendar-day {
+            aspect-ratio: 1;
+            background: rgba(31, 41, 55, 0.6);
+            border: 1px solid rgba(168, 85, 247, 0.2);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            transition: all 0.2s ease;
         }
-        .intro-card:hover {
-            transform: translateY(-5px) scale(1.02);
-            border-color: var(--primary-color);
-            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.2);
+
+        .calendar-day.header {
+            background: transparent;
+            border: none;
+            font-weight: 600;
+            color: #9ca3af;
         }
-        .intro-card-icon {
-            font-size: 48px;
-            margin-bottom: 10px;
-            animation: float 3s ease-in-out infinite;
+
+        .calendar-day.due-date {
+            background: rgba(239, 68, 68, 0.2);
+            border-color: #ef4444;
+            color: #fca5a5;
+            font-weight: 700;
+            box-shadow: 0 0 20px rgba(239, 68, 68, 0.4);
+            animation: pulse 2s ease-in-out infinite;
         }
-        .intro-card:nth-child(2) .intro-card-icon {
-            animation-delay: 1s;
-        }
-        .intro-card:nth-child(3) .intro-card-icon {
-            animation-delay: 2s;
-        }
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
-        }
-        .intro-card h3 {
-            color: var(--primary-color);
-            font-size: 18px;
-            margin-bottom: 8px;
+
+        .calendar-day.statement-close {
+            background: rgba(251, 191, 36, 0.2);
+            border-color: #fbbf24;
+            color: #fcd34d;
             font-weight: 700;
         }
-        .intro-card p {
-            color: var(--text-secondary);
-            font-size: 14px;
-            line-height: 1.5;
-            margin: 0;
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+            }
         }
 
         @media (max-width: 768px) {
-            .intro-cards {
+            .comparison-grid {
                 grid-template-columns: 1fr;
             }
         }
     </style>
 </head>
-<body class="homepage-dark">
+<body>
+    <!-- Progress Bar -->
+    <div class="progress-bar-container">
+        <div class="progress-bar" id="progressBar" style="width: 0%"></div>
+    </div>
+
     <!-- Navigation -->
-    <nav class="navbar">
-        <div class="container">
-            <div class="nav-wrapper">
-                <div class="logo"><a href="/" style="color: inherit; text-decoration: none;">Finance<span class="logo-accent">U</span></a></div>
-                <ul class="nav-links">
-                    <li><a href="/">Home</a></li>
-                    <li><a href="dashboard">Dashboard</a></li>
-                    <li id="authButtons" style=" opacity: 0;"></li>
-                </ul>
+    <nav class="fixed top-0 left-0 right-0 z-50 nav-blur">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <a href="/" class="flex items-center space-x-2">
+                    <div class="w-10 h-10 rounded-full bg-gradient-to-br from-gray-200 to-gray-400 glow-grey flex items-center justify-center font-bold text-xl" style="color: #1f2937;">
+                        F
+                    </div>
+                    <span class="text-2xl font-bold gradient-text">FinanceU</span>
+                </a>
+
+                <div class="flex items-center space-x-6">
+                    <a href="/" class="text-gray-400 hover:text-gray-200 transition-colors font-medium">Home</a>
+                    <a href="/dashboard" class="text-gray-400 hover:text-gray-200 transition-colors font-medium">Dashboard</a>
+                </div>
+
+                <div class="flex items-center space-x-4">
+                    <button onclick="logout()" class="btn-3d px-6 py-2.5 bg-gradient-to-r from-gray-200 to-gray-300 hover:from-gray-300 hover:to-gray-200 rounded-lg font-semibold glow-grey transition-all" style="color: #1f2937;">
+                        Logout
+                    </button>
+                </div>
             </div>
         </div>
     </nav>
 
-    <!-- Lesson Content -->
-    <div class="lesson-container">
-        <a href="/path3-lessons" class="back-link">← Back to Path 3 Lessons</a>
+    <!-- Main Content -->
+    <main class="container mx-auto px-6 pt-32 pb-20 max-w-4xl relative z-10">
+        <!-- Back Link -->
+        <a href="/path3-lessons" class="inline-flex items-center text-gray-400 hover:text-gray-200 transition-colors mb-8 font-medium">
+            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+            </svg>
+            Back to Path 3 Lessons
+        </a>
 
-        <!-- Header -->
-        <div class="lesson-header">
-            <div class="lesson-number">PILLAR 3: LESSON 2</div>
-            <h1>Building Credit from Scratch</h1>
+        <!-- Lesson Header -->
+        <div class="text-center mb-16">
+            <div class="inline-block px-4 py-2 bg-purple-500/20 border border-purple-500/30 rounded-full text-purple-400 font-bold text-sm mb-4">
+                PATH 3 • LESSON 2
+            </div>
+            <h1 class="text-5xl md:text-6xl font-black mb-4 text-gray-200">
+                How Credit Cards <span class="purple-accent">Actually Work</span>
+            </h1>
+            <p class="text-xl text-gray-400 max-w-2xl mx-auto">
+                The mechanics behind statements, due dates, interest, and autopay
+            </p>
         </div>
 
-        <!-- Screen 1: Quick Intro with Animated Icons -->
-        <div class="lesson-screen active" data-screen="1">
-            <div class="screen-progress">Screen 1 of 8</div>
-            <div class="lesson-section">
-                <h2>Starting from Zero</h2>
-                <div class="intro-cards">
-                    <div class="intro-card">
-                        <div class="intro-card-icon"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="20" fill="#EFF6FF"/><path d="M24 12 L28 28 L24 26 L20 28 Z" fill="#3B82F6" opacity="0.3"/><path d="M24 12 L28 28 L24 26 L20 28 Z" stroke="#3B82F6" stroke-width="2" fill="none"/><path d="M20 28 L18 34 L24 30 L30 34 L28 28" stroke="#3B82F6" stroke-width="2" fill="none"/><circle cx="24" cy="20" r="2" fill="#3B82F6"/></svg></div>
-                        <h3>The Problem</h3>
-                        <p>26 million Americans have no credit history. You need credit to build credit - a catch-22</p>
+        <!-- Section 1: Interactive Credit Card -->
+        <section class="lesson-section visible" id="section1">
+            <div class="glass-card">
+                <h2 class="text-3xl font-bold mb-6 text-gray-200">Your Credit Card: A Closer Look</h2>
+                <p class="text-gray-300 text-lg mb-8 leading-relaxed">
+                    Before we dive into how credit cards work, let's look at a typical credit card. This isn't just a piece of plastic - it's a <strong>30-day loan that renews every month</strong>.
+                </p>
+
+                <div class="credit-card mb-6" onclick="flipCard()">
+                    <div style="position: relative; z-index: 1;">
+                        <div class="flex justify-between items-start mb-8">
+                            <div class="text-sm font-semibold opacity-80">VISA</div>
+                            <div class="text-xs opacity-60">
+                                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="mb-6">
+                            <svg width="50" height="40" viewBox="0 0 50 40" fill="none">
+                                <rect x="5" y="10" width="30" height="22" rx="3" fill="rgba(255,255,255,0.2)" stroke="white" stroke-width="1.5"/>
+                                <circle cx="25" cy="15" r="3" fill="rgba(255,255,255,0.3)"/>
+                                <line x1="15" y1="24" x2="25" y2="24" stroke="white" stroke-width="1.5"/>
+                            </svg>
+                        </div>
+                        <div class="text-2xl font-bold tracking-wider mb-4">4532  ••••  ••••  8901</div>
+                        <div class="flex justify-between items-end">
+                            <div>
+                                <div class="text-xs opacity-60 mb-1">CARDHOLDER</div>
+                                <div class="font-semibold">YOUR NAME HERE</div>
+                            </div>
+                            <div>
+                                <div class="text-xs opacity-60 mb-1">VALID THRU</div>
+                                <div class="font-semibold">12/28</div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="intro-card">
-                        <div class="intro-card-icon"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="20" fill="#D1FAE5"/><path d="M16 24 Q18 20 22 22 Q24 24 24 28 L24 32" stroke="#00A676" stroke-width="2.5" stroke-linecap="round" fill="none"/><path d="M32 24 Q30 20 26 22 Q24 24 24 28" stroke="#00A676" stroke-width="2.5" stroke-linecap="round" fill="none"/><circle cx="22" cy="20" r="3" fill="#00A676" opacity="0.3"/><circle cx="26" cy="20" r="3" fill="#00A676" opacity="0.3"/></svg></div>
-                        <h3>The Solution</h3>
-                        <p>Three proven methods to break into the credit system from scratch</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div class="bg-purple-500/10 border border-purple-500/30 rounded-xl p-4">
+                        <div class="text-sm text-gray-400 mb-1">Credit Limit</div>
+                        <div class="text-2xl font-bold text-purple-400">$3,000</div>
                     </div>
-                    <div class="intro-card">
-                        <div class="intro-card-icon"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="20" fill="#DBEAFE"/><circle cx="24" cy="24" r="14" stroke="#3B82F6" stroke-width="2" fill="none"/><circle cx="24" cy="24" r="8" stroke="#3B82F6" stroke-width="2" fill="none"/><circle cx="24" cy="24" r="3" fill="#3B82F6"/></svg></div>
-                        <h3>Your Goal</h3>
-                        <p>Build a 680+ score in 6 months with the right strategy</p>
+                    <div class="bg-blue-500/10 border border-blue-500/30 rounded-xl p-4">
+                        <div class="text-sm text-gray-400 mb-1">Current Balance</div>
+                        <div class="text-2xl font-bold text-blue-400">$450</div>
+                    </div>
+                    <div class="bg-green-500/10 border border-green-500/30 rounded-xl p-4">
+                        <div class="text-sm text-gray-400 mb-1">Available Credit</div>
+                        <div class="text-2xl font-bold text-green-400">$2,550</div>
                     </div>
                 </div>
             </div>
-            <div class="screen-navigation">
-                <div class="nav-spacer"></div>
-                <button class="btn-nav" onclick="nextScreen()">Next <span>→</span></button>
+        </section>
+
+        <!-- Section 2: The Billing Cycle Timeline -->
+        <section class="lesson-section" id="section2">
+            <div class="glass-card">
+                <h2 class="text-3xl font-bold mb-6 text-gray-200">The Billing Cycle: Your 30-Day Journey</h2>
+                <p class="text-gray-300 text-lg mb-8 leading-relaxed">
+                    Every credit card operates on a <strong>billing cycle</strong> - typically 30 days. Understanding this timeline is crucial to avoiding interest charges.
+                </p>
+
+                <div class="timeline" style="position: relative;">
+                    <div class="timeline-line"></div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-dot">1</div>
+                        <div class="timeline-content">
+                            <div class="text-lg font-bold text-purple-400 mb-2">Day 1: Billing Cycle Starts</div>
+                            <p class="text-gray-300">Your new billing cycle begins. Any purchases made from this day forward will appear on your next statement.</p>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-dot">15</div>
+                        <div class="timeline-content">
+                            <div class="text-lg font-bold text-blue-400 mb-2">Mid-Cycle: Keep Spending</div>
+                            <p class="text-gray-300">You continue making purchases. Your balance grows, but you haven't received a bill yet. This is the "float" period.</p>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-dot">30</div>
+                        <div class="timeline-content">
+                            <div class="text-lg font-bold text-yellow-400 mb-2">Day 30: Statement Closes</div>
+                            <p class="text-gray-300"><strong>Critical moment!</strong> Your statement closes and a bill is generated. The balance on this date is what gets reported to credit bureaus.</p>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-dot">54</div>
+                        <div class="timeline-content">
+                            <div class="text-lg font-bold text-red-400 mb-2">Day 54: Payment Due Date</div>
+                            <p class="text-gray-300"><strong>Must pay by today!</strong> You have ~21-25 days after statement closes to pay. Pay in full to avoid interest. Miss this date and you'll pay late fees + interest.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-8 p-6 bg-green-500/10 border border-green-500/30 rounded-xl">
+                    <h4 class="font-bold text-green-400 mb-3 text-lg flex items-center gap-2">
+                        <span class="inline-flex items-center justify-center w-7 h-7 rounded-lg bg-green-500/30 border-2 border-green-500/50">
+                            <svg class="w-4 h-4 text-green-400" fill="currentColor" viewBox="0 0 24 24">
+                                <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" fill="none"/>
+                                <circle cx="12" cy="12" r="3" fill="currentColor"/>
+                            </svg>
+                        </span> Grace Period Magic
+                    </h4>
+                    <p class="text-gray-300 leading-relaxed">
+                        If you pay your <strong>statement balance in full</strong> by the due date, you pay ZERO interest. This is called the <strong>grace period</strong> - essentially 50+ days of free money if you pay attention!
+                    </p>
+                </div>
             </div>
+        </section>
+
+        <!-- Section 3: Interactive Statement -->
+        <section class="lesson-section" id="section3">
+            <div class="glass-card">
+                <h2 class="text-3xl font-bold mb-6 text-gray-200">Reading Your Statement</h2>
+                <p class="text-gray-300 text-lg mb-6 leading-relaxed">
+                    Your monthly statement has critical information. <strong>Click each item to learn more:</strong>
+                </p>
+
+                <div class="statement-item" onclick="toggleStatement(0)">
+                    <div class="flex justify-between items-center">
+                        <span class="font-semibold text-gray-200">Statement Balance: $450.00</span>
+                        <svg class="w-5 h-5 text-purple-400 transition-transform" style="transform: rotate(0deg);" data-arrow="0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </div>
+                    <div class="statement-details">
+                        <p class="text-gray-300 text-sm"><strong>This is the golden number!</strong> Pay this amount by the due date to avoid all interest charges. This is the total of all transactions from your billing cycle.</p>
+                    </div>
+                </div>
+
+                <div class="statement-item" onclick="toggleStatement(1)">
+                    <div class="flex justify-between items-center">
+                        <span class="font-semibold text-gray-200">Minimum Payment: $25.00</span>
+                        <svg class="w-5 h-5 text-purple-400 transition-transform" style="transform: rotate(0deg);" data-arrow="1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </div>
+                    <div class="statement-details">
+                        <p class="text-gray-300 text-sm"><strong>THE TRAP!</strong> This is the minimum you must pay to avoid late fees. BUT - if you only pay the minimum, you'll be charged interest on the remaining balance. This is how people get stuck in debt.</p>
+                        <div class="mt-2 p-3 bg-red-500/20 border border-red-500/40 rounded-lg">
+                            <p class="text-red-300 text-xs font-semibold">⚠ Warning: Paying only the minimum on a $450 balance at 24% APR would take 2+ years and cost $170+ in interest!</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="statement-item" onclick="toggleStatement(2)">
+                    <div class="flex justify-between items-center">
+                        <span class="font-semibold text-gray-200">Due Date: January 24, 2026</span>
+                        <svg class="w-5 h-5 text-purple-400 transition-transform" style="transform: rotate(0deg);" data-arrow="2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </div>
+                    <div class="statement-details">
+                        <p class="text-gray-300 text-sm">Mark this date! Miss it by even one day and you'll face: <strong>(1) Late fee ($25-40)</strong>, <strong>(2) Interest on entire balance</strong>, <strong>(3) Potential credit score damage</strong>. Set up autopay or calendar reminders!</p>
+                    </div>
+                </div>
+
+                <div class="statement-item" onclick="toggleStatement(3)">
+                    <div class="flex justify-between items-center">
+                        <span class="font-semibold text-gray-200">APR: 24.99%</span>
+                        <svg class="w-5 h-5 text-purple-400 transition-transform" style="transform: rotate(0deg);" data-arrow="3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </div>
+                    <div class="statement-details">
+                        <p class="text-gray-300 text-sm"><strong>Annual Percentage Rate</strong> - this is your interest rate. 24.99% means if you carry a $1,000 balance for a year, you'd pay ~$250 in interest. But it compounds monthly, so it's actually worse! The good news: pay in full = no interest.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: Interest Calculator -->
+        <section class="lesson-section" id="section4">
+            <div class="glass-card">
+                <h2 class="text-3xl font-bold mb-6 text-gray-200">The True Cost of Interest</h2>
+                <p class="text-gray-300 text-lg mb-6 leading-relaxed">
+                    Interest is how credit card companies make money. Let's see how quickly it adds up when you only pay the minimum.
+                </p>
+
+                <div class="calculator">
+                    <div class="mb-6">
+                        <label class="block text-gray-200 font-semibold mb-3">Balance: $<span id="balanceValue">1000</span></label>
+                        <input type="range" min="100" max="5000" value="1000" step="100" class="slider" id="balanceSlider" oninput="updateCalculator()">
+                    </div>
+
+                    <div class="mb-6">
+                        <label class="block text-gray-200 font-semibold mb-3">APR: <span id="aprValue">24</span>%</label>
+                        <input type="range" min="15" max="30" value="24" step="1" class="slider" id="aprSlider" oninput="updateCalculator()">
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-8">
+                        <div class="bg-green-500/20 border-2 border-green-500/40 rounded-xl p-6 text-center">
+                            <div class="text-sm text-gray-300 mb-2">Pay in Full</div>
+                            <div class="text-4xl font-black text-green-400 mb-1">$0</div>
+                            <div class="text-xs text-gray-400">Interest Paid</div>
+                        </div>
+
+                        <div class="bg-red-500/20 border-2 border-red-500/40 rounded-xl p-6 text-center">
+                            <div class="text-sm text-gray-300 mb-2">Minimum Payments Only</div>
+                            <div class="text-4xl font-black text-red-400 mb-1" id="interestCost">$250</div>
+                            <div class="text-xs text-gray-400">Interest Paid Over <span id="monthsToPayoff">24</span> Months</div>
+                        </div>
+                    </div>
+
+                    <div class="mt-6 p-4 bg-black/30 rounded-xl">
+                        <p class="text-gray-300 text-sm leading-relaxed">
+                            <strong class="text-yellow-400">Reality check:</strong> Making only minimum payments on a $<span id="balanceDisplay">1000</span> balance means you'll pay $<span id="totalPaid">1250</span> total - that's <span id="extraPercent">25</span>% more than you borrowed!
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 5: Payment Strategies -->
+        <section class="lesson-section" id="section5">
+            <div class="glass-card">
+                <h2 class="text-3xl font-bold mb-6 text-gray-200">Payment Strategies: Good vs. Dangerous</h2>
+
+                <div class="comparison-grid">
+                    <div class="comparison-card bad">
+                        <div class="w-12 h-12 mb-3 rounded-xl bg-red-500/30 flex items-center justify-center border-2 border-red-500/50">
+                            <svg class="w-7 h-7 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M6 18L18 6M6 6l12 12"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold text-red-400 mb-3">Dangerous: Minimum Payments</h3>
+                        <ul class="space-y-2 text-gray-300 text-sm">
+                            <li class="flex items-start gap-2">
+                                <span class="text-red-400">→</span>
+                                <span>Takes <strong>years</strong> to pay off debt</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-red-400">→</span>
+                                <span>Interest charges compound monthly</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-red-400">→</span>
+                                <span>Can pay <strong>2-3x</strong> the original amount</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-red-400">→</span>
+                                <span>High credit utilization hurts score</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="comparison-card good">
+                        <div class="w-12 h-12 mb-3 rounded-xl bg-green-500/30 flex items-center justify-center border-2 border-green-500/50">
+                            <svg class="w-7 h-7 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold text-green-400 mb-3">Smart: Pay in Full</h3>
+                        <ul class="space-y-2 text-gray-300 text-sm">
+                            <li class="flex items-start gap-2">
+                                <span class="text-green-400">→</span>
+                                <span><strong>Zero interest</strong> ever</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-green-400">→</span>
+                                <span>Build credit while using bank's money free</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-green-400">→</span>
+                                <span>Keep utilization low</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-green-400">→</span>
+                                <span>Earn rewards without paying for them</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="mt-8 p-6 bg-purple-500/10 border border-purple-500/30 rounded-xl">
+                    <h4 class="font-bold text-purple-400 mb-3">The Golden Rule</h4>
+                    <p class="text-gray-300 leading-relaxed">
+                        <strong>Never charge more than you can pay off that month.</strong> Treat your credit card like a debit card - if you don't have the money in your bank account, don't buy it on credit. Simple rule, but it keeps you out of debt forever.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 6: Autopay Setup -->
+        <section class="lesson-section" id="section6">
+            <div class="glass-card">
+                <h2 class="text-3xl font-bold mb-6 text-gray-200">Autopay: Your Safety Net</h2>
+                <p class="text-gray-300 text-lg mb-6 leading-relaxed">
+                    Even responsible people forget payments. <strong>Autopay</strong> ensures you never miss a due date. But there's a right way and a wrong way to set it up.
+                </p>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+                    <div class="bg-red-500/10 border-2 border-red-500/30 rounded-xl p-6 text-center cursor-pointer transition-all hover:border-red-500/50" onclick="selectAutopay(0)">
+                        <div class="mb-4">
+                            <label class="toggle-switch">
+                                <input type="radio" name="autopay" id="autopay0">
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+                        <div class="font-bold text-gray-200 mb-2">Minimum Payment</div>
+                        <p class="text-gray-400 text-sm">Avoids late fees but you'll pay interest</p>
+                    </div>
+
+                    <div class="bg-yellow-500/10 border-2 border-yellow-500/30 rounded-xl p-6 text-center cursor-pointer transition-all hover:border-yellow-500/50" onclick="selectAutopay(1)">
+                        <div class="mb-4">
+                            <label class="toggle-switch">
+                                <input type="radio" name="autopay" id="autopay1">
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+                        <div class="font-bold text-gray-200 mb-2">Fixed Amount</div>
+                        <p class="text-gray-400 text-sm">Predictable but may not cover full balance</p>
+                    </div>
+
+                    <div class="bg-green-500/10 border-2 border-green-500/30 rounded-xl p-6 text-center cursor-pointer transition-all hover:border-green-500/50" onclick="selectAutopay(2)">
+                        <div class="mb-4">
+                            <label class="toggle-switch">
+                                <input type="radio" name="autopay" id="autopay2" checked>
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+                        <div class="font-bold text-gray-200 mb-2">Statement Balance</div>
+                        <p class="text-gray-400 text-sm">BEST: Pays in full automatically, zero interest</p>
+                    </div>
+                </div>
+
+                <div id="autopayFeedback" class="p-6 bg-green-500/20 border-2 border-green-500/40 rounded-xl">
+                    <div class="flex items-start gap-3">
+                        <div class="w-8 h-8 rounded-full bg-green-500/30 flex items-center justify-center flex-shrink-0">
+                            <svg class="w-5 h-5 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <div class="font-bold text-green-400 mb-2">Perfect Choice!</div>
+                            <p class="text-gray-300 text-sm">Setting autopay to <strong>statement balance</strong> means you'll never pay interest and never miss a payment. Just make sure you have enough money in your checking account before the due date!</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-6 p-4 bg-yellow-500/10 border border-yellow-500/30 rounded-xl">
+                    <div class="flex items-start gap-2">
+                        <span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-yellow-500/30 border border-yellow-500/50 flex-shrink-0">
+                            <span class="text-yellow-400 text-sm font-bold">!</span>
+                        </span>
+                        <p class="text-gray-300 text-sm">
+                            <strong>Pro Tip:</strong> Even with autopay, check your statement monthly. Look for fraudulent charges, subscriptions you forgot about, and opportunities to optimize your spending.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 7: Visual Calendar -->
+        <section class="lesson-section" id="section7">
+            <div class="glass-card">
+                <h2 class="text-3xl font-bold mb-6 text-gray-200">Your Payment Calendar</h2>
+                <p class="text-gray-300 text-lg mb-6 leading-relaxed">
+                    Visualizing your billing cycle helps you understand when things happen. Here's a typical month:
+                </p>
+
+                <div class="calendar">
+                    <div class="calendar-day header">Sun</div>
+                    <div class="calendar-day header">Mon</div>
+                    <div class="calendar-day header">Tue</div>
+                    <div class="calendar-day header">Wed</div>
+                    <div class="calendar-day header">Thu</div>
+                    <div class="calendar-day header">Fri</div>
+                    <div class="calendar-day header">Sat</div>
+
+                    <div class="calendar-day">1</div>
+                    <div class="calendar-day">2</div>
+                    <div class="calendar-day">3</div>
+                    <div class="calendar-day">4</div>
+                    <div class="calendar-day">5</div>
+                    <div class="calendar-day">6</div>
+                    <div class="calendar-day">7</div>
+                    <div class="calendar-day">8</div>
+                    <div class="calendar-day">9</div>
+                    <div class="calendar-day">10</div>
+                    <div class="calendar-day">11</div>
+                    <div class="calendar-day">12</div>
+                    <div class="calendar-day">13</div>
+                    <div class="calendar-day">14</div>
+                    <div class="calendar-day">15</div>
+                    <div class="calendar-day">16</div>
+                    <div class="calendar-day">17</div>
+                    <div class="calendar-day">18</div>
+                    <div class="calendar-day">19</div>
+                    <div class="calendar-day">20</div>
+                    <div class="calendar-day">21</div>
+                    <div class="calendar-day">22</div>
+                    <div class="calendar-day">23</div>
+                    <div class="calendar-day due-date" title="Payment Due Date">24<br><span style="font-size: 10px;">DUE</span></div>
+                    <div class="calendar-day">25</div>
+                    <div class="calendar-day">26</div>
+                    <div class="calendar-day">27</div>
+                    <div class="calendar-day">28</div>
+                    <div class="calendar-day">29</div>
+                    <div class="calendar-day statement-close" title="Statement Closes">30<br><span style="font-size: 10px;">CLOSE</span></div>
+                    <div class="calendar-day">31</div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
+                    <div class="flex items-center gap-3 p-4 bg-yellow-500/10 border border-yellow-500/30 rounded-xl">
+                        <div class="w-4 h-4 bg-yellow-500/40 border border-yellow-500/50 rounded"></div>
+                        <span class="text-gray-300 text-sm"><strong>Day 30:</strong> Statement closes - balance reported to bureaus</span>
+                    </div>
+                    <div class="flex items-center gap-3 p-4 bg-red-500/10 border border-red-500/30 rounded-xl">
+                        <div class="w-4 h-4 bg-red-500/40 border border-red-500/50 rounded"></div>
+                        <span class="text-gray-300 text-sm"><strong>Day 24 (next month):</strong> Payment due - pay in full!</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 8: Quiz -->
+        <section class="lesson-section" id="section8">
+            <div class="glass-card">
+                <div class="text-center mb-8">
+                    <div class="inline-block px-4 py-2 bg-purple-500/20 border border-purple-500/30 rounded-full text-purple-400 font-bold text-sm mb-4">
+                        KNOWLEDGE CHECK
+                    </div>
+                    <h2 class="text-3xl font-bold text-gray-200 mb-3">Test Your Understanding</h2>
+                    <p class="text-gray-400">Answer all questions correctly to complete this lesson</p>
+                </div>
+
+                <div id="quizQuestions" class="space-y-6">
+                    <!-- Questions will be inserted here -->
+                </div>
+
+                <button id="submitQuiz" onclick="submitQuiz()" class="w-full btn-3d px-8 py-4 bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 rounded-xl font-bold text-white text-lg mt-8 transition-all" disabled>
+                    Submit Quiz
+                </button>
+
+                <div id="quizResult" class="mt-6 hidden"></div>
+            </div>
+        </section>
+
+        <!-- Navigation Buttons -->
+        <div class="flex justify-between items-center mt-12">
+            <button onclick="previousSection()" id="prevBtn" class="btn-3d px-8 py-3 bg-gray-700 hover:bg-gray-600 rounded-xl font-bold text-white transition-all" style="visibility: hidden;">
+                ← Previous
+            </button>
+            <div class="text-gray-400 text-sm">
+                Section <span id="currentSection">1</span> of 8
+            </div>
+            <button onclick="nextSection()" id="nextBtn" class="btn-3d px-8 py-3 bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 rounded-xl font-bold text-white transition-all">
+                Next →
+            </button>
         </div>
-
-        <!-- Screen 2: Method 1 - Secured Credit Cards -->
-        <div class="lesson-screen" data-screen="2">
-            <div class="screen-progress">Screen 2 of 8</div>
-            <div class="lesson-section">
-                <h2>Method 1: Secured Credit Cards</h2>
-                <p>A <strong>secured credit card</strong> is the easiest way to start building credit. Here's how it works:</p>
-
-                <p><strong>Step 1:</strong> You make a deposit (usually $200-500)</p>
-                <p><strong>Step 2:</strong> That deposit becomes your credit limit</p>
-                <p><strong>Step 3:</strong> Use it like a regular card and pay in full each month</p>
-                <p><strong>Step 4:</strong> On-time payments get reported to credit bureaus</p>
-                <p><strong>Step 5:</strong> After 6-12 months, upgrade to unsecured card and get deposit back</p>
-
-                <p style="margin-top: 20px;"><strong>Best Secured Cards:</strong></p>
-                <ul>
-                    <li><strong>Discover it Secured:</strong> Cashback rewards + no annual fee</li>
-                    <li><strong>Capital One Platinum Secured:</strong> As low as $49 deposit</li>
-                    <li><strong>Citi Secured Mastercard:</strong> No annual fee</li>
-                </ul>
-
-                <p style="margin-top: 20px;"><strong>What to look for:</strong> Reports to all 3 bureaus, no/low annual fee, path to upgrade</p>
-            </div>
-            <div class="screen-navigation">
-                <button class="btn-nav btn-prev" onclick="previousScreen()"><span>←</span> Previous</button>
-                <button class="btn-nav" onclick="nextScreen()">Next <span>→</span></button>
-            </div>
-        </div>
-
-        <!-- Screen 3: Checkpoint Question 1 -->
-        <div class="lesson-screen" data-screen="3">
-            <div class="screen-progress">Screen 3 of 8</div>
-            <div class="checkpoint-container">
-                <div class="checkpoint-header">
-                    <h3><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 8 L6 12 L14 4" stroke="currentColor" stroke-width="2" fill="none"/></svg> Quick Check</h3>
-                    <p>Test your understanding</p>
-                </div>
-
-                <div class="checkpoint-question">
-                    <div class="checkpoint-question-text">What is the main advantage of a secured credit card?</div>
-                    <div class="checkpoint-option" onclick="checkCheckpoint1(0)">
-                        <input type="radio" name="checkpoint1" value="0">
-                        <span>A) It offers the best rewards</span>
-                    </div>
-                    <div class="checkpoint-option" onclick="checkCheckpoint1(1)">
-                        <input type="radio" name="checkpoint1" value="1">
-                        <span>B) It requires a deposit but is easier to get approved for with no credit</span>
-                    </div>
-                    <div class="checkpoint-option" onclick="checkCheckpoint1(2)">
-                        <input type="radio" name="checkpoint1" value="2">
-                        <span>C) It has no fees at all</span>
-                    </div>
-                    <div class="checkpoint-option" onclick="checkCheckpoint1(3)">
-                        <input type="radio" name="checkpoint1" value="3">
-                        <span>D) It automatically upgrades after 1 month</span>
-                    </div>
-                </div>
-
-                <div class="checkpoint-feedback" id="checkpoint1-feedback">
-                    <div class="checkpoint-feedback-icon"></div>
-                    <div class="checkpoint-feedback-title"></div>
-                    <div class="checkpoint-explanation"></div>
-                </div>
-
-                <button class="btn-continue" id="checkpoint1-continue" onclick="nextScreen()">Continue <span>→</span></button>
-            </div>
-            <div class="screen-navigation">
-                <button class="btn-nav btn-prev" onclick="previousScreen()"><span>←</span> Previous</button>
-                <div class="nav-spacer"></div>
-            </div>
-        </div>
-
-        <!-- Screen 4: Method 2 - Authorized User -->
-        <div class="lesson-screen" data-screen="4">
-            <div class="screen-progress">Screen 4 of 8</div>
-            <div class="lesson-section">
-                <h2>Method 2: Authorized User Strategy</h2>
-                <p>One of the <strong>fastest ways to build credit</strong> is becoming an authorized user on someone else's credit card.</p>
-
-                <p><strong>Why this works:</strong> When added as an authorized user, the card's entire payment history gets added to YOUR credit report. If they have perfect payment history for 5 years, you inherit that history.</p>
-
-                <p style="margin-top: 20px;"><strong>Key requirements:</strong></p>
-                <ul>
-                    <li>Choose someone with excellent payment history (never late)</li>
-                    <li>Low credit utilization (under 30%)</li>
-                    <li>Long account history (3+ years is ideal)</li>
-                </ul>
-
-                <p style="margin-top: 20px;"><strong><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8 2 L14 14 L2 14 Z" fill="#F59E0B"/><path d="M8 6 L8 10 M8 11.5 L8 12.5" stroke="white" stroke-width="1.5"/></svg> Critical Warning:</strong> If the primary cardholder misses payments or maxes out the card, it will HURT your credit too. Only do this with someone financially responsible.</p>
-            </div>
-            <div class="screen-navigation">
-                <button class="btn-nav btn-prev" onclick="previousScreen()"><span>←</span> Previous</button>
-                <button class="btn-nav" onclick="nextScreen()">Next <span>→</span></button>
-            </div>
-        </div>
-
-        <!-- Screen 5: Checkpoint Question 2 -->
-        <div class="lesson-screen" data-screen="5">
-            <div class="screen-progress">Screen 5 of 8</div>
-            <div class="checkpoint-container">
-                <div class="checkpoint-header">
-                    <h3><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 8 L6 12 L14 4" stroke="currentColor" stroke-width="2" fill="none"/></svg> Apply Your Knowledge</h3>
-                    <p>What would you do in this situation?</p>
-                </div>
-
-                <div class="checkpoint-question">
-                    <div class="checkpoint-question-text">What's the risk of becoming an authorized user on someone else's credit card?</div>
-                    <div class="checkpoint-option" onclick="checkCheckpoint2(0)">
-                        <input type="radio" name="checkpoint2" value="0">
-                        <span>A) You have to make all the payments</span>
-                    </div>
-                    <div class="checkpoint-option" onclick="checkCheckpoint2(1)">
-                        <input type="radio" name="checkpoint2" value="1">
-                        <span>B) It doesn't help your credit at all</span>
-                    </div>
-                    <div class="checkpoint-option" onclick="checkCheckpoint2(2)">
-                        <input type="radio" name="checkpoint2" value="2">
-                        <span>C) Their bad payment history will hurt your credit too</span>
-                    </div>
-                    <div class="checkpoint-option" onclick="checkCheckpoint2(3)">
-                        <input type="radio" name="checkpoint2" value="3">
-                        <span>D) You can't remove yourself later</span>
-                    </div>
-                </div>
-
-                <div class="checkpoint-feedback" id="checkpoint2-feedback">
-                    <div class="checkpoint-feedback-icon"></div>
-                    <div class="checkpoint-feedback-title"></div>
-                    <div class="checkpoint-explanation"></div>
-                </div>
-
-                <button class="btn-continue" id="checkpoint2-continue" onclick="nextScreen()">Continue <span>→</span></button>
-            </div>
-            <div class="screen-navigation">
-                <button class="btn-nav btn-prev" onclick="previousScreen()"><span>←</span> Previous</button>
-                <div class="nav-spacer"></div>
-            </div>
-        </div>
-
-        <!-- Screen 6: Method 3 - Credit Builder Loans -->
-        <div class="lesson-screen" data-screen="6">
-            <div class="screen-progress">Screen 6 of 8</div>
-            <div class="lesson-section">
-                <h2>Method 3: Credit Builder Loans</h2>
-                <p>A <strong>credit builder loan</strong> is specifically designed for people with no credit. Unlike regular loans, these work backwards:</p>
-
-                <p><strong>Step 1:</strong> Bank holds $500-$1,000 in a savings account</p>
-                <p><strong>Step 2:</strong> You make monthly payments for 6-24 months</p>
-                <p><strong>Step 3:</strong> Payments are reported to credit bureaus, building your credit</p>
-                <p><strong>Step 4:</strong> After final payment, you get the money PLUS any interest earned</p>
-
-                <p style="margin-top: 20px;"><strong>Where to get them:</strong></p>
-                <ul>
-                    <li>Local credit unions (best rates, often 6-12% APR)</li>
-                    <li>Self Financial (online, reports to all 3 bureaus)</li>
-                    <li>MoneyLion (no hard credit check)</li>
-                </ul>
-
-                <p style="margin-top: 20px;"><strong><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="10" cy="8" r="4" fill="#FCD34D"/><rect x="8" y="12" width="4" height="3" fill="#FCD34D"/><rect x="7" y="15" width="6" height="1" fill="#FCD34D"/></svg> Pro Tip:</strong> This is essentially forced savings that builds credit. You'll pay about $50-100 in interest for a $1,000 loan - worth it for the credit boost and guaranteed savings.</p>
-            </div>
-            <div class="screen-navigation">
-                <button class="btn-nav btn-prev" onclick="previousScreen()"><span>←</span> Previous</button>
-                <button class="btn-nav" onclick="nextScreen()">Next <span>→</span></button>
-            </div>
-        </div>
-
-        <!-- Screen 7: Real Timeline Example -->
-        <div class="lesson-screen" data-screen="7">
-            <div class="screen-progress">Screen 7 of 8</div>
-            <div class="lesson-section">
-                <h2>Real Timeline: 0 to 680 in 6 Months</h2>
-                <p>Here's exactly how Maria built her credit from nothing to a 680 score:</p>
-
-                <p><strong>Month 1:</strong> Opened Discover it Secured card with $300 deposit. Became authorized user on mom's 8-year-old card with perfect history.</p>
-
-                <p><strong>Month 2:</strong> Credit score: 640. Used secured card for gas only ($40/month), paid in full immediately. Utilization: 13%.</p>
-
-                <p><strong>Months 3-4:</strong> Continued perfect payment history. Score climbed to 655. Set up autopay to never miss a payment.</p>
-
-                <p><strong>Month 5:</strong> Started a $500 credit builder loan at local credit union. Score: 665. Now has revolving and installment credit.</p>
-
-                <p><strong>Month 6:</strong> Score reached 680! Qualified for unsecured credit card with rewards. Total cost: $35 in interest.</p>
-
-                <p style="margin-top: 20px;"><strong><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="10" cy="10" r="8" fill="#10B981"/><text x="10" y="14" text-anchor="middle" font-size="10" fill="white" font-weight="bold">$</text></svg> The Numbers:</strong> Total investment: $335 ($300 secured card deposit + $35 credit builder loan interest). Result: 680 credit score in 6 months - enough to qualify for apartment rentals, car loans, and premium credit cards. This score can save you $50,000+ over a lifetime in lower interest rates.</p>
-            </div>
-            <div class="screen-navigation">
-                <button class="btn-nav btn-prev" onclick="previousScreen()"><span>←</span> Previous</button>
-                <button class="btn-nav" onclick="nextScreen()">Next <span>→</span></button>
-            </div>
-        </div>
-
-        <!-- Screen 8: Quiz -->
-        <div class="lesson-screen" data-screen="8">
-            <div class="screen-progress">Screen 8 of 8</div>
-            <!-- Lesson Quiz -->
-            <div class="quiz-container" id="quizContainer">
-                <div class="quiz-header">
-                    <h2>Final Quiz</h2>
-                    <p>Answer all 3 questions correctly to complete the lesson</p>
-                </div>
-                <div id="quizQuestions"></div>
-                <button class="btn-submit-quiz" id="submitQuiz" onclick="submitQuiz()">Submit Quiz</button>
-                <div id="quizResult"></div>
-            </div>
-
-            <!-- Finish Button -->
-            <button class="btn-finish" id="finishBtn" onclick="finishLesson()" disabled>Finish Lesson</button>
-
-            <div class="screen-navigation">
-                <button class="btn-nav btn-prev" onclick="previousScreen()"><span>←</span> Previous</button>
-                <div class="nav-spacer"></div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h4>FinanceU</h4>
-                    <p>Making financial literacy accessible for everyone.</p>
-                </div>
-                <div class="footer-section">
-                    <h4>Company</h4>
-                    <ul>
-                        <li><a href="/about">About Us</a></li>
-                        <li><a href="/careers">Careers</a></li>
-                        <li><a href="/contact">Contact</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h4>Support</h4>
-                    <ul>
-                        <li><a href="/help">Help Center</a></li>
-                        <li><a href="/privacy">Privacy Policy</a></li>
-                        <li><a href="/terms">Terms of Service</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p style=" font-size: 0.85rem; opacity: 0.8; margin-bottom: 10px;">Disclaimer: FinanceU provides educational content only and does not offer financial, legal, or investment advice. Always consult with a qualified professional before making financial decisions.</p>
-                <p>&copy; 2025 FinanceU. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
+    </main>
 
     <script src="config.js"></script>
-    <script src="lesson-completion.js"></script>
-    <script src="animations.js"></script>
     <script>
-        // Check authentication status and update nav
-        async function updateNav() {
-            const authButtons = document.getElementById('authButtons');
-            const cachedAuth = localStorage.getItem('authState');
-            if (cachedAuth) {
-                const authState = JSON.parse(cachedAuth);
-                authButtons.innerHTML = authState.isLoggedIn
-                    ? `<a href="#" onclick="logout(); return false;" class="btn-primary">Logout</a>`
-                    : `<a href="login" class="btn-primary">Login</a>`;
-                authButtons.style.opacity = '1';
-            }
-            try {
-                const response = await fetch(`${API_URL}/auth/me`, { credentials: 'include' });
-                if (response.ok) {
-                    localStorage.setItem('authState', JSON.stringify({ isLoggedIn: true }));
-                    authButtons.innerHTML = `<a href="#" onclick="logout(); return false;" class="btn-primary">Logout</a>`;
+        // Section navigation
+        let currentSection = 1;
+        const totalSections = 8;
+
+        function updateProgress() {
+            const progress = (currentSection / totalSections) * 100;
+            document.getElementById('progressBar').style.width = `${progress}%`;
+            document.getElementById('currentSection').textContent = currentSection;
+
+            document.getElementById('prevBtn').style.visibility = currentSection === 1 ? 'hidden' : 'visible';
+            document.getElementById('nextBtn').style.display = currentSection === totalSections ? 'none' : 'block';
+
+            document.querySelectorAll('.lesson-section').forEach((section, index) => {
+                if (index + 1 === currentSection) {
+                    section.classList.add('visible');
                 } else {
-                    localStorage.setItem('authState', JSON.stringify({ isLoggedIn: false }));
-                    authButtons.innerHTML = `<a href="login" class="btn-primary">Login</a>`;
+                    section.classList.remove('visible');
                 }
-                authButtons.style.opacity = '1';
-            } catch (error) {
-                console.log('Not logged in');
-                localStorage.setItem('authState', JSON.stringify({ isLoggedIn: false }));
-                authButtons.innerHTML = `<a href="login" class="btn-primary">Login</a>`;
-                authButtons.style.opacity = '1';
+            });
+        }
+
+        function nextSection() {
+            if (currentSection < totalSections) {
+                currentSection++;
+                updateProgress();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
             }
+        }
+
+        function previousSection() {
+            if (currentSection > 1) {
+                currentSection--;
+                updateProgress();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        }
+
+        // Interactive statement
+        function toggleStatement(index) {
+            const items = document.querySelectorAll('.statement-item');
+            const item = items[index];
+            const arrow = document.querySelector(`[data-arrow="${index}"]`);
+
+            item.classList.toggle('expanded');
+
+            if (item.classList.contains('expanded')) {
+                arrow.style.transform = 'rotate(180deg)';
+            } else {
+                arrow.style.transform = 'rotate(0deg)';
+            }
+        }
+
+        // Interest calculator
+        function updateCalculator() {
+            const balance = parseInt(document.getElementById('balanceSlider').value);
+            const apr = parseInt(document.getElementById('aprSlider').value);
+
+            document.getElementById('balanceValue').textContent = balance;
+            document.getElementById('aprValue').textContent = apr;
+
+            const monthlyRate = apr / 100 / 12;
+            const minPaymentPercent = 0.02;
+            let remainingBalance = balance;
+            let totalInterest = 0;
+            let months = 0;
+
+            while (remainingBalance > 0 && months < 300) {
+                const interest = remainingBalance * monthlyRate;
+                let payment = Math.max(remainingBalance * minPaymentPercent, 25);
+
+                if (payment > remainingBalance + interest) {
+                    payment = remainingBalance + interest;
+                }
+
+                totalInterest += interest;
+                remainingBalance = remainingBalance + interest - payment;
+                months++;
+            }
+
+            document.getElementById('interestCost').textContent = '$' + Math.round(totalInterest);
+            document.getElementById('monthsToPayoff').textContent = months;
+            document.getElementById('balanceDisplay').textContent = balance;
+            document.getElementById('totalPaid').textContent = balance + Math.round(totalInterest);
+            document.getElementById('extraPercent').textContent = Math.round((totalInterest / balance) * 100);
+        }
+
+        // Autopay selection
+        function selectAutopay(index) {
+            document.getElementById('autopay' + index).checked = true;
+
+            const feedback = document.getElementById('autopayFeedback');
+            const messages = [
+                {
+                    type: 'warning',
+                    title: 'Not Recommended',
+                    message: 'Minimum payment autopay will keep you out of late fees, but you\'ll still pay interest every month. This can trap you in debt for years.',
+                    color: 'red'
+                },
+                {
+                    type: 'caution',
+                    title: 'Be Careful',
+                    message: 'Fixed amount autopay is better than minimum, but if your balance is higher than the fixed amount, you\'ll still pay interest. Make sure the amount covers your typical spending.',
+                    color: 'yellow'
+                },
+                {
+                    type: 'success',
+                    title: 'Perfect Choice!',
+                    message: 'Setting autopay to statement balance means you\'ll never pay interest and never miss a payment. Just make sure you have enough money in your checking account before the due date!',
+                    color: 'green'
+                }
+            ];
+
+            const msg = messages[index];
+            feedback.className = `p-6 bg-${msg.color}-500/20 border-2 border-${msg.color}-500/40 rounded-xl`;
+            feedback.innerHTML = `
+                <div class="flex items-start gap-3">
+                    <div class="w-8 h-8 rounded-full bg-${msg.color}-500/30 flex items-center justify-center flex-shrink-0">
+                        ${index === 2 ? '<svg class="w-5 h-5 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>' : '<span class="text-' + msg.color + '-400 text-sm font-bold">!</span>'}
+                    </div>
+                    <div>
+                        <div class="font-bold text-${msg.color}-400 mb-2">${msg.title}</div>
+                        <p class="text-gray-300 text-sm">${msg.message}</p>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Quiz
+        const quizQuestions = [
+            {
+                question: "What should you pay to avoid ALL interest charges?",
+                options: [
+                    "Minimum payment",
+                    "Statement balance in full",
+                    "Half of your balance",
+                    "Whatever you can afford"
+                ],
+                correct: 1
+            },
+            {
+                question: "When does your billing cycle typically close?",
+                options: [
+                    "On your payment due date",
+                    "On the 1st of every month",
+                    "About 21-25 days BEFORE your payment due date",
+                    "It varies randomly each month"
+                ],
+                correct: 2
+            },
+            {
+                question: "What is the grace period?",
+                options: [
+                    "Extra time after you miss a payment",
+                    "The time between statement closing and due date where you pay no interest if you pay in full",
+                    "A feature only premium cards have",
+                    "The time it takes for charges to appear"
+                ],
+                correct: 1
+            },
+            {
+                question: "What's the danger of only paying the minimum?",
+                options: [
+                    "Nothing - minimum payment is fine",
+                    "You'll be charged interest on the remaining balance",
+                    "Your card will be closed immediately",
+                    "Your credit limit will decrease"
+                ],
+                correct: 1
+            },
+            {
+                question: "What's the best autopay setting?",
+                options: [
+                    "Minimum payment",
+                    "A fixed amount you choose",
+                    "Statement balance (full amount)",
+                    "Don't use autopay"
+                ],
+                correct: 2
+            }
+        ];
+
+        let selectedAnswers = {};
+
+        function renderQuiz() {
+            const container = document.getElementById('quizQuestions');
+            container.innerHTML = quizQuestions.map((q, qIndex) => `
+                <div class="mb-8">
+                    <h3 class="text-lg font-bold text-gray-200 mb-4">${qIndex + 1}. ${q.question}</h3>
+                    <div class="space-y-3">
+                        ${q.options.map((option, oIndex) => `
+                            <div class="quiz-option" onclick="selectAnswer(${qIndex}, ${oIndex})">
+                                <div class="w-6 h-6 rounded-full border-2 border-gray-400 flex items-center justify-center flex-shrink-0">
+                                    <div class="w-3 h-3 rounded-full bg-purple-500 hidden answer-indicator"></div>
+                                </div>
+                                <span class="text-gray-300">${option}</span>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function selectAnswer(questionIndex, answerIndex) {
+            selectedAnswers[questionIndex] = answerIndex;
+
+            const questionDiv = document.querySelectorAll('#quizQuestions > div')[questionIndex];
+            const options = questionDiv.querySelectorAll('.quiz-option');
+
+            options.forEach((option, index) => {
+                option.classList.remove('selected');
+                const indicator = option.querySelector('.answer-indicator');
+                indicator.classList.add('hidden');
+
+                if (index === answerIndex) {
+                    option.classList.add('selected');
+                    indicator.classList.remove('hidden');
+                }
+            });
+
+            document.getElementById('submitQuiz').disabled = Object.keys(selectedAnswers).length !== quizQuestions.length;
+        }
+
+        function submitQuiz() {
+            let correct = 0;
+
+            quizQuestions.forEach((q, qIndex) => {
+                const questionDiv = document.querySelectorAll('#quizQuestions > div')[qIndex];
+                const options = questionDiv.querySelectorAll('.quiz-option');
+
+                options.forEach((option, oIndex) => {
+                    if (oIndex === q.correct) {
+                        option.classList.add('correct');
+                    } else if (oIndex === selectedAnswers[qIndex]) {
+                        option.classList.add('incorrect');
+                    }
+                });
+
+                if (selectedAnswers[qIndex] === q.correct) {
+                    correct++;
+                }
+            });
+
+            const percentage = (correct / quizQuestions.length) * 100;
+            const resultDiv = document.getElementById('quizResult');
+
+            if (percentage === 100) {
+                resultDiv.innerHTML = `
+                    <div class="bg-gradient-to-r from-green-500/20 to-emerald-500/20 border-2 border-green-500/40 rounded-xl p-6 text-center">
+                        <div class="w-20 h-20 mx-auto mb-4 rounded-full bg-gradient-to-br from-green-400 to-emerald-500 flex items-center justify-center shadow-lg shadow-green-500/50">
+                            <svg class="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-2xl font-bold text-green-400 mb-2">Perfect Score!</h3>
+                        <p class="text-gray-300 mb-4">You got ${correct}/${quizQuestions.length} correct. You've mastered Lesson 2!</p>
+                        <button onclick="completeLesson()" class="btn-3d px-8 py-3 bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 rounded-xl font-bold text-white transition-all">
+                            Complete Lesson →
+                        </button>
+                    </div>
+                `;
+            } else {
+                resultDiv.innerHTML = `
+                    <div class="bg-gradient-to-r from-red-500/20 to-rose-500/20 border-2 border-red-500/40 rounded-xl p-6 text-center">
+                        <div class="w-20 h-20 mx-auto mb-4 rounded-full bg-gradient-to-br from-orange-400 to-red-500 flex items-center justify-center shadow-lg shadow-red-500/50">
+                            <svg class="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-2xl font-bold text-red-400 mb-2">Not Quite Yet</h3>
+                        <p class="text-gray-300 mb-4">You got ${correct}/${quizQuestions.length} correct. Review the lesson and try again!</p>
+                        <button onclick="location.reload()" class="btn-3d px-8 py-3 bg-gray-700 hover:bg-gray-600 rounded-xl font-bold text-white transition-all">
+                            Review Lesson
+                        </button>
+                    </div>
+                `;
+            }
+
+            resultDiv.classList.remove('hidden');
+            document.getElementById('submitQuiz').disabled = true;
+        }
+
+        function completeLesson() {
+            const userId = localStorage.getItem('userId');
+            if (!userId) {
+                window.location.href = '/path3-lessons';
+                return;
+            }
+
+            const completed = JSON.parse(localStorage.getItem(`path3_completed_${userId}`) || '[]');
+            if (!completed.includes(2)) {
+                completed.push(2);
+                localStorage.setItem(`path3_completed_${userId}`, JSON.stringify(completed));
+            }
+
+            localStorage.setItem(`lesson2_quiz_passed_${userId}`, 'true');
+
+            fetch(`${API_URL}/progress/path3-lesson2`, {
+                method: 'POST',
+                credentials: 'include',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ completed: true, score: 100 })
+            }).then(() => {
+                window.location.href = '/path3-lessons';
+            }).catch(() => {
+                window.location.href = '/path3-lessons';
+            });
         }
 
         async function logout() {
@@ -872,340 +1259,16 @@
             localStorage.removeItem('token');
             localStorage.removeItem('userId');
             try {
-                await fetch(`${API_URL}/auth/logout`, {
-                    method: 'POST',
-                    credentials: 'include'
-                });
-                window.location.href = '/index.html';
-            } catch (error) {
-                console.error('Logout error:', error);
-                window.location.href = '/index.html';
-            }
+                await fetch(`${API_URL}/auth/logout`, { method: 'POST', credentials: 'include' });
+            } catch (error) {}
+            window.location.href = '/index.html';
         }
 
-        // Quiz data
-        const quizData = [
-            {
-                question: "What is the main advantage of a secured credit card?",
-                options: [
-                    "A) It offers the best rewards",
-                    "B) It requires a deposit but is easier to get approved for with no credit",
-                    "C) It has no fees at all",
-                    "D) It automatically upgrades after 1 month"
-                ],
-                correct: 1
-            },
-            {
-                question: "What's the risk of becoming an authorized user on someone else's credit card?",
-                options: [
-                    "A) You have to make all the payments",
-                    "B) It doesn't help your credit at all",
-                    "C) Their bad payment history will hurt your credit too",
-                    "D) You can't remove yourself later"
-                ],
-                correct: 2
-            },
-            {
-                question: "How does a credit builder loan work differently than a regular loan?",
-                options: [
-                    "A) You don't have to make payments",
-                    "B) The bank holds the money while you make payments, then gives it to you at the end",
-                    "C) It doesn't report to credit bureaus",
-                    "D) You can never get the money back"
-                ],
-                correct: 1
-            },
-            {
-                question: "What should you do with a secured credit card to build credit effectively?",
-                options: [
-                    "A) Max it out immediately",
-                    "B) Never use it",
-                    "C) Make small purchases and pay the full balance on time each month",
-                    "D) Only make minimum payments"
-                ],
-                correct: 2
-            },
-            {
-                question: "Why is it important to choose a responsible person if becoming an authorized user?",
-                options: [
-                    "A) They control your bank account",
-                    "B) Their credit behavior affects your credit score",
-                    "C) You must pay their bills",
-                    "D) It doesn't matter who you choose"
-                ],
-                correct: 1
-            }
-        ];
-
-        let userAnswers = [];
-        let quizPassed = false;
-
-        function initQuiz() {
-            const userId = localStorage.getItem('userId');
-            if (!userId || userId === 'null' || userId === 'undefined') {
-                console.error('No valid userId found');
-                document.getElementById('finishBtn').disabled = true;
-                return;
-            }
-
-            const quizPassedStatus = localStorage.getItem(`path3_lesson2_quiz_passed_${userId}`);
-            if (quizPassedStatus === 'true') {
-                quizPassed = true;
-                document.getElementById('finishBtn').disabled = false;
-                document.getElementById('quizContainer').style.display = 'none';
-                return;
-            }
-
-            renderQuiz();
-        }
-
-        function renderQuiz() {
-            const questionsContainer = document.getElementById('quizQuestions');
-            questionsContainer.innerHTML = '';
-            userAnswers = new Array(quizData.length).fill(null);
-
-            quizData.forEach((q, qIndex) => {
-                const questionCard = document.createElement('div');
-                questionCard.className = 'question-card';
-                questionCard.innerHTML = `
-                    <div class="question-text">Question ${qIndex + 1}: ${q.question}</div>
-                    ${q.options.map((option, oIndex) => `
-                        <div class="answer-option" onclick="selectAnswer(${qIndex}, ${oIndex})">
-                            <input type="radio" name="question${qIndex}" value="${oIndex}" style="margin-right: 10px;">
-                            ${option}
-                        </div>
-                    `).join('')}
-                `;
-                questionsContainer.appendChild(questionCard);
-            });
-
-            document.getElementById('submitQuiz').disabled = false;
-            document.getElementById('quizResult').innerHTML = '';
-        }
-
-        function selectAnswer(questionIndex, optionIndex) {
-            userAnswers[questionIndex] = optionIndex;
-            const questionCard = document.querySelectorAll('.question-card')[questionIndex];
-            const options = questionCard.querySelectorAll('.answer-option');
-            options.forEach((opt, idx) => {
-                opt.classList.remove('selected');
-                if (idx === optionIndex) {
-                    opt.classList.add('selected');
-                    opt.querySelector('input').checked = true;
-                }
-            });
-        }
-
-        function submitQuiz() {
-            if (userAnswers.includes(null)) {
-                alert('Please answer all questions before submitting.');
-                return;
-            }
-
-            let correct = 0;
-            quizData.forEach((q, index) => {
-                if (userAnswers[index] === q.correct) {
-                    correct++;
-                }
-            });
-
-            const percentage = Math.round((correct / quizData.length) * 100);
-            const passed = correct === quizData.length;
-
-            document.querySelectorAll('.question-card').forEach((card, qIndex) => {
-                const options = card.querySelectorAll('.answer-option');
-                options.forEach((opt, oIndex) => {
-                    opt.style.pointerEvents = 'none';
-                    if (oIndex === quizData[qIndex].correct) {
-                        opt.classList.add('correct');
-                    } else if (oIndex === userAnswers[qIndex] && oIndex !== quizData[qIndex].correct) {
-                        opt.classList.add('incorrect');
-                    }
-                });
-            });
-
-            const resultDiv = document.getElementById('quizResult');
-            if (passed) {
-                quizPassed = true;
-                const userId = localStorage.getItem('userId');
-                localStorage.setItem(`path3_lesson2_quiz_passed_${userId}`, 'true');
-                document.getElementById('finishBtn').disabled = false;
-
-                resultDiv.innerHTML = `
-                    <div class="quiz-result pass">
-                        <div class="result-icon"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="20" fill="#D1FAE5"/><circle cx="24" cy="24" r="14" stroke="#00A676" stroke-width="2" fill="none"/><path d="M18 22 L20 18 L22 22" stroke="#00A676" stroke-width="2" fill="none"/><path d="M26 22 L28 18 L30 22" stroke="#00A676" stroke-width="2" fill="none"/><path d="M16 26 Q24 32 32 26" stroke="#00A676" stroke-width="2" fill="none"/></svg></div>
-                        <div class="result-text" style="color: #10b981;">Perfect Score!</div>
-                        <div class="result-score">You got all ${quizData.length} questions correct!</div>
-                        <p style="color: var(--text-secondary); font-size: 16px; font-weight: 600;">Excellent! Click "Finish Lesson" to continue.</p>
-                    </div>
-                `;
-            } else {
-                resultDiv.innerHTML = `
-                    <div class="quiz-result fail">
-                        <div class="result-icon"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="20" fill="#EDE9FE"/><rect x="16" y="12" width="16" height="24" rx="1" stroke="#8B5CF6" stroke-width="2" fill="none"/><line x1="20"y1="18"x2="28"y2="18" stroke="#8B5CF6" stroke-width="1.5"/><line x1="20"y1="22"x2="28"y2="22" stroke="#8B5CF6" stroke-width="1.5"/><line x1="20"y1="26"x2="25"y2="26" stroke="#8B5CF6" stroke-width="1.5"/></svg></div>
-                        <div class="result-text" style="color: #dc2626;">Not Quite</div>
-                        <div class="result-score">You scored ${correct} out of ${quizData.length}</div>
-                        <p style="color: var(--text-secondary); margin-bottom: 15px; font-size: 16px; font-weight: 600;">You need all 3 correct. Review the lesson and try again!</p>
-                        <button class="btn-retry" onclick="retryQuiz()">Retry Quiz</button>
-                    </div>
-                `;
-            }
-
-            document.getElementById('submitQuiz').style.display = 'none';
-        }
-
-        function retryQuiz() {
-            renderQuiz();
-            document.getElementById('submitQuiz').style.display = 'block';
-        }
-
-        async function finishLesson() {
-            if (!quizPassed) {
-                alert('Please complete the quiz first!');
-                return;
-            }
-            const success = await completeLesson('path3_lesson2', 3, 2);
-            if (success) {
-                window.location.href = 'path3-lessons.html';
-            }
-        }
-
-        updateNav();
-        initQuiz();
-
-        // Checkpoint functions
-        let checkpoint1Answered = false;
-        let checkpoint2Answered = false;
-
-        function checkCheckpoint1(selectedOption) {
-            if (checkpoint1Answered) return;
-            checkpoint1Answered = true;
-
-            const correctOption = 1; // B) It requires a deposit but is easier to get approved for with no credit
-            const isCorrect = selectedOption === correctOption;
-
-            const options = document.querySelectorAll('[name="checkpoint1"]').forEach((radio, index) => {
-                const optionDiv = radio.parentElement;
-                optionDiv.style.pointerEvents = 'none';
-
-                if (index === correctOption) {
-                    optionDiv.classList.add('correct');
-                } else if (index === selectedOption && index !== correctOption) {
-                    optionDiv.classList.add('incorrect');
-                }
-
-                if (index === selectedOption) {
-                    radio.checked = true;
-                }
-            });
-
-            const feedback = document.getElementById('checkpoint1-feedback');
-            const feedbackIcon = feedback.querySelector('.checkpoint-feedback-icon');
-            const feedbackTitle = feedback.querySelector('.checkpoint-feedback-title');
-            const feedbackExplanation = feedback.querySelector('.checkpoint-explanation');
-            const continueBtn = document.getElementById('checkpoint1-continue');
-
-            if (isCorrect) {
-                feedback.classList.add('correct');
-                feedbackIcon.textContent = '<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 8 L6 12 L14 4" stroke="currentColor" stroke-width="2" fill="none"/></svg>';
-                feedbackTitle.textContent = 'Correct!';
-                feedbackExplanation.textContent = 'Secured cards are specifically designed for people with no credit. Your deposit secures the credit line, making it low-risk for the bank, so they approve you even without a credit history.';
-            } else {
-                feedback.classList.add('incorrect');
-                feedbackIcon.textContent = '•';
-                feedbackTitle.textContent = 'Not quite!';
-                feedbackExplanation.textContent = 'The correct answer is B. Secured cards are specifically designed for people with no credit. Your deposit secures the credit line, making it low-risk for the bank, so they approve you even without a credit history.';
-            }
-
-            feedback.classList.add('show');
-            continueBtn.classList.add('show');
-        }
-
-        function checkCheckpoint2(selectedOption) {
-            if (checkpoint2Answered) return;
-            checkpoint2Answered = true;
-
-            const correctOption = 2; // C) Their bad payment history will hurt your credit too
-            const isCorrect = selectedOption === correctOption;
-
-            const options = document.querySelectorAll('[name="checkpoint2"]').forEach((radio, index) => {
-                const optionDiv = radio.parentElement;
-                optionDiv.style.pointerEvents = 'none';
-
-                if (index === correctOption) {
-                    optionDiv.classList.add('correct');
-                } else if (index === selectedOption && index !== correctOption) {
-                    optionDiv.classList.add('incorrect');
-                }
-
-                if (index === selectedOption) {
-                    radio.checked = true;
-                }
-            });
-
-            const feedback = document.getElementById('checkpoint2-feedback');
-            const feedbackIcon = feedback.querySelector('.checkpoint-feedback-icon');
-            const feedbackTitle = feedback.querySelector('.checkpoint-feedback-title');
-            const feedbackExplanation = feedback.querySelector('.checkpoint-explanation');
-            const continueBtn = document.getElementById('checkpoint2-continue');
-
-            if (isCorrect) {
-                feedback.classList.add('correct');
-                feedbackIcon.textContent = '<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 8 L6 12 L14 4" stroke="currentColor" stroke-width="2" fill="none"/></svg>';
-                feedbackTitle.textContent = 'Excellent!';
-                feedbackExplanation.textContent = 'When you become an authorized user, both the good AND bad history of that account appear on your credit report. This is why you should only become an authorized user on accounts with perfect payment history.';
-            } else {
-                feedback.classList.add('incorrect');
-                feedbackIcon.textContent = '•';
-                feedbackTitle.textContent = 'Good thinking, but...';
-                feedbackExplanation.textContent = 'The correct answer is C. When you become an authorized user, both the good AND bad history of that account appear on your credit report. This is why you should only become an authorized user on accounts with perfect payment history.';
-            }
-
-            feedback.classList.add('show');
-            continueBtn.classList.add('show');
-        }
-
-        // Multi-screen navigation
-        let currentScreen = 1;
-        const totalScreens = 8;
-
-        function showScreen(screenNumber) {
-            document.querySelectorAll('.lesson-screen').forEach(screen => {
-                screen.classList.remove('active');
-            });
-
-            const targetScreen = document.querySelector(`.lesson-screen[data-screen="${screenNumber}"]`);
-            if (targetScreen) {
-                targetScreen.classList.add('active');
-                currentScreen = screenNumber;
-
-                const lessonContainer = document.querySelector('.lesson-container');
-                const headerOffset = 80;
-                const elementPosition = lessonContainer.getBoundingClientRect().top;
-                const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-
-                window.scrollTo({
-                    top: offsetPosition,
-                    behavior: 'smooth'
-                });
-            }
-        }
-
-        function nextScreen() {
-            if (currentScreen < totalScreens) {
-                showScreen(currentScreen + 1);
-            }
-        }
-
-        function previousScreen() {
-            if (currentScreen > 1) {
-                showScreen(currentScreen - 1);
-            }
-        }
-
-        document.addEventListener('DOMContentLoaded', function() {
-            showScreen(1);
-        });
+        // Initialize
+        updateProgress();
+        renderQuiz();
+        updateCalculator();
+        selectAutopay(2);
     </script>
 </body>
 </html>
