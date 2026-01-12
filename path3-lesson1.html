@@ -59,14 +59,17 @@
 
         /* 3D Button Effect */
         .btn-3d {
-            transform-style: preserve-3d;
             transition: all 0.3s ease;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3), 0 8px 16px rgba(0, 0, 0, 0.2);
         }
 
         .btn-3d:hover {
-            transform: translateY(-4px) translateZ(10px);
-            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4), 0 16px 32px rgba(0, 0, 0, 0.3), 0 0 40px rgba(209, 213, 219, 0.2);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4), 0 12px 24px rgba(0, 0, 0, 0.3), 0 0 30px rgba(209, 213, 219, 0.15);
+        }
+
+        /* Navigation items should not transform */
+        nav .btn-3d:hover {
+            transform: none;
         }
 
         /* Section styling */
