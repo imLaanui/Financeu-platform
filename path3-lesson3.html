@@ -3,1368 +3,1051 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lesson 3 - Credit Cards: The Good, Bad, and Smart - FinanceU</title>
-    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
-    <link rel="icon" type="image/svg+xml" sizes="16x16" href="assets/favicon-16x16.svg">
-    <link rel="icon" type="image/svg+xml" sizes="32x32" href="assets/favicon-32x32.svg">
-    <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.svg">
-    <link rel="stylesheet" href="styles.css">
+    <title>Lesson 3: How to Build Credit the Right Way - Path 3</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        /* SVG Icon Alignment Fixes */
-        svg {
-            display: inline-block;
-            vertical-align: middle;
+        body {
+            background: linear-gradient(135deg, #0f0f23 0%, #1a1a3e 50%, #2d1b4e 100%);
+            min-height: 100vh;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
         }
 
-        .intro-card-icon svg,
-        .mistake-icon svg,
-        .reflection-icon svg,
-        .result-icon svg {
-            display: block;
-            margin: 0 auto;
+        .progress-bar {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
         }
 
-        .budget-method-emoji svg,
-        .budget-item-label svg {
-            display: inline-block;
-            vertical-align: middle;
-            margin-right: 8px;
+        .progress-fill {
+            background: linear-gradient(90deg, #a855f7 0%, #ec4899 100%);
+            transition: width 0.5s ease;
+            box-shadow: 0 0 20px rgba(168, 85, 247, 0.5);
         }
 
-        p svg, li svg, span svg {
-            display: inline-block;
-            vertical-align: middle;
-            margin: 0 2px;
+        .section-content {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
         }
 
-        .lesson-container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 30px 20px;
-        }
-        .lesson-header {
-            text-align: center;
-            margin-bottom: 30px;
-            padding: 25px;
-            background: linear-gradient(135deg, #0A1A2F 0%, #1a3a5c 100%);
+        .card-visual {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             border-radius: 16px;
-            position: relative;
-            overflow: hidden;
+            padding: 24px;
+            box-shadow: 0 20px 60px rgba(102, 126, 234, 0.3);
+            transition: transform 0.3s ease;
         }
-        .lesson-header::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
-            animation: rotate 20s linear infinite;
+
+        .card-visual:hover {
+            transform: translateY(-5px) scale(1.02);
         }
-        @keyframes rotate {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-        .lesson-header h1 {
-            font-size: 32px;
-            color: white;
-            margin-bottom: 8px;
-            position: relative;
-            z-index: 1;
-        }
-        .lesson-header .lesson-number {
-            color: rgba(255, 255, 255, 0.9);
-            font-size: 14px;
-            font-weight: 700;
-            margin-bottom: 5px;
-            position: relative;
-            z-index: 1;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-        .lesson-section {
-            background: white;
-            padding: 25px;
-            border-radius: 12px;
-            margin-bottom: 20px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-            position: relative;
+
+        .comparison-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 24px;
             transition: all 0.3s ease;
         }
-        .lesson-section:hover {
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
-            transform: translateY(-2px);
-        }
-        .lesson-section h2 {
-            color: var(--primary-color);
-            font-size: 24px;
-            margin-bottom: 15px;
-        }
-        .lesson-section p {
-            line-height: 1.6;
-            color: var(--text-secondary);
-            margin-bottom: 12px;
-            font-size: 16px;
-        }
-        .lesson-section ul {
-            line-height: 1.6;
-            color: var(--text-secondary);
-            margin-left: 20px;
-            margin-bottom: 12px;
-        }
-        .lesson-section ul li {
-            margin-bottom: 8px;
-        }
-        .btn-finish {
-            display: block;
-            width: 100%;
-            max-width: 400px;
-            margin: 30px auto;
-            padding: 18px;
-            background: var(--primary-color);
-            color: white;
-            text-align: center;
-            text-decoration: none;
-            border-radius: 8px;
-            font-size: 18px;
-            font-weight: 600;
-            transition: all 0.3s;
-            border: none;
-            cursor: pointer;
-        }
-        .btn-finish:hover {
-            background: #2563eb;
-            transform: scale(1.02);
-        }
-        .back-link {
-            display: inline-block;
-            margin-bottom: 20px;
-            color: var(--primary-color);
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.2s;
-        }
-        .back-link:hover {
-            transform: translateX(-5px);
-        }
-        .quiz-container {
-            background: linear-gradient(135deg, #0A1A2F15 0%, #00A67615 100%);
-            border: 2px solid var(--primary-color);
-            border-radius: 12px;
-            padding: 30px;
-            margin: 30px 0;
-        }
-        .quiz-header {
-            text-align: center;
-            margin-bottom: 25px;
-        }
-        .quiz-header h2 {
-            color: var(--primary-color);
-            font-size: 26px;
-            margin-bottom: 10px;
-        }
-        .quiz-header p {
-            color: var(--text-secondary);
-            font-size: 15px;
-        }
-        .question-card {
-            background: white;
-            padding: 20px;
-            border-radius: 8px;
-            margin-bottom: 15px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-        .question-text {
-            font-size: 17px;
-            font-weight: 600;
-            color: var(--text-primary);
-            margin-bottom: 15px;
-        }
-        .answer-option {
-            background: #f9fafb;
-            padding: 12px;
-            border: 2px solid #e5e7eb;
-            border-radius: 8px;
-            margin-bottom: 10px;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-        .answer-option:hover {
-            border-color: var(--primary-color);
-            background: #eff6ff;
-            transform: translateX(5px);
-        }
-        .answer-option.selected {
-            border-color: var(--primary-color);
-            background: #dbeafe;
-        }
-        .answer-option.correct {
-            border-color: #10b981;
-            background: #d1fae5;
-        }
-        .answer-option.incorrect {
-            border-color: #dc2626;
-            background: #fee2e2;
-        }
-        .btn-submit-quiz {
-            display: block;
-            width: 100%;
-            max-width: 300px;
-            margin: 20px auto;
-            padding: 15px;
-            background: var(--primary-color);
-            color: white;
-            text-align: center;
-            border-radius: 8px;
-            font-size: 16px;
-            font-weight: 600;
-            border: none;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-        .btn-submit-quiz:hover {
-            background: #2563eb;
-            transform: scale(1.05);
-        }
-        .btn-submit-quiz:disabled {
-            background: #9ca3af;
-            cursor: not-allowed;
-            transform: scale(1);
-        }
-        .quiz-result {
-            background: white;
-            padding: 25px;
-            border-radius: 8px;
-            text-align: center;
-            margin-top: 20px;
-        }
-        .quiz-result.pass {
-            border: 3px solid #10b981;
-        }
-        .quiz-result.fail {
-            border: 3px solid #dc2626;
-        }
-        .result-icon {
-            font-size: 48px;
-            margin-bottom: 15px;
-            animation: bounce 0.6s ease;
-        }
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-20px); }
-        }
-        .result-text {
-            font-size: 24px;
-            font-weight: 700;
-            margin-bottom: 10px;
-        }
-        .result-score {
-            font-size: 18px;
-            color: var(--text-secondary);
-            margin-bottom: 20px;
-        }
-        .btn-retry {
-            padding: 12px 24px;
-            background: #f59e0b;
-            color: white;
-            border: none;
-            border-radius: 8px;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-        .btn-retry:hover {
-            background: #d97706;
-            transform: scale(1.05);
-        }
-        .btn-finish:disabled {
-            background: #9ca3af;
-            cursor: not-allowed;
-            opacity: 0.6;
+
+        .comparison-card:hover {
+            border-color: rgba(168, 85, 247, 0.5);
+            background: rgba(168, 85, 247, 0.1);
         }
 
-        /* Multi-screen styles */
-        .lesson-screen {
-            display: none;
-        }
-        .lesson-screen.active {
-            display: block;
-            animation: fadeIn 0.4s ease-in;
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(15px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .screen-progress {
-            text-align: center;
-            margin-bottom: 20px;
-            padding: 10px 20px;
-            background: linear-gradient(135deg, #0A1A2F15 0%, #00A67615 100%);
-            border-radius: 8px;
-            font-weight: 600;
-            color: var(--primary-color);
-            font-size: 14px;
-        }
-        .screen-navigation {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 15px;
-            margin-top: 25px;
-            padding-top: 20px;
-            border-top: 2px solid #e5e7eb;
-        }
-        .btn-nav {
-            padding: 12px 24px;
-            background: var(--primary-color);
-            color: white;
-            border: none;
-            border-radius: 8px;
-            font-size: 16px;
-            font-weight: 600;
+        .habit-item {
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 16px;
             cursor: pointer;
-            transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        .btn-nav:hover {
-            background: #2563eb;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
-        }
-        .btn-nav:disabled {
-            background: #d1d5db;
-            cursor: not-allowed;
-            transform: none;
-            box-shadow: none;
-        }
-        .btn-nav.btn-prev {
-            background: #6b7280;
-        }
-        .btn-nav.btn-prev:hover {
-            background: #4b5563;
-        }
-        .nav-spacer {
-            width: 120px;
+            transition: all 0.3s ease;
         }
 
-        /* Checkpoint styles */
-        .checkpoint-container {
-            background: linear-gradient(135deg, #E0F2FE 0%, #BAE6FD 100%);
-            border: 2px solid #7DD3FC;
-            border-radius: 12px;
-            padding: 25px;
-            margin: 20px 0;
-        }
-        .checkpoint-header {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-        .checkpoint-header h3 {
-            color: #0284C7;
-            font-size: 24px;
-            margin-bottom: 8px;
-        }
-        .checkpoint-header p {
-            color: var(--text-secondary);
-            font-size: 14px;
-        }
-        .checkpoint-question {
-            background: white;
-            padding: 20px;
-            border-radius: 8px;
-            margin-bottom: 15px;
-        }
-        .checkpoint-question-text {
-            font-size: 17px;
-            font-weight: 600;
-            color: var(--text-primary);
-            margin-bottom: 15px;
-        }
-        .checkpoint-option {
-            background: #f9fafb;
-            padding: 12px;
-            border: 2px solid #e5e7eb;
-            border-radius: 8px;
-            margin-bottom: 10px;
-            cursor: pointer;
-            transition: all 0.2s;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        .checkpoint-option:hover {
-            border-color: #0284C7;
-            background: #F0F9FF;
-            transform: translateX(5px);
-        }
-        .checkpoint-option.selected {
-            border-color: #0284C7;
-            background: #E0F2FE;
-        }
-        .checkpoint-option.correct {
-            border-color: #10b981;
-            background: #d1fae5;
-            cursor: default;
-        }
-        .checkpoint-option.incorrect {
-            border-color: #dc2626;
-            background: #fee2e2;
-            cursor: default;
-        }
-        .checkpoint-option input[type="radio"] {
-            cursor: pointer;
-        }
-        .checkpoint-feedback {
-            background: white;
-            padding: 20px;
-            border-radius: 8px;
-            margin-top: 20px;
-            display: none;
-        }
-        .checkpoint-feedback.show {
-            display: block;
-            animation: fadeIn 0.3s ease-in;
-        }
-        .checkpoint-feedback.correct {
-            border-left: 4px solid #10b981;
-        }
-        .checkpoint-feedback.incorrect {
-            border-left: 4px solid #f59e0b;
-        }
-        .checkpoint-feedback-icon {
-            font-size: 32px;
-            margin-bottom: 10px;
-        }
-        .checkpoint-feedback-title {
-            font-size: 18px;
-            font-weight: 700;
-            margin-bottom: 10px;
-        }
-        .checkpoint-feedback.correct .checkpoint-feedback-title {
-            color: #10b981;
-        }
-        .checkpoint-feedback.incorrect .checkpoint-feedback-title {
-            color: #f59e0b;
-        }
-        .checkpoint-explanation {
-            color: var(--text-secondary);
-            line-height: 1.6;
-            margin-top: 10px;
-            font-size: 14px;
-        }
-        .btn-continue {
-            display: none;
-            width: 100%;
-            max-width: 300px;
-            margin: 20px auto;
-            padding: 15px;
-            background: var(--primary-color);
-            color: white;
-            text-align: center;
-            border-radius: 8px;
-            font-size: 16px;
-            font-weight: 600;
-            border: none;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-        .btn-continue.show {
-            display: block;
-        }
-        .btn-continue:hover {
-            background: #2563eb;
-            transform: scale(1.05);
+        .habit-item.checked {
+            border-color: rgba(34, 197, 94, 0.5);
+            background: rgba(34, 197, 94, 0.1);
         }
 
-        /* SCREEN 1: Animated Icons */
-        .intro-cards {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-            margin-top: 20px;
-        }
-        .intro-card {
-            background: linear-gradient(135deg, #0A1A2F15 0%, #00A67615 100%);
-            border-radius: 12px;
-            padding: 20px;
-            text-align: center;
-            transition: all 0.3s;
-            border: 2px solid transparent;
-        }
-        .intro-card:hover {
-            transform: translateY(-5px) scale(1.02);
-            border-color: var(--primary-color);
-            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.2);
-        }
-        .intro-card-icon {
-            font-size: 48px;
-            margin-bottom: 10px;
-            animation: float 3s ease-in-out infinite;
-        }
-        .intro-card:nth-child(2) .intro-card-icon {
-            animation-delay: 1s;
-        }
-        .intro-card:nth-child(3) .intro-card-icon {
-            animation-delay: 2s;
-        }
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
-        }
-        .intro-card h3 {
-            color: var(--primary-color);
-            font-size: 18px;
-            margin-bottom: 8px;
-            font-weight: 700;
-        }
-        .intro-card p {
-            color: var(--text-secondary);
-            font-size: 14px;
-            line-height: 1.5;
-            margin: 0;
-        }
-
-        /* Feature boxes */
-        .feature-boxes {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 15px;
-            margin: 20px 0;
-        }
-        .feature-box {
-            background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
-            border: 2px solid #10b981;
-            border-radius: 12px;
-            padding: 20px;
-            text-align: center;
-            transition: all 0.3s;
-        }
-        .feature-box:hover {
-            transform: translateY(-5px) scale(1.02);
-            box-shadow: 0 8px 20px rgba(16, 185, 129, 0.2);
-        }
-        .feature-icon {
-            font-size: 40px;
-            margin-bottom: 10px;
-        }
-        .feature-title {
-            font-weight: 700;
-            color: #065f46;
-            font-size: 14px;
-            margin-bottom: 8px;
-        }
-        .feature-desc {
-            font-size: 12px;
-            color: var(--text-secondary);
-            line-height: 1.4;
-        }
-
-        /* Warning boxes */
-        .warning-boxes {
-            display: grid;
-            gap: 15px;
-            margin: 20px 0;
-        }
-        .warning-box {
-            background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
-            border: 2px solid #dc2626;
-            border-radius: 12px;
-            padding: 20px;
-            transition: all 0.3s;
-        }
-        .warning-box:hover {
-            transform: translateX(5px);
-            box-shadow: 0 4px 12px rgba(220, 38, 38, 0.2);
-        }
-        .warning-title {
-            font-weight: 700;
-            color: #dc2626;
-            font-size: 16px;
-            margin-bottom: 8px;
-        }
-        .warning-desc {
-            font-size: 14px;
-            color: var(--text-secondary);
-            line-height: 1.5;
-        }
-
-        /* Highlight box */
-        .highlight-box {
-            background: linear-gradient(135deg, #F3E8FF 0%, #E9D5FF 100%);
-            border: 3px solid #9333EA;
-            border-radius: 12px;
-            padding: 25px;
-            margin: 20px 0;
-            text-align: center;
-        }
-        .highlight-box h3 {
-            color: #6B21A8;
-            font-size: 22px;
-            font-weight: 800;
-            margin-bottom: 15px;
-        }
-        .highlight-box p {
-            color: #581C87;
-            font-size: 16px;
-            line-height: 1.6;
-            font-weight: 600;
-            margin: 0;
-        }
-
-        /* Interactive checklist */
-        .action-checklist {
-            background: linear-gradient(135deg, #10b98115 0%, #d1fae530 100%);
-            border: 2px solid #10b981;
-            border-radius: 12px;
-            padding: 25px;
-            margin: 20px 0;
-        }
-        .checklist-title {
-            color: #10b981;
-            font-size: 20px;
-            font-weight: 700;
-            margin-bottom: 15px;
-            text-align: center;
-        }
-        .checklist-item {
-            background: white;
-            border-radius: 8px;
-            padding: 15px;
-            margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            transition: all 0.3s;
-            cursor: pointer;
-        }
-        .checklist-item:hover {
-            box-shadow: 0 2px 8px rgba(16, 185, 129, 0.2);
-            transform: translateX(5px);
-        }
-        .checklist-item.checked {
-            background: #d1fae5;
-            opacity: 0.7;
-        }
-        .checklist-checkbox {
+        .habit-checkbox {
             width: 24px;
             height: 24px;
-            border: 2px solid #10b981;
+            border: 2px solid rgba(255, 255, 255, 0.3);
             border-radius: 6px;
-            flex-shrink: 0;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 16px;
-            transition: all 0.3s;
-        }
-        .checklist-item.checked .checklist-checkbox {
-            background: #10b981;
-            color: white;
-        }
-        .checklist-text {
-            font-size: 14px;
-            color: var(--text-primary);
-            font-weight: 500;
+            transition: all 0.3s ease;
         }
 
-        @media (max-width: 768px) {
-            .intro-cards {
-                grid-template-columns: 1fr;
-            }
+        .habit-item.checked .habit-checkbox {
+            background: #22c55e;
+            border-color: #22c55e;
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 40px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 15px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(180deg, #a855f7 0%, #ec4899 100%);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 32px;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: -33px;
+            top: 0;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #a855f7 0%, #ec4899 100%);
+            box-shadow: 0 0 20px rgba(168, 85, 247, 0.5);
+        }
+
+        .btn-3d {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(240, 240, 245, 0.9) 100%);
+            color: #1a1a3e;
+            padding: 12px 32px;
+            border-radius: 12px;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .btn-3d:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
+            background: linear-gradient(135deg, rgba(255, 255, 255, 1) 0%, rgba(250, 250, 255, 1) 100%);
+        }
+
+        .stat-card {
+            background: rgba(168, 85, 247, 0.1);
+            border: 2px solid rgba(168, 85, 247, 0.3);
+            border-radius: 12px;
+            padding: 16px;
+            text-align: center;
+        }
+
+        .quiz-option {
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .quiz-option:hover {
+            border-color: rgba(168, 85, 247, 0.5);
+            background: rgba(168, 85, 247, 0.1);
+        }
+
+        .quiz-option.selected {
+            border-color: #a855f7;
+            background: rgba(168, 85, 247, 0.2);
+        }
+
+        .quiz-option.correct {
+            border-color: #22c55e;
+            background: rgba(34, 197, 94, 0.2);
+        }
+
+        .quiz-option.incorrect {
+            border-color: #ef4444;
+            background: rgba(239, 68, 68, 0.2);
+        }
+
+        .do-card {
+            background: rgba(34, 197, 94, 0.1);
+            border: 2px solid rgba(34, 197, 94, 0.3);
+        }
+
+        .dont-card {
+            background: rgba(239, 68, 68, 0.1);
+            border: 2px solid rgba(239, 68, 68, 0.3);
         }
     </style>
 </head>
-<body class="homepage-dark">
-    <!-- Navigation -->
-    <nav class="navbar">
-        <div class="container">
-            <div class="nav-wrapper">
-                <div class="logo"><a href="/" style="color: inherit; text-decoration: none;">Finance<span class="logo-accent">U</span></a></div>
-                <ul class="nav-links">
-                    <li><a href="/">Home</a></li>
-                    <li><a href="dashboard">Dashboard</a></li>
-                    <li id="authButtons" style=" opacity: 0;"></li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-
-    <!-- Lesson Content -->
-    <div class="lesson-container">
-        <a href="/path3-lessons" class="back-link">← Back to Path 3 Lessons</a>
-
+<body class="text-white">
+    <div class="max-w-4xl mx-auto px-6 py-8">
         <!-- Header -->
-        <div class="lesson-header">
-            <div class="lesson-number">PILLAR 3: LESSON 3</div>
-            <h1>Credit Cards: The Good, Bad, and Smart</h1>
+        <div class="mb-8">
+            <a href="/path3-lessons" class="text-purple-400 hover:text-purple-300 transition-colors inline-flex items-center gap-2 mb-4">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+                </svg>
+                Back to Path 3
+            </a>
+            <h1 class="text-4xl font-bold mb-2 bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+                How to Build Credit the Right Way
+            </h1>
+            <p class="text-gray-400">Learn the strategies and habits that set you up for credit success</p>
         </div>
 
-        <!-- Screen 1: Quick Intro with Animated Icons -->
-        <div class="lesson-screen active" data-screen="1">
-            <div class="screen-progress">Screen 1 of 8</div>
-            <div class="lesson-section">
-                <h2>Why Credit Cards Matter</h2>
-                <div class="intro-cards">
-                    <div class="intro-card">
-                        <div class="intro-card-icon"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="20" fill="#EFF6FF"/><rect x="12" y="18" width="24" height="16" rx="2" fill="#3B82F6" opacity="0.3"/><rect x="12" y="18" width="24" height="16" rx="2" stroke="#3B82F6" stroke-width="2" fill="none"/><rect x="12" y="21" width="24" height="4" fill="#3B82F6"/><line x1="15"y1="29"x2="21"y2="29" stroke="#3B82F6" stroke-width="1.5" stroke-linecap="round"/></svg></div>
-                        <h3>The Problem</h3>
-                        <p>Credit cards can be powerful tools or dangerous traps depending on how you use them</p>
-                    </div>
-                    <div class="intro-card">
-                        <div class="intro-card-icon"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="20" fill="#EDE9FE"/><rect x="16" y="12" width="16" height="24" rx="1" stroke="#8B5CF6" stroke-width="2" fill="none"/><line x1="20"y1="18"x2="28"y2="18" stroke="#8B5CF6" stroke-width="1.5"/><line x1="20"y1="22"x2="28"y2="22" stroke="#8B5CF6" stroke-width="1.5"/><line x1="20"y1="26"x2="25"y2="26" stroke="#8B5CF6" stroke-width="1.5"/></svg></div>
-                        <h3>The Solution</h3>
-                        <p>Learn the key features, benefits, and pitfalls to use credit cards strategically</p>
-                    </div>
-                    <div class="intro-card">
-                        <div class="intro-card-icon"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="20" fill="#D1FAE5"/><path d="M14 24 L20 30 L34 16" stroke="#00A676" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-                        <h3>Your Goal</h3>
-                        <p>Choose the right card and use it to build credit while earning rewards</p>
-                    </div>
-                </div>
-            </div>
-            <div class="screen-navigation">
-                <div class="nav-spacer"></div>
-                <button class="btn-nav" onclick="nextScreen()">Next <span>→</span></button>
-            </div>
+        <!-- Progress Bar -->
+        <div class="progress-bar rounded-full h-3 mb-8 overflow-hidden">
+            <div id="progressBar" class="progress-fill h-full rounded-full" style="width: 12.5%"></div>
         </div>
 
-        <!-- Screen 2: Core Concept -->
-        <div class="lesson-screen" data-screen="2">
-            <div class="screen-progress">Screen 2 of 8</div>
-            <div class="lesson-section">
-                <h2>The Benefits of Credit Cards</h2>
-                <p>When used responsibly, credit cards offer powerful advantages:</p>
-
-                <div class="feature-boxes">
-                    <div class="feature-box">
-                        <div class="feature-icon"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><polyline points="2,15 7,10 12,12 18,4" stroke="#10B981" stroke-width="2" fill="none"/><polyline points="14,4 18,4 18,8" stroke="#10B981" stroke-width="2" fill="none"/></svg></div>
-                        <div class="feature-title">Build Credit</div>
-                        <div class="feature-desc">Responsible use builds your credit score faster than any other method</div>
-                    </div>
-                    <div class="feature-box">
-                        <div class="feature-icon"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="4" y="8" width="12" height="9" fill="#EF4444"/><rect x="3" y="6" width="14" height="2" fill="#F59E0B"/><rect x="9" y="6" width="2" height="11" fill="#FCD34D"/><path d="M10 6 C10 4 11 3 12 3 C13 3 13 4 13 5 C13 6 12 6 10 6" fill="#10B981"/><path d="M10 6 C10 4 9 3 8 3 C7 3 7 4 7 5 C7 6 8 6 10 6" fill="#10B981"/></svg></div>
-                        <div class="feature-title">Earn Rewards</div>
-                        <div class="feature-desc">Cash back, travel points, or other perks on every purchase</div>
-                    </div>
-                    <div class="feature-box">
-                        <div class="feature-icon"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M10 2 L4 5 L4 10 C4 14 10 18 10 18 C10 18 16 14 16 10 L16 5 Z" fill="#10B981"/></svg></div>
-                        <div class="feature-title">Purchase Protection</div>
-                        <div class="feature-desc">Fraud protection and extended warranties on purchases</div>
-                    </div>
-                    <div class="feature-box">
-                        <div class="feature-icon"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="10" cy="10" r="8" fill="#10B981"/><text x="10" y="14" text-anchor="middle" font-size="10" fill="white" font-weight="bold">$</text></svg></div>
-                        <div class="feature-title">Interest-Free Period</div>
-                        <div class="feature-desc">21-25 day grace period to pay without interest if you pay in full</div>
-                    </div>
+        <!-- Section 1: Starting Your Credit Journey -->
+        <div id="section1" class="section-content rounded-3xl p-8 mb-6">
+            <div class="text-center mb-8">
+                <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-purple-500/40 to-pink-500/40 mb-4 border-4 border-purple-500/60 shadow-lg shadow-purple-500/30">
+                    <svg class="w-8 h-8 text-purple-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                    </svg>
                 </div>
-
-                <p style="margin-top: 20px;"><strong>The key:</strong> Pay your balance in full every month. This way, you enjoy all the benefits without paying a cent in interest.</p>
+                <h2 class="text-3xl font-bold mb-3">Starting Your Credit Journey</h2>
+                <p class="text-gray-400 max-w-2xl mx-auto">Building credit from scratch is easier than you think. Here's what you need to know.</p>
             </div>
-            <div class="screen-navigation">
-                <button class="btn-nav btn-prev" onclick="previousScreen()"><span>←</span> Previous</button>
-                <button class="btn-nav" onclick="nextScreen()">Next <span>→</span></button>
+
+            <div class="grid grid-cols-3 gap-4 mb-8">
+                <div class="stat-card">
+                    <div class="text-3xl font-bold text-purple-400 mb-1">6-12</div>
+                    <div class="text-sm text-gray-400">Months to build credit</div>
+                </div>
+                <div class="stat-card">
+                    <div class="text-3xl font-bold text-pink-400 mb-1">$0</div>
+                    <div class="text-sm text-gray-400">Cost to start</div>
+                </div>
+                <div class="stat-card">
+                    <div class="text-3xl font-bold text-purple-400 mb-1">100%</div>
+                    <div class="text-sm text-gray-400">Success rate with good habits</div>
+                </div>
+            </div>
+
+            <div class="bg-purple-500/10 border-2 border-purple-500/30 rounded-xl p-6">
+                <h3 class="text-xl font-bold text-purple-300 mb-3">The Reality Check</h3>
+                <div class="space-y-3 text-gray-300">
+                    <p><span class="text-purple-400 font-bold">✓</span> You don't need to be in debt to build credit</p>
+                    <p><span class="text-purple-400 font-bold">✓</span> You don't need a high income</p>
+                    <p><span class="text-purple-400 font-bold">✓</span> You don't need to carry a balance</p>
+                    <p><span class="text-purple-400 font-bold">✓</span> You just need the right card and the right habits</p>
+                </div>
+            </div>
+
+            <div class="mt-8 text-center">
+                <button onclick="nextSection()" class="btn-3d">
+                    Let's Get Started
+                </button>
             </div>
         </div>
 
-        <!-- Screen 3: Checkpoint Question 1 -->
-        <div class="lesson-screen" data-screen="3">
-            <div class="screen-progress">Screen 3 of 8</div>
-            <div class="checkpoint-container">
-                <div class="checkpoint-header">
-                    <h3><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 8 L6 12 L14 4" stroke="currentColor" stroke-width="2" fill="none"/></svg> Quick Check</h3>
-                    <p>Test your understanding</p>
+        <!-- Section 2: Secured Credit Cards -->
+        <div id="section2" class="section-content rounded-3xl p-8 mb-6 hidden">
+            <div class="text-center mb-8">
+                <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-blue-500/40 to-purple-500/40 mb-4 border-4 border-blue-500/60 shadow-lg shadow-blue-500/30">
+                    <svg class="w-8 h-8 text-blue-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+                    </svg>
                 </div>
-
-                <div class="checkpoint-question">
-                    <div class="checkpoint-question-text">What's the best way to use a credit card to avoid interest charges?</div>
-                    <div class="checkpoint-option" onclick="checkCheckpoint1(0)">
-                        <input type="radio" name="checkpoint1" value="0">
-                        <span>A) Pay the minimum payment each month</span>
-                    </div>
-                    <div class="checkpoint-option" onclick="checkCheckpoint1(1)">
-                        <input type="radio" name="checkpoint1" value="1">
-                        <span>B) Pay the balance in full every month</span>
-                    </div>
-                    <div class="checkpoint-option" onclick="checkCheckpoint1(2)">
-                        <input type="radio" name="checkpoint1" value="2">
-                        <span>C) Keep a small balance to build credit</span>
-                    </div>
-                    <div class="checkpoint-option" onclick="checkCheckpoint1(3)">
-                        <input type="radio" name="checkpoint1" value="3">
-                        <span>D) Use it for emergencies only</span>
-                    </div>
-                </div>
-
-                <div class="checkpoint-feedback" id="checkpoint1-feedback">
-                    <div class="checkpoint-feedback-icon"></div>
-                    <div class="checkpoint-feedback-title"></div>
-                    <div class="checkpoint-explanation"></div>
-                </div>
-
-                <button class="btn-continue" id="checkpoint1-continue" onclick="nextScreen()">Continue <span>→</span></button>
+                <h2 class="text-3xl font-bold mb-3">Secured Credit Cards</h2>
+                <p class="text-gray-400 max-w-2xl mx-auto">Your best bet for building credit from zero</p>
             </div>
-            <div class="screen-navigation">
-                <button class="btn-nav btn-prev" onclick="previousScreen()"><span>←</span> Previous</button>
-                <div class="nav-spacer"></div>
+
+            <div class="card-visual max-w-md mx-auto mb-8">
+                <div class="text-right text-white/80 text-xs mb-4">SECURED CREDIT CARD</div>
+                <div class="mb-8">
+                    <div class="text-white/60 text-xs mb-1">Card Holder</div>
+                    <div class="text-white text-lg font-bold">YOUR NAME HERE</div>
+                </div>
+                <div class="flex justify-between items-end">
+                    <div>
+                        <div class="text-white/60 text-xs mb-1">Security Deposit</div>
+                        <div class="text-white text-xl font-bold">$200-$500</div>
+                    </div>
+                    <div class="text-white/80 text-2xl font-bold">****</div>
+                </div>
+            </div>
+
+            <div class="bg-white/5 rounded-xl p-6 mb-6">
+                <h3 class="text-xl font-bold text-gray-200 mb-4">How It Works</h3>
+                <div class="space-y-4">
+                    <div class="flex items-start gap-3">
+                        <div class="w-8 h-8 rounded-full bg-blue-500/30 flex items-center justify-center flex-shrink-0 font-bold text-blue-400">1</div>
+                        <div>
+                            <p class="text-gray-300 font-semibold">You put down a refundable deposit</p>
+                            <p class="text-gray-400 text-sm">Usually $200-$500. This becomes your credit limit.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <div class="w-8 h-8 rounded-full bg-blue-500/30 flex items-center justify-center flex-shrink-0 font-bold text-blue-400">2</div>
+                        <div>
+                            <p class="text-gray-300 font-semibold">You use the card like any credit card</p>
+                            <p class="text-gray-400 text-sm">Make purchases, get statements, pay your bill.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <div class="w-8 h-8 rounded-full bg-blue-500/30 flex items-center justify-center flex-shrink-0 font-bold text-blue-400">3</div>
+                        <div>
+                            <p class="text-gray-300 font-semibold">The card reports to credit bureaus</p>
+                            <p class="text-gray-400 text-sm">Your payment history builds your credit score.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <div class="w-8 h-8 rounded-full bg-blue-500/30 flex items-center justify-center flex-shrink-0 font-bold text-blue-400">4</div>
+                        <div>
+                            <p class="text-gray-300 font-semibold">You get your deposit back</p>
+                            <p class="text-gray-400 text-sm">When you close the card or upgrade to unsecured.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-4">
+                <div class="comparison-card">
+                    <div class="text-green-400 font-bold mb-3 flex items-center gap-2">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                        </svg>
+                        Pros
+                    </div>
+                    <ul class="space-y-2 text-gray-300 text-sm">
+                        <li>• Easy approval (no credit check)</li>
+                        <li>• Builds credit fast with good habits</li>
+                        <li>• Deposit is refundable</li>
+                        <li>• Works exactly like a regular card</li>
+                    </ul>
+                </div>
+                <div class="comparison-card">
+                    <div class="text-red-400 font-bold mb-3 flex items-center gap-2">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"/>
+                        </svg>
+                        Cons
+                    </div>
+                    <ul class="space-y-2 text-gray-300 text-sm">
+                        <li>• Requires upfront deposit</li>
+                        <li>• Low credit limit initially</li>
+                        <li>• May have annual fee ($25-$49)</li>
+                        <li>• Takes time to upgrade</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="mt-8 text-center">
+                <button onclick="nextSection()" class="btn-3d">
+                    Next: Student Cards
+                </button>
             </div>
         </div>
 
-        <!-- Screen 4: Detailed Example -->
-        <div class="lesson-screen" data-screen="4">
-            <div class="screen-progress">Screen 4 of 8</div>
-            <div class="lesson-section">
-                <h2>The Dangers: What to Avoid</h2>
+        <!-- Section 3: Student Credit Cards -->
+        <div id="section3" class="section-content rounded-3xl p-8 mb-6 hidden">
+            <div class="text-center mb-8">
+                <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-green-500/40 to-teal-500/40 mb-4 border-4 border-green-500/60 shadow-lg shadow-green-500/30">
+                    <svg class="w-8 h-8 text-green-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+                    </svg>
+                </div>
+                <h2 class="text-3xl font-bold mb-3">Student Credit Cards</h2>
+                <p class="text-gray-400 max-w-2xl mx-auto">If you're in college, this might be your best option</p>
+            </div>
 
-                <div class="warning-boxes">
-                    <div class="warning-box">
-                        <div class="warning-title"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="10" cy="10" r="7" fill="#EF4444"/><path d="M10 6 L10 11 M10 13 L10 14" stroke="white" stroke-width="2"/></svg> High Interest Rates</div>
-                        <div class="warning-desc">Average APR is 20-25%. If you carry a $3,000 balance at 22% APR and make minimum payments, you'll pay $4,000+ in interest over 10 years.</div>
+            <div class="bg-white/5 rounded-xl p-6 mb-6">
+                <h3 class="text-xl font-bold text-gray-200 mb-4">Who Qualifies?</h3>
+                <div class="space-y-3">
+                    <div class="flex items-center gap-3">
+                        <div class="w-6 h-6 rounded-full bg-green-500/30 flex items-center justify-center flex-shrink-0">
+                            <svg class="w-4 h-4 text-green-400" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                            </svg>
+                        </div>
+                        <p class="text-gray-300">Currently enrolled in college or university</p>
                     </div>
-                    <div class="warning-box">
-                        <div class="warning-title"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8 2 L14 14 L2 14 Z" fill="#F59E0B"/><path d="M8 6 L8 10 M8 11.5 L8 12.5" stroke="white" stroke-width="1.5"/></svg> Minimum Payment Trap</div>
-                        <div class="warning-desc">Paying only the minimum keeps you in debt for years. On a $2,000 balance, minimum payments take 10+ years to pay off.</div>
+                    <div class="flex items-center gap-3">
+                        <div class="w-6 h-6 rounded-full bg-green-500/30 flex items-center justify-center flex-shrink-0">
+                            <svg class="w-4 h-4 text-green-400" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                            </svg>
+                        </div>
+                        <p class="text-gray-300">Age 18-25 (varies by issuer)</p>
                     </div>
-                    <div class="warning-box">
-                        <div class="warning-title"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="10" cy="10" r="8" stroke="#10B981" stroke-width="2" fill="none"/><text x="10" y="14" text-anchor="middle" font-size="10" fill="#10B981" font-weight="bold">$</text></svg> Annual Fees</div>
-                        <div class="warning-desc">Some cards charge $50-$500+ per year. Only worth it if rewards exceed the fee.</div>
-                    </div>
-                    <div class="warning-box">
-                        <div class="warning-title"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="10" cy="10" r="6" fill="#EF4444"/></svg> Late Payment Fees</div>
-                        <div class="warning-desc">$25-$40 per late payment, plus it damages your credit score significantly.</div>
+                    <div class="flex items-center gap-3">
+                        <div class="w-6 h-6 rounded-full bg-green-500/30 flex items-center justify-center flex-shrink-0">
+                            <svg class="w-4 h-4 text-green-400" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                            </svg>
+                        </div>
+                        <p class="text-gray-300">Some form of income (job, allowance, financial aid)</p>
                     </div>
                 </div>
-
-                <p style="margin-top: 20px;"><strong>The bottom line:</strong> Credit cards amplify your financial habits. Good habits get rewarded, bad habits get expensive fast.</p>
             </div>
-            <div class="screen-navigation">
-                <button class="btn-nav btn-prev" onclick="previousScreen()"><span>←</span> Previous</button>
-                <button class="btn-nav" onclick="nextScreen()">Next <span>→</span></button>
+
+            <div class="grid md:grid-cols-2 gap-4 mb-6">
+                <div class="comparison-card">
+                    <h4 class="text-lg font-bold text-purple-300 mb-3">Student Cards</h4>
+                    <ul class="space-y-2 text-gray-300 text-sm">
+                        <li class="flex items-start gap-2">
+                            <span class="text-green-400 flex-shrink-0">✓</span>
+                            <span>No deposit required</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="text-green-400 flex-shrink-0">✓</span>
+                            <span>Often have rewards</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="text-green-400 flex-shrink-0">✓</span>
+                            <span>No annual fee usually</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="text-red-400 flex-shrink-0">✗</span>
+                            <span>Need to qualify (income check)</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="text-red-400 flex-shrink-0">✗</span>
+                            <span>May need co-signer under 21</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="comparison-card">
+                    <h4 class="text-lg font-bold text-blue-300 mb-3">Secured Cards</h4>
+                    <ul class="space-y-2 text-gray-300 text-sm">
+                        <li class="flex items-start gap-2">
+                            <span class="text-green-400 flex-shrink-0">✓</span>
+                            <span>Guaranteed approval</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="text-green-400 flex-shrink-0">✓</span>
+                            <span>No income required</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="text-green-400 flex-shrink-0">✓</span>
+                            <span>Builds credit equally fast</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="text-red-400 flex-shrink-0">✗</span>
+                            <span>Requires $200-$500 deposit</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="text-red-400 flex-shrink-0">✗</span>
+                            <span>May have annual fee</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="bg-purple-500/10 border-2 border-purple-500/30 rounded-xl p-6">
+                <h3 class="text-lg font-bold text-purple-300 mb-2">Our Recommendation</h3>
+                <p class="text-gray-300">Try applying for a student card first (it's free to apply). If denied, go with a secured card. Both build credit equally well!</p>
+            </div>
+
+            <div class="mt-8 text-center">
+                <button onclick="nextSection()" class="btn-3d">
+                    Next: Making Your Choice
+                </button>
             </div>
         </div>
 
-        <!-- Screen 5: Checkpoint Question 2 -->
-        <div class="lesson-screen" data-screen="5">
-            <div class="screen-progress">Screen 5 of 8</div>
-            <div class="checkpoint-container">
-                <div class="checkpoint-header">
-                    <h3><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 8 L6 12 L14 4" stroke="currentColor" stroke-width="2" fill="none"/></svg> Apply Your Knowledge</h3>
-                    <p>What would you do in this situation?</p>
+        <!-- Section 4: Card Decision Guide -->
+        <div id="section4" class="section-content rounded-3xl p-8 mb-6 hidden">
+            <div class="text-center mb-8">
+                <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-yellow-500/40 to-orange-500/40 mb-4 border-4 border-yellow-500/60 shadow-lg shadow-yellow-500/30">
+                    <svg class="w-8 h-8 text-yellow-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/>
+                    </svg>
                 </div>
-
-                <div class="checkpoint-question">
-                    <div class="checkpoint-question-text">What's the average APR (interest rate) on credit cards?</div>
-                    <div class="checkpoint-option" onclick="checkCheckpoint2(0)">
-                        <input type="radio" name="checkpoint2" value="0">
-                        <span>A) 5-10%</span>
-                    </div>
-                    <div class="checkpoint-option" onclick="checkCheckpoint2(1)">
-                        <input type="radio" name="checkpoint2" value="1">
-                        <span>B) 10-15%</span>
-                    </div>
-                    <div class="checkpoint-option" onclick="checkCheckpoint2(2)">
-                        <input type="radio" name="checkpoint2" value="2">
-                        <span>C) 20-25%</span>
-                    </div>
-                    <div class="checkpoint-option" onclick="checkCheckpoint2(3)">
-                        <input type="radio" name="checkpoint2" value="3">
-                        <span>D) 30-35%</span>
-                    </div>
-                </div>
-
-                <div class="checkpoint-feedback" id="checkpoint2-feedback">
-                    <div class="checkpoint-feedback-icon"></div>
-                    <div class="checkpoint-feedback-title"></div>
-                    <div class="checkpoint-explanation"></div>
-                </div>
-
-                <button class="btn-continue" id="checkpoint2-continue" onclick="nextScreen()">Continue <span>→</span></button>
+                <h2 class="text-3xl font-bold mb-3">Which Card Should You Choose?</h2>
+                <p class="text-gray-400 max-w-2xl mx-auto">Quick decision guide to find your best option</p>
             </div>
-            <div class="screen-navigation">
-                <button class="btn-nav btn-prev" onclick="previousScreen()"><span>←</span> Previous</button>
-                <div class="nav-spacer"></div>
+
+            <div class="space-y-4">
+                <div class="comparison-card">
+                    <div class="flex items-start gap-4">
+                        <div class="text-4xl">1</div>
+                        <div class="flex-1">
+                            <h3 class="text-xl font-bold text-gray-200 mb-2">Are you currently a college student?</h3>
+                            <div class="grid md:grid-cols-2 gap-3 mt-4">
+                                <div class="bg-green-500/20 border border-green-500/40 rounded-lg p-4">
+                                    <p class="font-bold text-green-300 mb-2">Yes → Student Card</p>
+                                    <p class="text-sm text-gray-300">Apply for a student credit card. They're designed for you and often have no fees.</p>
+                                </div>
+                                <div class="bg-blue-500/20 border border-blue-500/40 rounded-lg p-4">
+                                    <p class="font-bold text-blue-300 mb-2">No → Skip to Question 2</p>
+                                    <p class="text-sm text-gray-300">Student cards won't work for you, but that's okay!</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="comparison-card">
+                    <div class="flex items-start gap-4">
+                        <div class="text-4xl">2</div>
+                        <div class="flex-1">
+                            <h3 class="text-xl font-bold text-gray-200 mb-2">Do you have $200-$500 available?</h3>
+                            <div class="grid md:grid-cols-2 gap-3 mt-4">
+                                <div class="bg-purple-500/20 border border-purple-500/40 rounded-lg p-4">
+                                    <p class="font-bold text-purple-300 mb-2">Yes → Secured Card</p>
+                                    <p class="text-sm text-gray-300">Perfect! A secured card guarantees approval and you'll get your deposit back.</p>
+                                </div>
+                                <div class="bg-orange-500/20 border border-orange-500/40 rounded-lg p-4">
+                                    <p class="font-bold text-orange-300 mb-2">No → Save First</p>
+                                    <p class="text-sm text-gray-300">Save up for a secured card deposit. It's worth the wait!</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="comparison-card">
+                    <div class="flex items-start gap-4">
+                        <div class="text-4xl">3</div>
+                        <div class="flex-1">
+                            <h3 class="text-xl font-bold text-gray-200 mb-2">Do you have some form of income?</h3>
+                            <div class="grid md:grid-cols-2 gap-3 mt-4">
+                                <div class="bg-teal-500/20 border border-teal-500/40 rounded-lg p-4">
+                                    <p class="font-bold text-teal-300 mb-2">Yes → Try Student Card First</p>
+                                    <p class="text-sm text-gray-300">If you're a student with income, try a student card. If denied, get a secured card.</p>
+                                </div>
+                                <div class="bg-indigo-500/20 border border-indigo-500/40 rounded-lg p-4">
+                                    <p class="font-bold text-indigo-300 mb-2">No → Secured Card</p>
+                                    <p class="text-sm text-gray-300">Secured cards don't require income verification. Perfect for you!</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-8 bg-gradient-to-r from-purple-500/20 to-pink-500/20 border-2 border-purple-500/40 rounded-xl p-6">
+                <h3 class="text-xl font-bold text-center text-purple-300 mb-4">The Bottom Line</h3>
+                <p class="text-center text-gray-300 mb-4">Both secured and student cards build credit equally fast. Choose based on what you qualify for, not which is "better."</p>
+                <p class="text-center text-sm text-gray-400">Remember: Your first card isn't forever. After 6-12 months of good history, you can upgrade or apply for better cards!</p>
+            </div>
+
+            <div class="mt-8 text-center">
+                <button onclick="nextSection()" class="btn-3d">
+                    Next: Essential Habits
+                </button>
             </div>
         </div>
 
-        <!-- Screen 6: Additional Content -->
-        <div class="lesson-screen" data-screen="6">
-            <div class="screen-progress">Screen 6 of 8</div>
-            <div class="lesson-section">
-                <h2>Choosing the Right Card</h2>
-                <p>Different cards serve different purposes. Match the card to your needs:</p>
+        <!-- Section 5: Essential Habits Checklist -->
+        <div id="section5" class="section-content rounded-3xl p-8 mb-6 hidden">
+            <div class="text-center mb-8">
+                <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-pink-500/40 to-rose-500/40 mb-4 border-4 border-pink-500/60 shadow-lg shadow-pink-500/30">
+                    <svg class="w-8 h-8 text-pink-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                    </svg>
+                </div>
+                <h2 class="text-3xl font-bold mb-3">The 5 Essential Habits</h2>
+                <p class="text-gray-400 max-w-2xl mx-auto">These are the non-negotiable habits that build excellent credit</p>
+            </div>
 
-                <ul style=" font-size: 16px; line-height: 1.8; margin-top: 15px;">
-                    <li><strong>Building Credit:</strong> Secured cards or student cards with no annual fee</li>
-                    <li><strong>Everyday Spending:</strong> Cash back cards (1.5-2% back on everything)</li>
-                    <li><strong>Specific Categories:</strong> Cards with bonus rewards on gas, groceries, or dining</li>
-                    <li><strong>Travel:</strong> Cards with travel points, no foreign transaction fees, travel insurance</li>
-                    <li><strong>Large Purchases:</strong> 0% intro APR cards (12-18 months interest-free)</li>
-                </ul>
+            <div class="mb-6 text-center">
+                <p class="text-gray-300">Click each habit to mark it as complete:</p>
+            </div>
 
-                <div class="highlight-box" style="margin-top: 25px;">
-                    <h3><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="10" cy="10" r="8" stroke="#EF4444" stroke-width="1.5" fill="none"/><circle cx="10" cy="10" r="5" stroke="#EF4444" stroke-width="1.5" fill="none"/><circle cx="10" cy="10" r="2" fill="#EF4444"/></svg> For Beginners</h3>
-                    <p>Start with a simple cash back card with no annual fee. Once you've proven you can pay in full every month for 12+ months, then consider specialty rewards cards.</p>
+            <div class="space-y-3 mb-8">
+                <div class="habit-item" onclick="toggleHabit(0)">
+                    <div class="flex items-start gap-4">
+                        <div class="habit-checkbox">
+                            <svg class="w-4 h-4 text-white hidden" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                            </svg>
+                        </div>
+                        <div class="flex-1">
+                            <h3 class="text-lg font-bold text-gray-200 mb-1">Always Pay On Time</h3>
+                            <p class="text-gray-400 text-sm">Even one late payment can drop your score 100+ points. Set up autopay for at least the minimum.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="habit-item" onclick="toggleHabit(1)">
+                    <div class="flex items-start gap-4">
+                        <div class="habit-checkbox">
+                            <svg class="w-4 h-4 text-white hidden" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                            </svg>
+                        </div>
+                        <div class="flex-1">
+                            <h3 class="text-lg font-bold text-gray-200 mb-1">Pay in Full Every Month</h3>
+                            <p class="text-gray-400 text-sm">Avoid interest charges completely. You don't need to carry a balance to build credit—that's a myth!</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="habit-item" onclick="toggleHabit(2)">
+                    <div class="flex items-start gap-4">
+                        <div class="habit-checkbox">
+                            <svg class="w-4 h-4 text-white hidden" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                            </svg>
+                        </div>
+                        <div class="flex-1">
+                            <h3 class="text-lg font-bold text-gray-200 mb-1">Keep Usage Below 30%</h3>
+                            <p class="text-gray-400 text-sm">If your limit is $500, don't let your balance go above $150. Lower is even better.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="habit-item" onclick="toggleHabit(3)">
+                    <div class="flex items-start gap-4">
+                        <div class="habit-checkbox">
+                            <svg class="w-4 h-4 text-white hidden" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                            </svg>
+                        </div>
+                        <div class="flex-1">
+                            <h3 class="text-lg font-bold text-gray-200 mb-1">Use Your Card Regularly</h3>
+                            <p class="text-gray-400 text-sm">Use it for small purchases (gas, groceries) and pay it off. Inactive cards don't help your score.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="habit-item" onclick="toggleHabit(4)">
+                    <div class="flex items-start gap-4">
+                        <div class="habit-checkbox">
+                            <svg class="w-4 h-4 text-white hidden" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                            </svg>
+                        </div>
+                        <div class="flex-1">
+                            <h3 class="text-lg font-bold text-gray-200 mb-1">Don't Apply for Too Many Cards</h3>
+                            <p class="text-gray-400 text-sm">Each application is a "hard inquiry" that temporarily lowers your score. Space them out by 6+ months.</p>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="screen-navigation">
-                <button class="btn-nav btn-prev" onclick="previousScreen()"><span>←</span> Previous</button>
-                <button class="btn-nav" onclick="nextScreen()">Next <span>→</span></button>
+
+            <div class="bg-green-500/10 border-2 border-green-500/30 rounded-xl p-6 text-center">
+                <p class="text-green-300 font-bold mb-2">Master These 5 Habits</p>
+                <p class="text-gray-300">Follow these consistently for 6-12 months and you'll have a solid credit score (680-720+).</p>
+            </div>
+
+            <div class="mt-8 text-center">
+                <button onclick="nextSection()" class="btn-3d">
+                    Next: What to Avoid
+                </button>
             </div>
         </div>
 
-        <!-- Screen 7: Action Plan -->
-        <div class="lesson-screen" data-screen="7">
-            <div class="screen-progress">Screen 7 of 8</div>
-            <div class="lesson-section">
-                <div class="action-checklist">
-                    <div class="checklist-title"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="20" fill="#DBEAFE"/><circle cx="24" cy="24" r="14" stroke="#3B82F6" stroke-width="2" fill="none"/><circle cx="24" cy="24" r="8" stroke="#3B82F6" stroke-width="2" fill="none"/><circle cx="24" cy="24" r="3" fill="#3B82F6"/></svg> Your Smart Credit Card Strategy</div>
-                    <p style="text-align: center; color: var(--text-secondary); margin-bottom: 15px; font-size: 14px;">
-                        Follow these rules to use credit cards safely:
-                    </p>
-                    <div class="checklist-item" onclick="toggleChecklistItem(this)">
-                        <div class="checklist-checkbox"></div>
-                        <div class="checklist-text">Only charge what you can afford to pay off in full this month</div>
+        <!-- Section 6: Do's and Don'ts -->
+        <div id="section6" class="section-content rounded-3xl p-8 mb-6 hidden">
+            <div class="text-center mb-8">
+                <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-red-500/40 to-orange-500/40 mb-4 border-4 border-red-500/60 shadow-lg shadow-red-500/30">
+                    <svg class="w-8 h-8 text-red-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+                    </svg>
+                </div>
+                <h2 class="text-3xl font-bold mb-3">Credit Building Do's and Don'ts</h2>
+                <p class="text-gray-400 max-w-2xl mx-auto">Avoid these common mistakes that sabotage credit building</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-6">
+                <div>
+                    <h3 class="text-xl font-bold text-green-300 mb-4 flex items-center gap-2">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                        </svg>
+                        DO
+                    </h3>
+                    <div class="space-y-3">
+                        <div class="do-card rounded-lg p-4">
+                            <p class="text-gray-200 font-semibold mb-1">Set up autopay</p>
+                            <p class="text-gray-400 text-sm">Prevents missed payments automatically</p>
+                        </div>
+                        <div class="do-card rounded-lg p-4">
+                            <p class="text-gray-200 font-semibold mb-1">Pay statement balance in full</p>
+                            <p class="text-gray-400 text-sm">Zero interest charges, maximum credit building</p>
+                        </div>
+                        <div class="do-card rounded-lg p-4">
+                            <p class="text-gray-200 font-semibold mb-1">Check your statement monthly</p>
+                            <p class="text-gray-400 text-sm">Catch fraud and verify charges</p>
+                        </div>
+                        <div class="do-card rounded-lg p-4">
+                            <p class="text-gray-200 font-semibold mb-1">Use for planned purchases</p>
+                            <p class="text-gray-400 text-sm">Things you'd buy with cash anyway</p>
+                        </div>
+                        <div class="do-card rounded-lg p-4">
+                            <p class="text-gray-200 font-semibold mb-1">Keep your first card forever</p>
+                            <p class="text-gray-400 text-sm">Even if you upgrade, don't close it</p>
+                        </div>
                     </div>
-                    <div class="checklist-item" onclick="toggleChecklistItem(this)">
-                        <div class="checklist-checkbox"></div>
-                        <div class="checklist-text">Set up automatic payments to pay in full every month (or at least the minimum)</div>
-                    </div>
-                    <div class="checklist-item" onclick="toggleChecklistItem(this)">
-                        <div class="checklist-checkbox"></div>
-                        <div class="checklist-text">Keep credit utilization under 30% of your limit</div>
-                    </div>
-                    <div class="checklist-item" onclick="toggleChecklistItem(this)">
-                        <div class="checklist-checkbox"></div>
-                        <div class="checklist-text">Review statements monthly for errors or fraud</div>
-                    </div>
-                    <div class="checklist-item" onclick="toggleChecklistItem(this)">
-                        <div class="checklist-checkbox"></div>
-                        <div class="checklist-text">Never pay for rewards - if annual fee exceeds rewards value, it's not worth it</div>
+                </div>
+
+                <div>
+                    <h3 class="text-xl font-bold text-red-300 mb-4 flex items-center gap-2">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"/>
+                        </svg>
+                        DON'T
+                    </h3>
+                    <div class="space-y-3">
+                        <div class="dont-card rounded-lg p-4">
+                            <p class="text-gray-200 font-semibold mb-1">Don't carry a balance "to build credit"</p>
+                            <p class="text-gray-400 text-sm">This is a myth that costs you money</p>
+                        </div>
+                        <div class="dont-card rounded-lg p-4">
+                            <p class="text-gray-200 font-semibold mb-1">Don't max out your card</p>
+                            <p class="text-gray-400 text-sm">High utilization hurts your score badly</p>
+                        </div>
+                        <div class="dont-card rounded-lg p-4">
+                            <p class="text-gray-200 font-semibold mb-1">Don't apply for multiple cards at once</p>
+                            <p class="text-gray-400 text-sm">Each inquiry drops your score temporarily</p>
+                        </div>
+                        <div class="dont-card rounded-lg p-4">
+                            <p class="text-gray-200 font-semibold mb-1">Don't buy things you can't afford</p>
+                            <p class="text-gray-400 text-sm">Credit is not extra money to spend</p>
+                        </div>
+                        <div class="dont-card rounded-lg p-4">
+                            <p class="text-gray-200 font-semibold mb-1">Don't ignore your statements</p>
+                            <p class="text-gray-400 text-sm">Missing a payment destroys your score</p>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="screen-navigation">
-                <button class="btn-nav btn-prev" onclick="previousScreen()"><span>←</span> Previous</button>
-                <button class="btn-nav" onclick="nextScreen()">Next <span>→</span></button>
+
+            <div class="mt-8 bg-purple-500/10 border-2 border-purple-500/30 rounded-xl p-6">
+                <h3 class="text-lg font-bold text-purple-300 mb-2 text-center">The Golden Rule</h3>
+                <p class="text-center text-gray-300 text-lg">Treat your credit card like a debit card. Only spend money you already have.</p>
+            </div>
+
+            <div class="mt-8 text-center">
+                <button onclick="nextSection()" class="btn-3d">
+                    Next: Your First Year
+                </button>
             </div>
         </div>
 
-        <!-- Screen 8: Quiz -->
-        <div class="lesson-screen" data-screen="8">
-            <div class="screen-progress">Screen 8 of 8</div>
-            <!-- Lesson Quiz -->
-            <div class="quiz-container" id="quizContainer">
-                <div class="quiz-header">
-                    <h2>Final Quiz</h2>
-                    <p>Answer all 3 questions correctly to complete the lesson</p>
+        <!-- Section 7: Timeline -->
+        <div id="section7" class="section-content rounded-3xl p-8 mb-6 hidden">
+            <div class="text-center mb-8">
+                <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-cyan-500/40 to-blue-500/40 mb-4 border-4 border-cyan-500/60 shadow-lg shadow-cyan-500/30">
+                    <svg class="w-8 h-8 text-cyan-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                    </svg>
                 </div>
-                <div id="quizQuestions"></div>
-                <button class="btn-submit-quiz" id="submitQuiz" onclick="submitQuiz()">Submit Quiz</button>
-                <div id="quizResult"></div>
+                <h2 class="text-3xl font-bold mb-3">Your First Year Timeline</h2>
+                <p class="text-gray-400 max-w-2xl mx-auto">What to expect as you build your credit history</p>
             </div>
 
-            <!-- Finish Button -->
-            <button class="btn-finish" id="finishBtn" onclick="finishLesson()" disabled>Finish Lesson</button>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="bg-white/5 rounded-lg p-4">
+                        <div class="text-purple-400 font-bold mb-1">Month 1</div>
+                        <p class="text-gray-200 font-semibold mb-1">Get Your First Card</p>
+                        <p class="text-gray-400 text-sm">Apply for secured or student card. Make first purchase. Set up autopay immediately.</p>
+                    </div>
+                </div>
 
-            <div class="screen-navigation">
-                <button class="btn-nav btn-prev" onclick="previousScreen()"><span>←</span> Previous</button>
-                <div class="nav-spacer"></div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="bg-white/5 rounded-lg p-4">
+                        <div class="text-purple-400 font-bold mb-1">Month 2</div>
+                        <p class="text-gray-200 font-semibold mb-1">First Statement</p>
+                        <p class="text-gray-400 text-sm">Receive your first statement. Pay it in full before the due date. You're officially building credit!</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="bg-white/5 rounded-lg p-4">
+                        <div class="text-purple-400 font-bold mb-1">Month 3-6</div>
+                        <p class="text-gray-200 font-semibold mb-1">Building History</p>
+                        <p class="text-gray-400 text-sm">Continue using card for small purchases. Pay in full every month. Your credit score starts appearing (~640-680).</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="bg-white/5 rounded-lg p-4">
+                        <div class="text-purple-400 font-bold mb-1">Month 6</div>
+                        <p class="text-gray-200 font-semibold mb-1">First Milestone</p>
+                        <p class="text-gray-400 text-sm">You now have 6 months of credit history! Score typically 680-720 with good habits.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="bg-white/5 rounded-lg p-4">
+                        <div class="text-purple-400 font-bold mb-1">Month 7-9</div>
+                        <p class="text-gray-200 font-semibold mb-1">Consider Upgrades</p>
+                        <p class="text-gray-400 text-sm">You may qualify for credit limit increases or better cards with rewards. Don't close your first card!</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="bg-white/5 rounded-lg p-4">
+                        <div class="text-purple-400 font-bold mb-1">Month 12</div>
+                        <p class="text-gray-200 font-semibold mb-1">One Year Anniversary</p>
+                        <p class="text-gray-400 text-sm">You have a full year of credit history. Score typically 720+ with perfect payment history. You're now creditworthy!</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-8 bg-gradient-to-r from-green-500/20 to-teal-500/20 border-2 border-green-500/40 rounded-xl p-6">
+                <h3 class="text-xl font-bold text-green-300 mb-3 text-center">After 12 Months</h3>
+                <div class="grid md:grid-cols-3 gap-4 text-center">
+                    <div>
+                        <div class="text-2xl font-bold text-purple-400 mb-1">720+</div>
+                        <div class="text-sm text-gray-400">Typical credit score</div>
+                    </div>
+                    <div>
+                        <div class="text-2xl font-bold text-pink-400 mb-1">$0</div>
+                        <div class="text-sm text-gray-400">Interest paid (if paid in full)</div>
+                    </div>
+                    <div>
+                        <div class="text-2xl font-bold text-purple-400 mb-1">Endless</div>
+                        <div class="text-sm text-gray-400">New opportunities</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-8 text-center">
+                <button onclick="nextSection()" class="btn-3d">
+                    Take the Quiz
+                </button>
             </div>
         </div>
+
+        <!-- Section 8: Quiz -->
+        <div id="section8" class="section-content rounded-3xl p-8 mb-6 hidden">
+            <div class="text-center mb-8">
+                <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-purple-500/40 to-pink-500/40 mb-4 border-4 border-purple-500/60 shadow-lg shadow-purple-500/30">
+                    <svg class="w-8 h-8 text-purple-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                    </svg>
+                </div>
+                <h2 class="text-3xl font-bold mb-3">Test Your Knowledge</h2>
+                <p class="text-gray-400 max-w-2xl mx-auto">Make sure you've got the essentials down</p>
+            </div>
+
+            <div id="quizQuestions" class="space-y-6 mb-8">
+                <!-- Question 1 -->
+                <div class="bg-white/5 rounded-xl p-6">
+                    <p class="text-lg font-semibold text-gray-200 mb-4">1. Which is the BEST first credit card for most people with no credit history?</p>
+                    <div class="space-y-2">
+                        <div class="quiz-option" onclick="selectAnswer(0, 0)">
+                            <p class="text-gray-300">A premium rewards card with $95 annual fee</p>
+                        </div>
+                        <div class="quiz-option" onclick="selectAnswer(0, 1)">
+                            <p class="text-gray-300">A secured credit card or student credit card</p>
+                        </div>
+                        <div class="quiz-option" onclick="selectAnswer(0, 2)">
+                            <p class="text-gray-300">A store credit card from your favorite retailer</p>
+                        </div>
+                        <div class="quiz-option" onclick="selectAnswer(0, 3)">
+                            <p class="text-gray-300">Wait until you have a job to apply</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Question 2 -->
+                <div class="bg-white/5 rounded-xl p-6">
+                    <p class="text-lg font-semibold text-gray-200 mb-4">2. To build good credit, you MUST carry a balance month-to-month.</p>
+                    <div class="space-y-2">
+                        <div class="quiz-option" onclick="selectAnswer(1, 0)">
+                            <p class="text-gray-300">True - you need to pay interest to build credit</p>
+                        </div>
+                        <div class="quiz-option" onclick="selectAnswer(1, 1)">
+                            <p class="text-gray-300">False - you should pay in full every month</p>
+                        </div>
+                        <div class="quiz-option" onclick="selectAnswer(1, 2)">
+                            <p class="text-gray-300">True - but only for the first 6 months</p>
+                        </div>
+                        <div class="quiz-option" onclick="selectAnswer(1, 3)">
+                            <p class="text-gray-300">It doesn't matter either way</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Question 3 -->
+                <div class="bg-white/5 rounded-xl p-6">
+                    <p class="text-lg font-semibold text-gray-200 mb-4">3. What's the ideal credit utilization rate to maintain?</p>
+                    <div class="space-y-2">
+                        <div class="quiz-option" onclick="selectAnswer(2, 0)">
+                            <p class="text-gray-300">90-100% (use your full limit)</p>
+                        </div>
+                        <div class="quiz-option" onclick="selectAnswer(2, 1)">
+                            <p class="text-gray-300">50-70% (use half your limit)</p>
+                        </div>
+                        <div class="quiz-option" onclick="selectAnswer(2, 2)">
+                            <p class="text-gray-300">Under 30% (keep it low)</p>
+                        </div>
+                        <div class="quiz-option" onclick="selectAnswer(2, 3)">
+                            <p class="text-gray-300">0% (never use your card)</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Question 4 -->
+                <div class="bg-white/5 rounded-xl p-6">
+                    <p class="text-lg font-semibold text-gray-200 mb-4">4. With a secured credit card, what happens to your security deposit?</p>
+                    <div class="space-y-2">
+                        <div class="quiz-option" onclick="selectAnswer(3, 0)">
+                            <p class="text-gray-300">It's gone forever, that's the cost of the card</p>
+                        </div>
+                        <div class="quiz-option" onclick="selectAnswer(3, 1)">
+                            <p class="text-gray-300">You get it back when you close or upgrade the card</p>
+                        </div>
+                        <div class="quiz-option" onclick="selectAnswer(3, 2)">
+                            <p class="text-gray-300">The bank keeps half and returns half</p>
+                        </div>
+                        <div class="quiz-option" onclick="selectAnswer(3, 3)">
+                            <p class="text-gray-300">You use it to pay your monthly bills</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Question 5 -->
+                <div class="bg-white/5 rounded-xl p-6">
+                    <p class="text-lg font-semibold text-gray-200 mb-4">5. How long does it typically take to build a solid credit score from scratch?</p>
+                    <div class="space-y-2">
+                        <div class="quiz-option" onclick="selectAnswer(4, 0)">
+                            <p class="text-gray-300">1-2 months</p>
+                        </div>
+                        <div class="quiz-option" onclick="selectAnswer(4, 1)">
+                            <p class="text-gray-300">6-12 months</p>
+                        </div>
+                        <div class="quiz-option" onclick="selectAnswer(4, 2)">
+                            <p class="text-gray-300">3-5 years</p>
+                        </div>
+                        <div class="quiz-option" onclick="selectAnswer(4, 3)">
+                            <p class="text-gray-300">10+ years</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="quizResult" class="hidden">
+                <div id="quizFeedback" class="rounded-xl p-6 mb-6"></div>
+            </div>
+
+            <div class="text-center">
+                <button id="submitQuiz" onclick="submitQuiz()" class="btn-3d">
+                    Submit Answers
+                </button>
+                <button id="finishLesson" onclick="finishLesson()" class="btn-3d hidden">
+                    Complete Lesson
+                </button>
+            </div>
+        </div>
+
     </div>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h4>FinanceU</h4>
-                    <p>Making financial literacy accessible for everyone.</p>
-                </div>
-                <div class="footer-section">
-                    <h4>Company</h4>
-                    <ul>
-                        <li><a href="/about">About Us</a></li>
-                        <li><a href="/careers">Careers</a></li>
-                        <li><a href="/contact">Contact</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h4>Support</h4>
-                    <ul>
-                        <li><a href="/help">Help Center</a></li>
-                        <li><a href="/privacy">Privacy Policy</a></li>
-                        <li><a href="/terms">Terms of Service</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p style=" font-size: 0.85rem; opacity: 0.8; margin-bottom: 10px;">Disclaimer: FinanceU provides educational content only and does not offer financial, legal, or investment advice. Always consult with a qualified professional before making financial decisions.</p>
-                <p>&copy; 2025 FinanceU. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
-
-    <script src="config.js"></script>
-    <script src="lesson-completion.js"></script>
-    <script src="animations.js"></script>
     <script>
-        // Check authentication status and update nav
-        async function updateNav() {
-            const authButtons = document.getElementById('authButtons');
-            const cachedAuth = localStorage.getItem('authState');
-            if (cachedAuth) {
-                const authState = JSON.parse(cachedAuth);
-                authButtons.innerHTML = authState.isLoggedIn
-                    ? \`<a href="#" onclick="logout(); return false;" class="btn-primary">Logout</a>\`
-                    : \`<a href="login" class="btn-primary">Login</a>\`;
-                authButtons.style.opacity = '1';
-            }
-            try {
-                const response = await fetch(\`\${API_URL}/auth/me\`, { credentials: 'include' });
-                if (response.ok) {
-                    localStorage.setItem('authState', JSON.stringify({ isLoggedIn: true }));
-                    authButtons.innerHTML = \`<a href="#" onclick="logout(); return false;" class="btn-primary">Logout</a>\`;
-                } else {
-                    localStorage.setItem('authState', JSON.stringify({ isLoggedIn: false }));
-                    authButtons.innerHTML = \`<a href="login" class="btn-primary">Login</a>\`;
-                }
-                authButtons.style.opacity = '1';
-            } catch (error) {
-                console.log('Not logged in');
-                localStorage.setItem('authState', JSON.stringify({ isLoggedIn: false }));
-                authButtons.innerHTML = \`<a href="login" class="btn-primary">Login</a>\`;
-                authButtons.style.opacity = '1';
-            }
+        let currentSection = 1;
+        const totalSections = 8;
+        const correctAnswers = [1, 1, 2, 1, 1];
+        let userAnswers = [-1, -1, -1, -1, -1];
+        let habitsChecked = [false, false, false, false, false];
+
+        function updateProgress() {
+            const progress = (currentSection / totalSections) * 100;
+            document.getElementById('progressBar').style.width = progress + '%';
         }
 
-        async function logout() {
-            localStorage.removeItem('authState');
-            localStorage.removeItem('token');
-            localStorage.removeItem('userId');
-            try {
-                await fetch(\`\${API_URL}/auth/logout\`, {
-                    method: 'POST',
-                    credentials: 'include'
-                });
-                window.location.href = '/index.html';
-            } catch (error) {
-                console.error('Logout error:', error);
-                window.location.href = '/index.html';
-            }
+        function nextSection() {
+            document.getElementById(`section${currentSection}`).classList.add('hidden');
+            currentSection++;
+            document.getElementById(`section${currentSection}`).classList.remove('hidden');
+            updateProgress();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // Interactive Checklist
-        function toggleChecklistItem(item) {
-            item.classList.toggle('checked');
-            const checkbox = item.querySelector('.checklist-checkbox');
-            if (item.classList.contains('checked')) {
-                checkbox.innerHTML = '<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 8 L6 12 L14 4" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+        function toggleHabit(index) {
+            const habitItems = document.querySelectorAll('.habit-item');
+            const habitItem = habitItems[index];
+            const checkbox = habitItem.querySelector('.habit-checkbox svg');
+
+            habitsChecked[index] = !habitsChecked[index];
+
+            if (habitsChecked[index]) {
+                habitItem.classList.add('checked');
+                checkbox.classList.remove('hidden');
             } else {
-                checkbox.textContent = '';
+                habitItem.classList.remove('checked');
+                checkbox.classList.add('hidden');
             }
         }
 
-        // Quiz data
-        const quizData = [
-            {
-                question: "What's the best way to avoid paying interest on credit cards?",
-                options: ["A) Pay minimum payments", "B) Pay balance in full monthly", "C) Keep a small balance", "D) Use it rarely"],
-                correct: 1
-            },
-            {
-                question: "What's the average APR on credit cards?",
-                options: ["A) 5-10%", "B) 10-15%", "C) 20-25%", "D) 30-35%"],
-                correct: 2
-            },
-            {
-                question: "Which type of credit card is best for beginners?",
-                options: ["A) Travel rewards card", "B) Simple cash back card with no annual fee", "C) Premium card with high rewards", "D) Store credit card"],
-                correct: 1
-            },
-            {
-                question: "What is credit utilization and what percentage is recommended?",
-                options: ["A) How much credit you have; keep it at 100%", "B) Percentage of available credit you're using; keep under 30%", "C) Number of cards you own; unlimited", "D) Your credit score; above 800"],
-                correct: 1
-            },
-            {
-                question: "What happens if you only make minimum payments on your credit card?",
-                options: ["A) You avoid all interest charges", "B) You'll pay much more in interest over time", "C) Your credit score improves faster", "D) The balance disappears"],
-                correct: 1
-            }
-        ];
-
-        let userAnswers = [];
-        let quizPassed = false;
-
-        function initQuiz() {
-            const userId = localStorage.getItem('userId');
-            if (!userId || userId === 'null' || userId === 'undefined') {
-                console.error('No valid userId found');
-                document.getElementById('finishBtn').disabled = true;
-                return;
-            }
-
-            const quizPassedStatus = localStorage.getItem(\`path3_lesson3_quiz_passed_\${userId}\`);
-            if (quizPassedStatus === 'true') {
-                quizPassed = true;
-                document.getElementById('finishBtn').disabled = false;
-                document.getElementById('quizContainer').style.display = 'none';
-                return;
-            }
-
-            renderQuiz();
-        }
-
-        function renderQuiz() {
-            const questionsContainer = document.getElementById('quizQuestions');
-            questionsContainer.innerHTML = '';
-            userAnswers = new Array(quizData.length).fill(null);
-
-            quizData.forEach((q, qIndex) => {
-                const questionCard = document.createElement('div');
-                questionCard.className = 'question-card';
-                questionCard.innerHTML = \`
-                    <div class="question-text">Question \${qIndex + 1}: \${q.question}</div>
-                    \${q.options.map((option, oIndex) => \`
-                        <div class="answer-option" onclick="selectAnswer(\${qIndex}, \${oIndex})">
-                            <input type="radio" name="question\${qIndex}" value="\${oIndex}" style="margin-right: 10px;">
-                            \${option}
-                        </div>
-                    \`).join('')}
-                \`;
-                questionsContainer.appendChild(questionCard);
-            });
-
-            document.getElementById('submitQuiz').disabled = false;
-            document.getElementById('quizResult').innerHTML = '';
-        }
-
-        function selectAnswer(questionIndex, optionIndex) {
-            userAnswers[questionIndex] = optionIndex;
-            const questionCard = document.querySelectorAll('.question-card')[questionIndex];
-            const options = questionCard.querySelectorAll('.answer-option');
-            options.forEach((opt, idx) => {
-                opt.classList.remove('selected');
-                if (idx === optionIndex) {
-                    opt.classList.add('selected');
-                    opt.querySelector('input').checked = true;
-                }
-            });
+        function selectAnswer(questionIndex, answerIndex) {
+            const questionDiv = document.querySelectorAll('#quizQuestions > div')[questionIndex];
+            const options = questionDiv.querySelectorAll('.quiz-option');
+            options.forEach(opt => opt.classList.remove('selected'));
+            options[answerIndex].classList.add('selected');
+            userAnswers[questionIndex] = answerIndex;
         }
 
         function submitQuiz() {
-            if (userAnswers.includes(null)) {
+            if (userAnswers.includes(-1)) {
                 alert('Please answer all questions before submitting.');
                 return;
             }
 
-            let correct = 0;
-            quizData.forEach((q, index) => {
-                if (userAnswers[index] === q.correct) {
-                    correct++;
+            let score = 0;
+            for (let i = 0; i < correctAnswers.length; i++) {
+                const questionDiv = document.querySelectorAll('#quizQuestions > div')[i];
+                const options = questionDiv.querySelectorAll('.quiz-option');
+
+                if (userAnswers[i] === correctAnswers[i]) {
+                    score++;
+                    options[userAnswers[i]].classList.add('correct');
+                } else {
+                    options[userAnswers[i]].classList.add('incorrect');
+                    options[correctAnswers[i]].classList.add('correct');
                 }
-            });
-
-            const percentage = Math.round((correct / quizData.length) * 100);
-            const passed = correct === quizData.length;
-
-            document.querySelectorAll('.question-card').forEach((card, qIndex) => {
-                const options = card.querySelectorAll('.answer-option');
-                options.forEach((opt, oIndex) => {
-                    opt.style.pointerEvents = 'none';
-                    if (oIndex === quizData[qIndex].correct) {
-                        opt.classList.add('correct');
-                    } else if (oIndex === userAnswers[qIndex] && oIndex !== quizData[qIndex].correct) {
-                        opt.classList.add('incorrect');
-                    }
-                });
-            });
+            }
 
             const resultDiv = document.getElementById('quizResult');
-            if (passed) {
-                quizPassed = true;
-                const userId = localStorage.getItem('userId');
-                localStorage.setItem(\`path3_lesson3_quiz_passed_\${userId}\`, 'true');
-                document.getElementById('finishBtn').disabled = false;
+            const feedbackDiv = document.getElementById('quizFeedback');
+            resultDiv.classList.remove('hidden');
 
-                resultDiv.innerHTML = \`
-                    <div class="quiz-result pass">
-                        <div class="result-icon"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="20" fill="#D1FAE5"/><circle cx="24" cy="24" r="14" stroke="#00A676" stroke-width="2" fill="none"/><path d="M18 22 L20 18 L22 22" stroke="#00A676" stroke-width="2" fill="none"/><path d="M26 22 L28 18 L30 22" stroke="#00A676" stroke-width="2" fill="none"/><path d="M16 26 Q24 32 32 26" stroke="#00A676" stroke-width="2" fill="none"/></svg></div>
-                        <div class="result-text" style="color: #10b981;">Perfect Score!</div>
-                        <div class="result-score">You got all \${quizData.length} questions correct!</div>
-                        <p style="color: var(--text-secondary); font-size: 16px; font-weight: 600;">Excellent! Click "Finish Lesson" to continue.</p>
+            if (score === correctAnswers.length) {
+                feedbackDiv.className = 'rounded-xl p-6 mb-6 bg-green-500/20 border-2 border-green-500/40';
+                feedbackDiv.innerHTML = `
+                    <h3 class="text-2xl font-bold text-green-300 mb-2">Perfect Score!</h3>
+                    <p class="text-gray-300 mb-4">You got ${score} out of ${correctAnswers.length} correct. You're ready to start building credit the right way!</p>
+                    <div class="bg-green-500/10 rounded-lg p-4">
+                        <p class="text-gray-200 font-semibold mb-2">Key Takeaways:</p>
+                        <ul class="text-gray-300 text-sm space-y-1">
+                            <li>✓ Start with a secured or student card</li>
+                            <li>✓ Always pay in full every month</li>
+                            <li>✓ Keep utilization under 30%</li>
+                            <li>✓ Your deposit is refundable</li>
+                            <li>✓ Build solid credit in 6-12 months</li>
+                        </ul>
                     </div>
-                \`;
+                `;
             } else {
-                resultDiv.innerHTML = \`
-                    <div class="quiz-result fail">
-                        <div class="result-icon"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="20" fill="#EDE9FE"/><rect x="16" y="12" width="16" height="24" rx="1" stroke="#8B5CF6" stroke-width="2" fill="none"/><line x1="20"y1="18"x2="28"y2="18" stroke="#8B5CF6" stroke-width="1.5"/><line x1="20"y1="22"x2="28"y2="22" stroke="#8B5CF6" stroke-width="1.5"/><line x1="20"y1="26"x2="25"y2="26" stroke="#8B5CF6" stroke-width="1.5"/></svg></div>
-                        <div class="result-text" style="color: #dc2626;">Not Quite</div>
-                        <div class="result-score">You scored \${correct} out of \${quizData.length}</div>
-                        <p style="color: var(--text-secondary); margin-bottom: 15px; font-size: 16px; font-weight: 600;">You need all 3 correct. Review the lesson and try again!</p>
-                        <button class="btn-retry" onclick="retryQuiz()">Retry Quiz</button>
-                    </div>
-                \`;
+                feedbackDiv.className = 'rounded-xl p-6 mb-6 bg-orange-500/20 border-2 border-orange-500/40';
+                feedbackDiv.innerHTML = `
+                    <h3 class="text-2xl font-bold text-orange-300 mb-2">You got ${score} out of ${correctAnswers.length}</h3>
+                    <p class="text-gray-300 mb-4">Review the correct answers above, then go back through the lesson to strengthen your understanding.</p>
+                    <p class="text-gray-400 text-sm">The correct answers are highlighted in green.</p>
+                `;
             }
 
-            document.getElementById('submitQuiz').style.display = 'none';
+            document.getElementById('submitQuiz').classList.add('hidden');
+            document.getElementById('finishLesson').classList.remove('hidden');
         }
 
-        function retryQuiz() {
-            renderQuiz();
-            document.getElementById('submitQuiz').style.display = 'block';
+        function finishLesson() {
+            let completedLessons = JSON.parse(localStorage.getItem('completedLessons') || '{}');
+            completedLessons['path3-lesson3'] = true;
+            localStorage.setItem('completedLessons', JSON.stringify(completedLessons));
+            window.location.href = '/path3-lessons';
         }
 
-        async function finishLesson() {
-            if (!quizPassed) {
-                alert('Please complete the quiz first!');
-                return;
-            }
-            const success = await completeLesson('path3_lesson3', 3, 3);
-            if (success) {
-                window.location.href = 'path3-lessons.html';
-            }
-        }
-
-        updateNav();
-        initQuiz();
-
-        // Checkpoint functions
-        let checkpoint1Answered = false;
-        let checkpoint2Answered = false;
-
-        function checkCheckpoint1(selectedOption) {
-            if (checkpoint1Answered) return;
-            checkpoint1Answered = true;
-
-            const correctOption = 1; // B) Pay the balance in full every month
-            const isCorrect = selectedOption === correctOption;
-
-            const options = document.querySelectorAll('[name="checkpoint1"]').forEach((radio, index) => {
-                const optionDiv = radio.parentElement;
-                optionDiv.style.pointerEvents = 'none';
-
-                if (index === correctOption) {
-                    optionDiv.classList.add('correct');
-                } else if (index === selectedOption && index !== correctOption) {
-                    optionDiv.classList.add('incorrect');
-                }
-
-                if (index === selectedOption) {
-                    radio.checked = true;
-                }
-            });
-
-            const feedback = document.getElementById('checkpoint1-feedback');
-            const feedbackIcon = feedback.querySelector('.checkpoint-feedback-icon');
-            const feedbackTitle = feedback.querySelector('.checkpoint-feedback-title');
-            const feedbackExplanation = feedback.querySelector('.checkpoint-explanation');
-            const continueBtn = document.getElementById('checkpoint1-continue');
-
-            if (isCorrect) {
-                feedback.classList.add('correct');
-                feedbackIcon.textContent = '<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 8 L6 12 L14 4" stroke="currentColor" stroke-width="2" fill="none"/></svg>';
-                feedbackTitle.textContent = 'Correct!';
-                feedbackExplanation.textContent = 'Paying your balance in full every month means you never pay interest, but you still build credit and earn rewards.';
-            } else {
-                feedback.classList.add('incorrect');
-                feedbackIcon.textContent = '•';
-                feedbackTitle.textContent = 'Not quite!';
-                feedbackExplanation.textContent = 'The correct answer is to pay the balance in full every month. This avoids all interest charges while still building credit.';
-            }
-
-            feedback.classList.add('show');
-            continueBtn.classList.add('show');
-        }
-
-        function checkCheckpoint2(selectedOption) {
-            if (checkpoint2Answered) return;
-            checkpoint2Answered = true;
-
-            const correctOption = 2; // C) 20-25%
-            const isCorrect = selectedOption === correctOption;
-
-            const options = document.querySelectorAll('[name="checkpoint2"]').forEach((radio, index) => {
-                const optionDiv = radio.parentElement;
-                optionDiv.style.pointerEvents = 'none';
-
-                if (index === correctOption) {
-                    optionDiv.classList.add('correct');
-                } else if (index === selectedOption && index !== correctOption) {
-                    optionDiv.classList.add('incorrect');
-                }
-
-                if (index === selectedOption) {
-                    radio.checked = true;
-                }
-            });
-
-            const feedback = document.getElementById('checkpoint2-feedback');
-            const feedbackIcon = feedback.querySelector('.checkpoint-feedback-icon');
-            const feedbackTitle = feedback.querySelector('.checkpoint-feedback-title');
-            const feedbackExplanation = feedback.querySelector('.checkpoint-explanation');
-            const continueBtn = document.getElementById('checkpoint2-continue');
-
-            if (isCorrect) {
-                feedback.classList.add('correct');
-                feedbackIcon.textContent = '<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 8 L6 12 L14 4" stroke="currentColor" stroke-width="2" fill="none"/></svg>';
-                feedbackTitle.textContent = 'Excellent!';
-                feedbackExplanation.textContent = 'The average credit card APR is 20-25%, which is why carrying a balance is so expensive. Always pay in full!';
-            } else {
-                feedback.classList.add('incorrect');
-                feedbackIcon.textContent = '•';
-                feedbackTitle.textContent = 'Good thinking, but...';
-                feedbackExplanation.textContent = 'The correct answer is 20-25%. Credit card interest rates are much higher than other types of loans.';
-            }
-
-            feedback.classList.add('show');
-            continueBtn.classList.add('show');
-        }
-
-        // Multi-screen navigation
-        let currentScreen = 1;
-        const totalScreens = 8;
-
-        function showScreen(screenNumber) {
-            document.querySelectorAll('.lesson-screen').forEach(screen => {
-                screen.classList.remove('active');
-            });
-
-            const targetScreen = document.querySelector(\`.lesson-screen[data-screen="\${screenNumber}"]\`);
-            if (targetScreen) {
-                targetScreen.classList.add('active');
-                currentScreen = screenNumber;
-
-                const lessonContainer = document.querySelector('.lesson-container');
-                const headerOffset = 80;
-                const elementPosition = lessonContainer.getBoundingClientRect().top;
-                const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-
-                window.scrollTo({
-                    top: offsetPosition,
-                    behavior: 'smooth'
-                });
-            }
-        }
-
-        function nextScreen() {
-            if (currentScreen < totalScreens) {
-                showScreen(currentScreen + 1);
-            }
-        }
-
-        function previousScreen() {
-            if (currentScreen > 1) {
-                showScreen(currentScreen - 1);
-            }
-        }
-
-        document.addEventListener('DOMContentLoaded', function() {
-            showScreen(1);
-        });
+        updateProgress();
     </script>
 </body>
 </html>
