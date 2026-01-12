@@ -662,43 +662,116 @@
             </div>
         </section>
 
-        <!-- Section 4: Interest Calculator -->
+        <!-- Section 4: Understanding Interest -->
         <section class="lesson-section" id="section4">
             <div class="glass-card">
-                <h2 class="text-3xl font-bold mb-6 text-gray-200">The True Cost of Interest</h2>
+                <h2 class="text-3xl font-bold mb-6 text-gray-200">Understanding Interest</h2>
                 <p class="text-gray-300 text-lg mb-6 leading-relaxed">
-                    Interest is how credit card companies make money. Let's see how quickly it adds up when you only pay the minimum.
+                    Interest is the price you pay for borrowing money. Credit cards charge interest ONLY if you don't pay your full statement balance by the due date.
                 </p>
 
-                <div class="calculator">
-                    <div class="mb-6">
-                        <label class="block text-gray-200 font-semibold mb-3">Balance: $<span id="balanceValue">1000</span></label>
-                        <input type="range" min="100" max="5000" value="1000" step="100" class="slider" id="balanceSlider" oninput="updateCalculator()">
+                <div class="mb-8 p-6 bg-blue-500/10 border-2 border-blue-500/30 rounded-xl">
+                    <h3 class="text-xl font-bold text-blue-400 mb-4">How Credit Card Interest Works</h3>
+                    <div class="space-y-4">
+                        <div class="flex items-start gap-3">
+                            <div class="w-8 h-8 rounded-full bg-blue-500/30 flex items-center justify-center flex-shrink-0 font-bold text-blue-400">1</div>
+                            <div>
+                                <p class="text-gray-300 font-semibold mb-1">Your card has an APR (Annual Percentage Rate)</p>
+                                <p class="text-gray-400 text-sm">Example: 24% APR. This is your yearly interest rate.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <div class="w-8 h-8 rounded-full bg-blue-500/30 flex items-center justify-center flex-shrink-0 font-bold text-blue-400">2</div>
+                            <div>
+                                <p class="text-gray-300 font-semibold mb-1">Interest is calculated DAILY</p>
+                                <p class="text-gray-400 text-sm">24% ÷ 365 days = 0.066% per day on your balance.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <div class="w-8 h-8 rounded-full bg-blue-500/30 flex items-center justify-center flex-shrink-0 font-bold text-blue-400">3</div>
+                            <div>
+                                <p class="text-gray-300 font-semibold mb-1">Interest compounds (grows on itself)</p>
+                                <p class="text-gray-400 text-sm">Each day's interest gets added to your balance, then tomorrow's interest is charged on the NEW higher balance.</p>
+                            </div>
+                        </div>
                     </div>
+                </div>
 
-                    <div class="mb-6">
-                        <label class="block text-gray-200 font-semibold mb-3">APR: <span id="aprValue">24</span>%</label>
-                        <input type="range" min="15" max="30" value="24" step="1" class="slider" id="aprSlider" oninput="updateCalculator()">
-                    </div>
-
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-8">
-                        <div class="bg-green-500/20 border-2 border-green-500/40 rounded-xl p-6 text-center">
-                            <div class="text-sm text-gray-300 mb-2">Pay in Full</div>
-                            <div class="text-4xl font-black text-green-400 mb-1">$0</div>
-                            <div class="text-xs text-gray-400">Interest Paid</div>
+                <div class="mb-8">
+                    <h3 class="text-xl font-bold text-gray-200 mb-4">Real Example: $500 Balance at 24% APR</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="bg-green-500/10 border-2 border-green-500/30 rounded-xl p-6">
+                            <div class="flex items-center gap-3 mb-4">
+                                <div class="w-12 h-12 rounded-xl bg-green-500/30 flex items-center justify-center border-2 border-green-500/50">
+                                    <svg class="w-7 h-7 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/>
+                                    </svg>
+                                </div>
+                                <h4 class="font-bold text-green-400 text-lg">Pay Full Balance</h4>
+                            </div>
+                            <div class="space-y-2 mb-4">
+                                <div class="flex justify-between text-sm">
+                                    <span class="text-gray-400">Balance:</span>
+                                    <span class="text-gray-300 font-semibold">$500</span>
+                                </div>
+                                <div class="flex justify-between text-sm">
+                                    <span class="text-gray-400">You pay:</span>
+                                    <span class="text-gray-300 font-semibold">$500</span>
+                                </div>
+                                <div class="flex justify-between border-t border-green-500/30 pt-2">
+                                    <span class="text-gray-300 font-bold">Interest charged:</span>
+                                    <span class="text-2xl font-black text-green-400">$0</span>
+                                </div>
+                            </div>
+                            <p class="text-gray-400 text-xs">Grace period = no interest!</p>
                         </div>
 
-                        <div class="bg-red-500/20 border-2 border-red-500/40 rounded-xl p-6 text-center">
-                            <div class="text-sm text-gray-300 mb-2">Minimum Payments Only</div>
-                            <div class="text-4xl font-black text-red-400 mb-1" id="interestCost">$250</div>
-                            <div class="text-xs text-gray-400">Interest Paid Over <span id="monthsToPayoff">24</span> Months</div>
+                        <div class="bg-red-500/10 border-2 border-red-500/30 rounded-xl p-6">
+                            <div class="flex items-center gap-3 mb-4">
+                                <div class="w-12 h-12 rounded-xl bg-red-500/30 flex items-center justify-center border-2 border-red-500/50">
+                                    <svg class="w-7 h-7 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M6 18L18 6M6 6l12 12"/>
+                                    </svg>
+                                </div>
+                                <h4 class="font-bold text-red-400 text-lg">Pay Minimum ($25)</h4>
+                            </div>
+                            <div class="space-y-2 mb-4">
+                                <div class="flex justify-between text-sm">
+                                    <span class="text-gray-400">Balance:</span>
+                                    <span class="text-gray-300 font-semibold">$500</span>
+                                </div>
+                                <div class="flex justify-between text-sm">
+                                    <span class="text-gray-400">You pay:</span>
+                                    <span class="text-gray-300 font-semibold">$25</span>
+                                </div>
+                                <div class="flex justify-between text-sm">
+                                    <span class="text-gray-400">Remaining:</span>
+                                    <span class="text-gray-300 font-semibold">$475</span>
+                                </div>
+                                <div class="flex justify-between border-t border-red-500/30 pt-2">
+                                    <span class="text-gray-300 font-bold">This month's interest:</span>
+                                    <span class="text-2xl font-black text-red-400">~$10</span>
+                                </div>
+                            </div>
+                            <p class="text-gray-400 text-xs">Next month you owe $485 + more interest...</p>
                         </div>
                     </div>
+                </div>
 
-                    <div class="mt-6 p-4 bg-black/30 rounded-xl">
-                        <p class="text-gray-300 text-sm leading-relaxed">
-                            <strong class="text-yellow-400">Reality check:</strong> Making only minimum payments on a $<span id="balanceDisplay">1000</span> balance means you'll pay $<span id="totalPaid">1250</span> total - that's <span id="extraPercent">25</span>% more than you borrowed!
-                        </p>
+                <div class="p-6 bg-yellow-500/10 border-2 border-yellow-500/30 rounded-xl">
+                    <div class="flex items-start gap-3">
+                        <span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-yellow-500/30 border border-yellow-500/50 flex-shrink-0">
+                            <span class="text-yellow-400 text-lg font-bold">!</span>
+                        </span>
+                        <div>
+                            <h4 class="font-bold text-yellow-400 mb-2">The Minimum Payment Trap</h4>
+                            <p class="text-gray-300 text-sm leading-relaxed mb-2">
+                                If you only pay $25/month on a $500 balance at 24% APR, it will take you <strong>over 2 years</strong> to pay off, and you'll pay about <strong>$150 extra</strong> in interest!
+                            </p>
+                            <p class="text-gray-300 text-sm leading-relaxed">
+                                <strong>The solution:</strong> Always pay your full statement balance. Use your credit card like a debit card - only buy what you can afford to pay off immediately.
+                            </p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -884,13 +957,13 @@
                     <div class="calendar-day">21</div>
                     <div class="calendar-day">22</div>
                     <div class="calendar-day">23</div>
-                    <div class="calendar-day due-date" title="Payment Due Date">24<br><span style="font-size: 10px;">DUE</span></div>
+                    <div class="calendar-day due-date" title="Payment Due Date" style="line-height: 1.2; padding: 8px; font-size: 12px;">24<br><span style="font-size: 9px; display: block; margin-top: 2px;">DUE</span></div>
                     <div class="calendar-day">25</div>
                     <div class="calendar-day">26</div>
                     <div class="calendar-day">27</div>
                     <div class="calendar-day">28</div>
                     <div class="calendar-day">29</div>
-                    <div class="calendar-day statement-close" title="Statement Closes">30<br><span style="font-size: 10px;">CLOSE</span></div>
+                    <div class="calendar-day statement-close" title="Statement Closes" style="line-height: 1.2; padding: 8px; font-size: 12px;">30<br><span style="font-size: 9px; display: block; margin-top: 2px;">CLOSE</span></div>
                     <div class="calendar-day">31</div>
                 </div>
 
@@ -936,7 +1009,7 @@
                 ← Previous
             </button>
             <div class="text-gray-400 text-sm">
-                Section <span id="currentSection">1</span> of 8
+                <!-- Progress indicator -->
             </div>
             <button onclick="nextSection()" id="nextBtn" class="btn-3d px-8 py-3 bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 rounded-xl font-bold text-white transition-all">
                 Next →
@@ -998,39 +1071,6 @@
             }
         }
 
-        // Interest calculator
-        function updateCalculator() {
-            const balance = parseInt(document.getElementById('balanceSlider').value);
-            const apr = parseInt(document.getElementById('aprSlider').value);
-
-            document.getElementById('balanceValue').textContent = balance;
-            document.getElementById('aprValue').textContent = apr;
-
-            const monthlyRate = apr / 100 / 12;
-            const minPaymentPercent = 0.02;
-            let remainingBalance = balance;
-            let totalInterest = 0;
-            let months = 0;
-
-            while (remainingBalance > 0 && months < 300) {
-                const interest = remainingBalance * monthlyRate;
-                let payment = Math.max(remainingBalance * minPaymentPercent, 25);
-
-                if (payment > remainingBalance + interest) {
-                    payment = remainingBalance + interest;
-                }
-
-                totalInterest += interest;
-                remainingBalance = remainingBalance + interest - payment;
-                months++;
-            }
-
-            document.getElementById('interestCost').textContent = '$' + Math.round(totalInterest);
-            document.getElementById('monthsToPayoff').textContent = months;
-            document.getElementById('balanceDisplay').textContent = balance;
-            document.getElementById('totalPaid').textContent = balance + Math.round(totalInterest);
-            document.getElementById('extraPercent').textContent = Math.round((totalInterest / balance) * 100);
-        }
 
         // Autopay selection
         function selectAutopay(index) {
@@ -1267,7 +1307,6 @@
         // Initialize
         updateProgress();
         renderQuiz();
-        updateCalculator();
         selectAutopay(2);
     </script>
 </body>
