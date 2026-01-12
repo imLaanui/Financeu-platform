@@ -1115,7 +1115,6 @@
         function updateProgress() {
             const progress = (currentSection / totalSections) * 100;
             document.getElementById('progressBar').style.width = `${progress}%`;
-            document.getElementById('currentSection').textContent = currentSection;
 
             // Show/hide navigation buttons
             document.getElementById('prevBtn').style.visibility = currentSection === 1 ? 'hidden' : 'visible';
